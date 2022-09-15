@@ -18,6 +18,7 @@ open class APIClient {
     do {
       let (data, _) = try await URLSession.shared.data(for: request)
       if let d = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
+        print(d)
         return .success(d)
       } else {
         return .failure(.parseError("json parse error"))

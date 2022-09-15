@@ -29,6 +29,12 @@
 		73AACB2B28D32B310072B1DF /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 73AACB2A28D32B310072B1DF /* config.plist */; };
 		73AACB2D28D32BB10072B1DF /* DJFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACB2C28D32BB10072B1DF /* DJFileManager.swift */; };
 		73AACB3028D32E7B0072B1DF /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACB2F28D32E7B0072B1DF /* Config.swift */; };
+		73AACB3428D357C80072B1DF /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACB3328D357C80072B1DF /* UserViewController.swift */; };
+		73AACB3828D359260072B1DF /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 73AACB3728D359260072B1DF /* SnapKit */; };
+		73AACB3A28D359550072B1DF /* UserHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACB3928D359550072B1DF /* UserHeaderView.swift */; };
+		73AACB3C28D35C360072B1DF /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACB3B28D35C360072B1DF /* utils.swift */; };
+		73AACB3E28D362430072B1DF /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACB3D28D362430072B1DF /* Consts.swift */; };
+		73AACB4128D37E840072B1DF /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 73AACB4028D37E840072B1DF /* Kingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +81,10 @@
 		73AACB2A28D32B310072B1DF /* config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
 		73AACB2C28D32BB10072B1DF /* DJFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJFileManager.swift; sourceTree = "<group>"; };
 		73AACB2F28D32E7B0072B1DF /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		73AACB3328D357C80072B1DF /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		73AACB3928D359550072B1DF /* UserHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHeaderView.swift; sourceTree = "<group>"; };
+		73AACB3B28D35C360072B1DF /* utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
+		73AACB3D28D362430072B1DF /* Consts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consts.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +92,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73AACB4128D37E840072B1DF /* Kingfisher in Frameworks */,
+				73AACB3828D359260072B1DF /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				73AACB0B28D30B3D0072B1DF /* Error.swift */,
+				73AACB3D28D362430072B1DF /* Consts.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -197,6 +210,7 @@
 			children = (
 				73AACB1228D30F350072B1DF /* DJParser.swift */,
 				73AACB2C28D32BB10072B1DF /* DJFileManager.swift */,
+				73AACB3B28D35C360072B1DF /* utils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -204,6 +218,7 @@
 		73AACB1528D311C30072B1DF /* Github */ = {
 			isa = PBXGroup;
 			children = (
+				73AACB3128D357980072B1DF /* ViewController */,
 				73AACB2E28D32E6C0072B1DF /* Utils */,
 				73AACB2728D3213D0072B1DF /* Extension */,
 				73AACB2228D31A370072B1DF /* Model */,
@@ -254,6 +269,31 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		73AACB3128D357980072B1DF /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				73AACB3228D357A50072B1DF /* User */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		73AACB3228D357A50072B1DF /* User */ = {
+			isa = PBXGroup;
+			children = (
+				73AACB3528D357CE0072B1DF /* Views */,
+				73AACB3328D357C80072B1DF /* UserViewController.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		73AACB3528D357CE0072B1DF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				73AACB3928D359550072B1DF /* UserHeaderView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -270,6 +310,10 @@
 			dependencies = (
 			);
 			name = DJGithub;
+			packageProductDependencies = (
+				73AACB3728D359260072B1DF /* SnapKit */,
+				73AACB4028D37E840072B1DF /* Kingfisher */,
+			);
 			productName = DJGithub;
 			productReference = 73AACAD128D308A60072B1DF /* DJGithub.app */;
 			productType = "com.apple.product-type.application";
@@ -342,6 +386,10 @@
 				Base,
 			);
 			mainGroup = 73AACAC828D308A60072B1DF;
+			packageReferences = (
+				73AACB3628D359260072B1DF /* XCRemoteSwiftPackageReference "SnapKit" */,
+				73AACB3F28D37E840072B1DF /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = 73AACAD228D308A60072B1DF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -387,12 +435,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				73AACB0828D30A3C0072B1DF /* Router.swift in Sources */,
+				73AACB3428D357C80072B1DF /* UserViewController.swift in Sources */,
 				73AACB2928D321480072B1DF /* Result.swift in Sources */,
 				73AACB3028D32E7B0072B1DF /* Config.swift in Sources */,
 				73AACB1328D30F350072B1DF /* DJParser.swift in Sources */,
 				73AACB1128D30E720072B1DF /* Parse.swift in Sources */,
+				73AACB3A28D359550072B1DF /* UserHeaderView.swift in Sources */,
 				73AACB2628D31ACD0072B1DF /* UserViewModel.swift in Sources */,
 				73AACB0F28D30C470072B1DF /* APIClient.swift in Sources */,
+				73AACB3C28D35C360072B1DF /* utils.swift in Sources */,
 				73AACAD928D308A60072B1DF /* ViewController.swift in Sources */,
 				73AACB2D28D32BB10072B1DF /* DJFileManager.swift in Sources */,
 				73AACB2428D31A440072B1DF /* User.swift in Sources */,
@@ -400,6 +451,7 @@
 				73AACAD728D308A60072B1DF /* SceneDelegate.swift in Sources */,
 				73AACB0C28D30B3D0072B1DF /* Error.swift in Sources */,
 				73AACB0A28D30B0C0072B1DF /* URLConvertible.swift in Sources */,
+				73AACB3E28D362430072B1DF /* Consts.swift in Sources */,
 				73AACB1828D312D30072B1DF /* GithubRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -742,6 +794,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		73AACB3628D359260072B1DF /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		73AACB3F28D37E840072B1DF /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		73AACB3728D359260072B1DF /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 73AACB3628D359260072B1DF /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		73AACB4028D37E840072B1DF /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 73AACB3F28D37E840072B1DF /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 73AACAC928D308A60072B1DF /* Project object */;
 }
