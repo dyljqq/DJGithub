@@ -30,7 +30,7 @@ class ViewController: UIViewController {
   }
   
   @objc func jumpAction() {
-    self.navigationController?.pushToUser(with: "dyljqq")
+    self.navigationController?.pushToUserStaredRepo(with: "dyljqq")
   }
 }
 

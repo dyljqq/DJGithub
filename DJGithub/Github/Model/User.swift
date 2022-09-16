@@ -9,9 +9,9 @@ import Foundation
 
 struct User: Decodable {
   var login: String
-  var name: String
+  var name: String?
   var id: Int
-  var bio: String
+  var bio: String?
   var avatarUrl: String
   var type: String
   var createdAt: String
@@ -23,10 +23,10 @@ struct User: Decodable {
   var followingUrl: String
   var followersUrl: String
   
-  var company: String
-  var location: String
+  var company: String?
+  var location: String?
   var email: String?
-  var blog: String
+  var blog: String?
 }
 
 struct UserContribution: Decodable {

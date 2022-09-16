@@ -10,6 +10,7 @@ import Foundation
 enum GithubRouter: Router {
   case userInfo(String)
   case userContribution(String)
+  case userStartedRepos(String)
   
   var baseURLString: String {
     return "https://api.github.com/"
@@ -26,6 +27,7 @@ enum GithubRouter: Router {
     switch self {
     case .userInfo(let name): return "users/\(name)"
     case .userContribution: return "graphql"
+    case .userStartedRepos(let name): return "users/\(name)/starred"
     }
   }
   

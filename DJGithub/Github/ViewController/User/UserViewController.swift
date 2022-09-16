@@ -27,16 +27,23 @@ fileprivate enum UserType {
     }
   }
   
-  func getContent(by user: User?) -> String {
+  func getContent(by user: User?) -> (String, UIColor) {
     guard let user = user else {
-      return ""
+      return ("", .white)
     }
     switch self {
-    case .email: return user.email ?? ""
-    case .location: return user.location
-    case .company: return user.company
-    case .link: return user.blog
+    case .email: return convertContent(user.email, placeHolder: "邮箱")
+    case .location: return convertContent(user.location, placeHolder: "地点")
+    case .company: return convertContent(user.company, placeHolder: "团队")
+    case .link: return convertContent(user.blog, placeHolder: "个人主页")
     }
+  }
+  
+  func convertContent(_ content: String?, placeHolder: String) -> (String, UIColor) {
+    guard let content = content else {
+      return (placeHolder, UIColor.textGrayColor)
+    }
+    return !content.isEmpty ? (content, UIColor.textColor) : (placeHolder, UIColor.textGrayColor)
   }
 }
 
@@ -100,7 +107,6 @@ class UserViewController: UIViewController {
     Task {
       if let user = await UserViewModel.getUser(with: name) {
         self.user = user
-        self.view.stopLoading()
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
           make.edges.equalTo(view)
@@ -110,12 +116,12 @@ class UserViewController: UIViewController {
         self.dataSource = [.blank, .user(.company), .user(.location), .user(.email), .user(.link)]
         tableView.reloadData()
       }
-      
       if let userContribution = await UserViewModel.fetchUserContributions(with: name) {
         self.dataSource.insert(.blank, at: 0)
         self.dataSource.insert(.userContribution(userContribution), at: 1)
         tableView.reloadData()
       }
+      self.view.stopLoading()
     }
   }
 
@@ -144,7 +150,8 @@ extension UserViewController: UITableViewDataSource {
       } else {
         cell.accessoryType = .none
       }
-      cell.render(with: userType.iconImageName, content: userType.getContent(by: user))
+      let (content, color) = userType.getContent(by: user)
+      cell.render(with: userType.iconImageName, content: content, contentColor: color)
       return cell
     }
   }

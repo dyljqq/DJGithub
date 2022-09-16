@@ -17,11 +17,16 @@ open class APIClient {
     
     do {
       let (data, _) = try await URLSession.shared.data(for: request)
-      if let d = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
-        return .success(d)
+      let r = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
+      let d: [String: Any]
+      if let r = r as? [Any] {
+        d = ["items": r]
+      } else if let r = r as? [String: Any] {
+        d = r
       } else {
-        return .failure(.parseError("json parse error"))
+        d = [:]
       }
+      return .success(d)
     } catch {
       print("APIClient get data error: \(error)")
     }
