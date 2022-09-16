@@ -26,7 +26,18 @@ class UserViewController: UIViewController {
     return tableView
   }()
   
+  let name: String
+  
   var dataSource: [Int] = []
+  
+  init(name: String) {
+    self.name = name
+    super.init(nibName: nil, bundle: nil)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -35,15 +46,15 @@ class UserViewController: UIViewController {
   }
   
   func setUp() {
-    view.backgroundColor = .white
-    
-    view.addSubview(tableView)
-    tableView.snp.makeConstraints { make in
-      make.edges.equalTo(view)
-    }
-    
+    view.backgroundColor = UIColorFromRGB(0xf5f5f5)
+    self.view.startLoading()
     Task {
-      if let user = await UserViewModel.getUser(with: "dyljqq") {
+      if let user = await UserViewModel.getUser(with: name) {
+        self.view.stopLoading()
+        view.addSubview(tableView)
+        tableView.snp.makeConstraints { make in
+          make.edges.equalTo(view)
+        }
         self.title = user.type
         userHeaderView.render(with: user)
       }
