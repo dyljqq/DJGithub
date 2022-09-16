@@ -10,7 +10,7 @@ import Foundation
 open class APIClient {
   static let shared = APIClient()
   
-  func get(router: Router) async -> Result<[String: Any], DJError> {
+  func get(by router: Router) async -> Result<[String: Any], DJError> {
     guard let request = router.asURLRequest() else {
       return .failure(.unknown)
     }
@@ -18,7 +18,6 @@ open class APIClient {
     do {
       let (data, _) = try await URLSession.shared.data(for: request)
       if let d = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
-        print(d)
         return .success(d)
       } else {
         return .failure(.parseError("json parse error"))

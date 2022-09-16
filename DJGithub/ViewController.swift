@@ -30,8 +30,7 @@ class ViewController: UIViewController {
   }
   
   @objc func jumpAction() {
-    let vc = UserViewController()
-    self.navigationController?.pushViewController(vc, animated: true)
+    self.navigationController?.pushToUser(with: "dyljqq")
   }
 }
 

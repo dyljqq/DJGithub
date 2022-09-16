@@ -17,7 +17,7 @@ struct Config {
   }
   
   func getAuthorization() -> String {
-    let d = DJFileManager.shared.getFile(with: "Config")
+    let d = DJFileManager.shared.getFile(with: "config")
     return (d["Authorization"] as? String) ?? ""
   }
 }

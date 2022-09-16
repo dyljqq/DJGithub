@@ -28,3 +28,36 @@ struct User: Decodable {
   var email: String?
   var blog: String
 }
+
+struct UserContribution: Decodable {
+  var totalContributions: Int
+  var colors: [String]
+  var items: [UserContributionItem]
+  
+  init(with dict: [String: Any]) {
+    totalContributions = dict["totalContributions"] as? Int ?? 0
+    colors = dict["colors"] as? [String] ?? []
+    guard let weeks = dict["weeks"] as? [[String: Any]] else {
+      items = []
+      return
+    }
+    
+    items = []
+    for week in weeks {
+      if let days = week["contributionDays"] as? [[String: Any]] {
+        for day in days {
+          if let item = DJDecoder<UserContributionItem>(dict: day).decode() {
+            items.append(item)
+          }
+        }
+      }
+    }
+  }
+}
+
+struct UserContributionItem: Decodable {
+  var color: String
+  var contributionCount: Int
+  var date: String
+  var weekday: Int
+}
