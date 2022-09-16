@@ -2,6 +2,14 @@
 
 方便自己去看一些开源项目以及一些咨询。
 
+### 配置
+
+在/DJGithub/Github/目录下添加config.plist文件，App启动的时候会读取用户的Personal Token.
+
+例：
+
+"Authorization": "token \\(Personal Token)"
+
 ### 目前进度：
 
 2022-09-15

@@ -26,7 +26,6 @@
 		73AACB2428D31A440072B1DF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACB2328D31A440072B1DF /* User.swift */; };
 		73AACB2628D31ACD0072B1DF /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACB2528D31ACD0072B1DF /* UserViewModel.swift */; };
 		73AACB2928D321480072B1DF /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACB2828D321480072B1DF /* Result.swift */; };
-		73AACB2B28D32B310072B1DF /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 73AACB2A28D32B310072B1DF /* config.plist */; };
 		73AACB2D28D32BB10072B1DF /* DJFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACB2C28D32BB10072B1DF /* DJFileManager.swift */; };
 		73AACB3028D32E7B0072B1DF /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACB2F28D32E7B0072B1DF /* Config.swift */; };
 		73AACB3428D357C80072B1DF /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACB3328D357C80072B1DF /* UserViewController.swift */; };
@@ -50,6 +49,7 @@
 		73AACB6028D4BE4F0072B1DF /* RepoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACB5F28D4BE4F0072B1DF /* RepoViewModel.swift */; };
 		73AACB6228D4BEFE0072B1DF /* UserStaredRepoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACB6128D4BEFE0072B1DF /* UserStaredRepoCell.swift */; };
 		73AACB6428D4E5000072B1DF /* Int+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACB6328D4E5000072B1DF /* Int+Ext.swift */; };
+		73AACB6628D4F2BF0072B1DF /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 73AACB6528D4F2BF0072B1DF /* config.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,7 +93,6 @@
 		73AACB2328D31A440072B1DF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		73AACB2528D31ACD0072B1DF /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		73AACB2828D321480072B1DF /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
-		73AACB2A28D32B310072B1DF /* config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
 		73AACB2C28D32BB10072B1DF /* DJFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJFileManager.swift; sourceTree = "<group>"; };
 		73AACB2F28D32E7B0072B1DF /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		73AACB3328D357C80072B1DF /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
@@ -115,6 +114,7 @@
 		73AACB5F28D4BE4F0072B1DF /* RepoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoViewModel.swift; sourceTree = "<group>"; };
 		73AACB6128D4BEFE0072B1DF /* UserStaredRepoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStaredRepoCell.swift; sourceTree = "<group>"; };
 		73AACB6328D4E5000072B1DF /* Int+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Ext.swift"; sourceTree = "<group>"; };
+		73AACB6528D4F2BF0072B1DF /* config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -255,7 +255,7 @@
 				73AACB2228D31A370072B1DF /* Model */,
 				73AACB2128D31A2C0072B1DF /* ViewModel */,
 				73AACB1628D311D00072B1DF /* Network */,
-				73AACB2A28D32B310072B1DF /* config.plist */,
+				73AACB6528D4F2BF0072B1DF /* config.plist */,
 			);
 			path = Github;
 			sourceTree = "<group>";
@@ -475,7 +475,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				73AACB2B28D32B310072B1DF /* config.plist in Resources */,
+				73AACB6628D4F2BF0072B1DF /* config.plist in Resources */,
 				73AACAE128D308A70072B1DF /* LaunchScreen.storyboard in Resources */,
 				73AACADE28D308A70072B1DF /* Assets.xcassets in Resources */,
 				73AACADC28D308A60072B1DF /* Main.storyboard in Resources */,
