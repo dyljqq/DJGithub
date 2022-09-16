@@ -118,9 +118,9 @@ class UserHeaderView: UIView {
   
   func render(with user: User) {
     avatarImageView.kf.setImage(with: URL(string: user.avatarUrl))
-    nameLabel.text = user.name
+    nameLabel.text = user.name ?? user.login
     loginLabel.text = "(\(user.login))"
-    bioLabel.text = user.bio
+    bioLabel.text = user.bio ?? "No description provided."
     if let joined = user.createdAt.split(separator: "T").first {
       joinedLabel.text = "Joined on \(String(describing: joined))"
     } else {

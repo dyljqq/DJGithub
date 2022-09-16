@@ -43,9 +43,10 @@ class UserCell: UITableViewCell {
     }
   }
   
-  func render(with iconName: String, content: String) {
+  func render(with iconName: String, content: String, contentColor: UIColor) {
     iconImageView.image = UIImage(named: iconName)
     contentLabel.text = content
+    contentLabel.textColor = contentColor
   }
   
   required init?(coder: NSCoder) {
