@@ -19,6 +19,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     let navi = UINavigationController(rootViewController: vc)
     window?.rootViewController = navi
     window?.makeKeyAndVisible()
+
+    setUp()
+  }
+  
+  func setUp() {
+    Language.createTable()
+    
+    Task {
+      await LanguageManager.loadLanguageMapping()
+    }
   }
 
   func sceneDidDisconnect(_ scene: UIScene) {

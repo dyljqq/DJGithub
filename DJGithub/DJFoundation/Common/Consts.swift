@@ -59,4 +59,8 @@ struct FrameGuide {
   lazy var navigationBarAndStatusBarHeight: CGFloat = {
     return navigationBarHeight + statusBarHeight
   }()
+  
+  static var safeAreaInsets: UIEdgeInsets {
+    return UIApplication.shared.delegate?.window??.safeAreaInsets ?? UIEdgeInsets.zero
+  }
 }

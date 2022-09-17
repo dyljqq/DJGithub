@@ -141,7 +141,13 @@ class UserStaredRepoCell: UITableViewCell {
       updatedAtLabel.text = "Updated on \(repo.updatedAt)"
     }
     
-    languageView.render(with: .language(UIColor.blue, repo.language ?? "Unknown"))
+    let color: UIColor
+    if let hex = LanguageManager.mapping[repo.language ?? "Unknown"] {
+      color = hex.toColor ?? .blue
+    } else {
+      color = .blue
+    }
+    languageView.render(with: .language(color, repo.language ?? "Unknown"))
     starView.render(with: .star("stared", repo.stargazersCount.toGitNum))
     forkView.render(with: .fork("git-branch", repo.forksCount.toGitNum))
   }
