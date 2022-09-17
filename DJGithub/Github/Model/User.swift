@@ -27,6 +27,10 @@ struct User: Decodable {
   var location: String?
   var email: String?
   var blog: String?
+  
+  var desc: String {
+    return isEmpty(by: self.bio) ? "No description provided." : self.bio!
+  }
 }
 
 struct UserContribution: Decodable {
