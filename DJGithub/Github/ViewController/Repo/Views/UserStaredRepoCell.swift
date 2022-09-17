@@ -141,7 +141,13 @@ class UserStaredRepoCell: UITableViewCell {
       updatedAtLabel.text = "Updated on \(repo.updatedAt)"
     }
     
-    languageView.render(with: .language(UIColor.blue, repo.language ?? "Unknown"))
+    let color: UIColor
+    if let hex = LanguageManager.mapping[repo.language ?? "Unknown"] {
+      color = hex.toColor ?? .blue
+    } else {
+      color = .blue
+    }
+    languageView.render(with: .language(color, repo.language ?? "Unknown"))
     starView.render(with: .star("stared", repo.stargazersCount.toGitNum))
     forkView.render(with: .fork("git-branch", repo.forksCount.toGitNum))
   }
@@ -174,12 +180,12 @@ class UserStaredRepoCell: UITableViewCell {
     repoNameLabel.snp.makeConstraints { make in
       make.leading.equalTo(avatarImageView.snp.trailing).offset(10)
       make.top.equalTo(avatarImageView)
-      make.trailing.equalTo(contentView).offset(12)
+      make.trailing.equalTo(contentView).offset(-12)
     }
     descLabel.snp.makeConstraints { make in
       make.leading.trailing.equalTo(repoNameLabel)
       make.top.equalTo(repoNameLabel.snp.bottom).offset(6)
-      make.trailing.equalTo(contentView).offset(-12)
+      make.trailing.equalTo(repoNameLabel)
     }
     updatedAtLabel.snp.makeConstraints { make in
       make.top.equalTo(descLabel.snp.bottom).offset(6)
@@ -192,12 +198,14 @@ class UserStaredRepoCell: UITableViewCell {
       make.top.equalTo(updatedAtLabel.snp.bottom).offset(5)
     }
     starView.snp.makeConstraints { make in
+      make.width.equalTo(60)
       make.leading.equalTo(languageView.snp.trailing).offset(40)
-      make.top.height.width.equalTo(languageView)
+      make.top.height.equalTo(languageView)
     }
     forkView.snp.makeConstraints { make in
-      make.top.height.width.equalTo(languageView)
-      make.trailing.equalTo(self.contentView.snp.trailing).offset(-12)
+      make.top.height.equalTo(languageView)
+      make.width.equalTo(60)
+      make.leading.equalTo(starView.snp.trailing).offset(40)
     }
   }
   

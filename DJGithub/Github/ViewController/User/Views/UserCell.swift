@@ -40,6 +40,7 @@ class UserCell: UITableViewCell {
     contentLabel.snp.makeConstraints { make in
       make.centerY.equalTo(iconImageView)
       make.leading.equalTo(iconImageView.snp.trailing).offset(10)
+      make.trailing.equalTo(-12)
     }
   }
   

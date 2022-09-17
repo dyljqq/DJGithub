@@ -15,3 +15,7 @@ func UIColorFromRGB(_ rgbValue: UInt, alpha: CGFloat = 1.0) -> UIColor {
     alpha: alpha
   )
 }
+
+func isEmpty(by str: String?) -> Bool {
+  return str == nil || str!.isEmpty
+}

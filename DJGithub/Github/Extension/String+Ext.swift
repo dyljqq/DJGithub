@@ -9,10 +9,8 @@ import UIKit
 
 extension String {
   var toColor: UIColor? {
-    guard self.first == "#" else {
-      return nil
-    }
-    guard let v = UInt(String(Array(self).dropFirst()), radix: 16) else {
+    let hexStr = self.first == "#" ? String(Array(self).dropFirst()) : self
+    guard let v = UInt(hexStr, radix: 16) else {
       return nil
     }
     return UIColorFromRGB(v)

@@ -46,6 +46,9 @@ class UserStaredReposViewController: UIViewController {
     
     Task {
       if let repos = await RepoViewModel.fetchStaredRepos(with: self.userName) {
+        let languages = repos.items.map { Language(id: 0, language: $0.language ?? "Unknown", hex: UIColor.randomHex) }
+        await LanguageManager.save(languages)
+        
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
           make.edges.equalTo(view)

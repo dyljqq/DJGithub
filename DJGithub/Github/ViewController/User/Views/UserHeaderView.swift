@@ -120,7 +120,7 @@ class UserHeaderView: UIView {
     avatarImageView.kf.setImage(with: URL(string: user.avatarUrl))
     nameLabel.text = user.name ?? user.login
     loginLabel.text = "(\(user.login))"
-    bioLabel.text = user.bio ?? "No description provided."
+    bioLabel.text = user.desc.trimmingCharacters(in: .whitespacesAndNewlines)
     if let joined = user.createdAt.split(separator: "T").first {
       joinedLabel.text = "Joined on \(String(describing: joined))"
     } else {
@@ -157,7 +157,7 @@ class UserHeaderView: UIView {
     loginLabel.snp.makeConstraints { make in
       make.top.equalTo(avatarImageView)
       make.leading.equalTo(nameLabel.snp.trailing)
-      make.trailing.equalTo(-12)
+      make.trailing.equalTo(self).offset(-12)
     }
     bioLabel.snp.makeConstraints { make in
       make.top.equalTo(nameLabel.snp.bottom).offset(5)
@@ -166,7 +166,7 @@ class UserHeaderView: UIView {
     }
     joinedLabel.snp.makeConstraints { make in
       make.bottom.equalTo(avatarImageView)
-      make.trailing.equalTo(bioLabel)
+      make.trailing.equalTo(loginLabel)
       make.leading.equalTo(bioLabel)
     }
     horizontalLine.snp.makeConstraints { make in
