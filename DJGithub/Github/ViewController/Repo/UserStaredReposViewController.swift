@@ -18,7 +18,7 @@ class UserStaredReposViewController: UIViewController {
     tableView.delegate = self
     tableView.dataSource = self
     tableView.tableFooterView = UIView()
-    tableView.showsVerticalScrollIndicator = false    
+    tableView.showsVerticalScrollIndicator = false
     tableView.register(UserStaredRepoCell.classForCoder(), forCellReuseIdentifier: UserStaredRepoCell.className)
     return tableView
   }()
@@ -42,22 +42,55 @@ class UserStaredReposViewController: UIViewController {
   
   func setUp() {
     view.backgroundColor = .backgroundColor
-    view.startLoading()
+    view.addSubview(tableView)
+    tableView.snp.makeConstraints { make in
+      make.edges.equalTo(view)
+    }
+
+//    tableView.addHeader { [weak self] in
+//      guard let strongSelf = self else {
+//        return
+//      }
+//      Task {
+//        if let repos = await RepoViewModel.fetchStaredRepos(with: strongSelf.userName) {
+//          let languages = repos.items.map { Language(id: 0, language: $0.language ?? "Unknown", hex: UIColor.randomHex) }
+//          await LanguageManager.save(languages)
+//
+//          strongSelf.tableView.dj_endRefresh()
+//          strongSelf.repos = repos.items
+//          strongSelf.tableView.reloadData()
+//        }
+//      }
+//    }
     
     Task {
       if let repos = await RepoViewModel.fetchStaredRepos(with: self.userName) {
         let languages = repos.items.map { Language(id: 0, language: $0.language ?? "Unknown", hex: UIColor.randomHex) }
         await LanguageManager.save(languages)
-        
-        view.addSubview(tableView)
-        tableView.snp.makeConstraints { make in
-          make.edges.equalTo(view)
-        }
+
+        self.tableView.dj_endRefresh()
         self.repos = repos.items
         self.tableView.reloadData()
+        
+        tableView.addFooter { [weak self] in
+          guard let strongSelf = self else {
+            return
+          }
+          Task {
+            if let repos = await RepoViewModel.fetchStaredRepos(with: strongSelf.userName) {
+              let languages = repos.items.map { Language(id: 0, language: $0.language ?? "Unknown", hex: UIColor.randomHex) }
+              await LanguageManager.save(languages)
+
+              strongSelf.tableView.dj_endRefresh()
+              strongSelf.repos = repos.items
+              strongSelf.tableView.reloadData()
+            }
+          }
+        }
       }
-      view.stopLoading()
     }
+    
+//    tableView.dj_beginRefresh()
   }
 
 }

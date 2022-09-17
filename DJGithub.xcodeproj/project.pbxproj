@@ -55,6 +55,9 @@
 		73AACB7428D5BA2D0072B1DF /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACB7328D5BA2D0072B1DF /* Language.swift */; };
 		73AACB7728D5BBE90072B1DF /* SQLTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACB7628D5BBE90072B1DF /* SQLTable.swift */; };
 		73AACB7928D5BBF50072B1DF /* DBManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACB7828D5BBF50072B1DF /* DBManage.swift */; };
+		73AACB8328D6020A0072B1DF /* RefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACB8228D6020A0072B1DF /* RefreshView.swift */; };
+		73AACB8528D626E30072B1DF /* UIScrollView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACB8428D626E30072B1DF /* UIScrollView+Ext.swift */; };
+		73AACB8728D628BD0072B1DF /* IndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACB8628D628BD0072B1DF /* IndicatorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -125,6 +128,9 @@
 		73AACB7328D5BA2D0072B1DF /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		73AACB7628D5BBE90072B1DF /* SQLTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLTable.swift; sourceTree = "<group>"; };
 		73AACB7828D5BBF50072B1DF /* DBManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManage.swift; sourceTree = "<group>"; };
+		73AACB8228D6020A0072B1DF /* RefreshView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshView.swift; sourceTree = "<group>"; };
+		73AACB8428D626E30072B1DF /* UIScrollView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Ext.swift"; sourceTree = "<group>"; };
+		73AACB8628D628BD0072B1DF /* IndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,6 +216,7 @@
 		73AACB0428D308E30072B1DF /* DJFoundation */ = {
 			isa = PBXGroup;
 			children = (
+				73AACB8128D601EC0072B1DF /* DJRefresh */,
 				73AACB1428D30F3B0072B1DF /* Utils */,
 				73AACB0D28D30B670072B1DF /* Common */,
 				73AACB0628D309C90072B1DF /* Network */,
@@ -394,6 +401,16 @@
 			path = DataBase;
 			sourceTree = "<group>";
 		};
+		73AACB8128D601EC0072B1DF /* DJRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				73AACB8228D6020A0072B1DF /* RefreshView.swift */,
+				73AACB8428D626E30072B1DF /* UIScrollView+Ext.swift */,
+				73AACB8628D628BD0072B1DF /* IndicatorView.swift */,
+			);
+			path = DJRefresh;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -540,9 +557,11 @@
 				73AACB3028D32E7B0072B1DF /* Config.swift in Sources */,
 				73AACB1328D30F350072B1DF /* DJParser.swift in Sources */,
 				73AACB7728D5BBE90072B1DF /* SQLTable.swift in Sources */,
+				73AACB8328D6020A0072B1DF /* RefreshView.swift in Sources */,
 				73AACB7428D5BA2D0072B1DF /* Language.swift in Sources */,
 				73AACB4E28D45F1F0072B1DF /* Color.swift in Sources */,
 				73AACB4828D443350072B1DF /* LoadingView.swift in Sources */,
+				73AACB8728D628BD0072B1DF /* IndicatorView.swift in Sources */,
 				73AACB6A28D5ACBD0072B1DF /* UIColor+Ext.swift in Sources */,
 				73AACB1128D30E720072B1DF /* Parse.swift in Sources */,
 				73AACB3A28D359550072B1DF /* UserHeaderView.swift in Sources */,
@@ -557,6 +576,7 @@
 				73AACB2428D31A440072B1DF /* User.swift in Sources */,
 				73AACB6028D4BE4F0072B1DF /* RepoViewModel.swift in Sources */,
 				73AACAD528D308A60072B1DF /* AppDelegate.swift in Sources */,
+				73AACB8528D626E30072B1DF /* UIScrollView+Ext.swift in Sources */,
 				73AACB5428D47ECB0072B1DF /* UserContrbutionItemCell.swift in Sources */,
 				73AACB4328D42C1B0072B1DF /* UINavigation+Router.swift in Sources */,
 				73AACB7928D5BBF50072B1DF /* DBManage.swift in Sources */,
