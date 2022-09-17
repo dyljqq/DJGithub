@@ -38,6 +38,10 @@ extension UIScrollView {
     dj_header = IndicatorView(isHeader: true, height: height, action: action)
   }
   
+  public func addFooter(height: CGFloat = 60, action: @escaping () -> Void) {
+    dj_footer = IndicatorView(isHeader: false, height: height, action: action)
+  }
+  
   public func dj_beginRefresh() {
     dj_header?.beginRefreshing()
   }
@@ -45,7 +49,7 @@ extension UIScrollView {
   public func dj_endRefresh() {
     dj_header?.endRefreshing()
     dj_footer?.endRefreshing { [weak self] in
-      self?.dj_footer = nil
+      // TODO
     }
   }
   
