@@ -27,6 +27,10 @@ class ViewController: UIViewController {
       make.width.equalTo(100)
       make.height.equalTo(44)
     }
+    
+    let barApp = UINavigationBarAppearance()
+    barApp.backgroundEffect = UIBlurEffect(style: .regular)
+    self.navigationController?.navigationBar.scrollEdgeAppearance = barApp
   }
   
   @objc func jumpAction() {

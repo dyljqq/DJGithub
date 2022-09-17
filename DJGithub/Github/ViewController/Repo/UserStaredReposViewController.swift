@@ -43,7 +43,7 @@ class UserStaredReposViewController: UIViewController {
   func setUp() {
     view.backgroundColor = .backgroundColor
     view.startLoading()
-    
+
     Task {
       if let repos = await RepoViewModel.fetchStaredRepos(with: self.userName) {
         let languages = repos.items.map { Language(id: 0, language: $0.language ?? "Unknown", hex: UIColor.randomHex) }
@@ -52,6 +52,10 @@ class UserStaredReposViewController: UIViewController {
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
           make.edges.equalTo(view)
+        }
+        
+        tableView.addHeader { [weak self] in
+          self?.tableView.dj_endRefresh()
         }
         self.repos = repos.items
         self.tableView.reloadData()
