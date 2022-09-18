@@ -49,43 +49,24 @@ class UserStaredReposViewController: UIViewController {
       make.bottom.leading.trailing.equalTo(self.view)
     }
 
-//    tableView.addHeader { [weak self] in
-//      guard let strongSelf = self else {
-//        return
-//      }
-//      Task {
-//        if let repos = await RepoViewModel.fetchStaredRepos(with: strongSelf.userName) {
-//          let languages = repos.items.map { Language(id: 0, language: $0.language ?? "Unknown", hex: UIColor.randomHex) }
-//          await LanguageManager.save(languages)
-//
-//          strongSelf.tableView.dj_endRefresh()
-//          strongSelf.repos = repos.items
-//          strongSelf.tableView.reloadData()
-//        }
-//      }
-//    }
-    
-    Task {
-      if let repos = await RepoViewModel.fetchStaredRepos(with: self.userName) {
-        let languages = repos.items.map { Language(id: 0, language: $0.language ?? "Unknown", hex: UIColor.randomHex) }
-        await LanguageManager.save(languages)
-
-        self.tableView.dj_endRefresh()
-        self.repos = repos.items
-        self.tableView.reloadData()
-
-        tableView.addFooter { [weak self] in
-          guard let strongSelf = self else {
-            return
-          }
-          Task {
-            if let repos = await RepoViewModel.fetchStaredRepos(with: strongSelf.userName) {
-              let languages = repos.items.map { Language(id: 0, language: $0.language ?? "Unknown", hex: UIColor.randomHex) }
-              await LanguageManager.save(languages)
-
-              strongSelf.tableView.dj_endRefresh()
-              strongSelf.repos = repos.items
-              strongSelf.tableView.reloadData()
+    tableView.addHeader { [weak self] in
+      guard let strongSelf = self else {
+        return
+      }
+      Task {
+        if let repos = await RepoViewModel.fetchStaredRepos(with: strongSelf.userName) {
+          await strongSelf.handleData(repos: repos)
+          
+          if !repos.items.isEmpty {
+            strongSelf.tableView.addFooter { [weak self] in
+              guard let strongSelf = self else {
+                return
+              }
+              Task {
+                if let repos = await RepoViewModel.fetchStaredRepos(with: strongSelf.userName) {
+                  await strongSelf.handleData(repos: repos)
+                }
+              }
             }
           }
         }
@@ -93,6 +74,15 @@ class UserStaredReposViewController: UIViewController {
     }
     
     tableView.dj_beginRefresh()
+  }
+  
+  func handleData(repos: Repos) async {
+    let languages = repos.items.map { Language(id: 0, language: $0.language ?? "Unknown", hex: UIColor.randomHex) }
+    await LanguageManager.save(languages)
+
+    tableView.dj_endRefresh()
+    self.repos = repos.items
+    tableView.reloadData()
   }
 
 }

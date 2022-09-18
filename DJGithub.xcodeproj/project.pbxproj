@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		73727B2428D75DAE003D5A95 /* IndicatorCookieTerminatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73727B2328D75DAE003D5A95 /* IndicatorCookieTerminatorView.swift */; };
 		73AACAD528D308A60072B1DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD428D308A60072B1DF /* AppDelegate.swift */; };
 		73AACAD728D308A60072B1DF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD628D308A60072B1DF /* SceneDelegate.swift */; };
 		73AACAD928D308A60072B1DF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD828D308A60072B1DF /* ViewController.swift */; };
@@ -79,6 +80,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		73727B2328D75DAE003D5A95 /* IndicatorCookieTerminatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorCookieTerminatorView.swift; sourceTree = "<group>"; };
 		73AACAD128D308A60072B1DF /* DJGithub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DJGithub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73AACAD428D308A60072B1DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		73AACAD628D308A60072B1DF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -410,6 +412,7 @@
 				73AACB8228D6020A0072B1DF /* RefreshView.swift */,
 				73AACB8428D626E30072B1DF /* UIScrollView+Ext.swift */,
 				73AACB8628D628BD0072B1DF /* IndicatorView.swift */,
+				73727B2328D75DAE003D5A95 /* IndicatorCookieTerminatorView.swift */,
 			);
 			path = DJRefresh;
 			sourceTree = "<group>";
@@ -595,6 +598,7 @@
 				73AACB4A28D4463B0072B1DF /* UIView+Loading.swift in Sources */,
 				73AACB5E28D4BD3B0072B1DF /* UserStaredReposViewController.swift in Sources */,
 				73AACB5A28D4B8610072B1DF /* Repo.swift in Sources */,
+				73727B2428D75DAE003D5A95 /* IndicatorCookieTerminatorView.swift in Sources */,
 				73AACB3E28D362430072B1DF /* Consts.swift in Sources */,
 				73AACB1828D312D30072B1DF /* GithubRouter.swift in Sources */,
 			);

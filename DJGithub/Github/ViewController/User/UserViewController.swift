@@ -54,7 +54,7 @@ fileprivate enum CellType {
   
   var height: CGFloat {
     switch self {
-    case .blank: return 20
+    case .blank: return 10
     case .user: return 44
     case .userContribution: return 100
     }
