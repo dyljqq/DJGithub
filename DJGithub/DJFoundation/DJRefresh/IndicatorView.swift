@@ -26,31 +26,31 @@ class IndicatorView: RefreshView {
         return layer
     }()
 
-    let indicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
+    let indicatorCookieterminatorView = IndicatorCookieTerminatorView(with: 40, tintColor: .blue)
 
     private let isHeader: Bool
 
     init(isHeader: Bool, height: CGFloat, action: @escaping () -> Void) {
-        self.isHeader = isHeader
-        super.init(refreshPosition: isHeader ? .header : .footer, height: height, action: action)
-        layer.addSublayer(arrowLayer)
-        addSubview(indicator)
+      self.isHeader = isHeader
+      super.init(refreshPosition: isHeader ? .header : .footer, height: height, action: action)
+      layer.addSublayer(arrowLayer)
+      addSubview(indicatorCookieterminatorView)
     }
 
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+      fatalError("init(coder:) has not been implemented")
     }
 
     override func layoutSubviews() {
-        super.layoutSubviews()
-        let center = CGPoint(x: bounds.midX, y: bounds.midY)
-        arrowLayer.position = center
-        indicator.center = center
+      super.layoutSubviews()
+      let center = CGPoint(x: bounds.midX, y: bounds.midY)
+      arrowLayer.position = center
+      indicatorCookieterminatorView.center = center
     }
 
     override func didUpdateState(_ isRefreshing: Bool) {
-        arrowLayer.isHidden = isRefreshing
-        isRefreshing ? indicator.startAnimating() : indicator.stopAnimating()
+      arrowLayer.isHidden = isRefreshing
+      isRefreshing ? indicatorCookieterminatorView.startAnimation() : indicatorCookieterminatorView.stopAnimation()
     }
 
     override func didUpdateProgress(_ progress: CGFloat) {

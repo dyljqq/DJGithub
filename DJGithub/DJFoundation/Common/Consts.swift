@@ -11,12 +11,10 @@ let screenWidth = UIScreen.main.bounds.size.width
 let screenHeight = UIScreen.main.bounds.size.height
 
 struct FrameGuide {
-  static let shared = FrameGuide()
+  static let screenWidth = UIScreen.main.bounds.size.width
+  static let screenHeight = UIScreen.main.bounds.size.height
   
-  let screenWidth = UIScreen.main.bounds.size.width
-  let screenHeight = UIScreen.main.bounds.size.height
-  
-  lazy var currentKeyWindow: UIWindow? = {
+  static var currentKeyWindow: UIWindow? {
     var window: UIWindow?
     if #available(iOS 13.0, *) {
       for scene in UIApplication.shared.connectedScenes {
@@ -29,9 +27,9 @@ struct FrameGuide {
       window = UIApplication.shared.keyWindow
     }
     return window
-  }()
+  }
   
-  lazy var statusBarHeight: CGFloat = {
+  static var statusBarHeight: CGFloat {
     var statusHeight: Double = 0
     
     if #available(iOS 13.0, *) {
@@ -43,9 +41,9 @@ struct FrameGuide {
     }
     
     return statusHeight
-  }()
+  }
   
-  var isNotchScreen: Bool {
+  static var isNotchScreen: Bool {
     if UIDevice.current.userInterfaceIdiom == .pad {
       return false
     }
@@ -55,10 +53,10 @@ struct FrameGuide {
     return 216 == notchValue || 46 == notchValue
   }
   
-  let navigationBarHeight: CGFloat = 44
-  lazy var navigationBarAndStatusBarHeight: CGFloat = {
-    return navigationBarHeight + statusBarHeight
-  }()
+  static let navigationBarHeight: CGFloat = 44
+  static var navigationBarAndStatusBarHeight: CGFloat {
+    return self.navigationBarHeight + statusBarHeight
+  }
   
   static var safeAreaInsets: UIEdgeInsets {
     return UIApplication.shared.delegate?.window??.safeAreaInsets ?? UIEdgeInsets.zero

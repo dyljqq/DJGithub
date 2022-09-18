@@ -54,7 +54,7 @@ fileprivate enum CellType {
   
   var height: CGFloat {
     switch self {
-    case .blank: return 20
+    case .blank: return 10
     case .user: return 44
     case .userContribution: return 100
     }
@@ -65,7 +65,7 @@ class UserViewController: UIViewController {
 
   lazy var userHeaderView: UserHeaderView = {
     let view = UserHeaderView()
-    view.frame = CGRect(x: 0, y: 0, width: FrameGuide.shared.screenWidth, height: 135)
+    view.frame = CGRect(x: 0, y: 0, width: FrameGuide.screenWidth, height: 135)
     return view
   }()
   

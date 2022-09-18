@@ -46,8 +46,7 @@ class RefreshView: UIView, RefreshStatus {
     self.refreshPosition = refreshPosition
     self.height = height
     self.action = action
-    super.init(frame: .zero)
-    
+    super.init(frame: .zero)    
     self.autoresizingMask = [.flexibleWidth]
   }
   
@@ -84,7 +83,9 @@ class RefreshView: UIView, RefreshStatus {
     }
     
     stateToken = scrollView.observe(\.panGestureRecognizer.state) { [weak self] scrollView, _ in
-      guard scrollView.panGestureRecognizer.state == .ended else { return }
+      guard scrollView.panGestureRecognizer.state == .ended else {
+        return
+      }
       self?.scrollViewDidEndDragging(scrollView)
     }
     
@@ -94,7 +95,7 @@ class RefreshView: UIView, RefreshStatus {
     case .footer:
       sizeToken = scrollView.observe(\.contentSize) { [weak self] scrollView, _ in
         self?.frame = CGRect(x: 0, y: scrollView.contentSize.height, width: scrollView.bounds.width, height: self?.height ?? 0)
-        self?.isHidden = scrollView.contentSize.height <= scrollView.bounds.height
+        self?.isHidden = scrollView.contentSize.height > scrollView.bounds.height && scrollView.contentOffset.y < scrollView.bounds.height
       }
     }
   }
@@ -141,9 +142,9 @@ class RefreshView: UIView, RefreshStatus {
         switch self.refreshPosition {
         case .header:
           scrollView.contentOffset.y = -self.height - scrollView.contentInsetTop
-          scrollView.contentInset.top += self.height
+          scrollView.contentInset.top = self.height
         case .footer:
-          scrollView.contentInset.bottom += self.height
+          scrollView.contentInset.bottom = self.height
         }
       }, completion: { _ in
         self.action()
@@ -153,6 +154,7 @@ class RefreshView: UIView, RefreshStatus {
   
   func endRefreshing(with completionHandler: (() -> Void)? = nil) {
     guard let scrollView = scrollView else {
+      completionHandler?()
       return
     }
     
@@ -160,9 +162,9 @@ class RefreshView: UIView, RefreshStatus {
       UIView.animate(withDuration: 0.3, animations: {
         switch self.refreshPosition {
         case .header:
-          scrollView.contentInset.top -= self.height
+          scrollView.contentInset.top = 0
         case .footer:
-          scrollView.contentInset.bottom -= self.height
+          scrollView.contentInset.bottom = 0
         }
       }, completion: { _ in
         self.isRefreshing = false
@@ -176,22 +178,4 @@ class RefreshView: UIView, RefreshStatus {
     fatalError("init(coder:) has not been implemented")
   }
   
-}
-
-extension UIScrollView {
-  var contentInsetTop: CGFloat {
-    if #available(iOS 11.0, *) {
-      return contentInset.top + adjustedContentInset.top
-    } else {
-      return contentInset.top
-    }
-}
-
-  var contentInsetBottom: CGFloat {
-    if #available(iOS 11.0, *) {
-      return contentInset.bottom + adjustedContentInset.bottom
-    } else {
-      return contentInset.bottom
-    }
-  }
 }

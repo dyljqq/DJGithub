@@ -48,9 +48,7 @@ extension UIScrollView {
   
   public func dj_endRefresh() {
     dj_header?.endRefreshing()
-    dj_footer?.endRefreshing { [weak self] in
-      // TODO
-    }
+    dj_footer?.endRefreshing()
   }
   
 }
