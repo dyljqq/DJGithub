@@ -46,8 +46,7 @@ class RefreshView: UIView, RefreshStatus {
     self.refreshPosition = refreshPosition
     self.height = height
     self.action = action
-    super.init(frame: .zero)
-    
+    super.init(frame: .zero)    
     self.autoresizingMask = [.flexibleWidth]
   }
   
@@ -84,7 +83,9 @@ class RefreshView: UIView, RefreshStatus {
     }
     
     stateToken = scrollView.observe(\.panGestureRecognizer.state) { [weak self] scrollView, _ in
-      guard scrollView.panGestureRecognizer.state == .ended else { return }
+      guard scrollView.panGestureRecognizer.state == .ended else {
+        return
+      }
       self?.scrollViewDidEndDragging(scrollView)
     }
     
@@ -176,22 +177,4 @@ class RefreshView: UIView, RefreshStatus {
     fatalError("init(coder:) has not been implemented")
   }
   
-}
-
-extension UIScrollView {
-  var contentInsetTop: CGFloat {
-    if #available(iOS 11.0, *) {
-      return contentInset.top + adjustedContentInset.top
-    } else {
-      return contentInset.top
-    }
-}
-
-  var contentInsetBottom: CGFloat {
-    if #available(iOS 11.0, *) {
-      return contentInset.bottom + adjustedContentInset.bottom
-    } else {
-      return contentInset.bottom
-    }
-  }
 }

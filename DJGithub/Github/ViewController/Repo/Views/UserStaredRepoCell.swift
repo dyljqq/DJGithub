@@ -153,7 +153,7 @@ class UserStaredRepoCell: UITableViewCell {
   }
   
   class func cellHeight(by repo: Repo) -> CGFloat {
-    let descLabelHeight = NSString(string: repo.description).boundingRect(with: CGSize(width: FrameGuide.shared.screenWidth - 64, height: 0), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)], context: nil).size.height
+    let descLabelHeight = NSString(string: repo.description).boundingRect(with: CGSize(width: FrameGuide.screenWidth - 64, height: 0), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)], context: nil).size.height
     return 82 + descLabelHeight
   }
   

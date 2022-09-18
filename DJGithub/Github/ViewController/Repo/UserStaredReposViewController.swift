@@ -19,6 +19,7 @@ class UserStaredReposViewController: UIViewController {
     tableView.dataSource = self
     tableView.tableFooterView = UIView()
     tableView.showsVerticalScrollIndicator = false
+    tableView.contentInsetAdjustmentBehavior = .never
     tableView.register(UserStaredRepoCell.classForCoder(), forCellReuseIdentifier: UserStaredRepoCell.className)
     return tableView
   }()
@@ -44,7 +45,8 @@ class UserStaredReposViewController: UIViewController {
     view.backgroundColor = .backgroundColor
     view.addSubview(tableView)
     tableView.snp.makeConstraints { make in
-      make.edges.equalTo(view)
+      make.top.equalTo(FrameGuide.navigationBarAndStatusBarHeight)
+      make.bottom.leading.trailing.equalTo(self.view)
     }
 
 //    tableView.addHeader { [weak self] in
@@ -71,7 +73,7 @@ class UserStaredReposViewController: UIViewController {
         self.tableView.dj_endRefresh()
         self.repos = repos.items
         self.tableView.reloadData()
-        
+
         tableView.addFooter { [weak self] in
           guard let strongSelf = self else {
             return
@@ -90,7 +92,7 @@ class UserStaredReposViewController: UIViewController {
       }
     }
     
-//    tableView.dj_beginRefresh()
+    tableView.dj_beginRefresh()
   }
 
 }
