@@ -60,6 +60,8 @@
 		73AACB8528D626E30072B1DF /* UIScrollView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACB8428D626E30072B1DF /* UIScrollView+Ext.swift */; };
 		73AACB8728D628BD0072B1DF /* IndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACB8628D628BD0072B1DF /* IndicatorView.swift */; };
 		73AACB8B28D708740072B1DF /* UIScrollView+Refresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACB8A28D708740072B1DF /* UIScrollView+Refresh.swift */; };
+		73C598C528D85EF100DA86A1 /* PopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C598C428D85EF100DA86A1 /* PopoverView.swift */; };
+		73C598C728D8617800DA86A1 /* UIApplication+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C598C628D8617800DA86A1 /* UIApplication+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,6 +137,8 @@
 		73AACB8428D626E30072B1DF /* UIScrollView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Ext.swift"; sourceTree = "<group>"; };
 		73AACB8628D628BD0072B1DF /* IndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorView.swift; sourceTree = "<group>"; };
 		73AACB8A28D708740072B1DF /* UIScrollView+Refresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Refresh.swift"; sourceTree = "<group>"; };
+		73C598C428D85EF100DA86A1 /* PopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverView.swift; sourceTree = "<group>"; };
+		73C598C628D8617800DA86A1 /* UIApplication+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -220,6 +224,7 @@
 		73AACB0428D308E30072B1DF /* DJFoundation */ = {
 			isa = PBXGroup;
 			children = (
+				73C598C328D85ECF00DA86A1 /* View */,
 				73AACB8128D601EC0072B1DF /* DJRefresh */,
 				73AACB1428D30F3B0072B1DF /* Utils */,
 				73AACB0D28D30B670072B1DF /* Common */,
@@ -321,6 +326,7 @@
 				73AACB6328D4E5000072B1DF /* Int+Ext.swift */,
 				73AACB6928D5ACBD0072B1DF /* UIColor+Ext.swift */,
 				73AACB8A28D708740072B1DF /* UIScrollView+Refresh.swift */,
+				73C598C628D8617800DA86A1 /* UIApplication+Ext.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -415,6 +421,14 @@
 				73727B2328D75DAE003D5A95 /* IndicatorCookieTerminatorView.swift */,
 			);
 			path = DJRefresh;
+			sourceTree = "<group>";
+		};
+		73C598C328D85ECF00DA86A1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				73C598C428D85EF100DA86A1 /* PopoverView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -557,6 +571,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73C598C728D8617800DA86A1 /* UIApplication+Ext.swift in Sources */,
 				73AACB0828D30A3C0072B1DF /* Router.swift in Sources */,
 				73AACB3428D357C80072B1DF /* UserViewController.swift in Sources */,
 				73AACB2928D321480072B1DF /* Result.swift in Sources */,
@@ -590,6 +605,7 @@
 				73AACB5028D4618F0072B1DF /* UIView+Ext.swift in Sources */,
 				73AACB5228D467850072B1DF /* UserContributionView.swift in Sources */,
 				73AACB6228D4BEFE0072B1DF /* UserStaredRepoCell.swift in Sources */,
+				73C598C528D85EF100DA86A1 /* PopoverView.swift in Sources */,
 				73AACAD728D308A60072B1DF /* SceneDelegate.swift in Sources */,
 				73AACB5628D47FCB0072B1DF /* String+Ext.swift in Sources */,
 				73AACB5828D483CA0072B1DF /* UserContributionCell.swift in Sources */,
