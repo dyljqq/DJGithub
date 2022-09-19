@@ -93,5 +93,12 @@ extension UserContributionView: UICollectionViewDataSource {
 }
 
 extension UserContributionView: UICollectionViewDelegateFlowLayout {
-  
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    collectionView.deselectItem(at: indexPath, animated: true)
+    let attributes = collectionView.layoutAttributesForItem(at: indexPath)
+    if let frame = attributes?.frame, let userContribution = userContribution?.items[indexPath.row] {
+      let popoverView = PopoverView(content: userContribution.contributionDesc)
+      popoverView.showPopover(in: CGRect(x: 0, y: 0, width: FrameGuide.screenWidth, height: FrameGuide.screenHeight), sourceRect: self.convert(collectionView.convert(frame, to: self), to: UIApplication.shared.keyWindow))
+    }
+  }
 }

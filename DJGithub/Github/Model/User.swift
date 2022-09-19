@@ -64,4 +64,14 @@ struct UserContributionItem: Decodable {
   var contributionCount: Int
   var date: String
   var weekday: Int
+  
+  var contributionDesc: String {
+    let dateStr: String
+    if let date = self.date.split(separator: "T").first {
+      dateStr = String(describing: date)
+    } else {
+      dateStr = self.date
+    }
+    return "\(contributionCount) contributions on \(dateStr)"
+  }
 }

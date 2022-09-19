@@ -8,13 +8,14 @@
 import UIKit
 
 class ViewController: UIViewController {
+  
+  var button: UIButton = UIButton()
 
   override func viewDidLoad() {
     super.viewDidLoad()
     
     view.backgroundColor = .white
     
-    let button = UIButton()
     button.setTitle("jump", for: .normal)
     button.layer.cornerRadius = 5
     button.setTitleColor(.white, for: .normal)
