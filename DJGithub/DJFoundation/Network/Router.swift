@@ -29,10 +29,6 @@ extension Router {
     return [:]
   }
   
-  var parameters: [String: Any] {
-    return [:]
-  }
-  
   var path: String {
     return ""
   }
@@ -47,11 +43,14 @@ extension Router {
     return str
   }
   
-  func configURLRequest() -> URLRequest? {
-    guard let url = try? baseURLString.asURL() else {
+  func configURLRequest(with queryItems: [String: String]? = nil) -> URLRequest? {
+    guard var url = try? baseURLString.asURL().appendingPathComponent(path) else {
         return nil
     }
-    var request = URLRequest(url: url.appendingPathComponent(path))
+    if let queryItems = queryItems {
+      url = url.appending(by: queryItems)
+    }
+    var request = URLRequest(url: url)
     request.httpMethod = method.rawValue
     request.allHTTPHeaderFields = headers
     request.timeoutInterval = TimeInterval(10 * 1000)

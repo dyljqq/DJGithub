@@ -133,7 +133,7 @@ class UserStaredRepoCell: UITableViewCell {
     self.repo = repo
     avatarImageView.kf.setImage(with: URL(string: repo.owner?.avatarUrl ?? ""))
     repoNameLabel.text = repo.fullName
-    descLabel.text = repo.description
+    descLabel.text = repo.desc
     
     if let updatedAt = repo.updatedAt.split(separator: "T").first {
       updatedAtLabel.text = "Updated on \(String(describing: updatedAt))"
@@ -153,7 +153,7 @@ class UserStaredRepoCell: UITableViewCell {
   }
   
   class func cellHeight(by repo: Repo) -> CGFloat {
-    let descLabelHeight = NSString(string: repo.description).boundingRect(with: CGSize(width: FrameGuide.screenWidth - 64, height: 0), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)], context: nil).size.height
+    let descLabelHeight = NSString(string: repo.desc).boundingRect(with: CGSize(width: FrameGuide.screenWidth - 64, height: 0), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)], context: nil).size.height
     return 82 + descLabelHeight
   }
   

@@ -10,8 +10,8 @@ import UIKit
 class UserStaredReposViewController: UIViewController {
 
   let userName: String
-  
-  var repos: [Repo] = []
+
+  var viewModel = RepoViewModel()
   
   lazy var tableView: UITableView = {
     let tableView: UITableView = UITableView()
@@ -54,8 +54,8 @@ class UserStaredReposViewController: UIViewController {
         return
       }
       Task {
-        if let repos = await RepoViewModel.fetchStaredRepos(with: strongSelf.userName) {
-          await strongSelf.handleData(repos: repos)
+        if let repos = await RepoViewModel.fetchStaredRepos(with: strongSelf.userName, page: strongSelf.viewModel.page) {
+          await strongSelf.handleData(repos: repos.items, page: strongSelf.viewModel.page + 1)
           
           if !repos.items.isEmpty {
             strongSelf.tableView.addFooter { [weak self] in
@@ -63,12 +63,16 @@ class UserStaredReposViewController: UIViewController {
                 return
               }
               Task {
-                if let repos = await RepoViewModel.fetchStaredRepos(with: strongSelf.userName) {
-                  await strongSelf.handleData(repos: repos)
+                if let repos = await RepoViewModel.fetchStaredRepos(with: strongSelf.userName, page: strongSelf.viewModel.page) {
+                  await strongSelf.handleData(repos: repos.items, page: strongSelf.viewModel.page + 1)
+                } else {
+                  strongSelf.tableView.dj_endRefresh()
                 }
               }
             }
           }
+        } else {
+          strongSelf.tableView.dj_endRefresh()
         }
       }
     }
@@ -76,12 +80,12 @@ class UserStaredReposViewController: UIViewController {
     tableView.dj_beginRefresh()
   }
   
-  func handleData(repos: Repos) async {
-    let languages = repos.items.map { Language(id: 0, language: $0.language ?? "Unknown", hex: UIColor.randomHex) }
+  func handleData(repos: [Repo], page: Int) async {
+    let languages = repos.map { Language(id: 0, language: $0.language ?? "Unknown", hex: UIColor.randomHex) }
     await LanguageManager.save(languages)
 
     tableView.dj_endRefresh()
-    self.repos = repos.items
+    viewModel.update(by: page, repos: repos, isEnded: repos.isEmpty)
     tableView.reloadData()
   }
 
@@ -89,12 +93,12 @@ class UserStaredReposViewController: UIViewController {
 
 extension UserStaredReposViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return repos.count
+    return viewModel.repos.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: UserStaredRepoCell.className, for: indexPath) as! UserStaredRepoCell
-    cell.render(with: repos[indexPath.row])
+    cell.render(with: viewModel.repos[indexPath.row])
     cell.avatarImageViewTappedClosure = { [weak self] userName in
       guard let strongSelf = self else {
         return
@@ -105,7 +109,7 @@ extension UserStaredReposViewController: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return UserStaredRepoCell.cellHeight(by: repos[indexPath.row])
+    return UserStaredRepoCell.cellHeight(by: viewModel.repos[indexPath.row])
   }
 }
 

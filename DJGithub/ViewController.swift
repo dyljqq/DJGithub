@@ -32,18 +32,6 @@ class ViewController: UIViewController {
     let barApp = UINavigationBarAppearance()
     barApp.backgroundEffect = UIBlurEffect(style: .regular)
     self.navigationController?.navigationBar.scrollEdgeAppearance = barApp
-    
-    let indicatorView = IndicatorCookieTerminatorView()
-    indicatorView.backgroundColor = .red
-    self.view.addSubview(indicatorView)
-    
-    indicatorView.snp.makeConstraints { make in
-      make.leading.equalTo(100)
-      make.top.equalTo(200)
-      make.width.equalTo(FrameGuide.screenWidth / 5)
-      make.height.equalTo(FrameGuide.screenHeight / 7)
-    }
-    indicatorView.startAnimation()
   }
   
   @objc func jumpAction() {
