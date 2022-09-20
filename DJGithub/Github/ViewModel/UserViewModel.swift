@@ -16,7 +16,29 @@ struct UserViewModel {
   }
   
   static func fetchUserContributions(with name: String) async -> UserContribution? {
-    let router = GithubRouter.userContribution(name)
+    let query = """
+query {
+user(login: "\(name)") {
+  name
+  contributionsCollection {
+    contributionCalendar {
+      colors
+      totalContributions
+      weeks {
+        contributionDays {
+          color
+          contributionCount
+          date
+          weekday
+        }
+        firstDay
+      }
+    }
+  }
+}
+}
+"""
+    let router = GithubRouter.userContribution(parameters: ["query": query])
     let result = await APIClient.shared.get(by: router)
     switch result {
     case .success(let d):

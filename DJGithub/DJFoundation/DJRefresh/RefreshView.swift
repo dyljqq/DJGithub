@@ -178,4 +178,8 @@ class RefreshView: UIView, RefreshStatus {
     fatalError("init(coder:) has not been implemented")
   }
   
+  deinit {
+    self.clearObserver()
+  }
+  
 }

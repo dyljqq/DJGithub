@@ -15,11 +15,15 @@ struct Repo: Decodable {
   var fullName: String
   var forksCount: Int
   var stargazersCount: Int
-  var description: String
+  var description: String?
   var updatedAt: String
   var language: String?
   
   var owner: RepoOwner?
+  
+  var desc: String {
+    return self.description ?? "No description provided."
+  }
 }
 
 struct RepoOwner: Decodable {

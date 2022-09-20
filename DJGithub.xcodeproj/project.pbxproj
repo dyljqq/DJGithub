@@ -62,6 +62,7 @@
 		73AACB8B28D708740072B1DF /* UIScrollView+Refresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACB8A28D708740072B1DF /* UIScrollView+Refresh.swift */; };
 		73C598C528D85EF100DA86A1 /* PopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C598C428D85EF100DA86A1 /* PopoverView.swift */; };
 		73C598C728D8617800DA86A1 /* UIApplication+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C598C628D8617800DA86A1 /* UIApplication+Ext.swift */; };
+		73C598CD28D9E6A100DA86A1 /* URL+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C598CC28D9E6A100DA86A1 /* URL+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,6 +140,7 @@
 		73AACB8A28D708740072B1DF /* UIScrollView+Refresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Refresh.swift"; sourceTree = "<group>"; };
 		73C598C428D85EF100DA86A1 /* PopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverView.swift; sourceTree = "<group>"; };
 		73C598C628D8617800DA86A1 /* UIApplication+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Ext.swift"; sourceTree = "<group>"; };
+		73C598CC28D9E6A100DA86A1 /* URL+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -327,6 +329,7 @@
 				73AACB6928D5ACBD0072B1DF /* UIColor+Ext.swift */,
 				73AACB8A28D708740072B1DF /* UIScrollView+Refresh.swift */,
 				73C598C628D8617800DA86A1 /* UIApplication+Ext.swift */,
+				73C598CC28D9E6A100DA86A1 /* URL+Ext.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -608,6 +611,7 @@
 				73C598C528D85EF100DA86A1 /* PopoverView.swift in Sources */,
 				73AACAD728D308A60072B1DF /* SceneDelegate.swift in Sources */,
 				73AACB5628D47FCB0072B1DF /* String+Ext.swift in Sources */,
+				73C598CD28D9E6A100DA86A1 /* URL+Ext.swift in Sources */,
 				73AACB5828D483CA0072B1DF /* UserContributionCell.swift in Sources */,
 				73AACB0C28D30B3D0072B1DF /* Error.swift in Sources */,
 				73AACB0A28D30B0C0072B1DF /* URLConvertible.swift in Sources */,

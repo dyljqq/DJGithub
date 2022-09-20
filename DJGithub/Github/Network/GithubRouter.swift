@@ -8,9 +8,10 @@
 import Foundation
 
 enum GithubRouter: Router {
+  
   case userInfo(String)
-  case userContribution(String)
-  case userStartedRepos(String)
+  case userContribution(parameters: [String: Any])
+  case userStartedRepos(path: String, queryItems: [String: String])
   
   var baseURLString: String {
     return "https://api.github.com/"
@@ -27,7 +28,7 @@ enum GithubRouter: Router {
     switch self {
     case .userInfo(let name): return "users/\(name)"
     case .userContribution: return "graphql"
-    case .userStartedRepos(let name): return "users/\(name)/starred"
+    case .userStartedRepos(let name, _): return "users/\(name)/starred"
     }
   }
   
@@ -39,39 +40,26 @@ enum GithubRouter: Router {
   
   var parameters: [String : Any] {
     switch self {
-    case .userContribution(let name):
-      let query = """
-query {
-  user(login: "\(name)") {
-    name
-    contributionsCollection {
-      contributionCalendar {
-        colors
-        totalContributions
-        weeks {
-          contributionDays {
-            color
-            contributionCount
-            date
-            weekday
-          }
-          firstDay
-        }
-      }
-    }
-  }
-}
-"""
-      return ["query": query]
+    case .userContribution(let params):
+      return params
+    case .userStartedRepos(_, let queryItems):
+      return queryItems
     default: return [:]
     }
   }
   
   func asURLRequest() -> URLRequest? {
-    var request = configURLRequest()
+    var queryItems: [String: String] = [:]
+    if case GithubRouter.userStartedRepos(_, let items) = self {
+      queryItems = items
+    }
+    var request = configURLRequest(with: queryItems)
     request?.setValue(Config.shared.authorization, forHTTPHeaderField: "Authorization")
     if !parameters.isEmpty {
-      request?.httpBody = try? JSONSerialization.data(withJSONObject: parameters)
+      switch method {
+      case .POST: request?.httpBody = try? JSONSerialization.data(withJSONObject: parameters)
+      default: break
+      }
     }
     return request
   }

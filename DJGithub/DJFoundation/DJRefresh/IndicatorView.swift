@@ -26,7 +26,7 @@ class IndicatorView: RefreshView {
         return layer
     }()
 
-    let indicatorCookieterminatorView = IndicatorCookieTerminatorView(with: 40, tintColor: .blue)
+    let indicatorCookieterminatorView = IndicatorCookieTerminatorView(with: 40, tintColor: UIColor.black.withAlphaComponent(0.8))
 
     private let isHeader: Bool
 
