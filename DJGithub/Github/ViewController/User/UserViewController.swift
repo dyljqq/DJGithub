@@ -111,7 +111,7 @@ class UserViewController: UIViewController {
         tableView.snp.makeConstraints { make in
           make.edges.equalTo(view)
         }
-        self.title = user.type
+        self.navigationItem.title = user.name
         userHeaderView.render(with: user)
         self.dataSource = [.blank, .user(.company), .user(.location), .user(.email), .user(.link)]
         tableView.reloadData()
