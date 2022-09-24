@@ -19,7 +19,7 @@ class UserStaredReposViewController: UIViewController {
     tableView.dataSource = self
     tableView.tableFooterView = UIView()
     tableView.showsVerticalScrollIndicator = false
-    tableView.contentInsetAdjustmentBehavior = .never
+//    tableView.contentInsetAdjustmentBehavior = .never
     tableView.register(UserStaredRepoCell.classForCoder(), forCellReuseIdentifier: UserStaredRepoCell.className)
     return tableView
   }()
@@ -37,7 +37,7 @@ class UserStaredReposViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    title = "Stars"
+    self.navigationItem.title = "Stars"
     setUp()
   }
   
@@ -45,8 +45,8 @@ class UserStaredReposViewController: UIViewController {
     view.backgroundColor = .backgroundColor
     view.addSubview(tableView)
     tableView.snp.makeConstraints { make in
-      make.top.equalTo(FrameGuide.navigationBarAndStatusBarHeight)
-      make.bottom.leading.trailing.equalTo(self.view)
+//      make.top.equalTo(FrameGuide.navigationBarAndStatusBarHeight)
+      make.top.bottom.leading.trailing.equalTo(self.view)
     }
 
     tableView.addHeader { [weak self] in

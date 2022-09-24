@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "star.png",
+      "filename" : "user.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -19,6 +19,6 @@
     "version" : 1
   },
   "properties" : {
-    "template-rendering-intent" : "original"
+    "template-rendering-intent" : "template"
   }
 }
