@@ -54,8 +54,8 @@ class UserStaredReposViewController: UIViewController {
         return
       }
       Task {
-        if let repos = await RepoViewModel.fetchStaredRepos(with: strongSelf.userName, page: strongSelf.viewModel.page) {
-          await strongSelf.handleData(repos: repos.items, page: strongSelf.viewModel.page + 1)
+        if let repos = await RepoViewModel.fetchStaredRepos(with: strongSelf.userName, page: RepoViewModel.pageStart) {
+          await strongSelf.handleData(repos: repos.items, page: RepoViewModel.pageStart)
           
           if !repos.items.isEmpty {
             strongSelf.tableView.addFooter { [weak self] in
@@ -116,5 +116,8 @@ extension UserStaredReposViewController: UITableViewDataSource {
 extension UserStaredReposViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
+    
+    let repo = viewModel.repos[indexPath.row]
+    self.navigationController?.pushToRepo(with: repo.fullName)
   }
 }

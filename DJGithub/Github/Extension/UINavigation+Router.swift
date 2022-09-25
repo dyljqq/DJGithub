@@ -19,4 +19,18 @@ extension UINavigationController {
     self.pushViewController(vc, animated: true)
   }
   
+  func pushToRepo(with repoName: String) {
+    let vc = RepoViewController(repoName: repoName)
+    self.pushViewController(vc, animated: true)
+  }
+  
+  func pushToWebView(with urlString: String? = nil, request: URLRequest? = nil) {
+    let vc: WebViewController
+    if let request = request {
+      vc = WebViewController(with: request)
+    } else {
+      vc = WebViewController(with: urlString ?? "")
+    }
+    self.pushViewController(vc, animated: true)
+  }
 }

@@ -27,6 +27,7 @@ class IndicatorView: RefreshView {
     }()
 
     let indicatorCookieterminatorView = IndicatorCookieTerminatorView(with: 40, tintColor: UIColor.black.withAlphaComponent(0.8))
+    let activiryIndicator = UIActivityIndicatorView(style: .medium)
 
     private let isHeader: Bool
 
@@ -34,7 +35,12 @@ class IndicatorView: RefreshView {
       self.isHeader = isHeader
       super.init(refreshPosition: isHeader ? .header : .footer, height: height, action: action)
       layer.addSublayer(arrowLayer)
-      addSubview(indicatorCookieterminatorView)
+      
+      if isHeader {
+        addSubview(indicatorCookieterminatorView)
+      } else {
+        addSubview(activiryIndicator)
+      }
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -46,11 +52,17 @@ class IndicatorView: RefreshView {
       let center = CGPoint(x: bounds.midX, y: bounds.midY)
       arrowLayer.position = center
       indicatorCookieterminatorView.center = center
+      activiryIndicator.center = center
     }
 
     override func didUpdateState(_ isRefreshing: Bool) {
       arrowLayer.isHidden = isRefreshing
-      isRefreshing ? indicatorCookieterminatorView.startAnimation() : indicatorCookieterminatorView.stopAnimation()
+      
+      if isHeader {
+        isRefreshing ? indicatorCookieterminatorView.startAnimation() : indicatorCookieterminatorView.stopAnimation()
+      } else {
+        isRefreshing ? activiryIndicator.startAnimating() : activiryIndicator.stopAnimating()
+      }
     }
 
     override func didUpdateProgress(_ progress: CGFloat) {

@@ -9,12 +9,14 @@ import Foundation
 
 struct RepoViewModel {
   
-  var page: Int = 1
+  static let pageStart = 1
+  
+  var page: Int = pageStart
   var isEnded: Bool = false
   var repos: [Repo] = []
   
   mutating func update(by page: Int, repos: [Repo], isEnded: Bool) {
-    if page == 1 {
+    if page == RepoViewModel.pageStart {
       self.repos = repos
     } else {
       self.repos.append(contentsOf: repos)
@@ -33,5 +35,31 @@ struct RepoViewModel {
       print("fetchStaredRepos: \(error)")
     }
     return nil
+  }
+  
+  static func fetchRepo(with name: String) async -> Repo? {
+    let router = GithubRouter.repo(name)
+    let result = await APIClient.shared.get(by: router)
+    return result.parse()
+  }
+  
+  static func userStaredRepo(with name: String) async -> Bool {
+    let router = GithubRouter.userStaredRepo(name)
+    let result = await APIClient.shared.get(by: router)
+    switch result {
+    case .success(let r):
+      guard let statusCode = r["statusCode"] as? Int else {
+        return false
+      }
+      return statusCode == 204
+    case .failure:
+      return false
+    }
+  }
+  
+  static func fetchREADME(with repoName: String) async -> Readme? {
+    let router = GithubRouter.repoReadme(repoName)
+    let result = await APIClient.shared.get(by: router)
+    return result.parse()
   }
 }
