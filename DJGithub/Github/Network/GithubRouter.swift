@@ -13,6 +13,7 @@ enum GithubRouter: Router {
   case userContribution(parameters: [String: Any])
   case userStartedRepos(path: String, queryItems: [String: String])
   case repo(String)
+  case userStaredRepo(String)
   
   var baseURLString: String {
     return "https://api.github.com/"
@@ -31,6 +32,7 @@ enum GithubRouter: Router {
     case .userContribution: return "graphql"
     case .userStartedRepos(let name, _): return "users/\(name)/starred"
     case .repo(let name): return "repos/\(name)"
+    case .userStaredRepo(let name): return "user/starred/\(name)"
     }
   }
   

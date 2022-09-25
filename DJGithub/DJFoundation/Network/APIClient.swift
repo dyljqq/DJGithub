@@ -16,7 +16,12 @@ open class APIClient {
     }
     
     do {
-      let (data, _) = try await URLSession.shared.data(for: request)
+      let (data, response) = try await URLSession.shared.data(for: request)
+      if let httpResponse = response as? HTTPURLResponse {
+        if httpResponse.statusCode == 204 {
+          return .success(["statusCode": 204])
+        }
+      }
       let r = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
       let d: [String: Any]
       if let r = r as? [Any] {

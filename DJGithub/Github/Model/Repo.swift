@@ -22,6 +22,7 @@ struct Repo: Decodable {
   var description: String?
   var updatedAt: String
   var language: String?
+  var defaultBranch: String?
   
   var owner: RepoOwner?
   var license: License?

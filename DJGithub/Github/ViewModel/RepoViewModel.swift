@@ -42,4 +42,18 @@ struct RepoViewModel {
     let result = await APIClient.shared.get(by: router)
     return result.parse()
   }
+  
+  static func userStaredRepo(with name: String) async -> Bool {
+    let router = GithubRouter.userStaredRepo(name)
+    let result = await APIClient.shared.get(by: router)
+    switch result {
+    case .success(let r):
+      guard let statusCode = r["statusCode"] as? Int else {
+        return false
+      }
+      return statusCode == 204
+    case .failure(let _):
+      return false
+    }
+  }
 }
