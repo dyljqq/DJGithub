@@ -36,4 +36,10 @@ struct RepoViewModel {
     }
     return nil
   }
+  
+  static func fetchRepo(with name: String) async -> Repo? {
+    let router = GithubRouter.repo(name)
+    let result = await APIClient.shared.get(by: router)
+    return result.parse()
+  }
 }

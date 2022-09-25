@@ -19,4 +19,8 @@ extension UINavigationController {
     self.pushViewController(vc, animated: true)
   }
   
+  func pushToRepo(with repoName: String) {
+    let vc = RepoViewController(repoName: repoName)
+    self.pushViewController(vc, animated: true)
+  }
 }

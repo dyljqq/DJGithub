@@ -10,6 +10,9 @@
 		7341DCC628DF2400009A3A3C /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341DCC528DF2400009A3A3C /* TabBarController.swift */; };
 		7341DCC828DF24CB009A3A3C /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341DCC728DF24CB009A3A3C /* NavigationController.swift */; };
 		7341DCCA28DF2B4B009A3A3C /* ImageCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341DCC928DF2B4B009A3A3C /* ImageCoder.swift */; };
+		7341DCCE28E03505009A3A3C /* NormalHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341DCCD28E03505009A3A3C /* NormalHeaderView.swift */; };
+		7341DCD028E03B17009A3A3C /* RepoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341DCCF28E03B17009A3A3C /* RepoHeaderView.swift */; };
+		7341DCD228E03C6A009A3A3C /* RepoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341DCD128E03C6A009A3A3C /* RepoViewController.swift */; };
 		73727B2428D75DAE003D5A95 /* IndicatorCookieTerminatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73727B2328D75DAE003D5A95 /* IndicatorCookieTerminatorView.swift */; };
 		73AACAD528D308A60072B1DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD428D308A60072B1DF /* AppDelegate.swift */; };
 		73AACAD728D308A60072B1DF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD628D308A60072B1DF /* SceneDelegate.swift */; };
@@ -89,6 +92,9 @@
 		7341DCC528DF2400009A3A3C /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		7341DCC728DF24CB009A3A3C /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		7341DCC928DF2B4B009A3A3C /* ImageCoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCoder.swift; sourceTree = "<group>"; };
+		7341DCCD28E03505009A3A3C /* NormalHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormalHeaderView.swift; sourceTree = "<group>"; };
+		7341DCCF28E03B17009A3A3C /* RepoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoHeaderView.swift; sourceTree = "<group>"; };
+		7341DCD128E03C6A009A3A3C /* RepoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoViewController.swift; sourceTree = "<group>"; };
 		73727B2328D75DAE003D5A95 /* IndicatorCookieTerminatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorCookieTerminatorView.swift; sourceTree = "<group>"; };
 		73AACAD128D308A60072B1DF /* DJGithub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DJGithub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73AACAD428D308A60072B1DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -387,6 +393,7 @@
 				73AACB4728D443350072B1DF /* LoadingView.swift */,
 				7341DCC528DF2400009A3A3C /* TabBarController.swift */,
 				7341DCC728DF24CB009A3A3C /* NavigationController.swift */,
+				7341DCCD28E03505009A3A3C /* NormalHeaderView.swift */,
 			);
 			path = Widget;
 			sourceTree = "<group>";
@@ -396,6 +403,7 @@
 			children = (
 				73AACB5C28D4BD0F0072B1DF /* Views */,
 				73AACB5D28D4BD3B0072B1DF /* UserStaredReposViewController.swift */,
+				7341DCD128E03C6A009A3A3C /* RepoViewController.swift */,
 			);
 			path = Repo;
 			sourceTree = "<group>";
@@ -404,6 +412,7 @@
 			isa = PBXGroup;
 			children = (
 				73AACB6128D4BEFE0072B1DF /* UserStaredRepoCell.swift */,
+				7341DCCF28E03B17009A3A3C /* RepoHeaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -615,14 +624,17 @@
 				73AACB5428D47ECB0072B1DF /* UserContrbutionItemCell.swift in Sources */,
 				7341DCC828DF24CB009A3A3C /* NavigationController.swift in Sources */,
 				73AACB4328D42C1B0072B1DF /* UINavigation+Router.swift in Sources */,
+				7341DCD228E03C6A009A3A3C /* RepoViewController.swift in Sources */,
 				73AACB7928D5BBF50072B1DF /* DBManage.swift in Sources */,
 				73AACB5028D4618F0072B1DF /* UIView+Ext.swift in Sources */,
 				73AACB5228D467850072B1DF /* UserContributionView.swift in Sources */,
+				7341DCCE28E03505009A3A3C /* NormalHeaderView.swift in Sources */,
 				73AACB6228D4BEFE0072B1DF /* UserStaredRepoCell.swift in Sources */,
 				73C598C528D85EF100DA86A1 /* PopoverView.swift in Sources */,
 				73AACAD728D308A60072B1DF /* SceneDelegate.swift in Sources */,
 				73AACB5628D47FCB0072B1DF /* String+Ext.swift in Sources */,
 				73C598CD28D9E6A100DA86A1 /* URL+Ext.swift in Sources */,
+				7341DCD028E03B17009A3A3C /* RepoHeaderView.swift in Sources */,
 				73AACB5828D483CA0072B1DF /* UserContributionCell.swift in Sources */,
 				73AACB0C28D30B3D0072B1DF /* Error.swift in Sources */,
 				73AACB0A28D30B0C0072B1DF /* URLConvertible.swift in Sources */,

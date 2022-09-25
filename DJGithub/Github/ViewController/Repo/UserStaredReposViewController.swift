@@ -116,5 +116,8 @@ extension UserStaredReposViewController: UITableViewDataSource {
 extension UserStaredReposViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
+    
+    let repo = viewModel.repos[indexPath.row]
+    self.navigationController?.pushToRepo(with: repo.fullName)
   }
 }
