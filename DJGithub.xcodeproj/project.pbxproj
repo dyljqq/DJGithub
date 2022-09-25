@@ -14,7 +14,10 @@
 		7341DCD028E03B17009A3A3C /* RepoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341DCCF28E03B17009A3A3C /* RepoHeaderView.swift */; };
 		7341DCD228E03C6A009A3A3C /* RepoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341DCD128E03C6A009A3A3C /* RepoViewController.swift */; };
 		7341DCD428E0422F009A3A3C /* RepoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341DCD328E0422F009A3A3C /* RepoCell.swift */; };
+		7341DCD828E05D98009A3A3C /* RepoFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341DCD728E05D98009A3A3C /* RepoFooterView.swift */; };
 		73727B2428D75DAE003D5A95 /* IndicatorCookieTerminatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73727B2328D75DAE003D5A95 /* IndicatorCookieTerminatorView.swift */; };
+		7374D19528E0B2F300E6BE47 /* SwiftyMarkdown in Frameworks */ = {isa = PBXBuildFile; productRef = 7374D19428E0B2F300E6BE47 /* SwiftyMarkdown */; };
+		7374D19728E0BC1D00E6BE47 /* Readme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7374D19628E0BC1D00E6BE47 /* Readme.swift */; };
 		73AACAD528D308A60072B1DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD428D308A60072B1DF /* AppDelegate.swift */; };
 		73AACAD728D308A60072B1DF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD628D308A60072B1DF /* SceneDelegate.swift */; };
 		73AACAD928D308A60072B1DF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD828D308A60072B1DF /* ViewController.swift */; };
@@ -70,6 +73,8 @@
 		73C598C528D85EF100DA86A1 /* PopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C598C428D85EF100DA86A1 /* PopoverView.swift */; };
 		73C598C728D8617800DA86A1 /* UIApplication+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C598C628D8617800DA86A1 /* UIApplication+Ext.swift */; };
 		73C598CD28D9E6A100DA86A1 /* URL+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C598CC28D9E6A100DA86A1 /* URL+Ext.swift */; };
+		73DE29CC28E0C08200B48009 /* MarkdownView in Frameworks */ = {isa = PBXBuildFile; productRef = 73DE29CB28E0C08200B48009 /* MarkdownView */; };
+		73DE29CE28E0C35200B48009 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DE29CD28E0C35200B48009 /* WebViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,7 +102,9 @@
 		7341DCCF28E03B17009A3A3C /* RepoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoHeaderView.swift; sourceTree = "<group>"; };
 		7341DCD128E03C6A009A3A3C /* RepoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoViewController.swift; sourceTree = "<group>"; };
 		7341DCD328E0422F009A3A3C /* RepoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoCell.swift; sourceTree = "<group>"; };
+		7341DCD728E05D98009A3A3C /* RepoFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoFooterView.swift; sourceTree = "<group>"; };
 		73727B2328D75DAE003D5A95 /* IndicatorCookieTerminatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorCookieTerminatorView.swift; sourceTree = "<group>"; };
+		7374D19628E0BC1D00E6BE47 /* Readme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Readme.swift; sourceTree = "<group>"; };
 		73AACAD128D308A60072B1DF /* DJGithub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DJGithub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73AACAD428D308A60072B1DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		73AACAD628D308A60072B1DF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -155,6 +162,7 @@
 		73C598C428D85EF100DA86A1 /* PopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverView.swift; sourceTree = "<group>"; };
 		73C598C628D8617800DA86A1 /* UIApplication+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Ext.swift"; sourceTree = "<group>"; };
 		73C598CC28D9E6A100DA86A1 /* URL+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Ext.swift"; sourceTree = "<group>"; };
+		73DE29CD28E0C35200B48009 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +172,8 @@
 			files = (
 				73AACB4128D37E840072B1DF /* Kingfisher in Frameworks */,
 				73AACB3828D359260072B1DF /* SnapKit in Frameworks */,
+				73DE29CC28E0C08200B48009 /* MarkdownView in Frameworks */,
+				7374D19528E0B2F300E6BE47 /* SwiftyMarkdown in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,6 +337,7 @@
 				73AACB2328D31A440072B1DF /* User.swift */,
 				73AACB5928D4B8610072B1DF /* Repo.swift */,
 				73AACB7328D5BA2D0072B1DF /* Language.swift */,
+				7374D19628E0BC1D00E6BE47 /* Readme.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -406,6 +417,7 @@
 				73AACB5C28D4BD0F0072B1DF /* Views */,
 				73AACB5D28D4BD3B0072B1DF /* UserStaredReposViewController.swift */,
 				7341DCD128E03C6A009A3A3C /* RepoViewController.swift */,
+				73DE29CD28E0C35200B48009 /* WebViewController.swift */,
 			);
 			path = Repo;
 			sourceTree = "<group>";
@@ -416,6 +428,7 @@
 				73AACB6128D4BEFE0072B1DF /* UserStaredRepoCell.swift */,
 				7341DCCF28E03B17009A3A3C /* RepoHeaderView.swift */,
 				7341DCD328E0422F009A3A3C /* RepoCell.swift */,
+				7341DCD728E05D98009A3A3C /* RepoFooterView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -474,6 +487,8 @@
 			packageProductDependencies = (
 				73AACB3728D359260072B1DF /* SnapKit */,
 				73AACB4028D37E840072B1DF /* Kingfisher */,
+				7374D19428E0B2F300E6BE47 /* SwiftyMarkdown */,
+				73DE29CB28E0C08200B48009 /* MarkdownView */,
 			);
 			productName = DJGithub;
 			productReference = 73AACAD128D308A60072B1DF /* DJGithub.app */;
@@ -550,6 +565,9 @@
 			packageReferences = (
 				73AACB3628D359260072B1DF /* XCRemoteSwiftPackageReference "SnapKit" */,
 				73AACB3F28D37E840072B1DF /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				7341DCDB28E0792F009A3A3C /* XCRemoteSwiftPackageReference "SwiftyMarkdown" */,
+				7374D19328E0B2F300E6BE47 /* XCRemoteSwiftPackageReference "SwiftyMarkdown" */,
+				73DE29CA28E0C08200B48009 /* XCRemoteSwiftPackageReference "MarkdownView" */,
 			);
 			productRefGroup = 73AACAD228D308A60072B1DF /* Products */;
 			projectDirPath = "";
@@ -613,6 +631,8 @@
 				73AACB1128D30E720072B1DF /* Parse.swift in Sources */,
 				73AACB3A28D359550072B1DF /* UserHeaderView.swift in Sources */,
 				73AACB2628D31ACD0072B1DF /* UserViewModel.swift in Sources */,
+				7341DCD828E05D98009A3A3C /* RepoFooterView.swift in Sources */,
+				73DE29CE28E0C35200B48009 /* WebViewController.swift in Sources */,
 				73AACB0F28D30C470072B1DF /* APIClient.swift in Sources */,
 				73AACB8B28D708740072B1DF /* UIScrollView+Refresh.swift in Sources */,
 				73AACB3C28D35C360072B1DF /* Utils.swift in Sources */,
@@ -647,6 +667,7 @@
 				73AACB5A28D4B8610072B1DF /* Repo.swift in Sources */,
 				73727B2428D75DAE003D5A95 /* IndicatorCookieTerminatorView.swift in Sources */,
 				73AACB3E28D362430072B1DF /* Consts.swift in Sources */,
+				7374D19728E0BC1D00E6BE47 /* Readme.swift in Sources */,
 				73AACB1828D312D30072B1DF /* GithubRouter.swift in Sources */,
 				7341DCCA28DF2B4B009A3A3C /* ImageCoder.swift in Sources */,
 			);
@@ -996,6 +1017,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		7341DCDB28E0792F009A3A3C /* XCRemoteSwiftPackageReference "SwiftyMarkdown" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SimonFairbairn/SwiftyMarkdown.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		7374D19328E0B2F300E6BE47 /* XCRemoteSwiftPackageReference "SwiftyMarkdown" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SimonFairbairn/SwiftyMarkdown.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		73AACB3628D359260072B1DF /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -1012,9 +1049,22 @@
 				minimumVersion = 7.0.0;
 			};
 		};
+		73DE29CA28E0C08200B48009 /* XCRemoteSwiftPackageReference "MarkdownView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/keitaoouchi/MarkdownView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		7374D19428E0B2F300E6BE47 /* SwiftyMarkdown */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7341DCDB28E0792F009A3A3C /* XCRemoteSwiftPackageReference "SwiftyMarkdown" */;
+			productName = SwiftyMarkdown;
+		};
 		73AACB3728D359260072B1DF /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 73AACB3628D359260072B1DF /* XCRemoteSwiftPackageReference "SnapKit" */;
@@ -1024,6 +1074,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 73AACB3F28D37E840072B1DF /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		73DE29CB28E0C08200B48009 /* MarkdownView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 73DE29CA28E0C08200B48009 /* XCRemoteSwiftPackageReference "MarkdownView" */;
+			productName = MarkdownView;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -52,8 +52,14 @@ struct RepoViewModel {
         return false
       }
       return statusCode == 204
-    case .failure(let _):
+    case .failure:
       return false
     }
+  }
+  
+  static func fetchREADME(with repoName: String) async -> Readme? {
+    let router = GithubRouter.repoReadme(repoName)
+    let result = await APIClient.shared.get(by: router)
+    return result.parse()
   }
 }

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class RepoViewController: UIViewController {
   
@@ -40,13 +41,21 @@ class RepoViewController: UIViewController {
     return button
   }()
   
+  lazy var footerView: RepoFooterView = {
+    let footerView = RepoFooterView()
+    footerView.frame = CGRect(x: 0, y: 0, width: FrameGuide.screenWidth, height: 0)
+    footerView.backgroundColor = UIColor.white
+    return footerView
+  }()
+  
   lazy var tableView: UITableView = {
     let tableView = UITableView()
     tableView.delegate = self
     tableView.dataSource = self
     tableView.tableHeaderView = headerView
-    tableView.tableFooterView = UIView()
+    tableView.tableFooterView = footerView
     tableView.backgroundColor = .backgroundColor
+    tableView.showsVerticalScrollIndicator = false
     tableView.register(RepoCell.classForCoder(), forCellReuseIdentifier: RepoCell.className)
     return tableView
   }()
@@ -70,15 +79,17 @@ class RepoViewController: UIViewController {
     self.navigationItem.title = "Repository"
     view.backgroundColor = .backgroundColor
     
-    view.addSubview(tableView)
-    tableView.snp.makeConstraints { make in
-      make.edges.equalTo(self.view)
-    }
+    view.startLoading()
     
     Task {
       let star = await RepoViewModel.userStaredRepo(with: repoName)
       configStarButton(star)
       if let repo =  await RepoViewModel.fetchRepo(with: repoName) {
+        view.stopLoading()
+        view.addSubview(tableView)
+        tableView.snp.makeConstraints { make in
+          make.edges.equalTo(self.view)
+        }
         self.headerView.render(with: repo)
         dataSouce = [
           .blank,
@@ -90,6 +101,25 @@ class RepoViewController: UIViewController {
           .cell("book", "README", "")
         ]
         tableView.reloadData()
+      }
+      
+      if let readme = await RepoViewModel.fetchREADME(with: repoName) {
+        self.footerView.render(with: readme.content)
+      }
+    }
+    
+    footerView.fetchHeightClosure = { [weak self] height in
+      guard let strongSelf = self else {
+        return
+      }
+      strongSelf.footerView.frame.size.height = height
+      strongSelf.tableView.beginUpdates()
+      strongSelf.tableView.endUpdates()
+    }
+    footerView.touchLink = { [weak self] req in
+      if let url = req?.url {
+        let vc = SFSafariViewController(url: url)
+        self?.present(vc, animated: true)
       }
     }
   }
