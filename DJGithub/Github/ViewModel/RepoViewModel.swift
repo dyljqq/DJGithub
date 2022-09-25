@@ -9,12 +9,14 @@ import Foundation
 
 struct RepoViewModel {
   
-  var page: Int = 1
+  static let pageStart = 1
+  
+  var page: Int = pageStart
   var isEnded: Bool = false
   var repos: [Repo] = []
   
   mutating func update(by page: Int, repos: [Repo], isEnded: Bool) {
-    if page == 1 {
+    if page == RepoViewModel.pageStart {
       self.repos = repos
     } else {
       self.repos.append(contentsOf: repos)
