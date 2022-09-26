@@ -56,11 +56,9 @@ class WebViewController: UIViewController {
       make.edges.equalTo(self.view)
     }
     
-    print("request: \(request?.url?.absoluteString)")
-    webView.load(URLRequest(url: URL(string: "www.baidu.com")!))
-//    if let request = request {
-//      webView.load(request)
-//    }
+    if let req = self.request {
+      webView.load(req)
+    }
   }
   
   override func viewDidLayoutSubviews() {
@@ -72,6 +70,10 @@ class WebViewController: UIViewController {
 
 extension WebViewController: WKNavigationDelegate, WKUIDelegate {
   func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-    
+    print("todo...")
+  }
+  
+  func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+    print("failed...")
   }
 }

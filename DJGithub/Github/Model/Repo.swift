@@ -7,6 +7,14 @@
 
 import Foundation
 
+struct RepoStatus: Decodable {
+  var statusCode: Int
+  
+  var isStatus204: Bool {
+    return statusCode == 204
+  }
+}
+
 struct Repos: Decodable {
   var items: [Repo]
 }

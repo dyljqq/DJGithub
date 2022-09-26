@@ -24,21 +24,18 @@ class RepoViewController: UIViewController {
   let repoName: String
   
   var dataSouce: [CellType] = []
+  var isStaredRepo: Bool = false
+  
+  lazy var starView: RepoStarView = {
+    let view = RepoStarView()
+    view.layer.cornerRadius = 15
+    view.layer.masksToBounds = true
+    return view
+  }()
   
   lazy var headerView: RepoHeaderView = {
     let headerView = RepoHeaderView()
     return headerView
-  }()
-  
-  lazy var starButton: UIButton = {
-    let button = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 30))
-    button.setTitle("star", for: .normal)
-    button.setTitleColor(UIColor.blue, for: .normal)
-    button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-    button.addTarget(self, action: #selector(starAction), for: .touchUpInside)
-    button.layer.cornerRadius = 15
-    button.backgroundColor = .backgroundColor
-    return button
   }()
   
   lazy var footerView: RepoFooterView = {
@@ -78,13 +75,11 @@ class RepoViewController: UIViewController {
   private func setUp() {
     self.navigationItem.title = "Repository"
     view.backgroundColor = .backgroundColor
-    
     view.startLoading()
     
     Task {
-      let star = await RepoViewModel.userStaredRepo(with: repoName)
-      configStarButton(star)
-      if let repo =  await RepoViewModel.fetchRepo(with: repoName) {
+      configStarButton()
+      if let repo = await RepoViewModel.fetchRepo(with: repoName) {
         view.stopLoading()
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
@@ -117,28 +112,42 @@ class RepoViewController: UIViewController {
       strongSelf.tableView.endUpdates()
     }
     footerView.touchLink = { [weak self] req in
-      if let url = req?.url {
+      if let req = req, let url = req.url {
         let vc = SFSafariViewController(url: url)
-        self?.present(vc, animated: true)
+        self?.navigationController?.present(vc, animated: true)
       }
     }
-  }
-  
-  func configStarButton(_ isStar: Bool) {
-    let title = isStar ? "unstar" : "star"
-    DispatchQueue.global().async {
-      let width = NSString(string: title).boundingRect(with: CGSize(width: 0, height: 30), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)], context: nil).width
-      DispatchQueue.main.async {
-        let width = NSString(string: title).boundingRect(with: CGSize(width: 0, height: 30), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)], context: nil).width
-        self.starButton.frame.size.width = width + 30
-        self.starButton.setTitle(title, for: .normal)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.starButton)
-      }
-    }
-  }
-  
-  @objc func starAction() {
     
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: starView)
+  }
+  
+  func configStarButton() {
+    Task {
+      let repoStarStatus = await RepoViewModel.userStaredRepo(with: repoName)
+      isStaredRepo = repoStarStatus != nil && repoStarStatus!.isStatus204
+      starView.render(with: isStaredRepo)
+
+      self.starView.starClosure = { [weak self] in
+        guard let strongSelf = self else {
+          return
+        }
+        Task {
+          let status: RepoStatus?
+          if strongSelf.isStaredRepo {
+            status = await RepoViewModel.unStarRepo(with: strongSelf.repoName)
+          } else {
+            status = await RepoViewModel.starRepo(with: strongSelf.repoName)
+          }
+          
+          strongSelf.starView.stopAnimation(finishedClosure: {
+            if let status = status, status.isStatus204 {
+              strongSelf.isStaredRepo = !strongSelf.isStaredRepo
+              strongSelf.starView.render(with: strongSelf.isStaredRepo)
+            }
+          })
+        }
+      }
+    }
   }
 
 }

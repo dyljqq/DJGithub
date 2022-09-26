@@ -15,6 +15,8 @@ enum GithubRouter: Router {
   case repo(String)
   case userStaredRepo(String)
   case repoReadme(String)
+  case starRepo(String)
+  case unStarRepo(String)
   
   var baseURLString: String {
     return "https://api.github.com/"
@@ -23,6 +25,8 @@ enum GithubRouter: Router {
   var method: HTTPMethod {
     switch self {
     case .userContribution: return .POST
+    case .starRepo: return .PUT
+    case .unStarRepo: return .DELETE
     default: return .GET
     }
   }
@@ -35,6 +39,8 @@ enum GithubRouter: Router {
     case .repo(let name): return "repos/\(name)"
     case .userStaredRepo(let name): return "user/starred/\(name)"
     case .repoReadme(let name): return "repos/\(name)/readme"
+    case .starRepo(let name): return "user/starred/\(name)"
+    case .unStarRepo(let name): return "user/starred/\(name)"
     }
   }
   

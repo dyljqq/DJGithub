@@ -33,7 +33,7 @@ class RepoFooterView: UIView {
     
     self.mdView.onTouchLink = { [weak self] req in
       self?.touchLink?(req)
-      return true
+      return false
     }
   }
   

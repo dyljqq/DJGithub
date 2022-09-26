@@ -43,22 +43,26 @@ struct RepoViewModel {
     return result.parse()
   }
   
-  static func userStaredRepo(with name: String) async -> Bool {
+  static func userStaredRepo(with name: String) async -> RepoStatus? {
     let router = GithubRouter.userStaredRepo(name)
     let result = await APIClient.shared.get(by: router)
-    switch result {
-    case .success(let r):
-      guard let statusCode = r["statusCode"] as? Int else {
-        return false
-      }
-      return statusCode == 204
-    case .failure:
-      return false
-    }
+    return result.parse()
   }
   
   static func fetchREADME(with repoName: String) async -> Readme? {
     let router = GithubRouter.repoReadme(repoName)
+    let result = await APIClient.shared.get(by: router)
+    return result.parse()
+  }
+  
+  static func starRepo(with repoName: String) async -> RepoStatus? {
+    let router = GithubRouter.starRepo(repoName)
+    let result = await APIClient.shared.get(by: router)
+    return result.parse()
+  }
+  
+  static func unStarRepo(with repoName: String) async -> RepoStatus? {
+    let router = GithubRouter.unStarRepo(repoName)
     let result = await APIClient.shared.get(by: router)
     return result.parse()
   }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		732B21D028E1C09B005893C0 /* RepoStarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732B21CF28E1C09B005893C0 /* RepoStarView.swift */; };
 		7341DCC628DF2400009A3A3C /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341DCC528DF2400009A3A3C /* TabBarController.swift */; };
 		7341DCC828DF24CB009A3A3C /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341DCC728DF24CB009A3A3C /* NavigationController.swift */; };
 		7341DCCA28DF2B4B009A3A3C /* ImageCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341DCC928DF2B4B009A3A3C /* ImageCoder.swift */; };
@@ -16,7 +17,6 @@
 		7341DCD428E0422F009A3A3C /* RepoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341DCD328E0422F009A3A3C /* RepoCell.swift */; };
 		7341DCD828E05D98009A3A3C /* RepoFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341DCD728E05D98009A3A3C /* RepoFooterView.swift */; };
 		73727B2428D75DAE003D5A95 /* IndicatorCookieTerminatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73727B2328D75DAE003D5A95 /* IndicatorCookieTerminatorView.swift */; };
-		7374D19528E0B2F300E6BE47 /* SwiftyMarkdown in Frameworks */ = {isa = PBXBuildFile; productRef = 7374D19428E0B2F300E6BE47 /* SwiftyMarkdown */; };
 		7374D19728E0BC1D00E6BE47 /* Readme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7374D19628E0BC1D00E6BE47 /* Readme.swift */; };
 		73AACAD528D308A60072B1DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD428D308A60072B1DF /* AppDelegate.swift */; };
 		73AACAD728D308A60072B1DF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD628D308A60072B1DF /* SceneDelegate.swift */; };
@@ -95,6 +95,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		732B21CF28E1C09B005893C0 /* RepoStarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoStarView.swift; sourceTree = "<group>"; };
 		7341DCC528DF2400009A3A3C /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		7341DCC728DF24CB009A3A3C /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		7341DCC928DF2B4B009A3A3C /* ImageCoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCoder.swift; sourceTree = "<group>"; };
@@ -173,7 +174,6 @@
 				73AACB4128D37E840072B1DF /* Kingfisher in Frameworks */,
 				73AACB3828D359260072B1DF /* SnapKit in Frameworks */,
 				73DE29CC28E0C08200B48009 /* MarkdownView in Frameworks */,
-				7374D19528E0B2F300E6BE47 /* SwiftyMarkdown in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,6 +429,7 @@
 				7341DCCF28E03B17009A3A3C /* RepoHeaderView.swift */,
 				7341DCD328E0422F009A3A3C /* RepoCell.swift */,
 				7341DCD728E05D98009A3A3C /* RepoFooterView.swift */,
+				732B21CF28E1C09B005893C0 /* RepoStarView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -487,7 +488,6 @@
 			packageProductDependencies = (
 				73AACB3728D359260072B1DF /* SnapKit */,
 				73AACB4028D37E840072B1DF /* Kingfisher */,
-				7374D19428E0B2F300E6BE47 /* SwiftyMarkdown */,
 				73DE29CB28E0C08200B48009 /* MarkdownView */,
 			);
 			productName = DJGithub;
@@ -665,6 +665,7 @@
 				73AACB4A28D4463B0072B1DF /* UIView+Loading.swift in Sources */,
 				73AACB5E28D4BD3B0072B1DF /* UserStaredReposViewController.swift in Sources */,
 				73AACB5A28D4B8610072B1DF /* Repo.swift in Sources */,
+				732B21D028E1C09B005893C0 /* RepoStarView.swift in Sources */,
 				73727B2428D75DAE003D5A95 /* IndicatorCookieTerminatorView.swift in Sources */,
 				73AACB3E28D362430072B1DF /* Consts.swift in Sources */,
 				7374D19728E0BC1D00E6BE47 /* Readme.swift in Sources */,
@@ -853,8 +854,8 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -863,9 +864,12 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.dyljqq.DJGithub;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -883,8 +887,8 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -893,9 +897,12 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.dyljqq.DJGithub;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -1060,11 +1067,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		7374D19428E0B2F300E6BE47 /* SwiftyMarkdown */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7341DCDB28E0792F009A3A3C /* XCRemoteSwiftPackageReference "SwiftyMarkdown" */;
-			productName = SwiftyMarkdown;
-		};
 		73AACB3728D359260072B1DF /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 73AACB3628D359260072B1DF /* XCRemoteSwiftPackageReference "SnapKit" */;
