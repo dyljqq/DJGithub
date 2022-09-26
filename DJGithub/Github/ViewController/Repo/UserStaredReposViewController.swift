@@ -48,36 +48,43 @@ class UserStaredReposViewController: UIViewController {
 //      make.top.equalTo(FrameGuide.navigationBarAndStatusBarHeight)
       make.top.bottom.leading.trailing.equalTo(self.view)
     }
+    
+    view.startLoading()
 
     tableView.addHeader { [weak self] in
       guard let strongSelf = self else {
         return
       }
-      Task {
-        if let repos = await RepoViewModel.fetchStaredRepos(with: strongSelf.userName, page: RepoViewModel.pageStart) {
-          await strongSelf.handleData(repos: repos.items, page: RepoViewModel.pageStart)
-          
-          if !repos.items.isEmpty {
-            strongSelf.tableView.addFooter { [weak self] in
-              guard let strongSelf = self else {
-                return
-              }
-              Task {
-                if let repos = await RepoViewModel.fetchStaredRepos(with: strongSelf.userName, page: strongSelf.viewModel.page) {
-                  await strongSelf.handleData(repos: repos.items, page: strongSelf.viewModel.page + 1)
-                } else {
-                  strongSelf.tableView.dj_endRefresh()
-                }
+      strongSelf.fetchRepos()
+    }
+    fetchRepos()
+  }
+  
+  func fetchRepos() {
+    Task {
+      if let repos = await RepoViewModel.fetchStaredRepos(with: userName, page: RepoViewModel.pageStart) {
+        view.stopLoading()
+        await handleData(repos: repos.items, page: RepoViewModel.pageStart)
+        
+        if !repos.items.isEmpty {
+          tableView.addFooter { [weak self] in
+            guard let strongSelf = self else {
+              return
+            }
+            Task {
+              if let repos = await RepoViewModel.fetchStaredRepos(with: strongSelf.userName, page: strongSelf.viewModel.page) {
+                await strongSelf.handleData(repos: repos.items, page: strongSelf.viewModel.page + 1)
+              } else {
+                strongSelf.tableView.dj_endRefresh()
               }
             }
           }
-        } else {
-          strongSelf.tableView.dj_endRefresh()
         }
+      } else {
+        view.stopLoading()
+        tableView.dj_endRefresh()
       }
     }
-    
-    tableView.dj_beginRefresh()
   }
   
   func handleData(repos: [Repo], page: Int) async {

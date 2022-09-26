@@ -75,32 +75,17 @@ class RepoViewController: UIViewController {
   private func setUp() {
     self.navigationItem.title = "Repository"
     view.backgroundColor = .backgroundColor
+    view.addSubview(tableView)
+    tableView.snp.makeConstraints { make in
+      make.edges.equalTo(self.view)
+    }
+
     view.startLoading()
     
-    Task {
-      configStarButton()
-      if let repo = await RepoViewModel.fetchRepo(with: repoName) {
-        view.stopLoading()
-        view.addSubview(tableView)
-        tableView.snp.makeConstraints { make in
-          make.edges.equalTo(self.view)
-        }
-        self.headerView.render(with: repo)
-        dataSouce = [
-          .blank,
-          .cell("coding", repo.language ?? "unknown", "\(repo.license?.key ?? "") \(NSString(format: "%.2f", Double(repo.size) / 1000))MB"),
-          .cell("issue", "Issues", "\(repo.openIssuesCount)"),
-          .cell("pull-request", "Pull Requests", ""),
-          .blank,
-          .cell("git-branch", "Branches", repo.defaultBranch ?? ""),
-          .cell("book", "README", "")
-        ]
-        tableView.reloadData()
-      }
-      
-      if let readme = await RepoViewModel.fetchREADME(with: repoName) {
-        self.footerView.render(with: readme.content)
-      }
+    fetchRepo()
+    
+    tableView.addHeader { [weak self] in
+      self?.fetchRepo()
     }
     
     footerView.fetchHeightClosure = { [weak self] height in
@@ -119,6 +104,30 @@ class RepoViewController: UIViewController {
     }
     
     self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: starView)
+  }
+  
+  private func fetchRepo() {
+    Task {
+      configStarButton()
+      if let repo = await RepoViewModel.fetchRepo(with: repoName) {
+        view.stopLoading()
+        self.headerView.render(with: repo)
+        dataSouce = [
+          .blank,
+          .cell("coding", repo.language ?? "unknown", "\(repo.license?.key ?? "") \(NSString(format: "%.2f", Double(repo.size) / 1000))MB"),
+          .cell("issue", "Issues", "\(repo.openIssuesCount)"),
+          .cell("pull-request", "Pull Requests", ""),
+          .blank,
+          .cell("git-branch", "Branches", repo.defaultBranch ?? ""),
+          .cell("book", "README", "")
+        ]
+        tableView.reloadData()
+      }
+      tableView.dj_endRefresh()
+      if let readme = await RepoViewModel.fetchREADME(with: repoName) {
+        self.footerView.render(with: readme.content)
+      }
+    }
   }
   
   func configStarButton() {
@@ -181,4 +190,14 @@ extension RepoViewController: UITableViewDelegate, UITableViewDataSource {
     tableView.deselectRow(at: indexPath, animated: true)
   }
   
+}
+
+extension RepoViewController: UIScrollViewDelegate {
+  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    if scrollView.contentOffset.y > NormalHeaderView.defaultFrame.size.height {
+      self.navigationItem.title = self.repoName
+    } else {
+      self.navigationItem.title = "Repository"
+    }
+  }
 }

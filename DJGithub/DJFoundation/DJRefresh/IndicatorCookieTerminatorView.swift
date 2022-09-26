@@ -23,9 +23,8 @@ class IndicatorCookieTerminatorView: UIView {
   }
   
   func startAnimation() {
-    if (animationLayer.sublayers != nil) {
-      setupAnimation()
-    }
+    self.stopAnimation()
+    setupAnimation()
     self.isHidden = false
     animationLayer.speed = 1
     animating = true
@@ -40,11 +39,6 @@ class IndicatorCookieTerminatorView: UIView {
   override func layoutSubviews() {
     super.layoutSubviews()
     animationLayer.frame = self.bounds
-    if animating {
-      stopAnimation()
-      setupAnimation()
-      startAnimation()
-    }
   }
   
   func setupAnimation() {
