@@ -30,6 +30,11 @@ class LoadingView: UIView {
     return layer
   }()
   
+  lazy var loadingView: UIView = {
+    let view = UIView()
+    return view
+  }()
+  
   init() {
     self.size = defaultSize
     super.init(frame: CGRect.zero)
@@ -60,6 +65,12 @@ class LoadingView: UIView {
   }
   
   private func setUp() {
-    self.layer.addSublayer(circleLayer)
+    addSubview(loadingView)
+    loadingView.layer.addSublayer(circleLayer)
+    
+    loadingView.snp.makeConstraints { make in
+      make.center.equalTo(self)
+      make.size.equalTo(self.size)
+    }
   }
 }

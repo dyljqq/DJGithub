@@ -26,7 +26,9 @@ class IndicatorView: RefreshView {
         return layer
     }()
 
-    let indicatorCookieterminatorView = IndicatorCookieTerminatorView(with: 40, tintColor: UIColor.black.withAlphaComponent(0.8))
+  lazy var indicatorCookieterminatorView: IndicatorCookieTerminatorView = {
+    return IndicatorCookieTerminatorView(with: 40, tintColor: UIColor.black.withAlphaComponent(0.8))
+  }()
     let activiryIndicator = UIActivityIndicatorView(style: .medium)
 
     private let isHeader: Bool
@@ -52,6 +54,7 @@ class IndicatorView: RefreshView {
       let center = CGPoint(x: bounds.midX, y: bounds.midY)
       arrowLayer.position = center
       indicatorCookieterminatorView.center = center
+      indicatorCookieterminatorView.frame.size = self.bounds.size
       activiryIndicator.center = center
     }
 

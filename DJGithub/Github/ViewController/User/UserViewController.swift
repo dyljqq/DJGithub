@@ -101,6 +101,7 @@ class UserViewController: UIViewController {
   }
   
   func setUp() {
+    self.navigationItem.title = "User"
     view.backgroundColor = UIColorFromRGB(0xf5f5f5)
     self.view.startLoading()
     Task {

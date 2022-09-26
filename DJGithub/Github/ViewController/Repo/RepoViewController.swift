@@ -24,21 +24,18 @@ class RepoViewController: UIViewController {
   let repoName: String
   
   var dataSouce: [CellType] = []
+  var isStaredRepo: Bool = false
+  
+  lazy var starView: RepoStarView = {
+    let view = RepoStarView()
+    view.layer.cornerRadius = 15
+    view.layer.masksToBounds = true
+    return view
+  }()
   
   lazy var headerView: RepoHeaderView = {
     let headerView = RepoHeaderView()
     return headerView
-  }()
-  
-  lazy var starButton: UIButton = {
-    let button = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 30))
-    button.setTitle("star", for: .normal)
-    button.setTitleColor(UIColor.blue, for: .normal)
-    button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-    button.addTarget(self, action: #selector(starAction), for: .touchUpInside)
-    button.layer.cornerRadius = 15
-    button.backgroundColor = .backgroundColor
-    return button
   }()
   
   lazy var footerView: RepoFooterView = {
@@ -78,18 +75,42 @@ class RepoViewController: UIViewController {
   private func setUp() {
     self.navigationItem.title = "Repository"
     view.backgroundColor = .backgroundColor
-    
+    view.addSubview(tableView)
+    tableView.snp.makeConstraints { make in
+      make.edges.equalTo(self.view)
+    }
+
     view.startLoading()
     
+    fetchRepo()
+    
+    tableView.addHeader { [weak self] in
+      self?.fetchRepo()
+    }
+    
+    footerView.fetchHeightClosure = { [weak self] height in
+      guard let strongSelf = self else {
+        return
+      }
+      strongSelf.footerView.frame.size.height = height
+      strongSelf.tableView.beginUpdates()
+      strongSelf.tableView.endUpdates()
+    }
+    footerView.touchLink = { [weak self] req in
+      if let req = req, let url = req.url {
+        let vc = SFSafariViewController(url: url)
+        self?.navigationController?.present(vc, animated: true)
+      }
+    }
+    
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: starView)
+  }
+  
+  private func fetchRepo() {
     Task {
-      let star = await RepoViewModel.userStaredRepo(with: repoName)
-      configStarButton(star)
-      if let repo =  await RepoViewModel.fetchRepo(with: repoName) {
+      configStarButton()
+      if let repo = await RepoViewModel.fetchRepo(with: repoName) {
         view.stopLoading()
-        view.addSubview(tableView)
-        tableView.snp.makeConstraints { make in
-          make.edges.equalTo(self.view)
-        }
         self.headerView.render(with: repo)
         dataSouce = [
           .blank,
@@ -102,43 +123,40 @@ class RepoViewController: UIViewController {
         ]
         tableView.reloadData()
       }
-      
+      tableView.dj_endRefresh()
       if let readme = await RepoViewModel.fetchREADME(with: repoName) {
         self.footerView.render(with: readme.content)
       }
     }
-    
-    footerView.fetchHeightClosure = { [weak self] height in
-      guard let strongSelf = self else {
-        return
-      }
-      strongSelf.footerView.frame.size.height = height
-      strongSelf.tableView.beginUpdates()
-      strongSelf.tableView.endUpdates()
-    }
-    footerView.touchLink = { [weak self] req in
-      if let url = req?.url {
-        let vc = SFSafariViewController(url: url)
-        self?.present(vc, animated: true)
-      }
-    }
   }
   
-  func configStarButton(_ isStar: Bool) {
-    let title = isStar ? "unstar" : "star"
-    DispatchQueue.global().async {
-      let width = NSString(string: title).boundingRect(with: CGSize(width: 0, height: 30), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)], context: nil).width
-      DispatchQueue.main.async {
-        let width = NSString(string: title).boundingRect(with: CGSize(width: 0, height: 30), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)], context: nil).width
-        self.starButton.frame.size.width = width + 30
-        self.starButton.setTitle(title, for: .normal)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.starButton)
+  func configStarButton() {
+    Task {
+      let repoStarStatus = await RepoViewModel.userStaredRepo(with: repoName)
+      isStaredRepo = repoStarStatus != nil && repoStarStatus!.isStatus204
+      starView.render(with: isStaredRepo)
+
+      self.starView.starClosure = { [weak self] in
+        guard let strongSelf = self else {
+          return
+        }
+        Task {
+          let status: RepoStatus?
+          if strongSelf.isStaredRepo {
+            status = await RepoViewModel.unStarRepo(with: strongSelf.repoName)
+          } else {
+            status = await RepoViewModel.starRepo(with: strongSelf.repoName)
+          }
+          
+          strongSelf.starView.stopAnimation(finishedClosure: {
+            if let status = status, status.isStatus204 {
+              strongSelf.isStaredRepo = !strongSelf.isStaredRepo
+              strongSelf.starView.render(with: strongSelf.isStaredRepo)
+            }
+          })
+        }
       }
     }
-  }
-  
-  @objc func starAction() {
-    
   }
 
 }
@@ -172,4 +190,14 @@ extension RepoViewController: UITableViewDelegate, UITableViewDataSource {
     tableView.deselectRow(at: indexPath, animated: true)
   }
   
+}
+
+extension RepoViewController: UIScrollViewDelegate {
+  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    if scrollView.contentOffset.y > NormalHeaderView.defaultFrame.size.height {
+      self.navigationItem.title = self.repoName
+    } else {
+      self.navigationItem.title = "Repository"
+    }
+  }
 }
