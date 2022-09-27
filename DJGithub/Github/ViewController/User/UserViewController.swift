@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Combine
 
 fileprivate enum UserType {
   case email
@@ -83,6 +84,11 @@ class UserViewController: UIViewController {
   let name: String
   
   var user: User?
+  
+  var subscriptions: [AnyCancellable] = []
+  var userSubject = PassthroughSubject<User, Never>()
+  var userContributionSubject = PassthroughSubject<UserContribution, Never>()
+  
   fileprivate var dataSource: [CellType] = []
   
   init(name: String) {
@@ -103,26 +109,61 @@ class UserViewController: UIViewController {
   func setUp() {
     self.navigationItem.title = "User"
     view.backgroundColor = UIColorFromRGB(0xf5f5f5)
+    
+    view.addSubview(tableView)
+    tableView.snp.makeConstraints { make in
+      make.edges.equalTo(view)
+    }
+    
     self.view.startLoading()
+    
+    userSubject
+      .receive(on: DispatchQueue.main)
+      .sink(receiveValue: { [weak self] user in
+        self?.handle(with: user)
+      })
+      .store(in: &subscriptions)
+    
+    userContributionSubject
+      .receive(on: DispatchQueue.main)
+      .sink(receiveValue: { [weak self] userContribution in
+        self?.handle(with: userContribution)
+      })
+      .store(in: &subscriptions)
+    
     Task {
-      if let user = await UserViewModel.getUser(with: name) {
-        self.user = user
-        view.addSubview(tableView)
-        tableView.snp.makeConstraints { make in
-          make.edges.equalTo(view)
+      await withThrowingTaskGroup(of: Void.self) { [weak self] group in
+        guard let strongSelf = self else {
+          return
         }
-        self.navigationItem.title = user.name
-        userHeaderView.render(with: user)
-        self.dataSource = [.blank, .user(.company), .user(.location), .user(.email), .user(.link)]
-        tableView.reloadData()
-      }
-      if let userContribution = await UserViewModel.fetchUserContributions(with: name) {
-        self.dataSource.insert(.blank, at: 0)
-        self.dataSource.insert(.userContribution(userContribution), at: 1)
-        tableView.reloadData()
+        group.addTask {
+          if let user = await UserViewModel.getUser(with: strongSelf.name) {
+            await strongSelf.userSubject.send(user)
+          }
+        }
+        group.addTask {
+          if let userContribution = await UserViewModel.fetchUserContributions(with: strongSelf.name) {
+            await strongSelf.userContributionSubject.send(userContribution)
+          }
+        }
       }
       self.view.stopLoading()
     }
+  }
+  
+  private func handle(with user: User) {
+    self.user = user
+    
+    self.navigationItem.title = user.name
+    userHeaderView.render(with: user)
+    self.dataSource = [.blank, .user(.company), .user(.location), .user(.email), .user(.link)]
+    tableView.reloadData()
+  }
+  
+  private func handle(with contribution: UserContribution) {
+    self.dataSource.insert(.blank, at: 0)
+    self.dataSource.insert(.userContribution(contribution), at: 1)
+    tableView.reloadData()
   }
 
 }
