@@ -79,7 +79,7 @@ class UserViewController: UIViewController {
     tableView.register(UserContributionCell.classForCoder(), forCellReuseIdentifier: UserContributionCell.className)
     return tableView
   }()
-  
+    
   let name: String
   
   var user: User?

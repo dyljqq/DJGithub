@@ -82,7 +82,23 @@ class RepoViewController: UIViewController {
 
     view.startLoading()
     
-    fetchRepo()
+    Task {
+      await withThrowingTaskGroup(of: Void.self) { group in
+        group.addTask {
+          await self.fetchRepo()
+        }
+        group.addTask {
+          await self.configStarButton()
+        }
+        group.addTask {
+          Task {
+            if let readme = await RepoViewModel.fetchREADME(with: self.repoName) {
+              await self.footerView.render(with: readme.content)
+            }
+          }
+        }
+      }
+    }
     
     tableView.addHeader { [weak self] in
       self?.fetchRepo()
@@ -108,7 +124,6 @@ class RepoViewController: UIViewController {
   
   private func fetchRepo() {
     Task {
-      configStarButton()
       if let repo = await RepoViewModel.fetchRepo(with: repoName) {
         view.stopLoading()
         self.headerView.render(with: repo)
@@ -124,9 +139,6 @@ class RepoViewController: UIViewController {
         tableView.reloadData()
       }
       tableView.dj_endRefresh()
-      if let readme = await RepoViewModel.fetchREADME(with: repoName) {
-        self.footerView.render(with: readme.content)
-      }
     }
   }
   
