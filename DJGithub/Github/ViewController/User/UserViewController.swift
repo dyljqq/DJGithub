@@ -104,6 +104,10 @@ class UserViewController: UIViewController {
     super.viewDidLoad()
     
     setUp()
+    
+    Task {
+      await UserManager.getUserFollowing()
+    }
   }
   
   func setUp() {

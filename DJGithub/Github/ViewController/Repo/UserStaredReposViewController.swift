@@ -62,7 +62,15 @@ class UserStaredReposViewController: UIViewController, NextPageLoadable {
       guard let strongSelf = self else {
         return
       }
+      strongSelf.nextPageState.update(start: strongSelf.firstPageIndex, hasNext: true, isLoading: false)
       strongSelf.loadNext(start: strongSelf.nextPageState.start)
+    }
+    
+    tableView.addFooter { [weak self] in
+      guard let strongSelf = self else {
+        return
+      }
+      strongSelf.loadNext(start: strongSelf.nextPageState.start + 1)
     }
 
     loadNext(start: nextPageState.start)
@@ -121,21 +129,6 @@ extension UserStaredReposViewController {
         await LanguageManager.save(languages)
         
         successHandler(repos.items, repos.items.count > 0)
-        
-        if !repos.items.isEmpty {
-          tableView.addFooter { [weak self] in
-            guard let strongSelf = self else {
-              return
-            }
-            Task {
-              if let repos = await RepoViewModel.fetchStaredRepos(with: strongSelf.userName, page: strongSelf.nextPageState.start) {
-                successHandler(repos.items, repos.items.count > 0)
-              } else {
-                failureHandler("fetch repos error.")
-              }
-            }
-          }
-        }
       } else {
         failureHandler("fetch repos error.")
       }

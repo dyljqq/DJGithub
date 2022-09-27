@@ -53,23 +53,28 @@ extension NextPageLoadable {
   }
   
   func loadNext(start: Int, completionHandler: (() -> ())? = nil) {
-    guard nextPageState.hasNext, !nextPageState.isLoading else { return }
+    guard nextPageState.hasNext, !nextPageState.isLoading else {
+      completionHandler?()
+      return
+    }
     
     nextPageState.update(start: start, hasNext: nextPageState.hasNext, isLoading: true)
     
     performLoad(successHandler: { [weak self] items, hasNext in
       guard let strongSelf = self else { return }
       
-      if start == strongSelf.firstPageIndex {
+      if strongSelf.nextPageState.start == strongSelf.firstPageIndex {
         strongSelf.dataSource.removeAll()
       }
       
       strongSelf.dataSource.append(contentsOf: items)
-      strongSelf.nextPageState.update(start: strongSelf.nextPageState.start + 1, hasNext: hasNext, isLoading: false)
+      strongSelf.nextPageState.update(start: strongSelf.nextPageState.start, hasNext: hasNext, isLoading: false)
       
       completionHandler?()
       
-    }, failureHandler: { msg in
+    }, failureHandler: { [weak self] msg in
+      guard let strongSelf = self else { return }
+      strongSelf.nextPageState.update(start: strongSelf.nextPageState.start, hasNext: strongSelf.nextPageState.hasNext, isLoading: false)
       completionHandler?()
     })
   }

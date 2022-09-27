@@ -71,12 +71,13 @@ class IndicatorView: RefreshView {
 
     override func didUpdateProgress(_ progress: CGFloat) {
       self.arrowLayer.isHidden = false
-        let rotation = CATransform3DMakeRotation(CGFloat.pi, 0, 0, 1)
-        if isHeader {
-            arrowLayer.transform = progress == 1 ? rotation : CATransform3DIdentity
-        } else {
-            arrowLayer.transform = progress == 1 ? CATransform3DIdentity : rotation
-        }
+      let rotation = CATransform3DMakeRotation(CGFloat.pi, 0, 0, 1)
+      if isHeader {
+          arrowLayer.transform = progress == 1 ? rotation : CATransform3DIdentity
+      } else {
+        arrowLayer.backgroundColor = UIColor.red.cgColor
+          arrowLayer.transform = progress == 1 ? CATransform3DIdentity : rotation
+      }
     }
 
 }

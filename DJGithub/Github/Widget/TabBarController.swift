@@ -41,6 +41,7 @@ class TabBarController: UITabBarController {
   
   func setUp() {
     viewControllers = [
+      setUp(for: UserFollowingViewController(), tabTitle: "Developer", image: UIImage(named: "group"), selectedImage: UIImage(named: "people")),
       setUp(for: UserStaredReposViewController(userName: "dyljqq"), tabTitle: "Stars", image: UIImage(named: "star"), selectedImage: UIImage(named: "stared")),
       setUp(for: UserViewController(name: "dyljqq"), tabTitle: "User", image: UIImage(named: "user"), selectedImage: UIImage(named: "person"))
     ]
