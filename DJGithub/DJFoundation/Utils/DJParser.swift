@@ -25,6 +25,10 @@ struct DJDecoder<T:Decodable> {
     self.data = data
     decoder.keyDecodingStrategy = .convertFromSnakeCase
   }
+  init(value: Any) {
+    let data = try? JSONSerialization.data(withJSONObject: value)
+    self.init(data: data)
+  }
   
   func decode() -> T? {
     guard let data = data else {

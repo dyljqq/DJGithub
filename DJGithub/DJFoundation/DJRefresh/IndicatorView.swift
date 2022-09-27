@@ -36,6 +36,7 @@ class IndicatorView: RefreshView {
     init(isHeader: Bool, height: CGFloat, action: @escaping () -> Void) {
       self.isHeader = isHeader
       super.init(refreshPosition: isHeader ? .header : .footer, height: height, action: action)
+      arrowLayer.isHidden = true
       layer.addSublayer(arrowLayer)
       
       if isHeader {
@@ -69,12 +70,14 @@ class IndicatorView: RefreshView {
     }
 
     override func didUpdateProgress(_ progress: CGFloat) {
-        let rotation = CATransform3DMakeRotation(CGFloat.pi, 0, 0, 1)
-        if isHeader {
-            arrowLayer.transform = progress == 1 ? rotation : CATransform3DIdentity
-        } else {
-            arrowLayer.transform = progress == 1 ? CATransform3DIdentity : rotation
-        }
+      self.arrowLayer.isHidden = false
+      let rotation = CATransform3DMakeRotation(CGFloat.pi, 0, 0, 1)
+      if isHeader {
+          arrowLayer.transform = progress == 1 ? rotation : CATransform3DIdentity
+      } else {
+        arrowLayer.backgroundColor = UIColor.red.cgColor
+          arrowLayer.transform = progress == 1 ? CATransform3DIdentity : rotation
+      }
     }
 
 }

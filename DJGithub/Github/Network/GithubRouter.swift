@@ -17,6 +17,7 @@ enum GithubRouter: Router {
   case repoReadme(String)
   case starRepo(String)
   case unStarRepo(String)
+  case userFollowing(queryItems: [String: String])
   
   var baseURLString: String {
     return "https://api.github.com/"
@@ -41,6 +42,7 @@ enum GithubRouter: Router {
     case .repoReadme(let name): return "repos/\(name)/readme"
     case .starRepo(let name): return "user/starred/\(name)"
     case .unStarRepo(let name): return "user/starred/\(name)"
+    case .userFollowing: return "user/following"
     }
   }
   
@@ -62,8 +64,14 @@ enum GithubRouter: Router {
   
   func asURLRequest() -> URLRequest? {
     var queryItems: [String: String] = [:]
-    if case GithubRouter.userStartedRepos(_, let items) = self {
+    
+    switch self {
+    case .userStartedRepos(_, let items):
       queryItems = items
+    case .userFollowing(let items):
+      queryItems = items
+    default:
+      break
     }
     var request = configURLRequest(with: queryItems)
     request?.setValue(Config.shared.authorization, forHTTPHeaderField: "Authorization")
