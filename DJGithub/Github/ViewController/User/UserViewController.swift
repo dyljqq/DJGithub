@@ -75,7 +75,7 @@ class UserViewController: UIViewController {
     tableView.dataSource = self
     tableView.tableHeaderView = userHeaderView
     tableView.tableFooterView = UIView()
-    tableView.backgroundColor = UIColorFromRGB(0xf5f5f5)
+    tableView.backgroundColor = .backgroundColor
     tableView.register(UserCell.classForCoder(), forCellReuseIdentifier: UserCell.className)
     tableView.register(UserContributionCell.classForCoder(), forCellReuseIdentifier: UserContributionCell.className)
     return tableView

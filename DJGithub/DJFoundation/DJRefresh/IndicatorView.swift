@@ -74,7 +74,6 @@ class IndicatorView: RefreshView {
       if isHeader {
           arrowLayer.transform = progress == 1 ? rotation : CATransform3DIdentity
       } else {
-        arrowLayer.backgroundColor = UIColor.red.cgColor
           arrowLayer.transform = progress == 1 ? CATransform3DIdentity : rotation
       }
     }

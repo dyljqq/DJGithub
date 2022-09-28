@@ -51,7 +51,6 @@ class WebViewController: UIViewController {
   private func setUp() {
     view.backgroundColor = .backgroundColor
     view.addSubview(webView)
-    webView.backgroundColor = .red
     webView.snp.makeConstraints { make in
       make.edges.equalTo(self.view)
     }

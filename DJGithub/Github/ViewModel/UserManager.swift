@@ -83,4 +83,8 @@ struct UserManager {
     return result.parse()
   }
   
+  static func loadLocalDevelopers() -> [LocalDeveloperGroup] {
+    return loadBundleJSONFile("developers.json")
+  }
+  
 }

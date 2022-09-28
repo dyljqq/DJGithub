@@ -19,3 +19,25 @@ func UIColorFromRGB(_ rgbValue: UInt, alpha: CGFloat = 1.0) -> UIColor {
 func isEmpty(by str: String?) -> Bool {
   return str == nil || str!.isEmpty
 }
+
+func loadBundleJSONFile<T: Decodable>(_ filename: String) -> T {
+  do {
+    let decoder = JSONDecoder()
+    return try decoder.decode(T.self, from: loadBundleData(filename))
+  } catch {
+    fatalError("Couldn't find \(filename) in main bundle")
+  }
+}
+
+func loadBundleData(_ filename: String) -> Data {
+    let data: Data
+    guard let file = Bundle.main.url(forResource: filename, withExtension: nil) else {
+        fatalError("Couldn't find \(filename) in main bundle.")
+    }
+    do {
+        data = try Data(contentsOf: file)
+        return data
+    } catch {
+        fatalError("Couldn't load \(filename) from main bundle:\n\(error)")
+    }
+}
