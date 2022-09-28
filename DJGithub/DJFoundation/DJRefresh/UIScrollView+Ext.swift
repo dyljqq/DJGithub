@@ -40,6 +40,7 @@ extension UIScrollView {
   
   public func addFooter(height: CGFloat = 60, action: @escaping () -> Void) {
     dj_footer = IndicatorView(isHeader: false, height: height, action: action)
+    dj_footer?.backgroundColor = .red
   }
   
   public func dj_beginRefresh() {

@@ -65,4 +65,22 @@ struct UserManager {
     return []
   }
   
+  static func followUser(with userName: String) async -> StatusModel? {
+    let router = GithubRouter.followUser(userName)
+    let result = await APIClient.shared.get(by: router)
+    return result.parse()
+  }
+  
+  static func unFollowUser(with userName: String) async -> StatusModel? {
+    let router = GithubRouter.unfollowUser(userName)
+    let result = await APIClient.shared.get(by: router)
+    return result.parse()
+  }
+  
+  static func checkFollowStatus(with userName: String) async -> StatusModel? {
+    let router = GithubRouter.checkFollowStatus(userName)
+    let result = await APIClient.shared.get(by: router)
+    return result.parse()
+  }
+  
 }

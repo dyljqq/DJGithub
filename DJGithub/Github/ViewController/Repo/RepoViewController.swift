@@ -24,12 +24,17 @@ class RepoViewController: UIViewController {
   let repoName: String
   
   var dataSouce: [CellType] = []
-  var isStaredRepo: Bool = false
+  var isStaredRepo: Bool = false {
+    didSet {
+      staredContent = isStaredRepo ? "unstar" : "star"
+    }
+  }
+  var staredContent: String = ""
   
-  lazy var starView: RepoStarView = {
-    let view = RepoStarView()
+  lazy var userStatusView: UserStatusView = {
+    let view = UserStatusView(layoutLay: .normal)
     view.layer.cornerRadius = 15
-    view.layer.masksToBounds = true
+    view.frame = CGRect(x: 0, y: 0, width: 70, height: 30)
     return view
   }()
   
@@ -119,7 +124,7 @@ class RepoViewController: UIViewController {
       }
     }
     
-    self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: starView)
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: userStatusView)
   }
   
   private func fetchRepo() {
@@ -146,26 +151,26 @@ class RepoViewController: UIViewController {
     Task {
       let repoStarStatus = await RepoViewModel.userStaredRepo(with: repoName)
       isStaredRepo = repoStarStatus != nil && repoStarStatus!.isStatus204
-      starView.render(with: isStaredRepo)
+      userStatusView.render(with: isStaredRepo ? .active : .inactive, content: staredContent)
 
-      self.starView.starClosure = { [weak self] in
+      userStatusView.touchClosure = { [weak self] in
         guard let strongSelf = self else {
           return
         }
         Task {
-          let status: RepoStatus?
+          strongSelf.userStatusView.render(with: .loading)
+          let status: StatusModel?
           if strongSelf.isStaredRepo {
             status = await RepoViewModel.unStarRepo(with: strongSelf.repoName)
           } else {
             status = await RepoViewModel.starRepo(with: strongSelf.repoName)
           }
-          
-          strongSelf.starView.stopAnimation(finishedClosure: {
-            if let status = status, status.isStatus204 {
-              strongSelf.isStaredRepo = !strongSelf.isStaredRepo
-              strongSelf.starView.render(with: strongSelf.isStaredRepo)
-            }
-          })
+
+          if let status = status, status.isStatus204 {
+            strongSelf.isStaredRepo = !strongSelf.isStaredRepo
+            strongSelf.userStatusView.render(
+              with: strongSelf.isStaredRepo ? .active : .inactive, content: strongSelf.staredContent)
+          }
         }
       }
     }
