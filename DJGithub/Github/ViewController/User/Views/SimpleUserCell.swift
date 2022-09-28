@@ -9,7 +9,8 @@ import UIKit
 
 class SimpleUserCell: UITableViewCell {
   
-  var avatarClosure: (() -> ())? = nil
+  var avatarClosure: (() -> ())?
+  var followClosure: (() -> ())?
   
   lazy var avatarImageView: UIImageView = {
     let imageView = UIImageView()
@@ -37,13 +38,10 @@ class SimpleUserCell: UITableViewCell {
     return label
   }()
   
-  lazy var followingButton: UIButton = {
-    let button = UIButton()
-    button.setTitleColor(.white, for: .normal)
-    button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .bold)
-    button.layer.cornerRadius = 15
-    button.addTarget(self, action: #selector(followAction), for: .touchUpInside)
-    return button
+  lazy var followingView: UserStatusView = {
+    let view = UserStatusView()
+    view.layer.cornerRadius = 15
+    return view
   }()
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -56,30 +54,18 @@ class SimpleUserCell: UITableViewCell {
     loginLabel.text = user.login
     urlLabel.text = user.url
     
-    let title: String
-    let font: UIFont
-    if user.isFollowing {
-      title = "UnFollow"
-      followingButton.setTitleColor(.white, for: .normal)
-      followingButton.backgroundColor = .lightBlue
-      font = UIFont.systemFont(ofSize: 14, weight: .bold)
-    } else {
-      title = "Follow"
-      followingButton.setTitleColor(.blue, for: .normal)
-      followingButton.backgroundColor = .backgroundColor
-      font = UIFont.systemFont(ofSize: 12)
-    }
-    followingButton.titleLabel?.font = font
-    followingButton.setTitle(title, for: .normal)
-    
-    DispatchQueue.global().async {
-      let width = (title as NSString).boundingRect(with: CGSize(width: 0, height: 30), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil).size.width + 16
+    updateFollowStatus(user.isFollowing ? .active : .inactive, isFollowing: user.isFollowing)
+  }
+  
+  func updateFollowStatus(_ status: UserStatusView.UserStatusType, isFollowing: Bool) {
+    let title: String = isFollowing ? "UnFollow" : "Follow"
+    followingView.render(with: status, content:title, widthClosure: { [weak self] width in
       DispatchQueue.main.async {
-        self.followingButton.snp.updateConstraints { make in
+        self?.followingView.snp.updateConstraints { make in
           make.width.equalTo(width)
         }
       }
-    }
+    })
   }
   
   private func setUp() {
@@ -88,7 +74,7 @@ class SimpleUserCell: UITableViewCell {
     contentView.addSubview(avatarImageView)
     contentView.addSubview(loginLabel)
     contentView.addSubview(urlLabel)
-    contentView.addSubview(followingButton)
+    contentView.addSubview(followingView)
     
     avatarImageView.snp.makeConstraints { make in
       make.centerY.equalTo(contentView)
@@ -102,22 +88,22 @@ class SimpleUserCell: UITableViewCell {
     urlLabel.snp.makeConstraints { make in
       make.bottom.equalTo(avatarImageView)
       make.leading.equalTo(loginLabel)
-      make.trailing.equalTo(followingButton.snp.leading).offset(-5)
+      make.trailing.equalTo(followingView.snp.leading).offset(-5)
     }
-    followingButton.snp.makeConstraints { make in
+    followingView.snp.makeConstraints { make in
       make.trailing.equalTo(contentView).offset(-12)
       make.centerY.equalTo(contentView)
       make.width.equalTo(70)
       make.height.equalTo(30)
     }
+    
+    followingView.touchClosure = { [weak self] in
+      self?.followClosure?()
+    }
   }
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
-  }
-  
-  @objc func followAction() {
-    
   }
   
   @objc func avatarTapped() {

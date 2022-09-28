@@ -18,6 +18,9 @@ enum GithubRouter: Router {
   case starRepo(String)
   case unStarRepo(String)
   case userFollowing(queryItems: [String: String])
+  case followUser(String)
+  case unfollowUser(String)
+  case checkFollowStatus(String)
   
   var baseURLString: String {
     return "https://api.github.com/"
@@ -28,6 +31,8 @@ enum GithubRouter: Router {
     case .userContribution: return .POST
     case .starRepo: return .PUT
     case .unStarRepo: return .DELETE
+    case .followUser: return .PUT
+    case .unfollowUser: return .DELETE
     default: return .GET
     }
   }
@@ -43,6 +48,9 @@ enum GithubRouter: Router {
     case .starRepo(let name): return "user/starred/\(name)"
     case .unStarRepo(let name): return "user/starred/\(name)"
     case .userFollowing: return "user/following"
+    case .followUser(let name): return "user/following/\(name)"
+    case .unfollowUser(let name): return "user/following/\(name)"
+    case .checkFollowStatus(let name): return "user/following/\(name)"
     }
   }
   

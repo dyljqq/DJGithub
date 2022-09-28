@@ -43,7 +43,7 @@ struct RepoViewModel {
     return result.parse()
   }
   
-  static func userStaredRepo(with name: String) async -> RepoStatus? {
+  static func userStaredRepo(with name: String) async -> StatusModel? {
     let router = GithubRouter.userStaredRepo(name)
     let result = await APIClient.shared.get(by: router)
     return result.parse()
@@ -55,13 +55,13 @@ struct RepoViewModel {
     return result.parse()
   }
   
-  static func starRepo(with repoName: String) async -> RepoStatus? {
+  static func starRepo(with repoName: String) async -> StatusModel? {
     let router = GithubRouter.starRepo(repoName)
     let result = await APIClient.shared.get(by: router)
     return result.parse()
   }
   
-  static func unStarRepo(with repoName: String) async -> RepoStatus? {
+  static func unStarRepo(with repoName: String) async -> StatusModel? {
     let router = GithubRouter.unStarRepo(repoName)
     let result = await APIClient.shared.get(by: router)
     return result.parse()

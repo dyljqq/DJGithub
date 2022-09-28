@@ -94,6 +94,27 @@ extension UserFollowingViewController: UITableViewDelegate, UITableViewDataSourc
       let user = strongSelf.dataSource[indexPath.row]
       strongSelf.navigationController?.pushToUser(with: user.login)
     }
+    cell.followClosure = { [weak self] in
+      guard let strongSelf = self else {
+        return
+      }
+      Task {
+        let user = strongSelf.dataSource[indexPath.row]
+        cell.updateFollowStatus(.loading, isFollowing: user.isFollowing)
+        if user.isFollowing {
+          let _ = await UserManager.unFollowUser(with: user.login)
+        } else {
+          let _ =  await UserManager.followUser(with: user.login)
+        }
+        
+        if let userStatus = await UserManager.checkFollowStatus(with: user.login) {
+          var user = user
+          user.update(isFollowing: userStatus.isStatus204)
+          strongSelf.dataSource[indexPath.row] = user
+          strongSelf.tableView.reloadData()
+        }
+      }
+    }
     return cell
   }
   
