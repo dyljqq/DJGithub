@@ -11,6 +11,12 @@ enum RefreshPosition {
   case header, footer
 }
 
+enum RefreshState {
+  case begin
+  case end
+  case unknown
+}
+
 protocol RefreshStatus {
   func didUpdateState(_ isRefreshing: Bool)
   func didUpdateProgress(_ progress: CGFloat)
@@ -42,6 +48,8 @@ class RefreshView: UIView, RefreshStatus {
     return superview as? UIScrollView
   }
   
+  var refreshState: RefreshState = .unknown
+  
   init(refreshPosition: RefreshPosition, height: CGFloat, action: @escaping () -> Void) {
     self.refreshPosition = refreshPosition
     self.height = height
@@ -72,6 +80,7 @@ class RefreshView: UIView, RefreshStatus {
   
   override func willMove(toSuperview newSuperview: UIView?) {
     guard let scrollView = newSuperview as? UIScrollView else {
+      clearObserver()
       return
     }
     setUpObserver(scrollView)
@@ -79,7 +88,14 @@ class RefreshView: UIView, RefreshStatus {
   
   func setUpObserver(_ scrollView: UIScrollView) {
     offsetToken = scrollView.observe(\.contentOffset) { [weak self] scrollView, _ in
-      self?.scrollViewDidScroll(scrollView)
+      guard let strongSelf = self else {
+        return
+      }
+      
+      if case .footer = strongSelf.refreshPosition {
+        strongSelf.isHidden = scrollView.contentOffset.y <= (scrollView.contentSize.height - scrollView.bounds.height - 10)
+      }
+      strongSelf.scrollViewDidScroll(scrollView)
     }
     
     stateToken = scrollView.observe(\.panGestureRecognizer.state) { [weak self] scrollView, _ in
@@ -94,8 +110,10 @@ class RefreshView: UIView, RefreshStatus {
       frame = CGRect(x: 0, y: -height, width: scrollView.bounds.width, height: height)
     case .footer:
       sizeToken = scrollView.observe(\.contentSize) { [weak self] scrollView, _ in
-        self?.frame = CGRect(x: 0, y: scrollView.contentSize.height, width: scrollView.bounds.width, height: self?.height ?? 0)
-        self?.isHidden = scrollView.contentSize.height > scrollView.bounds.height && scrollView.contentOffset.y < scrollView.bounds.height
+        guard let strongSelf = self else {
+          return
+        }
+        strongSelf.frame = CGRect(x: 0, y: scrollView.contentSize.height, width: scrollView.bounds.width, height: strongSelf.height)
       }
     }
   }
@@ -115,9 +133,6 @@ class RefreshView: UIView, RefreshStatus {
     case .header:
       progress = min(1, max(0, -(scrollView.contentOffset.y + scrollView.contentInsetTop) / height))
     case .footer:
-      guard scrollView.contentSize.height > scrollView.bounds.height else {
-        return
-      }
       progress = min(1, max(0, (scrollView.contentOffset.y + scrollView.bounds.height - scrollView.contentSize.height - scrollView.contentInsetBottom) / height))
     }
   }
@@ -130,6 +145,8 @@ class RefreshView: UIView, RefreshStatus {
   }
   
   func beginRefreshing() {
+    refreshState = .begin
+
     guard let scrollView = scrollView else {
       return
     }
@@ -153,11 +170,12 @@ class RefreshView: UIView, RefreshStatus {
   }
   
   func endRefreshing(with completionHandler: (() -> Void)? = nil) {
+    refreshState = .end
     guard let scrollView = scrollView else {
       completionHandler?()
       return
     }
-    
+
     DispatchQueue.main.async {
       UIView.animate(withDuration: 0.3, animations: {
         switch self.refreshPosition {
@@ -169,6 +187,7 @@ class RefreshView: UIView, RefreshStatus {
       }, completion: { _ in
         self.isRefreshing = false
         self.progress = 0
+        self.refreshState = .unknown
         completionHandler?()
       })
     }
