@@ -83,8 +83,21 @@ struct UserManager {
     return result.parse()
   }
   
-  static func loadLocalDevelopers() -> [LocalDeveloperGroup] {
-    return loadBundleJSONFile("developers.json")
+  static func loadLocalDevelopers(completionHandler: @escaping ([LocalDeveloperGroup]) -> ()) {
+    DispatchQueue.global().async {
+      let rs: [LocalDeveloperGroup] = loadBundleJSONFile("developers.json")
+      DispatchQueue.main.async {
+        completionHandler(rs)
+      }
+    }
+  }
+  
+  static func loadLocalDevelopersAsync() async throws -> [LocalDeveloperGroup] {
+    try await withCheckedThrowingContinuation { continuation in
+      loadLocalDevelopers { groups in
+        continuation.resume(returning: groups)
+      }
+    }
   }
   
 }

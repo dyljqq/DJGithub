@@ -27,11 +27,11 @@ class DevelopersViewController: UIViewController {
     return scrollView
   }()
   
-  let followingVC = UserFollowingViewController()
-  let developerVC = UserFollowingViewController()
-  
   lazy var vcs: [UIViewController] =  {
-    return [followingVC, developerVC]
+    return [
+      UserFollowingViewController(),
+      LocalDevelopersViewController()
+    ]
   }()
   
   override func viewDidLoad() {
@@ -47,12 +47,6 @@ class DevelopersViewController: UIViewController {
       addChild(vc)
       scrollView.addSubview(vc.view)
     }
-    
-    addChild(followingVC)
-    scrollView.addSubview(followingVC.view)
-    
-    addChild(developerVC)
-    scrollView.addSubview(developerVC.view)
   }
   
   override func viewDidLayoutSubviews() {
@@ -74,7 +68,7 @@ class DevelopersViewController: UIViewController {
 }
 
 extension DevelopersViewController: UIScrollViewDelegate {
-  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+  func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
     let offsetX = scrollView.contentOffset.x
     let page = Int(offsetX / scrollView.bounds.width + 0.5)
     self.segmentView.selectedSegmentIndex = page

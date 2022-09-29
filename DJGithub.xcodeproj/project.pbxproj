@@ -82,6 +82,9 @@
 		73AACB8528D626E30072B1DF /* UIScrollView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACB8428D626E30072B1DF /* UIScrollView+Ext.swift */; };
 		73AACB8728D628BD0072B1DF /* IndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACB8628D628BD0072B1DF /* IndicatorView.swift */; };
 		73AACB8B28D708740072B1DF /* UIScrollView+Refresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACB8A28D708740072B1DF /* UIScrollView+Refresh.swift */; };
+		73B7904828E51A3A002A9CDC /* UIImage+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7904728E51A3A002A9CDC /* UIImage+Ext.swift */; };
+		73B7904A28E52450002A9CDC /* LocalDevelopersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7904928E52450002A9CDC /* LocalDevelopersViewController.swift */; };
+		73B7904C28E5298D002A9CDC /* LocalDeveloperCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7904B28E5298D002A9CDC /* LocalDeveloperCell.swift */; };
 		73C598C528D85EF100DA86A1 /* PopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C598C428D85EF100DA86A1 /* PopoverView.swift */; };
 		73C598C728D8617800DA86A1 /* UIApplication+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C598C628D8617800DA86A1 /* UIApplication+Ext.swift */; };
 		73C598CD28D9E6A100DA86A1 /* URL+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C598CC28D9E6A100DA86A1 /* URL+Ext.swift */; };
@@ -184,6 +187,9 @@
 		73AACB8428D626E30072B1DF /* UIScrollView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Ext.swift"; sourceTree = "<group>"; };
 		73AACB8628D628BD0072B1DF /* IndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorView.swift; sourceTree = "<group>"; };
 		73AACB8A28D708740072B1DF /* UIScrollView+Refresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Refresh.swift"; sourceTree = "<group>"; };
+		73B7904728E51A3A002A9CDC /* UIImage+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Ext.swift"; sourceTree = "<group>"; };
+		73B7904928E52450002A9CDC /* LocalDevelopersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDevelopersViewController.swift; sourceTree = "<group>"; };
+		73B7904B28E5298D002A9CDC /* LocalDeveloperCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDeveloperCell.swift; sourceTree = "<group>"; };
 		73C598C428D85EF100DA86A1 /* PopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverView.swift; sourceTree = "<group>"; };
 		73C598C628D8617800DA86A1 /* UIApplication+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Ext.swift"; sourceTree = "<group>"; };
 		73C598CC28D9E6A100DA86A1 /* URL+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Ext.swift"; sourceTree = "<group>"; };
@@ -248,6 +254,7 @@
 			children = (
 				73101D5D28E4A5CC00DB5423 /* View */,
 				73101D5E28E4A5E400DB5423 /* DevelopersViewController.swift */,
+				73B7904928E52450002A9CDC /* LocalDevelopersViewController.swift */,
 			);
 			path = Developer;
 			sourceTree = "<group>";
@@ -255,6 +262,7 @@
 		73101D5D28E4A5CC00DB5423 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				73B7904B28E5298D002A9CDC /* LocalDeveloperCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -427,6 +435,7 @@
 				73AACB8A28D708740072B1DF /* UIScrollView+Refresh.swift */,
 				73C598C628D8617800DA86A1 /* UIApplication+Ext.swift */,
 				73C598CC28D9E6A100DA86A1 /* URL+Ext.swift */,
+				73B7904728E51A3A002A9CDC /* UIImage+Ext.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -720,6 +729,7 @@
 				73AACB0F28D30C470072B1DF /* APIClient.swift in Sources */,
 				73AACB8B28D708740072B1DF /* UIScrollView+Refresh.swift in Sources */,
 				73101D4128E30C5200DB5423 /* SimpleUserCell.swift in Sources */,
+				73B7904A28E52450002A9CDC /* LocalDevelopersViewController.swift in Sources */,
 				73AACB3C28D35C360072B1DF /* Utils.swift in Sources */,
 				73AACB4C28D45EA50072B1DF /* UserCell.swift in Sources */,
 				73AACAD928D308A60072B1DF /* ViewController.swift in Sources */,
@@ -733,6 +743,7 @@
 				73AACB5428D47ECB0072B1DF /* UserContrbutionItemCell.swift in Sources */,
 				7341DCC828DF24CB009A3A3C /* NavigationController.swift in Sources */,
 				73AACB4328D42C1B0072B1DF /* UINavigation+Router.swift in Sources */,
+				73B7904C28E5298D002A9CDC /* LocalDeveloperCell.swift in Sources */,
 				73101D4928E47FB100DB5423 /* StatusModel.swift in Sources */,
 				7341DCD228E03C6A009A3A3C /* RepoViewController.swift in Sources */,
 				73AACB7928D5BBF50072B1DF /* DBManage.swift in Sources */,
@@ -745,6 +756,7 @@
 				73AACB5628D47FCB0072B1DF /* String+Ext.swift in Sources */,
 				73C598CD28D9E6A100DA86A1 /* URL+Ext.swift in Sources */,
 				7341DCD028E03B17009A3A3C /* RepoHeaderView.swift in Sources */,
+				73B7904828E51A3A002A9CDC /* UIImage+Ext.swift in Sources */,
 				73AACB5828D483CA0072B1DF /* UserContributionCell.swift in Sources */,
 				73AACB0C28D30B3D0072B1DF /* Error.swift in Sources */,
 				73AACB0A28D30B0C0072B1DF /* URLConvertible.swift in Sources */,

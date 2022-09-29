@@ -10,7 +10,7 @@ import Kingfisher
 
 class UserHeaderView: NormalHeaderView {
   func render(with model: User) {
-    avatarImageView.kf.setImage(with: URL(string: model.avatarUrl))
+    avatarImageView.setImage(with: URL(string: model.avatarUrl))
     nameLabel.text = model.name ?? model.login
     loginLabel.text = "(\(model.login))"
     bioLabel.text = model.desc.trimmingCharacters(in: .whitespacesAndNewlines)
