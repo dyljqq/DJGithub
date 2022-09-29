@@ -23,6 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   
   func setUp() {
     Language.createTable()
+    ConfigManager.loadConfig()
     
     Task {
       await LanguageManager.loadLanguageMapping()

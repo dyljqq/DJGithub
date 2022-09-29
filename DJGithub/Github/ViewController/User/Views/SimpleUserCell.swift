@@ -50,7 +50,7 @@ class SimpleUserCell: UITableViewCell {
   }
   
   func render(with user: UserFollowing) {
-    avatarImageView.kf.setImage(with: URL(string: user.avatarUrl))
+    avatarImageView.setImage(with: URL(string: user.avatarUrl))
     loginLabel.text = user.login
     urlLabel.text = user.url
     

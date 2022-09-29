@@ -88,12 +88,15 @@ class RefreshView: UIView, RefreshStatus {
   
   func setUpObserver(_ scrollView: UIScrollView) {
     offsetToken = scrollView.observe(\.contentOffset) { [weak self] scrollView, _ in
-      guard let strongSelf = self else {
-        return
-      }
+      guard let strongSelf = self else { return }
       
       if case .footer = strongSelf.refreshPosition {
-        strongSelf.isHidden = scrollView.contentOffset.y <= (scrollView.contentSize.height - scrollView.bounds.height - 10)
+        let offsetY = scrollView.contentSize.height - scrollView.bounds.height - 10
+        if offsetY < 0 {
+          strongSelf.isHidden = true
+        } else {
+          strongSelf.isHidden = scrollView.contentOffset.y <= offsetY
+        }
       }
       strongSelf.scrollViewDidScroll(scrollView)
     }

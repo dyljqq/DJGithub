@@ -26,7 +26,7 @@ struct FrameGuide {
     } else {
       window = UIApplication.shared.keyWindow
     }
-    return window
+    return UIApplication.shared.keyWindow
   }
   
   static var statusBarHeight: CGFloat {
@@ -40,7 +40,7 @@ struct FrameGuide {
       statusHeight = UIApplication.shared.statusBarFrame.size.height
     }
     
-    return statusHeight
+    return UIApplication.shared.statusBarFrame.size.height
   }
   
   static var isNotchScreen: Bool {
@@ -60,5 +60,9 @@ struct FrameGuide {
   
   static var safeAreaInsets: UIEdgeInsets {
     return UIApplication.shared.delegate?.window??.safeAreaInsets ?? UIEdgeInsets.zero
+  }
+  
+  static var tabbarHeight: CGFloat {
+    return isNotchScreen ? 83 : 49
   }
 }
