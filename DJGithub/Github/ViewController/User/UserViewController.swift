@@ -64,6 +64,11 @@ fileprivate enum CellType {
 
 class UserViewController: UIViewController {
 
+  lazy var followStatusView: UserStatusView = {
+    let view = UserStatusView(layoutLay: .normal)
+    return view
+  }()
+  
   lazy var userHeaderView: UserHeaderView = {
     let view = UserHeaderView(frame: CGRect(x: 0, y: 0, width: FrameGuide.screenWidth, height: 135))
     return view
@@ -110,7 +115,7 @@ class UserViewController: UIViewController {
     }
   }
   
-  func setUp() {
+  private func setUp() {
     self.navigationItem.title = "User"
     view.backgroundColor = UIColorFromRGB(0xf5f5f5)
     
@@ -168,6 +173,12 @@ class UserViewController: UIViewController {
     self.dataSource.insert(.blank, at: 0)
     self.dataSource.insert(.userContribution(contribution), at: 1)
     tableView.reloadData()
+  }
+  
+  private func configNavigationRightButton() {
+    Task {
+      let status = await UserManager.checkFollowStatus(with: "dyljqq")
+    }
   }
 
 }
