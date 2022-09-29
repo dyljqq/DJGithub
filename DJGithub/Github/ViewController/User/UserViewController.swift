@@ -66,6 +66,7 @@ class UserViewController: UIViewController {
 
   lazy var followStatusView: UserStatusView = {
     let view = UserStatusView(layoutLay: .normal)
+    view.type = .follow(self.name)
     return view
   }()
   
@@ -89,6 +90,7 @@ class UserViewController: UIViewController {
   let name: String
   
   var user: User?
+  var isFollowing: Bool = false
   
   var subscriptions: [AnyCancellable] = []
   var userSubject = PassthroughSubject<User, Never>()
@@ -117,7 +119,8 @@ class UserViewController: UIViewController {
   
   private func setUp() {
     self.navigationItem.title = "User"
-    view.backgroundColor = UIColorFromRGB(0xf5f5f5)
+    view.backgroundColor = .backgroundColor
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.followStatusView)
     
     view.addSubview(tableView)
     tableView.snp.makeConstraints { make in
@@ -158,6 +161,8 @@ class UserViewController: UIViewController {
       }
       self.view.stopLoading()
     }
+    
+    configNavigationRightButton()
   }
   
   private func handle(with user: User) {
@@ -177,7 +182,13 @@ class UserViewController: UIViewController {
   
   private func configNavigationRightButton() {
     Task {
-      let status = await UserManager.checkFollowStatus(with: "dyljqq")
+      if let status = await UserManager.checkFollowStatus(with: self.name) {
+        self.followStatusView.active = status.isStatus204
+        followStatusView.touchClosure = { [weak self] in
+          guard let strongSelf = self else { return }
+          strongSelf.followStatusView.activeAction()
+        }
+      }
     }
   }
 

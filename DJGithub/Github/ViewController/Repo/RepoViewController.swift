@@ -22,19 +22,11 @@ class RepoViewController: UIViewController {
   }
 
   let repoName: String
-  
   var dataSouce: [CellType] = []
-  var isStaredRepo: Bool = false {
-    didSet {
-      staredContent = isStaredRepo ? "unstar" : "star"
-    }
-  }
-  var staredContent: String = ""
   
   lazy var userStatusView: UserStatusView = {
     let view = UserStatusView(layoutLay: .normal)
-    view.layer.cornerRadius = 15
-    view.frame = CGRect(x: 0, y: 0, width: 70, height: 30)
+    view.type = .star(repoName)
     return view
   }()
   
@@ -149,29 +141,15 @@ class RepoViewController: UIViewController {
   
   func configStarButton() {
     Task {
-      let repoStarStatus = await RepoViewModel.userStaredRepo(with: repoName)
-      isStaredRepo = repoStarStatus != nil && repoStarStatus!.isStatus204
-      userStatusView.render(with: isStaredRepo ? .active : .inactive, content: staredContent)
+      if let repoStarStatus = await RepoViewModel.userStaredRepo(with: repoName) {
+        userStatusView.active = repoStarStatus.isStatus204
+      }
 
       userStatusView.touchClosure = { [weak self] in
         guard let strongSelf = self else {
           return
         }
-        Task {
-          strongSelf.userStatusView.render(with: .loading)
-          let status: StatusModel?
-          if strongSelf.isStaredRepo {
-            status = await RepoViewModel.unStarRepo(with: strongSelf.repoName)
-          } else {
-            status = await RepoViewModel.starRepo(with: strongSelf.repoName)
-          }
-
-          if let status = status, status.isStatus204 {
-            strongSelf.isStaredRepo = !strongSelf.isStaredRepo
-            strongSelf.userStatusView.render(
-              with: strongSelf.isStaredRepo ? .active : .inactive, content: strongSelf.staredContent)
-          }
-        }
+        strongSelf.userStatusView.activeAction()
       }
     }
   }

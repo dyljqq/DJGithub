@@ -37,10 +37,10 @@ extension Router {
   
   var urlString: String {
     guard let request = self.asURLRequest(), var str = request.url?.absoluteString else {
-        return ""
+      return ""
     }
     if str.last == "/" {
-        str.removeLast()
+      str.removeLast()
     }
     return str
   }

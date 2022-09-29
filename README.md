@@ -43,6 +43,30 @@
 2. 添加following users的列表
 3. 添加follow功能，抽象剥离follow跟star组件 (单击star或者follow button的时候，会有一个网络请求跟状态变更的过程)
 
+2022-09-29
+
+1. 剥离替换star button 跟 follow button。
+
+​	举个例子，star跟follow的操作其实是一样的，不管是视图的布局，样式等等。因此我们只需要定义一个enum：
+
+```swift
+enum UserStatusViewType {
+  case follow(String)
+  case star(String)
+  case unknown
+  
+  func getActiveContent(isActive: Bool) -> String {
+    switch self {
+    case .follow: return isActive.followText
+    case .star: return isActive.starText
+    case .unknown: return ""
+    }
+  }
+}
+```
+
+根据具体的枚举值做对应的操作即可。
+
 ### TODO
 
 1. 继续基础界面的搭建

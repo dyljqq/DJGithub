@@ -40,7 +40,6 @@ class SimpleUserCell: UITableViewCell {
   
   lazy var followingView: UserStatusView = {
     let view = UserStatusView()
-    view.layer.cornerRadius = 15
     return view
   }()
   
@@ -54,18 +53,8 @@ class SimpleUserCell: UITableViewCell {
     loginLabel.text = user.login
     urlLabel.text = user.url
     
-    updateFollowStatus(user.isFollowing ? .active : .inactive, isFollowing: user.isFollowing)
-  }
-  
-  func updateFollowStatus(_ status: UserStatusView.UserStatusType, isFollowing: Bool) {
-    let title: String = isFollowing ? "UnFollow" : "Follow"
-    followingView.render(with: status, content:title, widthClosure: { [weak self] width in
-      DispatchQueue.main.async {
-        self?.followingView.snp.updateConstraints { make in
-          make.width.equalTo(width)
-        }
-      }
-    })
+    self.followingView.type = .follow(user.login)
+    self.followingView.active = user.isFollowing
   }
   
   private func setUp() {

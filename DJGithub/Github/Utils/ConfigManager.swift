@@ -10,9 +10,9 @@ import Foundation
 struct ConfigManager {
   static let shared = ConfigManager()
   
-  static var config: Config?
+  static var config: Config = Config()
   
-  static func loadConfig() {
+  static func loadConfig(completionHandler: ((Config) -> ())? = nil) {
     DispatchQueue.global().async {
       let config: Config = loadBundleJSONFile("config.json")
       DispatchQueue.main.async {

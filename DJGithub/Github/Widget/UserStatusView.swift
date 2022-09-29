@@ -7,6 +7,20 @@
 
 import UIKit
 
+enum UserStatusViewType {
+  case follow(String)
+  case star(String)
+  case unknown
+  
+  func getActiveContent(isActive: Bool) -> String {
+    switch self {
+    case .follow: return isActive.followText
+    case .star: return isActive.starText
+    case .unknown: return ""
+    }
+  }
+}
+
 class UserStatusView: UIView {
   
   enum UserStatusType {
@@ -21,6 +35,7 @@ class UserStatusView: UIView {
   }
   
   let layoutWay: LayoutWay
+  var type: UserStatusViewType = .unknown
   
   var height: CGFloat = 30
   
@@ -81,8 +96,11 @@ class UserStatusView: UIView {
             self.frame = CGRect(x: 0, y: 0, width: width + 30, height: self.height)
             self.activityIndicatorView.center = self.center
             self.contentLabel.frame = CGRect(x: 15, y: (self.height - fontSize) / 2, width: width, height: fontSize)
+          } else {
+            self.snp.updateConstraints { make in
+              make.width.equalTo(width + 30)
+            }
           }
-          widthClosure?(width + 30)
         }
       }
     }
@@ -95,6 +113,8 @@ class UserStatusView: UIView {
     let tap = UITapGestureRecognizer(target: self, action: #selector(touchAction))
     addGestureRecognizer(tap)
     self.isUserInteractionEnabled = true
+    
+    self.layer.cornerRadius = height / 2
     
     updateLayout()
   }
@@ -119,6 +139,49 @@ class UserStatusView: UIView {
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+}
+
+private var activeKey: UInt8 = 0
+extension UserStatusView {
+  
+  var active: Bool {
+    get {
+      return objc_getAssociatedObject(self, &activeKey) as? Bool ?? false
+    }
+    
+    set {
+      self.render(with: newValue ? .active : .inactive, content: self.type.getActiveContent(isActive: newValue))
+      objc_setAssociatedObject(self, &activeKey, newValue, .OBJC_ASSOCIATION_ASSIGN)
+    }
+  }
+  
+  func activeAction() {
+    self.render(with: .loading)
+    Task {
+      let statusModel: StatusModel?
+      switch self.type {
+      case .follow(let name):
+        if active {
+          statusModel = await UserManager.unFollowUser(with: name)
+        } else {
+          statusModel = await UserManager.followUser(with: name)
+        }
+      case .star(let name):
+        if active {
+          statusModel = await RepoViewModel.unStarRepo(with: name)
+        } else {
+          statusModel = await RepoViewModel.starRepo(with: name)
+        }
+      case .unknown:
+        statusModel = nil
+      }
+      
+      if let statusModel = statusModel, statusModel.isStatus204 {
+        active = !active
+      }
+    }
   }
   
 }

@@ -82,7 +82,7 @@ enum GithubRouter: Router {
       break
     }
     var request = configURLRequest(with: queryItems)
-    request?.setValue(ConfigManager.config?.authorization, forHTTPHeaderField: "Authorization")
+    request?.setValue(ConfigManager.config.authorization, forHTTPHeaderField: "Authorization")
     if !parameters.isEmpty {
       switch method {
       case .POST: request?.httpBody = try? JSONSerialization.data(withJSONObject: parameters)

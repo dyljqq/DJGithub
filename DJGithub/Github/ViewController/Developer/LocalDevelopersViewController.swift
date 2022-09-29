@@ -16,6 +16,8 @@ class LocalDevelopersViewController: UIViewController {
     tableView.delegate = self
     tableView.dataSource = self
     tableView.rowHeight = 50
+    tableView.sectionHeaderHeight = 44
+    tableView.sectionHeaderTopPadding = 0
     tableView.backgroundColor = .backgroundColor
     tableView.showsVerticalScrollIndicator = false
     tableView.tableFooterView = UIView()
@@ -70,5 +72,23 @@ extension LocalDevelopersViewController: UITableViewDelegate, UITableViewDataSou
     
     let user = self.dataSource[indexPath.section].users[indexPath.row]
     self.navigationController?.pushToUser(with: user.id)
+  }
+  
+  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 30))
+    
+    let group = self.dataSource[section]
+    let contentLabel = UILabel()
+    contentLabel.text = group.name
+    contentLabel.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+    contentLabel.textColor = .black
+    view.addSubview(contentLabel)
+    
+    contentLabel.snp.makeConstraints { make in
+      make.leading.equalTo(16)
+      make.bottom.equalTo(-10)
+    }
+    
+    return view
   }
 }
