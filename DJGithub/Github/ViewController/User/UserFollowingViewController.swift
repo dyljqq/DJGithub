@@ -11,15 +11,17 @@ enum UserFollowingType {
   case watches(String)
   case star(String)
   case contributor(String)
-  case following
+  case following(String)
+  case followers(String)
   case unknown
   
   var title: String {
     switch self {
     case .watches: return "Watches"
     case .star: return "Stargazers"
-    case .contributor: return "contributor"
-    case .following: return "following"
+    case .contributor: return "Contributor"
+    case .following: return "Following"
+    case .followers: return "Followers"
     case .unknown: return ""
     }
   }
@@ -46,7 +48,7 @@ class UserFollowingViewController: UIViewController, NextPageLoadable {
   }
   
   init() {
-    self.type = .following
+    self.type = .following("")
     super.init(nibName: nil, bundle: nil)
   }
   
@@ -151,14 +153,16 @@ extension UserFollowingViewController {
     Task {
       let users: [UserFollowing]
       switch type {
-      case .following:
-        users = await UserManager.getUserFollowing(with: nextPageState.start)
+      case .following(let name):
+        users = await UserManager.getUserFollowing(with: name, page: nextPageState.start)
       case .star(let repoName):
         users = await UserManager.fetch(by: .stargazers(repoName, ["page": "\(nextPageState.start)"]))
       case .contributor(let repoName):
         users = await UserManager.fetch(by: .contributors(repoName, ["page": "\(nextPageState.start)"]))
       case .watches(let repoName):
         users = await UserManager.fetch(by: .subscribers(repoName, ["page": "\(nextPageState.start)"]))
+      case .followers(let name):
+        users = await UserManager.getUserFollowers(with: name, page: nextPageState.start)
       case .unknown:
         users = []
       }

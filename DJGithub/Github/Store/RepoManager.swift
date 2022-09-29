@@ -37,6 +37,12 @@ struct RepoManager {
     return result.parse()
   }
   
+  static func fetchUserRepos(with userName: String, page: Int) async -> Repos? {
+    let router = GithubRouter.userRepos(userName, ["page": "\(page)"])
+    let result = await APIClient.shared.get(by: router)
+    return result.parse()
+  }
+  
   static func fetchRepo(with name: String) async -> Repo? {
     let router = GithubRouter.repo(name)
     let result = await APIClient.shared.get(by: router)

@@ -50,8 +50,8 @@ struct UserManager {
    type = User;
    url = "https://api.github.com/users/rentzsch";
    */
-  static func getUserFollowing(with page: Int = 1) async -> [UserFollowing] {
-    let router = GithubRouter.userFollowing(queryItems: ["page": "\(page)"])
+  static func getUserFollowing(with userName: String, page: Int = 1) async -> [UserFollowing] {
+    let router = GithubRouter.userFollowing(userName, queryItems: ["page": "\(page)"])
     let result = await APIClient.shared.get(by: router)
     let users: UserFollowings? = result.parse()
     return (users?.items ?? []).map { user in
@@ -59,6 +59,19 @@ struct UserManager {
       user.update(isFollowing: true)
       return user
     }
+  }
+  
+  static func getUserFollowers(with userName: String, page: Int = 1) async -> [UserFollowing] {
+    let router = GithubRouter.userFollowers(userName, ["page": "\(page)"])
+    let result = await APIClient.shared.get(by: router)
+    let users: UserFollowings? = result.parse()
+    return users?.items ?? []
+  }
+  
+  static func getUserSubscription(with userName: String, page: Int = 1) async -> Repos? {
+    let router = GithubRouter.userSubscription(userName, ["page": "\(page)"])
+    let result = await APIClient.shared.get(by: router)
+    return result.parse()
   }
   
   static func followUser(with userName: String) async -> StatusModel? {

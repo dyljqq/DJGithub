@@ -67,6 +67,7 @@ class UserViewController: UIViewController {
   lazy var followStatusView: UserStatusView = {
     let view = UserStatusView(layoutLay: .normal)
     view.type = .follow(self.name)
+    view.isHidden = true
     return view
   }()
   
@@ -111,10 +112,6 @@ class UserViewController: UIViewController {
     super.viewDidLoad()
     
     setUp()
-    
-    Task {
-      await UserManager.getUserFollowing()
-    }
   }
   
   private func setUp() {
@@ -168,13 +165,17 @@ class UserViewController: UIViewController {
   private func handle(with user: User) {
     self.user = user
     
+    self.followStatusView.isHidden = ConfigManager.checkOwner(by: user.login)
     self.navigationItem.title = user.name
     userHeaderView.render(with: user)
     self.dataSource = [.blank, .user(.company), .user(.location), .user(.email), .user(.link)]
     tableView.reloadData()
     
     userHeaderView.tapCounterClosure = { [weak self] index in
-      
+      guard let strongSelf = self else { return }
+      if let user = strongSelf.user {
+        strongSelf.navigationController?.pushToUserInteract(with: user, selectedIndex: index)
+      }
     }
   }
   

@@ -119,12 +119,9 @@ class RepoViewController: UIViewController {
     
     headerView.tapCounterClosure = { [weak self] index in
       guard let strongSelf = self else { return }
-      let types: [RepoInteractViewController.RepoInteractType] = [
-        .watches(strongSelf.repoName),
-        .star(strongSelf.repoName),
-        .forks(strongSelf.repoName)
-      ]
-      strongSelf.navigationController?.pushToRepoInteract(type: types[index], repo: strongSelf.repo)
+      if let repo = strongSelf.repo {
+        strongSelf.navigationController?.pushToRepoInteract(with: repo, selectedIndex: index)
+      }
     }
     
     self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: userStatusView)
@@ -134,6 +131,9 @@ class RepoViewController: UIViewController {
     Task {
       if let repo = await RepoManager.fetchRepo(with: repoName) {
         self.repo = repo
+        if let userName = repo.owner?.login {
+          self.userStatusView.isHidden = ConfigManager.checkOwner(by: userName)
+        }
         view.stopLoading()
         self.headerView.render(with: repo)
         dataSouce = [

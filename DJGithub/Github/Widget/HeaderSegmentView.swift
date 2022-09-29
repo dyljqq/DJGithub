@@ -76,6 +76,7 @@ class HeaderSegmentView: UIView {
     let layout = UICollectionViewFlowLayout()
     layout.minimumLineSpacing = 0
     layout.minimumInteritemSpacing = 0
+    layout.scrollDirection = .horizontal
     return layout
   }()
   
@@ -139,6 +140,8 @@ class HeaderSegmentView: UIView {
       return HeaderModel(title: model.title, width: model.width, selected: index == selectedIndex)
     }
     self.collectionView.reloadData()
+    self.collectionView.scrollToItem(at: IndexPath(row: selectedIndex, section: 0),
+                                     at: .centeredHorizontally, animated: true)
   }
 
 }

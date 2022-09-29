@@ -14,6 +14,11 @@ class RepoInteractViewController: UIViewController {
     case contributor(String)
     case star(String)
     case forks(String)
+    case repositories(String)
+    case followers(String)
+    case following(String)
+    case userWatches(String)
+    case userStar(String)
     
     var title: String {
       switch self {
@@ -21,6 +26,11 @@ class RepoInteractViewController: UIViewController {
       case .contributor: return "Contributors"
       case .star: return "Stargazers"
       case .forks: return "Forks"
+      case .followers: return "Followers"
+      case .following: return "Following"
+      case .repositories: return "Repositories"
+      case .userWatches: return "Watches"
+      case .userStar: return "Stars"
       }
     }
     
@@ -29,29 +39,38 @@ class RepoInteractViewController: UIViewController {
       case .watches(let name): return UserFollowingType.watches(name)
       case .contributor(let name): return UserFollowingType.contributor(name)
       case .star(let name): return UserFollowingType.star(name)
+      case .following(let name): return UserFollowingType.following(name)
+      case .followers(let name): return UserFollowingType.followers(name)
       default: return UserFollowingType.unknown
       }
     }
+    
+    var userRepoState: UserRepoState {
+      switch self {
+      case .forks(let name): return UserRepoState.fork(name)
+      case .repositories(let name): return UserRepoState.repos(name)
+      case .userStar(let name): return UserRepoState.star(name)
+      case .userWatches(let name): return UserRepoState.subscription(name)
+      default: return .unknown
+      }
+    }
   }
-  
-  let repoName: String
+
   var repo: Repo?
+  var user: User?
   var selectedIndex: Int = 0 {
     didSet {
-      self.scrollView.setContentOffset(
-        CGPoint(x: self.scrollView.frame.width * CGFloat(selectedIndex), y: 0), animated: true)
-      self.headerSegmentView.selectedIndex = selectedIndex
+      self.update(with: selectedIndex)
     }
   }
   
-  let initType: RepoInteractType
-  
   lazy var vcs: [UIViewController] = {
     return types.map { type in
-      if case RepoInteractType.forks(let name) = type {
-        return UserStaredReposViewController(with: UserRepoState.fork(name), repo: self.repo)
-      } else {
+      switch type {
+      case .watches, .star, .contributor, .following, .followers:
         return UserFollowingViewController(with: type.userFollowingType)
+      case .repositories, .userStar, .forks, .userWatches:
+        return UserStaredReposViewController(userRepoState: type.userRepoState)
       }
     }
   }()
@@ -72,27 +91,11 @@ class RepoInteractViewController: UIViewController {
     return scrollView
   }()
   
-  lazy var types: [RepoInteractType] = {
-    return [
-      .watches(repoName),
-      .star(repoName),
-      .forks(repoName),
-      .contributor(repoName)
-    ]
-  }()
+  let types: [RepoInteractType]
   
-  init(with repoName: String) {
-    self.repoName = repoName
-    self.initType = .watches(repoName)
-    super.init(nibName: nil, bundle: nil)
-  }
-  
-  init(with type: RepoInteractType) {
-    self.initType = type
-    switch type {
-    case .watches(let repoName), .star(let repoName), .contributor(let repoName), .forks(let repoName):
-      self.repoName = repoName
-    }
+  init(with types: [RepoInteractType], selectedIndex: Int = 0) {
+    self.types = types
+    self.selectedIndex = selectedIndex
     super.init(nibName: nil, bundle: nil)
   }
   
@@ -107,7 +110,13 @@ class RepoInteractViewController: UIViewController {
   }
   
   private func setUp() {
-    self.navigationItem.title = self.repo?.name ?? repoName
+    if let title = self.repo?.name {
+      self.navigationItem.title = title
+    } else if let title = self.user?.name {
+      self.navigationItem.title = title
+    } else {
+      self.navigationItem.title = ""
+    }
 
     view.backgroundColor = .white
     view.addSubview(headerSegmentView)
@@ -129,23 +138,13 @@ class RepoInteractViewController: UIViewController {
         CGPoint(x: strongSelf.scrollView.frame.width * CGFloat(index), y: 0), animated: true)
     }
     
-    var flag = false
-    for (index, typ) in types.enumerated() {
-      switch (typ, self.initType) {
-      case (.watches(let n1), .watches(let n2)) where n1 == n2,
-        (.forks(let n1), .forks(let n2)) where n1 == n2,
-        (.contributor(let n1), .contributor(let n2)) where n1 == n2,
-        (.star(let n1), .star(let n2)) where n1 == n2:
-        flag = true
-      default:
-        flag = false
-      }
-      
-      if flag {
-        self.selectedIndex = index
-        break
-      }
-    }
+    update(with: self.selectedIndex)
+  }
+  
+  private func update(with index: Int) {
+    self.scrollView.setContentOffset(
+      CGPoint(x: self.scrollView.frame.width * CGFloat(index), y: 0), animated: true)
+    self.headerSegmentView.selectedIndex = index
   }
   
   override func viewDidLayoutSubviews() {

@@ -67,6 +67,7 @@ enum UserStatusViewType {
 根据具体的枚举值做对应的操作即可。
 
 2. 添加Repo的watches，stars，forks的列表页。剥离&抽象&复用
+3. 添加User的following，followers等列表页
 
 ### TODO
 
@@ -74,6 +75,16 @@ enum UserStatusViewType {
 2. 完善页面跳转方案
 2. 添加用户界面的交互功能
 2. 添加判定是不是owner，根据这个隐藏对应的视图。
+2. 如何动态的展示登录用户对不同用户的follow状态。比如说，在followers页面，会存在follow的用户跟unfollow的用户，那么如何展示follow button的状态呢？
+
+​	Github上有一个api可以check单个用户的是否被follow，但是对于列表来说，如果不断的去调用这个接口的话，是否会有问题？是否可以通过在本地缓存follow状态？
+
+​	现在有两个方案：
+
+* 方案一：首先在App启动时，去拉取所有的follow列表，然后进行缓存，当用户在App上做follow or unfollow的操作的时候，去修改对应的值。并去check这个值是否正确？
+* 方案二：在滑动的时候，去获取对应的follow的信息。然后通过一个全局变量来缓存这个信息。
+
+
 
 ps：
 
