@@ -21,6 +21,10 @@ enum GithubRouter: Router {
   case followUser(String)
   case unfollowUser(String)
   case checkFollowStatus(String)
+  case stargazers(String, [String: String])
+  case contributors(String, [String: String])
+  case subscribers(String, [String: String])
+  case forks(String, [String: String])
   
   var baseURLString: String {
     return "https://api.github.com/"
@@ -51,6 +55,10 @@ enum GithubRouter: Router {
     case .followUser(let name): return "user/following/\(name)"
     case .unfollowUser(let name): return "user/following/\(name)"
     case .checkFollowStatus(let name): return "user/following/\(name)"
+    case .stargazers(let name, _): return "repos/\(name)/stargazers"
+    case .subscribers(let name, _): return "repos/\(name)/subscribers"
+    case .contributors(let name, _): return "repos/\(name)/contributors"
+    case .forks(let name, _): return "repos/\(name)/forks"
     }
   }
   
@@ -74,9 +82,12 @@ enum GithubRouter: Router {
     var queryItems: [String: String] = [:]
     
     switch self {
-    case .userStartedRepos(_, let items):
-      queryItems = items
-    case .userFollowing(let items):
+    case .userStartedRepos(_, let items),
+        .userFollowing(let items),
+        .contributors(_, let items),
+        .subscribers(_, let items),
+        .stargazers(_, let items),
+        .forks(_, let items):
       queryItems = items
     default:
       break

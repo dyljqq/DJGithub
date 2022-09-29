@@ -19,6 +19,7 @@ struct LanguageManager {
           language.insert()
         }
       }
+      await loadLanguageMapping()
     }
   }
   

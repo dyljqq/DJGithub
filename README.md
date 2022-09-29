@@ -11,7 +11,6 @@
 ```json
 {
  "authorization": "", // person token
- "userName": "" // 你自己的github的名字
 }
 ```
 
@@ -67,10 +66,14 @@ enum UserStatusViewType {
 
 根据具体的枚举值做对应的操作即可。
 
+2. 添加Repo的watches，stars，forks的列表页。剥离&抽象&复用
+
 ### TODO
 
 1. 继续基础界面的搭建
 2. 完善页面跳转方案
+2. 添加用户界面的交互功能
+2. 添加判定是不是owner，根据这个隐藏对应的视图。
 
 ps：
 

@@ -149,14 +149,13 @@ class RefreshView: UIView, RefreshStatus {
   
   func beginRefreshing() {
     refreshState = .begin
-
     guard let scrollView = scrollView else {
       return
     }
     
     progress = 1
     isRefreshing = true
-    
+
     DispatchQueue.main.async {
       UIView.animate(withDuration: 0.3, animations: {
         switch self.refreshPosition {

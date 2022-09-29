@@ -22,6 +22,7 @@ class RepoViewController: UIViewController {
   }
 
   let repoName: String
+  var repo: Repo?
   var dataSouce: [CellType] = []
   
   lazy var userStatusView: UserStatusView = {
@@ -89,7 +90,7 @@ class RepoViewController: UIViewController {
         }
         group.addTask {
           Task {
-            if let readme = await RepoViewModel.fetchREADME(with: self.repoName) {
+            if let readme = await RepoManager.fetchREADME(with: self.repoName) {
               await self.footerView.render(with: readme.content)
             }
           }
@@ -116,12 +117,23 @@ class RepoViewController: UIViewController {
       }
     }
     
+    headerView.tapCounterClosure = { [weak self] index in
+      guard let strongSelf = self else { return }
+      let types: [RepoInteractViewController.RepoInteractType] = [
+        .watches(strongSelf.repoName),
+        .star(strongSelf.repoName),
+        .forks(strongSelf.repoName)
+      ]
+      strongSelf.navigationController?.pushToRepoInteract(type: types[index], repo: strongSelf.repo)
+    }
+    
     self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: userStatusView)
   }
   
   private func fetchRepo() {
     Task {
-      if let repo = await RepoViewModel.fetchRepo(with: repoName) {
+      if let repo = await RepoManager.fetchRepo(with: repoName) {
+        self.repo = repo
         view.stopLoading()
         self.headerView.render(with: repo)
         dataSouce = [
@@ -141,7 +153,7 @@ class RepoViewController: UIViewController {
   
   func configStarButton() {
     Task {
-      if let repoStarStatus = await RepoViewModel.userStaredRepo(with: repoName) {
+      if let repoStarStatus = await RepoManager.userStaredRepo(with: repoName) {
         userStatusView.active = repoStarStatus.isStatus204
       }
 

@@ -1,5 +1,5 @@
 //
-//  RepoViewModel.swift
+//  RepoManager.swift
 //  DJGithub
 //
 //  Created by jiqinqiang on 2022/9/16.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RepoViewModel {
+struct RepoManager {
   
   static let pageStart = 1
   
@@ -16,7 +16,7 @@ struct RepoViewModel {
   var repos: [Repo] = []
   
   mutating func update(by page: Int, repos: [Repo], isEnded: Bool) {
-    if page == RepoViewModel.pageStart {
+    if page == RepoManager.pageStart {
       self.repos = repos
     } else {
       self.repos.append(contentsOf: repos)
@@ -28,13 +28,13 @@ struct RepoViewModel {
   static func fetchStaredRepos(with name: String, page: Int) async -> Repos? {
     let router = GithubRouter.userStartedRepos(path: name, queryItems: ["page": "\(page)"])
     let result = await APIClient.shared.get(by: router)
-    switch result {
-    case .success(let d):
-      return DJDecoder<Repos>(dict:d).decode()
-    case .failure(let error):
-      print("fetchStaredRepos: \(error)")
-    }
-    return nil
+    return result.parse()
+  }
+  
+  static func fetchForkRepos(with name: String, page: Int) async -> Repos? {
+    let router = GithubRouter.forks(name, ["page": "\(page)"])
+    let result = await APIClient.shared.get(by: router)
+    return result.parse()
   }
   
   static func fetchRepo(with name: String) async -> Repo? {

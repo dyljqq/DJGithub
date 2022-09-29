@@ -43,7 +43,7 @@ class TabBarController: UITabBarController {
     let userName = ConfigManager.config.userName
     viewControllers = [
       setUp(for: DevelopersViewController(), tabTitle: "Developer", image: UIImage(named: "group"), selectedImage: UIImage(named: "people")),
-      setUp(for: UserStaredReposViewController(userName: userName), tabTitle: "Stars", image: UIImage(named: "star"), selectedImage: UIImage(named: "stared")),
+      setUp(for: UserStaredReposViewController(userRepoState: .star(userName)), tabTitle: "Stars", image: UIImage(named: "star"), selectedImage: UIImage(named: "stared")),
       setUp(for: UserViewController(name: userName), tabTitle: "User", image: UIImage(named: "user"), selectedImage: UIImage(named: "person"))
     ]
   }

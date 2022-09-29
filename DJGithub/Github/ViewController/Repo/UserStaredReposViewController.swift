@@ -7,6 +7,12 @@
 
 import UIKit
 
+enum UserRepoState {
+  case fork(String)
+  case star(String)
+  case unknown
+}
+
 class UserStaredReposViewController: UIViewController, NextPageLoadable {
   typealias DataType = Repo
   var firstPageIndex: Int {
@@ -15,10 +21,8 @@ class UserStaredReposViewController: UIViewController, NextPageLoadable {
   
   var dataSource: [Repo] = []
   var nextPageState: NextPageState = NextPageState()
-  
-  let userName: String
-
-  var viewModel = RepoViewModel()
+  let userRepoState: UserRepoState
+  var repo: Repo?
   
   lazy var tableView: UITableView = {
     let tableView: UITableView = UITableView()
@@ -30,13 +34,19 @@ class UserStaredReposViewController: UIViewController, NextPageLoadable {
     return tableView
   }()
   
-  init(userName: String) {
-    self.userName = userName
+  init(userRepoState: UserRepoState) {
+    self.userRepoState = userRepoState
+    super.init(nibName: nil, bundle: nil)
+  }
+  
+  init(with state: UserRepoState, repo: Repo? = nil) {
+    self.userRepoState = state
+    self.repo = repo
     super.init(nibName: nil, bundle: nil)
   }
   
   required init?(coder: NSCoder) {
-    self.userName = ""
+    self.userRepoState = .unknown
     super.init(coder: coder)
   }
   
@@ -96,7 +106,13 @@ extension UserStaredReposViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: UserStaredRepoCell.className, for: indexPath) as! UserStaredRepoCell
-    cell.render(with: dataSource[indexPath.row])
+    var r = dataSource[indexPath.row]
+    if case UserRepoState.fork = self.userRepoState,
+       let repo = self.repo,
+       r.language == nil {
+      r.language = repo.language
+    }
+    cell.render(with: r)
     cell.avatarImageViewTappedClosure = { [weak self] userName in
       guard let strongSelf = self else {
         return
@@ -124,10 +140,18 @@ extension UserStaredReposViewController {
   
   func performLoad(successHandler: @escaping ([Repo], Bool) -> (), failureHandler: @escaping (String) -> ()) {
     Task {
-      if let repos = await RepoViewModel.fetchStaredRepos(with: userName, page: nextPageState.start) {
+      let repos: Repos?
+      switch self.userRepoState {
+      case .star(let userName):
+        repos = await RepoManager.fetchStaredRepos(with: userName, page: nextPageState.start)
+      case .fork(let content):
+        repos = await RepoManager.fetchForkRepos(with: content, page: nextPageState.start)
+      default:
+        repos = nil
+      }
+      if let repos = repos {
         let languages = repos.items.map { Language(id: 0, language: $0.language ?? "Unknown", hex: UIColor.randomHex) }
         await LanguageManager.save(languages)
-        
         successHandler(repos.items, repos.items.count > 0)
       } else {
         failureHandler("fetch repos error.")

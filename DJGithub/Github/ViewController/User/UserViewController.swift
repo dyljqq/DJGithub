@@ -149,12 +149,12 @@ class UserViewController: UIViewController {
           return
         }
         group.addTask {
-          if let user = await UserViewModel.getUser(with: strongSelf.name) {
+          if let user = await UserManager.getUser(with: strongSelf.name) {
             await strongSelf.userSubject.send(user)
           }
         }
         group.addTask {
-          if let userContribution = await UserViewModel.fetchUserContributions(with: strongSelf.name) {
+          if let userContribution = await UserManager.fetchUserContributions(with: strongSelf.name) {
             await strongSelf.userContributionSubject.send(userContribution)
           }
         }
@@ -172,6 +172,10 @@ class UserViewController: UIViewController {
     userHeaderView.render(with: user)
     self.dataSource = [.blank, .user(.company), .user(.location), .user(.email), .user(.link)]
     tableView.reloadData()
+    
+    userHeaderView.tapCounterClosure = { [weak self] index in
+      
+    }
   }
   
   private func handle(with contribution: UserContribution) {

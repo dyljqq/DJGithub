@@ -27,6 +27,8 @@ class NormalHeaderView: UIView {
       return label
     }()
     
+    var tapClosure: (() -> ())? = nil
+    
     init() {
       super.init(frame: CGRect.zero)
       
@@ -45,6 +47,14 @@ class NormalHeaderView: UIView {
         make.centerX.equalTo(self)
         make.top.equalTo(self.snp.centerY)
       }
+      
+      self.isUserInteractionEnabled = true
+      let tap = UITapGestureRecognizer(target: self, action: #selector(tapAction))
+      self.addGestureRecognizer(tap)
+    }
+    
+    @objc func tapAction() {
+      tapClosure?()
     }
     
     func render(with count: Int, name: String) {
@@ -111,6 +121,8 @@ class NormalHeaderView: UIView {
     return CounterView()
   }()
   
+  var tapCounterClosure: ((Int) -> ())?
+  
   init() {
     super.init(frame: NormalHeaderView.defaultFrame)
     
@@ -175,6 +187,17 @@ class NormalHeaderView: UIView {
     followingView.snp.makeConstraints { make in
       make.width.height.top.equalTo(repoView)
       make.leading.equalTo(followersView.snp.trailing)
+    }
+    
+    self.isUserInteractionEnabled = true
+    repoView.tapClosure = { [weak self] in
+      self?.tapCounterClosure?(0)
+    }
+    followersView.tapClosure = { [weak self] in
+      self?.tapCounterClosure?(1)
+    }
+    followingView.tapClosure = { [weak self] in
+      self?.tapCounterClosure?(2)
     }
   }
     

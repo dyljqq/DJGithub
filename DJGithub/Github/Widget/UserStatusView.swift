@@ -170,9 +170,9 @@ extension UserStatusView {
         }
       case .star(let name):
         if active {
-          statusModel = await RepoViewModel.unStarRepo(with: name)
+          statusModel = await RepoManager.unStarRepo(with: name)
         } else {
-          statusModel = await RepoViewModel.starRepo(with: name)
+          statusModel = await RepoManager.starRepo(with: name)
         }
       case .unknown:
         statusModel = nil

@@ -15,7 +15,7 @@ extension UINavigationController {
   }
   
   func pushToUserStaredRepo(with userName: String) {
-    let vc = UserStaredReposViewController(userName: userName)
+    let vc = UserStaredReposViewController(userRepoState: .star(userName))
     self.pushViewController(vc, animated: true)
   }
   
@@ -31,6 +31,12 @@ extension UINavigationController {
     } else {
       vc = WebViewController(with: urlString ?? "")
     }
+    self.pushViewController(vc, animated: true)
+  }
+  
+  func pushToRepoInteract(type: RepoInteractViewController.RepoInteractType, repo: Repo? = nil) {
+    let vc = RepoInteractViewController(with: type)
+    vc.repo = repo
     self.pushViewController(vc, animated: true)
   }
 }
