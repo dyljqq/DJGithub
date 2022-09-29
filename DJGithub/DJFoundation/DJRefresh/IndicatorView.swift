@@ -9,26 +9,27 @@ import UIKit
 
 class IndicatorView: RefreshView {
 
-    lazy var arrowLayer: CAShapeLayer = {
-        let path = UIBezierPath()
-        path.move(to: CGPoint(x: 0, y: 8))
-        path.addLine(to: CGPoint(x: 0, y: -8))
-        path.move(to: CGPoint(x: 0, y: 8))
-        path.addLine(to: CGPoint(x: 5.66, y: 2.34))
-        path.move(to: CGPoint(x: 0, y: 8))
-        path.addLine(to: CGPoint(x: -5.66, y: 2.34))
+  lazy var arrowLayer: CAShapeLayer = {
+    let path = UIBezierPath()
+    path.move(to: CGPoint(x: 0, y: 8))
+    path.addLine(to: CGPoint(x: 0, y: -8))
+    path.move(to: CGPoint(x: 0, y: 8))
+    path.addLine(to: CGPoint(x: 5.66, y: 2.34))
+    path.move(to: CGPoint(x: 0, y: 8))
+    path.addLine(to: CGPoint(x: -5.66, y: 2.34))
 
-        let layer = CAShapeLayer()
-        layer.path = path.cgPath
-        layer.strokeColor = UIColor.black.withAlphaComponent(0.8).cgColor
-        layer.lineWidth = 2
-        layer.lineCap = .round
-        return layer
-    }()
+    let layer = CAShapeLayer()
+    layer.path = path.cgPath
+    layer.strokeColor = UIColor.black.withAlphaComponent(0.8).cgColor
+    layer.lineWidth = 2
+    layer.lineCap = .round
+    return layer
+  }()
 
   lazy var indicatorCookieterminatorView: IndicatorCookieTerminatorView = {
     return IndicatorCookieTerminatorView(with: 40, tintColor: UIColor.black.withAlphaComponent(0.8))
   }()
+
     let activityIndicator = UIActivityIndicatorView(style: .medium)
 
     private let isHeader: Bool
@@ -60,7 +61,7 @@ class IndicatorView: RefreshView {
     }
 
     override func didUpdateState(_ isRefreshing: Bool) {
-      arrowLayer.isHidden = isRefreshing
+      arrowLayer.isHidden = true
       if isHeader {
         isRefreshing ? indicatorCookieterminatorView.startAnimation() : indicatorCookieterminatorView.stopAnimation()
       } else {
@@ -69,12 +70,16 @@ class IndicatorView: RefreshView {
     }
 
     override func didUpdateProgress(_ progress: CGFloat) {
-      self.arrowLayer.isHidden = false
+      if case RefreshState.end = self.refreshState {
+        arrowLayer.isHidden = true
+      } else {
+        arrowLayer.isHidden = false
+      }
       let rotation = CATransform3DMakeRotation(CGFloat.pi, 0, 0, 1)
       if isHeader {
-          arrowLayer.transform = progress == 1 ? rotation : CATransform3DIdentity
+        arrowLayer.transform = progress == 1 ? rotation : CATransform3DIdentity
       } else {
-          arrowLayer.transform = progress == 1 ? CATransform3DIdentity : rotation
+        arrowLayer.transform = progress == 1 ? CATransform3DIdentity : rotation
       }
     }
 

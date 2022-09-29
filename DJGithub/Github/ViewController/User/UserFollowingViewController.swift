@@ -7,6 +7,26 @@
 
 import UIKit
 
+enum UserFollowingType {
+  case watches(String)
+  case star(String)
+  case contributor(String)
+  case following(String)
+  case followers(String)
+  case unknown
+  
+  var title: String {
+    switch self {
+    case .watches: return "Watches"
+    case .star: return "Stargazers"
+    case .contributor: return "Contributor"
+    case .following: return "Following"
+    case .followers: return "Followers"
+    case .unknown: return ""
+    }
+  }
+}
+
 class UserFollowingViewController: UIViewController, NextPageLoadable {
 
   var nextPageState: NextPageState = NextPageState()
@@ -20,6 +40,21 @@ class UserFollowingViewController: UIViewController, NextPageLoadable {
   }
   
   let pageSize = 30
+  let type: UserFollowingType
+  
+  init(with type: UserFollowingType) {
+    self.type = type
+    super.init(nibName: nil, bundle: nil)
+  }
+  
+  init() {
+    self.type = .following("")
+    super.init(nibName: nil, bundle: nil)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
   
   lazy var tableView: UITableView = {
     let tableView = UITableView()
@@ -94,26 +129,8 @@ extension UserFollowingViewController: UITableViewDelegate, UITableViewDataSourc
       let user = strongSelf.dataSource[indexPath.row]
       strongSelf.navigationController?.pushToUser(with: user.login)
     }
-    cell.followClosure = { [weak self] in
-      guard let strongSelf = self else {
-        return
-      }
-      Task {
-        let user = strongSelf.dataSource[indexPath.row]
-        cell.updateFollowStatus(.loading, isFollowing: user.isFollowing)
-        if user.isFollowing {
-          let _ = await UserManager.unFollowUser(with: user.login)
-        } else {
-          let _ =  await UserManager.followUser(with: user.login)
-        }
-        
-        if let userStatus = await UserManager.checkFollowStatus(with: user.login) {
-          var user = user
-          user.update(isFollowing: userStatus.isStatus204)
-          strongSelf.dataSource[indexPath.row] = user
-          strongSelf.tableView.reloadData()
-        }
-      }
+    cell.followClosure = { [weak cell] in
+      cell?.followingView.activeAction()
     }
     return cell
   }
@@ -134,7 +151,21 @@ extension UserFollowingViewController {
   
   func performLoad(successHandler: @escaping ([UserFollowing], Bool) -> (), failureHandler: @escaping (String) -> ()) {
     Task {
-      let users = await UserManager.getUserFollowing(with: nextPageState.start)
+      let users: [UserFollowing]
+      switch type {
+      case .following(let name):
+        users = await UserManager.getUserFollowing(with: name, page: nextPageState.start)
+      case .star(let repoName):
+        users = await UserManager.fetch(by: .stargazers(repoName, ["page": "\(nextPageState.start)"]))
+      case .contributor(let repoName):
+        users = await UserManager.fetch(by: .contributors(repoName, ["page": "\(nextPageState.start)"]))
+      case .watches(let repoName):
+        users = await UserManager.fetch(by: .subscribers(repoName, ["page": "\(nextPageState.start)"]))
+      case .followers(let name):
+        users = await UserManager.getUserFollowers(with: name, page: nextPageState.start)
+      case .unknown:
+        users = []
+      }
       successHandler(users, users.count == pageSize)
     }
   }

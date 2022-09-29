@@ -9,15 +9,18 @@ import Foundation
 
 struct ConfigManager {
   static let shared = ConfigManager()
+  static var config: Config = Config()
   
-  static var config: Config?
-  
-  static func loadConfig() {
+  static func loadConfig(completionHandler: ((Config) -> ())? = nil) {
     DispatchQueue.global().async {
       let config: Config = loadBundleJSONFile("config.json")
       DispatchQueue.main.async {
         ConfigManager.config = config
       }
     }
+  }
+  
+  static func checkOwner(by userName: String) -> Bool {
+    return userName == config.userName
   }
 }

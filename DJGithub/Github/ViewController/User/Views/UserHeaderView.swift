@@ -23,5 +23,4 @@ class UserHeaderView: NormalHeaderView {
     followersView.render(with: model.followers, name: "Followers")
     followingView.render(with: model.following, name: "Following")
   }
-
 }

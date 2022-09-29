@@ -24,13 +24,21 @@ class NavigationController: UINavigationController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    let backButtonAppearance = UIBarButtonItemAppearance(style: .plain)
+    backButtonAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.clear]
+    
     let barApp = UINavigationBarAppearance()
     barApp.backgroundEffect = UIBlurEffect(style: .regular)
+    barApp.backButtonAppearance = backButtonAppearance
     navigationBar.scrollEdgeAppearance = barApp
+
+    let barAppearace = UIBarButtonItem.appearance()
+    barAppearace.setBackButtonTitlePositionAdjustment(UIOffset(horizontal: 0, vertical: -60), for:UIBarMetrics.default)
+    
   }
   
   override func pushViewController(_ viewController: UIViewController, animated: Bool) {
-    if self.viewControllers.count > 1 {
+    if self.children.count == 1 {
       viewController.hidesBottomBarWhenPushed = true
     }
     super.pushViewController(viewController, animated: animated)

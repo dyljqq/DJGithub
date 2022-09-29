@@ -17,10 +17,17 @@ enum GithubRouter: Router {
   case repoReadme(String)
   case starRepo(String)
   case unStarRepo(String)
-  case userFollowing(queryItems: [String: String])
+  case userFollowing(String, queryItems: [String: String])
   case followUser(String)
   case unfollowUser(String)
   case checkFollowStatus(String)
+  case stargazers(String, [String: String])
+  case contributors(String, [String: String])
+  case subscribers(String, [String: String])
+  case forks(String, [String: String])
+  case userRepos(String, [String: String])
+  case userFollowers(String, [String: String])
+  case userSubscription(String, [String: String])
   
   var baseURLString: String {
     return "https://api.github.com/"
@@ -47,10 +54,17 @@ enum GithubRouter: Router {
     case .repoReadme(let name): return "repos/\(name)/readme"
     case .starRepo(let name): return "user/starred/\(name)"
     case .unStarRepo(let name): return "user/starred/\(name)"
-    case .userFollowing: return "user/following"
+    case .userFollowing(let name, _): return "users/\(name)/following"
     case .followUser(let name): return "user/following/\(name)"
     case .unfollowUser(let name): return "user/following/\(name)"
     case .checkFollowStatus(let name): return "user/following/\(name)"
+    case .stargazers(let name, _): return "repos/\(name)/stargazers"
+    case .subscribers(let name, _): return "repos/\(name)/subscribers"
+    case .contributors(let name, _): return "repos/\(name)/contributors"
+    case .forks(let name, _): return "repos/\(name)/forks"
+    case .userRepos(let name, _): return "users/\(name)/repos"
+    case .userFollowers(let name, _): return "users/\(name)/followers"
+    case .userSubscription(let name, _): return "users/\(name)/subscriptions"
     }
   }
   
@@ -74,15 +88,21 @@ enum GithubRouter: Router {
     var queryItems: [String: String] = [:]
     
     switch self {
-    case .userStartedRepos(_, let items):
-      queryItems = items
-    case .userFollowing(let items):
+    case .userStartedRepos(_, let items),
+        .userFollowing(_, let items),
+        .contributors(_, let items),
+        .subscribers(_, let items),
+        .stargazers(_, let items),
+        .userRepos(_, let items),
+        .userFollowers(_, let items),
+        .userSubscription(_, let items),
+        .forks(_, let items):
       queryItems = items
     default:
       break
     }
     var request = configURLRequest(with: queryItems)
-    request?.setValue(ConfigManager.config?.authorization, forHTTPHeaderField: "Authorization")
+    request?.setValue(ConfigManager.config.authorization, forHTTPHeaderField: "Authorization")
     if !parameters.isEmpty {
       switch method {
       case .POST: request?.httpBody = try? JSONSerialization.data(withJSONObject: parameters)

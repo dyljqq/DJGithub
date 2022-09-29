@@ -8,6 +8,14 @@
 import Foundation
 
 struct Config: Decodable {
-  var authorization: String
-  var userName: String
+  var authorization: String = ""
+  let userName: String = "dyljqq"
+  
+  init() {
+    
+  }
+  
+  enum CodingKeys: String, CodingKey {
+    case authorization
+  }
 }

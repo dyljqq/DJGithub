@@ -29,7 +29,7 @@ class DevelopersViewController: UIViewController {
   
   lazy var vcs: [UIViewController] =  {
     return [
-      UserFollowingViewController(),
+      UserFollowingViewController(with: .following(ConfigManager.config.userName)),
       LocalDevelopersViewController()
     ]
   }()

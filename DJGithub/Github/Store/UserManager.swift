@@ -7,6 +7,10 @@
 
 import Foundation
 
+struct UserFollowings: Decodable {
+  var items: [UserFollowing]
+}
+
 struct UserFollowing: Decodable {
   var id: Int
   var login: String
@@ -46,23 +50,28 @@ struct UserManager {
    type = User;
    url = "https://api.github.com/users/rentzsch";
    */
-  static func getUserFollowing(with page: Int = 1) async -> [UserFollowing] {
-    let router = GithubRouter.userFollowing(queryItems: ["page": "\(page)"])
+  static func getUserFollowing(with userName: String, page: Int = 1) async -> [UserFollowing] {
+    let router = GithubRouter.userFollowing(userName, queryItems: ["page": "\(page)"])
     let result = await APIClient.shared.get(by: router)
-    switch result {
-    case.success(let d):
-      if let items = d["items"] as? [Any] {
-        let users = DJDecoder<[UserFollowing]>(value: items).decode() ?? []
-        return users.map { user in
-          var user = user
-          user.update(isFollowing: true)
-          return user
-        }
-      }
-    case .failure:
-      break
+    let users: UserFollowings? = result.parse()
+    return (users?.items ?? []).map { user in
+      var user = user
+      user.update(isFollowing: true)
+      return user
     }
-    return []
+  }
+  
+  static func getUserFollowers(with userName: String, page: Int = 1) async -> [UserFollowing] {
+    let router = GithubRouter.userFollowers(userName, ["page": "\(page)"])
+    let result = await APIClient.shared.get(by: router)
+    let users: UserFollowings? = result.parse()
+    return users?.items ?? []
+  }
+  
+  static func getUserSubscription(with userName: String, page: Int = 1) async -> Repos? {
+    let router = GithubRouter.userSubscription(userName, ["page": "\(page)"])
+    let result = await APIClient.shared.get(by: router)
+    return result.parse()
   }
   
   static func followUser(with userName: String) async -> StatusModel? {
@@ -98,6 +107,58 @@ struct UserManager {
         continuation.resume(returning: groups)
       }
     }
+  }
+  
+  static func fetch(by router: GithubRouter) async -> [UserFollowing] {
+    let result = await APIClient.shared.get(by: router)
+    let users: UserFollowings? = result.parse()
+    return users?.items ?? []
+  }
+  
+  static func getUser(with name: String) async -> User? {
+    let router = GithubRouter.userInfo(name)
+    let result = await APIClient.shared.get(by: router)
+    return result.parse()
+  }
+  
+  static func fetchUserContributions(with name: String) async -> UserContribution? {
+    let query = """
+query {
+user(login: "\(name)") {
+  name
+  contributionsCollection {
+    contributionCalendar {
+      colors
+      totalContributions
+      weeks {
+        contributionDays {
+          color
+          contributionCount
+          date
+          weekday
+        }
+        firstDay
+      }
+    }
+  }
+}
+}
+"""
+    let router = GithubRouter.userContribution(parameters: ["query": query])
+    let result = await APIClient.shared.get(by: router)
+    switch result {
+    case .success(let d):
+      guard let data = d["data"] as? [String: Any],
+            let user = data["user"] as? [String: Any],
+            let contributionsCollection = user["contributionsCollection"] as? [String: Any],
+            let contributionCalendar = contributionsCollection["contributionCalendar"] as? [String: Any] else {
+        return nil
+      }
+      return UserContribution(with: contributionCalendar)
+    case .failure(let error):
+      print("fetchUserContributions error: \(error)")
+    }
+    return nil
   }
   
 }

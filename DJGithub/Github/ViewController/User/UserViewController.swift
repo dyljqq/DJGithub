@@ -66,6 +66,8 @@ class UserViewController: UIViewController {
 
   lazy var followStatusView: UserStatusView = {
     let view = UserStatusView(layoutLay: .normal)
+    view.type = .follow(self.name)
+    view.isHidden = true
     return view
   }()
   
@@ -89,6 +91,7 @@ class UserViewController: UIViewController {
   let name: String
   
   var user: User?
+  var isFollowing: Bool = false
   
   var subscriptions: [AnyCancellable] = []
   var userSubject = PassthroughSubject<User, Never>()
@@ -109,15 +112,12 @@ class UserViewController: UIViewController {
     super.viewDidLoad()
     
     setUp()
-    
-    Task {
-      await UserManager.getUserFollowing()
-    }
   }
   
   private func setUp() {
     self.navigationItem.title = "User"
-    view.backgroundColor = UIColorFromRGB(0xf5f5f5)
+    view.backgroundColor = .backgroundColor
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.followStatusView)
     
     view.addSubview(tableView)
     tableView.snp.makeConstraints { make in
@@ -146,27 +146,37 @@ class UserViewController: UIViewController {
           return
         }
         group.addTask {
-          if let user = await UserViewModel.getUser(with: strongSelf.name) {
+          if let user = await UserManager.getUser(with: strongSelf.name) {
             await strongSelf.userSubject.send(user)
           }
         }
         group.addTask {
-          if let userContribution = await UserViewModel.fetchUserContributions(with: strongSelf.name) {
+          if let userContribution = await UserManager.fetchUserContributions(with: strongSelf.name) {
             await strongSelf.userContributionSubject.send(userContribution)
           }
         }
       }
       self.view.stopLoading()
     }
+    
+    configNavigationRightButton()
   }
   
   private func handle(with user: User) {
     self.user = user
     
+    self.followStatusView.isHidden = ConfigManager.checkOwner(by: user.login)
     self.navigationItem.title = user.name
     userHeaderView.render(with: user)
     self.dataSource = [.blank, .user(.company), .user(.location), .user(.email), .user(.link)]
     tableView.reloadData()
+    
+    userHeaderView.tapCounterClosure = { [weak self] index in
+      guard let strongSelf = self else { return }
+      if let user = strongSelf.user {
+        strongSelf.navigationController?.pushToUserInteract(with: user, selectedIndex: index)
+      }
+    }
   }
   
   private func handle(with contribution: UserContribution) {
@@ -177,7 +187,13 @@ class UserViewController: UIViewController {
   
   private func configNavigationRightButton() {
     Task {
-      let status = await UserManager.checkFollowStatus(with: "dyljqq")
+      if let status = await UserManager.checkFollowStatus(with: self.name) {
+        self.followStatusView.active = status.isStatus204
+        followStatusView.touchClosure = { [weak self] in
+          guard let strongSelf = self else { return }
+          strongSelf.followStatusView.activeAction()
+        }
+      }
     }
   }
 
