@@ -17,14 +17,10 @@ struct UserFollowing: Decodable {
   var url: String
   var avatarUrl: String
   
-  var isFollowing: Bool = false
+  var followingStatus: UserFollowingStatus = .unknown
   
   enum CodingKeys: String, CodingKey {
     case id, login, url, avatarUrl
-  }
-  
-  mutating func update(isFollowing: Bool) {
-    self.isFollowing = isFollowing
   }
 }
 
@@ -50,15 +46,11 @@ struct UserManager {
    type = User;
    url = "https://api.github.com/users/rentzsch";
    */
-  static func getUserFollowing(with userName: String, page: Int = 1) async -> [UserFollowing] {
-    let router = GithubRouter.userFollowing(userName, queryItems: ["page": "\(page)"])
+  static func getUserFollowing(with userName: String, page: Int = 1, perpage: Int = 30) async -> [UserFollowing] {
+    let router = GithubRouter.userFollowing(userName, queryItems: ["page": "\(page)", "per_page": "\(perpage)"])
     let result = await APIClient.shared.get(by: router)
     let users: UserFollowings? = result.parse()
-    return (users?.items ?? []).map { user in
-      var user = user
-      user.update(isFollowing: true)
-      return user
-    }
+    return users?.items ?? []
   }
   
   static func getUserFollowers(with userName: String, page: Int = 1) async -> [UserFollowing] {
@@ -77,13 +69,23 @@ struct UserManager {
   static func followUser(with userName: String) async -> StatusModel? {
     let router = GithubRouter.followUser(userName)
     let result = await APIClient.shared.get(by: router)
-    return result.parse()
+    let status: StatusModel? = result.parse()
+    
+    // sync follow status
+    if let status = status, status.isStatus204 {
+      await UserFollowingManager.shared.update(with: userName, following: true)
+    }
+    return status
   }
   
   static func unFollowUser(with userName: String) async -> StatusModel? {
     let router = GithubRouter.unfollowUser(userName)
     let result = await APIClient.shared.get(by: router)
-    return result.parse()
+    let status: StatusModel? = result.parse()
+    if let status = status, status.isStatus204 {
+      await UserFollowingManager.shared.update(with: userName, following: false)
+    }
+    return status
   }
   
   static func checkFollowStatus(with userName: String) async -> StatusModel? {

@@ -92,6 +92,7 @@ class RepoInteractViewController: UIViewController {
   }()
   
   let types: [RepoInteractType]
+  var needUpdateHeader: Bool = true
   
   init(with types: [RepoInteractType], selectedIndex: Int = 0) {
     self.types = types
@@ -134,6 +135,7 @@ class RepoInteractViewController: UIViewController {
     
     headerSegmentView.selectedClosure = { [weak self] index in
       guard let strongSelf = self else { return }
+      strongSelf.needUpdateHeader = false
       strongSelf.scrollView.setContentOffset(
         CGPoint(x: strongSelf.scrollView.frame.width * CGFloat(index), y: 0), animated: true)
     }
@@ -161,8 +163,12 @@ class RepoInteractViewController: UIViewController {
 extension RepoInteractViewController: UIScrollViewDelegate {  
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
     let page = Int(scrollView.contentOffset.x / scrollView.bounds.width + 0.5)
-    if page != self.headerSegmentView.selectedIndex {
+    if needUpdateHeader && page != self.headerSegmentView.selectedIndex {
       self.headerSegmentView.selectedIndex = page
     }
+  }
+  
+  func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    needUpdateHeader = true
   }
 }

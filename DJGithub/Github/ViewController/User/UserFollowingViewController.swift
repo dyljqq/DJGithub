@@ -91,6 +91,12 @@ class UserFollowingViewController: UIViewController, NextPageLoadable {
       strongSelf.nextPageState.update(start: strongSelf.firstPageIndex, hasNext: true, isLoading: false)
       strongSelf.loadData(start: strongSelf.nextPageState.start)
     }
+    tableView.addFooter { [weak self] in
+      guard let strongSelf = self else {
+        return
+      }
+      strongSelf.loadData(start: strongSelf.nextPageState.start + 1)
+    }
     loadData(start: nextPageState.start)
   }
   
@@ -102,13 +108,6 @@ class UserFollowingViewController: UIViewController, NextPageLoadable {
       strongSelf.view.stopLoading()
       strongSelf.tableView.dj_endRefresh()
       strongSelf.tableView.reloadData()
-      
-      strongSelf.tableView.addFooter { [weak self] in
-        guard let strongSelf = self else {
-          return
-        }
-        strongSelf.loadData(start: strongSelf.nextPageState.start + 1)
-      }
     }
   }
 

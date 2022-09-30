@@ -27,7 +27,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     ConfigManager.loadConfig()
     
     Task {
-      await LanguageManager.loadLanguageMapping()
+      await withThrowingTaskGroup(of: Void.self) { group in
+        group.addTask {
+          await LanguageManager.loadLanguageMapping()
+        }
+        group.addTask {
+          await UserFollowingManager.shared.fetchUserFollowingStatus()
+        }
+      }
     }
   }
 
