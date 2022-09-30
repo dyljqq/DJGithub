@@ -57,6 +57,8 @@ class UserStatusView: UIView {
     setUp()
   }
   
+  var userFollowing: UserFollowing?
+  
   func render(with statusType: UserStatusType, content: String = "", widthClosure: ((CGFloat) -> ())? = nil) {
     if case .loading = statusType {
       activityIndicatorView.isHidden = false
@@ -72,6 +74,7 @@ class UserStatusView: UIView {
     
     let font: UIFont?
     var fontSize: CGFloat = 14
+    print("statusType: \(statusType)")
     switch statusType {
     case .active:
       font = UIFont.systemFont(ofSize: fontSize, weight: .bold)
@@ -145,7 +148,6 @@ class UserStatusView: UIView {
 
 private var activeKey: UInt8 = 0
 extension UserStatusView {
-  
   var active: Bool {
     get {
       return objc_getAssociatedObject(self, &activeKey) as? Bool ?? false
@@ -180,6 +182,41 @@ extension UserStatusView {
       
       if let statusModel = statusModel, statusModel.isStatus204 {
         active = !active
+      }
+    }
+  }
+}
+
+class FollowUserStatusView: UserStatusView {
+  
+  override init(layoutLay: UserStatusView.LayoutWay = .auto) {
+    super.init(layoutLay: layoutLay)
+    
+    self.isHidden = true
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
+  func render(with user: UserFollowing) {
+    self.userFollowing = user
+    self.type = .follow(user.login)
+    Task {
+      let userName = user.login
+      var status = await UserFollowingManager.shared.followingStatus(with: userName)
+      if case UserFollowingStatus.unknown = status {
+        status = await UserFollowingManager.shared.update(with: userName)
+      }
+      switch status {
+      case .unfollow:
+        self.isHidden = false
+        self.active = false
+      case .following:
+        self.isHidden = false
+        self.active = true
+      case .unknown:
+        self.isHidden = true
       }
     }
   }

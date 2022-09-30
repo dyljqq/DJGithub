@@ -38,8 +38,8 @@ class SimpleUserCell: UITableViewCell {
     return label
   }()
   
-  lazy var followingView: UserStatusView = {
-    let view = UserStatusView()
+  lazy var followingView: FollowUserStatusView = {
+    let view = FollowUserStatusView()
     return view
   }()
   
@@ -53,8 +53,7 @@ class SimpleUserCell: UITableViewCell {
     loginLabel.text = user.login
     urlLabel.text = user.url
     
-    self.followingView.type = .follow(user.login)
-    self.followingView.active = user.isFollowing
+    self.followingView.render(with: user)
   }
   
   private func setUp() {

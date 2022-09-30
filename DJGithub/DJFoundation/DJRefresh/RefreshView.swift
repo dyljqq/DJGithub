@@ -149,7 +149,7 @@ class RefreshView: UIView, RefreshStatus {
   
   func beginRefreshing() {
     refreshState = .begin
-    guard let scrollView = scrollView else {
+    guard let scrollView = scrollView, !self.isHidden else {
       return
     }
     

@@ -88,6 +88,7 @@
 		73B7905828E541BE002A9CDC /* Bool+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7905728E541BE002A9CDC /* Bool+Ext.swift */; };
 		73B7905A28E56003002A9CDC /* RepoInteractViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7905928E56003002A9CDC /* RepoInteractViewController.swift */; };
 		73B7905C28E59104002A9CDC /* HeaderSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7905B28E59104002A9CDC /* HeaderSegmentView.swift */; };
+		73B7905E28E6D8EB002A9CDC /* UserFollowingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7905D28E6D8EB002A9CDC /* UserFollowingManager.swift */; };
 		73C598C528D85EF100DA86A1 /* PopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C598C428D85EF100DA86A1 /* PopoverView.swift */; };
 		73C598C728D8617800DA86A1 /* UIApplication+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C598C628D8617800DA86A1 /* UIApplication+Ext.swift */; };
 		73C598CD28D9E6A100DA86A1 /* URL+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C598CC28D9E6A100DA86A1 /* URL+Ext.swift */; };
@@ -196,6 +197,7 @@
 		73B7905728E541BE002A9CDC /* Bool+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+Ext.swift"; sourceTree = "<group>"; };
 		73B7905928E56003002A9CDC /* RepoInteractViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoInteractViewController.swift; sourceTree = "<group>"; };
 		73B7905B28E59104002A9CDC /* HeaderSegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderSegmentView.swift; sourceTree = "<group>"; };
+		73B7905D28E6D8EB002A9CDC /* UserFollowingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFollowingManager.swift; sourceTree = "<group>"; };
 		73C598C428D85EF100DA86A1 /* PopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverView.swift; sourceTree = "<group>"; };
 		73C598C628D8617800DA86A1 /* UIApplication+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Ext.swift"; sourceTree = "<group>"; };
 		73C598CC28D9E6A100DA86A1 /* URL+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Ext.swift"; sourceTree = "<group>"; };
@@ -408,6 +410,7 @@
 			children = (
 				73AACB5F28D4BE4F0072B1DF /* RepoManager.swift */,
 				73101D3E28E3077C00DB5423 /* UserManager.swift */,
+				73B7905D28E6D8EB002A9CDC /* UserFollowingManager.swift */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -748,6 +751,7 @@
 				73AACB4328D42C1B0072B1DF /* UINavigation+Router.swift in Sources */,
 				73B7904C28E5298D002A9CDC /* LocalDeveloperCell.swift in Sources */,
 				73101D4928E47FB100DB5423 /* StatusModel.swift in Sources */,
+				73B7905E28E6D8EB002A9CDC /* UserFollowingManager.swift in Sources */,
 				7341DCD228E03C6A009A3A3C /* RepoViewController.swift in Sources */,
 				73AACB7928D5BBF50072B1DF /* DBManage.swift in Sources */,
 				73AACB5028D4618F0072B1DF /* UIView+Ext.swift in Sources */,
