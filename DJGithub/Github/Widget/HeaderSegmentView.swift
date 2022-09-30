@@ -166,7 +166,6 @@ extension HeaderSegmentView: UICollectionViewDelegateFlowLayout, UICollectionVie
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     collectionView.deselectItem(at: indexPath, animated: true)
     self.selectedIndex = indexPath.row
-    
     selectedClosure?(indexPath.row)
   }
   
