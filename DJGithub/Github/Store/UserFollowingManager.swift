@@ -16,7 +16,7 @@ enum UserFollowingStatus {
 actor UserFollowingHolder {
   var mapping = [String: UserFollowingStatus]()
   
-  func batchUpdate(with users: [User]) {
+  func batchUpdate(with users: [UserFollowing]) {
     Task {
       for user in users {
         if let followingStatus = await UserManager.checkFollowStatus(with: user.login) {
@@ -63,11 +63,11 @@ struct UserFollowingManager {
     await holder.update(with: userName, following: following)
   }
   
-  func update(with user: User) async {
+  func update(with user: UserFollowing) async {
     await holder.batchUpdate(with: [user])
   }
   
-  func batchUpdate(with users: [User]) async {
+  func batchUpdate(with users: [UserFollowing]) async {
     await holder.batchUpdate(with: users)
   }
   
@@ -77,6 +77,22 @@ struct UserFollowingManager {
   
   func update(with userName: String) async -> UserFollowingStatus {
     return await self.holder.update(with: userName)
+  }
+  
+  func fetchUserFollowingStatus(total: Int = 1000) async {
+    var page = 1
+    let perpage = 100
+    let totalPage = total / perpage
+    while page <= totalPage {
+      let users = await UserManager.getUserFollowing(with: ConfigManager.config.userName, page: page, perpage: 100)
+      var hash: [String: Bool] = [:]
+      users.forEach { hash[$0.login] = true }
+      await self.holder.batchUpdate(with: hash)
+      if users.count < perpage {
+        return
+      }
+      page += 1
+    }
   }
   
 }

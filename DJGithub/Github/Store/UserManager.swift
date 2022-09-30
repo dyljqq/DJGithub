@@ -46,8 +46,8 @@ struct UserManager {
    type = User;
    url = "https://api.github.com/users/rentzsch";
    */
-  static func getUserFollowing(with userName: String, page: Int = 1) async -> [UserFollowing] {
-    let router = GithubRouter.userFollowing(userName, queryItems: ["page": "\(page)"])
+  static func getUserFollowing(with userName: String, page: Int = 1, perpage: Int = 30) async -> [UserFollowing] {
+    let router = GithubRouter.userFollowing(userName, queryItems: ["page": "\(page)", "per_page": "\(perpage)"])
     let result = await APIClient.shared.get(by: router)
     let users: UserFollowings? = result.parse()
     return users?.items ?? []

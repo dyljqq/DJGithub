@@ -74,7 +74,6 @@ class UserStatusView: UIView {
     
     let font: UIFont?
     var fontSize: CGFloat = 14
-    print("statusType: \(statusType)")
     switch statusType {
     case .active:
       font = UIFont.systemFont(ofSize: fontSize, weight: .bold)

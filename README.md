@@ -69,6 +69,20 @@ enum UserStatusViewType {
 2. 添加Repo的watches，stars，forks的列表页。剥离&抽象&复用
 3. 添加User的following，followers等列表页
 
+2022-09-30
+
+1. 添加用户follow状态。具体的方案如下:
+
+```
+1. App启动时默认加载一千条用户的follow状态，并通过UserFollowingManager管理对应的缓存。
+2. 当加载用户列表的时候，异步加载用户是否被follow。
+	* 从内存中获取
+	* 如果不在内存中，则异步加载获取
+3. 当用户follow跟unfollow操作的时候，去修改缓存数据。
+```
+
+这个方案有点问题，就是当用户在其他的App进行follow跟unfollow的操作时，该App无法做及时的修改。
+
 ### TODO
 
 1. 继续基础界面的搭建
