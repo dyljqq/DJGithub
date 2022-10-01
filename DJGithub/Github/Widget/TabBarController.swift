@@ -44,6 +44,7 @@ class TabBarController: UITabBarController {
     viewControllers = [
       setUp(for: DevelopersViewController(), tabTitle: "Developer", image: UIImage(named: "group"), selectedImage: UIImage(named: "people")),
       setUp(for: UserStaredReposViewController(userRepoState: .star(userName)), tabTitle: "Stars", image: UIImage(named: "star"), selectedImage: UIImage(named: "stared")),
+      setUp(for: SearchViewController(), tabTitle: "Search", image: UIImage(named: "find"), selectedImage: UIImage(named: "search")),
       setUp(for: UserViewController(name: userName), tabTitle: "User", image: UIImage(named: "user"), selectedImage: UIImage(named: "person"))
     ]
   }

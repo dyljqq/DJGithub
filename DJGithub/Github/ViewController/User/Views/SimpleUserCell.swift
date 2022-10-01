@@ -53,7 +53,12 @@ class SimpleUserCell: UITableViewCell {
     loginLabel.text = user.login
     urlLabel.text = user.url
     
-    self.followingView.render(with: user)
+    if !ConfigManager.checkOwner(by: user.login) {
+      self.followingView.isHidden = false
+      self.followingView.render(with: user)
+    } else {
+      self.followingView.isHidden = true
+    }
   }
   
   private func setUp() {

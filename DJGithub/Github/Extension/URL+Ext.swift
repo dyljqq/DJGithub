@@ -12,7 +12,7 @@ extension URL {
     guard !queryItems.isEmpty, var urlComponents = URLComponents(url: self, resolvingAgainstBaseURL: true) else {
       return self
     }
-    urlComponents.queryItems = urlComponents.queryItems ?? [] + queryItems.map { URLQueryItem(name: $0, value: $1) }
+    urlComponents.queryItems = urlComponents.queryItems ?? [] + queryItems.map { URLQueryItem(name: $0, value: $1.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)) }
     return urlComponents.url != nil ? urlComponents.url! : self
   }
 }
