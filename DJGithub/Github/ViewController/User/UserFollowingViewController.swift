@@ -42,7 +42,7 @@ class UserFollowingViewController: UIViewController, NextPageLoadable {
   }
   
   let pageSize = 30
-  let type: UserFollowingType
+  var type: UserFollowingType = .unknown
   
   init(with type: UserFollowingType) {
     self.type = type
