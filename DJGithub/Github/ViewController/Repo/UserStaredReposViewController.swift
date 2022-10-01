@@ -12,6 +12,7 @@ enum UserRepoState {
   case star(String)
   case repos(String)
   case subscription(String)
+  case search(String)
   case unknown
 }
 
@@ -23,7 +24,7 @@ class UserStaredReposViewController: UIViewController, NextPageLoadable {
   
   var dataSource: [Repo] = []
   var nextPageState: NextPageState = NextPageState()
-  let userRepoState: UserRepoState
+  var userRepoState: UserRepoState
   var repo: Repo?
   
   lazy var tableView: UITableView = {
@@ -142,26 +143,28 @@ extension UserStaredReposViewController {
   
   func performLoad(successHandler: @escaping ([Repo], Bool) -> (), failureHandler: @escaping (String) -> ()) {
     Task {
-      let repos: Repos?
+      let repos: [Repo]
       switch self.userRepoState {
       case .star(let userName):
-        repos = await RepoManager.fetchStaredRepos(with: userName, page: nextPageState.start)
+        repos = await RepoManager.fetchStaredRepos(with: userName, page: nextPageState.start)?.items ?? []
       case .fork(let content):
-        repos = await RepoManager.fetchForkRepos(with: content, page: nextPageState.start)
+        repos = await RepoManager.fetchForkRepos(with: content, page: nextPageState.start)?.items ?? []
       case .repos(let content):
-        repos = await RepoManager.fetchUserRepos(with: content, page: nextPageState.start)
+        repos = await RepoManager.fetchUserRepos(with: content, page: nextPageState.start)?.items ?? []
       case .subscription(let userName):
-        repos = await UserManager.getUserSubscription(with: userName, page: nextPageState.start)
+        repos = await UserManager.getUserSubscription(with: userName, page: nextPageState.start)?.items ?? []
+      case .search(let query):
+        if let r = await SearchManager.searchRepos(with: query, page: nextPageState.start) {
+          repos = r.items
+        } else {
+          repos = []
+        }
       default:
-        repos = nil
+        repos = []
       }
-      if let repos = repos {
-        let languages = repos.items.map { Language(id: 0, language: $0.language ?? "Unknown", hex: UIColor.randomHex) }
-        await LanguageManager.save(languages)
-        successHandler(repos.items, repos.items.count > 0)
-      } else {
-        failureHandler("fetch repos error.")
-      }
+      let languages = repos.map { Language(id: 0, language: $0.language ?? "Unknown", hex: UIColor.randomHex) }
+      await LanguageManager.save(languages)
+      successHandler(repos, repos.count > 0)
     }
   }
   
