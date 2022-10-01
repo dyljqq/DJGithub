@@ -89,6 +89,9 @@
 		73B7905A28E56003002A9CDC /* RepoInteractViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7905928E56003002A9CDC /* RepoInteractViewController.swift */; };
 		73B7905C28E59104002A9CDC /* HeaderSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7905B28E59104002A9CDC /* HeaderSegmentView.swift */; };
 		73B7905E28E6D8EB002A9CDC /* UserFollowingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7905D28E6D8EB002A9CDC /* UserFollowingManager.swift */; };
+		73B7906028E7E805002A9CDC /* SearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7905F28E7E805002A9CDC /* SearchManager.swift */; };
+		73B7906228E7EB8A002A9CDC /* SearchList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7906128E7EB8A002A9CDC /* SearchList.swift */; };
+		73B7906628E7F133002A9CDC /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7906528E7F133002A9CDC /* SearchViewController.swift */; };
 		73C598C528D85EF100DA86A1 /* PopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C598C428D85EF100DA86A1 /* PopoverView.swift */; };
 		73C598C728D8617800DA86A1 /* UIApplication+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C598C628D8617800DA86A1 /* UIApplication+Ext.swift */; };
 		73C598CD28D9E6A100DA86A1 /* URL+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C598CC28D9E6A100DA86A1 /* URL+Ext.swift */; };
@@ -198,6 +201,9 @@
 		73B7905928E56003002A9CDC /* RepoInteractViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoInteractViewController.swift; sourceTree = "<group>"; };
 		73B7905B28E59104002A9CDC /* HeaderSegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderSegmentView.swift; sourceTree = "<group>"; };
 		73B7905D28E6D8EB002A9CDC /* UserFollowingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFollowingManager.swift; sourceTree = "<group>"; };
+		73B7905F28E7E805002A9CDC /* SearchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchManager.swift; sourceTree = "<group>"; };
+		73B7906128E7EB8A002A9CDC /* SearchList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchList.swift; sourceTree = "<group>"; };
+		73B7906528E7F133002A9CDC /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		73C598C428D85EF100DA86A1 /* PopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverView.swift; sourceTree = "<group>"; };
 		73C598C628D8617800DA86A1 /* UIApplication+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Ext.swift"; sourceTree = "<group>"; };
 		73C598CC28D9E6A100DA86A1 /* URL+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Ext.swift"; sourceTree = "<group>"; };
@@ -411,6 +417,7 @@
 				73AACB5F28D4BE4F0072B1DF /* RepoManager.swift */,
 				73101D3E28E3077C00DB5423 /* UserManager.swift */,
 				73B7905D28E6D8EB002A9CDC /* UserFollowingManager.swift */,
+				73B7905F28E7E805002A9CDC /* SearchManager.swift */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -426,6 +433,7 @@
 				73101D4828E47FB100DB5423 /* StatusModel.swift */,
 				73101D4F28E4A10400DB5423 /* LocalDeveloperGroup.swift */,
 				73B7905128E53353002A9CDC /* Config.swift */,
+				73B7906128E7EB8A002A9CDC /* SearchList.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -463,6 +471,7 @@
 		73AACB3128D357980072B1DF /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				73B7906328E7F10C002A9CDC /* Search */,
 				73101D5C28E4A5BF00DB5423 /* Developer */,
 				73AACB5B28D4BD040072B1DF /* Repo */,
 				73AACB3228D357A50072B1DF /* User */,
@@ -548,6 +557,22 @@
 				73727B2328D75DAE003D5A95 /* IndicatorCookieTerminatorView.swift */,
 			);
 			path = DJRefresh;
+			sourceTree = "<group>";
+		};
+		73B7906328E7F10C002A9CDC /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				73B7906428E7F11D002A9CDC /* Views */,
+				73B7906528E7F133002A9CDC /* SearchViewController.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		73B7906428E7F11D002A9CDC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		73C598C328D85ECF00DA86A1 /* View */ = {
@@ -706,6 +731,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				73101D4328E310D900DB5423 /* UserFollowingViewController.swift in Sources */,
+				73B7906628E7F133002A9CDC /* SearchViewController.swift in Sources */,
 				73B7905828E541BE002A9CDC /* Bool+Ext.swift in Sources */,
 				73C598C728D8617800DA86A1 /* UIApplication+Ext.swift in Sources */,
 				73AACB0828D30A3C0072B1DF /* Router.swift in Sources */,
@@ -732,6 +758,7 @@
 				73DE29CE28E0C35200B48009 /* WebViewController.swift in Sources */,
 				73B7905428E533C2002A9CDC /* ConfigManager.swift in Sources */,
 				73B7905A28E56003002A9CDC /* RepoInteractViewController.swift in Sources */,
+				73B7906028E7E805002A9CDC /* SearchManager.swift in Sources */,
 				73AACB0F28D30C470072B1DF /* APIClient.swift in Sources */,
 				73AACB8B28D708740072B1DF /* UIScrollView+Refresh.swift in Sources */,
 				73101D4128E30C5200DB5423 /* SimpleUserCell.swift in Sources */,
@@ -753,6 +780,7 @@
 				73101D4928E47FB100DB5423 /* StatusModel.swift in Sources */,
 				73B7905E28E6D8EB002A9CDC /* UserFollowingManager.swift in Sources */,
 				7341DCD228E03C6A009A3A3C /* RepoViewController.swift in Sources */,
+				73B7906228E7EB8A002A9CDC /* SearchList.swift in Sources */,
 				73AACB7928D5BBF50072B1DF /* DBManage.swift in Sources */,
 				73AACB5028D4618F0072B1DF /* UIView+Ext.swift in Sources */,
 				73AACB5228D467850072B1DF /* UserContributionView.swift in Sources */,

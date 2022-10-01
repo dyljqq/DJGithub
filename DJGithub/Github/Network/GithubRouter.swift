@@ -29,6 +29,10 @@ enum GithubRouter: Router {
   case userFollowers(String, [String: String])
   case userSubscription(String, [String: String])
   
+  // search
+  case searchUser([String: String])
+  case searchRepos([String: String])
+  
   var baseURLString: String {
     return "https://api.github.com/"
   }
@@ -65,6 +69,8 @@ enum GithubRouter: Router {
     case .userRepos(let name, _): return "users/\(name)/repos"
     case .userFollowers(let name, _): return "users/\(name)/followers"
     case .userSubscription(let name, _): return "users/\(name)/subscriptions"
+    case .searchUser: return "search/users"
+    case .searchRepos: return "search/repositories"
     }
   }
   
@@ -96,6 +102,8 @@ enum GithubRouter: Router {
         .userRepos(_, let items),
         .userFollowers(_, let items),
         .userSubscription(_, let items),
+        .searchRepos(let items),
+        .searchUser(let items),
         .forks(_, let items):
       queryItems = items
     default:
