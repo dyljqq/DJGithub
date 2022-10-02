@@ -18,12 +18,18 @@ extension SearchType {
 
 class SearchViewController: UIViewController {
   
+  enum SearchViewType {
+    case history
+    case result
+  }
+  
   let types: [SearchType]
   
   lazy var searchBar: UISearchBar = {
     let searchBar = UISearchBar()
     searchBar.delegate = self
     searchBar.placeholder = "search"
+    searchBar.searchTextField.clearsOnBeginEditing = true
     return searchBar
   }()
   
@@ -45,12 +51,36 @@ class SearchViewController: UIViewController {
     return scrollView
   }()
   
+  lazy var tableView: UITableView = {
+    let tableView = UITableView()
+    tableView.delegate = self
+    tableView.dataSource = self
+    tableView.tableFooterView = UIView()
+    tableView.rowHeight = 44
+    tableView.backgroundColor = .white
+    tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: UITableViewCell.className)
+    return tableView
+  }()
+  
   lazy var vcs: [UIViewController] = {
     return types.map { $0.vc }
   }()
   
+  var historyWords: [String] {
+    return SearchWordManager.shared.load()
+  }
+  
   var currentPage: Int = 0
   var needUpdateScroll = true
+  var searchWord: String = ""
+  var historyPanToken: NSKeyValueObservation?
+  var resultPanTokens: [NSKeyValueObservation?] = []
+
+  var searchViewType: SearchViewType = .history {
+    didSet {
+      self.update(with: searchViewType)
+    }
+  }
   
   init(with types: [SearchType]) {
     self.types = types
@@ -65,6 +95,7 @@ class SearchViewController: UIViewController {
     super.viewDidLoad()
     
     setUp()
+    addObserver()
   }
   
   private func setUp() {
@@ -79,6 +110,13 @@ class SearchViewController: UIViewController {
       height: 30
     )
     
+    view.addSubview(self.tableView)
+    self.tableView.snp.makeConstraints { make in
+      make.top.equalTo(self.segmentView.snp.bottom)
+      make.bottom.leading.trailing.equalTo(self.view)
+    }
+    
+    scrollView.isHidden = true
     view.addSubview(scrollView)
     let y: CGFloat = self.segmentView.frame.origin.y + self.segmentView.frame.height + 10
     scrollView.frame = CGRect(x: 0, y: y, width: FrameGuide.screenWidth, height: FrameGuide.screenHeight - y)
@@ -91,31 +129,91 @@ class SearchViewController: UIViewController {
     self.scrollView.contentSize = CGSize(width: scrollView.bounds.width * CGFloat(vcs.count), height: scrollView.bounds.height)
   }
   
+  private func addObserver() {
+    historyPanToken = tableView.observe(\.panGestureRecognizer.state) { [weak self] scrollView, _ in
+      self?.searchBar.searchTextField.resignFirstResponder()
+    }
+    
+    for vc in vcs {
+      if let vc = vc as? UserStaredReposViewController {
+        let token = vc.tableView.observe(\.panGestureRecognizer.state) { [weak self] (scrollView, _) in
+          self?.searchBar.searchTextField.resignFirstResponder()
+        }
+        resultPanTokens.append(token)
+      } else if let vc = vc as? UserFollowingViewController {
+        let token = vc.tableView.observe(\.panGestureRecognizer.state) { [weak self] (scrollView, _) in
+          self?.searchBar.searchTextField.resignFirstResponder()
+        }
+        resultPanTokens.append(token)
+      }
+    }
+  }
+  
+  private func clearObserver() {
+    historyPanToken?.invalidate()
+    for token in resultPanTokens {
+      token?.invalidate()
+    }
+  }
+  
   @objc func segmentSelectAction(segment: UISegmentedControl) {
     self.needUpdateScroll = false
     self.currentPage = segment.selectedSegmentIndex
     self.scrollView.setContentOffset(CGPoint(x: CGFloat(self.currentPage) * FrameGuide.screenWidth, y: scrollView.contentOffset.y), animated: true)
   }
   
-}
-
-extension SearchViewController: UISearchBarDelegate {
-  func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-    
+  private func update(with type: SearchViewType) {
+    switch type {
+    case .history:
+      self.scrollView.isHidden = true
+      self.tableView.isHidden = false
+      self.tableView.reloadData()
+    case .result:
+      self.scrollView.isHidden = false
+      self.tableView.isHidden = true
+      self.loadData(with: self.currentPage)
+    }
   }
   
-  func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-    guard let searchText = searchBar.text else { return }
-    let page = Int(scrollView.contentOffset.x / scrollView.bounds.width)
+  func loadData(with page: Int) {
+    guard !self.searchWord.isEmpty else {
+      return
+    }
     if let vc = vcs[page] as? UserFollowingViewController {
-      vc.type = .search(searchText)
+      vc.type = .search(searchWord)
       vc.nextPageState.update(start: 1, hasNext: true, isLoading: false)
       vc.loadData(start: 1)
     }
     if let vc = vcs[page] as? UserStaredReposViewController {
-      vc.userRepoState = .search(searchText)
+      vc.userRepoState = .search(searchWord)
       vc.nextPageState.update(start: 1, hasNext: true, isLoading: false)
       vc.loadNext(start: 1)
+    }
+  }
+  
+  deinit {
+    self.clearObserver()
+  }
+  
+}
+
+extension SearchViewController: UISearchBarDelegate {
+  func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    if searchText.isEmpty {
+      self.searchWord = ""
+      self.update(with: .history)
+    }
+  }
+  
+  func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    guard let searchText = searchBar.text else { return }
+    self.searchWord = searchText
+    self.currentPage = Int(scrollView.contentOffset.x / scrollView.bounds.width)
+    if searchText.isEmpty {
+      self.update(with: .history)
+    } else {
+      self.update(with: .result)
+      SearchWordManager.shared.save(with: searchText)
     }
   }
 }
@@ -132,5 +230,27 @@ extension SearchViewController: UIScrollViewDelegate {
   
   func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
     self.needUpdateScroll = true
+  }
+}
+
+extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
+  
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return historyWords.count
+  }
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: UITableViewCell.className, for: indexPath)
+    cell.accessoryType = .disclosureIndicator
+    cell.textLabel?.text = self.historyWords[indexPath.row]
+    return cell
+  }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    tableView.deselectRow(at: indexPath, animated: true)
+    
+    self.searchWord = self.historyWords[indexPath.row]
+    self.searchBar.text = self.searchWord
+    self.update(with: .result)
   }
 }
