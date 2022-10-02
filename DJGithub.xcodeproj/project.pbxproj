@@ -92,6 +92,7 @@
 		73B7906028E7E805002A9CDC /* SearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7905F28E7E805002A9CDC /* SearchManager.swift */; };
 		73B7906228E7EB8A002A9CDC /* SearchList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7906128E7EB8A002A9CDC /* SearchList.swift */; };
 		73B7906628E7F133002A9CDC /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7906528E7F133002A9CDC /* SearchViewController.swift */; };
+		73B7906D28E972A9002A9CDC /* SearchWordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7906C28E972A9002A9CDC /* SearchWordManager.swift */; };
 		73C598C528D85EF100DA86A1 /* PopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C598C428D85EF100DA86A1 /* PopoverView.swift */; };
 		73C598C728D8617800DA86A1 /* UIApplication+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C598C628D8617800DA86A1 /* UIApplication+Ext.swift */; };
 		73C598CD28D9E6A100DA86A1 /* URL+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C598CC28D9E6A100DA86A1 /* URL+Ext.swift */; };
@@ -204,6 +205,7 @@
 		73B7905F28E7E805002A9CDC /* SearchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchManager.swift; sourceTree = "<group>"; };
 		73B7906128E7EB8A002A9CDC /* SearchList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchList.swift; sourceTree = "<group>"; };
 		73B7906528E7F133002A9CDC /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		73B7906C28E972A9002A9CDC /* SearchWordManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWordManager.swift; sourceTree = "<group>"; };
 		73C598C428D85EF100DA86A1 /* PopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverView.swift; sourceTree = "<group>"; };
 		73C598C628D8617800DA86A1 /* UIApplication+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Ext.swift"; sourceTree = "<group>"; };
 		73C598CC28D9E6A100DA86A1 /* URL+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Ext.swift"; sourceTree = "<group>"; };
@@ -418,6 +420,7 @@
 				73101D3E28E3077C00DB5423 /* UserManager.swift */,
 				73B7905D28E6D8EB002A9CDC /* UserFollowingManager.swift */,
 				73B7905F28E7E805002A9CDC /* SearchManager.swift */,
+				73B7906C28E972A9002A9CDC /* SearchWordManager.swift */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -779,6 +782,7 @@
 				73B7904C28E5298D002A9CDC /* LocalDeveloperCell.swift in Sources */,
 				73101D4928E47FB100DB5423 /* StatusModel.swift in Sources */,
 				73B7905E28E6D8EB002A9CDC /* UserFollowingManager.swift in Sources */,
+				73B7906D28E972A9002A9CDC /* SearchWordManager.swift in Sources */,
 				7341DCD228E03C6A009A3A3C /* RepoViewController.swift in Sources */,
 				73B7906228E7EB8A002A9CDC /* SearchList.swift in Sources */,
 				73AACB7928D5BBF50072B1DF /* DBManage.swift in Sources */,
