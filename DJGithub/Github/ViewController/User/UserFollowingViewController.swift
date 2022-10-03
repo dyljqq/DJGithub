@@ -62,6 +62,7 @@ class UserFollowingViewController: UIViewController, NextPageLoadable {
     let tableView = UITableView()
     tableView.delegate = self
     tableView.dataSource = self
+    tableView.prefetchDataSource = self
     tableView.tableFooterView = UIView()
     tableView.showsVerticalScrollIndicator = false
     tableView.register(SimpleUserCell.classForCoder(), forCellReuseIdentifier: SimpleUserCell.className)
@@ -142,6 +143,20 @@ extension UserFollowingViewController: UITableViewDelegate, UITableViewDataSourc
     
     let user = self.dataSource[indexPath.row]
     self.navigationController?.pushToUser(with: user.login)
+  }
+}
+
+extension UserFollowingViewController: UITableViewDataSourcePrefetching {
+  func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+    // 预加载图片
+    for indexPath in indexPaths {
+      let user = self.dataSource[indexPath.row]
+      UIImageView().setImage(with: user.avatarUrl)
+    }
+  }
+  
+  func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
+    
   }
 }
 
