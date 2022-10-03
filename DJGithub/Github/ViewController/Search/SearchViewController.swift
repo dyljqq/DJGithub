@@ -58,8 +58,15 @@ class SearchViewController: UIViewController {
     tableView.tableFooterView = UIView()
     tableView.rowHeight = 44
     tableView.backgroundColor = .white
+    tableView.tableHeaderView = self.headerView
     tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: UITableViewCell.className)
     return tableView
+  }()
+  
+  lazy var headerView: SearchWordHeaderView = {
+    let view = SearchWordHeaderView()
+    view.frame = CGRect(x: 0, y: 0, width: FrameGuide.screenWidth, height: 44)
+    return view
   }()
   
   lazy var vcs: [UIViewController] = {
@@ -114,6 +121,11 @@ class SearchViewController: UIViewController {
     self.tableView.snp.makeConstraints { make in
       make.top.equalTo(self.segmentView.snp.bottom)
       make.bottom.leading.trailing.equalTo(self.view)
+    }
+    
+    self.headerView.eraseClosure = { [weak self] in
+      SearchWordManager.shared.removeAll()
+      self?.tableView.reloadData()
     }
     
     scrollView.isHidden = true
@@ -179,15 +191,17 @@ class SearchViewController: UIViewController {
     guard !self.searchWord.isEmpty else {
       return
     }
-    if let vc = vcs[page] as? UserFollowingViewController {
-      vc.type = .search(searchWord)
-      vc.nextPageState.update(start: 1, hasNext: true, isLoading: false)
-      vc.loadData(start: 1)
-    }
-    if let vc = vcs[page] as? UserStaredReposViewController {
-      vc.userRepoState = .search(searchWord)
-      vc.nextPageState.update(start: 1, hasNext: true, isLoading: false)
-      vc.loadNext(start: 1)
+    
+    for vc in vcs {
+      if let vc = vc as? UserFollowingViewController {
+        vc.type = .search(searchWord)
+        vc.nextPageState.update(start: 1, hasNext: true, isLoading: false)
+        vc.loadData(start: 1)
+      } else if let vc = vc as? UserStaredReposViewController {
+        vc.userRepoState = .search(searchWord)
+        vc.nextPageState.update(start: 1, hasNext: true, isLoading: false)
+        vc.loadNext(start: 1)
+      }
     }
   }
   
@@ -215,6 +229,10 @@ extension SearchViewController: UISearchBarDelegate {
       self.update(with: .result)
       SearchWordManager.shared.save(with: searchText)
     }
+  }
+  
+  func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+    self.searchBar.searchTextField.text = self.searchWord
   }
 }
 

@@ -17,7 +17,7 @@ struct SearchWordManager {
     guard !words.contains(word) else {
       return
     }
-    words.append(word)
+    words.insert(word, at: 0)
     UserDefaults.standard.setValue(words, forKey: SearchWordKey)
   }
   
@@ -26,6 +26,10 @@ struct SearchWordManager {
       return words
     }
     return []
+  }
+  
+  func removeAll() {
+    UserDefaults.standard.set(nil, forKey: SearchWordKey)
   }
   
 }

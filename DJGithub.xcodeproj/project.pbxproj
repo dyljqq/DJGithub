@@ -98,6 +98,7 @@
 		73C598CD28D9E6A100DA86A1 /* URL+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C598CC28D9E6A100DA86A1 /* URL+Ext.swift */; };
 		73DE29CC28E0C08200B48009 /* MarkdownView in Frameworks */ = {isa = PBXBuildFile; productRef = 73DE29CB28E0C08200B48009 /* MarkdownView */; };
 		73DE29CE28E0C35200B48009 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DE29CD28E0C35200B48009 /* WebViewController.swift */; };
+		73DF6BEC28EACF340003BDB8 /* SearchWordHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DF6BEB28EACF340003BDB8 /* SearchWordHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -210,6 +211,7 @@
 		73C598C628D8617800DA86A1 /* UIApplication+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Ext.swift"; sourceTree = "<group>"; };
 		73C598CC28D9E6A100DA86A1 /* URL+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Ext.swift"; sourceTree = "<group>"; };
 		73DE29CD28E0C35200B48009 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		73DF6BEB28EACF340003BDB8 /* SearchWordHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWordHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -574,6 +576,7 @@
 		73B7906428E7F11D002A9CDC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				73DF6BEB28EACF340003BDB8 /* SearchWordHeaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -809,6 +812,7 @@
 				7374D19728E0BC1D00E6BE47 /* Readme.swift in Sources */,
 				73AACB1828D312D30072B1DF /* GithubRouter.swift in Sources */,
 				73101D5028E4A10400DB5423 /* LocalDeveloperGroup.swift in Sources */,
+				73DF6BEC28EACF340003BDB8 /* SearchWordHeaderView.swift in Sources */,
 				73B7905228E53353002A9CDC /* Config.swift in Sources */,
 				7341DCCA28DF2B4B009A3A3C /* ImageCoder.swift in Sources */,
 			);
