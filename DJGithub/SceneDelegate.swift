@@ -24,7 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   
   func setUp() {
     Language.createTable()
-    LocalDeveloper.deleteTable()
+    LocalDeveloperGroup.createTable()
     LocalDeveloper.createTable()
     ConfigManager.loadConfig()
     

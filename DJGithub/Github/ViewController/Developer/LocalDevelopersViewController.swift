@@ -33,6 +33,8 @@ class LocalDevelopersViewController: UIViewController {
       make.edges.equalTo(self.view)
     }
     
+    update()
+    
     NotificationCenter.default.addObserver(forName: DeveloperGroupManager.NotificationUpdatedAllName, object: nil, queue: .main, using: { [weak self] notification in
       guard let strongSelf = self else { return }
       strongSelf.update()
@@ -41,7 +43,10 @@ class LocalDevelopersViewController: UIViewController {
   
   func update() {
     Task {
-      dataSource = await DeveloperGroupManager.shared.loadLocalDeveloperGroups()
+      dataSource = await DeveloperGroupManager.shared.loadFromDatabase()
+      if dataSource.isEmpty {
+        dataSource = await DeveloperGroupManager.shared.loadLocalDeveloperGroups()
+      }
       tableView.reloadData()
     }
   }
@@ -56,12 +61,12 @@ extension LocalDevelopersViewController: UITableViewDelegate, UITableViewDataSou
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     let group = dataSource[section]
-    return group.users.count
+    return group.developers.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: LocalDeveloperCell.className, for: indexPath) as! LocalDeveloperCell
-    let developer = dataSource[indexPath.section].users[indexPath.row]
+    let developer = dataSource[indexPath.section].developers[indexPath.row]
     cell.render(with: developer)
     return cell
   }
@@ -69,7 +74,7 @@ extension LocalDevelopersViewController: UITableViewDelegate, UITableViewDataSou
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
     
-    let user = self.dataSource[indexPath.section].users[indexPath.row]
+    let user = self.dataSource[indexPath.section].developers[indexPath.row]
     self.navigationController?.pushToUser(with: user.name)
   }
   

@@ -49,11 +49,20 @@
                 "des":"13 - [weak self]播客"
             },
             {
+                "name":"Kyle-Ye"
+            },
+            {
                 "name":"ming1016",
                 "des":"戴铭"
             },
             {
                 "name":"mxcl"
+            },
+            {
+                "name":"lkzhao"
+            },
+            {
+                "name":"insidegui"
             },
             {
                 "name":"johnno1962",
@@ -72,16 +81,33 @@
                 "des":"元编程 Sourcery"
             },
             {
+                "name":"onmyway133"
+            },
+            {
                 "name":"pofat",
                 "des":"Pofat - [weak self]播客"
             },
             {
-                "name":"livid",
-                "des":"V2EX 掌门人"
+                "name":"mecid",
+                "des":"Swift with Majid"
             },
             {
-                "name":"banach-space",
-                "des":"ARM 公司编译器开发者"
+                "name":"hebertialmeida"
+            },
+            {
+                "name":"kylef",
+                "des":"Commander"
+            },
+            {
+                "name":"joshaber",
+                "des":"at GitHub"
+            },
+            {
+                "name":"ashfurrow",
+                "des":"Moya"
+            },
+            {
+                "name":"jessesquires"
             }
         ]
     }

@@ -130,9 +130,6 @@ extension UserFollowingViewController: UITableViewDelegate, UITableViewDataSourc
       let user = strongSelf.dataSource[indexPath.row]
       strongSelf.navigationController?.pushToUser(with: user.login)
     }
-    cell.followClosure = { [weak cell] in
-      cell?.followingView.activeAction()
-    }
     return cell
   }
   

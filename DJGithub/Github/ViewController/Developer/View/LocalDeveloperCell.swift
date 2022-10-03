@@ -30,6 +30,13 @@ class LocalDeveloperCell: UITableViewCell {
     return label
   }()
   
+  lazy var followView: FollowUserStatusView = {
+    let view = FollowUserStatusView(layoutLay: .auto)
+    return view
+  }()
+  
+  var touchFollowViewClosure: (() -> ())?
+  
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     
@@ -40,12 +47,15 @@ class LocalDeveloperCell: UITableViewCell {
     avatarImageView.setImage(with: developer.avatarUrl, placeHolder: UIImage.defaultPersonImage)
     titleLabel.text = developer.name
     desLabel.text = developer.des ?? "None desc"
+    
+    followView.render(with: developer.name)
   }
   
   private func setUp() {
     contentView.addSubview(avatarImageView)
     contentView.addSubview(titleLabel)
     contentView.addSubview(desLabel)
+    contentView.addSubview(followView)
     
     avatarImageView.snp.makeConstraints { make in
       make.leading.equalTo(16)
@@ -61,6 +71,16 @@ class LocalDeveloperCell: UITableViewCell {
       make.leading.equalTo(titleLabel)
       make.bottom.equalTo(avatarImageView)
       make.trailing.equalTo(titleLabel)
+    }
+    followView.snp.makeConstraints { make in
+      make.trailing.equalTo(contentView).offset(-12)
+      make.centerY.equalTo(contentView)
+      make.width.equalTo(70)
+      make.height.equalTo(30)
+    }
+    
+    followView.touchClosure = { [weak self] in
+      self?.touchFollowViewClosure?()
     }
   }
   

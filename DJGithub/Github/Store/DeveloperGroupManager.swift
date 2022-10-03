@@ -13,23 +13,44 @@ struct DeveloperGroupManager {
   
   static let shared = DeveloperGroupManager()
   
-  func loadLocalDeveloperGroups() async -> [LocalDeveloperGroup] {
-    let task = Task {
-      let rs: [LocalDeveloperGroup] = loadBundleJSONFile("developerss.json")
+  func loadFromDatabase() async -> [LocalDeveloperGroup] {
+    let task = Task { () -> [LocalDeveloperGroup] in
+      guard let groups = DJDecoder(value: LocalDeveloperGroup.selectAll()).decode() as [LocalDeveloperGroup]? else {
+        return []
+      }
+      var rs: [LocalDeveloperGroup] = []
+      for group in groups {
+        let users = LocalDeveloper.get(by: group.id).compactMap { $0 }
+        rs.append(LocalDeveloperGroup(
+          id: group.id, name: group.name, users: users.compactMap { $0 }
+        ))
+      }
       return rs
     }
     return await task.value
   }
   
+  func loadLocalDeveloperGroups() async -> [LocalDeveloperGroup] {
+    let task = Task {
+      let groups: [LocalDeveloperGroup] = loadBundleJSONFile("developers")
+      return groups
+    }
+    return await task.value
+  }
+  
   @discardableResult
-  func update(with dev: LocalDeveloper) async -> LocalDeveloper? {
+  func update(with dev: LocalDeveloper, groupId: Int) async -> LocalDeveloper? {
     guard let user = await UserManager.getUser(with: dev.name) else { return nil }
     
+    let des = dev.des ?? user.bio ?? "No Description provided."
     if let developer = LocalDeveloper.get(by: user.login) {
-      return LocalDeveloper.update(with: developer.name, des: developer.des ?? "", avatarUrl: user.avatarUrl)
+      return LocalDeveloper.update(
+        with: developer.name, des: des, avatarUrl: user.avatarUrl, groupId: groupId)
     } else {
       var dev = dev
-      dev.update(avatarUrl: user.avatarUrl)
+      dev.avatarUrl = user.avatarUrl
+      dev.groupId = groupId
+      dev.des = des
       dev.insert()
     }
     return nil
@@ -37,15 +58,20 @@ struct DeveloperGroupManager {
   
   func updateAll() async {
     let groups = await loadLocalDeveloperGroups()
-    var developers: [LocalDeveloper] = []
     for group in groups {
-      developers.append(contentsOf: group.users)
+      if let g = LocalDeveloperGroup.get(by: group.id) {
+        LocalDeveloperGroup.update(by: g.id, name: group.name)
+      } else {
+        group.insert()
+      }
     }
     
     await withThrowingTaskGroup(of: Void.self) { group in
-      for developer in developers {
-        group.addTask {
-          await update(with: developer)
+      for gp in groups {
+        for developer in gp.developers {
+          group.addTask {
+            await update(with: developer, groupId: gp.id)
+          }
         }
       }
     }

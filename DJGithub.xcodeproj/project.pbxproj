@@ -13,7 +13,6 @@
 		73101D4928E47FB100DB5423 /* StatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73101D4828E47FB100DB5423 /* StatusModel.swift */; };
 		73101D4B28E4889B00DB5423 /* UserStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73101D4A28E4889B00DB5423 /* UserStatusView.swift */; };
 		73101D5028E4A10400DB5423 /* LocalDeveloperGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73101D4F28E4A10400DB5423 /* LocalDeveloperGroup.swift */; };
-		73101D5928E4A2AB00DB5423 /* developers.json in Resources */ = {isa = PBXBuildFile; fileRef = 73101D5628E4A2AB00DB5423 /* developers.json */; };
 		73101D5A28E4A2AB00DB5423 /* rssfeed.json in Resources */ = {isa = PBXBuildFile; fileRef = 73101D5728E4A2AB00DB5423 /* rssfeed.json */; };
 		73101D5B28E4A2AB00DB5423 /* repos.json in Resources */ = {isa = PBXBuildFile; fileRef = 73101D5828E4A2AB00DB5423 /* repos.json */; };
 		73101D5F28E4A5E400DB5423 /* DevelopersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73101D5E28E4A5E400DB5423 /* DevelopersViewController.swift */; };
@@ -102,6 +101,7 @@
 		73DF6BEE28EADD160003BDB8 /* LocalDeveloperSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DF6BED28EADD160003BDB8 /* LocalDeveloperSectionHeaderView.swift */; };
 		73DF6BF028EAE0A00003BDB8 /* DeveloperGroupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DF6BEF28EAE0A00003BDB8 /* DeveloperGroupManager.swift */; };
 		73DF6BF228EAE3060003BDB8 /* DJCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DF6BF128EAE3060003BDB8 /* DJCodable.swift */; };
+		73DF6BF428EB0DCB0003BDB8 /* developers.json in Resources */ = {isa = PBXBuildFile; fileRef = 73DF6BF328EB0DCB0003BDB8 /* developers.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,7 +128,6 @@
 		73101D4828E47FB100DB5423 /* StatusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusModel.swift; sourceTree = "<group>"; };
 		73101D4A28E4889B00DB5423 /* UserStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatusView.swift; sourceTree = "<group>"; };
 		73101D4F28E4A10400DB5423 /* LocalDeveloperGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDeveloperGroup.swift; sourceTree = "<group>"; };
-		73101D5628E4A2AB00DB5423 /* developers.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = developers.json; sourceTree = "<group>"; };
 		73101D5728E4A2AB00DB5423 /* rssfeed.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = rssfeed.json; sourceTree = "<group>"; };
 		73101D5828E4A2AB00DB5423 /* repos.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = repos.json; sourceTree = "<group>"; };
 		73101D5E28E4A5E400DB5423 /* DevelopersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopersViewController.swift; sourceTree = "<group>"; };
@@ -218,6 +217,7 @@
 		73DF6BED28EADD160003BDB8 /* LocalDeveloperSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDeveloperSectionHeaderView.swift; sourceTree = "<group>"; };
 		73DF6BEF28EAE0A00003BDB8 /* DeveloperGroupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperGroupManager.swift; sourceTree = "<group>"; };
 		73DF6BF128EAE3060003BDB8 /* DJCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJCodable.swift; sourceTree = "<group>"; };
+		73DF6BF328EB0DCB0003BDB8 /* developers.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = developers.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -267,7 +267,7 @@
 		73101D5528E4A2AB00DB5423 /* News */ = {
 			isa = PBXGroup;
 			children = (
-				73101D5628E4A2AB00DB5423 /* developers.json */,
+				73DF6BF328EB0DCB0003BDB8 /* developers.json */,
 				73101D5728E4A2AB00DB5423 /* rssfeed.json */,
 				73101D5828E4A2AB00DB5423 /* repos.json */,
 			);
@@ -716,10 +716,10 @@
 			files = (
 				73B7905628E53B6B002A9CDC /* config.json in Resources */,
 				73AACAE128D308A70072B1DF /* LaunchScreen.storyboard in Resources */,
-				73101D5928E4A2AB00DB5423 /* developers.json in Resources */,
 				73AACADE28D308A70072B1DF /* Assets.xcassets in Resources */,
 				73101D5A28E4A2AB00DB5423 /* rssfeed.json in Resources */,
 				73101D5B28E4A2AB00DB5423 /* repos.json in Resources */,
+				73DF6BF428EB0DCB0003BDB8 /* developers.json in Resources */,
 				73AACADC28D308A60072B1DF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

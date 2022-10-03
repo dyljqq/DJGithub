@@ -13,7 +13,7 @@ struct ConfigManager {
   
   static func loadConfig(completionHandler: ((Config) -> ())? = nil) {
     DispatchQueue.global().async {
-      let config: Config = loadBundleJSONFile("config.json")
+      let config: Config = loadBundleJSONFile("config")
       DispatchQueue.main.async {
         ConfigManager.config = config
       }
