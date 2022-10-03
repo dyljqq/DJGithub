@@ -57,8 +57,6 @@ class UserStatusView: UIView {
     setUp()
   }
   
-  var userFollowing: UserFollowing?
-  
   func render(with statusType: UserStatusType, content: String = "", widthClosure: ((CGFloat) -> ())? = nil) {
     if case .loading = statusType {
       activityIndicatorView.isHidden = false
@@ -136,6 +134,7 @@ class UserStatusView: UIView {
   }
   
   @objc func touchAction() {
+    activeAction()
     touchClosure?()
   }
   
@@ -198,11 +197,9 @@ class FollowUserStatusView: UserStatusView {
     fatalError("init(coder:) has not been implemented")
   }
   
-  func render(with user: UserFollowing) {
-    self.userFollowing = user
-    self.type = .follow(user.login)
+  func render(with userName: String) {
+    self.type = .follow(userName)
     Task {
-      let userName = user.login
       var status = await UserFollowingManager.shared.followingStatus(with: userName)
       if case UserFollowingStatus.unknown = status {
         status = await UserFollowingManager.shared.update(with: userName)

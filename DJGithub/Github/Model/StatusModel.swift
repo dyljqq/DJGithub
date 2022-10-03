@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct StatusModel: Decodable {
+struct StatusModel: DJCodable {
   var statusCode: Int
   
   var isStatus204: Bool {

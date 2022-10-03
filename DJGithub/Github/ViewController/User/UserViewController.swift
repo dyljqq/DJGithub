@@ -189,10 +189,6 @@ class UserViewController: UIViewController {
     Task {
       if let status = await UserManager.checkFollowStatus(with: self.name) {
         self.followStatusView.active = status.isStatus204
-        followStatusView.touchClosure = { [weak self] in
-          guard let strongSelf = self else { return }
-          strongSelf.followStatusView.activeAction()
-        }
       }
     }
   }

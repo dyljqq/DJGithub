@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct User: Decodable {
+struct User: DJCodable {
   var login: String
   var name: String?
   var id: Int
@@ -33,7 +33,7 @@ struct User: Decodable {
   }
 }
 
-struct UserContribution: Decodable {
+struct UserContribution: DJCodable {
   var totalContributions: Int
   var colors: [String]
   var items: [UserContributionItem]
@@ -59,7 +59,7 @@ struct UserContribution: Decodable {
   }
 }
 
-struct UserContributionItem: Decodable {
+struct UserContributionItem: DJCodable {
   var color: String
   var contributionCount: Int
   var date: String

@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct Repos: Decodable {
+struct Repos: DJCodable {
   var items: [Repo]
 }
 
-struct Repo: Decodable {
+struct Repo: DJCodable {
   var name: String
   var fullName: String
   var forksCount: Int
@@ -32,14 +32,14 @@ struct Repo: Decodable {
   }
 }
 
-struct RepoOwner: Decodable {
+struct RepoOwner: DJCodable {
   var avatarUrl: String
   var id: Int
   var login: String
   var type: String
 }
 
-struct License: Decodable {
+struct License: DJCodable {
   var name: String
   var key: String
   var url: String?

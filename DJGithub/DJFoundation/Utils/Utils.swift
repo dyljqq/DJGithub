@@ -20,12 +20,16 @@ func isEmpty(by str: String?) -> Bool {
   return str == nil || str!.isEmpty
 }
 
-func loadBundleJSONFile<T: Decodable>(_ filename: String) -> T {
+func loadBundleJSONFile<T: DJCodable>(_ filename: String) -> T {
+  guard let file = Bundle.main.url(forResource: filename, withExtension: "json") else {
+      fatalError("Couldn't find \(filename) in main bundle.")
+  }
   do {
     let decoder = JSONDecoder()
-    return try decoder.decode(T.self, from: loadBundleData(filename))
+    let data = try Data(contentsOf: file)
+    return try decoder.decode(T.self, from: data)
   } catch {
-    fatalError("Couldn't find \(filename) in main bundle")
+    fatalError("load data from \(filename), error: \(error)")
   }
 }
 

@@ -10,12 +10,14 @@ import Foundation
 enum FieldType {
     case int
     case text
+  case bigint
     case unknown
     
     var name: String? {
         switch self {
         case .int: return "INTEGER"
         case .text: return "TEXT"
+        case .bigint: return "BIGINT"
         case .unknown: return nil
         }
     }
@@ -28,22 +30,37 @@ protocol SQLTable {
     static var fields: [String] { get }
     static var uniqueKeys: [String] { get }
     static var fieldsTypeMapping: [String: FieldType] { get }
-    
+    static var needFieldId: Bool { get }
+  static var selectedFields: [String] { get }
+
     var fieldsValueMapping: [String: Any] { get }
     
     func execute()
         
-    static func decode<T: Decodable>(_ hash: [String: Any]) -> T?
+    static func decode<T: DJCodable>(_ hash: [String: Any]) -> T?
     
 }
 
 extension SQLTable {
+  
+  static var needFieldId: Bool {
+    return true
+  }
+  
+  static var selectedFields: [String] {
+    var fs: [String] = []
+    if needFieldId {
+      fs.append("id")
+    }
+    fs.append(contentsOf: fields)
+    return fs
+  }
     
     func execute() {
         // TODO
     }
     
-    static func decode<T: Decodable>(_ hash: [String: Any]) -> T? {
+    static func decode<T: DJCodable>(_ hash: [String: Any]) -> T? {
         return DJDecoder<T>(dict: hash).decode()
     }
     
@@ -52,7 +69,7 @@ extension SQLTable {
     }
     
     static var tableSql: String {
-        var rs = ["id INTEGER PRIMARY KEY AUTOINCREMENT not null"]
+      var rs: [String] = needFieldId ? ["id INTEGER PRIMARY KEY AUTOINCREMENT not null"] : []
         
         for field in Self.fields {
             guard let typ = Self.fieldsTypeMapping[field], let name = typ.name else {
@@ -95,7 +112,7 @@ extension SQLTable {
     }
     
     func select() -> [[String: Any]] {
-        let sql = "select * from \(Self.tableName)"
+      let sql = "select \(Self.selectedFields.joined(separator: ",")) from \(Self.tableName)"
         guard let rs = execute(.select, sql: sql) as? [[String: Any]] else {
             return []
         }
@@ -103,7 +120,7 @@ extension SQLTable {
     }
     
     static func selectAll() -> [[String: Any]] {
-        let sql = "select * from \(Self.tableName)"
+      let sql = "select \(Self.selectedFields.joined(separator: ",")) from \(Self.tableName)"
         let rs = store.execute(.select, sql: sql, type: Self.self) as? [[String: Any]] ?? []
         return rs
     }

@@ -24,6 +24,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   
   func setUp() {
     Language.createTable()
+    LocalDeveloperGroup.createTable()
+    LocalDeveloper.createTable()
     ConfigManager.loadConfig()
     
     Task {
@@ -33,6 +35,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         group.addTask {
           await UserFollowingManager.shared.fetchUserFollowingStatus()
+        }
+        group.addTask {
+          await DeveloperGroupManager.shared.updateAll()
         }
       }
     }

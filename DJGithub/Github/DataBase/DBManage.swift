@@ -104,7 +104,6 @@ class DBManager {
         }
 
         for (index, field) in T.fields.enumerated() {
-            
             if let fieldType = T.fieldsTypeMapping[field] {
                 let offset = Int32(index) + 1
                 
@@ -116,6 +115,10 @@ class DBManager {
                 case .text:
                     let text: String = model.fieldsValueMapping[field] as? String ?? ""
                     sqlite3_bind_text(insertStatement, offset, (text as NSString).utf8String, -1, nil)
+                case .bigint:
+                  if let value = model.fieldsValueMapping[field] as? Int {
+                    sqlite3_bind_int64(insertStatement, offset, Int64(value))
+                  }
                 default:
                     break
                 }
@@ -143,11 +146,8 @@ class DBManager {
         var rs: [[String: Any]] = []
         while sqlite3_step(selectStatement) == SQLITE_ROW {
             var hash: [String: Any] = [:]
-            let id = sqlite3_column_int(selectStatement, 0)
-            
-            hash["id"] = id
-            for (index, field) in T.fields.enumerated() {
-                let offset = Int32(index) + 1
+            for (index, field) in T.selectedFields.enumerated() {
+                let offset = Int32(index)
                 if let typ = T.fieldsTypeMapping[field] {
                     switch typ {
                     case .int:
@@ -156,6 +156,8 @@ class DBManager {
                         if let v = sqlite3_column_text(selectStatement, offset) {
                             hash[field] = String(cString: v)
                         }
+                    case .bigint:
+                      hash[field] = sqlite3_column_int64(selectStatement, offset)
                     default: break
                     }
                 }

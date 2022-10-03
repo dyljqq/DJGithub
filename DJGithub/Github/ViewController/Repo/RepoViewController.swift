@@ -156,13 +156,6 @@ class RepoViewController: UIViewController {
       if let repoStarStatus = await RepoManager.userStaredRepo(with: repoName) {
         userStatusView.active = repoStarStatus.isStatus204
       }
-
-      userStatusView.touchClosure = { [weak self] in
-        guard let strongSelf = self else {
-          return
-        }
-        strongSelf.userStatusView.activeAction()
-      }
     }
   }
 

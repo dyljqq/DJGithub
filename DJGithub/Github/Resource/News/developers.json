@@ -4,14 +4,14 @@
         "id":2111161255,
         "users":[
             {
-                "id":"tkremenek",
+                "name":"tkremenek",
                 "des":"Swift director"
             },
             {
-                "id":"DougGregor"
+                "name":"DougGregor"
             },
             {
-                "id":"mikeash",
+                "name":"mikeash",
                 "des": "Friday Q&A"
             }
         ]
@@ -21,67 +21,93 @@
         "id":2111141053,
         "users":[
             {
-                "id":"onevcat",
+                "name":"onevcat",
                 "des":"喵神"
             },
             {
-                "id":"DianQK",
+                "name":"DianQK",
                 "des":"靛青 - SwiftGG翻译组"
             },
             {
-                "id":"kean",
+                "name":"kean",
                 "des":"Nuke、Pulse"
             },
             {
-                "id":"stephencelis",
+                "name":"stephencelis",
                 "des":"Point-Free & SQLite.swift"
             },
             {
-                "id":"ibireme",
+                "name":"ibireme",
                 "des":"YYDS"
             },
             {
-                "id":"mattt",
+                "name":"mattt",
                 "des":"NSHipster"
             },
             {
-                "id":"ethanhuang13",
+                "name":"ethanhuang13",
                 "des":"13 - [weak self]播客"
             },
             {
-                "id":"ming1016",
+                "name":"Kyle-Ye"
+            },
+            {
+                "name":"ming1016",
                 "des":"戴铭"
             },
             {
-                "id":"mxcl"
+                "name":"mxcl"
             },
             {
-                "id":"johnno1962",
+                "name":"lkzhao"
+            },
+            {
+                "name":"insidegui"
+            },
+            {
+                "name":"johnno1962",
                 "des":"InjectionIII"
             },
             {
-                "id":"wigging",
+                "name":"wigging",
                 "des":"Back to the Mac"
             },
             {
-                "id":"Dimillian",
+                "name":"Dimillian",
                 "des":"MovieSwiftUI"
             },
             {
-                "id":"krzysztofzablocki",
+                "name":"krzysztofzablocki",
                 "des":"元编程 Sourcery"
             },
             {
-                "id":"pofat",
+                "name":"onmyway133"
+            },
+            {
+                "name":"pofat",
                 "des":"Pofat - [weak self]播客"
             },
             {
-                "id":"livid",
-                "des":"V2EX 掌门人"
+                "name":"mecid",
+                "des":"Swift with Majid"
             },
             {
-                "id":"banach-space",
-                "des":"ARM 公司编译器开发者"
+                "name":"hebertialmeida"
+            },
+            {
+                "name":"kylef",
+                "des":"Commander"
+            },
+            {
+                "name":"joshaber",
+                "des":"at GitHub"
+            },
+            {
+                "name":"ashfurrow",
+                "des":"Moya"
+            },
+            {
+                "name":"jessesquires"
             }
         ]
     }

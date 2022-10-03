@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct UserFollowings: Decodable {
+struct UserFollowings: DJCodable {
   var items: [UserFollowing]
 }
 
-struct UserFollowing: Decodable {
+struct UserFollowing: DJCodable {
   var id: Int
   var login: String
   var url: String

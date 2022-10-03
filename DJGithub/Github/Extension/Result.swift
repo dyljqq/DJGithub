@@ -9,7 +9,7 @@ import Foundation
 
 extension Result {
   
-  func parse<T: Decodable>() -> T? {
+  func parse<T: DJCodable>() -> T? {
     switch self {
     case .success(let d):
       if let d = d as? [String: Any] {

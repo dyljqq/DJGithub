@@ -76,7 +76,7 @@ open class APIClient {
       .eraseToAnyPublisher()
   }
   
-  func fetch<T: Decodable>(by router: Router) -> AnyPublisher<T, DJError> {
+  func fetch<T: DJCodable>(by router: Router) -> AnyPublisher<T, DJError> {
     return self._fetch(by: router)
       .tryMap { d in
         return try JSONSerialization.data(withJSONObject: d, options: .prettyPrinted)

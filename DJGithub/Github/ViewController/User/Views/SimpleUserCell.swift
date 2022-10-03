@@ -55,7 +55,7 @@ class SimpleUserCell: UITableViewCell {
     
     if !ConfigManager.checkOwner(by: user.login) {
       self.followingView.isHidden = false
-      self.followingView.render(with: user)
+      self.followingView.render(with: user.login)
     } else {
       self.followingView.isHidden = true
     }

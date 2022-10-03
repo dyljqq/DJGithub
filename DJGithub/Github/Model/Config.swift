@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Config: Decodable {
+struct Config: DJCodable {
   var authorization: String = ""
   let userName: String = "dyljqq"
   
