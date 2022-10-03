@@ -17,7 +17,7 @@ struct SearchManager {
     return await self.search(with: query, searchType: .repos, page: page)
   }
   
-  static func search<T: Decodable>(with query: String, searchType: SearchType, page: Int) async -> T? {
+  static func search<T: DJCodable>(with query: String, searchType: SearchType, page: Int) async -> T? {
     guard !query.isEmpty else { return nil }
     let params = [
       "q": query,

@@ -11,7 +11,7 @@ struct DJParser: Parse {
   static let shared = DJParser()
 }
 
-struct DJDecoder<T:Decodable> {
+struct DJDecoder<T:DJCodable> {
   let decoder = JSONDecoder()
   
   private var data: Data?
@@ -25,6 +25,7 @@ struct DJDecoder<T:Decodable> {
     self.data = data
     decoder.keyDecodingStrategy = .convertFromSnakeCase
   }
+
   init(value: Any) {
     let data = try? JSONSerialization.data(withJSONObject: value)
     self.init(data: data)
@@ -38,6 +39,28 @@ struct DJDecoder<T:Decodable> {
       return try decoder.decode(T.self, from: data)
     } catch {
       print("DJDecode Error: \(error)")
+    }
+    return nil
+  }
+}
+
+struct DJEncoder<T: Encodable> {
+  let encoder = JSONEncoder()
+  
+  let model: T?
+  
+  init(model: T?) {
+    self.model = model
+    encoder.keyEncodingStrategy = .convertToSnakeCase
+  }
+  
+  func encode() -> [String: Any]? {
+    guard let model = model else { return nil }
+    do {
+      let data = try encoder.encode(model)
+      return try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed) as? [String: Any]
+    } catch {
+      print("JDEncode Error: \(error)")
     }
     return nil
   }

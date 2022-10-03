@@ -33,7 +33,7 @@ protocol SQLTable {
     
     func execute()
         
-    static func decode<T: Decodable>(_ hash: [String: Any]) -> T?
+    static func decode<T: DJCodable>(_ hash: [String: Any]) -> T?
     
 }
 
@@ -43,7 +43,7 @@ extension SQLTable {
         // TODO
     }
     
-    static func decode<T: Decodable>(_ hash: [String: Any]) -> T? {
+    static func decode<T: DJCodable>(_ hash: [String: Any]) -> T? {
         return DJDecoder<T>(dict: hash).decode()
     }
     

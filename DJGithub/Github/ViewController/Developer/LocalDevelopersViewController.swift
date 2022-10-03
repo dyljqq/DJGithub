@@ -33,13 +33,16 @@ class LocalDevelopersViewController: UIViewController {
       make.edges.equalTo(self.view)
     }
     
+    NotificationCenter.default.addObserver(forName: DeveloperGroupManager.NotificationUpdatedAllName, object: nil, queue: .main, using: { [weak self] notification in
+      guard let strongSelf = self else { return }
+      strongSelf.update()
+    })
+  }
+  
+  func update() {
     Task {
-      do {
-        dataSource = try await UserManager.loadLocalDevelopersAsync()
-        tableView.reloadData()
-      } catch {
-        print("fetch local developers error: \(error)")
-      }
+      dataSource = await DeveloperGroupManager.shared.loadLocalDeveloperGroups()
+      tableView.reloadData()
     }
   }
 
@@ -56,10 +59,6 @@ extension LocalDevelopersViewController: UITableViewDelegate, UITableViewDataSou
     return group.users.count
   }
   
-  func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    return dataSource[section].name
-  }
-  
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: LocalDeveloperCell.className, for: indexPath) as! LocalDeveloperCell
     let developer = dataSource[indexPath.section].users[indexPath.row]
@@ -71,24 +70,13 @@ extension LocalDevelopersViewController: UITableViewDelegate, UITableViewDataSou
     tableView.deselectRow(at: indexPath, animated: true)
     
     let user = self.dataSource[indexPath.section].users[indexPath.row]
-    self.navigationController?.pushToUser(with: user.id)
+    self.navigationController?.pushToUser(with: user.name)
   }
   
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 30))
-    
-    let group = self.dataSource[section]
-    let contentLabel = UILabel()
-    contentLabel.text = group.name
-    contentLabel.font = UIFont.systemFont(ofSize: 14, weight: .bold)
-    contentLabel.textColor = .black
-    view.addSubview(contentLabel)
-    
-    contentLabel.snp.makeConstraints { make in
-      make.leading.equalTo(16)
-      make.bottom.equalTo(-10)
-    }
-    
+    let view = LocalDeveloperSectionHeaderView()
+    view.frame = CGRect(x: 0, y: 0, width: FrameGuide.screenWidth, height: 30)
+    view.render(with: self.dataSource[section].name)
     return view
   }
 }

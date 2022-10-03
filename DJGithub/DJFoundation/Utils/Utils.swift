@@ -20,7 +20,7 @@ func isEmpty(by str: String?) -> Bool {
   return str == nil || str!.isEmpty
 }
 
-func loadBundleJSONFile<T: Decodable>(_ filename: String) -> T {
+func loadBundleJSONFile<T: DJCodable>(_ filename: String) -> T {
   do {
     let decoder = JSONDecoder()
     return try decoder.decode(T.self, from: loadBundleData(filename))

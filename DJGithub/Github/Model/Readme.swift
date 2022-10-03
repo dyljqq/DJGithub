@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Readme: Decodable {
+struct Readme: DJCodable {
   
   var content: String
   

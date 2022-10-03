@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Language: Decodable {
+struct Language: DJCodable {
   var id: Int
   var language: String
   var hex: String

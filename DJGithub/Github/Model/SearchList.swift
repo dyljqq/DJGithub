@@ -19,7 +19,7 @@ enum SearchType {
   }
 }
 
-struct SearchList<T: Decodable>: Decodable {
+struct SearchList<T: DJCodable>: DJCodable {
   var totalCount: Int
   var incompleteResults: Bool
   var items: [T]
