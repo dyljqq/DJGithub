@@ -44,6 +44,19 @@ open class APIClient {
     return .failure(.requestError)
   }
   
+  func get<T: DJCodable>(with urlString: String) async -> T? {
+    do {
+      guard let url = URL(string: urlString) else {
+        return nil
+      }
+      let (data, _) = try await URLSession.shared.data(from: url)
+      return DJDecoder(data: data).decode()
+    } catch {
+      print("fetch error: \(urlString), error: \(error)")
+    }
+    return nil
+  }
+  
   private func _fetch(by router: Router) -> AnyPublisher<[String: Any], DJError> {
     guard let request = router.asURLRequest() else {
       return Fail(error: DJError.requestError).eraseToAnyPublisher()

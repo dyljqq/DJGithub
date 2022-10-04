@@ -9,21 +9,10 @@ import UIKit
 import SafariServices
 
 class RepoViewController: UIViewController {
-  
-  enum CellType {
-    case blank, cell(String, String, String)
-    
-    var height: CGFloat {
-      switch self {
-      case .cell: return 44
-      case .blank: return 12
-      }
-    }
-  }
 
   let repoName: String
   var repo: Repo?
-  var dataSouce: [CellType] = []
+  var dataSouce: [RepoCell.CellType] = []
   
   lazy var userStatusView: UserStatusView = {
     let view = UserStatusView(layoutLay: .normal)
@@ -138,12 +127,12 @@ class RepoViewController: UIViewController {
         self.headerView.render(with: repo)
         dataSouce = [
           .blank,
-          .cell("coding", repo.language ?? "unknown", "\(repo.license?.key ?? "") \(NSString(format: "%.2f", Double(repo.size) / 1000))MB"),
-          .cell("issue", "Issues", "\(repo.openIssuesCount)"),
-          .cell("pull-request", "Pull Requests", ""),
+          .language(repo.language ?? "unknown", "\(repo.license?.key ?? "") \(NSString(format: "%.2f", Double(repo.size) / 1000))MB"),
+          .issues(repo.openIssuesCount.toGitNum),
+          .pull,
           .blank,
-          .cell("git-branch", "Branches", repo.defaultBranch ?? ""),
-          .cell("book", "README", "")
+          .branch(repo.defaultBranch ?? ""),
+          .readme
         ]
         tableView.reloadData()
       }
@@ -172,11 +161,12 @@ extension RepoViewController: UITableViewDelegate, UITableViewDataSource {
     switch data {
     case .blank:
       let cell = UITableViewCell()
+      cell.selectionStyle = .none
       cell.backgroundColor = .backgroundColor
       return cell
-    case .cell(let iconName, let name, let desc):
+    default:
       let cell = tableView.dequeueReusableCell(withIdentifier: RepoCell.className, for: indexPath) as! RepoCell
-      cell.render(with: iconName, name: name, desc: desc)
+      cell.render(with: data)
       cell.accessoryType = .disclosureIndicator
       return cell
     }
@@ -188,6 +178,13 @@ extension RepoViewController: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
+    
+    let type = self.dataSouce[indexPath.row]
+    if case RepoCell.CellType.language = type,
+       let userName = repo?.owner?.login,
+       let repoName = repo?.name {
+      self.navigationController?.pushToRepoContent(with: userName, repoName: repoName)
+    }
   }
   
 }
