@@ -70,4 +70,9 @@ extension UINavigationController {
     let vc = RepoContentFileViewController(with: urlString)
     self.pushViewController(vc, animated: true)
   }
+  
+  func pushToRepoIssues(with userName: String, repoName: String) {
+    let vc = RepoIssuesStateViewController(userName: userName, repoName: repoName)
+    self.pushViewController(vc, animated: true)
+  }
 }

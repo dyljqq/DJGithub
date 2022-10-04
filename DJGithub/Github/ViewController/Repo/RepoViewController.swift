@@ -179,11 +179,17 @@ extension RepoViewController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
     
-    let type = self.dataSouce[indexPath.row]
-    if case RepoCell.CellType.language = type,
-       let userName = repo?.owner?.login,
+    if let userName = repo?.owner?.login,
        let repoName = repo?.name {
-      self.navigationController?.pushToRepoContent(with: userName, repoName: repoName)
+      let type = self.dataSouce[indexPath.row]
+      switch type {
+      case .language:
+        self.navigationController?.pushToRepoContent(with: userName, repoName: repoName)
+      case .issues:
+        self.navigationController?.pushToRepoIssues(with: userName, repoName: repoName)
+      default:
+        break
+      }
     }
   }
   
@@ -192,7 +198,7 @@ extension RepoViewController: UITableViewDelegate, UITableViewDataSource {
 extension RepoViewController: UIScrollViewDelegate {
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
     if scrollView.contentOffset.y > NormalHeaderView.defaultFrame.size.height {
-      self.navigationItem.title = self.repoName
+      self.navigationItem.title = self.repo?.name
     } else {
       self.navigationItem.title = "Repository"
     }
