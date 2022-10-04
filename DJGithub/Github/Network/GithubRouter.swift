@@ -33,6 +33,9 @@ enum GithubRouter: Router {
   case searchUser([String: String])
   case searchRepos([String: String])
   
+  // repo
+  case repoContents(userName: String, repoName: String)
+  
   var baseURLString: String {
     return "https://api.github.com/"
   }
@@ -71,6 +74,7 @@ enum GithubRouter: Router {
     case .userSubscription(let name, _): return "users/\(name)/subscriptions"
     case .searchUser: return "search/users"
     case .searchRepos: return "search/repositories"
+    case .repoContents(let userName, let repoName): return "repos/\(userName)/\(repoName)/contents"
     }
   }
   

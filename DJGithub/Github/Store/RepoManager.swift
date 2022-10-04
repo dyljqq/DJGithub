@@ -72,4 +72,21 @@ struct RepoManager {
     let result = await APIClient.shared.get(by: router)
     return result.parse()
   }
+  
+  static func getRepoContent(with userName: String, repoName: String) async -> [RepoContent] {
+    let router = GithubRouter.repoContents(userName: userName, repoName: repoName)
+    let result = await APIClient.shared.get(by: router)
+    let repoContents = result.parse() as RepoContents?
+    return repoContents?.items ?? []
+  }
+  
+  static func getRepoContent(with urlString: String) async -> [RepoContent] {
+    let result = await APIClient.shared.get(with: urlString) as [RepoContent]?
+    return result ?? []
+  }
+  
+  static func getRepoContentFile(with urlString: String) async -> RepoContent? {
+    let result = await APIClient.shared.get(with: urlString) as RepoContent?
+    return result
+  }
 }

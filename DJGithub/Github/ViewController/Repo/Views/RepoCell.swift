@@ -9,6 +9,48 @@ import UIKit
 
 class RepoCell: UITableViewCell {
 
+  enum CellType {
+    case blank, language(String, String), issues(String), pull, branch(String), readme
+    
+    var height: CGFloat {
+      switch self {
+      case .blank: return 12
+      default: return 44
+      }
+    }
+
+    var imageName: String {
+      switch self {
+      case .language: return "coding"
+      case .issues: return "issue"
+      case .pull: return "pull-request"
+      case .branch: return "git-branch"
+      case .readme: return "book"
+      default: return ""
+      }
+    }
+    
+    var name: String {
+      switch self {
+      case .language(let language, _): return language
+      case .issues: return "Issues"
+      case .pull: return "Pull Requests"
+      case .branch: return "Branches"
+      case .readme: return "README"
+      default: return ""
+      }
+    }
+    
+    var desc: String {
+      switch self {
+      case .language(_, let desc): return desc
+      case .issues(let desc): return desc
+      case .branch(let desc): return desc
+      default: return ""
+      }
+    }
+  }
+  
   lazy var backIconLabel: UILabel = {
     let label = UILabel()
     
@@ -48,10 +90,10 @@ class RepoCell: UITableViewCell {
     fatalError("init(coder:) has not been implemented")
   }
   
-  func render(with iconName: String, name: String, desc: String) {
-    iconImageView.image = UIImage(named: iconName)
-    nameLabel.text = name
-    descLabel.text = desc
+  func render(with type: CellType) {
+    iconImageView.image = UIImage(named: type.imageName)
+    nameLabel.text = type.name
+    descLabel.text = type.desc
   }
   
   private func setUp() {
