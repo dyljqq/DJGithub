@@ -54,7 +54,7 @@ class RepoContentsViewController: UIViewController {
     
     Task {
       let repoContents = await RepoManager.getRepoContent(with: self.userName, repoName: self.repoName)
-      self.dataSource = repoContents.reversed()
+      self.dataSource = repoContents.sorted { $0.type.rawValue < $1.type.rawValue }
       self.tableView.reloadData()
     }
   }
@@ -84,6 +84,7 @@ class RepoContentsViewController: UIViewController {
       loadingQueue[indexPath.row] = true
       Task {
         var contents = await RepoManager.getRepoContent(with: repoContent.url)
+        contents = contents.sorted { $0.type.rawValue < $1.type.rawValue }
         contents = contents.map { content in
           var c = content
           c.deepLength = repoContent.deepLength + 1

@@ -92,7 +92,12 @@ enum UserStatusViewType {
 	1. 保存历史搜索词
 	1. 增加对应的界面
 
-​	
+##### 2022-10-04
+
+1.  添加repo的文件展示功能
+2. 添加查看repo issues的功能
+
+​	目前只做了issues列表，详情的话还在添加
 
 ### TODO
 
