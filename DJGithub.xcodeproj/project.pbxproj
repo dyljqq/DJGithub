@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		73074C7C28ED5507001A90E7 /* RepoIssueDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73074C7B28ED5507001A90E7 /* RepoIssueDetailViewController.swift */; };
+		73074C7E28ED5664001A90E7 /* IssueDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73074C7D28ED5664001A90E7 /* IssueDetail.swift */; };
 		73101D3F28E3077C00DB5423 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73101D3E28E3077C00DB5423 /* UserManager.swift */; };
 		73101D4128E30C5200DB5423 /* SimpleUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73101D4028E30C5200DB5423 /* SimpleUserCell.swift */; };
 		73101D4328E310D900DB5423 /* UserFollowingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73101D4228E310D900DB5423 /* UserFollowingViewController.swift */; };
@@ -131,6 +133,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		73074C7B28ED5507001A90E7 /* RepoIssueDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoIssueDetailViewController.swift; sourceTree = "<group>"; };
+		73074C7D28ED5664001A90E7 /* IssueDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDetail.swift; sourceTree = "<group>"; };
 		73101D3E28E3077C00DB5423 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		73101D4028E30C5200DB5423 /* SimpleUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleUserCell.swift; sourceTree = "<group>"; };
 		73101D4228E310D900DB5423 /* UserFollowingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFollowingViewController.swift; sourceTree = "<group>"; };
@@ -468,6 +472,7 @@
 				73B7906128E7EB8A002A9CDC /* SearchList.swift */,
 				73DF6BFB28EBFD3E0003BDB8 /* RepoContent.swift */,
 				73DF6C0728EC69840003BDB8 /* Issue.swift */,
+				73074C7D28ED5664001A90E7 /* IssueDetail.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -562,6 +567,7 @@
 				73DF6C0128EC1EE80003BDB8 /* RepoContentFileViewController.swift */,
 				73DF6C0528EC68A00003BDB8 /* RepoIssuesViewController.swift */,
 				73DF6C0B28EC7A7A0003BDB8 /* RepoIssuesStateViewController.swift */,
+				73074C7B28ED5507001A90E7 /* RepoIssueDetailViewController.swift */,
 			);
 			path = Repo;
 			sourceTree = "<group>";
@@ -782,6 +788,7 @@
 				73DF6C0428EC252E0003BDB8 /* String+File.swift in Sources */,
 				73AACB3428D357C80072B1DF /* UserViewController.swift in Sources */,
 				7341DCC628DF2400009A3A3C /* TabBarController.swift in Sources */,
+				73074C7E28ED5664001A90E7 /* IssueDetail.swift in Sources */,
 				73DF6C0C28EC7A7A0003BDB8 /* RepoIssuesStateViewController.swift in Sources */,
 				73AACB2928D321480072B1DF /* Result.swift in Sources */,
 				73DF6BFC28EBFD3E0003BDB8 /* RepoContent.swift in Sources */,
@@ -839,6 +846,7 @@
 				7341DCCE28E03505009A3A3C /* NormalHeaderView.swift in Sources */,
 				73AACB6228D4BEFE0072B1DF /* UserStaredRepoCell.swift in Sources */,
 				73C598C528D85EF100DA86A1 /* PopoverView.swift in Sources */,
+				73074C7C28ED5507001A90E7 /* RepoIssueDetailViewController.swift in Sources */,
 				73AACAD728D308A60072B1DF /* SceneDelegate.swift in Sources */,
 				73AACB5628D47FCB0072B1DF /* String+Ext.swift in Sources */,
 				73C598CD28D9E6A100DA86A1 /* URL+Ext.swift in Sources */,

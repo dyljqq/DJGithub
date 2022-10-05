@@ -75,4 +75,9 @@ extension UINavigationController {
     let vc = RepoIssuesStateViewController(userName: userName, repoName: repoName)
     self.pushViewController(vc, animated: true)
   }
+  
+  func pushToRepoIssue(with userName: String, repoName: String, issueNum: Int) {
+    let vc = RepoIssueDetailViewController(userName: userName, repoName: repoName, issueNum: issueNum)
+    self.pushViewController(vc, animated: true)
+  }
 }
