@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		73074C7C28ED5507001A90E7 /* RepoIssueDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73074C7B28ED5507001A90E7 /* RepoIssueDetailViewController.swift */; };
 		73074C7E28ED5664001A90E7 /* IssueDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73074C7D28ED5664001A90E7 /* IssueDetail.swift */; };
+		73074C8028EDB955001A90E7 /* WebViewFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73074C7F28EDB955001A90E7 /* WebViewFooterView.swift */; };
 		73101D3F28E3077C00DB5423 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73101D3E28E3077C00DB5423 /* UserManager.swift */; };
 		73101D4128E30C5200DB5423 /* SimpleUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73101D4028E30C5200DB5423 /* SimpleUserCell.swift */; };
 		73101D4328E310D900DB5423 /* UserFollowingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73101D4228E310D900DB5423 /* UserFollowingViewController.swift */; };
@@ -135,6 +136,7 @@
 /* Begin PBXFileReference section */
 		73074C7B28ED5507001A90E7 /* RepoIssueDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoIssueDetailViewController.swift; sourceTree = "<group>"; };
 		73074C7D28ED5664001A90E7 /* IssueDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDetail.swift; sourceTree = "<group>"; };
+		73074C7F28EDB955001A90E7 /* WebViewFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewFooterView.swift; sourceTree = "<group>"; };
 		73101D3E28E3077C00DB5423 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		73101D4028E30C5200DB5423 /* SimpleUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleUserCell.swift; sourceTree = "<group>"; };
 		73101D4228E310D900DB5423 /* UserFollowingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFollowingViewController.swift; sourceTree = "<group>"; };
@@ -582,6 +584,7 @@
 				732B21CF28E1C09B005893C0 /* RepoStarView.swift */,
 				73DF6BFF28EC00FD0003BDB8 /* RepoContentCell.swift */,
 				73DF6C0928EC6A9C0003BDB8 /* IssueCell.swift */,
+				73074C7F28EDB955001A90E7 /* WebViewFooterView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -781,6 +784,7 @@
 				73101D4328E310D900DB5423 /* UserFollowingViewController.swift in Sources */,
 				73B7906628E7F133002A9CDC /* SearchViewController.swift in Sources */,
 				73B7905828E541BE002A9CDC /* Bool+Ext.swift in Sources */,
+				73074C8028EDB955001A90E7 /* WebViewFooterView.swift in Sources */,
 				73C598C728D8617800DA86A1 /* UIApplication+Ext.swift in Sources */,
 				73AACB0828D30A3C0072B1DF /* Router.swift in Sources */,
 				73DF6C0A28EC6A9C0003BDB8 /* IssueCell.swift in Sources */,

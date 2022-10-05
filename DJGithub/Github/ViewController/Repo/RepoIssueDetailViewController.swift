@@ -62,7 +62,7 @@ class RepoIssueDetailHeaderView: UIView {
   }
   
   func render(with issue: IssueDetail, comletionHandler: ((CGFloat) -> ())? = nil) {
-    titleLabel.text = "#\(issue.number) - \(issue.title)"
+    titleLabel.text = "\(issue.title) - #\(issue.number)"
     avatarImageView.setImage(with: URL(string: issue.user.avatarUrl))
     if let date = issue.createdAt.components(separatedBy: "T").first {
       contentLabel.text = "\(issue.user.login) commented on \(date)"
