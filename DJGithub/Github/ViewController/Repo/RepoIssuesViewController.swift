@@ -100,6 +100,9 @@ extension RepoIssuesViewController: UITableViewDataSource, UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
+    
+    let issue = self.dataSource[indexPath.row]
+    self.navigationController?.pushToRepoIssue(with: userName, repoName: repoName, issueNum: issue.issue.number)
   }
 }
 

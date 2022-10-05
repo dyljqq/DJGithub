@@ -96,4 +96,10 @@ struct RepoManager {
     let issueItems = result.parse() as IssueItems?
     return issueItems?.items ?? []
   }
+  
+  static func getRepoIssueDetail(with userName: String, repoName: String, issueNum: Int) async -> IssueDetail? {
+    let router = GithubRouter.repoIssue(userName: userName, repoName: repoName, issueNum: issueNum)
+    let result = await APIClient.shared.get(by: router)
+    return result.parse()
+  }
 }

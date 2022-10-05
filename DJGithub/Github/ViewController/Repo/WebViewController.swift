@@ -52,7 +52,8 @@ class WebViewController: UIViewController {
     view.backgroundColor = .backgroundColor
     view.addSubview(webView)
     webView.snp.makeConstraints { make in
-      make.edges.equalTo(self.view)
+      make.top.equalTo(FrameGuide.navigationBarAndStatusBarHeight)
+      make.leading.bottom.trailing.equalTo(self.view)
     }
     
     if let req = self.request {

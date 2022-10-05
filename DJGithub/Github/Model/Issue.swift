@@ -37,6 +37,7 @@ struct Issue: DJCodable {
   var title: String
   var state: IssueState
   var comments: Int
+  var htmlUrl:String
 
   var createdAt: String
   var updatedAt: String
