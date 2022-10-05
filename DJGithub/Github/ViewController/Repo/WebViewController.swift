@@ -64,7 +64,8 @@ class WebViewController: UIViewController {
     view.addSubview(footerView)
     webView.snp.makeConstraints { make in
       make.top.equalTo(FrameGuide.navigationBarAndStatusBarHeight)
-      make.leading.bottom.trailing.equalTo(self.view)
+      make.bottom.equalTo(footerView.snp.top)
+      make.leading.trailing.equalTo(self.view)
     }
     footerView.snp.makeConstraints { make in
       make.height.equalTo(FrameGuide.tabbarHeight)
@@ -72,7 +73,7 @@ class WebViewController: UIViewController {
     }
     
     if let req = self.request {
-      webView.load(req)
+      self.webView.load(req)
     }
     
     view.startLoading()
@@ -95,7 +96,9 @@ class WebViewController: UIViewController {
       self?.navigationItem.title = webView.title
     }
     progressToken = self.webView.observe(\.estimatedProgress) { [weak self] webView, progress in
-      self?.view.stopLoading()
+      if webView.estimatedProgress >= 1  {
+        self?.view.stopLoading()
+      }
     }
   }
   

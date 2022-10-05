@@ -107,6 +107,11 @@ enum UserStatusViewType {
 
 2. webView添加back，forward，reload action。
 
+TODO:
+
+	1. Create new issue & new issue comment
+	1. rss read parse
+
 ### TODO
 
 1. 继续基础界面的搭建
