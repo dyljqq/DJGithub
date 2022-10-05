@@ -105,6 +105,8 @@ enum UserStatusViewType {
 
 	* 接口返回的body是md形式的文本，如果列表渲染每个cell的md文本的话，性能会消耗的非常厉害。而且会有一些样式的问题。因此issue的详情通过原生，列表采用web展示
 
+2. webView添加back，forward，reload action。
+
 ### TODO
 
 1. 继续基础界面的搭建
