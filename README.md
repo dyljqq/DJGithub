@@ -109,8 +109,19 @@ enum UserStatusViewType {
 
 TODO:
 
-	1. Create new issue & new issue comment
-	1. rss read parse
+1. Create new issue & new issue comment
+1. rss read parse
+
+##### 2022-10-06
+
+1. 添加创建issue的界面
+2. 封装HUD & UITextView + Placeholder
+2. issue & issue comment的交互
+
+TODO：
+
+1. 查看repo的pull情况。
+2. 添加本地的repo
 
 ### TODO
 

@@ -80,6 +80,11 @@ class RepoIssuesStateViewController: UIViewController {
   
   @objc func plusAction() {
     let vc = RepoFeedbackViewController(with: .issue(userName: userName, repoName: repoName))
+    vc.completionHandler = { [weak self] in
+      guard let strongSelf = self else { return }
+      let vc = strongSelf.vcs[strongSelf.segmentView.selectedSegmentIndex]
+      vc.refresh()
+    }
     self.present(vc, animated: true)
   }
   

@@ -14,7 +14,7 @@ extension Result {
     case .success(let d):
       if let d = d as? [String: Any] {
         if let statusCode = d["statusCode"] as? Int,
-           ![204, 404].contains(statusCode) {
+           ![204, 404, 201].contains(statusCode) {
           print("result parse error, status code:\(statusCode)")
           return nil
         }

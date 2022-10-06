@@ -13,6 +13,7 @@
 		73074CBE28EEC4AF001A90E7 /* RepoFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73074CBD28EEC4AF001A90E7 /* RepoFeedbackViewController.swift */; };
 		73074CC028EED421001A90E7 /* CommitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73074CBF28EED421001A90E7 /* CommitView.swift */; };
 		73074CC228EEE6C5001A90E7 /* UITextView+Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73074CC128EEE6C5001A90E7 /* UITextView+Placeholder.swift */; };
+		73074CC428EEF54F001A90E7 /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73074CC328EEF54F001A90E7 /* HUD.swift */; };
 		73101D3F28E3077C00DB5423 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73101D3E28E3077C00DB5423 /* UserManager.swift */; };
 		73101D4128E30C5200DB5423 /* SimpleUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73101D4028E30C5200DB5423 /* SimpleUserCell.swift */; };
 		73101D4328E310D900DB5423 /* UserFollowingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73101D4228E310D900DB5423 /* UserFollowingViewController.swift */; };
@@ -143,6 +144,7 @@
 		73074CBD28EEC4AF001A90E7 /* RepoFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoFeedbackViewController.swift; sourceTree = "<group>"; };
 		73074CBF28EED421001A90E7 /* CommitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitView.swift; sourceTree = "<group>"; };
 		73074CC128EEE6C5001A90E7 /* UITextView+Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Placeholder.swift"; sourceTree = "<group>"; };
+		73074CC328EEF54F001A90E7 /* HUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
 		73101D3E28E3077C00DB5423 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		73101D4028E30C5200DB5423 /* SimpleUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleUserCell.swift; sourceTree = "<group>"; };
 		73101D4228E310D900DB5423 /* UserFollowingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFollowingViewController.swift; sourceTree = "<group>"; };
@@ -639,6 +641,7 @@
 			isa = PBXGroup;
 			children = (
 				73C598C428D85EF100DA86A1 /* PopoverView.swift */,
+				73074CC328EEF54F001A90E7 /* HUD.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -885,6 +888,7 @@
 				73AACB1828D312D30072B1DF /* GithubRouter.swift in Sources */,
 				73101D5028E4A10400DB5423 /* LocalDeveloperGroup.swift in Sources */,
 				73DF6BEC28EACF340003BDB8 /* SearchWordHeaderView.swift in Sources */,
+				73074CC428EEF54F001A90E7 /* HUD.swift in Sources */,
 				73B7905228E53353002A9CDC /* Config.swift in Sources */,
 				7341DCCA28DF2B4B009A3A3C /* ImageCoder.swift in Sources */,
 			);

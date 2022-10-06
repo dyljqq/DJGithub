@@ -11,14 +11,15 @@ class RepoFeedbackViewController: UIViewController {
 
   enum RepoFeedbackType {
     case issue(userName: String, repoName: String)
+    case editIssue(userName: String, repoName: String, issueNum: Int)
     case issueComment(userName: String, repoName: String, issueNum: Int)
   }
   
   let type: RepoFeedbackType
+  var completionHandler: (() -> ())? = nil
   
   lazy var titleLabel: UILabel = {
     let label = UILabel()
-    label.text = "New Issue"
     label.textColor = .textColor
     label.font = UIFont.systemFont(ofSize: 14, weight: .bold)
     return label
@@ -57,7 +58,7 @@ class RepoFeedbackViewController: UIViewController {
     textView.layer.cornerRadius = 5
     textView.layer.masksToBounds = true
     textView.textContainer.lineFragmentPadding = 15
-    textView.placeholder = "issue content"
+    textView.placeholder = "Issue content"
     return textView
   }()
   
@@ -72,6 +73,8 @@ class RepoFeedbackViewController: UIViewController {
     return view
   }()
   
+  let headerView = UIView()
+  
   init(with type: RepoFeedbackType) {
     self.type = type
     super.init(nibName: nil, bundle: nil)
@@ -85,13 +88,36 @@ class RepoFeedbackViewController: UIViewController {
     super.viewDidLoad()
     
     setUp()
+    
+    switch type {
+    case .editIssue(let userName, let repoName, let issueNum):
+      titleLabel.text = "Edit Issue"
+      fetchIssueDetail(with: userName, repoName: repoName, issueNum: issueNum)
+    case .issue:
+      titleLabel.text = "Create Issue"
+    case .issueComment:
+      titleLabel.text = "Create Issue Comment"
+      self.titleTextField.isHidden = true
+      self.descTextView.snp.updateConstraints { make in
+        make.top.equalTo(headerView.snp.bottom).offset(20)
+      }
+      self.descTextView.placeholder = "Issue comment content"
+    }
+  }
+  
+  private func fetchIssueDetail(with userName: String, repoName: String, issueNum: Int) {
+    Task {
+      if let issue = await RepoManager.getRepoIssueDetail(with: userName, repoName: repoName, issueNum: issueNum) {
+        self.titleTextField.text = issue.title
+        self.descTextView.placeholder = ""
+        self.descTextView.text = issue.body
+      }
+    }
   }
   
   private func setUp() {
     view.backgroundColor = .backgroundColor
-    self.navigationItem.title = "New Issue"
     
-    let headerView = UIView()
     headerView.backgroundColor = .white
     view.addSubview(headerView)
     
@@ -120,7 +146,7 @@ class RepoFeedbackViewController: UIViewController {
       make.top.equalTo(headerView.snp.bottom).offset(20)
     }
     descTextView.snp.makeConstraints { make in
-      make.top.equalTo(titleTextField.snp.bottom).offset(20)
+      make.top.equalTo(headerView.snp.bottom).offset(80)
       make.leading.equalTo(titleTextField)
       make.centerX.equalToSuperview()
       make.height.equalTo(200)
@@ -140,25 +166,43 @@ class RepoFeedbackViewController: UIViewController {
       let title = titleTextField.text ?? ""
       let content = descTextView.text ?? ""
       
-      guard !title.isEmpty else {
-        commitView.isLoading = false
-        return
-      }
-      
       let params: [String: String] = [
         "title": title,
         "body": content
       ]
       switch type {
       case .issue(let userName, let repoName):
-        if let statusCode = await RepoManager.createNewIssue(with: userName, repoName: repoName, params: params) {
-          commitView.isLoading = false
+        guard !title.isEmpty else { break }
+        if let statusCode = await RepoManager.createNewIssue(with: userName, repoName: repoName, params: params),
+           statusCode.isStatus201 {
+          self.dismiss(animated: true, completion: { [weak self] in
+            self?.completionHandler?()
+          })
         } else {
-          commitView.isLoading = false
+          HUD.show(with: "Fail to create issue.")
         }
+        commitView.isLoading = false
       case .issueComment(let userName, let repoName, let issueNum):
-        break
+        guard !content.isEmpty else { break }
+        if let status = await RepoManager.createIssueComment(with: userName, repoName: repoName, issueNum: issueNum, params: ["body": content]),
+           status.isStatus201 {
+          self.dismiss(animated: true, completion: { [weak self] in
+            self?.completionHandler?()
+          })
+        } else {
+          HUD.show(with: "Fail to create issue comment.")
+        }
+      case .editIssue(let userName, let repoName, let issueNum):
+        guard !title.isEmpty else { break }
+        if let _ = await RepoManager.updateIssue(with: userName, repoName: repoName, issueNum: issueNum, params: params) {
+          self.dismiss(animated: true, completion: { [weak self] in
+            self?.completionHandler?()
+          })
+        } else {
+          HUD.show(with: "Fail to update issue.")
+        }
       }
+      commitView.isLoading = false
     }
   }
   
@@ -169,12 +213,4 @@ class RepoFeedbackViewController: UIViewController {
 }
 
 extension RepoFeedbackViewController: UITextViewDelegate {
-  func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-    print("text: \(text), range: \(range)")
-    return true
-  }
-  
-  func textViewDidBeginEditing(_ textView: UITextView) {
-    
-  }
 }

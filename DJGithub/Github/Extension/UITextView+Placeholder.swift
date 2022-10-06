@@ -28,7 +28,13 @@ extension UITextView: UITextViewDelegate {
       if self.placeholderLabel == nil {
         self.addPlaceholder(with: newValue)
       }
+      if newValue == nil || newValue!.isEmpty {
+        self.placeholderLabel?.isHidden = true
+      } else {
+        self.placeholderLabel?.isHidden = false
+      }
       self.placeholderLabel?.text = newValue
+      self.resizePlaceholderLabel()
     }
   }
   
@@ -40,7 +46,6 @@ extension UITextView: UITextViewDelegate {
     let x = self.textContainer.lineFragmentPadding
     let y = self.textContainerInset.top
     
-    print("placeholder: \(placeholder), placeholder: \(placeholderLabel)")
     if let placeholder = placeholder {
       let rect = (placeholder as NSString).boundingRect(
         with: CGSize(width: 0, height: 20),
@@ -48,7 +53,6 @@ extension UITextView: UITextViewDelegate {
         attributes: [NSAttributedString.Key.font: self.placeholderLabel?.font ?? UIFont.systemFont(ofSize: 14)],
         context: nil)
       placeholderLabel?.frame = CGRect(x: x, y: y, width: rect.width, height: 20)
-      print("frame: \(CGRect(x: x, y: y, width: self.frame.width - 2 * x, height: 20))")
     }
   }
   
