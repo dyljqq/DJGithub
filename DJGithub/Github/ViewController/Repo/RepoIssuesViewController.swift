@@ -48,7 +48,7 @@ class RepoIssuesViewController: UIViewController, NextPageLoadable {
   }
   
   private func setUp() {
-    self.navigationItem.title = "issues"
+    self.navigationItem.title = "issue"
     
     view.addSubview(self.tableView)
     tableView.snp.makeConstraints { make in
@@ -64,7 +64,7 @@ class RepoIssuesViewController: UIViewController, NextPageLoadable {
     }
     tableView.addFooter { [weak self] in
       guard let strongSelf = self else { return }
-      strongSelf.loadNext(start: strongSelf.nextPageState.start)
+      strongSelf.loadNext(start: strongSelf.nextPageState.start + 1)
     }
     nextPageState.update(start: 1, hasNext: true, isLoading: false)
     self.loadNext(start: self.nextPageState.start)

@@ -48,8 +48,8 @@ class RepoIssueDetailHeaderView: UIView {
     let label = UILabel()
     label.backgroundColor = .green
     label.textColor = .white
-    label.font = UIFont.systemFont(ofSize: 14)
-    label.layer.cornerRadius = 10
+    label.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+    label.layer.cornerRadius = 12
     label.layer.masksToBounds = true
     label.textAlignment = .center
     return label
@@ -114,7 +114,7 @@ class RepoIssueDetailHeaderView: UIView {
     stateLabel.snp.makeConstraints { make in
       make.trailing.equalTo(-12)
       make.width.equalTo(50)
-      make.height.equalTo(20)
+      make.height.equalTo(24)
       make.centerY.equalTo(avatarImageView)
     }
     
