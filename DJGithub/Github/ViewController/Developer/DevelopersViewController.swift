@@ -8,11 +8,13 @@
 import UIKit
 
 class DevelopersViewController: UIViewController {
-
+  
+  var isSelectedSegment = false
+  
   lazy var segmentView: UISegmentedControl = {
-    let segment = UISegmentedControl(items: ["Following", "Developers"])
+    let segment = UISegmentedControl(items: ["Following", "Developers", "Repos"])
     segment.selectedSegmentIndex = 0
-    segment.frame = CGRect(x: 0, y: 100, width: 200, height: 30)
+    segment.frame = CGRect(x: 0, y: 100, width: 300, height: 30)
     segment.addTarget(self, action: #selector(segmentSelectAction), for: .valueChanged)
     return segment
   }()
@@ -30,7 +32,8 @@ class DevelopersViewController: UIViewController {
   lazy var vcs: [UIViewController] =  {
     return [
       UserFollowingViewController(with: .following(ConfigManager.config.userName)),
-      LocalDevelopersViewController()
+      LocalDevelopersViewController(with: .developer),
+      LocalDevelopersViewController(with: .repo)
     ]
   }()
   
@@ -51,7 +54,7 @@ class DevelopersViewController: UIViewController {
   
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
-    scrollView.contentSize = CGSize(width: FrameGuide.screenWidth * 2, height: scrollView.bounds.height)
+    scrollView.contentSize = CGSize(width: FrameGuide.screenWidth * CGFloat(vcs.count), height: scrollView.bounds.height)
     for (index, vc) in vcs.enumerated() {
       var frame = scrollView.frame
       frame.origin = CGPoint(x: CGFloat(index) * scrollView.frame.width, y: 0)
@@ -60,6 +63,7 @@ class DevelopersViewController: UIViewController {
   }
   
   @objc func segmentSelectAction(segment: UISegmentedControl) {
+    isSelectedSegment = true
     let selectedNum = segment.selectedSegmentIndex
     scrollView.setContentOffset(
       CGPoint(x: CGFloat(selectedNum) * scrollView.bounds.width, y: scrollView.contentOffset.y), animated: true)
@@ -68,9 +72,13 @@ class DevelopersViewController: UIViewController {
 }
 
 extension DevelopersViewController: UIScrollViewDelegate {
-  func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-    let offsetX = scrollView.contentOffset.x
-    let page = Int(offsetX / scrollView.bounds.width + 0.5)
+  func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+    isSelectedSegment = false
+  }
+  
+  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    guard !isSelectedSegment else { return }
+    let page = Int(scrollView.contentOffset.x / scrollView.bounds.width + 0.5)
     self.segmentView.selectedSegmentIndex = page
   }
 }
