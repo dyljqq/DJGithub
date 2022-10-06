@@ -47,6 +47,7 @@ class RepoIssuesStateViewController: UIViewController {
     super.viewDidLoad()
     
     setUp()
+    configNavigationItem()
   }
   
   private func setUp() {
@@ -70,6 +71,21 @@ class RepoIssuesStateViewController: UIViewController {
       addChild(vc)
       scrollView.addSubview(vc.view)
     }
+  }
+  
+  private func configNavigationItem() {
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+      barButtonSystemItem: .add, target: self, action: #selector(plusAction))
+  }
+  
+  @objc func plusAction() {
+    let vc = RepoFeedbackViewController(with: .issue(userName: userName, repoName: repoName))
+    vc.completionHandler = { [weak self] in
+      guard let strongSelf = self else { return }
+      let vc = strongSelf.vcs[strongSelf.segmentView.selectedSegmentIndex]
+      vc.refresh()
+    }
+    self.present(vc, animated: true)
   }
   
   override func viewDidLayoutSubviews() {

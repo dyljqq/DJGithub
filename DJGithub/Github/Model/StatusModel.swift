@@ -13,4 +13,8 @@ struct StatusModel: DJCodable {
   var isStatus204: Bool {
     return statusCode == 204
   }
+  
+  var isStatus201: Bool {
+    return statusCode == 201
+  }
 }

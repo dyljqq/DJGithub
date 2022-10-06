@@ -102,4 +102,22 @@ struct RepoManager {
     let result = await APIClient.shared.get(by: router)
     return result.parse()
   }
+  
+  static func createNewIssue(with userName: String, repoName: String, params: [String: String]) async -> StatusModel? {
+    let router = GithubRouter.repoIssueCommit(userName: userName, repoName: repoName, params: params)
+    let result = await APIClient.shared.get(by: router)
+    return result.parse()
+  }
+  
+  static func updateIssue(with userName: String, repoName: String, issueNum: Int, params: [String: String]) async -> IssueDetail? {
+    let router = GithubRouter.repoIssueUpdate(userName: userName, repoName: repoName, issueNum: issueNum, params: params)
+    let result = await APIClient.shared.get(by: router)
+    return result.parse()
+  }
+  
+  static func createIssueComment(with userName: String, repoName: String, issueNum: Int, params: [String: String]) async -> StatusModel? {
+    let router = GithubRouter.repoIssueCommentCommit(userName: userName, repoName: repoName, issueNum: issueNum, params: params)
+    let result = await APIClient.shared.get(by: router)
+    return result.parse()
+  }
 }

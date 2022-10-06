@@ -19,7 +19,10 @@ extension Issue.IssueState {
 
 class RepoIssueDetailHeaderView: UIView {
   
+  var issue: IssueDetail?
+  
   var touchedTitleClosure: (() -> ())?
+  var updateStateClosure:(() -> ())?
   
   lazy var avatarImageView: UIImageView = {
     let imageView = UIImageView()
@@ -48,10 +51,15 @@ class RepoIssueDetailHeaderView: UIView {
     let label = UILabel()
     label.backgroundColor = .green
     label.textColor = .white
-    label.font = UIFont.systemFont(ofSize: 14)
-    label.layer.cornerRadius = 10
+    label.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+    label.layer.cornerRadius = 12
     label.layer.masksToBounds = true
     label.textAlignment = .center
+    label.isUserInteractionEnabled = true
+    
+    let tap = UITapGestureRecognizer(target: self, action: #selector(updateStateAction))
+    label.addGestureRecognizer(tap)
+    
     return label
   }()
   
@@ -62,6 +70,7 @@ class RepoIssueDetailHeaderView: UIView {
   }
   
   func render(with issue: IssueDetail, comletionHandler: ((CGFloat) -> ())? = nil) {
+    self.issue = issue
     titleLabel.text = "\(issue.title) - #\(issue.number)"
     avatarImageView.setImage(with: URL(string: issue.user.avatarUrl))
     if let date = issue.createdAt.components(separatedBy: "T").first {
@@ -114,7 +123,7 @@ class RepoIssueDetailHeaderView: UIView {
     stateLabel.snp.makeConstraints { make in
       make.trailing.equalTo(-12)
       make.width.equalTo(50)
-      make.height.equalTo(20)
+      make.height.equalTo(24)
       make.centerY.equalTo(avatarImageView)
     }
     
@@ -125,6 +134,12 @@ class RepoIssueDetailHeaderView: UIView {
   
   @objc func touchTitleAction() {
     touchedTitleClosure?()
+  }
+  
+  @objc func updateStateAction() {
+    if let issue = issue, case Issue.IssueState.open = issue.state {
+      updateStateClosure?()
+    }
   }
   
 }
@@ -168,10 +183,28 @@ class RepoIssueDetailViewController: UIViewController {
     super.viewDidLoad()
     
     setUp()
+    updateIssue()
+  }
+  
+  @objc func editAction() {
+    let vc = RepoFeedbackViewController(with: .editIssue(userName: userName, repoName: repoName, issueNum: issueNum))
+    vc.completionHandler = { [weak self] in
+      self?.updateIssue()
+    }
+    present(vc, animated: true)
   }
   
   func render(with issueDetail: IssueDetail) {
     self.issue = issueDetail
+    
+    if case Issue.IssueState.open = issueDetail.state {
+      self.navigationItem.rightBarButtonItems = [
+        UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addAction)),
+        UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editAction))
+      ]
+    } else {
+      self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addAction))
+    }
     headerView.render(with: issueDetail, comletionHandler: { [weak self] height in
       self?.headerView.snp.updateConstraints { make in
         make.height.equalTo(height + 64)
@@ -213,6 +246,24 @@ class RepoIssueDetailViewController: UIViewController {
         strongSelf.navigationController?.pushToWebView(with: issue.htmlUrl)
       }
     }
+    headerView.updateStateClosure = { [weak self] in
+      guard let strongSelf = self else { return }
+      let alertVC = UIAlertController(title: "", message: "Are you sure to close this issue?", preferredStyle: .alert)
+      alertVC.addAction(UIAlertAction(title: "sure", style: .default, handler: { action in
+        Task {
+          if let _ = await RepoManager.updateIssue(
+            with: strongSelf.userName,
+            repoName: strongSelf.repoName,
+            issueNum: strongSelf.issueNum,
+            params: ["state": "closed"]
+          ) {
+            strongSelf.updateIssue()
+          }
+        }
+      }))
+      alertVC.addAction(UIAlertAction(title: "cancel", style: .cancel))
+      strongSelf.present(alertVC, animated: true)
+    }
 
     bodyView.onRendered = { [weak self] height in
       guard let strongSelf = self else { return }
@@ -229,11 +280,20 @@ class RepoIssueDetailViewController: UIViewController {
       return false
     }
     
+  }
+  
+  private func updateIssue() {
     Task {
       if let issue = await RepoManager.getRepoIssueDetail(with: userName, repoName: repoName, issueNum: issueNum) {
         self.render(with: issue)
       }
     }
+  }
+  
+  // Add issue comment
+  @objc func addAction() {
+    let vc = RepoFeedbackViewController(with: .issueComment(userName: userName, repoName: repoName, issueNum: issueNum))
+    present(vc, animated: true)
   }
 
 }

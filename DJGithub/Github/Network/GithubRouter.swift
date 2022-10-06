@@ -39,6 +39,9 @@ enum GithubRouter: Router {
   // repo issues
   case repoIssues(userName: String, repoName: String, params: [String: String])
   case repoIssue(userName: String, repoName: String, issueNum: Int)
+  case repoIssueCommit(userName: String, repoName: String, params: [String: String])
+  case repoIssueUpdate(userName: String, repoName: String, issueNum: Int, params: [String: String])
+  case repoIssueCommentCommit(userName: String, repoName: String, issueNum: Int, params: [String: String])
   
   var baseURLString: String {
     return "https://api.github.com/"
@@ -51,6 +54,9 @@ enum GithubRouter: Router {
     case .unStarRepo: return .DELETE
     case .followUser: return .PUT
     case .unfollowUser: return .DELETE
+    case .repoIssueCommit: return .POST
+    case .repoIssueUpdate: return .PATCH
+    case .repoIssueCommentCommit: return .POST
     default: return .GET
     }
   }
@@ -81,6 +87,9 @@ enum GithubRouter: Router {
     case .repoContents(let userName, let repoName): return "repos/\(userName)/\(repoName)/contents"
     case .repoIssues(let userName, let repoName, _): return "repos/\(userName)/\(repoName)/issues"
     case .repoIssue(let userName, let repoName, let issueNum): return "repos/\(userName)/\(repoName)/issues/\(issueNum)"
+    case .repoIssueCommit(let userName, let repoName, _): return "repos/\(userName)/\(repoName)/issues"
+    case .repoIssueUpdate(let userName, let repoName, let issueNum, _): return "repos/\(userName)/\(repoName)/issues/\(issueNum)"
+    case .repoIssueCommentCommit(let userName, let repoName, let issueNum, _): return "repos/\(userName)/\(repoName)/issues/\(issueNum)/comments"
     }
   }
   
@@ -96,6 +105,12 @@ enum GithubRouter: Router {
       return params
     case .userStartedRepos(_, let queryItems):
       return queryItems
+    case .repoIssueCommit(_, _, let params):
+      return params
+    case .repoIssueUpdate(_, _, _, let params):
+      return params
+    case .repoIssueCommentCommit(_, _, _, let params):
+      return params
     default: return [:]
     }
   }
@@ -124,7 +139,7 @@ enum GithubRouter: Router {
     request?.setValue(ConfigManager.config.authorization, forHTTPHeaderField: "Authorization")
     if !parameters.isEmpty {
       switch method {
-      case .POST: request?.httpBody = try? JSONSerialization.data(withJSONObject: parameters)
+      case .POST, .PATCH: request?.httpBody = try? JSONSerialization.data(withJSONObject: parameters)
       default: break
       }
     }

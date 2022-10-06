@@ -109,7 +109,7 @@ class PopoverView: UIView {
     UIView.animate(withDuration: 0.3, animations: {
       self.alpha = 1
     }, completion: { finished in
-      self .removeFromSuperview()
+      self.removeFromSuperview()
     })
   }
   
