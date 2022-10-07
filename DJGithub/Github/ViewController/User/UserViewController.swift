@@ -159,6 +159,13 @@ class UserViewController: UIViewController {
       self.view.stopLoading()
     }
     
+    userHeaderView.renderHeightClosure = { [weak self] height in
+      guard let strongSelf = self else { return }
+      strongSelf.userHeaderView.frame = CGRect(x: 0, y: 0, width: FrameGuide.screenWidth, height: height)
+      strongSelf.tableView.beginUpdates()
+      strongSelf.tableView.endUpdates()
+    }
+    
     configNavigationRightButton()
   }
   
@@ -210,6 +217,7 @@ extension UserViewController: UITableViewDataSource {
     case .blank:
       let cell = UITableViewCell()
       cell.backgroundColor = .backgroundColor
+      cell.selectionStyle = .none
       return cell
     case .user(let userType):
       let cell = tableView.dequeueReusableCell(withIdentifier: UserCell.className, for: indexPath) as! UserCell
@@ -232,5 +240,23 @@ extension UserViewController: UITableViewDataSource {
 extension UserViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
+    
+    let cellType = self.dataSource[indexPath.row]
+    if case CellType.user(let userType) = cellType {
+      let (content, _) = userType.getContent(by: user)
+      switch userType {
+      case .email:
+        if let email = user?.email, !email.isEmpty {
+          UIPasteboard.general.string = content
+          HUD.show(with: "已经复制到粘贴板")
+        }
+      case .link:
+        if let link = user?.blog, !link.isEmpty {
+          self.navigationController?.pushToWebView(with: link)
+        }
+      default:
+        break
+      }
+    }
   }
 }

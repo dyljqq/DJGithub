@@ -127,6 +127,7 @@ TODO：
 
 1. 添加本地Repo
 2. 抽象本地Devlopers，共用一个vc
+3. 用户界面细节跟交互调整
 
 TODO:
 

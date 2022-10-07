@@ -93,6 +93,7 @@ class NormalHeaderView: UIView {
     let label = UILabel()
     label.textColor = UIColorFromRGB(0x444444)
     label.font = UIFont.systemFont(ofSize: 12)
+    label.numberOfLines = 0
     return label
   }()
   
@@ -101,6 +102,14 @@ class NormalHeaderView: UIView {
     label.textColor = UIColorFromRGB(0x444444)
     label.font = UIFont.systemFont(ofSize: 12)
     return label
+  }()
+  
+  lazy var arrowImageView: UIImageView = {
+    let imageView = UIImageView()
+    imageView.image = UIImage(named: "arrow-24")
+    imageView.contentMode = .scaleAspectFit
+    imageView.isHidden = true
+    return imageView
   }()
   
   lazy var horizontalLine: UIView = {
@@ -122,6 +131,8 @@ class NormalHeaderView: UIView {
   }()
   
   var tapCounterClosure: ((Int) -> ())?
+  var renderHeightClosure: ((CGFloat) -> ())?
+  var heightToken: NSKeyValueObservation?
   
   init() {
     super.init(frame: NormalHeaderView.defaultFrame)
@@ -137,6 +148,7 @@ class NormalHeaderView: UIView {
     addSubview(loginLabel)
     addSubview(bioLabel)
     addSubview(joinedLabel)
+    addSubview(arrowImageView)
     
     addSubview(horizontalLine)
     addSubview(repoView)
@@ -156,15 +168,22 @@ class NormalHeaderView: UIView {
     loginLabel.snp.makeConstraints { make in
       make.centerY.equalTo(nameLabel)
       make.leading.equalTo(nameLabel.snp.trailing)
-      make.trailing.equalTo(-12)
+      make.trailing.equalTo(bioLabel)
     }
     bioLabel.snp.makeConstraints { make in
       make.top.equalTo(nameLabel.snp.bottom).offset(5)
       make.leading.equalTo(nameLabel)
-      make.trailing.equalTo(loginLabel)
+      make.trailing.equalTo(arrowImageView.snp.leading).offset(-12)
+      make.height.equalTo(20)
+    }
+    arrowImageView.snp.makeConstraints { make in
+      make.trailing.equalTo(-12)
+      make.height.equalTo(24)
+      make.width.equalTo(12)
+      make.centerY.equalTo(bioLabel)
     }
     joinedLabel.snp.makeConstraints { make in
-      make.bottom.equalTo(avatarImageView)
+      make.top.equalTo(bioLabel.snp.bottom).offset(5)
       make.trailing.equalTo(loginLabel)
       make.leading.equalTo(bioLabel)
     }
@@ -172,7 +191,7 @@ class NormalHeaderView: UIView {
       make.leading.equalTo(12)
       make.centerX.equalTo(self)
       make.height.equalTo(0.5)
-      make.top.equalTo(avatarImageView.snp.bottom).offset(12)
+      make.top.equalTo(joinedLabel.snp.bottom).offset(12)
     }
     repoView.snp.makeConstraints { make in
       make.width.equalTo(self).dividedBy(3)
@@ -199,16 +218,36 @@ class NormalHeaderView: UIView {
     followingView.tapClosure = { [weak self] in
       self?.tapCounterClosure?(2)
     }
+    
+    heightToken = self.bioLabel.observe(\.text) { [weak self] label, _ in
+      guard let strongSelf = self, let text = label.text else { return }
+      DispatchQueue.global().async {
+        let rect = (text as NSString).boundingRect(
+          with: CGSize(width: FrameGuide.screenWidth - 108, height: 0),
+          options: .usesLineFragmentOrigin,
+          attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)],
+          context: nil)
+        DispatchQueue.main.async {
+          strongSelf.bioLabel.snp.updateConstraints { make in
+            make.height.equalTo(rect.height)
+          }
+          strongSelf.renderHeightClosure?(rect.height + 120)
+        }
+      }
+    }
   }
     
   override init(frame: CGRect) {
     super.init(frame: frame)
-    
     setUp()
   }
   
   required init?(coder: NSCoder) {
     super.init(coder: coder)
+  }
+  
+  deinit {
+    self.heightToken?.invalidate()
   }
   
 }

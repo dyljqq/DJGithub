@@ -11,6 +11,7 @@ import Kingfisher
 class UserHeaderView: NormalHeaderView {
   func render(with model: User) {
     avatarImageView.setImage(with: URL(string: model.avatarUrl))
+    self.arrowImageView.isHidden = !ConfigManager.checkOwner(by: model.login)
     nameLabel.text = model.name ?? model.login
     loginLabel.text = "(\(model.login))"
     bioLabel.text = model.desc.trimmingCharacters(in: .whitespacesAndNewlines)
