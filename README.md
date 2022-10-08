@@ -1,6 +1,6 @@
 # 开源的Github客户端
 
-方便自己去看一些开源项目以及一些咨询。
+方便自己去看一些开源项目以及一些咨询。纯Swift编写。
 
 ### 配置
 
@@ -13,6 +13,16 @@
  "authorization": "", // person token
 }
 ```
+
+### APP展示
+
+| <img src="https://github.com/dyljqq/DJGithub/raw/main/screenshot/LocalDeveloper.png" width="190" height="335"/> | <img src="https://github.com/dyljqq/DJGithub/raw/main/screenshot/Stars.png" width="190" height="335"/> | <img src="https://github.com/dyljqq/DJGithub/raw/main/screenshot/SearchHistory.png" width="190" height="335"/> | <img src="https://github.com/dyljqq/DJGithub/raw/main/screenshot/SearchResults.png" width="190" height="335"/> |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| <img src="https://github.com/dyljqq/DJGithub/raw/main/screenshot/User.png" width="190" height="335"/> | <img src="https://github.com/dyljqq/DJGithub/raw/main/screenshot/UserInteract.png" width="190" height="335"/> | <img src="https://github.com/dyljqq/DJGithub/raw/main/screenshot/UserInfo.png" width="190" height="335"/> | <img src="https://github.com/dyljqq/DJGithub/raw/main/screenshot/Repo.png" width="190" height="335"/> |
+| <img src="https://github.com/dyljqq/DJGithub/raw/main/screenshot/RepoDir.png" width="190" height="335"/> | <img src="https://github.com/dyljqq/DJGithub/raw/main/screenshot/RepoIssues.png" width="190" height="335"/> | <img src="https://github.com/dyljqq/DJGithub/raw/main/screenshot/IssueDetail.png" width="190" height="335"/> | <img src="https://github.com/dyljqq/DJGithub/raw/main/screenshot/EditIssue.png" width="190" height="335"/> |
+| <img src="https://github.com/dyljqq/DJGithub/raw/main/screenshot/IssueComments.png" width="190" height="335"/> |                                                              |                                                              |                                                              |
+
+
 
 
 
