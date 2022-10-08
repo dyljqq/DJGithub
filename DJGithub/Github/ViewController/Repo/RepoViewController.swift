@@ -113,6 +113,13 @@ class RepoViewController: UIViewController {
       }
     }
     
+    headerView.renderHeightClosure = { [weak self] height in
+      guard let strongSelf = self else { return }
+      strongSelf.headerView.frame = CGRect(x: 0, y: 0, width: FrameGuide.screenWidth, height: height)
+      strongSelf.tableView.beginUpdates()
+      strongSelf.tableView.endUpdates()
+    }
+    
     self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: userStatusView)
   }
   
