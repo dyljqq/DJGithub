@@ -10,6 +10,7 @@ import Foundation
 enum GithubRouter: Router {
   
   case userInfo(String)
+  case userInfoEdit(params: [String: String])
   case userContribution(parameters: [String: Any])
   case userStartedRepos(path: String, queryItems: [String: String])
   case repo(String)
@@ -57,6 +58,7 @@ enum GithubRouter: Router {
     case .repoIssueCommit: return .POST
     case .repoIssueUpdate: return .PATCH
     case .repoIssueCommentCommit: return .POST
+    case .userInfoEdit: return .PATCH
     default: return .GET
     }
   }
@@ -90,6 +92,7 @@ enum GithubRouter: Router {
     case .repoIssueCommit(let userName, let repoName, _): return "repos/\(userName)/\(repoName)/issues"
     case .repoIssueUpdate(let userName, let repoName, let issueNum, _): return "repos/\(userName)/\(repoName)/issues/\(issueNum)"
     case .repoIssueCommentCommit(let userName, let repoName, let issueNum, _): return "repos/\(userName)/\(repoName)/issues/\(issueNum)/comments"
+    case .userInfoEdit: return "user"
     }
   }
   
@@ -130,6 +133,7 @@ enum GithubRouter: Router {
         .searchRepos(let items),
         .searchUser(let items),
         .repoIssues(_, _, let items),
+        .userInfoEdit(let items),
         .forks(_, let items):
       queryItems = items
     default:

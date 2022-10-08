@@ -19,6 +19,9 @@
 		73074CCB28EF4AD0001A90E7 /* LocalDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73074CCA28EF4AD0001A90E7 /* LocalDataViewController.swift */; };
 		73074CCD28EF4AFE001A90E7 /* LocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73074CCC28EF4AFE001A90E7 /* LocalDataManager.swift */; };
 		73074CCF28EF573D001A90E7 /* LocalRepoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73074CCE28EF573D001A90E7 /* LocalRepoCell.swift */; };
+		73074CD128F1559D001A90E7 /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73074CD028F1559D001A90E7 /* UserInfoViewController.swift */; };
+		73074CD328F155CB001A90E7 /* UserInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73074CD228F155CB001A90E7 /* UserInfoCell.swift */; };
+		73074CD528F166D8001A90E7 /* UserInfoEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73074CD428F166D8001A90E7 /* UserInfoEditViewController.swift */; };
 		73101D3F28E3077C00DB5423 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73101D3E28E3077C00DB5423 /* UserManager.swift */; };
 		73101D4128E30C5200DB5423 /* SimpleUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73101D4028E30C5200DB5423 /* SimpleUserCell.swift */; };
 		73101D4328E310D900DB5423 /* UserFollowingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73101D4228E310D900DB5423 /* UserFollowingViewController.swift */; };
@@ -155,6 +158,9 @@
 		73074CCA28EF4AD0001A90E7 /* LocalDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataViewController.swift; sourceTree = "<group>"; };
 		73074CCC28EF4AFE001A90E7 /* LocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataManager.swift; sourceTree = "<group>"; };
 		73074CCE28EF573D001A90E7 /* LocalRepoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalRepoCell.swift; sourceTree = "<group>"; };
+		73074CD028F1559D001A90E7 /* UserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
+		73074CD228F155CB001A90E7 /* UserInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoCell.swift; sourceTree = "<group>"; };
+		73074CD428F166D8001A90E7 /* UserInfoEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoEditViewController.swift; sourceTree = "<group>"; };
 		73101D3E28E3077C00DB5423 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		73101D4028E30C5200DB5423 /* SimpleUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleUserCell.swift; sourceTree = "<group>"; };
 		73101D4228E310D900DB5423 /* UserFollowingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFollowingViewController.swift; sourceTree = "<group>"; };
@@ -551,6 +557,8 @@
 				73AACB3528D357CE0072B1DF /* Views */,
 				73AACB3328D357C80072B1DF /* UserViewController.swift */,
 				73101D4228E310D900DB5423 /* UserFollowingViewController.swift */,
+				73074CD028F1559D001A90E7 /* UserInfoViewController.swift */,
+				73074CD428F166D8001A90E7 /* UserInfoEditViewController.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -564,6 +572,7 @@
 				73AACB5328D47ECB0072B1DF /* UserContrbutionItemCell.swift */,
 				73AACB5728D483CA0072B1DF /* UserContributionCell.swift */,
 				73101D4028E30C5200DB5423 /* SimpleUserCell.swift */,
+				73074CD228F155CB001A90E7 /* UserInfoCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -816,6 +825,7 @@
 				73C598C728D8617800DA86A1 /* UIApplication+Ext.swift in Sources */,
 				73AACB0828D30A3C0072B1DF /* Router.swift in Sources */,
 				73DF6C0A28EC6A9C0003BDB8 /* IssueCell.swift in Sources */,
+				73074CD328F155CB001A90E7 /* UserInfoCell.swift in Sources */,
 				73DF6C0028EC00FD0003BDB8 /* RepoContentCell.swift in Sources */,
 				73DF6C0428EC252E0003BDB8 /* String+File.swift in Sources */,
 				73AACB3428D357C80072B1DF /* UserViewController.swift in Sources */,
@@ -855,6 +865,7 @@
 				73074CC728EF4809001A90E7 /* LocalRepo.swift in Sources */,
 				73101D4128E30C5200DB5423 /* SimpleUserCell.swift in Sources */,
 				73B7904A28E52450002A9CDC /* LocalDevelopersViewController.swift in Sources */,
+				73074CD528F166D8001A90E7 /* UserInfoEditViewController.swift in Sources */,
 				73074CCD28EF4AFE001A90E7 /* LocalDataManager.swift in Sources */,
 				73AACB3C28D35C360072B1DF /* Utils.swift in Sources */,
 				73AACB4C28D45EA50072B1DF /* UserCell.swift in Sources */,
@@ -905,6 +916,7 @@
 				73AACB3E28D362430072B1DF /* Consts.swift in Sources */,
 				7374D19728E0BC1D00E6BE47 /* Readme.swift in Sources */,
 				73DF6BEE28EADD160003BDB8 /* LocalDeveloperSectionHeaderView.swift in Sources */,
+				73074CD128F1559D001A90E7 /* UserInfoViewController.swift in Sources */,
 				73AACB1828D312D30072B1DF /* GithubRouter.swift in Sources */,
 				73101D5028E4A10400DB5423 /* LocalDeveloperGroup.swift in Sources */,
 				73DF6BEC28EACF340003BDB8 /* SearchWordHeaderView.swift in Sources */,

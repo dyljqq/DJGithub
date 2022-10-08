@@ -130,6 +130,7 @@ class NormalHeaderView: UIView {
     return CounterView()
   }()
   
+  var jumpClosure: (() -> ())?
   var tapCounterClosure: ((Int) -> ())?
   var renderHeightClosure: ((CGFloat) -> ())?
   var heightToken: NSKeyValueObservation?
@@ -235,6 +236,10 @@ class NormalHeaderView: UIView {
         }
       }
     }
+    
+    let tap = UITapGestureRecognizer(target: self, action: #selector(jumpAction))
+    addGestureRecognizer(tap)
+    self.isUserInteractionEnabled = true
   }
     
   override init(frame: CGRect) {
@@ -244,6 +249,10 @@ class NormalHeaderView: UIView {
   
   required init?(coder: NSCoder) {
     super.init(coder: coder)
+  }
+  
+  @objc func jumpAction() {
+    self.jumpClosure?()
   }
   
   deinit {

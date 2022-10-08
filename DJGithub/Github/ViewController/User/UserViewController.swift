@@ -165,6 +165,9 @@ class UserViewController: UIViewController {
       strongSelf.tableView.beginUpdates()
       strongSelf.tableView.endUpdates()
     }
+    userHeaderView.jumpClosure = { [weak self] in
+      self?.navigationController?.pushToUserInfo()
+    }
     
     configNavigationRightButton()
   }
