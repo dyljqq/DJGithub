@@ -80,4 +80,14 @@ extension UINavigationController {
     let vc = RepoIssueDetailViewController(userName: userName, repoName: repoName, issueNum: issueNum)
     self.pushViewController(vc, animated: true)
   }
+  
+  func pushToUserInfo() {
+    let vc = UserInfoViewController()
+    self.pushViewController(vc, animated: true)
+  }
+  
+  func pushToUserInfoEdit(with type: UserInfoType, user: User?) {
+    let vc = UserInfoEditViewController(with: type, user: user)
+    pushViewController(vc, animated: true)
+  }
 }

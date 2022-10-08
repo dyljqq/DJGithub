@@ -50,6 +50,10 @@ class CommitView: UIView {
   }
   
   private func setUp() {
+    self.backgroundColor = .lightBlue
+    self.layer.cornerRadius = 5
+    self.layer.masksToBounds = true
+
     addSubview(indicatorView)
     addSubview(contentLabel)
     

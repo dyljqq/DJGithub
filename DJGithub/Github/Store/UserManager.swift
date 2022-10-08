@@ -163,4 +163,10 @@ user(login: "\(name)") {
     return nil
   }
   
+  static func editUserInfo(with params: [String: String]) async -> User? {
+    let router = GithubRouter.userInfoEdit(params: params)
+    let result = await APIClient.shared.get(by: router)
+    return result.parse()
+  }
+  
 }
