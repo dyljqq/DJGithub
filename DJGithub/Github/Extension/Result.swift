@@ -18,7 +18,7 @@ extension Result {
           print("result parse error, status code:\(statusCode)")
           return nil
         }
-        return DJDecoder(dict: d).decode()
+        return try? DJDecoder(dict: d).decode()
       }
     case .failure(let error):
       print("result parse error: \(error)")

@@ -9,115 +9,82 @@ import Foundation
 
 struct RepoManager {
   
-  static let pageStart = 1
-  
-  var page: Int = pageStart
-  var isEnded: Bool = false
-  var repos: [Repo] = []
-  
-  mutating func update(by page: Int, repos: [Repo], isEnded: Bool) {
-    if page == RepoManager.pageStart {
-      self.repos = repos
-    } else {
-      self.repos.append(contentsOf: repos)
-    }
-    self.page = page
-    self.isEnded = isEnded
-  }
-  
-  static func fetchStaredRepos(with name: String, page: Int) async -> Repos? {
+  static func fetchStaredRepos(with name: String, page: Int) async -> [Repo] {
     let router = GithubRouter.userStartedRepos(path: name, queryItems: ["page": "\(page)"])
-    let result = await APIClient.shared.get(by: router)
-    return result.parse()
+    return (try? await APIClient.shared.model(with: router)) ?? []
   }
   
-  static func fetchForkRepos(with name: String, page: Int) async -> Repos? {
+  static func fetchForkRepos(with name: String, page: Int) async ->[Repo] {
     let router = GithubRouter.forks(name, ["page": "\(page)"])
-    let result = await APIClient.shared.get(by: router)
-    return result.parse()
+    return (try? await APIClient.shared.model(with: router)) ?? []
   }
   
-  static func fetchUserRepos(with userName: String, page: Int) async -> Repos? {
+  static func fetchUserRepos(with userName: String, page: Int) async -> [Repo] {
     let router = GithubRouter.userRepos(userName, ["page": "\(page)"])
-    let result = await APIClient.shared.get(by: router)
-    return result.parse()
+    return (try? await APIClient.shared.model(with: router)) ?? []
   }
   
   static func fetchRepo(with name: String) async -> Repo? {
     let router = GithubRouter.repo(name)
-    let result = await APIClient.shared.get(by: router)
-    return result.parse()
+    return try? await APIClient.shared.model(with: router)
   }
   
   static func userStaredRepo(with name: String) async -> StatusModel? {
     let router = GithubRouter.userStaredRepo(name)
-    let result = await APIClient.shared.get(by: router)
-    return result.parse()
+    return try? await APIClient.shared.model(with: router)
   }
   
   static func fetchREADME(with repoName: String) async -> Readme? {
     let router = GithubRouter.repoReadme(repoName)
-    let result = await APIClient.shared.get(by: router)
-    return result.parse()
+    return try? await APIClient.shared.model(with: router)
   }
   
   static func starRepo(with repoName: String) async -> StatusModel? {
     let router = GithubRouter.starRepo(repoName)
-    let result = await APIClient.shared.get(by: router)
-    return result.parse()
+    return try? await APIClient.shared.model(with: router)
   }
   
   static func unStarRepo(with repoName: String) async -> StatusModel? {
     let router = GithubRouter.unStarRepo(repoName)
-    let result = await APIClient.shared.get(by: router)
-    return result.parse()
+    return try? await APIClient.shared.model(with: router)
   }
   
   static func getRepoContent(with userName: String, repoName: String) async -> [RepoContent] {
     let router = GithubRouter.repoContents(userName: userName, repoName: repoName)
-    let result = await APIClient.shared.get(by: router)
-    let repoContents = result.parse() as RepoContents?
-    return repoContents?.items ?? []
+    let repos = try? await APIClient.shared.model(with: router) as [RepoContent]?
+    return repos ?? []
   }
   
   static func getRepoContent(with urlString: String) async -> [RepoContent] {
-    let result = await APIClient.shared.get(with: urlString) as [RepoContent]?
-    return result ?? []
+    return (try? await APIClient.shared.data(with: urlString)) ?? []
   }
   
   static func getRepoContentFile(with urlString: String) async -> RepoContent? {
-    let result = await APIClient.shared.get(with: urlString) as RepoContent?
-    return result
+    return try? await APIClient.shared.data(with: urlString)
   }
   
   static func getRepoIssues(with userName: String, repoName: String, params: [String: String]) async -> [Issue] {
     let router = GithubRouter.repoIssues(userName: userName, repoName: repoName, params: params)
-    let result = await APIClient.shared.get(by: router)
-    let issueItems = result.parse() as IssueItems?
-    return issueItems?.items ?? []
+    return (try? await APIClient.shared.model(with: router)) ?? []
   }
   
   static func getRepoIssueDetail(with userName: String, repoName: String, issueNum: Int) async -> IssueDetail? {
     let router = GithubRouter.repoIssue(userName: userName, repoName: repoName, issueNum: issueNum)
-    let result = await APIClient.shared.get(by: router)
-    return result.parse()
+    return try? await APIClient.shared.model(with: router)
   }
   
   static func createNewIssue(with userName: String, repoName: String, params: [String: String]) async -> StatusModel? {
     let router = GithubRouter.repoIssueCommit(userName: userName, repoName: repoName, params: params)
-    let result = await APIClient.shared.get(by: router)
-    return result.parse()
+    return try? await APIClient.shared.model(with: router)
   }
   
   static func updateIssue(with userName: String, repoName: String, issueNum: Int, params: [String: String]) async -> IssueDetail? {
     let router = GithubRouter.repoIssueUpdate(userName: userName, repoName: repoName, issueNum: issueNum, params: params)
-    let result = await APIClient.shared.get(by: router)
-    return result.parse()
+    return try? await APIClient.shared.model(with: router)
   }
   
   static func createIssueComment(with userName: String, repoName: String, issueNum: Int, params: [String: String]) async -> StatusModel? {
     let router = GithubRouter.repoIssueCommentCommit(userName: userName, repoName: repoName, issueNum: issueNum, params: params)
-    let result = await APIClient.shared.get(by: router)
-    return result.parse()
+    return try? await APIClient.shared.model(with: router)
   }
 }

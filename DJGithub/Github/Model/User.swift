@@ -50,7 +50,7 @@ struct UserContribution: DJCodable {
     for week in weeks {
       if let days = week["contributionDays"] as? [[String: Any]] {
         for day in days {
-          if let item = DJDecoder<UserContributionItem>(dict: day).decode() {
+          if let item = try? DJDecoder<UserContributionItem>(dict: day).decode() {
             items.append(item)
           }
         }

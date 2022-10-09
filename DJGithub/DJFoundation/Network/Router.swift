@@ -63,4 +63,17 @@ extension Router {
   func asURLRequest() -> URLRequest? {
     return configURLRequest()
   }
+  
+  func printDebugInfo(with error: Error, other message: String? = nil) {
+    print("debug info:")
+    print("url: \(self.urlString)")
+    print("method: \(self.method)")
+    print("params: \(self.parameters)")
+    print("headers: \(self.headers)")
+    print("error: \(error)")
+    if let message = message {
+      print("output message: \(message)")
+    }
+    print("------------------------")
+  }
 }

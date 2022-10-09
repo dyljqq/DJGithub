@@ -12,7 +12,7 @@ struct IssueDetail: DJCodable {
   var id: Int
   var number: Int
   var title: String
-  var body: String
+  var body: String?
   var createdAt: String
   var updatedAt: String
   var authorAssociation: String

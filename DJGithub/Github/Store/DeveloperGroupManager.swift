@@ -15,7 +15,7 @@ struct DeveloperGroupManager {
   
   func loadFromDatabase() async -> [LocalDeveloperGroup] {
     let task = Task { () -> [LocalDeveloperGroup] in
-      guard let groups = DJDecoder(value: LocalDeveloperGroup.selectAll()).decode() as [LocalDeveloperGroup]? else {
+      guard let groups = try? DJDecoder(value: LocalDeveloperGroup.selectAll()).decode() as [LocalDeveloperGroup]? else {
         return []
       }
       var rs: [LocalDeveloperGroup] = []

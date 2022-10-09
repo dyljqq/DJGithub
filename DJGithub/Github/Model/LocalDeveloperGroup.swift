@@ -54,7 +54,7 @@ extension LocalDeveloperGroup: SQLTable {
     let sql = "select \(Self.selectedFields.joined(separator: ",")) from \(tableName) where id=\(id)"
     guard let rs = store.execute(.select, sql: sql, type: LocalDeveloperGroup.self) as? [[String: Any]],
           !rs.isEmpty else { return nil }
-    return DJDecoder(dict: rs[0]).decode()
+    return try? DJDecoder(dict: rs[0]).decode()
   }
   
   static func update(by groupId: Int, name: String) {
@@ -117,14 +117,14 @@ extension LocalDeveloper: SQLTable {
     let sql = "select \(Self.selectedFields.joined(separator: ",")) from \(tableName) where name='\(name)'"
     guard let rs = store.execute(.select, sql: sql, type: LocalDeveloper.self) as? [[String: Any]],
           !rs.isEmpty else { return nil }
-    return DJDecoder(dict: rs[0]).decode()
+    return try? DJDecoder(dict: rs[0]).decode()
   }
   
   static func get(by groupId: Int) -> [Self?] {
     let sql = "select \(Self.selectedFields.joined(separator: ",")) from \(tableName) where groupId=\(groupId)"
     guard let rs = store.execute(.select, sql: sql, type: LocalDeveloper.self) as? [[String: Any]],
           !rs.isEmpty else { return [] }
-    let developers: [Self?]? = DJDecoder(value: rs).decode()
+    let developers: [Self?]? = try? DJDecoder(value: rs).decode()
     return developers ?? []
   }
   

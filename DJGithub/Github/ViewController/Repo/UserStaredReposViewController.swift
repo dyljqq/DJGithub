@@ -146,19 +146,15 @@ extension UserStaredReposViewController {
       let repos: [Repo]
       switch self.userRepoState {
       case .star(let userName):
-        repos = await RepoManager.fetchStaredRepos(with: userName, page: nextPageState.start)?.items ?? []
+        repos = await RepoManager.fetchStaredRepos(with: userName, page: nextPageState.start)
       case .fork(let content):
-        repos = await RepoManager.fetchForkRepos(with: content, page: nextPageState.start)?.items ?? []
+        repos = await RepoManager.fetchForkRepos(with: content, page: nextPageState.start)
       case .repos(let content):
-        repos = await RepoManager.fetchUserRepos(with: content, page: nextPageState.start)?.items ?? []
+        repos = await RepoManager.fetchUserRepos(with: content, page: nextPageState.start)
       case .subscription(let userName):
-        repos = await UserManager.getUserSubscription(with: userName, page: nextPageState.start)?.items ?? []
+        repos = await UserManager.getUserSubscription(with: userName, page: nextPageState.start)
       case .search(let query):
-        if let r = await SearchManager.searchRepos(with: query, page: nextPageState.start) {
-          repos = r.items
-        } else {
-          repos = []
-        }
+        repos = await SearchManager.searchRepos(with: query, page: nextPageState.start)?.items ?? []
       default:
         repos = []
       }
