@@ -28,6 +28,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     LocalDeveloper.createTable()
     ConfigManager.loadConfig()
     
+    
     Task {
       await withThrowingTaskGroup(of: Void.self) { group in
         group.addTask {
@@ -38,6 +39,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         group.addTask {
           await DeveloperGroupManager.shared.updateAll()
+        }
+        group.addTask {
+          if let feeds = await FeedManager.getFeeds() {
+            await FeedManager.fetchFeedInfo(with: feeds.currentUserUrl)
+          }
         }
       }
     }

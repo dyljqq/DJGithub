@@ -57,7 +57,6 @@
 		73AACB0A28D30B0C0072B1DF /* URLConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACB0928D30B0C0072B1DF /* URLConvertible.swift */; };
 		73AACB0C28D30B3D0072B1DF /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACB0B28D30B3D0072B1DF /* Error.swift */; };
 		73AACB0F28D30C470072B1DF /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACB0E28D30C470072B1DF /* APIClient.swift */; };
-		73AACB1128D30E720072B1DF /* Parse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACB1028D30E720072B1DF /* Parse.swift */; };
 		73AACB1328D30F350072B1DF /* DJParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACB1228D30F350072B1DF /* DJParser.swift */; };
 		73AACB1828D312D30072B1DF /* GithubRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACB1728D312D30072B1DF /* GithubRouter.swift */; };
 		73AACB2428D31A440072B1DF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACB2328D31A440072B1DF /* User.swift */; };
@@ -126,6 +125,9 @@
 		73DF6C0828EC69840003BDB8 /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DF6C0728EC69840003BDB8 /* Issue.swift */; };
 		73DF6C0A28EC6A9C0003BDB8 /* IssueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DF6C0928EC6A9C0003BDB8 /* IssueCell.swift */; };
 		73DF6C0C28EC7A7A0003BDB8 /* RepoIssuesStateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DF6C0B28EC7A7A0003BDB8 /* RepoIssuesStateViewController.swift */; };
+		73E14E4D28F3426900A9811D /* FeedManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E14E4C28F3426900A9811D /* FeedManager.swift */; };
+		73E14E4F28F3477E00A9811D /* Feeds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E14E4E28F3477E00A9811D /* Feeds.swift */; };
+		73E14E5328F34FF200A9811D /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E14E5228F34FF200A9811D /* Parser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -200,7 +202,6 @@
 		73AACB0928D30B0C0072B1DF /* URLConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLConvertible.swift; sourceTree = "<group>"; };
 		73AACB0B28D30B3D0072B1DF /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		73AACB0E28D30C470072B1DF /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
-		73AACB1028D30E720072B1DF /* Parse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parse.swift; sourceTree = "<group>"; };
 		73AACB1228D30F350072B1DF /* DJParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJParser.swift; sourceTree = "<group>"; };
 		73AACB1728D312D30072B1DF /* GithubRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubRouter.swift; sourceTree = "<group>"; };
 		73AACB2328D31A440072B1DF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -266,6 +267,9 @@
 		73DF6C0728EC69840003BDB8 /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
 		73DF6C0928EC6A9C0003BDB8 /* IssueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCell.swift; sourceTree = "<group>"; };
 		73DF6C0B28EC7A7A0003BDB8 /* RepoIssuesStateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoIssuesStateViewController.swift; sourceTree = "<group>"; };
+		73E14E4C28F3426900A9811D /* FeedManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedManager.swift; sourceTree = "<group>"; };
+		73E14E4E28F3477E00A9811D /* Feeds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feeds.swift; sourceTree = "<group>"; };
+		73E14E5228F34FF200A9811D /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -414,7 +418,6 @@
 			isa = PBXGroup;
 			children = (
 				73AACB0928D30B0C0072B1DF /* URLConvertible.swift */,
-				73AACB1028D30E720072B1DF /* Parse.swift */,
 				732B21D528E22B9A005893C0 /* NextPageLoadable.swift */,
 				73DF6BF128EAE3060003BDB8 /* DJCodable.swift */,
 			);
@@ -484,6 +487,7 @@
 				73B7906C28E972A9002A9CDC /* SearchWordManager.swift */,
 				73DF6BEF28EAE0A00003BDB8 /* DeveloperGroupManager.swift */,
 				73074CC828EF4992001A90E7 /* LocalRepoManager.swift */,
+				73E14E4C28F3426900A9811D /* FeedManager.swift */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -504,6 +508,7 @@
 				73DF6C0728EC69840003BDB8 /* Issue.swift */,
 				73074C7D28ED5664001A90E7 /* IssueDetail.swift */,
 				73074CC628EF4809001A90E7 /* LocalRepo.swift */,
+				73E14E4E28F3477E00A9811D /* Feeds.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -536,6 +541,7 @@
 				73AACB6B28D5AF7D0072B1DF /* LanguageManager.swift */,
 				7341DCC928DF2B4B009A3A3C /* ImageCoder.swift */,
 				73B7905328E533C2002A9CDC /* ConfigManager.swift */,
+				73E14E5228F34FF200A9811D /* Parser.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -846,8 +852,8 @@
 				73AACB4828D443350072B1DF /* LoadingView.swift in Sources */,
 				73AACB8728D628BD0072B1DF /* IndicatorView.swift in Sources */,
 				73AACB6A28D5ACBD0072B1DF /* UIColor+Ext.swift in Sources */,
-				73AACB1128D30E720072B1DF /* Parse.swift in Sources */,
 				732B21D628E22B9A005893C0 /* NextPageLoadable.swift in Sources */,
+				73E14E4D28F3426900A9811D /* FeedManager.swift in Sources */,
 				73AACB3A28D359550072B1DF /* UserHeaderView.swift in Sources */,
 				73DF6C0228EC1EE80003BDB8 /* RepoContentFileViewController.swift in Sources */,
 				73101D5F28E4A5E400DB5423 /* DevelopersViewController.swift in Sources */,
@@ -869,6 +875,7 @@
 				73074CCD28EF4AFE001A90E7 /* LocalDataManager.swift in Sources */,
 				73AACB3C28D35C360072B1DF /* Utils.swift in Sources */,
 				73AACB4C28D45EA50072B1DF /* UserCell.swift in Sources */,
+				73E14E4F28F3477E00A9811D /* Feeds.swift in Sources */,
 				73074CC028EED421001A90E7 /* CommitView.swift in Sources */,
 				73AACAD928D308A60072B1DF /* ViewController.swift in Sources */,
 				73AACB6C28D5AF7D0072B1DF /* LanguageManager.swift in Sources */,
@@ -895,6 +902,7 @@
 				73AACB5228D467850072B1DF /* UserContributionView.swift in Sources */,
 				7341DCCE28E03505009A3A3C /* NormalHeaderView.swift in Sources */,
 				73AACB6228D4BEFE0072B1DF /* UserStaredRepoCell.swift in Sources */,
+				73E14E5328F34FF200A9811D /* Parser.swift in Sources */,
 				73C598C528D85EF100DA86A1 /* PopoverView.swift in Sources */,
 				73074C7C28ED5507001A90E7 /* RepoIssueDetailViewController.swift in Sources */,
 				73AACAD728D308A60072B1DF /* SceneDelegate.swift in Sources */,

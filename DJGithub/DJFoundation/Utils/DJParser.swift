@@ -7,10 +7,6 @@
 
 import Foundation
 
-struct DJParser: Parse {
-  static let shared = DJParser()
-}
-
 struct DJDecoder<T:DJCodable> {
   let decoder = JSONDecoder()
   
