@@ -46,7 +46,8 @@ class RepoContentFileViewController: UIViewController {
       make.edges.equalTo(self.view)
     }
     fileImageView.snp.makeConstraints { make in
-      make.center.equalTo(self.view)
+      make.top.equalTo(FrameGuide.navigationBarAndStatusBarHeight)
+      make.centerX.equalTo(self.view)
       make.width.height.equalTo(50)
     }
     

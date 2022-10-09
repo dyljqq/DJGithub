@@ -17,6 +17,45 @@ open class APIClient {
     return decoder
   }()
   
+  func data(with router: Router) async throws -> Data {
+    guard let request = router.asURLRequest() else { throw DJError.requestError }
+    do {
+      let (data, _) = try await URLSession.shared.data(for: request)
+      return data
+    } catch {
+      router.printDebugInfo(with: error)
+      throw DJError.dataError
+    }
+  }
+  
+  func model<T: DJCodable>(with router: Router) async throws -> T? {
+    guard let request = router.asURLRequest() else { throw DJError.requestError }
+    do {
+      let (data, response) = try await URLSession.shared.data(for: request)
+      if let httpReponse = response as? HTTPURLResponse, httpReponse.statusCode != 200 {
+        let dict = ["statusCode": httpReponse.statusCode]
+        return try DJDecoder(dict: dict).decode()
+      }
+      return try DJDecoder(data: data).decode() as T?
+    } catch {
+      router.printDebugInfo(with: error)
+      throw DJError.dataError
+    }
+  }
+  
+  func data<T: DJCodable>(with urlString: String) async throws -> T? {
+    do {
+      guard let url = URL(string: urlString) else { return nil }
+      let (data, _) = try await URLSession.shared.data(from: url)
+      return try? DJDecoder(data: data).decode()
+    } catch {
+      print("url session debug info:")
+      print("fetch error: \(urlString), error: \(error)")
+      print("------------------------")
+    }
+    return nil
+  }
+  
   func get(by router: Router) async -> Result<[String: Any], DJError> {
     guard let request = router.asURLRequest() else {
       return .failure(.unknown)
@@ -50,7 +89,7 @@ open class APIClient {
         return nil
       }
       let (data, _) = try await URLSession.shared.data(from: url)
-      return DJDecoder(data: data).decode()
+      return try? DJDecoder(data: data).decode()
     } catch {
       print("fetch error: \(urlString), error: \(error)")
     }

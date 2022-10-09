@@ -59,7 +59,8 @@ class RepoIssuesViewController: UIViewController, NextPageLoadable {
     
     tableView.addHeader { [weak self] in
       guard let strongSelf = self else { return }
-      strongSelf.refresh()
+      strongSelf.nextPageState.update(start: 1, hasNext: true, isLoading: false)
+      strongSelf.loadNext(start: 1)
     }
     tableView.addFooter { [weak self] in
       guard let strongSelf = self else { return }
@@ -70,8 +71,7 @@ class RepoIssuesViewController: UIViewController, NextPageLoadable {
   }
   
   func refresh() {
-    self.nextPageState.update(start: 1, hasNext: true, isLoading: false)
-    self.loadNext(start: 1)
+    tableView.dj_beginRefresh()
   }
   
   func loadNext(start: Int) {

@@ -61,7 +61,7 @@ extension SQLTable {
     }
     
     static func decode<T: DJCodable>(_ hash: [String: Any]) -> T? {
-        return DJDecoder<T>(dict: hash).decode()
+        return try? DJDecoder<T>(dict: hash).decode()
     }
     
     static var uniqueKeys: [String] {

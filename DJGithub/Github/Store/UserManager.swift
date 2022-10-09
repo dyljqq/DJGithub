@@ -48,28 +48,25 @@ struct UserManager {
    */
   static func getUserFollowing(with userName: String, page: Int = 1, perpage: Int = 30) async -> [UserFollowing] {
     let router = GithubRouter.userFollowing(userName, queryItems: ["page": "\(page)", "per_page": "\(perpage)"])
-    let result = await APIClient.shared.get(by: router)
-    let users: UserFollowings? = result.parse()
-    return users?.items ?? []
+    let userFollowings = try? await APIClient.shared.model(with: router) as [UserFollowing]?
+    return userFollowings ?? []
   }
   
   static func getUserFollowers(with userName: String, page: Int = 1) async -> [UserFollowing] {
     let router = GithubRouter.userFollowers(userName, ["page": "\(page)"])
-    let result = await APIClient.shared.get(by: router)
-    let users: UserFollowings? = result.parse()
-    return users?.items ?? []
+    let userFollowers = try? await APIClient.shared.model(with: router) as [UserFollowing]?
+    return userFollowers ?? []
   }
   
-  static func getUserSubscription(with userName: String, page: Int = 1) async -> Repos? {
+  static func getUserSubscription(with userName: String, page: Int = 1) async -> [Repo] {
     let router = GithubRouter.userSubscription(userName, ["page": "\(page)"])
-    let result = await APIClient.shared.get(by: router)
-    return result.parse()
+    let repos = try? await APIClient.shared.model(with: router) as [Repo]?
+    return repos ?? []
   }
   
   static func followUser(with userName: String) async -> StatusModel? {
     let router = GithubRouter.followUser(userName)
-    let result = await APIClient.shared.get(by: router)
-    let status: StatusModel? = result.parse()
+    let status = try? await APIClient.shared.model(with: router) as StatusModel?
     
     // sync follow status
     if let status = status, status.isStatus204 {
@@ -80,8 +77,7 @@ struct UserManager {
   
   static func unFollowUser(with userName: String) async -> StatusModel? {
     let router = GithubRouter.unfollowUser(userName)
-    let result = await APIClient.shared.get(by: router)
-    let status: StatusModel? = result.parse()
+    let status: StatusModel? = try? await APIClient.shared.model(with: router) as StatusModel?
     if let status = status, status.isStatus204 {
       await UserFollowingManager.shared.update(with: userName, following: false)
     }
@@ -90,8 +86,7 @@ struct UserManager {
   
   static func checkFollowStatus(with userName: String) async -> StatusModel? {
     let router = GithubRouter.checkFollowStatus(userName)
-    let result = await APIClient.shared.get(by: router)
-    return result.parse()
+    return try? await APIClient.shared.model(with: router)
   }
   
   static func loadLocalDevelopers(completionHandler: @escaping ([LocalDeveloperGroup]) -> ()) {
@@ -112,15 +107,12 @@ struct UserManager {
   }
   
   static func fetch(by router: GithubRouter) async -> [UserFollowing] {
-    let result = await APIClient.shared.get(by: router)
-    let users: UserFollowings? = result.parse()
-    return users?.items ?? []
+    return (try? await APIClient.shared.model(with: router) as [UserFollowing]?) ?? []
   }
   
   static func getUser(with name: String) async -> User? {
     let router = GithubRouter.userInfo(name)
-    let result = await APIClient.shared.get(by: router)
-    return result.parse()
+    return try? await APIClient.shared.model(with: router)
   }
   
   static func fetchUserContributions(with name: String) async -> UserContribution? {
@@ -147,17 +139,17 @@ user(login: "\(name)") {
 }
 """
     let router = GithubRouter.userContribution(parameters: ["query": query])
-    let result = await APIClient.shared.get(by: router)
-    switch result {
-    case .success(let d):
-      guard let data = d["data"] as? [String: Any],
-            let user = data["user"] as? [String: Any],
-            let contributionsCollection = user["contributionsCollection"] as? [String: Any],
-            let contributionCalendar = contributionsCollection["contributionCalendar"] as? [String: Any] else {
+    do {
+      let data: Data = try await APIClient.shared.data(with: router)
+      guard let d = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed) as? [String: Any],
+           let data = d["data"] as? [String: Any],
+           let user = data["user"] as? [String: Any],
+           let contributionsCollection = user["contributionsCollection"] as? [String: Any],
+           let contributionCalendar = contributionsCollection["contributionCalendar"] as? [String: Any] else {
         return nil
       }
       return UserContribution(with: contributionCalendar)
-    case .failure(let error):
+    } catch {
       print("fetchUserContributions error: \(error)")
     }
     return nil
@@ -165,8 +157,7 @@ user(login: "\(name)") {
   
   static func editUserInfo(with params: [String: String]) async -> User? {
     let router = GithubRouter.userInfoEdit(params: params)
-    let result = await APIClient.shared.get(by: router)
-    return result.parse()
+    return try? await APIClient.shared.model(with: router)
   }
   
 }

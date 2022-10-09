@@ -35,7 +35,8 @@ class ViewController: UIViewController {
   }
   
   @objc func jumpAction() {
-    self.navigationController?.pushToUserStaredRepo(with: "dyljqq")
+    let vc = UserStaredReposViewController(with: .star("dyljqq"))
+    self.present(vc, animated: true)
   }
 }
 

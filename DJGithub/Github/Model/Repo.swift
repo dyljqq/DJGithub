@@ -7,10 +7,6 @@
 
 import Foundation
 
-struct Repos: DJCodable {
-  var items: [Repo]
-}
-
 struct Repo: DJCodable {
   var name: String
   var fullName: String

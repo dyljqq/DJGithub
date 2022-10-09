@@ -48,6 +48,6 @@ extension Language: SQLTable {
     guard let rs = store.execute(.select, sql: sql, type: Language.self) as? [[String: Any]], !rs.isEmpty else {
       return nil
     }
-    return DJDecoder<Self>(dict: rs[0]).decode()
+    return try? DJDecoder<Self>(dict: rs[0]).decode()
   }
 }

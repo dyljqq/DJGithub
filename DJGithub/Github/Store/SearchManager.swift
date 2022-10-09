@@ -28,8 +28,7 @@ struct SearchManager {
     case .repos: router = GithubRouter.searchRepos(params)
     case .users: router = GithubRouter.searchUser(params)
     }
-    let result = await APIClient.shared.get(by: router)
-    return result.parse() as T?
+    return try? await APIClient.shared.model(with: router)
   }
   
 }

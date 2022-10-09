@@ -31,16 +31,13 @@ struct DJDecoder<T:DJCodable> {
     self.init(data: data)
   }
   
-  func decode() -> T? {
-    guard let data = data else {
-      return nil
-    }
+  func decode() throws -> T? {
+    guard let data = data else { return nil }
     do {
       return try decoder.decode(T.self, from: data)
     } catch {
-      print("DJDecode Error: \(error)")
+      throw DJError.parseError("\(error)")
     }
-    return nil
   }
 }
 
