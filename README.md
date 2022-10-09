@@ -14,6 +14,31 @@
 }
 ```
 
+### 已完成功能
+
+1. 获取，修改用户信息
+2. 获取库信息
+
+	* 库基本信息
+	* 库文件信息的读取与展示
+	* 库start，watches，forks，contributors列表展示
+	* 库issue & issue comment的获取，展示，修改
+	* README通过webview去渲染
+
+3. 登录用户的star repos的获取&展示
+4. 库与用户的相关信息的检索，并设置历史搜索词。
+5. 接入一些SwiftPamphletApp中的本地相关文件，里面有一些常用，精选的iOS开发相关的内容。[SwiftPamphletApp](https://github.com/KwaiAppTeam/SwiftPamphletApp)
+
+### 待完成(目前想到的)
+
+1. repo pull request的相关信息的展示以及相关的code review， merge等操作
+2. 剥离github api相关的代码，方便其他开发者调用
+3. 一些功能组件的剥离与重构，比如refresh，网络模块等。
+
+4. 接入一些常见的rss订阅源。
+
+
+
 ### APP展示
 
 | <img src="https://raw.githubusercontent.com/dyljqq/DJGithub/master/screenshot/LocalDeveloper.png" width="190" height="335"/> | <img src="https://raw.githubusercontent.com/dyljqq/DJGithub/master/screenshot/Stars.png" width="190" height="335"/> | <img src="https://raw.githubusercontent.com/dyljqq/DJGithub/master/screenshot/SearchHistory.png" width="190" height="335"/> | <img src="https://raw.githubusercontent.com/dyljqq/DJGithub/master/screenshot/SearchResults.png" width="190" height="335"/> |
