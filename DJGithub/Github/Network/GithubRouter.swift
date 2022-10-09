@@ -44,6 +44,9 @@ enum GithubRouter: Router {
   case repoIssueUpdate(userName: String, repoName: String, issueNum: Int, params: [String: String])
   case repoIssueCommentCommit(userName: String, repoName: String, issueNum: Int, params: [String: String])
   
+  // Feed
+  case feeds
+  
   var baseURLString: String {
     return "https://api.github.com/"
   }
@@ -93,6 +96,7 @@ enum GithubRouter: Router {
     case .repoIssueUpdate(let userName, let repoName, let issueNum, _): return "repos/\(userName)/\(repoName)/issues/\(issueNum)"
     case .repoIssueCommentCommit(let userName, let repoName, let issueNum, _): return "repos/\(userName)/\(repoName)/issues/\(issueNum)/comments"
     case .userInfoEdit: return "user"
+    case .feeds: return "feeds"
     }
   }
   
