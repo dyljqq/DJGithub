@@ -176,7 +176,7 @@ class UserViewController: UIViewController {
     self.user = user
     
     self.followStatusView.isHidden = ConfigManager.checkOwner(by: user.login)
-    self.navigationItem.title = user.name
+    self.navigationItem.title = user.name ?? user.login
     userHeaderView.render(with: user)
     self.dataSource = [.blank, .user(.company), .user(.location), .user(.email), .user(.link)]
     tableView.reloadData()

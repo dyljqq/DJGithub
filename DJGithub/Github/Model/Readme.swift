@@ -8,7 +8,5 @@
 import Foundation
 
 struct Readme: DJCodable {
-  
-  var content: String
-  
+  var content: String?
 }

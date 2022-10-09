@@ -37,7 +37,8 @@ class RepoFooterView: UIView {
     }
   }
   
-  func render(with content: String) {
+  func render(with content: String?) {
+    guard let content = content else { return }
     DispatchQueue.global().async {
       if let data = NSData(base64Encoded: content, options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) as? Data,
          let decodedString = NSString(data: data, encoding: String.Encoding.utf8.rawValue) as? String {

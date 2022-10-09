@@ -270,5 +270,6 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     self.searchWord = self.historyWords[indexPath.row]
     self.searchBar.text = self.searchWord
     self.update(with: .result)
+    SearchWordManager.shared.move(index: indexPath.row, to: 0)
   }
 }
