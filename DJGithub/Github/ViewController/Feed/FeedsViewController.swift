@@ -96,6 +96,14 @@ extension FeedsViewController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: FeedCell.className, for: indexPath) as! FeedCell
     cell.render(with: dataSource[indexPath.row])
+    cell.tappedClosure = { [weak self] pushType in
+      guard let strongSelf = self else { return }
+      switch pushType {
+      case .repo(let repoName): strongSelf.navigationController?.pushToRepo(with: repoName)
+      case .user(let userName): strongSelf.navigationController?.pushToUser(with: userName)
+      case .unknown: break
+      }
+    }
     return cell
   }
   
@@ -116,7 +124,7 @@ extension FeedsViewController: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     let feed = dataSource[indexPath.row]
-    let height = FeedCell.cellHeight(with: feed.title ?? "")
+    let height = FeedCell.cellHeight(with: feed)
     return height
   }
   

@@ -90,4 +90,9 @@ extension UINavigationController {
     let vc = UserInfoEditViewController(with: type, user: user)
     pushViewController(vc, animated: true)
   }
+  
+  func pushToFeed(with feed: Feed) {
+    let vc = FeedViewController(feed: feed)
+    pushViewController(vc, animated: true)
+  }
 }

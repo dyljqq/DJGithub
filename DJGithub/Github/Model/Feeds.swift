@@ -5,15 +5,16 @@
 //  Created by jiqinqiang on 2022/10/10.
 //
 
-import Foundation
+import UIKit
 
 enum FeedPushType {
   case repo(String)
-  case webview(String)
+  case user(String)
+  case unknown
 }
 
-enum FeedActionType {
-  case starred, forked, createdRepository
+enum FeedEventType: String {
+  case Follow, Watch, Fork, Create, Release, Public, UnKnown
 }
 
 struct Feeds: DJCodable {
@@ -63,9 +64,11 @@ struct Feed: DJCodable {
     return RegularParser.parse(with: ":([a-zA-Z]+)Event", validateString: self.id).first
   }
   
-  // TODO
-  var pushType: FeedPushType {
-    return .repo("")
+  var eventType: FeedEventType {
+    if let eventName = eventName, let type = FeedEventType(rawValue: eventName) {
+      return type
+    }
+    return .UnKnown
   }
   
   enum CodingKeys: String, CodingKey {
@@ -98,5 +101,64 @@ struct FeedLink: DJCodable {
       return path
     }
     return nil
+  }
+}
+
+extension Feed {
+  var titleAttr: NSAttributedString? {
+    guard let title = self.title, let userName = self.author?.name else { return nil }
+    let attr = NSMutableAttributedString(string: title)
+    if let match = RegularParser.matches(with: userName, validateString: title).first {
+      let range = match.range(at: 0)
+      let value = (title as NSString).substring(with: range)
+      attr.addAttribute(NSAttributedString.Key.link, value: value, range: range)
+    }
+    
+    var checkedTexts: [(String, String)] = [(userName, "User")]
+    switch self.eventType {
+    case .Watch, .Public:
+      if let path = self.link?.path {
+        checkedTexts.append((path, "Repo"))
+      }
+    case .Follow:
+      if let path = self.link?.path {
+        checkedTexts.append((path, "User"))
+      }
+    case .Fork:
+      let arr = title.components(separatedBy: " ")
+      if arr.count == 5 {
+        checkedTexts.append(contentsOf: [
+          (arr[2], "Repo"), (arr[4], "Repo")
+        ])
+      }
+    case .Create, .Release:
+      let arr = title.components(separatedBy: " ")
+      let text = arr.last!
+      checkedTexts.append((text, "Repo"))
+    case .UnKnown:
+      break
+    }
+    
+    for (checked, type) in checkedTexts {
+      if let match = RegularParser.matches(with: checked, validateString: title).first {
+        let range = match.range(at: 0)
+        attr.addAttribute(NSAttributedString.Key.link, value: "value=\(checked)&type=\(type)", range: range)
+      }
+    }
+    attr.addAttribute(NSAttributedString.Key.font, value: UIFont.systemFont(ofSize: 14), range: NSRange(location: 0, length: title.count))
+    return attr
+  }
+  
+  var titleHeight: CGFloat {
+    guard let title = title, let titleAttr = titleAttr else { return 0 }
+    var range = NSRange(location: 0, length: title.count)
+    let dict = titleAttr.attributes(at: 0, effectiveRange: &range)
+    let height = (title as NSString).boundingRect(
+      with: CGSize(width: FrameGuide.screenWidth - 64, height: 0),
+      options: .usesLineFragmentOrigin,
+      attributes: dict,
+      context: nil
+    ).height
+    return height
   }
 }

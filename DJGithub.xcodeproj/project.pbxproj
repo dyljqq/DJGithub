@@ -33,6 +33,7 @@
 		73101D5F28E4A5E400DB5423 /* DevelopersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73101D5E28E4A5E400DB5423 /* DevelopersViewController.swift */; };
 		732016FF28F46DFB007B970F /* DateParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732016FE28F46DFB007B970F /* DateParser.swift */; };
 		7320170128F47B76007B970F /* RegularParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7320170028F47B76007B970F /* RegularParser.swift */; };
+		7320170328F48227007B970F /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7320170228F48227007B970F /* FeedViewController.swift */; };
 		732B21D028E1C09B005893C0 /* RepoStarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732B21CF28E1C09B005893C0 /* RepoStarView.swift */; };
 		732B21D328E228FD005893C0 /* NextPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732B21D228E228FD005893C0 /* NextPageModel.swift */; };
 		732B21D628E22B9A005893C0 /* NextPageLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732B21D528E22B9A005893C0 /* NextPageLoadable.swift */; };
@@ -180,6 +181,7 @@
 		73101D5E28E4A5E400DB5423 /* DevelopersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopersViewController.swift; sourceTree = "<group>"; };
 		732016FE28F46DFB007B970F /* DateParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateParser.swift; sourceTree = "<group>"; };
 		7320170028F47B76007B970F /* RegularParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularParser.swift; sourceTree = "<group>"; };
+		7320170228F48227007B970F /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		732B21CF28E1C09B005893C0 /* RepoStarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoStarView.swift; sourceTree = "<group>"; };
 		732B21D228E228FD005893C0 /* NextPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextPageModel.swift; sourceTree = "<group>"; };
 		732B21D528E22B9A005893C0 /* NextPageLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextPageLoadable.swift; sourceTree = "<group>"; };
@@ -706,6 +708,7 @@
 			children = (
 				73E14E5A28F414FC00A9811D /* Views */,
 				73E14E5C28F4151100A9811D /* FeedsViewController.swift */,
+				7320170228F48227007B970F /* FeedViewController.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -957,6 +960,7 @@
 				73AACB5628D47FCB0072B1DF /* String+Ext.swift in Sources */,
 				73C598CD28D9E6A100DA86A1 /* URL+Ext.swift in Sources */,
 				7341DCD028E03B17009A3A3C /* RepoHeaderView.swift in Sources */,
+				7320170328F48227007B970F /* FeedViewController.swift in Sources */,
 				73DF6BF028EAE0A00003BDB8 /* DeveloperGroupManager.swift in Sources */,
 				73DF6C0828EC69840003BDB8 /* Issue.swift in Sources */,
 				73B7904828E51A3A002A9CDC /* UIImage+Ext.swift in Sources */,

@@ -18,4 +18,13 @@ struct RegularParser {
     }
     return []
   }
+  
+  static func matches(with pattern: String, validateString: String) -> [NSTextCheckingResult] {
+    do {
+      let expression = try NSRegularExpression(pattern: pattern)
+      return expression.matches(in: validateString, range: NSRange(location: 0, length: validateString.count))
+    } catch {
+      return []
+    }
+  }
 }
