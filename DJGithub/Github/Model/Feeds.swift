@@ -108,12 +108,6 @@ extension Feed {
   var titleAttr: NSAttributedString? {
     guard let title = self.title, let userName = self.author?.name else { return nil }
     let attr = NSMutableAttributedString(string: title)
-    if let match = RegularParser.matches(with: userName, validateString: title).first {
-      let range = match.range(at: 0)
-      let value = (title as NSString).substring(with: range)
-      attr.addAttribute(NSAttributedString.Key.link, value: value, range: range)
-    }
-    
     var checkedTexts: [(String, String)] = [(userName, "User")]
     switch self.eventType {
     case .Watch, .Public:
@@ -159,6 +153,6 @@ extension Feed {
       attributes: dict,
       context: nil
     ).height
-    return height
+    return height + 1
   }
 }
