@@ -12,7 +12,7 @@ class DevelopersViewController: UIViewController {
   var isSelectedSegment = false
   
   lazy var segmentView: UISegmentedControl = {
-    let segment = UISegmentedControl(items: ["Following", "Developers", "Repos"])
+    let segment = UISegmentedControl(items: ["Feeds", "Developers", "Repos"])
     segment.selectedSegmentIndex = 0
     segment.frame = CGRect(x: 0, y: 100, width: 300, height: 30)
     segment.addTarget(self, action: #selector(segmentSelectAction), for: .valueChanged)
@@ -31,7 +31,7 @@ class DevelopersViewController: UIViewController {
   
   lazy var vcs: [UIViewController] =  {
     return [
-      UserFollowingViewController(with: .following(ConfigManager.config.userName)),
+      FeedsViewController(),
       LocalDevelopersViewController(with: .developer),
       LocalDevelopersViewController(with: .repo)
     ]
