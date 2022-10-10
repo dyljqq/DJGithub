@@ -14,7 +14,7 @@ struct Feeds: DJCodable {
 struct FeedInfo: DJCodable {
   var title: String
   var updated: String
-  var items: [Feed]
+  var entry: [Feed]
 }
 
 struct Feed: DJCodable {
@@ -22,4 +22,11 @@ struct Feed: DJCodable {
   var published: String?
   var title: String?
   var content: String
+  var author: FeedAuthor?
+}
+
+struct FeedAuthor: DJCodable {
+  var name: String
+  var email: String?
+  var uri: String?
 }

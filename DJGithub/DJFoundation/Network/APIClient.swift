@@ -60,7 +60,7 @@ open class APIClient {
     do {
       guard let url = URL(string: urlString) else { return nil }
       let (data, _) = try await URLSession.shared.data(from: url)
-      return try? decoder.parse(with: data) as? T
+      return try? await decoder.parse(with: data) as? T
     } catch {
       print("url session debug info:")
       print("fetch error: \(urlString), error: \(error)")

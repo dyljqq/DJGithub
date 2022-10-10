@@ -128,6 +128,10 @@
 		73E14E4D28F3426900A9811D /* FeedManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E14E4C28F3426900A9811D /* FeedManager.swift */; };
 		73E14E4F28F3477E00A9811D /* Feeds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E14E4E28F3477E00A9811D /* Feeds.swift */; };
 		73E14E5328F34FF200A9811D /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E14E5228F34FF200A9811D /* Parser.swift */; };
+		73E14E5628F3DAC800A9811D /* DJJSONParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E14E5528F3DAC800A9811D /* DJJSONParser.swift */; };
+		73E14E5828F3DAE200A9811D /* DJXMLParsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E14E5728F3DAE200A9811D /* DJXMLParsable.swift */; };
+		73E14E5D28F4151100A9811D /* FeedsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E14E5C28F4151100A9811D /* FeedsViewController.swift */; };
+		73E14E5F28F415AD00A9811D /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E14E5E28F415AD00A9811D /* FeedCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -270,6 +274,10 @@
 		73E14E4C28F3426900A9811D /* FeedManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedManager.swift; sourceTree = "<group>"; };
 		73E14E4E28F3477E00A9811D /* Feeds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feeds.swift; sourceTree = "<group>"; };
 		73E14E5228F34FF200A9811D /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		73E14E5528F3DAC800A9811D /* DJJSONParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJJSONParser.swift; sourceTree = "<group>"; };
+		73E14E5728F3DAE200A9811D /* DJXMLParsable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJXMLParsable.swift; sourceTree = "<group>"; };
+		73E14E5C28F4151100A9811D /* FeedsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedsViewController.swift; sourceTree = "<group>"; };
+		73E14E5E28F415AD00A9811D /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -537,11 +545,11 @@
 		73AACB2E28D32E6C0072B1DF /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				73E14E5428F3DAB100A9811D /* Parse */,
 				73AACB4D28D45F1F0072B1DF /* Color.swift */,
 				73AACB6B28D5AF7D0072B1DF /* LanguageManager.swift */,
 				7341DCC928DF2B4B009A3A3C /* ImageCoder.swift */,
 				73B7905328E533C2002A9CDC /* ConfigManager.swift */,
-				73E14E5228F34FF200A9811D /* Parser.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -549,6 +557,7 @@
 		73AACB3128D357980072B1DF /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				73E14E5928F414F600A9811D /* Feed */,
 				73B7906328E7F10C002A9CDC /* Search */,
 				73101D5C28E4A5BF00DB5423 /* Developer */,
 				73AACB5B28D4BD040072B1DF /* Repo */,
@@ -674,6 +683,33 @@
 				73074CC328EEF54F001A90E7 /* HUD.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		73E14E5428F3DAB100A9811D /* Parse */ = {
+			isa = PBXGroup;
+			children = (
+				73E14E5228F34FF200A9811D /* Parser.swift */,
+				73E14E5528F3DAC800A9811D /* DJJSONParser.swift */,
+				73E14E5728F3DAE200A9811D /* DJXMLParsable.swift */,
+			);
+			path = Parse;
+			sourceTree = "<group>";
+		};
+		73E14E5928F414F600A9811D /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				73E14E5A28F414FC00A9811D /* Views */,
+				73E14E5C28F4151100A9811D /* FeedsViewController.swift */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
+		73E14E5A28F414FC00A9811D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				73E14E5E28F415AD00A9811D /* FeedCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -844,6 +880,7 @@
 				7341DCD428E0422F009A3A3C /* RepoCell.swift in Sources */,
 				73AACB1328D30F350072B1DF /* DJParser.swift in Sources */,
 				73AACB7728D5BBE90072B1DF /* SQLTable.swift in Sources */,
+				73E14E5D28F4151100A9811D /* FeedsViewController.swift in Sources */,
 				73AACB8328D6020A0072B1DF /* RefreshView.swift in Sources */,
 				73AACB7428D5BA2D0072B1DF /* Language.swift in Sources */,
 				73B7905C28E59104002A9CDC /* HeaderSegmentView.swift in Sources */,
@@ -859,6 +896,7 @@
 				73101D5F28E4A5E400DB5423 /* DevelopersViewController.swift in Sources */,
 				73DF6BFE28EBFEE30003BDB8 /* RepoContentsViewController.swift in Sources */,
 				73101D4B28E4889B00DB5423 /* UserStatusView.swift in Sources */,
+				73E14E5628F3DAC800A9811D /* DJJSONParser.swift in Sources */,
 				73DF6BF228EAE3060003BDB8 /* DJCodable.swift in Sources */,
 				7341DCD828E05D98009A3A3C /* RepoFooterView.swift in Sources */,
 				73DE29CE28E0C35200B48009 /* WebViewController.swift in Sources */,
@@ -867,6 +905,7 @@
 				73B7906028E7E805002A9CDC /* SearchManager.swift in Sources */,
 				73AACB0F28D30C470072B1DF /* APIClient.swift in Sources */,
 				73AACB8B28D708740072B1DF /* UIScrollView+Refresh.swift in Sources */,
+				73E14E5828F3DAE200A9811D /* DJXMLParsable.swift in Sources */,
 				73074CC228EEE6C5001A90E7 /* UITextView+Placeholder.swift in Sources */,
 				73074CC728EF4809001A90E7 /* LocalRepo.swift in Sources */,
 				73101D4128E30C5200DB5423 /* SimpleUserCell.swift in Sources */,
@@ -897,6 +936,7 @@
 				73074CCF28EF573D001A90E7 /* LocalRepoCell.swift in Sources */,
 				7341DCD228E03C6A009A3A3C /* RepoViewController.swift in Sources */,
 				73B7906228E7EB8A002A9CDC /* SearchList.swift in Sources */,
+				73E14E5F28F415AD00A9811D /* FeedCell.swift in Sources */,
 				73AACB7928D5BBF50072B1DF /* DBManage.swift in Sources */,
 				73AACB5028D4618F0072B1DF /* UIView+Ext.swift in Sources */,
 				73AACB5228D467850072B1DF /* UserContributionView.swift in Sources */,

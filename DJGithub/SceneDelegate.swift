@@ -42,7 +42,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         group.addTask {
           if let feeds = await FeedManager.getFeeds() {
-            await FeedManager.fetchFeedInfo(with: feeds.currentUserUrl)
+            let feedInfo = await FeedManager.fetchFeedInfo(with: feeds.currentUserUrl)
+            print("feedInfo: \(feedInfo)")
           }
         }
       }
