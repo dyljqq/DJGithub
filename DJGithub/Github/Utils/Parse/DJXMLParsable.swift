@@ -12,7 +12,8 @@ class XMLNode {
   var value: String = ""
   var isEnd = false
   var isRoot = false
-  var attributes: [XMLNode] = []
+  var attributeDict: [String: String] = [:]
+  var nodes: [XMLNode] = []
   
   var dict: [String: Any] = [:]
   
@@ -20,12 +21,16 @@ class XMLNode {
     self.key = key
   }
   
-  func parseAttributes() {
-    for node in attributes {
-      if node.attributes.isEmpty {
-        dict[node.key] = node.value
+  func parseNodes() {
+    for node in nodes {
+      if node.nodes.isEmpty {
+        if node.value.isEmpty {
+          dict[node.key] = node.attributeDict
+        } else {
+          dict[node.key] = node.value
+        }
       } else {
-        node.parseAttributes()
+        node.parseNodes()
         if let value = dict[node.key] {
           if let items = value as? [[String: Any]] {
             dict[node.key] = items + [node.dict]
@@ -73,6 +78,9 @@ class DJXMLParser<T: DJCodable>: NSObject, Parsable, XMLParserDelegate {
     if stack.isEmpty {
       node.isRoot = true
     }
+    if !attributeDict.isEmpty {
+      node.attributeDict = attributeDict
+    }
     stack.append(node)
   }
   
@@ -91,13 +99,13 @@ class DJXMLParser<T: DJCodable>: NSObject, Parsable, XMLParserDelegate {
         rootNode = node
       }
       if let parentNode = stack.last {
-        parentNode.attributes.append(node)
+        parentNode.nodes.append(node)
       }
     }
   }
   
   func parserDidEndDocument(_ parser: XMLParser) {
-    rootNode?.parseAttributes()
+    rootNode?.parseNodes()
     guard let dict = rootNode?.dict else { return }
     do {
       let model = try DJDecoder(dict: dict).decode() as T?

@@ -9,15 +9,20 @@ import UIKit
 
 class FeedsViewController: UIViewController, NextPageLoadable {
   
-  typealias DataType = FeedInfo
+  typealias DataType = Feed
   
-  var dataSource: [FeedInfo] = []
+  var dataSource: [DataType] = []
   var nextPageState: NextPageState = NextPageState()
   
+  var feeds: Feeds?
 
   lazy var tableView: UITableView = {
     let tableView = UITableView()
-    
+    tableView.delegate = self
+    tableView.dataSource = self
+    tableView.backgroundColor = .backgroundColor
+    tableView.showsVerticalScrollIndicator = false
+    tableView.register(FeedCell.classForCoder(), forCellReuseIdentifier: FeedCell.className)
     return tableView
   }()
   
@@ -29,10 +34,79 @@ class FeedsViewController: UIViewController, NextPageLoadable {
   
   private func setUp() {
     view.backgroundColor = .backgroundColor
+    
+    view.addSubview(tableView)
+    tableView.snp.makeConstraints { make in
+      make.edges.equalToSuperview()
+    }
+    
+    view.startLoading()
+    nextPageState.update(start: 1, hasNext: true, isLoading: false)
+    
+    Task {
+      self.feeds = await FeedManager.getFeeds()
+      if let _ = self.feeds {
+        tableView.addHeader { [weak self] in
+          guard let strongSelf = self else { return }
+          strongSelf.nextPageState.update(start: 1, hasNext: true, isLoading: false)
+          strongSelf.loadNext(start: strongSelf.nextPageState.start)
+        }
+        tableView.addFooter { [weak self] in
+          guard let strongSelf = self else { return }
+          strongSelf.loadNext(start: strongSelf.nextPageState.start + 1)
+        }
+        self.loadNext(start: nextPageState.start)
+      }
+    }
   }
   
-  func performLoad(successHandler: @escaping ([FeedInfo], Bool) -> (), failureHandler: @escaping (String) -> ()) {
-    
+  func loadNext(start: Int) {
+    self.loadNext(start: start) { [weak self] in
+      guard let strongSelf = self else { return }
+      strongSelf.view.stopLoading()
+      strongSelf.tableView.dj_endRefresh()
+      strongSelf.tableView.reloadData()
+    }
+  }
+  
+  func performLoad(successHandler: @escaping ([DataType], Bool) -> (), failureHandler: @escaping (String) -> ()) {
+    guard let feeds = self.feeds else {
+      failureHandler("no valid url.")
+      return
+    }
+    Task {
+      let page = self.nextPageState.start
+      let urlString = "\(feeds.currentUserUrl)&page=\(page)"
+      if let feedInfo = await FeedManager.fetchFeedInfo(with: urlString) {
+        successHandler(feedInfo.entry, !feedInfo.entry.isEmpty)
+      } else {
+        failureHandler("fetch feeds error: \(urlString)")
+      }
+    }
   }
 
+}
+
+extension FeedsViewController: UITableViewDelegate, UITableViewDataSource {
+  
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return dataSource.count
+  }
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: FeedCell.className, for: indexPath) as! FeedCell
+    cell.render(with: dataSource[indexPath.row])
+    return cell
+  }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    tableView.deselectRow(at: indexPath, animated: true)
+  }
+  
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    let feed = dataSource[indexPath.row]
+    let height = FeedCell.cellHeight(with: feed.title ?? "")
+    return height
+  }
+  
 }

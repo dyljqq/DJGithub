@@ -177,6 +177,17 @@ TODO:
 1. 一些bug的修复
 2. 统一网络请求返回数据的xml与json数据的解析。
 
+##### 2022-10-10
+
+1. 重构xml解析代码，能够兼容更多的xml内容
+2. 添加user feeds相关的界面跟内容
+
+TODO：
+
+通过xml解析出的文本，确定feed将要跳转的地方，目前已知的是一条feed entry会有：
+
+starred， forked， createRepository，release， added to，这些都会带repo相关的内容。后面会思考如何更简便的去解析出这些文本的内容。
+
 ### TODO
 
 1. 继续基础界面的搭建

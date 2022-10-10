@@ -12,12 +12,7 @@ struct ConfigManager {
   static var config: Config = Config()
   
   static func loadConfig(completionHandler: ((Config) -> ())? = nil) {
-    DispatchQueue.global().async {
-      let config: Config = loadBundleJSONFile("config")
-      DispatchQueue.main.async {
-        ConfigManager.config = config
-      }
-    }
+    ConfigManager.config = loadBundleJSONFile("config")
   }
   
   static func checkOwner(by userName: String) -> Bool {
