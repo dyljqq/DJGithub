@@ -32,6 +32,7 @@
 		73101D5B28E4A2AB00DB5423 /* repos.json in Resources */ = {isa = PBXBuildFile; fileRef = 73101D5828E4A2AB00DB5423 /* repos.json */; };
 		73101D5F28E4A5E400DB5423 /* DevelopersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73101D5E28E4A5E400DB5423 /* DevelopersViewController.swift */; };
 		732016FF28F46DFB007B970F /* DateParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732016FE28F46DFB007B970F /* DateParser.swift */; };
+		7320170128F47B76007B970F /* RegularParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7320170028F47B76007B970F /* RegularParser.swift */; };
 		732B21D028E1C09B005893C0 /* RepoStarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732B21CF28E1C09B005893C0 /* RepoStarView.swift */; };
 		732B21D328E228FD005893C0 /* NextPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732B21D228E228FD005893C0 /* NextPageModel.swift */; };
 		732B21D628E22B9A005893C0 /* NextPageLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732B21D528E22B9A005893C0 /* NextPageLoadable.swift */; };
@@ -178,6 +179,7 @@
 		73101D5828E4A2AB00DB5423 /* repos.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = repos.json; sourceTree = "<group>"; };
 		73101D5E28E4A5E400DB5423 /* DevelopersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopersViewController.swift; sourceTree = "<group>"; };
 		732016FE28F46DFB007B970F /* DateParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateParser.swift; sourceTree = "<group>"; };
+		7320170028F47B76007B970F /* RegularParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularParser.swift; sourceTree = "<group>"; };
 		732B21CF28E1C09B005893C0 /* RepoStarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoStarView.swift; sourceTree = "<group>"; };
 		732B21D228E228FD005893C0 /* NextPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextPageModel.swift; sourceTree = "<group>"; };
 		732B21D528E22B9A005893C0 /* NextPageLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextPageLoadable.swift; sourceTree = "<group>"; };
@@ -694,6 +696,7 @@
 				73E14E5528F3DAC800A9811D /* DJJSONParser.swift */,
 				73E14E5728F3DAE200A9811D /* DJXMLParsable.swift */,
 				732016FE28F46DFB007B970F /* DateParser.swift */,
+				7320170028F47B76007B970F /* RegularParser.swift */,
 			);
 			path = Parse;
 			sourceTree = "<group>";
@@ -875,6 +878,7 @@
 				73DF6C0428EC252E0003BDB8 /* String+File.swift in Sources */,
 				73AACB3428D357C80072B1DF /* UserViewController.swift in Sources */,
 				7341DCC628DF2400009A3A3C /* TabBarController.swift in Sources */,
+				7320170128F47B76007B970F /* RegularParser.swift in Sources */,
 				73074C7E28ED5664001A90E7 /* IssueDetail.swift in Sources */,
 				73DF6C0C28EC7A7A0003BDB8 /* RepoIssuesStateViewController.swift in Sources */,
 				73AACB2928D321480072B1DF /* Result.swift in Sources */,

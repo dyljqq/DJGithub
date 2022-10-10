@@ -40,12 +40,6 @@ class FeedCell: UITableViewCell {
   func render(with feed: Feed) {
     avatarImageView.setImage(with: feed.thumbnail?.url)
     titleLabel.text = feed.title
-    let dateString: String?
-    if let published = feed.published?.components(separatedBy: "T").first {
-      dateString = published
-    } else {
-      dateString = feed.published
-    }
     dateLabel.text = feed.formatedDate
   }
   

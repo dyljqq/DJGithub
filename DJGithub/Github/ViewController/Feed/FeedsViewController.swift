@@ -101,6 +101,17 @@ extension FeedsViewController: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
+    let feed = dataSource[indexPath.row]
+    if let eventName = feed.eventName, let path = feed.link?.path {
+      switch eventName {
+      case "Follow":
+        self.navigationController?.pushToUser(with: path)
+      case "Release":
+        self.navigationController?.pushToWebView(with: feed.link?.href)
+      default:
+        self.navigationController?.pushToRepo(with: path)
+      }
+    }
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

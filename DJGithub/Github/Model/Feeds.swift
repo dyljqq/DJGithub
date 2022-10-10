@@ -59,13 +59,17 @@ struct Feed: DJCodable {
     return published
   }
   
+  var eventName: String? {
+    return RegularParser.parse(with: ":([a-zA-Z]+)Event", validateString: self.id).first
+  }
+  
   // TODO
   var pushType: FeedPushType {
     return .repo("")
   }
   
   enum CodingKeys: String, CodingKey {
-    case id, published, title, content, author, thumbnail = "media:thumbnail"
+    case id, published, title, content, author, thumbnail = "media:thumbnail", link
   }
 }
 
@@ -82,6 +86,17 @@ struct FeedAuthorThumbnail: DJCodable {
 }
 
 struct FeedLink: DJCodable {
-  var type: String
-  var href: String
+  var type: String?
+  var href: String?
+  
+  var path: String? {
+    guard let href = href else { return nil }
+    if var path = URLComponents(string: href)?.path {
+      if path.starts(with: "/") {
+        path.removeFirst()
+      }
+      return path
+    }
+    return nil
+  }
 }
