@@ -4,7 +4,13 @@
 
 ### 配置
 
-在/DJGithub/Github/Resource/config.json文件中补充对应的配置信息
+在/DJGithub/Github/Resource/config.json文件中补充对应的配置信息.
+
+Personal access tokens的申请链接如下：
+
+[Personal access tokens](https://github.com/settings/tokens) 
+
+申请的时候注意看用户的权限信息，如果某些权限没有选择的话，可能会造成app内容无法成功获取。具体以返回数据信息为准。
 
 例:
 
