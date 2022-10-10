@@ -46,7 +46,7 @@ class FeedCell: UITableViewCell {
     } else {
       dateString = feed.published
     }
-    dateLabel.text = dateString
+    dateLabel.text = feed.formatedDate
   }
   
   required init?(coder: NSCoder) {

@@ -35,7 +35,7 @@ class XMLNode {
           if let items = value as? [[String: Any]] {
             dict[node.key] = items + [node.dict]
           } else {
-            dict[node.key] = [node.dict]
+            dict[node.key] = [value, node.dict]
           }
         } else {
           dict[node.key] = node.dict

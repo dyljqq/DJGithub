@@ -35,6 +35,30 @@ struct Feed: DJCodable {
   var thumbnail: FeedAuthorThumbnail?
   var link: FeedLink?
   
+  var formatedDate: String? {
+    guard let published = published,
+          let date = FeedDateParser.date(from: published)else {
+      return published
+    }
+    let diff = (Date.now.timeIntervalSince1970 - date.timeIntervalSince1970)
+    if diff < 60 {
+      return "\(diff) seconds ago"
+    } else if diff >= 60 && diff < 3600 {
+      return "\(Int(diff / 60)) minuts ago"
+    } else if diff >= 3600 && diff < 24 * 3600 {
+      return "\(Int(diff / 3600)) hours ago"
+    } else if diff >= 24 * 3600 && diff <= 24 * 30 * 3600 {
+      return "\(Int(diff / (24 * 3600))) days ago"
+    } else if diff >= (24 * 30 * 3600) && diff < (12 * 30 * 24 * 30 * 3600) {
+      return "\(Int(diff / (30 * 24 * 3600))) months ago"
+    } else {
+      if let published = published.components(separatedBy: "T").first {
+        return published
+      }
+    }
+    return published
+  }
+  
   // TODO
   var pushType: FeedPushType {
     return .repo("")
