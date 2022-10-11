@@ -47,6 +47,7 @@
 		7339201528F56D2900DC76B0 /* RssFeedManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7339201428F56D2900DC76B0 /* RssFeedManager.swift */; };
 		7339201728F587F100DC76B0 /* css.html in Resources */ = {isa = PBXBuildFile; fileRef = 7339201628F587F100DC76B0 /* css.html */; };
 		7339201928F5883500DC76B0 /* RssFeedDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7339201828F5883500DC76B0 /* RssFeedDetailViewController.swift */; };
+		7339201B28F5C2F200DC76B0 /* SwiftOrgRssFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7339201A28F5C2F200DC76B0 /* SwiftOrgRssFeed.swift */; };
 		7341DCC628DF2400009A3A3C /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341DCC528DF2400009A3A3C /* TabBarController.swift */; };
 		7341DCC828DF24CB009A3A3C /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341DCC728DF24CB009A3A3C /* NavigationController.swift */; };
 		7341DCCA28DF2B4B009A3A3C /* ImageCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341DCC928DF2B4B009A3A3C /* ImageCoder.swift */; };
@@ -205,6 +206,7 @@
 		7339201428F56D2900DC76B0 /* RssFeedManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssFeedManager.swift; sourceTree = "<group>"; };
 		7339201628F587F100DC76B0 /* css.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = css.html; sourceTree = "<group>"; };
 		7339201828F5883500DC76B0 /* RssFeedDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssFeedDetailViewController.swift; sourceTree = "<group>"; };
+		7339201A28F5C2F200DC76B0 /* SwiftOrgRssFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftOrgRssFeed.swift; sourceTree = "<group>"; };
 		7341DCC528DF2400009A3A3C /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		7341DCC728DF24CB009A3A3C /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		7341DCC928DF2B4B009A3A3C /* ImageCoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCoder.swift; sourceTree = "<group>"; };
@@ -389,6 +391,7 @@
 				7320170828F535CB007B970F /* RssFeed.swift */,
 				7320170A28F53642007B970F /* MyzbRssFeed.swift */,
 				7320170C28F5378E007B970F /* RssFeedAtom.swift */,
+				7339201A28F5C2F200DC76B0 /* SwiftOrgRssFeed.swift */,
 			);
 			path = RssFeed;
 			sourceTree = "<group>";
@@ -1004,6 +1007,7 @@
 				73AACAD728D308A60072B1DF /* SceneDelegate.swift in Sources */,
 				73AACB5628D47FCB0072B1DF /* String+Ext.swift in Sources */,
 				73C598CD28D9E6A100DA86A1 /* URL+Ext.swift in Sources */,
+				7339201B28F5C2F200DC76B0 /* SwiftOrgRssFeed.swift in Sources */,
 				7341DCD028E03B17009A3A3C /* RepoHeaderView.swift in Sources */,
 				7339201928F5883500DC76B0 /* RssFeedDetailViewController.swift in Sources */,
 				7339201328F5458100DC76B0 /* DateHelper.swift in Sources */,

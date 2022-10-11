@@ -15,9 +15,9 @@ func getInternetDateFormatter() -> DateFormatter {
     return formmater
 }
 
-func getFeedDateFormatter() -> DateFormatter {
+func getRssFeedDateFormatter() -> DateFormatter {
     let formmatter = DateFormatter()
-    formmatter.dateFormat = "MM-dd HH:mm"
+    formmatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
     return formmatter
 }
 
@@ -25,7 +25,7 @@ struct DateHelper {
     
     static let standard = DateHelper()
     
-    static let feedDateFormatter = getFeedDateFormatter()
+    static let rssFeedDateFormatter = getRssFeedDateFormatter()
     static let internetDateFormatter = getInternetDateFormatter()
     
     let formatters = [
@@ -46,15 +46,19 @@ struct DateHelper {
                 }
             }
         } else {
-            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-            return formatter.date(from: dateString)
+          for f in ["yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd'T'HH:mm:ss-mm:ss"] {
+            formatter.dateFormat = f
+            if let date = formatter.date(from: dateString) {
+                return date
+            }
+          }
         }
         
         return nil
     }
     
     func dateToString(_ date: Date) -> String {
-        return DateHelper.feedDateFormatter.string(from: date)
+        return DateHelper.rssFeedDateFormatter.string(from: date)
     }
     
 }

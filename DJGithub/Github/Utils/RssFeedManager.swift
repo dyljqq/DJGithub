@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 class RssFeedManager: NSObject {
   override init() {
@@ -15,21 +16,18 @@ class RssFeedManager: NSObject {
     Task {
       await self.saveAtoms()
     }
-    
+
     Task {
-      let atoms = await loadAtoms()
-      for atom in atoms {
-        if atom.title.contains("摸鱼") {
-          await loadFeeds(by: atom)
+      let atoms = await loadAtoms()      
+      await withThrowingTaskGroup(of: Void.self) { group in
+        for atom in atoms {
+          switch atom.atomType {
+          case .swiftOrg: group.addTask { let _ = await self.loadFeeds(by: atom) as SwiftOrgRssFeedInfo? }
+          case .myzb: group.addTask { let _ = await self.loadFeeds(by: atom) as MyzbRssFeedChannel? }
+          default: break
+          }
         }
       }
-//      await withThrowingTaskGroup(of: Void.self) { group in
-//        for atom in atoms {
-//          group.addTask {
-//            await self.loadFeeds(by: atom)
-//          }
-//        }
-//      }
     }
   }
   
@@ -51,12 +49,18 @@ class RssFeedManager: NSObject {
     }
   }
   
-  func loadFeeds(by atom: RssFeedAtom) async {
+  @discardableResult
+  func loadFeeds<T: RssFeedParsable>(by atom: RssFeedAtom) async -> T? {
     print("----------------------------------")
     print("start fetch \(atom.title)'s feeds")
-    let feeds = await FeedManager.fetchRssFeeds(with: atom.feedLink)
+    guard let info = await FeedManager.fetchRssInfo(with: atom.feedLink) as T? else {
+      print("failed to load feeds: \(atom.title)")
+      return nil
+    }
+    let feeds = info.convert()
+    print("fetched feeds: \(atom.title) feeds count: \(feeds.count)")
     for var feed in feeds {
-      let selectedFeeds: [RssFeed] = RssFeed.select(with: " where title='\(feed.title)'")
+      let selectedFeeds: [RssFeed] = RssFeed.select(with: " where title=\"\(feed.title)\"")
       if selectedFeeds.isEmpty {
         feed.atomId = atom.id
         feed.insert()
@@ -64,10 +68,10 @@ class RssFeedManager: NSObject {
     }
     print("end fetch \(atom.title)'s feeds")
     print("----------------------------------")
+    return info
   }
   
   static func getFeeds(by atomId: Int) async -> [RssFeed] {
-    let d = RssFeed.selectAll()
     let feeds: [RssFeed] = RssFeed.select(with: " where atom_id=\(atomId)")
     return feeds
   }

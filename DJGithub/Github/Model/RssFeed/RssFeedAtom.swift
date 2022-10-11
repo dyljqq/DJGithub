@@ -7,12 +7,33 @@
 
 import Foundation
 
+enum RssFeedAtomType: String, DJCodable {
+  case myzb, swiftOrg, tsai, ssp, onevcat
+  case swiftLee, swiftWithMajid, zhouzi, daiming
+  case sundell, fiveStars, coalescing, swiftUIWeekly
+  case swiftlyRushWeekly, iOSDevWeekly, ruanyifeng
+  case theSwiftDev, afer, jihe
+}
+
+extension RssFeedAtomType {
+  var modelType: any RssFeedParsable.Type {
+    switch self {
+    case .myzb: return MyzbRssFeedChannel.self
+    case .swiftOrg: return SwiftOrgRssFeed.self
+      // TODO
+    default: return SwiftOrgRssFeed.self
+    }
+  }
+}
+
 struct RssFeedAtom: DJCodable {
   var id: Int
   var title: String
   var des: String
   var siteLink: String
   var feedLink: String
+  
+  var atomType: RssFeedAtomType
 }
 
 extension RssFeedAtom: SQLTable {
@@ -26,7 +47,7 @@ extension RssFeedAtom: SQLTable {
   
   static var fields: [String] {
     return [
-      "id", "title", "des", "site_link", "feed_link"
+      "id", "title", "des", "site_link", "feed_link", "atom_type"
     ]
   }
   
@@ -36,13 +57,14 @@ extension RssFeedAtom: SQLTable {
       "title": .text,
       "des": .text,
       "site_link": .text,
-      "feed_link": .text
+      "feed_link": .text,
+      "atom_type": .text
     ]
   }
   
   static var selectedFields: [String] {
     return [
-      "id", "title", "des", "site_link", "feed_link"
+      "id", "title", "des", "site_link", "feed_link", "atom_type"
     ]
   }
   
@@ -52,7 +74,8 @@ extension RssFeedAtom: SQLTable {
       "id": self.id,
       "des": self.des,
       "site_link": self.siteLink,
-      "feed_link": self.feedLink
+      "feed_link": self.feedLink,
+      "atom_type": self.atomType.rawValue
     ]
   }
   

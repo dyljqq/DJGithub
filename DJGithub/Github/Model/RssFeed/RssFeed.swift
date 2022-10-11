@@ -7,8 +7,16 @@
 
 import Foundation
 
-protocol RssFeedCinvertable {
-  func conver() -> RssFeed
+typealias RssFeedParsable = RssFeedConvertable & DJCodable
+
+protocol RssFeedConvertable {
+  func convert() -> [RssFeed]
+}
+
+extension RssFeedConvertable {
+  func convert() -> [RssFeed] {
+    return []
+  }
 }
 
 struct RssFeed: DJCodable {

@@ -66,7 +66,7 @@ extension RssFeedsViewController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: RssFeedAtomCell.className, for: indexPath) as! RssFeedAtomCell
     let rssFeed = self.dataSource[indexPath.row]
-    cell.render(with: rssFeed.title, des: rssFeed.updated)
+    cell.render(with: rssFeed.title, des: rssFeed.displayDateString)
     return cell
   }
   
@@ -80,5 +80,11 @@ extension RssFeedsViewController: UITableViewDelegate, UITableViewDataSource {
     
     let rssFeed = dataSource[indexPath.row]
     self.navigationController?.pushToRssFeedDetial(with: rssFeed)
+  }
+}
+
+extension RssFeed {
+  var displayDateString: String {
+    return "updated on \(self.updated.components(separatedBy: " ").first ?? self.updated)"
   }
 }
