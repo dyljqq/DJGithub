@@ -10,16 +10,41 @@ import WebKit
 
 class WebViewController: UIViewController {
 
-  let urlString: String
+  enum LoadType {
+    case local, remote
+  }
+
   var request: URLRequest? = nil
+  let content: String
+  var type: LoadType = .remote
+  let urlString: String
   
   // token
   var titleToken: NSKeyValueObservation?
   var progressToken: NSKeyValueObservation?
   
-  lazy var webView: WKWebView = {
+  // nice job!!!!
+  let photoJS = "var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta); var imgs = document.getElementsByTagName('img');for (var i in imgs){imgs[i].style.maxWidth='100%';imgs[i].style.height='auto';}"
+  
+  lazy var userScript: WKUserScript = {
+      let us = WKUserScript(source: photoJS, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+      return us
+  }()
+  
+  lazy var userContentController: WKUserContentController = {
+     let userContentController = WKUserContentController()
+      userContentController.addUserScript(userScript)
+      return userContentController
+  }()
+  
+  lazy var webConfig: WKWebViewConfiguration = {
     let config = WKWebViewConfiguration()
-    let webView = WKWebView(frame: .zero, configuration: config)
+      config.userContentController = userContentController
+      return config
+  }()
+  
+  lazy var webView: WKWebView = {
+    let webView = WKWebView(frame: .zero, configuration: webConfig)
     webView.navigationDelegate = self
     webView.uiDelegate = self
     webView.isOpaque = false
@@ -27,7 +52,7 @@ class WebViewController: UIViewController {
     webView.scrollView.isDirectionalLockEnabled = true
     return webView
   }()
-  
+
   lazy var footerView: WebViewFooterView = {
     let footView = WebViewFooterView()
     return footView
@@ -35,11 +60,23 @@ class WebViewController: UIViewController {
   
   init(with urlString: String) {
     self.urlString = urlString
+    self.content = urlString
     super.init(nibName: nil, bundle: nil)
     
     if let url = URL(string: urlString) {
       self.request = URLRequest(url: url)
     }
+  }
+  
+  init(with content: String, type: LoadType = .remote) {
+    self.content = content
+    self.type = type
+    if case LoadType.remote = type {
+      urlString = content
+    } else {
+      urlString = ""
+    }
+    super.init(nibName: nil, bundle: nil)
   }
   
   convenience init(with request: URLRequest?) {
@@ -72,8 +109,9 @@ class WebViewController: UIViewController {
       make.leading.trailing.bottom.equalTo(self.view)
     }
     
-    if let req = self.request {
-      self.webView.load(req)
+    switch type {
+    case .remote: loadFromRemote()
+    case .local: loadFromLocal()
     }
     
     view.startLoading()
@@ -89,6 +127,23 @@ class WebViewController: UIViewController {
         strongSelf.webView.goBack()
       }
     }
+  }
+  
+  private func loadFromRemote() {
+    if let req = self.request {
+      self.webView.load(req)
+    }
+  }
+  
+  private func loadFromLocal() {
+    let html: String
+    if let path = Bundle.main.path(forResource: "css", ofType: "html"),
+       let style = try? String(contentsOfFile: path) {
+      html = "\(style)\(content)"
+    } else {
+      html = content
+    }
+    webView.loadHTMLString(html, baseURL: nil)
   }
   
   private func addObserve() {
@@ -119,10 +174,14 @@ class WebViewController: UIViewController {
 
 extension WebViewController: WKNavigationDelegate, WKUIDelegate {
   func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-    print("todo...")
+    
   }
   
   func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-    print("failed...")
+    
+  }
+  func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+    print("url: \(navigationAction.request.url?.absoluteString), \(navigationAction.navigationType)")
+    decisionHandler(.allow)
   }
 }

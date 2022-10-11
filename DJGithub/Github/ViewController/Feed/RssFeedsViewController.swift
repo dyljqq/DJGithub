@@ -50,7 +50,7 @@ class RssFeedsViewController: UIViewController {
     view.startLoading()
     
     Task {
-      self.dataSource = await FeedManager.fetchRssFeeds(with: rssFeedAtom.feedLink)
+      self.dataSource = await RssFeedManager.getFeeds(by: rssFeedAtom.id)
       view.stopLoading()
       self.tableView.reloadData()
     }
@@ -78,6 +78,7 @@ extension RssFeedsViewController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
     
-    // TODO
+    let rssFeed = dataSource[indexPath.row]
+    self.navigationController?.pushToRssFeedDetial(with: rssFeed)
   }
 }

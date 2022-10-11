@@ -60,6 +60,9 @@ extension RssFeedAtomViewController: UITableViewDelegate, UITableViewDataSource 
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
-    self.navigationController?.pushToRssFeeds(with: dataSource[indexPath.row])
+    let atom = dataSource[indexPath.row]
+    if atom.hasFeeds {
+      self.navigationController?.pushToRssFeeds(with: dataSource[indexPath.row])
+    }
   }
 }

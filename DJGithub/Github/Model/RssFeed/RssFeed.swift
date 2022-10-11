@@ -12,8 +12,51 @@ protocol RssFeedCinvertable {
 }
 
 struct RssFeed: DJCodable {
-  let title: String
-  let updated: String
-  let content: String
-  let link: String
+  var id: Int?
+  var title: String
+  var updated: String
+  var content: String
+  var link: String
+  
+  var atomId: Int?
+}
+
+extension RssFeed: SQLTable {
+  static var tableName: String {
+    return "rss_feed"
+  }
+  
+  static var fields: [String] {
+    return [
+      "title", "updated", "content", "link", "atom_id"
+    ]
+  }
+  
+  static var fieldsTypeMapping: [String : FieldType] {
+    return [
+      "title": .text,
+      "updated": .text,
+      "content": .text,
+      "link": .text,
+      "atom_id": .bigint
+    ]
+  }
+  
+  static var selectedFields: [String] {
+    return [
+      "id", "title", "updated", "content", "link", "atom_id"
+    ]
+  }
+  
+  var fieldsValueMapping: [String : Any] {
+    return [
+      "id": self.id ?? 0,
+      "title": self.title,
+      "updated": self.updated,
+      "content": self.content,
+      "link": self.link,
+      "atom_id": self.atomId ?? 0
+    ]
+  }
+  
 }
