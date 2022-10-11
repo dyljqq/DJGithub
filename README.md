@@ -23,6 +23,7 @@ Personal access tokens的申请链接如下：
 ### 已完成功能
 
 1. 获取，修改用户信息
+
 2. 获取库信息
 
 	* 库基本信息
@@ -30,13 +31,28 @@ Personal access tokens的申请链接如下：
 	* 库start，watches，forks，contributors列表展示
 	* 库issue & issue comment的获取，展示，修改
 	* README通过webview去渲染
-3. 登录用户的star repos的获取&展示
-4. 库与用户的相关信息的检索，并设置历史搜索词。
-5. 接入一些SwiftPamphletApp中的本地相关文件，里面有一些常用，精选的iOS开发相关的内容。[SwiftPamphletApp](https://github.com/KwaiAppTeam/SwiftPamphletApp)
-5. 添加User feeds相关的内容
 
-	* 解析XML数据，自定义XML解析器
-	* 因为Feed数据中会包含多个库跟用户信息，因此给这些文字做了高亮与点击操作。
+3. 登录用户的star repos的获取&展示
+
+4. 库与用户的相关信息的检索，并设置历史搜索词。
+
+5. 接入一些SwiftPamphletApp中的本地相关文件，里面有一些常用，精选的iOS开发相关的内容。[SwiftPamphletApp](https://github.com/KwaiAppTeam/SwiftPamphletApp)
+
+6. 添加User feeds相关的内容
+
+   	* 解析XML数据，自定义XML解析器
+
+   	* 因为Feed数据中会包含多个库跟用户信息，因此给这些文字做了高亮与点击操作。
+
+7. 加入Rss源的解析。
+
+   已完成：界面的搭建以及数据解析框架的搭建
+
+   待完成：
+
+   * 接入不同Rss源数据
+   * 数据做本地存储的操作
+   * Rss中content内容的展示
 
 ### 待完成(目前想到的)
 
@@ -54,7 +70,7 @@ Personal access tokens的申请链接如下：
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | <img src="https://raw.githubusercontent.com/dyljqq/DJGithub/master/screenshot/User.png" width="190" height="335"/> | <img src="https://raw.githubusercontent.com/dyljqq/DJGithub/master/screenshot/UserInteract.png" width="190" height="335"/> | <img src="https://raw.githubusercontent.com/dyljqq/DJGithub/master/screenshot/UserInfo.png" width="190" height="335"/> | <img src="https://raw.githubusercontent.com/dyljqq/DJGithub/master/screenshot/Repo.png" width="190" height="335"/> |
 | <img src="https://raw.githubusercontent.com/dyljqq/DJGithub/master/screenshot/RepoDir.png" width="190" height="335"/> | <img src="https://raw.githubusercontent.com/dyljqq/DJGithub/master/screenshot/RepoIssues.png" width="190" height="335"/> | <img src="https://raw.githubusercontent.com/dyljqq/DJGithub/master/screenshot/IssueDetail.png" width="190" height="335"/> | <img src="https://raw.githubusercontent.com/dyljqq/DJGithub/master/screenshot/EditIssue.png" width="190" height="335"/> |
-| <img src="https://raw.githubusercontent.com/dyljqq/DJGithub/master/screenshot/IssueComments.png" width="190" height="335"/> | <img src="https://raw.githubusercontent.com/dyljqq/DJGithub/master/screenshot/Feeds.png" width="190" height="335"/> |                                                              |                                                              |
+| <img src="https://raw.githubusercontent.com/dyljqq/DJGithub/master/screenshot/IssueComments.png" width="190" height="335"/> | <img src="https://raw.githubusercontent.com/dyljqq/DJGithub/master/screenshot/Feeds.png" width="190" height="335"/> | <img src="https://raw.githubusercontent.com/dyljqq/DJGithub/master/screenshot/RssFeeds.png" width="190" height="335"/ |                                                              |
 
 
 

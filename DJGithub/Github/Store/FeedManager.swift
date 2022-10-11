@@ -15,4 +15,11 @@ struct FeedManager {
   static func fetchFeedInfo(with urlString: String) async -> FeedInfo? {
     return try? await APIClient.shared.data(with: urlString, decoder: DJXMLParser<FeedInfo>())
   }
+  
+  static func fetchRssFeeds(with urlString: String) async -> [RssFeed] {
+    if let rssFeedChannel = try? await APIClient.shared.data(with: urlString, decoder: DJXMLParser<MyzbRssFeedChannel>()) as MyzbRssFeedChannel? {
+      return rssFeedChannel.channel.item.map { $0.conver() }
+    }
+    return []
+  }
 }
