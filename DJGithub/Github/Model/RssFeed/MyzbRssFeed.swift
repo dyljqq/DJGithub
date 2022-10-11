@@ -8,17 +8,23 @@
 import Foundation
 
 // 摸鱼周报
-struct MyzbRssFeedChannel: DJCodable {
-  struct MyzbRssFeedInfo: DJCodable {
+struct MyzbRssFeedChannel: RssFeedParsable {
+  struct MyzbRssFeedInfo: RssFeedParsable {
     var title: String
     var pubDate: String
     var item: [MyzbRssFeed]
   }
   
   var channel: MyzbRssFeedInfo
+  
+  func convert() -> [RssFeed] {
+    return channel.item.compactMap { $0.convert() }
+  }
 }
 
-struct MyzbRssFeed: DJCodable {
+struct MyzbRssFeed: RssFeedParsable {
+  typealias DataType = RssFeed
+
   var title: String?
   var link: String?
   var content: String?
@@ -27,10 +33,8 @@ struct MyzbRssFeed: DJCodable {
   enum CodingKeys: String, CodingKey {
     case title, link, content = "content:encoded", pubDate
   }
-}
-
-extension MyzbRssFeed: RssFeedCinvertable {
-  func conver() -> RssFeed {
+  
+  func convert() -> RssFeed {
     let dateString: String?
     if let pubDate = self.pubDate, let date = DateHelper.standard.dateFromRFC822String(pubDate) {
       dateString = DateHelper.standard.dateToString(date)

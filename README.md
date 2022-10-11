@@ -51,8 +51,8 @@ Personal access tokens的申请链接如下：
    待完成：
 
    * 接入不同Rss源数据
-   * 数据做本地存储的操作
-   * Rss中content内容的展示
+   * 数据做本地存储的操作(已完成)
+   * Rss中content内容的展示（已完成）
 
 ### 待完成(目前想到的)
 

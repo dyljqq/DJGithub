@@ -98,6 +98,12 @@ class RepoContentFileViewController: UIViewController {
         }
       }
     }
+    
+    fileView.onTouchLink = { [weak self] request in
+      guard let strongSelf = self else { return false }
+      strongSelf.navigationController?.pushToWebView(request: request)
+      return false
+    }
   }
 
 }

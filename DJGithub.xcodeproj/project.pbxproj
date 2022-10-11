@@ -44,6 +44,10 @@
 		732B21D628E22B9A005893C0 /* NextPageLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732B21D528E22B9A005893C0 /* NextPageLoadable.swift */; };
 		7339201128F53DAC00DC76B0 /* RssFeedsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7339201028F53DAC00DC76B0 /* RssFeedsViewController.swift */; };
 		7339201328F5458100DC76B0 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7339201228F5458100DC76B0 /* DateHelper.swift */; };
+		7339201528F56D2900DC76B0 /* RssFeedManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7339201428F56D2900DC76B0 /* RssFeedManager.swift */; };
+		7339201728F587F100DC76B0 /* css.html in Resources */ = {isa = PBXBuildFile; fileRef = 7339201628F587F100DC76B0 /* css.html */; };
+		7339201928F5883500DC76B0 /* RssFeedDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7339201828F5883500DC76B0 /* RssFeedDetailViewController.swift */; };
+		7339201B28F5C2F200DC76B0 /* SwiftOrgRssFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7339201A28F5C2F200DC76B0 /* SwiftOrgRssFeed.swift */; };
 		7341DCC628DF2400009A3A3C /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341DCC528DF2400009A3A3C /* TabBarController.swift */; };
 		7341DCC828DF24CB009A3A3C /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341DCC728DF24CB009A3A3C /* NavigationController.swift */; };
 		7341DCCA28DF2B4B009A3A3C /* ImageCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341DCC928DF2B4B009A3A3C /* ImageCoder.swift */; };
@@ -199,6 +203,10 @@
 		732B21D528E22B9A005893C0 /* NextPageLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextPageLoadable.swift; sourceTree = "<group>"; };
 		7339201028F53DAC00DC76B0 /* RssFeedsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssFeedsViewController.swift; sourceTree = "<group>"; };
 		7339201228F5458100DC76B0 /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
+		7339201428F56D2900DC76B0 /* RssFeedManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssFeedManager.swift; sourceTree = "<group>"; };
+		7339201628F587F100DC76B0 /* css.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = css.html; sourceTree = "<group>"; };
+		7339201828F5883500DC76B0 /* RssFeedDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssFeedDetailViewController.swift; sourceTree = "<group>"; };
+		7339201A28F5C2F200DC76B0 /* SwiftOrgRssFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftOrgRssFeed.swift; sourceTree = "<group>"; };
 		7341DCC528DF2400009A3A3C /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		7341DCC728DF24CB009A3A3C /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		7341DCC928DF2B4B009A3A3C /* ImageCoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCoder.swift; sourceTree = "<group>"; };
@@ -340,6 +348,7 @@
 			children = (
 				73101D5528E4A2AB00DB5423 /* News */,
 				73B7905528E53B6B002A9CDC /* config.json */,
+				7339201628F587F100DC76B0 /* css.html */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -382,6 +391,7 @@
 				7320170828F535CB007B970F /* RssFeed.swift */,
 				7320170A28F53642007B970F /* MyzbRssFeed.swift */,
 				7320170C28F5378E007B970F /* RssFeedAtom.swift */,
+				7339201A28F5C2F200DC76B0 /* SwiftOrgRssFeed.swift */,
 			);
 			path = RssFeed;
 			sourceTree = "<group>";
@@ -582,6 +592,7 @@
 				73AACB6B28D5AF7D0072B1DF /* LanguageManager.swift */,
 				7341DCC928DF2B4B009A3A3C /* ImageCoder.swift */,
 				73B7905328E533C2002A9CDC /* ConfigManager.swift */,
+				7339201428F56D2900DC76B0 /* RssFeedManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -737,6 +748,7 @@
 				7320170228F48227007B970F /* FeedViewController.swift */,
 				7320170528F53455007B970F /* RssFeedAtomViewController.swift */,
 				7339201028F53DAC00DC76B0 /* RssFeedsViewController.swift */,
+				7339201828F5883500DC76B0 /* RssFeedDetailViewController.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -870,6 +882,7 @@
 				73AACAE128D308A70072B1DF /* LaunchScreen.storyboard in Resources */,
 				73AACADE28D308A70072B1DF /* Assets.xcassets in Resources */,
 				73101D5A28E4A2AB00DB5423 /* rssfeed.json in Resources */,
+				7339201728F587F100DC76B0 /* css.html in Resources */,
 				73101D5B28E4A2AB00DB5423 /* repos.json in Resources */,
 				73DF6BF428EB0DCB0003BDB8 /* developers.json in Resources */,
 				73AACADC28D308A60072B1DF /* Main.storyboard in Resources */,
@@ -913,6 +926,7 @@
 				7320170128F47B76007B970F /* RegularParser.swift in Sources */,
 				73074C7E28ED5664001A90E7 /* IssueDetail.swift in Sources */,
 				73DF6C0C28EC7A7A0003BDB8 /* RepoIssuesStateViewController.swift in Sources */,
+				7339201528F56D2900DC76B0 /* RssFeedManager.swift in Sources */,
 				73AACB2928D321480072B1DF /* Result.swift in Sources */,
 				7320170628F53455007B970F /* RssFeedAtomViewController.swift in Sources */,
 				73DF6BFC28EBFD3E0003BDB8 /* RepoContent.swift in Sources */,
@@ -993,7 +1007,9 @@
 				73AACAD728D308A60072B1DF /* SceneDelegate.swift in Sources */,
 				73AACB5628D47FCB0072B1DF /* String+Ext.swift in Sources */,
 				73C598CD28D9E6A100DA86A1 /* URL+Ext.swift in Sources */,
+				7339201B28F5C2F200DC76B0 /* SwiftOrgRssFeed.swift in Sources */,
 				7341DCD028E03B17009A3A3C /* RepoHeaderView.swift in Sources */,
+				7339201928F5883500DC76B0 /* RssFeedDetailViewController.swift in Sources */,
 				7339201328F5458100DC76B0 /* DateHelper.swift in Sources */,
 				7320170328F48227007B970F /* FeedViewController.swift in Sources */,
 				73DF6BF028EAE0A00003BDB8 /* DeveloperGroupManager.swift in Sources */,

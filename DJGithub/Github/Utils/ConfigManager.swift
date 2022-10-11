@@ -7,15 +7,25 @@
 
 import Foundation
 
-struct ConfigManager {
+class ConfigManager: NSObject {
   static let shared = ConfigManager()
   static var config: Config = Config()
+  let rssFeedManager: RssFeedManager = RssFeedManager()
   
-  static func loadConfig(completionHandler: ((Config) -> ())? = nil) {
+  override init() {
+    super.init()
+  }
+  
+  func load() {
+    loadConfig()
+  }
+  
+  func loadConfig(completionHandler: ((Config) -> ())? = nil) {
     ConfigManager.config = loadBundleJSONFile("config")
   }
   
   static func checkOwner(by userName: String) -> Bool {
     return userName == config.userName
   }
+  
 }

@@ -100,4 +100,9 @@ extension UINavigationController {
     let vc = RssFeedsViewController(with: atom)
     pushViewController(vc, animated: true)
   }
+  
+  func pushToRssFeedDetial(with rssFeed: RssFeed) {
+    let vc = RssFeedDetailViewController(rssFeed: rssFeed)
+    pushViewController(vc, animated: true)
+  }
 }

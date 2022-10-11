@@ -26,7 +26,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     Language.createTable()
     LocalDeveloperGroup.createTable()
     LocalDeveloper.createTable()
-    ConfigManager.loadConfig()
+    
+    ConfigManager.shared.load()
     
     Task {
       await withThrowingTaskGroup(of: Void.self) { group in
