@@ -34,9 +34,16 @@
 		732016FF28F46DFB007B970F /* DateParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732016FE28F46DFB007B970F /* DateParser.swift */; };
 		7320170128F47B76007B970F /* RegularParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7320170028F47B76007B970F /* RegularParser.swift */; };
 		7320170328F48227007B970F /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7320170228F48227007B970F /* FeedViewController.swift */; };
+		7320170628F53455007B970F /* RssFeedAtomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7320170528F53455007B970F /* RssFeedAtomViewController.swift */; };
+		7320170928F535CB007B970F /* RssFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7320170828F535CB007B970F /* RssFeed.swift */; };
+		7320170B28F53642007B970F /* MyzbRssFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7320170A28F53642007B970F /* MyzbRssFeed.swift */; };
+		7320170D28F5378E007B970F /* RssFeedAtom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7320170C28F5378E007B970F /* RssFeedAtom.swift */; };
+		7320170F28F5385B007B970F /* RssFeedAtomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7320170E28F5385B007B970F /* RssFeedAtomCell.swift */; };
 		732B21D028E1C09B005893C0 /* RepoStarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732B21CF28E1C09B005893C0 /* RepoStarView.swift */; };
 		732B21D328E228FD005893C0 /* NextPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732B21D228E228FD005893C0 /* NextPageModel.swift */; };
 		732B21D628E22B9A005893C0 /* NextPageLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732B21D528E22B9A005893C0 /* NextPageLoadable.swift */; };
+		7339201128F53DAC00DC76B0 /* RssFeedsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7339201028F53DAC00DC76B0 /* RssFeedsViewController.swift */; };
+		7339201328F5458100DC76B0 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7339201228F5458100DC76B0 /* DateHelper.swift */; };
 		7341DCC628DF2400009A3A3C /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341DCC528DF2400009A3A3C /* TabBarController.swift */; };
 		7341DCC828DF24CB009A3A3C /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341DCC728DF24CB009A3A3C /* NavigationController.swift */; };
 		7341DCCA28DF2B4B009A3A3C /* ImageCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341DCC928DF2B4B009A3A3C /* ImageCoder.swift */; };
@@ -182,9 +189,16 @@
 		732016FE28F46DFB007B970F /* DateParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateParser.swift; sourceTree = "<group>"; };
 		7320170028F47B76007B970F /* RegularParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularParser.swift; sourceTree = "<group>"; };
 		7320170228F48227007B970F /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		7320170528F53455007B970F /* RssFeedAtomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssFeedAtomViewController.swift; sourceTree = "<group>"; };
+		7320170828F535CB007B970F /* RssFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssFeed.swift; sourceTree = "<group>"; };
+		7320170A28F53642007B970F /* MyzbRssFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyzbRssFeed.swift; sourceTree = "<group>"; };
+		7320170C28F5378E007B970F /* RssFeedAtom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssFeedAtom.swift; sourceTree = "<group>"; };
+		7320170E28F5385B007B970F /* RssFeedAtomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssFeedAtomCell.swift; sourceTree = "<group>"; };
 		732B21CF28E1C09B005893C0 /* RepoStarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoStarView.swift; sourceTree = "<group>"; };
 		732B21D228E228FD005893C0 /* NextPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextPageModel.swift; sourceTree = "<group>"; };
 		732B21D528E22B9A005893C0 /* NextPageLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextPageLoadable.swift; sourceTree = "<group>"; };
+		7339201028F53DAC00DC76B0 /* RssFeedsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssFeedsViewController.swift; sourceTree = "<group>"; };
+		7339201228F5458100DC76B0 /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		7341DCC528DF2400009A3A3C /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		7341DCC728DF24CB009A3A3C /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		7341DCC928DF2B4B009A3A3C /* ImageCoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCoder.swift; sourceTree = "<group>"; };
@@ -362,6 +376,16 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		7320170728F535BB007B970F /* RssFeed */ = {
+			isa = PBXGroup;
+			children = (
+				7320170828F535CB007B970F /* RssFeed.swift */,
+				7320170A28F53642007B970F /* MyzbRssFeed.swift */,
+				7320170C28F5378E007B970F /* RssFeedAtom.swift */,
+			);
+			path = RssFeed;
+			sourceTree = "<group>";
+		};
 		73AACAC828D308A60072B1DF = {
 			isa = PBXGroup;
 			children = (
@@ -462,6 +486,7 @@
 				73AACB1228D30F350072B1DF /* DJParser.swift */,
 				73AACB2C28D32BB10072B1DF /* DJFileManager.swift */,
 				73AACB3B28D35C360072B1DF /* Utils.swift */,
+				7339201228F5458100DC76B0 /* DateHelper.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -509,6 +534,7 @@
 		73AACB2228D31A370072B1DF /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7320170728F535BB007B970F /* RssFeed */,
 				73AACB2328D31A440072B1DF /* User.swift */,
 				73AACB5928D4B8610072B1DF /* Repo.swift */,
 				73AACB7328D5BA2D0072B1DF /* Language.swift */,
@@ -709,6 +735,8 @@
 				73E14E5A28F414FC00A9811D /* Views */,
 				73E14E5C28F4151100A9811D /* FeedsViewController.swift */,
 				7320170228F48227007B970F /* FeedViewController.swift */,
+				7320170528F53455007B970F /* RssFeedAtomViewController.swift */,
+				7339201028F53DAC00DC76B0 /* RssFeedsViewController.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -717,6 +745,7 @@
 			isa = PBXGroup;
 			children = (
 				73E14E5E28F415AD00A9811D /* FeedCell.swift */,
+				7320170E28F5385B007B970F /* RssFeedAtomCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -885,9 +914,11 @@
 				73074C7E28ED5664001A90E7 /* IssueDetail.swift in Sources */,
 				73DF6C0C28EC7A7A0003BDB8 /* RepoIssuesStateViewController.swift in Sources */,
 				73AACB2928D321480072B1DF /* Result.swift in Sources */,
+				7320170628F53455007B970F /* RssFeedAtomViewController.swift in Sources */,
 				73DF6BFC28EBFD3E0003BDB8 /* RepoContent.swift in Sources */,
 				732B21D328E228FD005893C0 /* NextPageModel.swift in Sources */,
 				7341DCD428E0422F009A3A3C /* RepoCell.swift in Sources */,
+				7320170F28F5385B007B970F /* RssFeedAtomCell.swift in Sources */,
 				73AACB1328D30F350072B1DF /* DJParser.swift in Sources */,
 				73AACB7728D5BBE90072B1DF /* SQLTable.swift in Sources */,
 				73E14E5D28F4151100A9811D /* FeedsViewController.swift in Sources */,
@@ -921,9 +952,11 @@
 				73101D4128E30C5200DB5423 /* SimpleUserCell.swift in Sources */,
 				73B7904A28E52450002A9CDC /* LocalDevelopersViewController.swift in Sources */,
 				73074CD528F166D8001A90E7 /* UserInfoEditViewController.swift in Sources */,
+				7320170B28F53642007B970F /* MyzbRssFeed.swift in Sources */,
 				73074CCD28EF4AFE001A90E7 /* LocalDataManager.swift in Sources */,
 				73AACB3C28D35C360072B1DF /* Utils.swift in Sources */,
 				73AACB4C28D45EA50072B1DF /* UserCell.swift in Sources */,
+				7339201128F53DAC00DC76B0 /* RssFeedsViewController.swift in Sources */,
 				73E14E4F28F3477E00A9811D /* Feeds.swift in Sources */,
 				73074CC028EED421001A90E7 /* CommitView.swift in Sources */,
 				73AACAD928D308A60072B1DF /* ViewController.swift in Sources */,
@@ -943,6 +976,7 @@
 				732016FF28F46DFB007B970F /* DateParser.swift in Sources */,
 				73101D4928E47FB100DB5423 /* StatusModel.swift in Sources */,
 				73B7905E28E6D8EB002A9CDC /* UserFollowingManager.swift in Sources */,
+				7320170D28F5378E007B970F /* RssFeedAtom.swift in Sources */,
 				73B7906D28E972A9002A9CDC /* SearchWordManager.swift in Sources */,
 				73074CCF28EF573D001A90E7 /* LocalRepoCell.swift in Sources */,
 				7341DCD228E03C6A009A3A3C /* RepoViewController.swift in Sources */,
@@ -960,6 +994,7 @@
 				73AACB5628D47FCB0072B1DF /* String+Ext.swift in Sources */,
 				73C598CD28D9E6A100DA86A1 /* URL+Ext.swift in Sources */,
 				7341DCD028E03B17009A3A3C /* RepoHeaderView.swift in Sources */,
+				7339201328F5458100DC76B0 /* DateHelper.swift in Sources */,
 				7320170328F48227007B970F /* FeedViewController.swift in Sources */,
 				73DF6BF028EAE0A00003BDB8 /* DeveloperGroupManager.swift in Sources */,
 				73DF6C0828EC69840003BDB8 /* Issue.swift in Sources */,
@@ -977,6 +1012,7 @@
 				7374D19728E0BC1D00E6BE47 /* Readme.swift in Sources */,
 				73DF6BEE28EADD160003BDB8 /* LocalDeveloperSectionHeaderView.swift in Sources */,
 				73074CD128F1559D001A90E7 /* UserInfoViewController.swift in Sources */,
+				7320170928F535CB007B970F /* RssFeed.swift in Sources */,
 				73AACB1828D312D30072B1DF /* GithubRouter.swift in Sources */,
 				73101D5028E4A10400DB5423 /* LocalDeveloperGroup.swift in Sources */,
 				73DF6BEC28EACF340003BDB8 /* SearchWordHeaderView.swift in Sources */,
