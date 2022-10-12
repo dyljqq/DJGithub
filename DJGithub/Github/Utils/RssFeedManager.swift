@@ -18,13 +18,11 @@ class RssFeedManager: NSObject {
     }
 
     Task {
-      let atoms = await loadAtoms()      
+      let atoms = await loadAtoms()
       await withThrowingTaskGroup(of: Void.self) { group in
         for atom in atoms {
-          switch atom.atomType {
-          case .swiftOrg: group.addTask { let _ = await self.loadFeeds(by: atom) as SwiftOrgRssFeedInfo? }
-          case .myzb: group.addTask { let _ = await self.loadFeeds(by: atom) as MyzbRssFeedChannel? }
-          default: break
+          group.addTask {
+            await self.loadFeeds(by: atom)
           }
         }
       }
@@ -49,26 +47,25 @@ class RssFeedManager: NSObject {
     }
   }
   
-  @discardableResult
-  func loadFeeds<T: RssFeedParsable>(by atom: RssFeedAtom) async -> T? {
+  func loadFeeds(by atom: RssFeedAtom) async {
     print("----------------------------------")
     print("start fetch \(atom.title)'s feeds")
-    guard let info = await FeedManager.fetchRssInfo(with: atom.feedLink) as T? else {
+    guard let info = await FeedManager.fetchRssInfo(with: atom.feedLink) as RssFeedInfo? else {
       print("failed to load feeds: \(atom.title)")
-      return nil
+      return
     }
-    let feeds = info.convert()
-    print("fetched feeds: \(atom.title) feeds count: \(feeds.count)")
-    for var feed in feeds {
+    print("[\(atom.title)] fetches \(info.entries.count)'s items.")
+    for var feed in info.entries {
       let selectedFeeds: [RssFeed] = RssFeed.select(with: " where title=\"\(feed.title)\"")
       if selectedFeeds.isEmpty {
         feed.atomId = atom.id
         feed.insert()
+      } else {
+        feed.update(with: feed)
       }
     }
     print("end fetch \(atom.title)'s feeds")
     print("----------------------------------")
-    return info
   }
   
   static func getFeeds(by atomId: Int) async -> [RssFeed] {

@@ -15,17 +15,6 @@ enum RssFeedAtomType: String, DJCodable {
   case theSwiftDev, afer, jihe
 }
 
-extension RssFeedAtomType {
-  var modelType: any RssFeedParsable.Type {
-    switch self {
-    case .myzb: return MyzbRssFeedChannel.self
-    case .swiftOrg: return SwiftOrgRssFeed.self
-      // TODO
-    default: return SwiftOrgRssFeed.self
-    }
-  }
-}
-
 struct RssFeedAtom: DJCodable {
   var id: Int
   var title: String
