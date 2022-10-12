@@ -23,10 +23,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   }
   
   func setUp() {
-    Language.createTable()
-    LocalDeveloperGroup.createTable()
-    LocalDeveloper.createTable()
-    
     ConfigManager.shared.load()
     
     Task {

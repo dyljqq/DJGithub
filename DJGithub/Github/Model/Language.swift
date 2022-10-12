@@ -44,10 +44,6 @@ extension Language: SQLTable {
   }
   
   static func get(with language: String) -> Self? {
-    let sql = "select * from \(tableName) where language = \(language)"
-    guard let rs = store.execute(.select, sql: sql, type: Language.self) as? [[String: Any]], !rs.isEmpty else {
-      return nil
-    }
-    return try? DJDecoder<Self>(dict: rs[0]).decode()
+    return Self.select(with: " where language=\"\(language)\"").first
   }
 }

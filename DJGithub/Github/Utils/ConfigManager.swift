@@ -11,12 +11,15 @@ class ConfigManager: NSObject {
   static let shared = ConfigManager()
   static var config: Config = Config()
   let rssFeedManager: RssFeedManager = RssFeedManager()
+  let languageManager = LanguageManager()
   
   override init() {
     super.init()
   }
   
   func load() {
+    LocalDeveloperGroup.createTable()
+    LocalDeveloper.createTable()
     loadConfig()
   }
   

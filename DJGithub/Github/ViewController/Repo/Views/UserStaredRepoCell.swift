@@ -143,9 +143,9 @@ class UserStaredRepoCell: UITableViewCell {
     
     let color: UIColor
     if let hex = LanguageManager.mapping[repo.language ?? "Unknown"] {
-      color = hex.toColor ?? .blue
+      color = hex.toColor ?? .lightGray
     } else {
-      color = .blue
+      color = .lightGray
     }
     languageView.render(with: .language(color, repo.language ?? "Unknown"))
     starView.render(with: .star("stared", repo.stargazersCount.toGitNum))
