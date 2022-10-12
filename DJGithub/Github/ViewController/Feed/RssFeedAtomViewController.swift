@@ -28,6 +28,7 @@ class RssFeedAtomViewController: UIViewController {
   }
   
   private func setUp() {
+    self.navigationItem.title = "Rss"
     view.backgroundColor = .backgroundColor
     
     view.addSubview(tableView)

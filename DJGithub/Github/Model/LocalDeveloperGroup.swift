@@ -52,14 +52,14 @@ extension LocalDeveloperGroup: SQLTable {
 
   static func get(by id: Int) -> Self? {
     let sql = "select \(Self.selectedFields.joined(separator: ",")) from \(tableName) where id=\(id)"
-    guard let rs = store.execute(.select, sql: sql, type: LocalDeveloperGroup.self) as? [[String: Any]],
+    guard let rs = store?.execute(.select, sql: sql, type: LocalDeveloperGroup.self) as? [[String: Any]],
           !rs.isEmpty else { return nil }
     return try? DJDecoder(dict: rs[0]).decode()
   }
   
   static func update(by groupId: Int, name: String) {
     let sql = "update \(tableName) set name='\(name)' where id=\(groupId)"
-    store.execute(.update, sql: sql, type: LocalDeveloperGroup.self)
+    store?.execute(.update, sql: sql, type: LocalDeveloperGroup.self)
   }
   
 }
@@ -115,14 +115,14 @@ extension LocalDeveloper: SQLTable {
   
   static func get(by name: String) -> Self? {
     let sql = "select \(Self.selectedFields.joined(separator: ",")) from \(tableName) where name='\(name)'"
-    guard let rs = store.execute(.select, sql: sql, type: LocalDeveloper.self) as? [[String: Any]],
+    guard let rs = store?.execute(.select, sql: sql, type: LocalDeveloper.self) as? [[String: Any]],
           !rs.isEmpty else { return nil }
     return try? DJDecoder(dict: rs[0]).decode()
   }
   
   static func get(by groupId: Int) -> [Self?] {
     let sql = "select \(Self.selectedFields.joined(separator: ",")) from \(tableName) where groupId=\(groupId)"
-    guard let rs = store.execute(.select, sql: sql, type: LocalDeveloper.self) as? [[String: Any]],
+    guard let rs = store?.execute(.select, sql: sql, type: LocalDeveloper.self) as? [[String: Any]],
           !rs.isEmpty else { return [] }
     let developers: [Self?]? = try? DJDecoder(value: rs).decode()
     return developers ?? []
@@ -130,7 +130,7 @@ extension LocalDeveloper: SQLTable {
   
   static func update(with id: String, des: String, avatarUrl: String, groupId: Int) -> Self? {
     let sql = "update \(tableName) set des='\(des)', avatarUrl='\(avatarUrl)', groupId=\(groupId) where name='\(id)'"
-    store.execute(.update, sql: sql, type: LocalDeveloper.self)
+    store?.execute(.update, sql: sql, type: LocalDeveloper.self)
     return get(by: id)
   }
 }

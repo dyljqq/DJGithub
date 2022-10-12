@@ -20,6 +20,16 @@ Personal access tokens的申请链接如下：
 }
 ```
 
+### 库介绍
+
+一些使用技巧与技术介绍。
+
+1. 关于DJGithub相关的网络数据下载与解析的模块可以看这篇文章：
+
+   	* 掘金地址：[如何使用异步方法构造一个简易的网络请求库 ](https://juejin.cn/post/7153533145168478245)
+
+   	* github地址： [如何使用异步方法构造一个简易的网络请求库 ](https://github.com/dyljqq/Article/blob/master/Swift/%E4%BD%BF%E7%94%A8swift%E6%9E%84%E9%80%A0%E4%B8%80%E4%B8%AA%E5%BC%82%E6%AD%A5%E7%9A%84%E7%BD%91%E7%BB%9C%E6%95%B0%E6%8D%AE%E8%AF%B7%E6%B1%82%E7%B1%BB.md)
+
 ### 已完成功能
 
 1. 获取，修改用户信息

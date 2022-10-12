@@ -159,7 +159,7 @@ extension RssFeed: SQLTable {
   func update(with rssFeed: RssFeed) {
     guard let rssFeedId = self.id, rssFeedId > 0 else { return }
     let sql = "update \(Self.tableName) set title=\"\(rssFeed.title)\", content=\"\(rssFeed.content)\", updated=\"\(rssFeed.updated)\", link=\"\(rssFeed.link)\" where id=\(rssFeedId)"
-    store.execute(.update, sql: sql, type: RssFeed.self)
+    store?.execute(.update, sql: sql, type: RssFeed.self)
   }
   
 }

@@ -12,9 +12,9 @@ class DevelopersViewController: UIViewController {
   var isSelectedSegment = false
   
   lazy var segmentView: UISegmentedControl = {
-    let segment = UISegmentedControl(items: ["RssFeed", "Feeds", "Developers", "Repos"])
+    let segment = UISegmentedControl(items: ["Repos", "Feeds", "Developers"])
     segment.selectedSegmentIndex = 0
-    segment.frame = CGRect(x: 0, y: 100, width: 360, height: 30)
+    segment.frame = CGRect(x: 0, y: 100, width: 240, height: 30)
     segment.addTarget(self, action: #selector(segmentSelectAction), for: .valueChanged)
     return segment
   }()
@@ -31,10 +31,9 @@ class DevelopersViewController: UIViewController {
   
   lazy var vcs: [UIViewController] =  {
     return [
-      RssFeedAtomViewController(),
+      LocalDevelopersViewController(with: .repo),
       FeedsViewController(),
       LocalDevelopersViewController(with: .developer),
-      LocalDevelopersViewController(with: .repo)
     ]
   }()
   
