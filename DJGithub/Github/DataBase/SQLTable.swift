@@ -8,37 +8,37 @@
 import Foundation
 
 enum FieldType {
-    case int
-    case text
-    case bigint
-    case unknown
-    
-    var name: String? {
-        switch self {
-        case .int: return "INTEGER"
-        case .text: return "TEXT"
-        case .bigint: return "BIGINT"
-        case .unknown: return nil
-        }
+  case int
+  case text
+  case bigint
+  case unknown
+  
+  var name: String? {
+    switch self {
+    case .int: return "INTEGER"
+    case .text: return "TEXT"
+    case .bigint: return "BIGINT"
+    case .unknown: return nil
     }
-    
+  }
+  
 }
 
 protocol SQLTable {
-    
+  
   static var tableName: String { get }
   static var fields: [String] { get }
   static var uniqueKeys: [String] { get }
   static var fieldsTypeMapping: [String: FieldType] { get }
   static var needFieldId: Bool { get }
   static var selectedFields: [String] { get }
-
+  
   var fieldsValueMapping: [String: Any] { get }
   
   func execute()
-      
+  
   static func decode<T: DJCodable>(_ hash: [String: Any]) -> T?
-    
+  
 }
 
 extension SQLTable {
@@ -55,56 +55,61 @@ extension SQLTable {
     fs.append(contentsOf: fields)
     return fs
   }
-    
+  
   func execute() {
-      // TODO
+    // TODO
   }
   
   static func decode<T: DJCodable>(_ hash: [String: Any]) -> T? {
-      return try? DJDecoder<T>(dict: hash).decode()
+    return try? DJDecoder<T>(dict: hash).decode()
   }
   
   static var uniqueKeys: [String] {
-      return []
+    return []
   }
   
   static var tableSql: String {
     var rs: [String] = needFieldId ? ["id INTEGER PRIMARY KEY AUTOINCREMENT not null"] : []
-      
-      for field in Self.fields {
-          guard let typ = Self.fieldsTypeMapping[field], let name = typ.name else {
-              continue
-          }
-          rs.append("\(field) \(name)")
+    
+    for field in Self.fields {
+      guard let typ = Self.fieldsTypeMapping[field], let name = typ.name else {
+        continue
       }
-      
-      for uk in uniqueKeys {
-          rs.append("UNIQUE(\(uk))")
-      }
-      
-      return "CREATE TABLE IF NOT EXISTS \(Self.tableName)(\(rs.joined(separator: ",")))"
+      rs.append("\(field) \(name)")
+    }
+    
+    for uk in uniqueKeys {
+      rs.append("UNIQUE(\(uk))")
+    }
+    
+    return "CREATE TABLE IF NOT EXISTS \(Self.tableName)(\(rs.joined(separator: ",")))"
   }
   
   var fieldsValueMapping: [String: Any] {
-      return [:]
+    return [:]
   }
   
   static var insertSql: String {
-      return "insert into \(tableName)(\(fields.joined(separator: ","))) values(\(fields.compactMap { _ in  "?" }.joined(separator: ",")));"
+    return "insert into \(tableName)(\(fields.joined(separator: ","))) values(\(fields.compactMap { _ in  "?" }.joined(separator: ",")));"
   }
   
   static func createTable() {
-      store.createTable(tableSql)
+    do {
+      try store?.createTable(table: Self.self)
+    } catch {
+      print(error)
+    }
   }
   
   @discardableResult
   func execute(_ operation: SqlOperation, sql: String) -> Any? {
-      switch operation {
-      case .insert: return store.execute(operation, sql: sql, model: self)
-      case .select: return store.execute(operation, sql: sql, model: self, type: Self.self)
-      default: break
-      }
-      return nil
+    switch operation {
+    case .insert: return store?.execute(operation, sql: sql, model: self)
+    case .select: return store?.execute(operation, sql: sql, model: self, type: Self.self)
+    case .createTable: return store?.execute(.createTable, sql: sql, type: Self.self)
+    default: break
+    }
+    return nil
   }
   
   func insert() {
@@ -113,21 +118,21 @@ extension SQLTable {
   
   func select() -> [[String: Any]] {
     let sql = "select \(Self.selectedFields.joined(separator: ",")) from \(Self.tableName)"
-      guard let rs = execute(.select, sql: sql) as? [[String: Any]] else {
-          return []
-      }
-      return rs
+    guard let rs = execute(.select, sql: sql) as? [[String: Any]] else {
+      return []
+    }
+    return rs
   }
   
   static func selectAll() -> [[String: Any]] {
     let sql = "select \(Self.selectedFields.joined(separator: ",")) from \(Self.tableName)"
-      let rs = store.execute(.select, sql: sql, type: Self.self) as? [[String: Any]] ?? []
-      return rs
+    let rs = store?.execute(.select, sql: sql, type: Self.self) as? [[String: Any]] ?? []
+    return rs
   }
   
   static func deleteTable() {
-      let sql = "drop table \(tableName)"
-      store.execute(.delete, sql: sql, type: Self.self)
+    let sql = "drop table \(tableName)"
+    store?.execute(.delete, sql: sql, type: Self.self)
   }
   
   static func select<T: DJCodable>(with condition: String? = nil) -> [T] {
@@ -135,12 +140,12 @@ extension SQLTable {
     if let condition = condition {
       sql += condition
     }
-    if let rs = store.execute(.select, sql: sql, type: Self.self)  as? [[String: Any]] {
+    if let rs = store?.execute(.select, sql: sql, type: Self.self)  as? [[String: Any]] {
       return rs.compactMap { try? DJDecoder(dict: $0).decode() }
     }
     return []
   }
-    
+  
   
   static func selectAll<T: DJCodable>() -> [T] {
     return Self.select()

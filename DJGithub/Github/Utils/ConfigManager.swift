@@ -7,6 +7,23 @@
 
 import Foundation
 
+let store = loadDatabase()
+
+func loadDatabase() -> SQLiteDatabase? {
+  let db: SQLiteDatabase?
+  do {
+    let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+      .appendingPathComponent("github.sqlite")
+    db = try SQLiteDatabase.open(path: fileURL.path)
+    print("Successfully opened connection to database.")
+  } catch {
+    print("Unable to open database.")
+    db = nil
+  }
+  
+  return db
+}
+
 class ConfigManager: NSObject {
   static let shared = ConfigManager()
   static var config: Config = Config()
