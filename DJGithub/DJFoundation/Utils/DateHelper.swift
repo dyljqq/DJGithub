@@ -46,7 +46,13 @@ struct DateHelper {
                 }
             }
         } else {
-          for f in ["yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd'T'HH:mm:ss-mm:ss"] {
+          let formatters = [
+            "yyyy-MM-dd HH:mm:ss",
+            "yyyy-MM-dd'T'HH:mm:ss-mm:ss",
+            "yyyy-MM-dd'T'HH:mm:ss+mm:ss",
+            "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+          ]
+          for f in formatters {
             formatter.dateFormat = f
             if let date = formatter.date(from: dateString) {
                 return date

@@ -106,12 +106,29 @@ class DJXMLParser<T: DJCodable>: NSObject, Parsable, XMLParserDelegate {
   
   func parserDidEndDocument(_ parser: XMLParser) {
     rootNode?.parseNodes()
-    guard let dict = rootNode?.dict else { return }
+    guard var dict = rootNode?.dict else { return }
+    /**
+    目前已知的xml格式如下：
+     format 1:
+     <Feed>
+            <channel>
+                        // data
+            </channel>
+     </Feed>
+     
+     format 2:
+     <Feed>
+      // data
+     </Feed>
+     */
+    if let channel = dict["channel"] as? [String: Any] {
+      dict = channel
+    }
     do {
       let model = try DJDecoder(dict: dict).decode() as T?
       continuation?.resume(returning: model)
     } catch {
-      print("xml parse error: \(error)")
+      print("json parse error: \(error)")
     }
   }
 }

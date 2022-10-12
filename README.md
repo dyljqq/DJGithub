@@ -50,7 +50,7 @@ Personal access tokens的申请链接如下：
 
    待完成：
 
-   * 接入不同Rss源数据
+   * 接入不同Rss源数据(已完成)
    * 数据做本地存储的操作(已完成)
    * Rss中content内容的展示（已完成）
 
@@ -59,8 +59,8 @@ Personal access tokens的申请链接如下：
 1. repo pull request的相关信息的展示以及相关的code review， merge等操作
 2. 剥离github api相关的代码，方便其他开发者调用
 3. 一些功能组件的剥离与重构，比如refresh，网络模块等。
-
 4. 接入一些常见的rss订阅源。
+4. 增加rss文章的收藏功能。可能可以增加文件夹？
 
 
 

@@ -63,6 +63,15 @@ extension RssFeedAtomViewController: UITableViewDelegate, UITableViewDataSource 
     let atom = dataSource[indexPath.row]
     if atom.hasFeeds {
       self.navigationController?.pushToRssFeeds(with: dataSource[indexPath.row])
+    } else {
+      let vc = UIAlertController(title: "", message: "The feeds is now on downloading.", preferredStyle: .alert)
+      self.present(vc, animated: true)
+      
+      DispatchQueue.global().asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
+        DispatchQueue.main.async {
+          vc.dismiss(animated: true)
+        }
+      })
     }
   }
 }
