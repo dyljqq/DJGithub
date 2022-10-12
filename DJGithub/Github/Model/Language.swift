@@ -8,7 +8,7 @@
 import Foundation
 
 struct Language: DJCodable {
-  var id: Int
+  var id: Int?
   var language: String
   var hex: String
 }
