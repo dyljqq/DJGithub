@@ -16,7 +16,7 @@ Personal access tokens的申请链接如下：
 
 ```json
 {
- "authorization": "", // person token
+ "authorization": "token \(personal token)", // person token
 }
 ```
 
@@ -41,7 +41,7 @@ Personal access tokens的申请链接如下：
 6. 添加User feeds相关的内容
 
    	* 解析XML数据，自定义XML解析器
-
+	
    	* 因为Feed数据中会包含多个库跟用户信息，因此给这些文字做了高亮与点击操作。
 
 7. 加入Rss源的解析。

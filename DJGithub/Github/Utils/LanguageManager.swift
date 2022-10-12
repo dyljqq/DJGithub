@@ -12,10 +12,14 @@ struct LanguageManager {
 
   static var mapping: [String: String] = [:]
   
+  init() {
+    Language.createTable()
+  }
+  
   static func save(_ languages: [Language]) async {
     Task {
       for language in languages {
-        if mapping[language.language] == nil {
+        if Language.get(with: language.language) == nil {
           language.insert()
         }
       }
