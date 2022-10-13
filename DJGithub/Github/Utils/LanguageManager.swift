@@ -13,14 +13,14 @@ struct LanguageManager {
   static var mapping: [String: String] = [:]
   
   init() {
-    Language.createTable()
+    try? Language.createTable()
   }
   
   static func save(_ languages: [Language]) async {
     Task {
       for language in languages {
         if Language.get(with: language.language) == nil {
-          language.insert()
+          try? language.insert()
         }
       }
       await loadLanguageMapping()
@@ -29,10 +29,9 @@ struct LanguageManager {
   
   static func loadLanguageMapping() async {
     var rs = [String: String]()
-    for r in Language.selectAll() {
-      if let language = r["language"] as? String, let hex = r["hex"] as? String {
-        rs[language] = hex
-      }
+    let languages: [Language] = Language.selectAll()
+    for language in languages {
+      rs[language.language] = language.hex
     }
     LanguageManager.mapping = rs
   }
