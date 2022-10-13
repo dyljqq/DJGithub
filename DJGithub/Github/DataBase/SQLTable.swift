@@ -21,25 +21,19 @@ enum FieldType {
     case .unknown: return nil
     }
   }
-  
 }
 
 protocol SQLTable {
-  
   static var tableName: String { get }
   static var fields: [String] { get }
   static var uniqueKeys: [String] { get }
   static var fieldsTypeMapping: [String: FieldType] { get }
   static var needFieldId: Bool { get }
   static var selectedFields: [String] { get }
-  
   var fieldsValueMapping: [String: Any] { get }
-  
-  func execute()
-  
-  static func decode<T: DJCodable>(_ hash: [String: Any]) -> T?
-  
 }
+
+let serialQueue = DispatchQueue(label: "com.dyljqq.dbmanager")
 
 extension SQLTable {
   
@@ -54,14 +48,6 @@ extension SQLTable {
     }
     fs.append(contentsOf: fields)
     return fs
-  }
-  
-  func execute() {
-    // TODO
-  }
-  
-  static func decode<T: DJCodable>(_ hash: [String: Any]) -> T? {
-    return try? DJDecoder<T>(dict: hash).decode()
   }
   
   static var uniqueKeys: [String] {
@@ -93,59 +79,19 @@ extension SQLTable {
     return "insert into \(tableName)(\(fields.joined(separator: ","))) values(\(fields.compactMap { _ in  "?" }.joined(separator: ",")));"
   }
   
-  static func createTable() {
-    do {
-      try store?.createTable(table: Self.self)
-    } catch {
-      print(error)
-    }
-  }
-  
-  @discardableResult
-  func execute(_ operation: SqlOperation, sql: String) -> Any? {
-    switch operation {
-    case .insert: return store?.execute(operation, sql: sql, model: self)
-    case .select: return store?.execute(operation, sql: sql, model: self, type: Self.self)
-    case .createTable: return store?.execute(.createTable, sql: sql, type: Self.self)
-    default: break
-    }
-    return nil
-  }
-  
-  func insert() {
-    execute(.insert, sql: Self.insertSql)
-  }
-  
-  func select() -> [[String: Any]] {
-    let sql = "select \(Self.selectedFields.joined(separator: ",")) from \(Self.tableName)"
-    guard let rs = execute(.select, sql: sql) as? [[String: Any]] else {
+  static func select<T: DJCodable>(with condition: String? = nil) -> [T] {
+    serialQueue.sync {
+      var sql = "select \(Self.selectedFields.joined(separator: ",")) from \(Self.tableName)"
+      if let condition = condition {
+        sql += condition
+      }
+
+      if let rs = try? query(with: sql) {
+        return rs.compactMap { try? DJDecoder(dict: $0).decode() }
+      }
       return []
     }
-    return rs
   }
-  
-  static func selectAll() -> [[String: Any]] {
-    let sql = "select \(Self.selectedFields.joined(separator: ",")) from \(Self.tableName)"
-    let rs = store?.execute(.select, sql: sql, type: Self.self) as? [[String: Any]] ?? []
-    return rs
-  }
-  
-  static func deleteTable() {
-    let sql = "drop table \(tableName)"
-    store?.execute(.delete, sql: sql, type: Self.self)
-  }
-  
-  static func select<T: DJCodable>(with condition: String? = nil) -> [T] {
-    var sql = "select \(Self.selectedFields.joined(separator: ",")) from \(Self.tableName)"
-    if let condition = condition {
-      sql += condition
-    }
-    if let rs = store?.execute(.select, sql: sql, type: Self.self)  as? [[String: Any]] {
-      return rs.compactMap { try? DJDecoder(dict: $0).decode() }
-    }
-    return []
-  }
-  
   
   static func selectAll<T: DJCodable>() -> [T] {
     return Self.select()

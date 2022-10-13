@@ -15,9 +15,7 @@ struct DeveloperGroupManager {
   
   func loadFromDatabase() async -> [LocalDeveloperGroup] {
     let task = Task { () -> [LocalDeveloperGroup] in
-      guard let groups = try? DJDecoder(value: LocalDeveloperGroup.selectAll()).decode() as [LocalDeveloperGroup]? else {
-        return []
-      }
+      guard let groups = LocalDeveloperGroup.selectAll() as [LocalDeveloperGroup]? else { return [] }
       var rs: [LocalDeveloperGroup] = []
       for group in groups {
         let users = LocalDeveloper.get(by: group.id).compactMap { $0 }
@@ -51,7 +49,7 @@ struct DeveloperGroupManager {
       dev.avatarUrl = user.avatarUrl
       dev.groupId = groupId
       dev.des = des
-      dev.insert()
+      try? dev.insert()
     }
     return nil
   }
@@ -62,7 +60,7 @@ struct DeveloperGroupManager {
       if let g = LocalDeveloperGroup.get(by: group.id) {
         LocalDeveloperGroup.update(by: g.id, name: group.name)
       } else {
-        group.insert()
+        try? group.insert()
       }
     }
     

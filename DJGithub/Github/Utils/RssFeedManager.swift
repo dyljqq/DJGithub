@@ -11,8 +11,8 @@ import Combine
 class RssFeedManager: NSObject {
   override init() {
     super.init()
-    RssFeedAtom.createTable()
-    RssFeed.createTable()
+    try? RssFeedAtom.createTable()
+    try? RssFeed.createTable()
     Task {
       await self.saveAtoms()
     }
@@ -42,7 +42,7 @@ class RssFeedManager: NSObject {
     for atom in atoms {
       let storedAtoms = RssFeedAtom.select(with: " where id=\(atom.id)") as [RssFeedAtom]
       if storedAtoms.isEmpty {
-        atom.insert()
+        try? atom.insert()
       }
     }
   }
@@ -59,7 +59,7 @@ class RssFeedManager: NSObject {
       let selectedFeeds: [RssFeed] = RssFeed.select(with: " where title=\"\(feed.title)\"")
       if selectedFeeds.isEmpty {
         feed.atomId = atom.id
-        feed.insert()
+        try? feed.insert()
       } else {
         feed.update(with: feed)
       }
