@@ -39,4 +39,9 @@ struct License: DJCodable {
   var name: String
   var key: String
   var url: String?
+  var spdxId: String?
+  
+  var licenseKey: String {
+    return self.spdxId ?? self.key
+  }
 }
