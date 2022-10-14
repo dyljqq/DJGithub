@@ -55,7 +55,6 @@ class RssFeedsViewController: UIViewController {
       self.tableView.reloadData()
     }
   }
-
 }
 
 extension RssFeedsViewController: UITableViewDelegate, UITableViewDataSource {

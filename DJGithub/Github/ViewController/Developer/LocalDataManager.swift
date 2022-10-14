@@ -12,37 +12,28 @@ enum LocalDataType {
   case developer
 }
 
-actor LocalDataHolder {
-  var dataSource: [DJCodable] = []
-  
-  func setResults(_ results: [DJCodable]) {
-    self.dataSource = results
-  }
-  
-}
-
 struct LocalDataViewModel {
   
   let type: LocalDataType
-  var holder: LocalDataHolder = LocalDataHolder()
   
   init(type: LocalDataType) {
     self.type = type
   }
   
-  func loadData() {
-    Task {
+  func loadData() async -> [DJCodable] {
+    let task = Task { () -> [DJCodable] in
       switch type {
       case .developer:
         var rs: [DJCodable] = await DeveloperGroupManager.shared.loadFromDatabase()
         if rs.isEmpty {
           rs = await DeveloperGroupManager.shared.loadLocalDeveloperGroups()
         }
-        await holder.setResults(rs)
+        return rs
       case .repo:
-        await holder.setResults(await LocalRepoManager.loadRepos())
+        return await LocalRepoManager.loadRepos()
       }
     }
+    return await task.value
   }
   
 }

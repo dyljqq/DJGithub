@@ -70,9 +70,8 @@ class LocalDevelopersViewController: UIViewController {
   }
   
   func updateLocalData() {
-    viewModel.loadData()
     Task {
-      self.dataSource = await viewModel.holder.dataSource
+      self.dataSource = await viewModel.loadData()
     }
   }
 }

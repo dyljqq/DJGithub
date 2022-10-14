@@ -35,8 +35,6 @@ class ConfigManager: NSObject {
   }
   
   func load() {
-    try? LocalDeveloperGroup.createTable()
-    try? LocalDeveloper.createTable()
     loadConfig()
   }
   

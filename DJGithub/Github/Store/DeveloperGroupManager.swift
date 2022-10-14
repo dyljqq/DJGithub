@@ -13,10 +13,16 @@ struct DeveloperGroupManager {
   
   static let shared = DeveloperGroupManager()
   
+  init() {
+    try? LocalDeveloper.createTable()
+    try? LocalDeveloperGroup.createTable()
+  }
+  
   func loadFromDatabase() async -> [LocalDeveloperGroup] {
     let task = Task { () -> [LocalDeveloperGroup] in
       guard let groups = LocalDeveloperGroup.selectAll() as [LocalDeveloperGroup]? else { return [] }
       var rs: [LocalDeveloperGroup] = []
+
       for group in groups {
         let users = LocalDeveloper.get(by: group.id).compactMap { $0 }
         rs.append(LocalDeveloperGroup(
@@ -73,7 +79,7 @@ struct DeveloperGroupManager {
         }
       }
     }
-    
+
     NotificationCenter.default.post(
       name: DeveloperGroupManager.NotificationUpdatedAllName, object: nil)
   }

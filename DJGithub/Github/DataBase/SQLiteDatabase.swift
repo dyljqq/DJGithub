@@ -84,47 +84,51 @@ extension SQLiteDatabase {
 extension SQLTable {
   
   static func createTable() throws {
-    guard let createTableStatement = try? store?.prepareStatement(sql: tableSql) else {
-      throw SQLiteError.Prepare(message: errorMessage)
-    }
-    defer {
-      sqlite3_finalize(createTableStatement)
-    }
-    if sqlite3_step(createTableStatement) != SQLITE_DONE {
-      throw SQLiteError.Step(message: errorMessage)
+    try serialQueue.sync {
+      guard let createTableStatement = try? store?.prepareStatement(sql: tableSql) else {
+        throw SQLiteError.Prepare(message: errorMessage)
+      }
+      defer {
+        sqlite3_finalize(createTableStatement)
+      }
+      if sqlite3_step(createTableStatement) != SQLITE_DONE {
+        throw SQLiteError.Step(message: errorMessage)
+      }
     }
   }
   
   func insert() throws {
-    let insertStatement = try store?.prepareStatement(sql: Self.insertSql)
-    defer {
-      sqlite3_finalize(insertStatement)
-    }
-    
-    for (index, field) in Self.fields.enumerated() {
-      if let fieldType = Self.fieldsTypeMapping[field] {
-        let offset = Int32(index) + 1
-        
-        switch fieldType {
-        case .int:
-          if let value = self.fieldsValueMapping[field] as? Int {
-            sqlite3_bind_int(insertStatement, offset, Int32(value))
+    try serialQueue.sync {
+      let insertStatement = try store?.prepareStatement(sql: Self.insertSql)
+      defer {
+        sqlite3_finalize(insertStatement)
+      }
+      
+      for (index, field) in Self.fields.enumerated() {
+        if let fieldType = Self.fieldsTypeMapping[field] {
+          let offset = Int32(index) + 1
+          
+          switch fieldType {
+          case .int:
+            if let value = self.fieldsValueMapping[field] as? Int {
+              sqlite3_bind_int(insertStatement, offset, Int32(value))
+            }
+          case .text:
+            let text: String = self.fieldsValueMapping[field] as? String ?? ""
+            sqlite3_bind_text(insertStatement, offset, (text as NSString).utf8String, -1, nil)
+          case .bigint:
+            if let value = self.fieldsValueMapping[field] as? Int {
+              sqlite3_bind_int64(insertStatement, offset, Int64(value))
+            }
+          default:
+            throw SQLiteError.Bind(message: "Field value mapping error.")
           }
-        case .text:
-          let text: String = self.fieldsValueMapping[field] as? String ?? ""
-          sqlite3_bind_text(insertStatement, offset, (text as NSString).utf8String, -1, nil)
-        case .bigint:
-          if let value = self.fieldsValueMapping[field] as? Int {
-            sqlite3_bind_int64(insertStatement, offset, Int64(value))
-          }
-        default:
-          throw SQLiteError.Bind(message: "Field value mapping error.")
         }
       }
-    }
-    
-    if sqlite3_step(insertStatement) != SQLITE_DONE {
-      throw SQLiteError.Bind(message: Self.errorMessage)
+      
+      if sqlite3_step(insertStatement) != SQLITE_DONE {
+        throw SQLiteError.Bind(message: Self.errorMessage)
+      }
     }
   }
   
@@ -159,7 +163,7 @@ extension SQLTable {
     return rs
   }
   
-  static func dropTable(with sql: String) throws {
+  static func dropTable() throws {
     let sql = "drop table \(tableName)"
     try delete(with: sql)
   }
