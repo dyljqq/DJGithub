@@ -51,7 +51,7 @@ extension LocalDeveloperGroup: SQLTable {
   }
 
   static func get(by id: Int) -> Self? {
-    let sql = "select \(Self.selectedFields.joined(separator: ",")) from \(tableName) where id=\(id)"
+    let sql = " where id=\(id)"
     guard let rs = select(with: sql) as [LocalDeveloperGroup]?, !rs.isEmpty else { return nil }
     return rs.first
   }
@@ -113,14 +113,14 @@ extension LocalDeveloper: SQLTable {
   }
   
   static func get(by name: String) -> Self? {
-    let sql = "select \(Self.selectedFields.joined(separator: ",")) from \(tableName) where name='\(name)'"
-    guard let rs = select(with: sql) as [LocalDeveloper]?, !rs.isEmpty else { return nil }
+    let condition = " where name='\(name)'"
+    guard let rs = select(with: condition) as [LocalDeveloper]?, !rs.isEmpty else { return nil }
     return rs.first
   }
   
   static func get(by groupId: Int) -> [Self?] {
-    let sql = "select \(Self.selectedFields.joined(separator: ",")) from \(tableName) where groupId=\(groupId)"
-    guard let rs = select(with: sql) as [LocalDeveloper]?, !rs.isEmpty else { return [] }
+    let condition = " where groupId=\(groupId)"
+    guard let rs = select(with: condition) as [LocalDeveloper]?, !rs.isEmpty else { return [] }
     return rs
   }
   

@@ -70,7 +70,7 @@ class LocalDeveloperCell: UITableViewCell {
     desLabel.snp.makeConstraints { make in
       make.leading.equalTo(titleLabel)
       make.bottom.equalTo(avatarImageView)
-      make.trailing.equalTo(titleLabel)
+      make.trailing.equalTo(followView.snp.leading).offset(-12)
     }
     followView.snp.makeConstraints { make in
       make.trailing.equalTo(contentView).offset(-12)

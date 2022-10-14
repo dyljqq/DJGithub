@@ -132,9 +132,15 @@ class RepoViewController: UIViewController {
         }
         view.stopLoading()
         self.headerView.render(with: repo)
+        
+        var languageDes = "\(NSString(format: "%.2f", Double(repo.size) / 1000))MB"
+        if let license = repo.license {
+          languageDes = "\(license.licenseKey) - " + languageDes
+        }
+        
         dataSouce = [
           .blank,
-          .language(repo.language ?? "unknown", "\(repo.license?.key ?? "") \(NSString(format: "%.2f", Double(repo.size) / 1000))MB"),
+          .language(repo.language ?? "Unknown", languageDes),
           .issues(repo.openIssuesCount.toGitNum),
           .pull,
           .blank,
@@ -143,6 +149,7 @@ class RepoViewController: UIViewController {
         ]
         tableView.reloadData()
       }
+      view.stopLoading()
       tableView.dj_endRefresh()
     }
   }

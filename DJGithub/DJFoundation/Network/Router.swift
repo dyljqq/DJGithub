@@ -47,7 +47,7 @@ extension Router {
   }
   
   func configURLRequest(with queryItems: [String: String]? = nil) -> URLRequest? {
-    guard var url = try? baseURLString.asURL().appendingPathComponent(path) else {
+    guard var url = try? baseURLString.asURL().appendingPathComponent(path.toValidPath) else {
         return nil
     }
     if let queryItems = queryItems {
@@ -75,5 +75,18 @@ extension Router {
       print("output message: \(message)")
     }
     print("------------------------")
+  }
+}
+
+// Helper
+extension String {
+  var toValidPath: String {
+    guard self.hasSuffix("/") else { return self }
+    let arr = Array(self)
+    var p = self.count - 1
+    while arr[p] == "/" {
+      p = p - 1
+    }
+    return String(arr[0...p])
   }
 }
