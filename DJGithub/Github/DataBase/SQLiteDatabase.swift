@@ -97,6 +97,23 @@ extension SQLTable {
     }
   }
   
+  static func addNewField(with fieldName: String, comment: String = "") throws {
+    try serialQueue.sync {
+      guard let fieldType = fieldsTypeMapping[fieldName], let fieldTypeName = fieldType.name else { return }
+      let fieldSql = "\(fieldName) \(fieldTypeName)"
+      let sql = "ALTER TABLE \(tableName) ADD COLUMN \(fieldSql);"
+      guard let createStatement = try? store?.prepareStatement(sql: sql) else {
+        throw SQLiteError.Prepare(message: errorMessage)
+      }
+      defer {
+        sqlite3_finalize(createStatement)
+      }
+      if sqlite3_step(createStatement) != SQLITE_DONE {
+        throw SQLiteError.Step(message: errorMessage)
+      }
+    }
+  }
+  
   func insert() throws {
     try serialQueue.sync {
       let insertStatement = try store?.prepareStatement(sql: Self.insertSql)

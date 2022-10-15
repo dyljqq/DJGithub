@@ -7,15 +7,16 @@
 
 import UIKit
 
-class RepoFeedbackViewController: UIViewController {
+class TitleAndDescViewController: UIViewController {
 
-  enum RepoFeedbackType {
+  enum VCType {
     case issue(userName: String, repoName: String)
     case editIssue(userName: String, repoName: String, issueNum: Int)
     case issueComment(userName: String, repoName: String, issueNum: Int)
+    case rssFeed
   }
   
-  let type: RepoFeedbackType
+  let type: VCType
   var completionHandler: (() -> ())? = nil
   
   lazy var titleLabel: UILabel = {
@@ -75,7 +76,7 @@ class RepoFeedbackViewController: UIViewController {
   
   let headerView = UIView()
   
-  init(with type: RepoFeedbackType) {
+  init(with type: VCType) {
     self.type = type
     super.init(nibName: nil, bundle: nil)
   }
@@ -102,6 +103,10 @@ class RepoFeedbackViewController: UIViewController {
         make.top.equalTo(headerView.snp.bottom).offset(20)
       }
       self.descTextView.placeholder = "Issue comment content"
+    case .rssFeed:
+      titleLabel.text = "Add Rss"
+      self.titleTextField.placeholder = "Add feed link"
+      self.descTextView.placeholder = "Rss Feed Description."
     }
   }
   
@@ -201,6 +206,16 @@ class RepoFeedbackViewController: UIViewController {
         } else {
           HUD.show(with: "Fail to update issue.")
         }
+      case .rssFeed:
+        guard !title.isEmpty else { return }
+        let isAdded = await ConfigManager.shared.rssFeedManager.addAtom(with: title, desc: content)
+        if isAdded {
+          self.dismiss(animated: true, completion: { [weak self] in
+            self?.completionHandler?()
+          })
+        } else {
+          HUD.show(with: "Fail to add atom.")
+        }
       }
       commitView.isLoading = false
     }
@@ -212,5 +227,5 @@ class RepoFeedbackViewController: UIViewController {
 
 }
 
-extension RepoFeedbackViewController: UITextViewDelegate {
+extension TitleAndDescViewController: UITextViewDelegate {
 }
