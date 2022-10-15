@@ -11,6 +11,7 @@ import Combine
 class RssFeedManager: NSObject {
   override init() {
     super.init()
+    
     try? RssFeedAtom.createTable()
     try? RssFeed.createTable()
     Task {
@@ -26,17 +27,17 @@ class RssFeedManager: NSObject {
   }
   
   func loadAtoms() async -> [RssFeedAtom] {
-    let atoms: [RssFeedAtom] = RssFeedAtom.selectAll()
+    let atoms: [RssFeedAtom] = RssFeedAtom.select(with: " order by update_time desc")
     if atoms.isEmpty {
       await self.saveAtoms()
     }
-    return RssFeedAtom.selectAll()
+    return RssFeedAtom.select(with: " order by update_time desc")
   }
   
   func saveAtoms() async {
     let atoms: [RssFeedAtom] = loadBundleJSONFile("rssfeed")
     for atom in atoms {
-      let storedAtoms = RssFeedAtom.select(with: " where id=\(atom.id)") as [RssFeedAtom]
+      let storedAtoms = RssFeedAtom.select(with: " where feed_link=\(atom.feedLink)") as [RssFeedAtom]
       if storedAtoms.isEmpty {
         try? atom.insert()
       }
@@ -52,7 +53,7 @@ class RssFeedManager: NSObject {
     }
     print("[\(atom.title)] fetches \(info.entries.count)'s items.")
     for var feed in info.entries {
-      let selectedFeeds: [RssFeed] = RssFeed.select(with: " where title=\"\(feed.title)\"")
+      let selectedFeeds: [RssFeed] = RssFeed.select(with: " where title=\"\(feed.title)\" order by updated desc")
       if selectedFeeds.isEmpty {
         feed.atomId = atom.id
         try? feed.insert()
@@ -90,7 +91,7 @@ class RssFeedManager: NSObject {
 fileprivate extension RssFeedAtom {
   static func convert(with rssFeedInfo: RssFeedInfo, feedLink: String, desc: String) -> RssFeedAtom {
     let atom = RssFeedAtom(
-      id: 0, title: rssFeedInfo.title, des: desc, siteLink: "", feedLink: feedLink
+      title: rssFeedInfo.title, desc: desc, feedLink: feedLink
     )
     return atom
   }
