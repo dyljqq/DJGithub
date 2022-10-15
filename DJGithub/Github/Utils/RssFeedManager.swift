@@ -37,7 +37,7 @@ class RssFeedManager: NSObject {
   func saveAtoms() async {
     let atoms: [RssFeedAtom] = loadBundleJSONFile("rssfeed")
     for atom in atoms {
-      let storedAtoms = RssFeedAtom.select(with: " where feed_link=\(atom.feedLink)") as [RssFeedAtom]
+      let storedAtoms = RssFeedAtom.select(with: " where feed_link='\(atom.feedLink)'") as [RssFeedAtom]
       if storedAtoms.isEmpty {
         try? atom.insert()
       }
@@ -56,6 +56,7 @@ class RssFeedManager: NSObject {
       let selectedFeeds: [RssFeed] = RssFeed.select(with: " where title=\"\(feed.title)\" order by updated desc")
       if selectedFeeds.isEmpty {
         feed.atomId = atom.id
+        feed.unread = true
         try? feed.insert()
       } else {
         feed.update(with: feed)

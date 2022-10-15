@@ -94,6 +94,7 @@ extension SQLTable {
       if sqlite3_step(createTableStatement) != SQLITE_DONE {
         throw SQLiteError.Step(message: errorMessage)
       }
+      print("create table: \(tableSql)")
     }
   }
   
