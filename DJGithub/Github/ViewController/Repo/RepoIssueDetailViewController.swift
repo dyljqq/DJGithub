@@ -187,7 +187,7 @@ class RepoIssueDetailViewController: UIViewController {
   }
   
   @objc func editAction() {
-    let vc = RepoFeedbackViewController(with: .editIssue(userName: userName, repoName: repoName, issueNum: issueNum))
+    let vc = TitleAndDescViewController(with: .editIssue(userName: userName, repoName: repoName, issueNum: issueNum))
     vc.completionHandler = { [weak self] in
       self?.updateIssue()
     }
@@ -292,7 +292,7 @@ class RepoIssueDetailViewController: UIViewController {
   
   // Add issue comment
   @objc func addAction() {
-    let vc = RepoFeedbackViewController(with: .issueComment(userName: userName, repoName: repoName, issueNum: issueNum))
+    let vc = TitleAndDescViewController(with: .issueComment(userName: userName, repoName: repoName, issueNum: issueNum))
     present(vc, animated: true)
   }
 

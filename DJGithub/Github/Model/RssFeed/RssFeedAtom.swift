@@ -7,14 +7,6 @@
 
 import Foundation
 
-enum RssFeedAtomType: String, DJCodable {
-  case myzb, swiftOrg, tsai, ssp, onevcat
-  case swiftLee, swiftWithMajid, zhouzi, daiming
-  case sundell, fiveStars, coalescing, swiftUIWeekly
-  case swiftlyRushWeekly, iOSDevWeekly, ruanyifeng
-  case theSwiftDev, afer, jihe
-}
-
 struct RssFeedAtom: DJCodable {
   var id: Int
   var title: String
@@ -22,7 +14,8 @@ struct RssFeedAtom: DJCodable {
   var siteLink: String
   var feedLink: String
   
-  var atomType: RssFeedAtomType
+  var createTime: String?
+  var updateTime: String?
 }
 
 extension RssFeedAtom: SQLTable {
@@ -36,7 +29,7 @@ extension RssFeedAtom: SQLTable {
   
   static var fields: [String] {
     return [
-      "id", "title", "des", "site_link", "feed_link", "atom_type"
+      "id", "title", "des", "site_link", "feed_link"
     ]
   }
   
@@ -53,7 +46,7 @@ extension RssFeedAtom: SQLTable {
   
   static var selectedFields: [String] {
     return [
-      "id", "title", "des", "site_link", "feed_link", "atom_type"
+      "id", "title", "des", "site_link", "feed_link"
     ]
   }
   
@@ -64,13 +57,22 @@ extension RssFeedAtom: SQLTable {
       "des": self.des,
       "site_link": self.siteLink,
       "feed_link": self.feedLink,
-      "atom_type": self.atomType.rawValue
     ]
   }
   
 }
 
 extension RssFeedAtom {
+  static func getByFeedLink(_ feedLink: String) -> RssFeedAtom? {
+    let condition = " where feed_link='\(feedLink)'"
+    let atoms: [RssFeedAtom] = Self.select(with: condition)
+    return atoms.first
+  }
+  
+  static func isExistedByFeedLink(_ feedLink: String) -> Bool {
+    return getByFeedLink(feedLink) != nil
+  }
+  
   var hasFeeds: Bool {
     let feeds: [RssFeed] = RssFeed.select(with: " where atom_id=\(self.id)")
     return !feeds.isEmpty

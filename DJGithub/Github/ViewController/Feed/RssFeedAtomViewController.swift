@@ -31,13 +31,29 @@ class RssFeedAtomViewController: UIViewController {
     self.navigationItem.title = "Rss"
     view.backgroundColor = .backgroundColor
     
+    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addAction))
+    
     view.addSubview(tableView)
     tableView.snp.makeConstraints { make in
       make.edges.equalToSuperview()
     }
     
-    dataSource = loadBundleJSONFile("rssfeed")
-    self.tableView.reloadData()
+    self.loadData()
+  }
+  
+  private func loadData() {
+    Task {
+      dataSource = await ConfigManager.shared.rssFeedManager.loadAtoms()
+      self.tableView.reloadData()
+    }
+  }
+  
+  @objc func addAction() {
+    let vc = TitleAndDescViewController(with: .rssFeed)
+    vc.completionHandler = { [weak self] in
+      self?.loadData()
+    }
+    self.present(vc, animated: true)
   }
 
 }

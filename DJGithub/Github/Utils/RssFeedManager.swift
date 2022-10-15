@@ -14,10 +14,6 @@ class RssFeedManager: NSObject {
     try? RssFeedAtom.createTable()
     try? RssFeed.createTable()
     Task {
-      await self.saveAtoms()
-    }
-
-    Task {
       let atoms = await loadAtoms()
       await withThrowingTaskGroup(of: Void.self) { group in
         for atom in atoms {
@@ -71,5 +67,31 @@ class RssFeedManager: NSObject {
   static func getFeeds(by atomId: Int) async -> [RssFeed] {
     let feeds: [RssFeed] = RssFeed.select(with: " where atom_id=\(atomId)")
     return feeds
+  }
+  
+  func addAtom(with atomUrl: String, desc: String) async -> Bool {
+    guard !RssFeedAtom.isExistedByFeedLink(atomUrl) else {
+      return false
+    }
+    if let info = await FeedManager.fetchRssInfo(with: atomUrl) as RssFeedInfo? {
+      let atom =  RssFeedAtom.convert(with: info, feedLink: atomUrl, desc: desc)
+      do {
+        try atom.insert()
+        await loadFeeds(by: atom)
+        return true
+      } catch {
+        print("Failed to load atom: \(error)")
+      }
+    }
+    return false
+  }
+}
+
+fileprivate extension RssFeedAtom {
+  static func convert(with rssFeedInfo: RssFeedInfo, feedLink: String, desc: String) -> RssFeedAtom {
+    let atom = RssFeedAtom(
+      id: 0, title: rssFeedInfo.title, des: desc, siteLink: "", feedLink: feedLink
+    )
+    return atom
   }
 }

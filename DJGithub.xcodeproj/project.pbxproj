@@ -10,7 +10,7 @@
 		73074C7C28ED5507001A90E7 /* RepoIssueDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73074C7B28ED5507001A90E7 /* RepoIssueDetailViewController.swift */; };
 		73074C7E28ED5664001A90E7 /* IssueDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73074C7D28ED5664001A90E7 /* IssueDetail.swift */; };
 		73074C8028EDB955001A90E7 /* WebViewFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73074C7F28EDB955001A90E7 /* WebViewFooterView.swift */; };
-		73074CBE28EEC4AF001A90E7 /* RepoFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73074CBD28EEC4AF001A90E7 /* RepoFeedbackViewController.swift */; };
+		73074CBE28EEC4AF001A90E7 /* TitleAndDescViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73074CBD28EEC4AF001A90E7 /* TitleAndDescViewController.swift */; };
 		73074CC028EED421001A90E7 /* CommitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73074CBF28EED421001A90E7 /* CommitView.swift */; };
 		73074CC228EEE6C5001A90E7 /* UITextView+Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73074CC128EEE6C5001A90E7 /* UITextView+Placeholder.swift */; };
 		73074CC428EEF54F001A90E7 /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73074CC328EEF54F001A90E7 /* HUD.swift */; };
@@ -167,7 +167,7 @@
 		73074C7B28ED5507001A90E7 /* RepoIssueDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoIssueDetailViewController.swift; sourceTree = "<group>"; };
 		73074C7D28ED5664001A90E7 /* IssueDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDetail.swift; sourceTree = "<group>"; };
 		73074C7F28EDB955001A90E7 /* WebViewFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewFooterView.swift; sourceTree = "<group>"; };
-		73074CBD28EEC4AF001A90E7 /* RepoFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoFeedbackViewController.swift; sourceTree = "<group>"; };
+		73074CBD28EEC4AF001A90E7 /* TitleAndDescViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleAndDescViewController.swift; sourceTree = "<group>"; };
 		73074CBF28EED421001A90E7 /* CommitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitView.swift; sourceTree = "<group>"; };
 		73074CC128EEE6C5001A90E7 /* UITextView+Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Placeholder.swift"; sourceTree = "<group>"; };
 		73074CC328EEF54F001A90E7 /* HUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
@@ -655,7 +655,7 @@
 				73DF6C0528EC68A00003BDB8 /* RepoIssuesViewController.swift */,
 				73DF6C0B28EC7A7A0003BDB8 /* RepoIssuesStateViewController.swift */,
 				73074C7B28ED5507001A90E7 /* RepoIssueDetailViewController.swift */,
-				73074CBD28EEC4AF001A90E7 /* RepoFeedbackViewController.swift */,
+				73074CBD28EEC4AF001A90E7 /* TitleAndDescViewController.swift */,
 			);
 			path = Repo;
 			sourceTree = "<group>";
@@ -908,7 +908,7 @@
 				73B7906628E7F133002A9CDC /* SearchViewController.swift in Sources */,
 				73B7905828E541BE002A9CDC /* Bool+Ext.swift in Sources */,
 				73074C8028EDB955001A90E7 /* WebViewFooterView.swift in Sources */,
-				73074CBE28EEC4AF001A90E7 /* RepoFeedbackViewController.swift in Sources */,
+				73074CBE28EEC4AF001A90E7 /* TitleAndDescViewController.swift in Sources */,
 				73C598C728D8617800DA86A1 /* UIApplication+Ext.swift in Sources */,
 				73AACB0828D30A3C0072B1DF /* Router.swift in Sources */,
 				73DF6C0A28EC6A9C0003BDB8 /* IssueCell.swift in Sources */,
