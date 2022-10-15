@@ -159,7 +159,8 @@ extension RssFeed: SQLTable {
       "updated": self.updated,
       "content": self.content,
       "link": self.link,
-      "atom_id": self.atomId ?? 0
+      "atom_id": self.atomId ?? 0,
+      "unread": self.unread ? 1 : 0
     ]
   }
   
