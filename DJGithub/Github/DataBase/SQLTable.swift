@@ -96,4 +96,21 @@ extension SQLTable {
   static func selectAll<T: DJCodable>() -> [T] {
     return Self.select()
   }
+  
+  static func addNewFields(with dict: [String: Any]) {
+    for key in dict.keys {
+      do {
+        try addNewField(with: key)
+      } catch {
+        print("addNewFields: \(error)")
+      }
+    }
+    updateNewFields(with: dict)
+  }
+  
+  static func updateNewFields(with dict: [String: Any]) {
+    let s = dict.map { "\($0)=\($1)" }.joined(separator: ", ")
+    let sql = "update \(Self.tableName) set \(s);"
+    try? update(with: sql)
+  }
 }

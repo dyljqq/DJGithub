@@ -19,7 +19,7 @@ class RssFeedsViewController: UIViewController {
     tableView.dataSource = self
     tableView.showsVerticalScrollIndicator = false
     tableView.backgroundColor = .backgroundColor
-    tableView.register(RssFeedAtomCell.classForCoder(), forCellReuseIdentifier: RssFeedAtomCell.className)
+    tableView.register(RssFeedSimpleCell.classForCoder(), forCellReuseIdentifier: RssFeedSimpleCell.className)
     return tableView
   }()
   
@@ -63,15 +63,16 @@ extension RssFeedsViewController: UITableViewDelegate, UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: RssFeedAtomCell.className, for: indexPath) as! RssFeedAtomCell
+    let cell = tableView.dequeueReusableCell(withIdentifier: RssFeedSimpleCell.className, for: indexPath) as! RssFeedSimpleCell
     let rssFeed = self.dataSource[indexPath.row]
-    cell.render(with: rssFeed.title, des: rssFeed.displayDateString)
+    let model = RssFeedSimpleCell.RssFeedSimpleModel(title: rssFeed.title, content: rssFeed.displayDateString, unread: rssFeed.unread)
+    cell.render(with: model)
     return cell
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     let feed = self.dataSource[indexPath.row]
-    return RssFeedAtomCell.cellHeight(by: feed.title, content: feed.updated)
+    return RssFeedSimpleCell.cellHeight(by: feed.title, content: feed.updated)
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -79,6 +80,8 @@ extension RssFeedsViewController: UITableViewDelegate, UITableViewDataSource {
     
     let rssFeed = dataSource[indexPath.row]
     self.navigationController?.pushToRssFeedDetial(with: rssFeed)
+    
+    rssFeed.updateReadStatus()
   }
 }
 

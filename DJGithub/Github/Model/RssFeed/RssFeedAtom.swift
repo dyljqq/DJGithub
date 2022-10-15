@@ -104,21 +104,15 @@ extension RssFeedAtom {
     return atoms.first
   }
   
-  static func addNewFields(with dict: [String: Any]) {
-    for key in dict.keys {
-      try? addNewField(with: key)
-    }
-    updateNewFields(with: dict)
-  }
-  
-  static func updateNewFields(with dict: [String: Any]) {
-    let s = dict.map { "\($0)=\($1)" }.joined(separator: ", ")
-    let sql = "update \(Self.tableName) set \(s);"
-    try? update(with: sql)
-  }
-  
   static func isExistedByFeedLink(_ feedLink: String) -> Bool {
     return getByFeedLink(feedLink) != nil
+  }
+  
+  static func totalFeedsStr(with atomId: Int) -> String {
+    let feeds: [RssFeed] = RssFeed.select(with: " where atom_id=\(atomId)")
+    let totalCount = feeds.count
+    let readedCount = feeds.filter { !$0.unread }.count
+    return "\(readedCount)/\(totalCount)"
   }
   
   var hasFeeds: Bool {

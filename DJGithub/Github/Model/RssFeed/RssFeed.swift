@@ -69,10 +69,11 @@ struct RssFeed: DJCodable {
   var rssFeedLink: RssFeedLink?
   
   var atomId: Int?
+  var unread: Bool = true
   
   enum CodingKeys: String, CodingKey {
     case id, title, updated, content, link, atomId, pubDate,
-         contentEncoded = "content:encoded", description, rssFeedLink, summary
+         contentEncoded = "content:encoded", description, rssFeedLink, summary, unread
   }
   
   init(from decoder: Decoder) throws {
@@ -114,6 +115,11 @@ struct RssFeed: DJCodable {
     }
     self.atomId = try? container.decode(Int.self, forKey: .atomId)
     self.id = try? container.decode(Int.self, forKey: .id)
+    if let unread = try? container.decode(Int.self, forKey: .unread) {
+      self.unread = unread == 0 ? false : true
+    } else {
+      self.unread = true
+    }
   }
 }
 
@@ -124,7 +130,7 @@ extension RssFeed: SQLTable {
   
   static var fields: [String] {
     return [
-      "title", "updated", "content", "link", "atom_id"
+      "title", "updated", "content", "link", "atom_id", "unread"
     ]
   }
   
@@ -135,13 +141,14 @@ extension RssFeed: SQLTable {
       "content": .text,
       "link": .text,
       "atom_id": .bigint,
-      "id": .int
+      "id": .int,
+      "unread": .int
     ]
   }
   
   static var selectedFields: [String] {
     return [
-      "id", "title", "updated", "content", "link", "atom_id"
+      "id", "title", "updated", "content", "link", "atom_id", "unread"
     ]
   }
   
@@ -159,6 +166,12 @@ extension RssFeed: SQLTable {
   func update(with rssFeed: RssFeed) {
     guard let rssFeedId = self.id, rssFeedId > 0 else { return }
     let sql = "update \(Self.tableName) set title=\"\(rssFeed.title)\", content=\"\(rssFeed.content)\", updated=\"\(rssFeed.updated)\", link=\"\(rssFeed.link)\" where id=\(rssFeedId)"
+    try? Self.update(with: sql)
+  }
+  
+  func updateReadStatus() {
+    guard self.unread, let id = self.id else { return }
+    let sql = "update \(Self.tableName) set unread=0 where id=\(id)"
     try? Self.update(with: sql)
   }
   

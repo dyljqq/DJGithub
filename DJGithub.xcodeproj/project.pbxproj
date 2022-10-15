@@ -37,7 +37,7 @@
 		7320170628F53455007B970F /* RssFeedAtomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7320170528F53455007B970F /* RssFeedAtomViewController.swift */; };
 		7320170928F535CB007B970F /* RssFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7320170828F535CB007B970F /* RssFeed.swift */; };
 		7320170D28F5378E007B970F /* RssFeedAtom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7320170C28F5378E007B970F /* RssFeedAtom.swift */; };
-		7320170F28F5385B007B970F /* RssFeedAtomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7320170E28F5385B007B970F /* RssFeedAtomCell.swift */; };
+		7320170F28F5385B007B970F /* RssFeedSimpleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7320170E28F5385B007B970F /* RssFeedSimpleCell.swift */; };
 		732B21D028E1C09B005893C0 /* RepoStarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732B21CF28E1C09B005893C0 /* RepoStarView.swift */; };
 		732B21D328E228FD005893C0 /* NextPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732B21D228E228FD005893C0 /* NextPageModel.swift */; };
 		732B21D628E22B9A005893C0 /* NextPageLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732B21D528E22B9A005893C0 /* NextPageLoadable.swift */; };
@@ -194,7 +194,7 @@
 		7320170528F53455007B970F /* RssFeedAtomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssFeedAtomViewController.swift; sourceTree = "<group>"; };
 		7320170828F535CB007B970F /* RssFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssFeed.swift; sourceTree = "<group>"; };
 		7320170C28F5378E007B970F /* RssFeedAtom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssFeedAtom.swift; sourceTree = "<group>"; };
-		7320170E28F5385B007B970F /* RssFeedAtomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssFeedAtomCell.swift; sourceTree = "<group>"; };
+		7320170E28F5385B007B970F /* RssFeedSimpleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssFeedSimpleCell.swift; sourceTree = "<group>"; };
 		732B21CF28E1C09B005893C0 /* RepoStarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoStarView.swift; sourceTree = "<group>"; };
 		732B21D228E228FD005893C0 /* NextPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextPageModel.swift; sourceTree = "<group>"; };
 		732B21D528E22B9A005893C0 /* NextPageLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextPageLoadable.swift; sourceTree = "<group>"; };
@@ -751,7 +751,7 @@
 			isa = PBXGroup;
 			children = (
 				73E14E5E28F415AD00A9811D /* FeedCell.swift */,
-				7320170E28F5385B007B970F /* RssFeedAtomCell.swift */,
+				7320170E28F5385B007B970F /* RssFeedSimpleCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -926,7 +926,7 @@
 				73DF6BFC28EBFD3E0003BDB8 /* RepoContent.swift in Sources */,
 				732B21D328E228FD005893C0 /* NextPageModel.swift in Sources */,
 				7341DCD428E0422F009A3A3C /* RepoCell.swift in Sources */,
-				7320170F28F5385B007B970F /* RssFeedAtomCell.swift in Sources */,
+				7320170F28F5385B007B970F /* RssFeedSimpleCell.swift in Sources */,
 				73AACB1328D30F350072B1DF /* DJParser.swift in Sources */,
 				73AACB7728D5BBE90072B1DF /* SQLTable.swift in Sources */,
 				73E14E5D28F4151100A9811D /* FeedsViewController.swift in Sources */,

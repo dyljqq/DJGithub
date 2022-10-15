@@ -27,7 +27,7 @@ Personal access tokens的申请链接如下：
 1. 关于DJGithub相关的网络数据下载与解析的模块可以看这篇文章：
 
    	* 掘金地址：[如何使用异步方法构造一个简易的网络请求库 ](https://juejin.cn/post/7153533145168478245)
-
+   	
    	* github地址： [如何使用异步方法构造一个简易的网络请求库 ](https://github.com/dyljqq/Article/blob/master/Swift/%E4%BD%BF%E7%94%A8swift%E6%9E%84%E9%80%A0%E4%B8%80%E4%B8%AA%E5%BC%82%E6%AD%A5%E7%9A%84%E7%BD%91%E7%BB%9C%E6%95%B0%E6%8D%AE%E8%AF%B7%E6%B1%82%E7%B1%BB.md)
 
 ### 已完成功能
@@ -51,15 +51,17 @@ Personal access tokens的申请链接如下：
 6. 添加User feeds相关的内容
 
    	* 解析XML数据，自定义XML解析器
-	
+		
    	* 因为Feed数据中会包含多个库跟用户信息，因此给这些文字做了高亮与点击操作。
 
 7. 加入Rss源的解析。
 
-   已完成：界面的搭建以及数据解析框架的搭建
+   1. 界面的搭建以及数据解析框架的搭建
+
+   2. Rss阅读体验优化，增加阅读状态。
 
    待完成：
-
+   
    * 接入不同Rss源数据(已完成)
    * 数据做本地存储的操作(已完成)
    * Rss中content内容的展示（已完成）
