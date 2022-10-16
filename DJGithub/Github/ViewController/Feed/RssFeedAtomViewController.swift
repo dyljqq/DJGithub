@@ -48,6 +48,26 @@ class RssFeedAtomViewController: UIViewController {
     
     view.startLoading()
     self.loadData()
+    
+    NotificationCenter.default.addObserver(
+      forName: RssFeedManager.RssFeedAtomUpdateNotificationKey,
+      object: nil,
+      queue: .main,
+      using: { [weak self] notification in
+        guard let strongSelf = self else { return }
+        if let dict = notification.object as? [String: Any],
+        let feedLink = dict["feedLink"] as? String {
+          for (index, model) in strongSelf.dataSource.enumerated() {
+            if model.atom.feedLink == feedLink {
+              if let atom = RssFeedAtom.getByFeedLink(feedLink) {
+                strongSelf.dataSource[index] = RssFeedAtomModel(readStr: model.readStr, atom: atom)
+                strongSelf.tableView.reloadData()
+                return
+              }
+            }
+          }
+        }
+    })
   }
   
   private func loadData() {

@@ -14,6 +14,7 @@ class TitleAndDescViewController: UIViewController {
     case editIssue(userName: String, repoName: String, issueNum: Int)
     case issueComment(userName: String, repoName: String, issueNum: Int)
     case rssFeed
+    case editRssFeedAtom(title: String, description: String, feedLink: String)
   }
   
   let type: VCType
@@ -107,6 +108,11 @@ class TitleAndDescViewController: UIViewController {
       titleLabel.text = "Add Rss"
       self.titleTextField.placeholder = "Add feed link"
       self.descTextView.placeholder = "Rss Feed Description."
+    case .editRssFeedAtom(let title, let description, _):
+      titleLabel.text = "Edit Atom"
+      self.titleTextField.text = title
+      self.descTextView.placeholder = ""
+      self.descTextView.text = description
     }
   }
   
@@ -216,6 +222,13 @@ class TitleAndDescViewController: UIViewController {
         } else {
           HUD.show(with: "Fail to add atom.")
         }
+      case .editRssFeedAtom(_, _, let feedLink):
+        guard !title.isEmpty else { return }
+        RssFeedManager.updateAtom(with: title, description: content, feedLink: feedLink)
+        self.dismiss(animated: true, completion: { [weak self] in
+          self?.completionHandler?()
+        })
+        
       }
       commitView.isLoading = false
     }

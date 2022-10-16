@@ -70,7 +70,7 @@ class HUD {
     view.render(with: content)
     
     UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
-      view.frame = CGRect(x: 40, y: 150, width: FrameGuide.screenWidth - 80, height: 44)
+      view.frame = CGRect(x: 40, y: FrameGuide.statusBarHeight, width: FrameGuide.screenWidth - 80, height: 44)
     }, completion: { finished in
       
     })

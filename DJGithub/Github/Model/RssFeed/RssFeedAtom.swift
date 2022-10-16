@@ -17,6 +17,8 @@ struct RssFeedAtom: DJCodable {
   var createTime: String
   var updateTime: String
   
+  var description: String?
+  
   init(title: String, desc: String, feedLink: String) {
     self.title = title
     self.des = desc
@@ -31,6 +33,12 @@ struct RssFeedAtom: DJCodable {
   init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.id = try container.decode(Int.self, forKey: .id)
+    if let title = try? container.decode(String.self, forKey: .title), !title.isEmpty {
+      self.title = title
+    } else {
+      let title =  try? container.decode(String.self, forKey: .description)
+      self.title = title ?? "No title provided."
+    }
     self.title = try container.decode(String.self, forKey: .title)
     self.des = try container.decode(String.self, forKey: .des)
     self.siteLink = try container.decode(String.self, forKey: .siteLink)
@@ -118,5 +126,11 @@ extension RssFeedAtom {
   var hasFeeds: Bool {
     let feeds: [RssFeed] = RssFeed.select(with: " where atom_id=\(self.id)")
     return !feeds.isEmpty
+  }
+  
+  static func get(by id: Int) -> RssFeedAtom? {
+    let condition = " where id=\(id)"
+    let atoms: [RssFeedAtom] = Self.select(with: condition)
+    return atoms.first
   }
 }

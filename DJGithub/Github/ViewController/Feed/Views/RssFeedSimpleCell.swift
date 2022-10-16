@@ -78,6 +78,7 @@ class RssFeedSimpleCell: UITableViewCell {
     titleLabel.snp.makeConstraints { make in
       make.leading.equalTo(12)
       make.top.equalTo(10)
+      make.trailing.equalTo(readStrLabel.snp.leading).offset(-12)
     }
     contentLabel.snp.makeConstraints { make in
       make.leading.equalTo(titleLabel)
