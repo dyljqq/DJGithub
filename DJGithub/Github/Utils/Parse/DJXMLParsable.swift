@@ -25,7 +25,11 @@ class XMLNode {
     for node in nodes {
       if node.nodes.isEmpty {
         if node.value.isEmpty {
-          dict[node.key] = node.attributeDict
+          if !node.attributeDict.isEmpty {
+            dict[node.key] = node.attributeDict
+          } else {
+            dict[node.key] = ""
+          }
         } else {
           dict[node.key] = node.value
         }
@@ -129,6 +133,7 @@ class DJXMLParser<T: DJCodable>: NSObject, Parsable, XMLParserDelegate {
       continuation?.resume(returning: model)
     } catch {
       print("json parse error: \(error)")
+      continuation?.resume(returning: nil)
     }
   }
 }

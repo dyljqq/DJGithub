@@ -68,11 +68,11 @@ struct RssFeed: DJCodable {
 
   var rssFeedLink: RssFeedLink?
   
-  var atomId: Int?
+  var feedLink: String?
   var unread: Bool = true
   
   enum CodingKeys: String, CodingKey {
-    case id, title, updated, content, link, atomId, pubDate,
+    case id, title, updated, content, link, feedLink, pubDate,
          contentEncoded = "content:encoded", description, rssFeedLink, summary, unread
   }
   
@@ -113,7 +113,7 @@ struct RssFeed: DJCodable {
     } else {
       self.content = ""
     }
-    self.atomId = try? container.decode(Int.self, forKey: .atomId)
+    self.feedLink = try? container.decode(String.self, forKey: .feedLink)
     self.id = try? container.decode(Int.self, forKey: .id)
     if let unread = try? container.decode(Int.self, forKey: .unread) {
       self.unread = unread == 0 ? false : true
@@ -130,7 +130,7 @@ extension RssFeed: SQLTable {
   
   static var fields: [String] {
     return [
-      "title", "updated", "content", "link", "atom_id", "unread"
+      "title", "updated", "content", "link", "feed_link", "unread"
     ]
   }
   
@@ -140,7 +140,7 @@ extension RssFeed: SQLTable {
       "updated": .text,
       "content": .text,
       "link": .text,
-      "atom_id": .bigint,
+      "feed_link": .text,
       "id": .int,
       "unread": .int
     ]
@@ -148,7 +148,7 @@ extension RssFeed: SQLTable {
   
   static var selectedFields: [String] {
     return [
-      "id", "title", "updated", "content", "link", "atom_id", "unread"
+      "id", "title", "updated", "content", "link", "feed_link", "unread"
     ]
   }
   
@@ -159,7 +159,7 @@ extension RssFeed: SQLTable {
       "updated": self.updated,
       "content": self.content,
       "link": self.link,
-      "atom_id": self.atomId ?? 0,
+      "feed_link": self.feedLink ?? "",
       "unread": self.unread ? 1 : 0
     ]
   }

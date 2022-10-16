@@ -50,10 +50,23 @@ class RssFeedsViewController: UIViewController {
     view.startLoading()
     
     Task {
-      self.dataSource = await RssFeedManager.getFeeds(by: rssFeedAtom.id)
+      self.dataSource = await RssFeedManager.getFeeds(by: rssFeedAtom.feedLink)
       view.stopLoading()
       self.tableView.reloadData()
     }
+    
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editAtomAction))
+  }
+  
+  @objc func editAtomAction() {
+    let vc = TitleAndDescViewController(with: .editRssFeedAtom(title: rssFeedAtom.title, description: rssFeedAtom.des, feedLink: rssFeedAtom.feedLink))
+    vc.completionHandler = { [weak self] in
+      guard let strongSelf = self else { return }
+      if let atom = RssFeedAtom.getByFeedLink(strongSelf.rssFeedAtom.feedLink) {
+        strongSelf.navigationItem.title = atom.title
+      }
+    }
+    self.present(vc, animated: true)
   }
 }
 

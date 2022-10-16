@@ -9,6 +9,8 @@ import Foundation
 import Combine
 
 class RssFeedManager: NSObject {
+  static let RssFeedAtomUpdateNotificationKey = NSNotification.Name("RssFeedAtomUpdateNotification")
+  
   override init() {
     super.init()
     
@@ -44,6 +46,13 @@ class RssFeedManager: NSObject {
     }
   }
   
+  static func updateAtom(with title: String, description: String, feedLink: String) {
+    let sql = "update \(RssFeedAtom.tableName) set title='\(title)', des='\(description)' where feed_link='\(feedLink)'"
+    try? RssFeedAtom.update(with: sql)
+    
+    NotificationCenter.default.post(name: RssFeedAtomUpdateNotificationKey, object: ["feedLink": feedLink])
+  }
+  
   func loadFeeds(by atom: RssFeedAtom) async {
     print("----------------------------------")
     print("start fetch \(atom.title)'s feeds")
@@ -55,7 +64,7 @@ class RssFeedManager: NSObject {
     for var feed in info.entries {
       let selectedFeeds: [RssFeed] = RssFeed.select(with: " where title=\"\(feed.title)\" order by updated desc")
       if selectedFeeds.isEmpty {
-        feed.atomId = atom.id
+        feed.feedLink = atom.feedLink
         feed.unread = true
         try? feed.insert()
       } else {
@@ -66,15 +75,13 @@ class RssFeedManager: NSObject {
     print("----------------------------------")
   }
   
-  static func getFeeds(by atomId: Int) async -> [RssFeed] {
-    let feeds: [RssFeed] = RssFeed.select(with: " where atom_id=\(atomId)")
+  static func getFeeds(by feedLink: String) async -> [RssFeed] {
+    let feeds: [RssFeed] = RssFeed.select(with: " where feed_link='\(feedLink)'")
     return feeds
   }
   
   func addAtom(with atomUrl: String, desc: String) async -> Bool {
-    guard !RssFeedAtom.isExistedByFeedLink(atomUrl) else {
-      return false
-    }
+    guard !RssFeedAtom.isExistedByFeedLink(atomUrl) else { return false }
     if let info = await FeedManager.fetchRssInfo(with: atomUrl) as RssFeedInfo? {
       let atom =  RssFeedAtom.convert(with: info, feedLink: atomUrl, desc: desc)
       do {

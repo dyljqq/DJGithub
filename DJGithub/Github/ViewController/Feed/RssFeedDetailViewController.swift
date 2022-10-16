@@ -69,7 +69,7 @@ class RssFeedDetailViewController: UIViewController {
     let content: String
     if let path = Bundle.main.path(forResource: "css", ofType: "html"),
        let style = try? String(contentsOfFile: path) {
-      content = "\(style)\(rssFeed.content)"
+      content = "\(style)\(rssFeed.content) <br /> <a href=\"\(rssFeed.link)\">阅读全文</a>"
     } else {
       content = rssFeed.content
     }
