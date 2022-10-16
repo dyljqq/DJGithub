@@ -116,15 +116,15 @@ extension RssFeedAtom {
     return getByFeedLink(feedLink) != nil
   }
   
-  static func totalFeedsStr(with atomId: Int) -> String {
-    let feeds: [RssFeed] = RssFeed.select(with: " where atom_id=\(atomId)")
+  static func totalFeedsStr(with feedLink: String) -> String {
+    let feeds: [RssFeed] = RssFeed.select(with: " where feed_link='\(feedLink)'")
     let totalCount = feeds.count
     let readedCount = feeds.filter { !$0.unread }.count
     return "\(readedCount)/\(totalCount)"
   }
   
   var hasFeeds: Bool {
-    let feeds: [RssFeed] = RssFeed.select(with: " where atom_id=\(self.id)")
+    let feeds: [RssFeed] = RssFeed.select(with: " where feed_link='\(self.feedLink)'")
     return !feeds.isEmpty
   }
   

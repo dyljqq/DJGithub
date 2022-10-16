@@ -75,7 +75,7 @@ class RssFeedAtomViewController: UIViewController {
       let atoms = await ConfigManager.shared.rssFeedManager.loadAtoms()
       var rs: [RssFeedAtomModel] = []
       for atom in atoms {
-        let str = RssFeedAtom.totalFeedsStr(with: atom.id)
+        let str = RssFeedAtom.totalFeedsStr(with: atom.feedLink)
         rs.append(RssFeedAtomModel(readStr: str, atom: atom))
       }
       dataSource = rs

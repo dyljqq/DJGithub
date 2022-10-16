@@ -64,7 +64,7 @@ class RssFeedManager: NSObject {
     for var feed in info.entries {
       let selectedFeeds: [RssFeed] = RssFeed.select(with: " where title=\"\(feed.title)\" order by updated desc")
       if selectedFeeds.isEmpty {
-        feed.atomId = atom.id
+        feed.feedLink = atom.feedLink
         feed.unread = true
         try? feed.insert()
       } else {
@@ -75,8 +75,8 @@ class RssFeedManager: NSObject {
     print("----------------------------------")
   }
   
-  static func getFeeds(by atomId: Int) async -> [RssFeed] {
-    let feeds: [RssFeed] = RssFeed.select(with: " where atom_id=\(atomId)")
+  static func getFeeds(by feedLink: String) async -> [RssFeed] {
+    let feeds: [RssFeed] = RssFeed.select(with: " where feed_link='\(feedLink)'")
     return feeds
   }
   

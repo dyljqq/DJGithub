@@ -50,7 +50,7 @@ class RssFeedsViewController: UIViewController {
     view.startLoading()
     
     Task {
-      self.dataSource = await RssFeedManager.getFeeds(by: rssFeedAtom.id)
+      self.dataSource = await RssFeedManager.getFeeds(by: rssFeedAtom.feedLink)
       view.stopLoading()
       self.tableView.reloadData()
     }
