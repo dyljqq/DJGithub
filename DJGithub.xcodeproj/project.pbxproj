@@ -55,6 +55,11 @@
 		7341DCD228E03C6A009A3A3C /* RepoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341DCD128E03C6A009A3A3C /* RepoViewController.swift */; };
 		7341DCD428E0422F009A3A3C /* RepoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341DCD328E0422F009A3A3C /* RepoCell.swift */; };
 		7341DCD828E05D98009A3A3C /* RepoFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341DCD728E05D98009A3A3C /* RepoFooterView.swift */; };
+		735D0E072903115E00E618B3 /* DJCallStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D0E012903115D00E618B3 /* DJCallStack.swift */; };
+		735D0E082903115E00E618B3 /* mach_stack_info.c in Sources */ = {isa = PBXBuildFile; fileRef = 735D0E022903115D00E618B3 /* mach_stack_info.c */; };
+		735D0E092903115E00E618B3 /* DJStuckMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D0E032903115D00E618B3 /* DJStuckMonitor.swift */; };
+		735D0E0A2903115E00E618B3 /* DJThreadInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D0E042903115D00E618B3 /* DJThreadInfoModel.swift */; };
+		735D0E0B2903115E00E618B3 /* StackAddressInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D0E062903115D00E618B3 /* StackAddressInfo.swift */; };
 		73727B2428D75DAE003D5A95 /* IndicatorCookieTerminatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73727B2328D75DAE003D5A95 /* IndicatorCookieTerminatorView.swift */; };
 		7374D19728E0BC1D00E6BE47 /* Readme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7374D19628E0BC1D00E6BE47 /* Readme.swift */; };
 		73AACAD528D308A60072B1DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD428D308A60072B1DF /* AppDelegate.swift */; };
@@ -212,6 +217,12 @@
 		7341DCD128E03C6A009A3A3C /* RepoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoViewController.swift; sourceTree = "<group>"; };
 		7341DCD328E0422F009A3A3C /* RepoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoCell.swift; sourceTree = "<group>"; };
 		7341DCD728E05D98009A3A3C /* RepoFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoFooterView.swift; sourceTree = "<group>"; };
+		735D0E012903115D00E618B3 /* DJCallStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DJCallStack.swift; sourceTree = "<group>"; };
+		735D0E022903115D00E618B3 /* mach_stack_info.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mach_stack_info.c; sourceTree = "<group>"; };
+		735D0E032903115D00E618B3 /* DJStuckMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DJStuckMonitor.swift; sourceTree = "<group>"; };
+		735D0E042903115D00E618B3 /* DJThreadInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DJThreadInfoModel.swift; sourceTree = "<group>"; };
+		735D0E052903115D00E618B3 /* mach_stack_info.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mach_stack_info.h; sourceTree = "<group>"; };
+		735D0E062903115D00E618B3 /* StackAddressInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackAddressInfo.swift; sourceTree = "<group>"; };
 		73727B2328D75DAE003D5A95 /* IndicatorCookieTerminatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorCookieTerminatorView.swift; sourceTree = "<group>"; };
 		7374D19628E0BC1D00E6BE47 /* Readme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Readme.swift; sourceTree = "<group>"; };
 		73AACAD128D308A60072B1DF /* DJGithub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DJGithub.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -390,6 +401,19 @@
 			path = RssFeed;
 			sourceTree = "<group>";
 		};
+		735D0E002903115D00E618B3 /* DJMonitor */ = {
+			isa = PBXGroup;
+			children = (
+				735D0E052903115D00E618B3 /* mach_stack_info.h */,
+				735D0E022903115D00E618B3 /* mach_stack_info.c */,
+				735D0E012903115D00E618B3 /* DJCallStack.swift */,
+				735D0E032903115D00E618B3 /* DJStuckMonitor.swift */,
+				735D0E042903115D00E618B3 /* DJThreadInfoModel.swift */,
+				735D0E062903115D00E618B3 /* StackAddressInfo.swift */,
+			);
+			path = DJMonitor;
+			sourceTree = "<group>";
+		};
 		73AACAC828D308A60072B1DF = {
 			isa = PBXGroup;
 			children = (
@@ -413,6 +437,7 @@
 		73AACAD328D308A60072B1DF /* DJGithub */ = {
 			isa = PBXGroup;
 			children = (
+				735D0E002903115D00E618B3 /* DJMonitor */,
 				73AACB1528D311C30072B1DF /* Github */,
 				73AACB0428D308E30072B1DF /* DJFoundation */,
 				73AACAD428D308A60072B1DF /* AppDelegate.swift */,
@@ -924,6 +949,7 @@
 				73AACB2928D321480072B1DF /* Result.swift in Sources */,
 				7320170628F53455007B970F /* RssFeedAtomViewController.swift in Sources */,
 				73DF6BFC28EBFD3E0003BDB8 /* RepoContent.swift in Sources */,
+				735D0E0A2903115E00E618B3 /* DJThreadInfoModel.swift in Sources */,
 				732B21D328E228FD005893C0 /* NextPageModel.swift in Sources */,
 				7341DCD428E0422F009A3A3C /* RepoCell.swift in Sources */,
 				7320170F28F5385B007B970F /* RssFeedSimpleCell.swift in Sources */,
@@ -944,6 +970,7 @@
 				73DF6C0228EC1EE80003BDB8 /* RepoContentFileViewController.swift in Sources */,
 				73101D5F28E4A5E400DB5423 /* DevelopersViewController.swift in Sources */,
 				73DF6BFE28EBFEE30003BDB8 /* RepoContentsViewController.swift in Sources */,
+				735D0E072903115E00E618B3 /* DJCallStack.swift in Sources */,
 				73101D4B28E4889B00DB5423 /* UserStatusView.swift in Sources */,
 				73E14E5628F3DAC800A9811D /* DJJSONParser.swift in Sources */,
 				73DF6BF228EAE3060003BDB8 /* DJCodable.swift in Sources */,
@@ -959,6 +986,7 @@
 				73074CC728EF4809001A90E7 /* LocalRepo.swift in Sources */,
 				73101D4128E30C5200DB5423 /* SimpleUserCell.swift in Sources */,
 				73B7904A28E52450002A9CDC /* LocalDevelopersViewController.swift in Sources */,
+				735D0E0B2903115E00E618B3 /* StackAddressInfo.swift in Sources */,
 				73074CD528F166D8001A90E7 /* UserInfoEditViewController.swift in Sources */,
 				73074CCD28EF4AFE001A90E7 /* LocalDataManager.swift in Sources */,
 				73AACB3C28D35C360072B1DF /* Utils.swift in Sources */,
@@ -1009,6 +1037,7 @@
 				73B7904828E51A3A002A9CDC /* UIImage+Ext.swift in Sources */,
 				73AACB5828D483CA0072B1DF /* UserContributionCell.swift in Sources */,
 				73AACB0C28D30B3D0072B1DF /* Error.swift in Sources */,
+				735D0E082903115E00E618B3 /* mach_stack_info.c in Sources */,
 				73AACB0A28D30B0C0072B1DF /* URLConvertible.swift in Sources */,
 				73AACB4A28D4463B0072B1DF /* UIView+Loading.swift in Sources */,
 				73AACB5E28D4BD3B0072B1DF /* UserStaredReposViewController.swift in Sources */,
@@ -1023,6 +1052,7 @@
 				7320170928F535CB007B970F /* RssFeed.swift in Sources */,
 				73AACB1828D312D30072B1DF /* GithubRouter.swift in Sources */,
 				73101D5028E4A10400DB5423 /* LocalDeveloperGroup.swift in Sources */,
+				735D0E092903115E00E618B3 /* DJStuckMonitor.swift in Sources */,
 				73DF6BEC28EACF340003BDB8 /* SearchWordHeaderView.swift in Sources */,
 				73074CC428EEF54F001A90E7 /* HUD.swift in Sources */,
 				73B7905228E53353002A9CDC /* Config.swift in Sources */,
