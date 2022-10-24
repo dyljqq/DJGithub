@@ -18,6 +18,7 @@ open class DJStuckMonitor {
   let dispatchSemaphore = DispatchSemaphore(value: 0)
   var runLoopActivity: CFRunLoopActivity = .entry
   var runloopObserver: CFRunLoopObserver?
+  let queue = DispatchQueue(label: "stuck_monitor.dyljqq.com", attributes: .concurrent)
   
   var timer: Timer?
   var stackInfos: [[String]] = []
@@ -42,7 +43,7 @@ open class DJStuckMonitor {
     monitorState.update(isMonitoting: true, timeoutCount: 0)
     CFRunLoopAddObserver(CFRunLoopGetMain(), runloopObserver, .commonModes)
     
-    DispatchQueue.global(qos: .default).async {
+    queue.async {
       while true {
         let wait = self.dispatchSemaphore.wait(timeout: DispatchTime.now() + STUCK_MONITOR_THRESH_HOLD)
         if DispatchTimeoutResult.timedOut == wait {
@@ -79,8 +80,8 @@ open class DJStuckMonitor {
   }
   
   private func getStackInfos() {
-    DispatchQueue.global(qos: .default).async {
-      self.timer = Timer(timeInterval: 0.1, repeats: true, block: { [weak self] timer in
+    queue.async {
+      self.timer = Timer(timeInterval: 3, repeats: true, block: { [weak self] timer in
         guard let strongSelf = self, let thread = strongSelf.thread else { return }
         let infos = DJCallStack.fetchStackInfo(from: thread)
         if strongSelf.stackInfos.count > 20 {

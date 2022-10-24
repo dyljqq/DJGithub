@@ -78,11 +78,7 @@ class RepoViewController: UIViewController {
           await self.configStarButton()
         }
         group.addTask {
-          Task {
-            if let readme = await RepoManager.fetchREADME(with: self.repoName) {
-              await self.footerView.render(with: readme.content)
-            }
-          }
+          await self.fetchReadme()
         }
       }
     }
@@ -161,6 +157,12 @@ class RepoViewController: UIViewController {
       }
     }
   }
+  
+  func fetchReadme() async {
+    if let readme = await RepoManager.fetchREADME(with: self.repoName) {
+      self.footerView.render(with: readme.content)
+    }
+  }
 
 }
 
@@ -181,7 +183,19 @@ extension RepoViewController: UITableViewDelegate, UITableViewDataSource {
     default:
       let cell = tableView.dequeueReusableCell(withIdentifier: RepoCell.className, for: indexPath) as! RepoCell
       cell.render(with: data)
-      cell.accessoryType = .disclosureIndicator
+      
+      if case RepoCell.CellType.readme = data {
+        cell.accessoryType = .none
+        cell.selectionStyle = .none
+        cell.reloadClosure = { [weak self] in
+          Task {
+            await self?.fetchReadme()
+          }
+        }
+      } else {
+        cell.accessoryType = .disclosureIndicator
+      }
+      
       return cell
     }
   }
@@ -201,6 +215,8 @@ extension RepoViewController: UITableViewDelegate, UITableViewDataSource {
         self.navigationController?.pushToRepoContent(with: userName, repoName: repoName)
       case .issues:
         self.navigationController?.pushToRepoIssues(with: userName, repoName: repoName)
+      case .pull:
+        self.navigationController?.pushToRepoIssues(with: userName, repoName: repoName, issueState: .pull)
       default:
         break
       }

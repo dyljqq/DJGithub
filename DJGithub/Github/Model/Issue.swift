@@ -15,6 +15,7 @@ struct IssueLayout {
   let issue: Issue
   let title: String
   var height: CGFloat = 0
+  var imageName: String = ""
   
   init(issue: Issue) {
     self.issue = issue
@@ -36,7 +37,7 @@ struct Issue: DJCodable {
   var number: Int
   var title: String
   var state: IssueState
-  var comments: Int
+  var comments: Int?
   var htmlUrl:String
 
   var createdAt: String
