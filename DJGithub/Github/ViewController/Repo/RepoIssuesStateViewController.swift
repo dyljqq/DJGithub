@@ -8,13 +8,26 @@
 import UIKit
 
 class RepoIssuesStateViewController: UIViewController {
-
+  
+  enum IssueState {
+    case issue, pull
+    
+    var title: String {
+      switch self {
+      case .pull: return "Pulls"
+      case .issue: return "Issues"
+      }
+    }
+  }
+  
   let userName: String
   let repoName: String
+  let issueState: IssueState
   
   let types: [Issue.IssueState] = [.open, .closed]
   lazy var vcs: [RepoIssuesViewController] = {
-    return types.map { RepoIssuesViewController(with: self.userName, repoName: self.repoName, issusState: $0) }
+    return types.map { RepoIssuesViewController(
+      with: self.userName, repoName: self.repoName, issueState: issueState, state: $0) }
   }()
   
   lazy var segmentView: UISegmentedControl = {
@@ -33,9 +46,10 @@ class RepoIssuesStateViewController: UIViewController {
     return scrollView
   }()
   
-  init(userName: String, repoName: String) {
+  init(userName: String, repoName: String, issueState: IssueState = .issue) {
     self.userName = userName
     self.repoName = repoName
+    self.issueState = issueState
     super.init(nibName: nil, bundle: nil)
   }
   
@@ -52,7 +66,7 @@ class RepoIssuesStateViewController: UIViewController {
   
   private func setUp() {
     view.backgroundColor = .white
-    self.navigationItem.title = "Issues"
+    self.navigationItem.title = issueState.title
     
     view.addSubview(segmentView)
     view.addSubview(scrollView)
@@ -74,6 +88,7 @@ class RepoIssuesStateViewController: UIViewController {
   }
   
   private func configNavigationItem() {
+    guard issueState != .pull else { return }
     self.navigationItem.rightBarButtonItem = UIBarButtonItem(
       barButtonSystemItem: .add, target: self, action: #selector(plusAction))
   }

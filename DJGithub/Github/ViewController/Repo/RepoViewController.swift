@@ -201,6 +201,8 @@ extension RepoViewController: UITableViewDelegate, UITableViewDataSource {
         self.navigationController?.pushToRepoContent(with: userName, repoName: repoName)
       case .issues:
         self.navigationController?.pushToRepoIssues(with: userName, repoName: repoName)
+      case .pull:
+        self.navigationController?.pushToRepoIssues(with: userName, repoName: repoName, issueState: .pull)
       default:
         break
       }

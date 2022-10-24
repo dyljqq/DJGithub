@@ -12,6 +12,7 @@ class RepoIssuesViewController: UIViewController, NextPageLoadable {
   
   let userName: String
   let repoName: String
+  let issueState: RepoIssuesStateViewController.IssueState
   let state: Issue.IssueState
   
   var dataSource: [DataType] = []
@@ -30,10 +31,11 @@ class RepoIssuesViewController: UIViewController, NextPageLoadable {
     return tableView
   }()
   
-  init(with userName: String, repoName: String, issusState: Issue.IssueState) {
+  init(with userName: String, repoName: String, issueState: RepoIssuesStateViewController.IssueState = .issue,  state: Issue.IssueState = .open) {
     self.userName = userName
     self.repoName = repoName
-    self.state = issusState
+    self.state = state
+    self.issueState = issueState
     super.init(nibName: nil, bundle: nil)
   }
   
@@ -113,18 +115,41 @@ extension RepoIssuesViewController: UITableViewDataSource, UITableViewDelegate {
 extension RepoIssuesViewController {
   func performLoad(successHandler: @escaping ([IssueLayout], Bool) -> (), failureHandler: @escaping (String) -> ()) {
     Task {
-      let issues = await RepoManager.getRepoIssues(
-        with: self.userName,
-        repoName: self.repoName,
-        params: ["state": self.state.rawValue, "page": "\(self.nextPageState.start)"]
-      )
+      let issues: [Issue]
+      switch self.issueState {
+      case .issue:
+        issues = await RepoManager.getRepoIssues(
+          with: self.userName,
+          repoName: self.repoName,
+          params: ["state": self.state.rawValue, "page": "\(self.nextPageState.start)"]
+        )
+      case .pull:
+        issues = await RepoManager.getRepoPullIssues(
+          with: userName,
+          repoName: repoName,
+          params: ["state": self.state.rawValue, "page": "\(self.nextPageState.start)"]
+        )
+      }
       var issueLayouts = [IssueLayout]()
       for issue in issues {
         var layout = IssueLayout(issue: issue)
         layout.calHeight()
+        switch self.issueState {
+        case .issue: layout.imageName = issue.state.imageName
+        case .pull: layout.imageName = "pull-request"
+        }
         issueLayouts.append(layout)
       }
       successHandler(issueLayouts, issues.count > 0)
+    }
+  }
+}
+
+fileprivate extension Issue.IssueState {
+  var imageName: String {
+    switch self {
+    case .open: return "check"
+    case .closed: return "close"
     }
   }
 }

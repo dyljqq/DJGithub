@@ -7,15 +7,6 @@
 
 import UIKit
 
-extension Issue.IssueState {
-  var image: UIImage? {
-    switch self {
-    case .open: return UIImage(named: "check")
-    case .closed: return UIImage(named: "close")
-    }
-  }
-}
-
 class IssueCell: UITableViewCell {
 
   lazy var stateImageView: UIImageView = {
@@ -73,7 +64,7 @@ class IssueCell: UITableViewCell {
   
   func render(with issueLayout: IssueLayout) {
     let issue = issueLayout.issue
-    stateImageView.image = issue.state.image
+    stateImageView.image = UIImage(named: issueLayout.imageName)
     titleLabel.text = issueLayout.title
 
     if let avatarUrlString = issue.user?.avatarUrl {
@@ -85,7 +76,7 @@ class IssueCell: UITableViewCell {
     } else {
       updateAtLabel.text = "\(issue.updatedAt)"
     }
-    commentsLabel.text = "\(issue.comments)"
+    commentsLabel.text = "\(issue.comments ?? 0)"
   }
   
   private func setUp() {

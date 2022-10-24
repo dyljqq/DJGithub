@@ -68,6 +68,11 @@ struct RepoManager {
     return (try? await APIClient.shared.model(with: router)) ?? []
   }
   
+  static func getRepoPullIssues(with userName: String, repoName: String, params: [String: String]) async -> [Issue] {
+    let router = GithubRouter.repoPullIssues(userName: userName, repoName: repoName, params: params)
+    return (try? await APIClient.shared.model(with: router)) ?? []
+  }
+  
   static func getRepoIssueDetail(with userName: String, repoName: String, issueNum: Int) async -> IssueDetail? {
     let router = GithubRouter.repoIssue(userName: userName, repoName: repoName, issueNum: issueNum)
     return try? await APIClient.shared.model(with: router)
