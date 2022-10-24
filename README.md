@@ -1,6 +1,8 @@
 # 开源的Github客户端
 
-方便自己去看一些开源项目以及一些咨询。纯Swift编写。
+方便自己去看一些开源项目以及一些RSS订阅功能。纯Swift编写。
+
+有任何问题欢迎提issue or [gmail](qinqiangji@gmail.com)
 
 ### 配置
 
