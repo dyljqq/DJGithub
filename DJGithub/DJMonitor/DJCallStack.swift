@@ -56,17 +56,13 @@ extension DJCallStack {
       address.deallocate()
     }
     
-    do {
-      let frameCount = getMachFrameCount(from: thread, stack: address, maxSymbolCount: maxSize)
-      let frames = UnsafeBufferPointer(start: address, count: frameCount)
-      for (idx, frame) in frames.enumerated() {
-        guard let frame = frame else { break }
-        let address = UInt(bitPattern: frame)
-        let addressInfo = StackAddressInfo(address: address)
-        rs.append(addressInfo.formattedDescription(index: idx))
-      }
-    } catch {
-      print("error: \(error)")
+    let frameCount = getMachFrameCount(from: thread, stack: address, maxSymbolCount: maxSize)
+    let frames = UnsafeBufferPointer(start: address, count: frameCount)
+    for (idx, frame) in frames.enumerated() {
+      guard let frame = frame else { break }
+      let address = UInt(bitPattern: frame)
+      let addressInfo = StackAddressInfo(address: address)
+      rs.append(addressInfo.formattedDescription(index: idx))
     }
     return rs
   }
