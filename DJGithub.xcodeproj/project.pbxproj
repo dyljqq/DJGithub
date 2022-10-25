@@ -55,6 +55,7 @@
 		7341DCD228E03C6A009A3A3C /* RepoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341DCD128E03C6A009A3A3C /* RepoViewController.swift */; };
 		7341DCD428E0422F009A3A3C /* RepoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341DCD328E0422F009A3A3C /* RepoCell.swift */; };
 		7341DCD828E05D98009A3A3C /* RepoFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341DCD728E05D98009A3A3C /* RepoFooterView.swift */; };
+		734D675F2908298A006A0BFA /* DJRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = 734D675E2908298A006A0BFA /* DJRefresh */; };
 		735D0E072903115E00E618B3 /* DJCallStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D0E012903115D00E618B3 /* DJCallStack.swift */; };
 		735D0E082903115E00E618B3 /* mach_stack_info.c in Sources */ = {isa = PBXBuildFile; fileRef = 735D0E022903115D00E618B3 /* mach_stack_info.c */; };
 		735D0E092903115E00E618B3 /* DJStuckMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D0E032903115D00E618B3 /* DJStuckMonitor.swift */; };
@@ -322,6 +323,7 @@
 				73AACB3828D359260072B1DF /* SnapKit in Frameworks */,
 				73D0DE252907B5F500F385E6 /* DJRefresh in Frameworks */,
 				73DE29CC28E0C08200B48009 /* MarkdownView in Frameworks */,
+				734D675F2908298A006A0BFA /* DJRefresh in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -808,6 +810,7 @@
 				73AACB4028D37E840072B1DF /* Kingfisher */,
 				73DE29CB28E0C08200B48009 /* MarkdownView */,
 				73D0DE242907B5F500F385E6 /* DJRefresh */,
+				734D675E2908298A006A0BFA /* DJRefresh */,
 			);
 			productName = DJGithub;
 			productReference = 73AACAD128D308A60072B1DF /* DJGithub.app */;
@@ -887,6 +890,7 @@
 				7341DCDB28E0792F009A3A3C /* XCRemoteSwiftPackageReference "SwiftyMarkdown" */,
 				7374D19328E0B2F300E6BE47 /* XCRemoteSwiftPackageReference "SwiftyMarkdown" */,
 				73DE29CA28E0C08200B48009 /* XCRemoteSwiftPackageReference "MarkdownView" */,
+				734D675D2908298A006A0BFA /* XCRemoteSwiftPackageReference "DJRefresh" */,
 			);
 			productRefGroup = 73AACAD228D308A60072B1DF /* Products */;
 			projectDirPath = "";
@@ -1423,6 +1427,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		734D675D2908298A006A0BFA /* XCRemoteSwiftPackageReference "DJRefresh" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dyljqq/DJRefresh.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		7374D19328E0B2F300E6BE47 /* XCRemoteSwiftPackageReference "SwiftyMarkdown" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SimonFairbairn/SwiftyMarkdown.git";
@@ -1458,6 +1470,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		734D675E2908298A006A0BFA /* DJRefresh */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 734D675D2908298A006A0BFA /* XCRemoteSwiftPackageReference "DJRefresh" */;
+			productName = DJRefresh;
+		};
 		73AACB3728D359260072B1DF /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 73AACB3628D359260072B1DF /* XCRemoteSwiftPackageReference "SnapKit" */;

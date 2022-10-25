@@ -22,6 +22,14 @@ Personal access tokens的申请链接如下：
 }
 ```
 
+如果Swift Package fetch过慢的话，可以使用以下命令行指令：
+
+```
+xcodebuild -resolvePackageDependencies -scmProvider system
+```
+
+
+
 ### 库介绍
 
 一些使用技巧与技术介绍。
