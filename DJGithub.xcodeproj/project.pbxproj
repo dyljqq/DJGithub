@@ -57,6 +57,7 @@
 		7341DCD828E05D98009A3A3C /* RepoFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341DCD728E05D98009A3A3C /* RepoFooterView.swift */; };
 		734D675F2908298A006A0BFA /* DJRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = 734D675E2908298A006A0BFA /* DJRefresh */; };
 		734D676129082D3E006A0BFA /* UserViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734D676029082D3E006A0BFA /* UserViewer.swift */; };
+		734D676329084571006A0BFA /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734D676229084571006A0BFA /* Repository.swift */; };
 		735D0E072903115E00E618B3 /* DJCallStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D0E012903115D00E618B3 /* DJCallStack.swift */; };
 		735D0E082903115E00E618B3 /* mach_stack_info.c in Sources */ = {isa = PBXBuildFile; fileRef = 735D0E022903115D00E618B3 /* mach_stack_info.c */; };
 		735D0E092903115E00E618B3 /* DJStuckMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D0E032903115D00E618B3 /* DJStuckMonitor.swift */; };
@@ -219,6 +220,7 @@
 		7341DCD328E0422F009A3A3C /* RepoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoCell.swift; sourceTree = "<group>"; };
 		7341DCD728E05D98009A3A3C /* RepoFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoFooterView.swift; sourceTree = "<group>"; };
 		734D676029082D3E006A0BFA /* UserViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewer.swift; sourceTree = "<group>"; };
+		734D676229084571006A0BFA /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		735D0E012903115D00E618B3 /* DJCallStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DJCallStack.swift; sourceTree = "<group>"; };
 		735D0E022903115D00E618B3 /* mach_stack_info.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mach_stack_info.c; sourceTree = "<group>"; };
 		735D0E032903115D00E618B3 /* DJStuckMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DJStuckMonitor.swift; sourceTree = "<group>"; };
@@ -584,6 +586,7 @@
 				73074CC628EF4809001A90E7 /* LocalRepo.swift */,
 				73E14E4E28F3477E00A9811D /* Feeds.swift */,
 				734D676029082D3E006A0BFA /* UserViewer.swift */,
+				734D676229084571006A0BFA /* Repository.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -986,6 +989,7 @@
 				73DF6BFE28EBFEE30003BDB8 /* RepoContentsViewController.swift in Sources */,
 				735D0E072903115E00E618B3 /* DJCallStack.swift in Sources */,
 				73101D4B28E4889B00DB5423 /* UserStatusView.swift in Sources */,
+				734D676329084571006A0BFA /* Repository.swift in Sources */,
 				73E14E5628F3DAC800A9811D /* DJJSONParser.swift in Sources */,
 				73DF6BF228EAE3060003BDB8 /* DJCodable.swift in Sources */,
 				7341DCD828E05D98009A3A3C /* RepoFooterView.swift in Sources */,

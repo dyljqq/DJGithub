@@ -48,6 +48,9 @@ enum GithubRouter: Router {
   // Feed
   case feeds
   
+  // graph
+  case graphql(params: [String: String])
+  
   var baseURLString: String {
     return "https://api.github.com/"
   }
@@ -63,6 +66,7 @@ enum GithubRouter: Router {
     case .repoIssueUpdate: return .PATCH
     case .repoIssueCommentCommit: return .POST
     case .userInfoEdit: return .PATCH
+    case .graphql: return .POST
     default: return .GET
     }
   }
@@ -99,6 +103,7 @@ enum GithubRouter: Router {
     case .userInfoEdit: return "user"
     case .feeds: return "feeds"
     case .repoPullIssues(let userName, let repoName, _): return "repos/\(userName)/\(repoName)/pulls"
+    case .graphql: return "graphql"
     }
   }
   
@@ -111,6 +116,8 @@ enum GithubRouter: Router {
   var parameters: [String : Any] {
     switch self {
     case .userContribution(let params):
+      return params
+    case .graphql(let params):
       return params
     case .userStartedRepos(_, let queryItems):
       return queryItems

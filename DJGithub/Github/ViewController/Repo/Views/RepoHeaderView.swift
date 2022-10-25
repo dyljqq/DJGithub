@@ -8,19 +8,19 @@
 import UIKit
 
 class RepoHeaderView: NormalHeaderView {
-
-  func render(with model: Repo) {
-    avatarImageView.setImage(with: URL(string: model.owner?.avatarUrl ?? ""))
-    nameLabel.text = model.fullName
-    bioLabel.text = model.desc
-    if let joined = model.updatedAt.split(separator: "T").first {
+  
+  func render(with repo: Repository) {
+    avatarImageView.setImage(with: URL(string: repo.owner?.avatarUrl ?? ""))
+    nameLabel.text = repo.nameWithOwner
+    bioLabel.text = repo.desc
+    if let joined = repo.updatedAt.split(separator: "T").first {
       joinedLabel.text = "Updated on \(String(describing: joined))"
     } else {
-      joinedLabel.text = "Updated on \(model.updatedAt)"
+      joinedLabel.text = "Updated on \(repo.updatedAt)"
     }
-    repoView.render(with: model.watchersCount, name: "Watchs")
-    followersView.render(with: model.stargazersCount, name: "Stars")
-    followingView.render(with: model.forksCount, name: "forks")
+    repoView.render(with: repo.watchers.totalCount, name: "Watchs")
+    followersView.render(with: repo.stargazers.totalCount, name: "Stars")
+    followingView.render(with: repo.forkCount, name: "forks")
   }
   
 }
