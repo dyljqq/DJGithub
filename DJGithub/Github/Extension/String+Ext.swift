@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CryptoKit
 
 extension String {
   var toColor: UIColor? {
@@ -14,5 +15,11 @@ extension String {
       return nil
     }
     return UIColorFromRGB(v)
+  }
+  
+  var md5: String {
+    guard let data = data(using: .utf8) else { return self }
+    let hashed = SHA256.hash(data: data)
+    return hashed.compactMap { String(format: "%02x", $0) }.joined()
   }
 }

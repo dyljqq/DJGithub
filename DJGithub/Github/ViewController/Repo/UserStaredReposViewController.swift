@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import DJRefresh
 
 enum UserRepoState {
   case fork(String)

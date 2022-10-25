@@ -55,12 +55,12 @@
 		7341DCD228E03C6A009A3A3C /* RepoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341DCD128E03C6A009A3A3C /* RepoViewController.swift */; };
 		7341DCD428E0422F009A3A3C /* RepoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341DCD328E0422F009A3A3C /* RepoCell.swift */; };
 		7341DCD828E05D98009A3A3C /* RepoFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341DCD728E05D98009A3A3C /* RepoFooterView.swift */; };
+		734D675F2908298A006A0BFA /* DJRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = 734D675E2908298A006A0BFA /* DJRefresh */; };
 		735D0E072903115E00E618B3 /* DJCallStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D0E012903115D00E618B3 /* DJCallStack.swift */; };
 		735D0E082903115E00E618B3 /* mach_stack_info.c in Sources */ = {isa = PBXBuildFile; fileRef = 735D0E022903115D00E618B3 /* mach_stack_info.c */; };
 		735D0E092903115E00E618B3 /* DJStuckMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D0E032903115D00E618B3 /* DJStuckMonitor.swift */; };
 		735D0E0A2903115E00E618B3 /* DJThreadInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D0E042903115D00E618B3 /* DJThreadInfoModel.swift */; };
 		735D0E0B2903115E00E618B3 /* StackAddressInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D0E062903115D00E618B3 /* StackAddressInfo.swift */; };
-		73727B2428D75DAE003D5A95 /* IndicatorCookieTerminatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73727B2328D75DAE003D5A95 /* IndicatorCookieTerminatorView.swift */; };
 		7374D19728E0BC1D00E6BE47 /* Readme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7374D19628E0BC1D00E6BE47 /* Readme.swift */; };
 		73AACAD528D308A60072B1DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD428D308A60072B1DF /* AppDelegate.swift */; };
 		73AACAD728D308A60072B1DF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD628D308A60072B1DF /* SceneDelegate.swift */; };
@@ -106,9 +106,6 @@
 		73AACB7428D5BA2D0072B1DF /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACB7328D5BA2D0072B1DF /* Language.swift */; };
 		73AACB7728D5BBE90072B1DF /* SQLTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACB7628D5BBE90072B1DF /* SQLTable.swift */; };
 		73AACB7928D5BBF50072B1DF /* SQLiteDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACB7828D5BBF50072B1DF /* SQLiteDatabase.swift */; };
-		73AACB8328D6020A0072B1DF /* RefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACB8228D6020A0072B1DF /* RefreshView.swift */; };
-		73AACB8528D626E30072B1DF /* UIScrollView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACB8428D626E30072B1DF /* UIScrollView+Ext.swift */; };
-		73AACB8728D628BD0072B1DF /* IndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACB8628D628BD0072B1DF /* IndicatorView.swift */; };
 		73AACB8B28D708740072B1DF /* UIScrollView+Refresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACB8A28D708740072B1DF /* UIScrollView+Refresh.swift */; };
 		73B7904828E51A3A002A9CDC /* UIImage+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7904728E51A3A002A9CDC /* UIImage+Ext.swift */; };
 		73B7904A28E52450002A9CDC /* LocalDevelopersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7904928E52450002A9CDC /* LocalDevelopersViewController.swift */; };
@@ -126,6 +123,9 @@
 		73C598C528D85EF100DA86A1 /* PopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C598C428D85EF100DA86A1 /* PopoverView.swift */; };
 		73C598C728D8617800DA86A1 /* UIApplication+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C598C628D8617800DA86A1 /* UIApplication+Ext.swift */; };
 		73C598CD28D9E6A100DA86A1 /* URL+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C598CC28D9E6A100DA86A1 /* URL+Ext.swift */; };
+		73D0DE252907B5F500F385E6 /* DJRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = 73D0DE242907B5F500F385E6 /* DJRefresh */; };
+		73D0DE292907D21F00F385E6 /* LocalUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D0DE282907D21F00F385E6 /* LocalUserManager.swift */; };
+		73D0DE2B2907D2DD00F385E6 /* DJUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D0DE2A2907D2DD00F385E6 /* DJUserDefaults.swift */; };
 		73DE29CC28E0C08200B48009 /* MarkdownView in Frameworks */ = {isa = PBXBuildFile; productRef = 73DE29CB28E0C08200B48009 /* MarkdownView */; };
 		73DE29CE28E0C35200B48009 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DE29CD28E0C35200B48009 /* WebViewController.swift */; };
 		73DF6BEC28EACF340003BDB8 /* SearchWordHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DF6BEB28EACF340003BDB8 /* SearchWordHeaderView.swift */; };
@@ -223,7 +223,6 @@
 		735D0E042903115D00E618B3 /* DJThreadInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DJThreadInfoModel.swift; sourceTree = "<group>"; };
 		735D0E052903115D00E618B3 /* mach_stack_info.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mach_stack_info.h; sourceTree = "<group>"; };
 		735D0E062903115D00E618B3 /* StackAddressInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackAddressInfo.swift; sourceTree = "<group>"; };
-		73727B2328D75DAE003D5A95 /* IndicatorCookieTerminatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorCookieTerminatorView.swift; sourceTree = "<group>"; };
 		7374D19628E0BC1D00E6BE47 /* Readme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Readme.swift; sourceTree = "<group>"; };
 		73AACAD128D308A60072B1DF /* DJGithub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DJGithub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73AACAD428D308A60072B1DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -271,9 +270,6 @@
 		73AACB7328D5BA2D0072B1DF /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		73AACB7628D5BBE90072B1DF /* SQLTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLTable.swift; sourceTree = "<group>"; };
 		73AACB7828D5BBF50072B1DF /* SQLiteDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLiteDatabase.swift; sourceTree = "<group>"; };
-		73AACB8228D6020A0072B1DF /* RefreshView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshView.swift; sourceTree = "<group>"; };
-		73AACB8428D626E30072B1DF /* UIScrollView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Ext.swift"; sourceTree = "<group>"; };
-		73AACB8628D628BD0072B1DF /* IndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorView.swift; sourceTree = "<group>"; };
 		73AACB8A28D708740072B1DF /* UIScrollView+Refresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Refresh.swift"; sourceTree = "<group>"; };
 		73B7904728E51A3A002A9CDC /* UIImage+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Ext.swift"; sourceTree = "<group>"; };
 		73B7904928E52450002A9CDC /* LocalDevelopersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDevelopersViewController.swift; sourceTree = "<group>"; };
@@ -291,6 +287,9 @@
 		73C598C428D85EF100DA86A1 /* PopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverView.swift; sourceTree = "<group>"; };
 		73C598C628D8617800DA86A1 /* UIApplication+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Ext.swift"; sourceTree = "<group>"; };
 		73C598CC28D9E6A100DA86A1 /* URL+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Ext.swift"; sourceTree = "<group>"; };
+		73D0DE272907CE9700F385E6 /* DJRefresh */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DJRefresh; path = ../DJRefresh; sourceTree = "<group>"; };
+		73D0DE282907D21F00F385E6 /* LocalUserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalUserManager.swift; sourceTree = "<group>"; };
+		73D0DE2A2907D2DD00F385E6 /* DJUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJUserDefaults.swift; sourceTree = "<group>"; };
 		73DE29CD28E0C35200B48009 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		73DF6BEB28EACF340003BDB8 /* SearchWordHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWordHeaderView.swift; sourceTree = "<group>"; };
 		73DF6BED28EADD160003BDB8 /* LocalDeveloperSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDeveloperSectionHeaderView.swift; sourceTree = "<group>"; };
@@ -322,7 +321,9 @@
 			files = (
 				73AACB4128D37E840072B1DF /* Kingfisher in Frameworks */,
 				73AACB3828D359260072B1DF /* SnapKit in Frameworks */,
+				73D0DE252907B5F500F385E6 /* DJRefresh in Frameworks */,
 				73DE29CC28E0C08200B48009 /* MarkdownView in Frameworks */,
+				734D675F2908298A006A0BFA /* DJRefresh in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,10 +418,12 @@
 		73AACAC828D308A60072B1DF = {
 			isa = PBXGroup;
 			children = (
+				73D0DE262907CE9700F385E6 /* Packages */,
 				73AACAD328D308A60072B1DF /* DJGithub */,
 				73AACAEA28D308A70072B1DF /* DJGithubTests */,
 				73AACAF428D308A70072B1DF /* DJGithubUITests */,
 				73AACAD228D308A60072B1DF /* Products */,
+				73D0DE232907B5F200F385E6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -472,7 +475,6 @@
 			isa = PBXGroup;
 			children = (
 				73C598C328D85ECF00DA86A1 /* View */,
-				73AACB8128D601EC0072B1DF /* DJRefresh */,
 				73AACB1428D30F3B0072B1DF /* Utils */,
 				73AACB0D28D30B670072B1DF /* Common */,
 				73AACB0628D309C90072B1DF /* Network */,
@@ -556,6 +558,7 @@
 				73DF6BEF28EAE0A00003BDB8 /* DeveloperGroupManager.swift */,
 				73074CC828EF4992001A90E7 /* LocalRepoManager.swift */,
 				73E14E4C28F3426900A9811D /* FeedManager.swift */,
+				73D0DE282907D21F00F385E6 /* LocalUserManager.swift */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -612,6 +615,7 @@
 				7341DCC928DF2B4B009A3A3C /* ImageCoder.swift */,
 				73B7905328E533C2002A9CDC /* ConfigManager.swift */,
 				7339201428F56D2900DC76B0 /* RssFeedManager.swift */,
+				73D0DE2A2907D2DD00F385E6 /* DJUserDefaults.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -710,17 +714,6 @@
 			path = DataBase;
 			sourceTree = "<group>";
 		};
-		73AACB8128D601EC0072B1DF /* DJRefresh */ = {
-			isa = PBXGroup;
-			children = (
-				73AACB8228D6020A0072B1DF /* RefreshView.swift */,
-				73AACB8428D626E30072B1DF /* UIScrollView+Ext.swift */,
-				73AACB8628D628BD0072B1DF /* IndicatorView.swift */,
-				73727B2328D75DAE003D5A95 /* IndicatorCookieTerminatorView.swift */,
-			);
-			path = DJRefresh;
-			sourceTree = "<group>";
-		};
 		73B7906328E7F10C002A9CDC /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -745,6 +738,21 @@
 				73074CC328EEF54F001A90E7 /* HUD.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		73D0DE232907B5F200F385E6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		73D0DE262907CE9700F385E6 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				73D0DE272907CE9700F385E6 /* DJRefresh */,
+			);
+			name = Packages;
 			sourceTree = "<group>";
 		};
 		73E14E5428F3DAB100A9811D /* Parse */ = {
@@ -801,6 +809,8 @@
 				73AACB3728D359260072B1DF /* SnapKit */,
 				73AACB4028D37E840072B1DF /* Kingfisher */,
 				73DE29CB28E0C08200B48009 /* MarkdownView */,
+				73D0DE242907B5F500F385E6 /* DJRefresh */,
+				734D675E2908298A006A0BFA /* DJRefresh */,
 			);
 			productName = DJGithub;
 			productReference = 73AACAD128D308A60072B1DF /* DJGithub.app */;
@@ -880,6 +890,7 @@
 				7341DCDB28E0792F009A3A3C /* XCRemoteSwiftPackageReference "SwiftyMarkdown" */,
 				7374D19328E0B2F300E6BE47 /* XCRemoteSwiftPackageReference "SwiftyMarkdown" */,
 				73DE29CA28E0C08200B48009 /* XCRemoteSwiftPackageReference "MarkdownView" */,
+				734D675D2908298A006A0BFA /* XCRemoteSwiftPackageReference "DJRefresh" */,
 			);
 			productRefGroup = 73AACAD228D308A60072B1DF /* Products */;
 			projectDirPath = "";
@@ -951,18 +962,17 @@
 				73DF6BFC28EBFD3E0003BDB8 /* RepoContent.swift in Sources */,
 				735D0E0A2903115E00E618B3 /* DJThreadInfoModel.swift in Sources */,
 				732B21D328E228FD005893C0 /* NextPageModel.swift in Sources */,
+				73D0DE2B2907D2DD00F385E6 /* DJUserDefaults.swift in Sources */,
 				7341DCD428E0422F009A3A3C /* RepoCell.swift in Sources */,
 				7320170F28F5385B007B970F /* RssFeedSimpleCell.swift in Sources */,
 				73AACB1328D30F350072B1DF /* DJParser.swift in Sources */,
 				73AACB7728D5BBE90072B1DF /* SQLTable.swift in Sources */,
 				73E14E5D28F4151100A9811D /* FeedsViewController.swift in Sources */,
-				73AACB8328D6020A0072B1DF /* RefreshView.swift in Sources */,
 				73AACB7428D5BA2D0072B1DF /* Language.swift in Sources */,
 				73B7905C28E59104002A9CDC /* HeaderSegmentView.swift in Sources */,
 				73DF6C0628EC68A00003BDB8 /* RepoIssuesViewController.swift in Sources */,
 				73AACB4E28D45F1F0072B1DF /* Color.swift in Sources */,
 				73AACB4828D443350072B1DF /* LoadingView.swift in Sources */,
-				73AACB8728D628BD0072B1DF /* IndicatorView.swift in Sources */,
 				73AACB6A28D5ACBD0072B1DF /* UIColor+Ext.swift in Sources */,
 				732B21D628E22B9A005893C0 /* NextPageLoadable.swift in Sources */,
 				73E14E4D28F3426900A9811D /* FeedManager.swift in Sources */,
@@ -1003,7 +1013,6 @@
 				73AACAD528D308A60072B1DF /* AppDelegate.swift in Sources */,
 				73074CCB28EF4AD0001A90E7 /* LocalDataViewController.swift in Sources */,
 				73074CC928EF4992001A90E7 /* LocalRepoManager.swift in Sources */,
-				73AACB8528D626E30072B1DF /* UIScrollView+Ext.swift in Sources */,
 				73AACB5428D47ECB0072B1DF /* UserContrbutionItemCell.swift in Sources */,
 				7341DCC828DF24CB009A3A3C /* NavigationController.swift in Sources */,
 				73AACB4328D42C1B0072B1DF /* UINavigation+Router.swift in Sources */,
@@ -1043,12 +1052,12 @@
 				73AACB5E28D4BD3B0072B1DF /* UserStaredReposViewController.swift in Sources */,
 				73AACB5A28D4B8610072B1DF /* Repo.swift in Sources */,
 				732B21D028E1C09B005893C0 /* RepoStarView.swift in Sources */,
-				73727B2428D75DAE003D5A95 /* IndicatorCookieTerminatorView.swift in Sources */,
 				73101D3F28E3077C00DB5423 /* UserManager.swift in Sources */,
 				73AACB3E28D362430072B1DF /* Consts.swift in Sources */,
 				7374D19728E0BC1D00E6BE47 /* Readme.swift in Sources */,
 				73DF6BEE28EADD160003BDB8 /* LocalDeveloperSectionHeaderView.swift in Sources */,
 				73074CD128F1559D001A90E7 /* UserInfoViewController.swift in Sources */,
+				73D0DE292907D21F00F385E6 /* LocalUserManager.swift in Sources */,
 				7320170928F535CB007B970F /* RssFeed.swift in Sources */,
 				73AACB1828D312D30072B1DF /* GithubRouter.swift in Sources */,
 				73101D5028E4A10400DB5423 /* LocalDeveloperGroup.swift in Sources */,
@@ -1418,6 +1427,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		734D675D2908298A006A0BFA /* XCRemoteSwiftPackageReference "DJRefresh" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dyljqq/DJRefresh.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		7374D19328E0B2F300E6BE47 /* XCRemoteSwiftPackageReference "SwiftyMarkdown" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SimonFairbairn/SwiftyMarkdown.git";
@@ -1453,6 +1470,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		734D675E2908298A006A0BFA /* DJRefresh */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 734D675D2908298A006A0BFA /* XCRemoteSwiftPackageReference "DJRefresh" */;
+			productName = DJRefresh;
+		};
 		73AACB3728D359260072B1DF /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 73AACB3628D359260072B1DF /* XCRemoteSwiftPackageReference "SnapKit" */;
@@ -1462,6 +1484,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 73AACB3F28D37E840072B1DF /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		73D0DE242907B5F500F385E6 /* DJRefresh */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DJRefresh;
 		};
 		73DE29CB28E0C08200B48009 /* MarkdownView */ = {
 			isa = XCSwiftPackageProductDependency;

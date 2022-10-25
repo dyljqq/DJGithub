@@ -28,6 +28,8 @@ struct User: DJCodable {
   var email: String?
   var blog: String?
   
+  var md5: String?
+  
   var desc: String {
     return isEmpty(by: self.bio) ? "No description provided." : self.bio!
   }
