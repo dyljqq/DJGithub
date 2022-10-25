@@ -9,7 +9,7 @@ import UIKit
 
 class RepoCell: UITableViewCell {
   enum CellType {
-    case blank, language(String, String), issues(String), pull, branch(String), readme
+    case blank, language(String, String), issues(String), pull(String), branch(String), readme
   }
   
   var reloadClosure: (() -> ())?
@@ -139,6 +139,7 @@ extension RepoCell.CellType {
     case .language(_, let desc): return desc
     case .issues(let desc): return desc
     case .branch(let desc): return desc
+    case .pull(let desc): return desc
     default: return ""
     }
   }

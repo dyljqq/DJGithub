@@ -136,7 +136,9 @@ extension UserStaredReposViewController: UITableViewDelegate {
     tableView.deselectRow(at: indexPath, animated: true)
     
     let repo = dataSource[indexPath.row]
-    self.navigationController?.pushToRepo(with: repo.fullName)
+    if let userName = repo.owner?.login {
+      self.navigationController?.pushToRepo(with: userName, repoName: repo.name)
+    }
   }
 }
 

@@ -56,8 +56,6 @@ class RepoInteractViewController: UIViewController {
     }
   }
 
-  var repo: Repo?
-  var user: User?
   var selectedIndex: Int = 0 {
     didSet {
       self.update(with: selectedIndex)
@@ -92,10 +90,12 @@ class RepoInteractViewController: UIViewController {
   }()
   
   let types: [RepoInteractType]
+  let interactTitle: String
   var needUpdateHeader: Bool = true
   
-  init(with types: [RepoInteractType], selectedIndex: Int = 0) {
+  init(with types: [RepoInteractType], title: String = "", selectedIndex: Int = 0) {
     self.types = types
+    self.interactTitle = title
     self.selectedIndex = selectedIndex
     super.init(nibName: nil, bundle: nil)
   }
@@ -111,13 +111,7 @@ class RepoInteractViewController: UIViewController {
   }
   
   private func setUp() {
-    if let title = self.repo?.name {
-      self.navigationItem.title = title
-    } else if let title = self.user?.name {
-      self.navigationItem.title = title
-    } else {
-      self.navigationItem.title = ""
-    }
+    self.navigationItem.title = interactTitle
 
     view.backgroundColor = .white
     view.addSubview(headerSegmentView)

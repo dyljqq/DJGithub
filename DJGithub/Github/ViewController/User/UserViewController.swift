@@ -28,7 +28,7 @@ fileprivate enum UserType {
     }
   }
   
-  func getContent(by user: User?) -> (String, UIColor) {
+  func getContent(by user: UserViewer?) -> (String, UIColor) {
     guard let user = user else {
       return ("", .white)
     }
@@ -36,7 +36,7 @@ fileprivate enum UserType {
     case .email: return convertContent(user.email, placeHolder: "邮箱")
     case .location: return convertContent(user.location, placeHolder: "地点")
     case .company: return convertContent(user.company, placeHolder: "团队")
-    case .link: return convertContent(user.blog, placeHolder: "个人主页")
+    case .link: return convertContent(user.websiteUrl, placeHolder: "个人主页")
     }
   }
   
@@ -91,11 +91,7 @@ class UserViewController: UIViewController {
   let name: String
   
   var user: User?
-  var isFollowing: Bool = false
-  
-  var subscriptions: [AnyCancellable] = []
-  var userSubject = PassthroughSubject<User, Never>()
-  var userContributionSubject = PassthroughSubject<UserContribution, Never>()
+  var userViewer: UserViewer?
   
   fileprivate var dataSource: [CellType] = []
   
@@ -126,31 +122,10 @@ class UserViewController: UIViewController {
     
     self.view.startLoading()
     
-    userSubject
-      .receive(on: DispatchQueue.main)
-      .sink(receiveValue: { [weak self] user in
-        self?.handle(with: user)
-      })
-      .store(in: &subscriptions)
-    
-    userContributionSubject
-      .receive(on: DispatchQueue.main)
-      .sink(receiveValue: { [weak self] userContribution in
-        self?.handle(with: userContribution)
-      })
-      .store(in: &subscriptions)
-    
     Task {
-      await withThrowingTaskGroup(of: Void.self) { [weak self] group in
-        guard let strongSelf = self else { return }
-        group.addTask {
-          await strongSelf.loadUserInfo()
-        }
-        group.addTask {
-          if let userContribution = await UserManager.fetchUserContributions(with: strongSelf.name) {
-            await strongSelf.userContributionSubject.send(userContribution)
-          }
-        }
+      if let userViewer = await UserManager.fetchUserInfo(by: self.name) {
+        self.userViewer = userViewer
+        self.loadUserViewerInfo(with: userViewer)
       }
     }
     
@@ -163,36 +138,28 @@ class UserViewController: UIViewController {
     userHeaderView.jumpClosure = { [weak self] in
       self?.navigationController?.pushToUserInfo()
     }
-    
-    configNavigationRightButton()
   }
   
-  private func loadUserInfo() async {
+  private func loadUserViewerInfo(with userViewer: UserViewer) {
     view.stopLoading()
-    if let user = LocalUserManager.getUser() {
-      userSubject.send(user)
-    }
     
-    await LocalUserManager.loadUserInfo { [weak self] user in
-      guard let strongSelf = self else { return }
-      strongSelf.userSubject.send(user)
+    self.followStatusView.isHidden = userViewer.isViewer
+    self.followStatusView.active = userViewer.viewerIsFollowing
+    self.navigationItem.title = userViewer.name
+    userHeaderView.render(with: userViewer)
+    if let userContribution = userViewer.userContribution {
+      self.dataSource = [.blank, .userContribution(userContribution)]
     }
-  }
-  
-  private func handle(with user: User) {
-    self.user = user
-    
-    self.followStatusView.isHidden = ConfigManager.checkOwner(by: user.login)
-    self.navigationItem.title = user.name ?? user.login
-    userHeaderView.render(with: user)
-    self.dataSource = [.blank, .user(.company), .user(.location), .user(.email), .user(.link)]
+    self.dataSource.append(contentsOf: [.blank, .user(.company), .user(.location), .user(.email), .user(.link)])
     tableView.reloadData()
     
     userHeaderView.tapCounterClosure = { [weak self] index in
       guard let strongSelf = self else { return }
-      if let user = strongSelf.user {
-        strongSelf.navigationController?.pushToUserInteract(with: user, selectedIndex: index)
-      }
+      strongSelf.navigationController?.pushToUserInteract(
+        with: strongSelf.userViewer?.login ?? "",
+        title: strongSelf.userViewer?.name ?? "",
+        selectedIndex: index
+      )
     }
   }
   
@@ -236,7 +203,7 @@ extension UserViewController: UITableViewDataSource {
       } else {
         cell.accessoryType = .none
       }
-      let (content, color) = userType.getContent(by: user)
+      let (content, color) = userType.getContent(by: userViewer)
       cell.render(with: userType.iconImageName, content: content, contentColor: color)
       return cell
     }
@@ -253,7 +220,7 @@ extension UserViewController: UITableViewDelegate {
     
     let cellType = self.dataSource[indexPath.row]
     if case CellType.user(let userType) = cellType {
-      let (content, _) = userType.getContent(by: user)
+      let (content, _) = userType.getContent(by: self.userViewer)
       switch userType {
       case .email:
         if let email = user?.email, !email.isEmpty {

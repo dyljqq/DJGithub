@@ -33,6 +33,12 @@ struct Issue: DJCodable {
     case open, closed
   }
   
+  struct PullRequest: DJCodable {
+    var url: String
+    var htmlUrl: String
+    var diffUrl: String
+  }
+  
   var id: Int
   var number: Int
   var title: String
@@ -44,4 +50,5 @@ struct Issue: DJCodable {
   var updatedAt: String
   
   var user: UserFollowing?
+  var pullRequest: PullRequest?
 }

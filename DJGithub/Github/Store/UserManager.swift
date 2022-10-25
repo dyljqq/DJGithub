@@ -160,4 +160,38 @@ user(login: "\(name)") {
     return try? await APIClient.shared.model(with: router)
   }
   
+  static func fetchUserInfo(by userName: String) async -> UserViewer? {
+    let query: String
+    let key: String
+    if ConfigManager.checkOwner(by: userName) {
+      key = "viewer"
+      query = """
+query {\n      organization(login: \"\") {\n        __typename\n        databaseId\n        name\n        login\n        avatarUrl\n        email\n        location\n        description\n        createdAt\n        websiteUrl\n        pinnableItems {\n          totalCount\n        }\n        membersWithRole {\n          totalCount\n        }\n        pinnedItems(first: 6) {\n          nodes {\n            ...RepositoryDetails\n          }\n        }\n      }\n      viewer {\n        __typename\n        databaseId\n        name\n        login\n        avatarUrl\n        websiteUrl\n        bio\n        company\n        email\n        location\n        createdAt\n        viewerCanFollow\n        viewerIsFollowing\n        isViewer\n        status {\n          emoji\n          message\n          indicatesLimitedAvailability\n        }\n        followers {\n          totalCount\n        }\n        following {\n          totalCount\n        }\n        starredRepositories {\n          totalCount\n        }\n        repositories(ownerAffiliations: [OWNER]) {\n          totalCount\n        }\n        pinnedItems(first: 6) {\n          nodes {\n            ...RepositoryDetails\n          }\n        }\n        organizations(first: 10) {\n          nodes {\n            name\n            login\n            avatarUrl\n            ... on Organization {\n              description\n            }\n          }\n        }\n        contributionsCollection {\n          contributionCalendar {\n colors\n            totalContributions\n            weeks {\n              contributionDays {\n                date\n                contributionCount\n                weekday\n   color\n           }\n            }\n          }\n        }\n      }\n    }\n\n    fragment RepositoryDetails on Repository {\n      name\n      nameWithOwner\n      description\n      owner {\n        avatarUrl\n      }\n      updatedAt\n      viewerHasStarred\n      primaryLanguage {\n        name\n        color\n      }\n      stargazers {\n        totalCount\n      }\n    }
+"""
+    } else {
+      key = "user"
+      query = """
+   query {\n      organization(login: \"\(userName)\") {\n        __typename\n        databaseId\n        name\n        login\n        avatarUrl\n        email\n        location\n        description\n        createdAt\n        websiteUrl\n        pinnableItems {\n          totalCount\n        }\n        membersWithRole {\n          totalCount\n        }\n        pinnedItems(first: 6) {\n          nodes {\n            ...RepositoryDetails\n          }\n        }\n      }\n      user(login: \"\(userName)\") {\n        __typename\n        databaseId\n        name\n        login\n        avatarUrl\n        websiteUrl\n        bio\n        company\n        email\n        location\n        createdAt\n        viewerCanFollow\n        viewerIsFollowing\n        isViewer\n        status {\n          emoji\n          message\n          indicatesLimitedAvailability\n        }\n        followers {\n          totalCount\n        }\n        following {\n          totalCount\n        }\n        starredRepositories {\n          totalCount\n        }\n        repositories(ownerAffiliations: [OWNER]) {\n          totalCount\n        }\n        pinnedItems(first: 6) {\n          nodes {\n            ...RepositoryDetails\n          }\n        }\n        organizations(first: 10) {\n          nodes {\n            name\n            login\n            avatarUrl\n            ... on Organization {\n              description\n            }\n          }\n        }\n        contributionsCollection {\n          contributionCalendar {\n     colors\n       totalContributions\n            weeks {\n              contributionDays {\n                date\n                contributionCount\n                weekday\n    color\n          }\n            }\n          }\n        }\n      }\n    }\n\n    fragment RepositoryDetails on Repository {\n      name\n      nameWithOwner\n      description\n      owner {\n        avatarUrl\n      }\n      updatedAt\n      viewerHasStarred\n      primaryLanguage {\n        name\n        color\n      }\n      stargazers {\n        totalCount\n      }\n    }
+"""
+    }
+    let router = GithubRouter.userContribution(parameters: ["query": query])
+    do {
+      let data: Data = try await APIClient.shared.data(with: router)
+      guard let d = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed) as? [String: Any],
+      let data = d["data"] as? [String: Any],
+      let viewer = data[key] as? [String: Any] else { return nil }
+      
+      var userViewer: UserViewer? = try DJDecoder(dict: viewer).decode()
+      if let contributionsCollection = viewer["contributionsCollection"] as? [String: Any],
+         let contributionCalendar = contributionsCollection["contributionCalendar"] as? [String: Any] {
+        let userContribution = UserContribution(with: contributionCalendar)
+        userViewer?.userContribution = userContribution
+      }
+      return userViewer
+    } catch {
+      print("error: \(error)")
+    }
+    return nil
+  }
+  
 }

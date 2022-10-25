@@ -22,4 +22,9 @@ extension String {
     let hashed = SHA256.hash(data: data)
     return hashed.compactMap { String(format: "%02x", $0) }.joined()
   }
+  
+  var splitRepoFullName: (String, String)? {
+    let arr = self.components(separatedBy: "/")
+    return arr.count == 2 ? (arr[0], arr[1]) : nil
+  }
 }

@@ -26,7 +26,7 @@ class RepoIssuesViewController: UIViewController, NextPageLoadable {
     tableView.delegate = self
     tableView.dataSource = self
     tableView.tableFooterView = UIView()
-    tableView.showsVerticalScrollIndicator = true
+    tableView.showsVerticalScrollIndicator = false
     tableView.register(IssueCell.classForCoder(), forCellReuseIdentifier: IssueCell.className)
     return tableView
   }()
@@ -122,7 +122,7 @@ extension RepoIssuesViewController {
           with: self.userName,
           repoName: self.repoName,
           params: ["state": self.state.rawValue, "page": "\(self.nextPageState.start)"]
-        )
+        ).filter { $0.pullRequest == nil }
       case .pull:
         issues = await RepoManager.getRepoPullIssues(
           with: userName,

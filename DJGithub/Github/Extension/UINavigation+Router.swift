@@ -19,8 +19,8 @@ extension UINavigationController {
     self.pushViewController(vc, animated: true)
   }
   
-  func pushToRepo(with repoName: String) {
-    let vc = RepoViewController(repoName: repoName)
+  func pushToRepo(with userName: String, repoName: String) {
+    let vc = RepoViewController(with: userName, repoName: repoName)
     self.pushViewController(vc, animated: true)
   }
   
@@ -34,21 +34,18 @@ extension UINavigationController {
     self.pushViewController(vc, animated: true)
   }
   
-  func pushToRepoInteract(with repo: Repo, selectedIndex: Int = 0) {
-    let repoName = repo.fullName
+  func pushToRepoInteract(with repoName: String, selectedIndex: Int = 0) {
     let types: [RepoInteractViewController.RepoInteractType] = [
       .watches(repoName),
       .star(repoName),
       .forks(repoName),
       .contributor(repoName)
     ]
-    let vc = RepoInteractViewController(with: types, selectedIndex: selectedIndex)
-    vc.repo = repo
+    let vc = RepoInteractViewController(with: types, title: repoName, selectedIndex: selectedIndex)
     self.pushViewController(vc, animated: true)
   }
   
-  func pushToUserInteract(with user: User, selectedIndex: Int = 0) {
-    let userName = user.login
+  func pushToUserInteract(with userName: String, title: String, selectedIndex: Int = 0) {
     let types: [RepoInteractViewController.RepoInteractType] = [
       .repositories(userName),
       .followers(userName),
@@ -56,8 +53,7 @@ extension UINavigationController {
       .userStar(userName),
       .userWatches(userName)
     ]
-    let vc = RepoInteractViewController(with: types, selectedIndex: selectedIndex)
-    vc.user = user
+    let vc = RepoInteractViewController(with: types, title: title, selectedIndex: selectedIndex)
     self.pushViewController(vc, animated: true)
   }
   

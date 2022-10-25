@@ -113,7 +113,10 @@ extension LocalDevelopersViewController: UITableViewDelegate, UITableViewDataSou
     switch self.type {
     case .repo:
       let repo = (group as! LocalRepoGroup).repos[indexPath.row]
-      self.navigationController?.pushToRepo(with: repo.id)
+      let arr = repo.id.components(separatedBy: "/")
+      if arr.count == 2 {
+        self.navigationController?.pushToRepo(with: arr[0], repoName: arr[1])
+      }
     case .developer:
       let user = (group as! LocalDeveloperGroup).developers[indexPath.row]
       self.navigationController?.pushToUser(with: user.name)

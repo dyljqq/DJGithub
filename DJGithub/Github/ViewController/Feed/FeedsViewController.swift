@@ -101,7 +101,10 @@ extension FeedsViewController: UITableViewDelegate, UITableViewDataSource {
     cell.tappedClosure = { [weak self] pushType in
       guard let strongSelf = self else { return }
       switch pushType {
-      case .repo(let repoName): strongSelf.navigationController?.pushToRepo(with: repoName)
+      case .repo(let repoName):
+        if let (userName, repoName) = repoName.splitRepoFullName {
+          strongSelf.navigationController?.pushToRepo(with: userName, repoName: repoName)
+        }
       case .user(let userName): strongSelf.navigationController?.pushToUser(with: userName)
       case .unknown: break
       }
@@ -119,7 +122,9 @@ extension FeedsViewController: UITableViewDelegate, UITableViewDataSource {
       case "Release":
         self.navigationController?.pushToWebView(with: feed.link?.href)
       default:
-        self.navigationController?.pushToRepo(with: path)
+        if let (userName, repoName) = path.splitRepoFullName {
+          self.navigationController?.pushToRepo(with: userName, repoName: repoName)
+        }
       }
     }
   }

@@ -10,13 +10,15 @@ import SafariServices
 
 class RepoViewController: UIViewController {
 
+  let userName: String
   let repoName: String
-  var repo: Repo?
+  
+  var repo: Repository?
   var dataSouce: [RepoCell.CellType] = []
   
   lazy var userStatusView: UserStatusView = {
     let view = UserStatusView(layoutLay: .normal)
-    view.type = .star(repoName)
+    view.type = .star("\(userName)/\(repoName)")
     return view
   }()
   
@@ -44,8 +46,9 @@ class RepoViewController: UIViewController {
     return tableView
   }()
   
-  init(repoName: String) {
+  init(with userName: String, repoName: String) {
     self.repoName = repoName
+    self.userName = userName
     super.init(nibName: nil, bundle: nil)
   }
   
@@ -75,9 +78,6 @@ class RepoViewController: UIViewController {
           await self.fetchRepo()
         }
         group.addTask {
-          await self.configStarButton()
-        }
-        group.addTask {
           await self.fetchReadme()
         }
       }
@@ -105,7 +105,7 @@ class RepoViewController: UIViewController {
     headerView.tapCounterClosure = { [weak self] index in
       guard let strongSelf = self else { return }
       if let repo = strongSelf.repo {
-        strongSelf.navigationController?.pushToRepoInteract(with: repo, selectedIndex: index)
+        strongSelf.navigationController?.pushToRepoInteract(with: repo.nameWithOwner, selectedIndex: index)
       }
     }
     
@@ -121,26 +121,27 @@ class RepoViewController: UIViewController {
   
   private func fetchRepo() {
     Task {
-      if let repo = await RepoManager.fetchRepo(with: repoName) {
+      if let repo = await RepoManager.fetchRepository(with: userName, repoName: repoName) {
+        userStatusView.active = repo.viewerHasStarred
         self.repo = repo
         if let userName = repo.owner?.login {
           self.userStatusView.isHidden = ConfigManager.checkOwner(by: userName)
         }
         view.stopLoading()
         self.headerView.render(with: repo)
-        
-        var languageDes = "\(NSString(format: "%.2f", Double(repo.size) / 1000))MB"
-        if let license = repo.license {
-          languageDes = "\(license.licenseKey) - " + languageDes
+
+        var languageDes = "\(NSString(format: "%.2f", Double(repo.diskUsage) / 1000))MB"
+        if let license = repo.licenseInfo?.spdxId {
+          languageDes = "\(license) - " + languageDes
         }
-        
+
         dataSouce = [
           .blank,
-          .language(repo.language ?? "Unknown", languageDes),
-          .issues(repo.openIssuesCount.toGitNum),
-          .pull,
+          .language(repo.primaryLanguage?.name ?? "Unknown", languageDes),
+          .issues(repo.issues.totalCount.toGitNum),
+          .pull(repo.pullRequests.totalCount.toGitNum),
           .blank,
-          .branch(repo.defaultBranch ?? ""),
+          .branch(repo.defaultBranchRef?.name ?? ""),
           .readme
         ]
         tableView.reloadData()
@@ -150,16 +151,8 @@ class RepoViewController: UIViewController {
     }
   }
   
-  func configStarButton() {
-    Task {
-      if let repoStarStatus = await RepoManager.userStaredRepo(with: repoName) {
-        userStatusView.active = repoStarStatus.isStatus204
-      }
-    }
-  }
-  
   func fetchReadme() async {
-    if let readme = await RepoManager.fetchREADME(with: self.repoName) {
+    if let readme = await RepoManager.fetchREADME(with: "\(userName)/\(repoName)") {
       self.footerView.render(with: readme.content)
     }
   }
@@ -207,19 +200,16 @@ extension RepoViewController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
     
-    if let userName = repo?.owner?.login,
-       let repoName = repo?.name {
-      let type = self.dataSouce[indexPath.row]
-      switch type {
-      case .language:
-        self.navigationController?.pushToRepoContent(with: userName, repoName: repoName)
-      case .issues:
-        self.navigationController?.pushToRepoIssues(with: userName, repoName: repoName)
-      case .pull:
-        self.navigationController?.pushToRepoIssues(with: userName, repoName: repoName, issueState: .pull)
-      default:
-        break
-      }
+    let type = self.dataSouce[indexPath.row]
+    switch type {
+    case .language:
+      self.navigationController?.pushToRepoContent(with: userName, repoName: repoName)
+    case .issues:
+      self.navigationController?.pushToRepoIssues(with: userName, repoName: repoName)
+    case .pull:
+      self.navigationController?.pushToRepoIssues(with: userName, repoName: repoName, issueState: .pull)
+    default:
+      break
     }
   }
   
