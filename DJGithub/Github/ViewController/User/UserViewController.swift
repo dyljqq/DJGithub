@@ -142,13 +142,9 @@ class UserViewController: UIViewController {
     
     Task {
       await withThrowingTaskGroup(of: Void.self) { [weak self] group in
-        guard let strongSelf = self else {
-          return
-        }
+        guard let strongSelf = self else { return }
         group.addTask {
-          if let user = await UserManager.getUser(with: strongSelf.name) {
-            await strongSelf.userSubject.send(user)
-          }
+          await strongSelf.loadUserInfo()
         }
         group.addTask {
           if let userContribution = await UserManager.fetchUserContributions(with: strongSelf.name) {
@@ -156,7 +152,6 @@ class UserViewController: UIViewController {
           }
         }
       }
-      self.view.stopLoading()
     }
     
     userHeaderView.renderHeightClosure = { [weak self] height in
@@ -170,6 +165,18 @@ class UserViewController: UIViewController {
     }
     
     configNavigationRightButton()
+  }
+  
+  private func loadUserInfo() async {
+    view.stopLoading()
+    if let user = LocalUserManager.getUser() {
+      userSubject.send(user)
+    }
+    
+    await LocalUserManager.loadUserInfo { [weak self] user in
+      guard let strongSelf = self else { return }
+      strongSelf.userSubject.send(user)
+    }
   }
   
   private func handle(with user: User) {

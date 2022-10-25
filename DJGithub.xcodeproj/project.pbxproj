@@ -123,6 +123,8 @@
 		73C598C728D8617800DA86A1 /* UIApplication+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C598C628D8617800DA86A1 /* UIApplication+Ext.swift */; };
 		73C598CD28D9E6A100DA86A1 /* URL+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C598CC28D9E6A100DA86A1 /* URL+Ext.swift */; };
 		73D0DE252907B5F500F385E6 /* DJRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = 73D0DE242907B5F500F385E6 /* DJRefresh */; };
+		73D0DE292907D21F00F385E6 /* LocalUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D0DE282907D21F00F385E6 /* LocalUserManager.swift */; };
+		73D0DE2B2907D2DD00F385E6 /* DJUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D0DE2A2907D2DD00F385E6 /* DJUserDefaults.swift */; };
 		73DE29CC28E0C08200B48009 /* MarkdownView in Frameworks */ = {isa = PBXBuildFile; productRef = 73DE29CB28E0C08200B48009 /* MarkdownView */; };
 		73DE29CE28E0C35200B48009 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DE29CD28E0C35200B48009 /* WebViewController.swift */; };
 		73DF6BEC28EACF340003BDB8 /* SearchWordHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DF6BEB28EACF340003BDB8 /* SearchWordHeaderView.swift */; };
@@ -284,7 +286,9 @@
 		73C598C428D85EF100DA86A1 /* PopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverView.swift; sourceTree = "<group>"; };
 		73C598C628D8617800DA86A1 /* UIApplication+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Ext.swift"; sourceTree = "<group>"; };
 		73C598CC28D9E6A100DA86A1 /* URL+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Ext.swift"; sourceTree = "<group>"; };
-		73D0DE222907B4B400F385E6 /* DJRefresh */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DJRefresh; path = ../DJRefresh; sourceTree = "<group>"; };
+		73D0DE272907CE9700F385E6 /* DJRefresh */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DJRefresh; path = ../DJRefresh; sourceTree = "<group>"; };
+		73D0DE282907D21F00F385E6 /* LocalUserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalUserManager.swift; sourceTree = "<group>"; };
+		73D0DE2A2907D2DD00F385E6 /* DJUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJUserDefaults.swift; sourceTree = "<group>"; };
 		73DE29CD28E0C35200B48009 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		73DF6BEB28EACF340003BDB8 /* SearchWordHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWordHeaderView.swift; sourceTree = "<group>"; };
 		73DF6BED28EADD160003BDB8 /* LocalDeveloperSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDeveloperSectionHeaderView.swift; sourceTree = "<group>"; };
@@ -412,7 +416,7 @@
 		73AACAC828D308A60072B1DF = {
 			isa = PBXGroup;
 			children = (
-				73D0DE212907B4B400F385E6 /* Packages */,
+				73D0DE262907CE9700F385E6 /* Packages */,
 				73AACAD328D308A60072B1DF /* DJGithub */,
 				73AACAEA28D308A70072B1DF /* DJGithubTests */,
 				73AACAF428D308A70072B1DF /* DJGithubUITests */,
@@ -552,6 +556,7 @@
 				73DF6BEF28EAE0A00003BDB8 /* DeveloperGroupManager.swift */,
 				73074CC828EF4992001A90E7 /* LocalRepoManager.swift */,
 				73E14E4C28F3426900A9811D /* FeedManager.swift */,
+				73D0DE282907D21F00F385E6 /* LocalUserManager.swift */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -608,6 +613,7 @@
 				7341DCC928DF2B4B009A3A3C /* ImageCoder.swift */,
 				73B7905328E533C2002A9CDC /* ConfigManager.swift */,
 				7339201428F56D2900DC76B0 /* RssFeedManager.swift */,
+				73D0DE2A2907D2DD00F385E6 /* DJUserDefaults.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -732,19 +738,19 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		73D0DE212907B4B400F385E6 /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-				73D0DE222907B4B400F385E6 /* DJRefresh */,
-			);
-			name = Packages;
-			sourceTree = "<group>";
-		};
 		73D0DE232907B5F200F385E6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		73D0DE262907CE9700F385E6 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				73D0DE272907CE9700F385E6 /* DJRefresh */,
+			);
+			name = Packages;
 			sourceTree = "<group>";
 		};
 		73E14E5428F3DAB100A9811D /* Parse */ = {
@@ -952,6 +958,7 @@
 				73DF6BFC28EBFD3E0003BDB8 /* RepoContent.swift in Sources */,
 				735D0E0A2903115E00E618B3 /* DJThreadInfoModel.swift in Sources */,
 				732B21D328E228FD005893C0 /* NextPageModel.swift in Sources */,
+				73D0DE2B2907D2DD00F385E6 /* DJUserDefaults.swift in Sources */,
 				7341DCD428E0422F009A3A3C /* RepoCell.swift in Sources */,
 				7320170F28F5385B007B970F /* RssFeedSimpleCell.swift in Sources */,
 				73AACB1328D30F350072B1DF /* DJParser.swift in Sources */,
@@ -1046,6 +1053,7 @@
 				7374D19728E0BC1D00E6BE47 /* Readme.swift in Sources */,
 				73DF6BEE28EADD160003BDB8 /* LocalDeveloperSectionHeaderView.swift in Sources */,
 				73074CD128F1559D001A90E7 /* UserInfoViewController.swift in Sources */,
+				73D0DE292907D21F00F385E6 /* LocalUserManager.swift in Sources */,
 				7320170928F535CB007B970F /* RssFeed.swift in Sources */,
 				73AACB1828D312D30072B1DF /* GithubRouter.swift in Sources */,
 				73101D5028E4A10400DB5423 /* LocalDeveloperGroup.swift in Sources */,

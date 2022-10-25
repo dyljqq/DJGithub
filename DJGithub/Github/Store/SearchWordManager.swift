@@ -13,15 +13,11 @@ struct SearchWordManager {
   static let shared = SearchWordManager()
   
   func save(with word: String) {
-    var words = load()
-    guard !words.contains(word) else { return }
-    words.insert(word, at: 0)
-    UserDefaults.standard.setValue(words, forKey: SearchWordKey)
+    DJUserDefaults.addHistoryWord(with: word)
   }
   
   func load() -> [String] {
-    guard let words = UserDefaults.standard.stringArray(forKey: SearchWordKey) else { return [] }
-    return words
+    return DJUserDefaults.allHistorySearchWords()
   }
   
   func move(index: Int, to top: Int) {
