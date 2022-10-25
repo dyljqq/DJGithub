@@ -8,15 +8,15 @@
 import Foundation
 
 struct UserViewer: DJCodable {
-  var name: String
+  var name: String?
   var login: String
   var avatarUrl: String
-  var websiteUrl: String
-  var bio: String
-  var company: String
-  var location: String
+  var websiteUrl: String?
+  var bio: String?
+  var company: String?
+  var location: String?
   var createdAt: String
-  var email: String
+  var email: String?
   
   var viewerCanFollow: Bool
   var viewerIsFollowing: Bool
@@ -29,6 +29,10 @@ struct UserViewer: DJCodable {
   
   var pinnedItems: PinnedRepos
   var userContribution: UserContribution?
+  
+  var desc: String {
+    return isEmpty(by: self.bio) ? "No description provided." : self.bio!
+  }
 }
 
 struct PinnedRepos: DJCodable {

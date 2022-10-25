@@ -138,14 +138,13 @@ class UserViewController: UIViewController {
     userHeaderView.jumpClosure = { [weak self] in
       self?.navigationController?.pushToUserInfo()
     }
-    
-    configNavigationRightButton()
   }
   
   private func loadUserViewerInfo(with userViewer: UserViewer) {
     view.stopLoading()
     
-    self.followStatusView.isHidden = !userViewer.viewerCanFollow
+    self.followStatusView.isHidden = userViewer.isViewer
+    self.followStatusView.active = userViewer.viewerIsFollowing
     self.navigationItem.title = userViewer.name
     userHeaderView.render(with: userViewer)
     if let userContribution = userViewer.userContribution {

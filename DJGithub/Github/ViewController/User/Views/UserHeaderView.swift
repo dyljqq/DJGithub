@@ -28,9 +28,9 @@ class UserHeaderView: NormalHeaderView {
   func render(with userViewer: UserViewer) {
     avatarImageView.setImage(with: URL(string: userViewer.avatarUrl))
     self.arrowImageView.isHidden = userViewer.viewerCanFollow
-    nameLabel.text = userViewer.name
+    nameLabel.text = userViewer.name ?? userViewer.login
     loginLabel.text = "(\(userViewer.login))"
-    bioLabel.text = userViewer.bio.trimmingCharacters(in: .whitespacesAndNewlines)
+    bioLabel.text = userViewer.desc.trimmingCharacters(in: .whitespacesAndNewlines)
     if let joined = userViewer.createdAt.split(separator: "T").first {
       joinedLabel.text = "Joined on \(String(describing: joined))"
     } else {
