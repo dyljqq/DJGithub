@@ -105,7 +105,7 @@ class RepoViewController: UIViewController {
     headerView.tapCounterClosure = { [weak self] index in
       guard let strongSelf = self else { return }
       if let repo = strongSelf.repo {
-        strongSelf.navigationController?.pushToRepoInteract(with: repo, selectedIndex: index)
+        strongSelf.navigationController?.pushToRepoInteract(with: repo.fullName, selectedIndex: index)
       }
     }
     
