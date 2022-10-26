@@ -10,6 +10,7 @@ import Combine
 
 class RssFeedManager: NSObject {
   static let RssFeedAtomUpdateNotificationKey = NSNotification.Name("RssFeedAtomUpdateNotification")
+  static let RssFeedAtomReadFeedNotificationKey = NSNotification.Name("RssFeedAtomReadFeedNotification")
   
   override init() {
     super.init()

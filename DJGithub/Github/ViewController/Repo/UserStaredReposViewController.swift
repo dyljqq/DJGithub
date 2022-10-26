@@ -149,7 +149,16 @@ extension UserStaredReposViewController {
       let repos: [Repo]
       switch self.userRepoState {
       case .star(let userName):
-        repos = await RepoManager.fetchStaredRepos(with: userName, page: nextPageState.start)
+        if nextPageState.start == 1 {
+          if let cachedRepos = DJUserDefaults.getStaredRepos() {
+            repos = cachedRepos
+          } else {
+            repos = await RepoManager.fetchStaredRepos(with: userName, page: nextPageState.start)
+            DJUserDefaults.saveStaredRepos(repos)
+          }
+        } else {
+          repos = await RepoManager.fetchStaredRepos(with: userName, page: nextPageState.start)
+        }
       case .fork(let content):
         repos = await RepoManager.fetchForkRepos(with: content, page: nextPageState.start)
       case .repos(let content):

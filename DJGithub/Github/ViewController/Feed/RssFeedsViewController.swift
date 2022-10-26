@@ -95,6 +95,7 @@ extension RssFeedsViewController: UITableViewDelegate, UITableViewDataSource {
     self.navigationController?.pushToRssFeedDetial(with: rssFeed)
     
     rssFeed.updateReadStatus()
+    NotificationCenter.default.post(name: RssFeedManager.RssFeedAtomReadFeedNotificationKey, object: ["feedLink": rssFeedAtom.feedLink])
   }
 }
 
