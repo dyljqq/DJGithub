@@ -8,13 +8,17 @@
 import UIKit
 import SafariServices
 
+enum RepoCellType {
+  case blank, language(String, String), issues(String), pull(String), branch(String), readme, primaryLanguage
+}
+
 class RepoViewController: UIViewController {
 
   let userName: String
   let repoName: String
   
   var repo: Repository?
-  var dataSouce: [RepoCell.CellType] = []
+  var dataSouce: [RepoCellType] = []
   
   lazy var userStatusView: UserStatusView = {
     let view = UserStatusView(layoutLay: .normal)
@@ -43,6 +47,7 @@ class RepoViewController: UIViewController {
     tableView.backgroundColor = .backgroundColor
     tableView.showsVerticalScrollIndicator = false
     tableView.register(RepoCell.classForCoder(), forCellReuseIdentifier: RepoCell.className)
+    tableView.register(PrimaryLanguageCell.classForCoder(), forCellReuseIdentifier: PrimaryLanguageCell.className)
     return tableView
   }()
   
@@ -96,15 +101,15 @@ class RepoViewController: UIViewController {
       strongSelf.tableView.endUpdates()
     }
     footerView.touchLink = { [weak self] req in
+      guard let strongSelf = self else { return }
       if let req = req,
          let url = req.url {
         
         // github readme中会存在这种链接，比如docs/issue-227.md，那么这种链接会跳转到对应的repo中去。
         var u = url
         if url.isFileURL {
-          let path = url.absoluteString.components(separatedBy: "MarkdownView_MarkdownView.bundle/").last
           if let path = url.absoluteString.components(separatedBy: "MarkdownView_MarkdownView.bundle/").last,
-             let url = URL(string: "https://github.com/ruanyf/weekly/blob/master/\(path)") {
+             let url = URL(string: "https://github.com/\(strongSelf.userName)/\(strongSelf.repoName)/blob/master/\(path)") {
             u = url
           }
         }
@@ -145,16 +150,19 @@ class RepoViewController: UIViewController {
         if let license = repo.licenseInfo?.spdxId {
           languageDes = "\(license) - " + languageDes
         }
-
-        dataSouce = [
-          .blank,
+        
+        dataSouce = [.blank]
+        if let _ = repo.primaryLanguage {
+          dataSouce.append(.primaryLanguage)
+        }
+        dataSouce.append(contentsOf: [
           .language(repo.primaryLanguage?.name ?? "Unknown", languageDes),
           .issues(repo.issues.totalCount.toGitNum),
           .pull(repo.pullRequests.totalCount.toGitNum),
           .blank,
           .branch(repo.defaultBranchRef?.name ?? ""),
           .readme
-        ]
+        ])
         tableView.reloadData()
       }
       view.stopLoading()
@@ -184,11 +192,17 @@ extension RepoViewController: UITableViewDelegate, UITableViewDataSource {
       cell.selectionStyle = .none
       cell.backgroundColor = .backgroundColor
       return cell
+    case .primaryLanguage:
+      let cell = tableView.dequeueReusableCell(withIdentifier: PrimaryLanguageCell.className, for: indexPath) as! PrimaryLanguageCell
+      if let repo = repo, let primaryLanguage = repo.primaryLanguage {
+        cell.render(with: primaryLanguage, language: repo.languages)
+      }
+      return cell
     default:
       let cell = tableView.dequeueReusableCell(withIdentifier: RepoCell.className, for: indexPath) as! RepoCell
       cell.render(with: data)
       
-      if case RepoCell.CellType.readme = data {
+      if case RepoCellType.readme = data {
         cell.accessoryType = .none
         cell.selectionStyle = .none
         cell.reloadClosure = { [weak self] in
@@ -232,6 +246,55 @@ extension RepoViewController: UIScrollViewDelegate {
       self.navigationItem.title = self.repo?.name
     } else {
       self.navigationItem.title = "Repository"
+    }
+  }
+}
+
+extension RepoCellType {
+  var height: CGFloat {
+    switch self {
+    case .blank: return 12
+    case .primaryLanguage: return 55
+    default: return 44
+    }
+  }
+
+  var imageName: String {
+    switch self {
+    case .language: return "coding"
+    case .issues: return "issue"
+    case .pull: return "pull-request"
+    case .branch: return "git-branch"
+    case .readme: return "book"
+    default: return ""
+    }
+  }
+  
+  var name: String {
+    switch self {
+    case .language(let language, _): return language
+    case .issues: return "Issues"
+    case .pull: return "Pull Requests"
+    case .branch: return "Branches"
+    case .readme: return "README"
+    default: return ""
+    }
+  }
+  
+  var desc: String {
+    switch self {
+    case .language(_, let desc): return desc
+    case .issues(let desc): return desc
+    case .branch(let desc): return desc
+    case .pull(let desc): return desc
+    default: return ""
+    }
+  }
+
+  var showReload: Bool {
+    switch self {
+    case .readme: return true
+    default: return false
     }
   }
 }

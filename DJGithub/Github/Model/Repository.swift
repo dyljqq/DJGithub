@@ -52,6 +52,7 @@ struct Repository: DJCodable {
         var color: String
       }
       
+      var size: Int
       var node: RepositoryLanguageNode
     }
     var totalSize: Int
@@ -65,5 +66,17 @@ struct Repository: DJCodable {
     
     var name: String
     var target: DefaultBranchRefTarget
+  }
+}
+
+extension Repository.RepositotyLanguage {
+  func primaryPercent(with languageName: String) -> CGFloat {
+    var primarySize: CGFloat = 0
+    for edge in edges {
+      if edge.node.name == languageName {
+        primarySize = CGFloat(edge.size)
+      }
+    }
+    return primarySize / CGFloat(totalSize)
   }
 }

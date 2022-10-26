@@ -151,6 +151,8 @@
 		73E14E5828F3DAE200A9811D /* DJXMLParsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E14E5728F3DAE200A9811D /* DJXMLParsable.swift */; };
 		73E14E5D28F4151100A9811D /* FeedsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E14E5C28F4151100A9811D /* FeedsViewController.swift */; };
 		73E14E5F28F415AD00A9811D /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E14E5E28F415AD00A9811D /* FeedCell.swift */; };
+		73EE0CDC29092F960010C54A /* LanguageGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EE0CDB29092F960010C54A /* LanguageGradientView.swift */; };
+		73EE0CDE2909351A0010C54A /* PrimaryLanguageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EE0CDD2909351A0010C54A /* PrimaryLanguageCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -316,6 +318,8 @@
 		73E14E5728F3DAE200A9811D /* DJXMLParsable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJXMLParsable.swift; sourceTree = "<group>"; };
 		73E14E5C28F4151100A9811D /* FeedsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedsViewController.swift; sourceTree = "<group>"; };
 		73E14E5E28F415AD00A9811D /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
+		73EE0CDB29092F960010C54A /* LanguageGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageGradientView.swift; sourceTree = "<group>"; };
+		73EE0CDD2909351A0010C54A /* PrimaryLanguageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryLanguageCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -673,6 +677,7 @@
 				7341DCCD28E03505009A3A3C /* NormalHeaderView.swift */,
 				73101D4A28E4889B00DB5423 /* UserStatusView.swift */,
 				73B7905B28E59104002A9CDC /* HeaderSegmentView.swift */,
+				73EE0CDB29092F960010C54A /* LanguageGradientView.swift */,
 			);
 			path = Widget;
 			sourceTree = "<group>";
@@ -707,6 +712,7 @@
 				73DF6C0928EC6A9C0003BDB8 /* IssueCell.swift */,
 				73074C7F28EDB955001A90E7 /* WebViewFooterView.swift */,
 				73074CBF28EED421001A90E7 /* CommitView.swift */,
+				73EE0CDD2909351A0010C54A /* PrimaryLanguageCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -962,6 +968,7 @@
 				7320170128F47B76007B970F /* RegularParser.swift in Sources */,
 				73074C7E28ED5664001A90E7 /* IssueDetail.swift in Sources */,
 				73DF6C0C28EC7A7A0003BDB8 /* RepoIssuesStateViewController.swift in Sources */,
+				73EE0CDE2909351A0010C54A /* PrimaryLanguageCell.swift in Sources */,
 				7339201528F56D2900DC76B0 /* RssFeedManager.swift in Sources */,
 				73AACB2928D321480072B1DF /* Result.swift in Sources */,
 				7320170628F53455007B970F /* RssFeedAtomViewController.swift in Sources */,
@@ -1029,6 +1036,7 @@
 				73101D4928E47FB100DB5423 /* StatusModel.swift in Sources */,
 				73B7905E28E6D8EB002A9CDC /* UserFollowingManager.swift in Sources */,
 				7320170D28F5378E007B970F /* RssFeedAtom.swift in Sources */,
+				73EE0CDC29092F960010C54A /* LanguageGradientView.swift in Sources */,
 				73B7906D28E972A9002A9CDC /* SearchWordManager.swift in Sources */,
 				73074CCF28EF573D001A90E7 /* LocalRepoCell.swift in Sources */,
 				7341DCD228E03C6A009A3A3C /* RepoViewController.swift in Sources */,
