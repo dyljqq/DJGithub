@@ -104,6 +104,11 @@ struct RepoManager {
           let repository = d["repository"] as? [String: Any] else {
       return nil
     }
-    return try? DJDecoder(dict: repository).decode()
+    do {
+      return try DJDecoder(dict: repository).decode()
+    } catch {
+      print("fetch repository error: \(error)")
+    }
+    return nil
   }
 }

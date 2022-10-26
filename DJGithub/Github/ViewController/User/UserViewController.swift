@@ -92,8 +92,7 @@ class UserViewController: UIViewController {
   }()
     
   let name: String
-  
-  var user: User?
+
   var userViewer: UserViewer?
   
   fileprivate var dataSource: [CellType] = []
@@ -123,12 +122,17 @@ class UserViewController: UIViewController {
       make.edges.equalTo(view)
     }
     
-    self.view.startLoading()
-    
     Task {
-      if let userViewer = await UserManager.fetchUserInfo(by: self.name) {
-        self.userViewer = userViewer
-        self.loadUserViewerInfo(with: userViewer)
+      if name.isEmpty || ConfigManager.checkOwner(by: name) {
+        self.userViewer = ConfigManager.viewer
+      } else {
+        self.view.startLoading()
+        if let userViewer = await UserManager.fetchUserInfo(by: self.name) {
+          self.userViewer = userViewer
+        }
+      }
+      if let viewer = self.userViewer {
+        self.loadUserViewerInfo(with: viewer)
       }
     }
     
@@ -160,7 +164,7 @@ class UserViewController: UIViewController {
     tableView.reloadData()
     
     userHeaderView.tapCounterClosure = { [weak self] index in
-      guard let strongSelf = self else { return }
+      guard let strongSelf = self, ConfigManager.checkOwner(by: strongSelf.name) else { return }
       strongSelf.navigationController?.pushToUserInteract(
         with: strongSelf.userViewer?.login ?? "",
         title: strongSelf.userViewer?.name ?? "",
@@ -239,12 +243,12 @@ extension UserViewController: UITableViewDelegate {
       let (content, _) = userType.getContent(by: self.userViewer)
       switch userType {
       case .email:
-        if let email = user?.email, !email.isEmpty {
+        if let email = userViewer?.email, !email.isEmpty {
           UIPasteboard.general.string = content
           HUD.show(with: "已经复制到粘贴板")
         }
       case .link:
-        if let link = user?.blog, !link.isEmpty {
+        if let link = userViewer?.websiteUrl, !link.isEmpty {
           self.navigationController?.pushToWebView(with: link)
         }
       default:

@@ -184,8 +184,10 @@ class RepoViewController: UIViewController {
         await LanguageManager.save(with: primaryLanguage.name, color: primaryLanguage.color)
       }
       
-      for edge in repo.languages.edges {
-        await LanguageManager.save(with: edge.node.name, color: edge.node.color)
+      for edge in (repo.languages?.edges ?? []) {
+        if let node = edge.node, let name = node.name, let color = node.color {
+          await LanguageManager.save(with: name, color: color)
+        }
       }
     }
   }
@@ -208,8 +210,8 @@ extension RepoViewController: UITableViewDelegate, UITableViewDataSource {
       return cell
     case .primaryLanguage:
       let cell = tableView.dequeueReusableCell(withIdentifier: PrimaryLanguageCell.className, for: indexPath) as! PrimaryLanguageCell
-      if let repo = repo, let primaryLanguage = repo.primaryLanguage {
-        cell.render(with: primaryLanguage, language: repo.languages)
+      if let repo = repo, let primaryLanguage = repo.primaryLanguage, let languages = repo.languages {
+        cell.render(with: primaryLanguage, language: languages)
       }
       return cell
     default:

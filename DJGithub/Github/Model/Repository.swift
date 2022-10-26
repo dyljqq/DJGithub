@@ -29,7 +29,7 @@ struct Repository: DJCodable {
   var primaryLanguage: PrimaryLanguage?
   
   var licenseInfo: LicenseInfo?
-  var languages: RepositotyLanguage
+  var languages: RepositotyLanguage?
   var defaultBranchRef: DefaultBranchRef?
   
   var desc: String {
@@ -48,15 +48,15 @@ struct Repository: DJCodable {
   struct RepositotyLanguage: DJCodable {
     struct RepositotyLanguageEdge: DJCodable {
       struct RepositoryLanguageNode: DJCodable {
-        var name: String
-        var color: String
+        var name: String?
+        var color: String?
       }
       
       var size: Int
-      var node: RepositoryLanguageNode
+      var node: RepositoryLanguageNode?
     }
     var totalSize: Int
-    var edges: [RepositotyLanguageEdge]
+    var edges: [RepositotyLanguageEdge]?
   }
   
   struct DefaultBranchRef: DJCodable {
@@ -72,8 +72,8 @@ struct Repository: DJCodable {
 extension Repository.RepositotyLanguage {
   func primaryPercent(with languageName: String) -> CGFloat {
     var primarySize: CGFloat = 0
-    for edge in edges {
-      if edge.node.name == languageName {
+    for edge in (edges ?? []) {
+      if let node = edge.node, node.name == languageName {
         primarySize = CGFloat(edge.size)
       }
     }
