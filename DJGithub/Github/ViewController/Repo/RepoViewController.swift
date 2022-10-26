@@ -164,6 +164,8 @@ class RepoViewController: UIViewController {
           .readme
         ])
         tableView.reloadData()
+
+        updateRepoLanguage(repo: repo)
       }
       view.stopLoading()
       tableView.dj_endRefresh()
@@ -173,6 +175,18 @@ class RepoViewController: UIViewController {
   func fetchReadme() async {
     if let readme = await RepoManager.fetchREADME(with: "\(userName)/\(repoName)") {
       self.footerView.render(with: readme.content)
+    }
+  }
+  
+  private func updateRepoLanguage(repo: Repository) {
+    Task {
+      if let primaryLanguage = repo.primaryLanguage {
+        await LanguageManager.save(with: primaryLanguage.name, color: primaryLanguage.color)
+      }
+      
+      for edge in repo.languages.edges {
+        await LanguageManager.save(with: edge.node.name, color: edge.node.color)
+      }
     }
   }
 
