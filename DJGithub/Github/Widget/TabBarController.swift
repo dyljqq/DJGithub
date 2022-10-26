@@ -40,7 +40,7 @@ class TabBarController: UITabBarController {
   }
   
   func setUp() {
-    let userName = ConfigManager.config.userName
+    let userName = ConfigManager.viewName
     viewControllers = [
       setUp(for: DevelopersViewController(), tabTitle: "Developer", image: UIImage(named: "group"), selectedImage: UIImage(named: "people")),
       setUp(for: RssFeedAtomViewController(), tabTitle: "Rss", image: UIImage(named: "rss"), selectedImage: UIImage(named: "rss-feed")),

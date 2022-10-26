@@ -42,10 +42,11 @@ struct PinnedRepos: DJCodable {
 struct PinnedRepoNode: DJCodable {
   var name: String
   var nameWithOwner: String
-  var description: String
+  var description: String?
+  var viewerHasStarred: Bool
   var owner: PinnedRepoNodeOwner
   var stargazers: TotalCountModel
-  var primaryLanguage: PrimaryLanguage
+  var primaryLanguage: PrimaryLanguage?
 }
 
 extension PinnedRepoNode {

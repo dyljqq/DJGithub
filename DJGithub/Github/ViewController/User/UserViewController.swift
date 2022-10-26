@@ -52,12 +52,14 @@ fileprivate enum CellType {
   case userContribution(UserContribution)
   case blank
   case user(UserType)
+  case pinnedItem(PinnedRepos)
   
   var height: CGFloat {
     switch self {
     case .blank: return 10
     case .user: return 44
     case .userContribution: return 100
+    case .pinnedItem: return 110
     }
   }
 }
@@ -85,12 +87,12 @@ class UserViewController: UIViewController {
     tableView.backgroundColor = .backgroundColor
     tableView.register(UserCell.classForCoder(), forCellReuseIdentifier: UserCell.className)
     tableView.register(UserContributionCell.classForCoder(), forCellReuseIdentifier: UserContributionCell.className)
+    tableView.register(PinnedItemsCell.classForCoder(), forCellReuseIdentifier: PinnedItemsCell.className)
     return tableView
   }()
     
   let name: String
-  
-  var user: User?
+
   var userViewer: UserViewer?
   
   fileprivate var dataSource: [CellType] = []
@@ -120,12 +122,17 @@ class UserViewController: UIViewController {
       make.edges.equalTo(view)
     }
     
-    self.view.startLoading()
-    
     Task {
-      if let userViewer = await UserManager.fetchUserInfo(by: self.name) {
-        self.userViewer = userViewer
-        self.loadUserViewerInfo(with: userViewer)
+      if name.isEmpty || ConfigManager.checkOwner(by: name) {
+        self.userViewer = ConfigManager.viewer
+      } else {
+        self.view.startLoading()
+        if let userViewer = await UserManager.fetchUserInfo(by: self.name) {
+          self.userViewer = userViewer
+        }
+      }
+      if let viewer = self.userViewer {
+        self.loadUserViewerInfo(with: viewer)
       }
     }
     
@@ -150,11 +157,14 @@ class UserViewController: UIViewController {
     if let userContribution = userViewer.userContribution {
       self.dataSource = [.blank, .userContribution(userContribution)]
     }
+    if userViewer.pinnedItems.nodes.count > 0 {
+      self.dataSource.append(contentsOf: [.blank, .pinnedItem(userViewer.pinnedItems)])
+    }
     self.dataSource.append(contentsOf: [.blank, .user(.company), .user(.location), .user(.email), .user(.link)])
     tableView.reloadData()
     
     userHeaderView.tapCounterClosure = { [weak self] index in
-      guard let strongSelf = self else { return }
+      guard let strongSelf = self, ConfigManager.checkOwner(by: strongSelf.name) else { return }
       strongSelf.navigationController?.pushToUserInteract(
         with: strongSelf.userViewer?.login ?? "",
         title: strongSelf.userViewer?.name ?? "",
@@ -195,6 +205,7 @@ extension UserViewController: UITableViewDataSource {
       let cell = UITableViewCell()
       cell.backgroundColor = .backgroundColor
       cell.selectionStyle = .none
+      cell.separatorInset = UIEdgeInsets(top: 0, left: tableView.bounds.width, bottom: 0, right: 0)
       return cell
     case .user(let userType):
       let cell = tableView.dequeueReusableCell(withIdentifier: UserCell.className, for: indexPath) as! UserCell
@@ -205,6 +216,15 @@ extension UserViewController: UITableViewDataSource {
       }
       let (content, color) = userType.getContent(by: userViewer)
       cell.render(with: userType.iconImageName, content: content, contentColor: color)
+      return cell
+    case .pinnedItem(let pinnedItems):
+      let cell = tableView.dequeueReusableCell(withIdentifier: PinnedItemsCell.className, for: indexPath) as! PinnedItemsCell
+      cell.render(with: pinnedItems)
+      cell.separatorInset = UIEdgeInsets(top: 0, left: tableView.bounds.width, bottom: 0, right: 0)
+      cell.onTouchPinnedItem = { [weak self] item in
+        guard let strongSelf = self else { return }
+        strongSelf.navigationController?.pushToRepo(with: strongSelf.name, repoName: item.name)
+      }
       return cell
     }
   }
@@ -223,12 +243,12 @@ extension UserViewController: UITableViewDelegate {
       let (content, _) = userType.getContent(by: self.userViewer)
       switch userType {
       case .email:
-        if let email = user?.email, !email.isEmpty {
+        if let email = userViewer?.email, !email.isEmpty {
           UIPasteboard.general.string = content
           HUD.show(with: "已经复制到粘贴板")
         }
       case .link:
-        if let link = user?.blog, !link.isEmpty {
+        if let link = userViewer?.websiteUrl, !link.isEmpty {
           self.navigationController?.pushToWebView(with: link)
         }
       default:

@@ -30,6 +30,13 @@ class ConfigManager: NSObject {
   let rssFeedManager: RssFeedManager = RssFeedManager()
   let languageManager = LanguageManager()
   
+  static var viewer: UserViewer? {
+    return LocalUserManager.getUser()
+  }
+  static var viewName: String {
+    return viewer?.login ?? ConfigManager.config.userName
+  }
+  
   override init() {
     super.init()
   }
@@ -39,10 +46,18 @@ class ConfigManager: NSObject {
   }
   
   func loadConfig(completionHandler: ((Config) -> ())? = nil) {
+    LocalUserManager.loadViewer()
     ConfigManager.config = loadBundleJSONFile("config")
   }
   
   static func checkOwner(by userName: String) -> Bool {
+    if let viewer = viewer {
+      return viewer.login == userName
+    } else {
+      if let viewer = LocalUserManager.getUser() {
+        return viewer.login == userName
+      }
+    }
     return userName == config.userName
   }
   

@@ -153,6 +153,8 @@
 		73E14E5F28F415AD00A9811D /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E14E5E28F415AD00A9811D /* FeedCell.swift */; };
 		73EE0CDC29092F960010C54A /* LanguageGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EE0CDB29092F960010C54A /* LanguageGradientView.swift */; };
 		73EE0CDE2909351A0010C54A /* PrimaryLanguageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EE0CDD2909351A0010C54A /* PrimaryLanguageCell.swift */; };
+		73EE0CE0290962CE0010C54A /* PinnedRepoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EE0CDF290962CE0010C54A /* PinnedRepoCell.swift */; };
+		73EE0CE2290968310010C54A /* PinnedItemsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EE0CE1290968310010C54A /* PinnedItemsCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -320,6 +322,8 @@
 		73E14E5E28F415AD00A9811D /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		73EE0CDB29092F960010C54A /* LanguageGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageGradientView.swift; sourceTree = "<group>"; };
 		73EE0CDD2909351A0010C54A /* PrimaryLanguageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryLanguageCell.swift; sourceTree = "<group>"; };
+		73EE0CDF290962CE0010C54A /* PinnedRepoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinnedRepoCell.swift; sourceTree = "<group>"; };
+		73EE0CE1290968310010C54A /* PinnedItemsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinnedItemsCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -657,6 +661,8 @@
 		73AACB3528D357CE0072B1DF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				73EE0CDF290962CE0010C54A /* PinnedRepoCell.swift */,
+				73EE0CE1290968310010C54A /* PinnedItemsCell.swift */,
 				73AACB3928D359550072B1DF /* UserHeaderView.swift */,
 				73AACB4B28D45EA50072B1DF /* UserCell.swift */,
 				73AACB5128D467850072B1DF /* UserContributionView.swift */,
@@ -952,6 +958,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73EE0CE2290968310010C54A /* PinnedItemsCell.swift in Sources */,
 				73101D4328E310D900DB5423 /* UserFollowingViewController.swift in Sources */,
 				73B7906628E7F133002A9CDC /* SearchViewController.swift in Sources */,
 				73B7905828E541BE002A9CDC /* Bool+Ext.swift in Sources */,
@@ -978,6 +985,7 @@
 				73D0DE2B2907D2DD00F385E6 /* DJUserDefaults.swift in Sources */,
 				7341DCD428E0422F009A3A3C /* RepoCell.swift in Sources */,
 				7320170F28F5385B007B970F /* RssFeedSimpleCell.swift in Sources */,
+				73EE0CE0290962CE0010C54A /* PinnedRepoCell.swift in Sources */,
 				73AACB1328D30F350072B1DF /* DJParser.swift in Sources */,
 				73AACB7728D5BBE90072B1DF /* SQLTable.swift in Sources */,
 				73E14E5D28F4151100A9811D /* FeedsViewController.swift in Sources */,
