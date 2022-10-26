@@ -16,6 +16,7 @@ class RepoFooterView: UIView {
 
   lazy var mdView: MarkdownView = {
     let mdView = MarkdownView()
+    mdView.isScrollEnabled = false
     return mdView
   }()
   

@@ -52,12 +52,14 @@ fileprivate enum CellType {
   case userContribution(UserContribution)
   case blank
   case user(UserType)
+  case pinnedItem(PinnedRepos)
   
   var height: CGFloat {
     switch self {
     case .blank: return 10
     case .user: return 44
     case .userContribution: return 100
+    case .pinnedItem: return 110
     }
   }
 }
@@ -85,6 +87,7 @@ class UserViewController: UIViewController {
     tableView.backgroundColor = .backgroundColor
     tableView.register(UserCell.classForCoder(), forCellReuseIdentifier: UserCell.className)
     tableView.register(UserContributionCell.classForCoder(), forCellReuseIdentifier: UserContributionCell.className)
+    tableView.register(PinnedItemsCell.classForCoder(), forCellReuseIdentifier: PinnedItemsCell.className)
     return tableView
   }()
     
@@ -150,6 +153,9 @@ class UserViewController: UIViewController {
     if let userContribution = userViewer.userContribution {
       self.dataSource = [.blank, .userContribution(userContribution)]
     }
+    if userViewer.pinnedItems.nodes.count > 0 {
+      self.dataSource.append(contentsOf: [.blank, .pinnedItem(userViewer.pinnedItems)])
+    }
     self.dataSource.append(contentsOf: [.blank, .user(.company), .user(.location), .user(.email), .user(.link)])
     tableView.reloadData()
     
@@ -195,6 +201,7 @@ extension UserViewController: UITableViewDataSource {
       let cell = UITableViewCell()
       cell.backgroundColor = .backgroundColor
       cell.selectionStyle = .none
+      cell.separatorInset = UIEdgeInsets(top: 0, left: tableView.bounds.width, bottom: 0, right: 0)
       return cell
     case .user(let userType):
       let cell = tableView.dequeueReusableCell(withIdentifier: UserCell.className, for: indexPath) as! UserCell
@@ -205,6 +212,15 @@ extension UserViewController: UITableViewDataSource {
       }
       let (content, color) = userType.getContent(by: userViewer)
       cell.render(with: userType.iconImageName, content: content, contentColor: color)
+      return cell
+    case .pinnedItem(let pinnedItems):
+      let cell = tableView.dequeueReusableCell(withIdentifier: PinnedItemsCell.className, for: indexPath) as! PinnedItemsCell
+      cell.render(with: pinnedItems)
+      cell.separatorInset = UIEdgeInsets(top: 0, left: tableView.bounds.width, bottom: 0, right: 0)
+      cell.onTouchPinnedItem = { [weak self] item in
+        guard let strongSelf = self else { return }
+        strongSelf.navigationController?.pushToRepo(with: strongSelf.name, repoName: item.name)
+      }
       return cell
     }
   }
