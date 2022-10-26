@@ -62,7 +62,8 @@ class RssFeedManager: NSObject {
     }
     print("[\(atom.title)] fetches \(info.entries.count)'s items.")
     for var feed in info.entries {
-      let selectedFeeds: [RssFeed] = RssFeed.select(with: " where title=\"\(feed.title)\" order by updated desc")
+      let selectedTitle = feed.title.replacingOccurrences(of: "\"", with: "'")
+      let selectedFeeds: [RssFeed] = RssFeed.select(with: " where title=\"\(selectedTitle)\" order by updated desc")
       if selectedFeeds.isEmpty {
         feed.feedLink = atom.feedLink
         feed.unread = true

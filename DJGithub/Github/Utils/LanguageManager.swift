@@ -36,4 +36,19 @@ struct LanguageManager {
     LanguageManager.mapping = rs
   }
   
+  static func save(with languageName: String, color: String) async {
+    var col = color
+    if color.hasPrefix("#") {
+      col = String(color.dropFirst())
+    }
+    if let lang = Language.get(with: languageName) {
+      if col != lang.hex {
+        lang.update(with: languageName, color: col)
+      }
+    } else {
+      try? Language(language: languageName, hex: col).insert()
+    }
+    mapping[languageName] = color
+  }
+  
 }

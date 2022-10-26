@@ -8,9 +8,6 @@
 import UIKit
 
 class RepoCell: UITableViewCell {
-  enum CellType {
-    case blank, language(String, String), issues(String), pull(String), branch(String), readme
-  }
   
   var reloadClosure: (() -> ())?
   
@@ -58,7 +55,7 @@ class RepoCell: UITableViewCell {
     fatalError("init(coder:) has not been implemented")
   }
   
-  func render(with type: CellType) {
+  func render(with type: RepoCellType) {
     iconImageView.image = UIImage(named: type.imageName)
     nameLabel.text = type.name
     
@@ -102,52 +99,4 @@ class RepoCell: UITableViewCell {
     }
   }
 
-}
-
-extension RepoCell.CellType {
-  var height: CGFloat {
-    switch self {
-    case .blank: return 12
-    default: return 44
-    }
-  }
-
-  var imageName: String {
-    switch self {
-    case .language: return "coding"
-    case .issues: return "issue"
-    case .pull: return "pull-request"
-    case .branch: return "git-branch"
-    case .readme: return "book"
-    default: return ""
-    }
-  }
-  
-  var name: String {
-    switch self {
-    case .language(let language, _): return language
-    case .issues: return "Issues"
-    case .pull: return "Pull Requests"
-    case .branch: return "Branches"
-    case .readme: return "README"
-    default: return ""
-    }
-  }
-  
-  var desc: String {
-    switch self {
-    case .language(_, let desc): return desc
-    case .issues(let desc): return desc
-    case .branch(let desc): return desc
-    case .pull(let desc): return desc
-    default: return ""
-    }
-  }
-
-  var showReload: Bool {
-    switch self {
-    case .readme: return true
-    default: return false
-    }
-  }
 }

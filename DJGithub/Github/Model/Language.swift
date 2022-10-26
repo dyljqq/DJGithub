@@ -46,4 +46,9 @@ extension Language: SQLTable {
   static func get(with language: String) -> Self? {
     return Self.select(with: " where language=\"\(language)\"").first
   }
+  
+  func update(with languageName: String, color: String) {
+    let sql = "update \(Self.tableName) set hex=\"\(color)\" where language=\"\(languageName)\""
+    try? Self.update(with: sql)
+  }
 }
