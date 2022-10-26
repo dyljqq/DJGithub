@@ -12,6 +12,7 @@ struct DJUserDefaults {
   enum Keys: String {
     case searchHistoryWords
     case userInfo
+    case staredRepos
   }
   
   static func allHistorySearchWords() -> [String] {
@@ -34,10 +35,22 @@ struct DJUserDefaults {
   }
   
   static func save(with user: UserViewer?) {
-    guard var dict = DJEncoder(model: user).encode(),
+    guard let dict = DJEncoder(model: user).encode(),
     let data = try? JSONSerialization.data(withJSONObject: dict),
     let userInfo = String(data: data, encoding: .utf8) else { return }
     UserDefaults.standard.set(userInfo, forKey: Keys.userInfo.rawValue)
+  }
+  
+  static func getStaredRepos() -> [Repo]? {
+    let str = UserDefaults.standard.string(forKey: Keys.staredRepos.rawValue)
+    return try? DJDecoder(data: str?.data(using: .utf8)).decode()
+  }
+  
+  static func saveStaredRepos(_ repos: [Repo]) {
+    guard let dict = DJEncoder(model: repos).encode(),
+    let data = try? JSONSerialization.data(withJSONObject: dict),
+    let values = String(data: data, encoding: .utf8) else { return }
+    UserDefaults.standard.set(values, forKey: Keys.userInfo.rawValue)
   }
   
 }

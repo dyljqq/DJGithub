@@ -68,6 +68,10 @@ class RssFeedAtomViewController: UIViewController {
           }
         }
     })
+    NotificationCenter.default.addObserver(forName: RssFeedManager.RssFeedAtomReadFeedNotificationKey, object: nil, queue: .main, using: { [weak self] notification in
+      guard let strongSelf = self else { return }
+      strongSelf.loadData()
+    })
   }
   
   private func loadData() {
