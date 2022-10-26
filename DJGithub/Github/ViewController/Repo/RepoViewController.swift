@@ -96,8 +96,19 @@ class RepoViewController: UIViewController {
       strongSelf.tableView.endUpdates()
     }
     footerView.touchLink = { [weak self] req in
-      if let req = req, let url = req.url {
-        let vc = SFSafariViewController(url: url)
+      if let req = req,
+         let url = req.url {
+        
+        // github readme中会存在这种链接，比如docs/issue-227.md，那么这种链接会跳转到对应的repo中去。
+        var u = url
+        if url.isFileURL {
+          let path = url.absoluteString.components(separatedBy: "MarkdownView_MarkdownView.bundle/").last
+          if let path = url.absoluteString.components(separatedBy: "MarkdownView_MarkdownView.bundle/").last,
+             let url = URL(string: "https://github.com/ruanyf/weekly/blob/master/\(path)") {
+            u = url
+          }
+        }
+        let vc = SFSafariViewController(url: u)
         self?.navigationController?.present(vc, animated: true)
       }
     }

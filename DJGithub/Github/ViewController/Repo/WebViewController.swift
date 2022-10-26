@@ -144,6 +144,7 @@ class WebViewController: UIViewController {
       html = content
     }
     webView.loadHTMLString(html, baseURL: nil)
+
   }
   
   private func addObserve() {
