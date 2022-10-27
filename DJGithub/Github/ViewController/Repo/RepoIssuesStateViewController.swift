@@ -24,6 +24,10 @@ class RepoIssuesStateViewController: UIViewController {
   let repoName: String
   let issueState: IssueState
   
+  var defaultBranchName: String = "master"
+  
+  var branches: [RepoBranch] = []
+  
   let types: [Issue.IssueState] = [.open, .closed]
   lazy var vcs: [RepoIssuesViewController] = {
     return types.map { RepoIssuesViewController(
@@ -62,6 +66,9 @@ class RepoIssuesStateViewController: UIViewController {
     
     setUp()
     configNavigationItem()
+    Task {
+      self.branches = await RepoManager.fetchRepoBranches(with: userName, repoName: repoName, params: [:])
+    }
   }
   
   private func setUp() {
@@ -88,19 +95,47 @@ class RepoIssuesStateViewController: UIViewController {
   }
   
   private func configNavigationItem() {
-    guard issueState != .pull else { return }
     self.navigationItem.rightBarButtonItem = UIBarButtonItem(
       barButtonSystemItem: .add, target: self, action: #selector(plusAction))
   }
   
   @objc func plusAction() {
-    let vc = TitleAndDescViewController(with: .issue(userName: userName, repoName: repoName))
-    vc.completionHandler = { [weak self] in
-      guard let strongSelf = self else { return }
-      let vc = strongSelf.vcs[strongSelf.segmentView.selectedSegmentIndex]
-      vc.refresh()
+    switch issueState {
+    case .pull:
+      showBranches()
+    case .issue:
+      let vc = TitleAndDescViewController(with: .issue(userName: userName, repoName: repoName))
+      vc.completionHandler = { [weak self] in
+        guard let strongSelf = self else { return }
+        let vc = strongSelf.vcs[strongSelf.segmentView.selectedSegmentIndex]
+        vc.refresh()
+      }
+      self.present(vc, animated: true)
     }
-    self.present(vc, animated: true)
+  }
+  
+  private func showBranches() {
+    Task {
+      if self.branches.isEmpty {
+        self.branches = await RepoManager.fetchRepoBranches(with: userName, repoName: repoName, params: [:])
+      }
+      guard !self.branches.isEmpty else { return }
+      let branchListView = RepoBranchListView()
+      branchListView.showCheckIcon = false
+      let config = DJMaskContentConfig(view: branchListView, size: CGSize(width: 300, height: 300))
+      let maskView = DJMaskView.show(with: config)
+      config.render(with: self.branches, title: "New pull request")
+      branchListView.selectedClosure = { [weak self] branch in
+        guard let strongSelf = self else { return }
+        maskView?.hide {
+          strongSelf.navigationController?.pushToRepoBranchCommit(
+            with: strongSelf.defaultBranchName,
+            head: branch.name,
+            urlString: branch.commit.url
+          )
+        }
+      }
+    }
   }
   
   override func viewDidLayoutSubviews() {

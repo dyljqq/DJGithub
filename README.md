@@ -68,6 +68,9 @@ xcodebuild -resolvePackageDependencies -scmProvider system
   * 库issue & issue comment的获取，展示，修改
   * README通过webview去渲染
   * 获取库信息的pull request
+    * 获取repo branches
+    * 展示Compare changes
+
   * 刷新README
 
 3. 登录用户的star repos的获取&展示
@@ -119,7 +122,8 @@ xcodebuild -resolvePackageDependencies -scmProvider system
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | <img src="https://raw.githubusercontent.com/dyljqq/DJGithub/master/screenshot/User.png" width="190" height="335"/> | <img src="https://raw.githubusercontent.com/dyljqq/DJGithub/master/screenshot/UserInteract.png" width="190" height="335"/> | <img src="https://raw.githubusercontent.com/dyljqq/DJGithub/master/screenshot/UserInfo.png" width="190" height="335"/> | <img src="https://raw.githubusercontent.com/dyljqq/DJGithub/master/screenshot/Repo.png" width="190" height="335"/> |
 | <img src="https://raw.githubusercontent.com/dyljqq/DJGithub/master/screenshot/RepoDir.png" width="190" height="335"/> | <img src="https://raw.githubusercontent.com/dyljqq/DJGithub/master/screenshot/RepoIssues.png" width="190" height="335"/> | <img src="https://raw.githubusercontent.com/dyljqq/DJGithub/master/screenshot/IssueDetail.png" width="190" height="335"/> | <img src="https://raw.githubusercontent.com/dyljqq/DJGithub/master/screenshot/EditIssue.png" width="190" height="335"/> |
-| <img src="https://raw.githubusercontent.com/dyljqq/DJGithub/master/screenshot/IssueComments.png" width="190" height="335"/> | <img src="https://raw.githubusercontent.com/dyljqq/DJGithub/master/screenshot/Feeds.png" width="190" height="335"/> | <img src="https://raw.githubusercontent.com/dyljqq/DJGithub/master/screenshot/RssFeeds.png" width="190" height="335"/> |                                                              |
+| <img src="https://raw.githubusercontent.com/dyljqq/DJGithub/master/screenshot/IssueComments.png" width="190" height="335"/> | <img src="https://raw.githubusercontent.com/dyljqq/DJGithub/master/screenshot/Feeds.png" width="190" height="335"/> | <img src="https://raw.githubusercontent.com/dyljqq/DJGithub/master/screenshot/RssFeeds.png" width="190" height="335"/> | <img src="https://raw.githubusercontent.com/dyljqq/DJGithub/master/screenshot/RepoBranch.png" width="190" height="335"/> |
+| <img src="https://raw.githubusercontent.com/dyljqq/DJGithub/master/screenshot/RepoBranchCreate.png" width="190" height="335"/> |                                                              |                                                              |                                                              |
 
 
 

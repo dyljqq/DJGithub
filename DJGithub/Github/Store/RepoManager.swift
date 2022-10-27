@@ -117,4 +117,9 @@ struct RepoManager {
     let brances: [RepoBranch]? = try? await APIClient.shared.model(with: router)
     return brances ?? []
   }
+  
+  static func fetchRepoBranchCommit(with urlString: String) async -> RepoBranchCommitInfo? {
+    let info: RepoBranchCommitInfo? = try? await APIClient.shared.data(with: urlString)
+    return info
+  }
 }

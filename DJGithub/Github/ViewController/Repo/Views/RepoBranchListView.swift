@@ -23,7 +23,7 @@ class RepoBranchListView: UIView {
     tableView.dataSource = self
     tableView.backgroundColor = .white
     tableView.showsVerticalScrollIndicator = false
-    tableView.rowHeight = 30
+    tableView.rowHeight = 34
     tableView.separatorColor = UIColorFromRGB(0xeeeeee)
     tableView.register(RepoBranchCell.classForCoder(), forCellReuseIdentifier: RepoBranchCell.className)
     return tableView
@@ -33,6 +33,7 @@ class RepoBranchListView: UIView {
   
   var defaultBranchName: String = ""
   var branches: [RepoBranch] = []
+  var showCheckIcon: Bool = true
   
   init() {
     super.init(frame: .zero)
@@ -40,9 +41,10 @@ class RepoBranchListView: UIView {
     setUp()
   }
   
-  func render(with branches: [RepoBranch], defaultBranchName: String = "master") {
+  func render(with branches: [RepoBranch], defaultBranchName: String = "master", title: String = "Branch") {
     self.defaultBranchName = defaultBranchName
     self.branches = branches
+    self.titleLabel.text = title
     self.tableView.reloadData()
   }
   
@@ -77,13 +79,12 @@ extension RepoBranchListView: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: RepoBranchCell.className, for: indexPath) as! RepoBranchCell
     let branch = branches[indexPath.row]
-    cell.render(with: branch, selected: branch.name == defaultBranchName)
+    cell.render(with: branch, selected: showCheckIcon && branch.name == defaultBranchName)
     return cell
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
-
     selectedClosure?(branches[indexPath.row])
   }
 }
