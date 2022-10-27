@@ -48,7 +48,7 @@ extension RepoBranchCommitInfo {
     var deletions: Int
     var contentsUrl: String
     var blobUrl: String
-    var patch: String
+    var patch: String?
   }
   
   struct RepoBranchCommitStats: DJCodable {
