@@ -155,6 +155,10 @@
 		73EE0CDE2909351A0010C54A /* PrimaryLanguageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EE0CDD2909351A0010C54A /* PrimaryLanguageCell.swift */; };
 		73EE0CE0290962CE0010C54A /* PinnedRepoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EE0CDF290962CE0010C54A /* PinnedRepoCell.swift */; };
 		73EE0CE2290968310010C54A /* PinnedItemsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EE0CE1290968310010C54A /* PinnedItemsCell.swift */; };
+		73EE0CE6290A6E040010C54A /* RepoBranchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EE0CE5290A6E040010C54A /* RepoBranchListView.swift */; };
+		73EE0CE8290A6EC90010C54A /* RepoBranch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EE0CE7290A6EC90010C54A /* RepoBranch.swift */; };
+		73EE0CEA290A6FB40010C54A /* RepoBranchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EE0CE9290A6FB40010C54A /* RepoBranchCell.swift */; };
+		73EE0CEC290A72560010C54A /* DJMaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EE0CEB290A72560010C54A /* DJMaskView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -324,6 +328,10 @@
 		73EE0CDD2909351A0010C54A /* PrimaryLanguageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryLanguageCell.swift; sourceTree = "<group>"; };
 		73EE0CDF290962CE0010C54A /* PinnedRepoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinnedRepoCell.swift; sourceTree = "<group>"; };
 		73EE0CE1290968310010C54A /* PinnedItemsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinnedItemsCell.swift; sourceTree = "<group>"; };
+		73EE0CE5290A6E040010C54A /* RepoBranchListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoBranchListView.swift; sourceTree = "<group>"; };
+		73EE0CE7290A6EC90010C54A /* RepoBranch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoBranch.swift; sourceTree = "<group>"; };
+		73EE0CE9290A6FB40010C54A /* RepoBranchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoBranchCell.swift; sourceTree = "<group>"; };
+		73EE0CEB290A72560010C54A /* DJMaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJMaskView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -595,6 +603,7 @@
 				73E14E4E28F3477E00A9811D /* Feeds.swift */,
 				734D676029082D3E006A0BFA /* UserViewer.swift */,
 				734D676229084571006A0BFA /* Repository.swift */,
+				73EE0CE7290A6EC90010C54A /* RepoBranch.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -684,6 +693,7 @@
 				73101D4A28E4889B00DB5423 /* UserStatusView.swift */,
 				73B7905B28E59104002A9CDC /* HeaderSegmentView.swift */,
 				73EE0CDB29092F960010C54A /* LanguageGradientView.swift */,
+				73EE0CEB290A72560010C54A /* DJMaskView.swift */,
 			);
 			path = Widget;
 			sourceTree = "<group>";
@@ -719,6 +729,8 @@
 				73074C7F28EDB955001A90E7 /* WebViewFooterView.swift */,
 				73074CBF28EED421001A90E7 /* CommitView.swift */,
 				73EE0CDD2909351A0010C54A /* PrimaryLanguageCell.swift */,
+				73EE0CE5290A6E040010C54A /* RepoBranchListView.swift */,
+				73EE0CE9290A6FB40010C54A /* RepoBranchCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -977,6 +989,7 @@
 				73DF6C0C28EC7A7A0003BDB8 /* RepoIssuesStateViewController.swift in Sources */,
 				73EE0CDE2909351A0010C54A /* PrimaryLanguageCell.swift in Sources */,
 				7339201528F56D2900DC76B0 /* RssFeedManager.swift in Sources */,
+				73EE0CE6290A6E040010C54A /* RepoBranchListView.swift in Sources */,
 				73AACB2928D321480072B1DF /* Result.swift in Sources */,
 				7320170628F53455007B970F /* RssFeedAtomViewController.swift in Sources */,
 				73DF6BFC28EBFD3E0003BDB8 /* RepoContent.swift in Sources */,
@@ -1030,6 +1043,7 @@
 				73AACAD928D308A60072B1DF /* ViewController.swift in Sources */,
 				73AACB6C28D5AF7D0072B1DF /* LanguageManager.swift in Sources */,
 				73AACB2D28D32BB10072B1DF /* DJFileManager.swift in Sources */,
+				73EE0CE8290A6EC90010C54A /* RepoBranch.swift in Sources */,
 				73AACB6428D4E5000072B1DF /* Int+Ext.swift in Sources */,
 				73AACB2428D31A440072B1DF /* User.swift in Sources */,
 				73AACB6028D4BE4F0072B1DF /* RepoManager.swift in Sources */,
@@ -1068,6 +1082,7 @@
 				73DF6BF028EAE0A00003BDB8 /* DeveloperGroupManager.swift in Sources */,
 				73DF6C0828EC69840003BDB8 /* Issue.swift in Sources */,
 				73B7904828E51A3A002A9CDC /* UIImage+Ext.swift in Sources */,
+				73EE0CEC290A72560010C54A /* DJMaskView.swift in Sources */,
 				73AACB5828D483CA0072B1DF /* UserContributionCell.swift in Sources */,
 				73AACB0C28D30B3D0072B1DF /* Error.swift in Sources */,
 				735D0E082903115E00E618B3 /* mach_stack_info.c in Sources */,
@@ -1076,6 +1091,7 @@
 				73AACB5E28D4BD3B0072B1DF /* UserStaredReposViewController.swift in Sources */,
 				73AACB5A28D4B8610072B1DF /* Repo.swift in Sources */,
 				732B21D028E1C09B005893C0 /* RepoStarView.swift in Sources */,
+				73EE0CEA290A6FB40010C54A /* RepoBranchCell.swift in Sources */,
 				73101D3F28E3077C00DB5423 /* UserManager.swift in Sources */,
 				73AACB3E28D362430072B1DF /* Consts.swift in Sources */,
 				7374D19728E0BC1D00E6BE47 /* Readme.swift in Sources */,

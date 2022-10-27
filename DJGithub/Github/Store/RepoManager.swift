@@ -111,4 +111,10 @@ struct RepoManager {
     }
     return nil
   }
+  
+  static func fetchRepoBranches(with userName: String, repoName: String, params: [String: String]) async -> [RepoBranch] {
+    let router = GithubRouter.branches(userName: userName, repoName: repoName, params: params)
+    let brances: [RepoBranch]? = try? await APIClient.shared.model(with: router)
+    return brances ?? []
+  }
 }
