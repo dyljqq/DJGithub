@@ -51,6 +51,11 @@ class RepoViewController: UIViewController {
     return tableView
   }()
   
+  lazy var repoBranchView: RepoBranchListView = {
+    let view = RepoBranchListView()
+    return view
+  }()
+  
   init(with userName: String, repoName: String) {
     self.repoName = repoName
     self.userName = userName
@@ -191,6 +196,20 @@ class RepoViewController: UIViewController {
       }
     }
   }
+  
+  private func showBranchesView() {
+    Task {
+      let branches = await RepoManager.fetchRepoBranches(with: userName, repoName: repoName, params: ["page": "1"])
+      repoBranchView.render(with: branches)
+      
+      DispatchQueue.main.async {
+        DJMaskView.show(with: DJMaskContentConfig(
+          view: self.repoBranchView,
+          size: CGSize(width: 300, height: 300)
+        ))
+      }
+    }
+  }
 
 }
 
@@ -249,6 +268,8 @@ extension RepoViewController: UITableViewDelegate, UITableViewDataSource {
       self.navigationController?.pushToRepoIssues(with: userName, repoName: repoName)
     case .pull:
       self.navigationController?.pushToRepoIssues(with: userName, repoName: repoName, issueState: .pull)
+    case .branch:
+      self.showBranchesView()
     default:
       break
     }

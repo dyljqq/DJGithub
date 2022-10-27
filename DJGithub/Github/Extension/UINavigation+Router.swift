@@ -102,4 +102,9 @@ extension UINavigationController {
     let vc = RssFeedDetailViewController(rssFeed: rssFeed)
     pushViewController(vc, animated: true)
   }
+  
+  func pushToRepoBranchCommit(with base: String, head: String, urlString: String) {
+    let vc = RepoBranchCommitViewController(head: head, base: base, urlString: urlString)
+    pushViewController(vc, animated: true)
+  }
 }

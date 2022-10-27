@@ -36,6 +36,7 @@ enum GithubRouter: Router {
   
   // repo
   case repoContents(userName: String, repoName: String)
+  case branches(userName: String, repoName: String, params: [String: String])
   
   // repo issues
   case repoIssues(userName: String, repoName: String, params: [String: String])
@@ -104,6 +105,7 @@ enum GithubRouter: Router {
     case .feeds: return "feeds"
     case .repoPullIssues(let userName, let repoName, _): return "repos/\(userName)/\(repoName)/pulls"
     case .graphql: return "graphql"
+    case .branches(let userName, let repoName, _): return "repos/\(userName)/\(repoName)/branches"
     }
   }
   
@@ -148,6 +150,7 @@ enum GithubRouter: Router {
         .repoIssues(_, _, let items),
         .userInfoEdit(let items),
         .repoPullIssues(_, _, let items),
+        .branches(_, _, let items),
         .forks(_, let items):
       queryItems = items
     default:
