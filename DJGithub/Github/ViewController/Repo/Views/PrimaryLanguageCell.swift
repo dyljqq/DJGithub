@@ -96,6 +96,16 @@ class PrimaryLanguageCell: UITableViewCell {
       percent: percent
     )
     otherLanguageView.render(with: UIColorFromRGB(0xeeeeee), languageName: "Other", percent: 1 - percent)
+    
+    let rect = (primaryLanguage.name as NSString).boundingRect(
+      with: CGSize(width: 0, height: 13),
+      options: .usesLineFragmentOrigin,
+      attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)],
+      context: nil
+    )
+    primaryLanguageView.snp.updateConstraints { make in
+      make.width.equalTo(rect.width + 80)
+    }
   }
   
   private func setUp() {
@@ -111,14 +121,14 @@ class PrimaryLanguageCell: UITableViewCell {
     }
     primaryLanguageView.snp.makeConstraints { make in
       make.leading.equalTo(languageView)
-      make.width.equalTo(languageView.snp.width).multipliedBy(0.33)
+      make.width.equalTo(150)
       make.height.equalTo(16)
       make.top.equalTo(languageView.snp.bottom).offset(10)
     }
     otherLanguageView.snp.makeConstraints { make in
-      make.top.equalTo(primaryLanguageView)
-      make.width.equalTo(languageView.snp.width).multipliedBy(0.33)
-      make.height.equalTo(10)
+      make.centerY.equalTo(primaryLanguageView)
+      make.width.equalTo(100)
+      make.height.equalTo(16)
       make.leading.equalTo(primaryLanguageView.snp.trailing)
     }
   }

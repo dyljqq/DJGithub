@@ -18,12 +18,14 @@ struct LocalUserManager {
   }
   
   static func loadViewer() {
-    if getUser() == nil {
-      Task {
-        let viewer = await UserManager.fetchUserInfo()
-        saveUser(viewer)
-      }
+    Task {
+      let viewer = await UserManager.fetchUserInfo()
+      saveUser(viewer)
     }
+  }
+  
+  static func getViewerName() -> String {
+    return DJUserDefaults.viewerName()
   }
   
 }

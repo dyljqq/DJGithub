@@ -33,8 +33,9 @@ class ConfigManager: NSObject {
   static var viewer: UserViewer? {
     return LocalUserManager.getUser()
   }
+
   static var viewName: String {
-    return viewer?.login ?? ConfigManager.config.userName
+    return LocalUserManager.getViewerName()
   }
   
   override init() {

@@ -13,6 +13,7 @@ struct DJUserDefaults {
     case searchHistoryWords
     case userInfo
     case staredRepos
+    case viewerName
   }
   
   static func allHistorySearchWords() -> [String] {
@@ -35,6 +36,9 @@ struct DJUserDefaults {
   }
   
   static func save(with user: UserViewer?) {
+    guard let user = user else { return }
+    saveViewerName(user.login)
+
     guard let dict = DJEncoder(model: user).encode(),
     let data = try? JSONSerialization.data(withJSONObject: dict),
     let userInfo = String(data: data, encoding: .utf8) else { return }
@@ -51,6 +55,19 @@ struct DJUserDefaults {
     let data = try? JSONSerialization.data(withJSONObject: dict),
     let values = String(data: data, encoding: .utf8) else { return }
     UserDefaults.standard.set(values, forKey: Keys.userInfo.rawValue)
+  }
+  
+  static func viewerName() -> String {
+    return UserDefaults.standard.string(forKey: Keys.viewerName.rawValue) ?? ""
+  }
+  
+  static func saveViewerName(_ name: String) {
+    UserDefaults.standard.set(name, forKey: Keys.viewerName.rawValue)
+  }
+  
+  static func clearViewerInfo() {
+    UserDefaults.standard.removeObject(forKey: Keys.userInfo.rawValue)
+    UserDefaults.standard.removeObject(forKey: Keys.viewerName.rawValue)
   }
   
 }

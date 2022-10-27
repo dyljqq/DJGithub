@@ -20,6 +20,22 @@ Personal access tokens的申请链接如下：
 {
  "authorization": "token \(personal token)", // person token
 }
+
+// 可以在Config文件中手动配置authorization对应的用户名字.
+// app会在初始化的时候去加载authorization对应的用户的所有信息，并做缓存的操作。但是可能会因为网络等问题，初始化失败。因此可以在下面添加。
+struct Config: DJCodable {
+  var authorization: String = ""
+  // user‘s login name
+  let userName: String = "dyljqq"
+  
+  init() {
+    
+  }
+  
+  enum CodingKeys: String, CodingKey {
+    case authorization
+  }
+}
 ```
 
 如果Swift Package fetch过慢的话，可以使用以下命令行指令：
