@@ -245,7 +245,8 @@ class TitleAndDescViewController: UIViewController {
           "head": "\(model.commiterName):\(model.compare)",
           "base": model.base
         ]
-        if let _ = await RepoManager.createRepoPullRequest(with: model.userName, repoName: model.repoName, params: params) {
+        if let statusModel = await RepoManager.createRepoPullRequest(with: model.userName, repoName: model.repoName, params: params),
+           statusModel.isStatus201 {
           self.dismiss(animated: true, completion: { [weak self] in
             NotificationCenter.default.post(name: NotificationKeys.createPullRequestKey, object: nil)
             self?.completionHandler?()
