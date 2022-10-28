@@ -15,8 +15,15 @@ class RepoBranchCommitViewController: UIViewController {
   // master
   let base: String
   let urlString: String
+
+  var showCommitButton: Bool = false {
+    didSet {
+      createButton.isHidden = !showCommitButton
+    }
+  }
   
-  var files: [RepoBranchCommitInfo.RepoBranchCommitFile] = []
+  var branchCommit: RepoBranchCommitInfo?
+  var files: [RepoPullFile] = []
   
   lazy var compareLabel: UILabel = {
     let label = UILabel()
@@ -61,9 +68,7 @@ class RepoBranchCommitViewController: UIViewController {
     return view
   }()
   
-  lazy var footerView: UIView = {
-    let view = UIView(frame: CGRect(x: 0, y: 0, width: FrameGuide.screenWidth, height: 80))
-    
+  lazy var createButton: UIButton = {
     let createButton = UIButton()
     createButton.backgroundColor = UIColor(red: 66.0 / 255, green: 150.0 / 255, blue: 77.0 / 255, alpha: 1)
     createButton.layer.cornerRadius = 5
@@ -71,14 +76,17 @@ class RepoBranchCommitViewController: UIViewController {
     createButton.setTitleColor(.white, for: .normal)
     createButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
     createButton.addTarget(self, action: #selector(createAction), for: .touchUpInside)
+    return createButton
+  }()
+  
+  lazy var footerView: UIView = {
+    let view = UIView(frame: CGRect(x: 0, y: 0, width: FrameGuide.screenWidth, height: 80))
     view.addSubview(createButton)
-    
     createButton.snp.makeConstraints { make in
       make.center.equalToSuperview()
       make.leading.equalTo(40)
       make.height.equalTo(44)
     }
-    
     return view
   }()
   
@@ -109,26 +117,29 @@ class RepoBranchCommitViewController: UIViewController {
   private func fetchRepoBranchCommitInfo() {
     Task {
       if let info = await RepoManager.fetchRepoBranchCommit(with: urlString) {
+        self.branchCommit = info
         commitUserView.render(with: info)
         
-        let text = "Showing \(info.files.count) changed files with \(info.stats.additions) additions and \(info.stats.deletions) deletions."
-        let attr = NSMutableAttributedString(string: text)
-        if let changedRange = text.range(of: "\(info.files.count) changed files") {
-          let range = NSRange(changedRange, in: text)
-          attr.addAttribute(.foregroundColor, value: UIColor.lightBlue, range: range)
-          attr.addAttribute(.font, value: UIFont.systemFont(ofSize: 14, weight: .bold), range: range)
+        if let stats = info.stats {
+          let text = "Showing \(info.displayedFiles.count) changed files with \(stats.additions) additions and \(stats.deletions) deletions."
+          let attr = NSMutableAttributedString(string: text)
+          if let changedRange = text.range(of: "\(info.displayedFiles.count) changed files") {
+            let range = NSRange(changedRange, in: text)
+            attr.addAttribute(.foregroundColor, value: UIColor.lightBlue, range: range)
+            attr.addAttribute(.font, value: UIFont.systemFont(ofSize: 14, weight: .bold), range: range)
+          }
+          if let additionRange = text.range(of: "\(stats.additions) additions") {
+            let range = NSRange(additionRange, in: text)
+            attr.addAttribute(.font, value: UIFont.systemFont(ofSize: 14, weight: .bold), range: range)
+          }
+          if let deletionRange = text.range(of: "\(stats.deletions) deletions") {
+            let range = NSRange(deletionRange, in: text)
+            attr.addAttribute(.font, value: UIFont.systemFont(ofSize: 14, weight: .bold), range: range)
+          }
+          descLabel.attributedText = attr
         }
-        if let additionRange = text.range(of: "\(info.stats.additions) additions") {
-          let range = NSRange(additionRange, in: text)
-          attr.addAttribute(.font, value: UIFont.systemFont(ofSize: 14, weight: .bold), range: range)
-        }
-        if let deletionRange = text.range(of: "\(info.stats.deletions) deletions") {
-          let range = NSRange(deletionRange, in: text)
-          attr.addAttribute(.font, value: UIFont.systemFont(ofSize: 14, weight: .bold), range: range)
-        }
-        descLabel.attributedText = attr
         
-        self.files = info.files
+        self.files = info.displayedFiles
         self.tableView.reloadData()
       }
     }
@@ -190,7 +201,21 @@ class RepoBranchCommitViewController: UIViewController {
   }
   
   @objc func createAction() {
-    // TODO
+    if let branchCommit = branchCommit,
+       let repoName = getRepoName(by: urlString),
+       let author = branchCommit.author,
+       let committer = branchCommit.committer {
+      let model = PullRequestModel(
+        title: branchCommit.commit.message,
+        userName: author.login,
+        repoName: repoName,
+        base: base,
+        compare: head,
+        commiterName: committer.login
+      )
+      let vc = TitleAndDescViewController(with: .createPullRequest(model: model))
+      self.present(vc, animated: true)
+    }
   }
   
   required init?(coder: NSCoder) {
@@ -222,79 +247,14 @@ extension RepoBranchCommitViewController: UITableViewDelegate, UITableViewDataSo
 }
 
 extension RepoBranchCommitViewController {
-  class RepoBranchCommitUserView: UIView {
-    lazy var titleLabel: UILabel = {
-      let label = UILabel()
-      label.textColor = .textColor
-      label.font = UIFont.systemFont(ofSize: 14, weight: .bold)
-      return label
-    }()
-    lazy var avatarImageView: UIImageView = {
-      let imageView = UIImageView()
-      imageView.layer.cornerRadius = 10
-      imageView.layer.masksToBounds = true
-      return imageView
-    }()
-    lazy var nameLabel: UILabel = {
-      let label = UILabel()
-      label.textColor = .textColor
-      label.font = UIFont.systemFont(ofSize: 12)
-      return label
-    }()
-    lazy var dateLabel: UILabel = {
-      let label = UILabel()
-      label.textColor = .textGrayColor
-      label.font = UIFont.systemFont(ofSize: 12)
-      return label
-    }()
-    
-    init() {
-      super.init(frame: .zero)
-      
-      setUp()
-    }
-    
-    func render(with commit: RepoBranchCommitInfo) {
-      titleLabel.text = commit.commit.message
-      if let committer = commit.committer {
-        avatarImageView.setImage(with: committer.avatarUrl)
-      }
-      nameLabel.text = commit.commit.committer.name
-      if let date = normalDateParser.date(from: commit.commit.committer.date) {
-        dateLabel.text = "committed \(date.dateFormatString)"
-      } else {
-        dateLabel.text = commit.commit.committer.date
+  private func getRepoName(by urlString: String) -> String? {
+    let components = URLComponents(string: urlString)
+    if let path = components?.path {
+      let arr = path.components(separatedBy: "/").filter { !$0.isEmpty }
+      if arr.count == 5 {
+        return arr[2]
       }
     }
-    
-    required init?(coder: NSCoder) {
-      fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func setUp() {
-      addSubview(titleLabel)
-      addSubview(avatarImageView)
-      addSubview(nameLabel)
-      addSubview(dateLabel)
-      
-      titleLabel.snp.makeConstraints { make in
-        make.leading.equalTo(12)
-        make.top.equalTo(10)
-      }
-      avatarImageView.snp.makeConstraints { make in
-        make.leading.equalTo(titleLabel)
-        make.top.equalTo(titleLabel.snp.bottom).offset(5)
-        make.width.height.equalTo(20)
-      }
-      nameLabel.snp.makeConstraints { make in
-        make.leading.equalTo(avatarImageView.snp.trailing).offset(5)
-        make.centerY.equalTo(avatarImageView)
-      }
-      dateLabel.snp.makeConstraints { make in
-        make.leading.equalTo(nameLabel.snp.trailing).offset(5)
-        make.trailing.equalTo(-12)
-        make.centerY.equalTo(avatarImageView)
-      }
-    }
+    return nil
   }
 }

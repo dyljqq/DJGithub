@@ -162,6 +162,11 @@
 		73EE0CEE290ABF7B0010C54A /* RepoBranchCommit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EE0CED290ABF7B0010C54A /* RepoBranchCommit.swift */; };
 		73EE0CF0290AC4B30010C54A /* RepoBranchCommitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EE0CEF290AC4B30010C54A /* RepoBranchCommitViewController.swift */; };
 		73EE0CF2290AE2E90010C54A /* RepoBranchCommitFileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EE0CF1290AE2E90010C54A /* RepoBranchCommitFileCell.swift */; };
+		73EE0CF6290BA8F10010C54A /* RepoPullRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EE0CF5290BA8F10010C54A /* RepoPullRequestViewController.swift */; };
+		73EE0CF8290BAE7D0010C54A /* RepoPull.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EE0CF7290BAE7D0010C54A /* RepoPull.swift */; };
+		73EE0CFA290BB3F50010C54A /* RepoBranchCommitUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EE0CF9290BB3F50010C54A /* RepoBranchCommitUserView.swift */; };
+		73EE0CFC290BB48E0010C54A /* RepoBranchCommitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EE0CFB290BB48E0010C54A /* RepoBranchCommitCell.swift */; };
+		73EE0CFE290BB79A0010C54A /* RepoPullFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EE0CFD290BB79A0010C54A /* RepoPullFile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -338,6 +343,11 @@
 		73EE0CED290ABF7B0010C54A /* RepoBranchCommit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoBranchCommit.swift; sourceTree = "<group>"; };
 		73EE0CEF290AC4B30010C54A /* RepoBranchCommitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoBranchCommitViewController.swift; sourceTree = "<group>"; };
 		73EE0CF1290AE2E90010C54A /* RepoBranchCommitFileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoBranchCommitFileCell.swift; sourceTree = "<group>"; };
+		73EE0CF5290BA8F10010C54A /* RepoPullRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoPullRequestViewController.swift; sourceTree = "<group>"; };
+		73EE0CF7290BAE7D0010C54A /* RepoPull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoPull.swift; sourceTree = "<group>"; };
+		73EE0CF9290BB3F50010C54A /* RepoBranchCommitUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoBranchCommitUserView.swift; sourceTree = "<group>"; };
+		73EE0CFB290BB48E0010C54A /* RepoBranchCommitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoBranchCommitCell.swift; sourceTree = "<group>"; };
+		73EE0CFD290BB79A0010C54A /* RepoPullFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoPullFile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -611,6 +621,8 @@
 				734D676229084571006A0BFA /* Repository.swift */,
 				73EE0CE7290A6EC90010C54A /* RepoBranch.swift */,
 				73EE0CED290ABF7B0010C54A /* RepoBranchCommit.swift */,
+				73EE0CF7290BAE7D0010C54A /* RepoPull.swift */,
+				73EE0CFD290BB79A0010C54A /* RepoPullFile.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -720,6 +732,7 @@
 				73074C7B28ED5507001A90E7 /* RepoIssueDetailViewController.swift */,
 				73074CBD28EEC4AF001A90E7 /* TitleAndDescViewController.swift */,
 				73EE0CEF290AC4B30010C54A /* RepoBranchCommitViewController.swift */,
+				73EE0CF5290BA8F10010C54A /* RepoPullRequestViewController.swift */,
 			);
 			path = Repo;
 			sourceTree = "<group>";
@@ -740,6 +753,8 @@
 				73EE0CE5290A6E040010C54A /* RepoBranchListView.swift */,
 				73EE0CE9290A6FB40010C54A /* RepoBranchCell.swift */,
 				73EE0CF1290AE2E90010C54A /* RepoBranchCommitFileCell.swift */,
+				73EE0CF9290BB3F50010C54A /* RepoBranchCommitUserView.swift */,
+				73EE0CFB290BB48E0010C54A /* RepoBranchCommitCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -998,6 +1013,7 @@
 				73DF6C0C28EC7A7A0003BDB8 /* RepoIssuesStateViewController.swift in Sources */,
 				73EE0CDE2909351A0010C54A /* PrimaryLanguageCell.swift in Sources */,
 				7339201528F56D2900DC76B0 /* RssFeedManager.swift in Sources */,
+				73EE0CFA290BB3F50010C54A /* RepoBranchCommitUserView.swift in Sources */,
 				73EE0CF0290AC4B30010C54A /* RepoBranchCommitViewController.swift in Sources */,
 				73EE0CE6290A6E040010C54A /* RepoBranchListView.swift in Sources */,
 				73AACB2928D321480072B1DF /* Result.swift in Sources */,
@@ -1064,12 +1080,14 @@
 				73AACB5428D47ECB0072B1DF /* UserContrbutionItemCell.swift in Sources */,
 				7341DCC828DF24CB009A3A3C /* NavigationController.swift in Sources */,
 				73AACB4328D42C1B0072B1DF /* UINavigation+Router.swift in Sources */,
+				73EE0CFC290BB48E0010C54A /* RepoBranchCommitCell.swift in Sources */,
 				73B7904C28E5298D002A9CDC /* LocalDeveloperCell.swift in Sources */,
 				732016FF28F46DFB007B970F /* DateParser.swift in Sources */,
 				73101D4928E47FB100DB5423 /* StatusModel.swift in Sources */,
 				73B7905E28E6D8EB002A9CDC /* UserFollowingManager.swift in Sources */,
 				7320170D28F5378E007B970F /* RssFeedAtom.swift in Sources */,
 				73EE0CDC29092F960010C54A /* LanguageGradientView.swift in Sources */,
+				73EE0CF8290BAE7D0010C54A /* RepoPull.swift in Sources */,
 				73B7906D28E972A9002A9CDC /* SearchWordManager.swift in Sources */,
 				73074CCF28EF573D001A90E7 /* LocalRepoCell.swift in Sources */,
 				7341DCD228E03C6A009A3A3C /* RepoViewController.swift in Sources */,
@@ -1088,6 +1106,7 @@
 				73C598CD28D9E6A100DA86A1 /* URL+Ext.swift in Sources */,
 				7341DCD028E03B17009A3A3C /* RepoHeaderView.swift in Sources */,
 				7339201928F5883500DC76B0 /* RssFeedDetailViewController.swift in Sources */,
+				73EE0CFE290BB79A0010C54A /* RepoPullFile.swift in Sources */,
 				7339201328F5458100DC76B0 /* DateHelper.swift in Sources */,
 				7320170328F48227007B970F /* FeedViewController.swift in Sources */,
 				73DF6BF028EAE0A00003BDB8 /* DeveloperGroupManager.swift in Sources */,
@@ -1116,6 +1135,7 @@
 				735D0E092903115E00E618B3 /* DJStuckMonitor.swift in Sources */,
 				73DF6BEC28EACF340003BDB8 /* SearchWordHeaderView.swift in Sources */,
 				73074CC428EEF54F001A90E7 /* HUD.swift in Sources */,
+				73EE0CF6290BA8F10010C54A /* RepoPullRequestViewController.swift in Sources */,
 				73B7905228E53353002A9CDC /* Config.swift in Sources */,
 				7341DCCA28DF2B4B009A3A3C /* ImageCoder.swift in Sources */,
 			);

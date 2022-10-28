@@ -15,6 +15,7 @@ class TitleAndDescViewController: UIViewController {
     case issueComment(userName: String, repoName: String, issueNum: Int)
     case rssFeed
     case editRssFeedAtom(title: String, description: String, feedLink: String)
+    case createPullRequest(model: PullRequestModel)
   }
   
   let type: VCType
@@ -113,6 +114,10 @@ class TitleAndDescViewController: UIViewController {
       self.titleTextField.text = title
       self.descTextView.placeholder = ""
       self.descTextView.text = description
+    case .createPullRequest(let model):
+      titleLabel.text = "create pull request"
+      self.titleTextField.text = model.title
+      self.descTextView.placeholder = "Leave a comment."
     }
   }
   
@@ -228,7 +233,15 @@ class TitleAndDescViewController: UIViewController {
         self.dismiss(animated: true, completion: { [weak self] in
           self?.completionHandler?()
         })
-        
+      case .createPullRequest(let model):
+        let params: [String: String] = [
+          "title": title,
+          "body": content,
+          "head": "\(model.commiterName):\(model.compare)",
+          "base": model.base
+        ]
+        await RepoManager.createRepoPullRequest(with: model.userName, repoName: model.repoName, params: params)
+        self.dismiss(animated: true)
       }
       commitView.isLoading = false
     }

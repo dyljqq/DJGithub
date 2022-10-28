@@ -36,7 +36,6 @@ class RepoIssueDetailHeaderView: UIView {
     label.font = UIFont.systemFont(ofSize: 16)
     label.textColor = .blue
     label.numberOfLines = 0
-    label.text = "#\(0)"
     return label
   }()
   
