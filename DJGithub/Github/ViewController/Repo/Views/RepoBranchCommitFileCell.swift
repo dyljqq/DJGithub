@@ -29,7 +29,7 @@ class RepoBranchCommitFileCell: UITableViewCell {
     setUp()
   }
   
-  func render(with file: RepoBranchCommitInfo.RepoBranchCommitFile) {
+  func render(with file: RepoPullFile) {
     titleLabel.text = file.filename
     descLabel.text = "\(file.additions) additions and \(file.deletions) deletions."
   }

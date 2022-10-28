@@ -12,9 +12,12 @@ struct RepoBranchCommitInfo: DJCodable {
   var url: String
   var htmlUrl: String
   var commentsUrl: String
-  var stats: RepoBranchCommitStats
+  var stats: RepoBranchCommitStats?
   
-  var files: [RepoBranchCommitFile]
+  var files: [RepoPullFile]?
+  var displayedFiles: [RepoPullFile] {
+    return files ?? []
+  }
   
   var author: RepoBranchCommitInfoUser?
   var committer: RepoBranchCommitInfoUser?
@@ -41,19 +44,19 @@ extension RepoBranchCommitInfo {
     var avatarUrl: String
   }
   
-  struct RepoBranchCommitFile: DJCodable {
-    var filename: String
-    var status: String
-    var additions: Int
-    var deletions: Int
-    var contentsUrl: String
-    var blobUrl: String
-    var patch: String?
-  }
-  
   struct RepoBranchCommitStats: DJCodable {
     var total: Int
     var additions: Int
     var deletions: Int
   }
+}
+
+struct PullRequestModel: DJCodable {
+  let title: String
+  let userName: String
+  let repoName: String
+  let base: String
+  // to use compare userName + branch name,etc: dyljqq:dev
+  let compare: String
+  let commiterName: String
 }

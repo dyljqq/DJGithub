@@ -122,4 +122,47 @@ struct RepoManager {
     let info: RepoBranchCommitInfo? = try? await APIClient.shared.data(with: urlString)
     return info
   }
+  
+  static func createRepoPullRequest(with userName: String, repoName: String, params: [String: String]) async -> RepoPull? {
+    let router = GithubRouter.createPullRequest(userName: userName, repoName: repoName, params: params)
+    do {
+      if let data = try? await APIClient.shared.data(with: router) {
+        print(String(data: data, encoding: .utf8))
+      }
+    } catch {
+      print("error: \(error)")
+    }
+    return nil
+  }
+  
+  static func getPullRequest(with userName: String, repoName: String, pullNum: Int) async -> RepoPull? {
+    let router = GithubRouter.repoPull(userName: userName, repoName: repoName, pullNum: pullNum)
+    return try? await APIClient.shared.model(with: router)
+  }
+  
+  static func fetchRepoPullCommits(with userName: String, repoName: String, pullNum: Int) async -> [RepoBranchCommitInfo] {
+    let router = GithubRouter.repoPullCommits(userName: userName, repoName: repoName, pullNum: pullNum)
+    let infos: [RepoBranchCommitInfo]? = try? await APIClient.shared.model(with: router)
+    return infos ?? []
+  }
+  
+  static func fetchRepoPullFiles(with userName: String, repoName: String, pullNum: Int) async -> [RepoPullFile] {
+    let router = GithubRouter.repoPullFiles(userName: userName, repoName: repoName, pullNum: pullNum)
+    let files: [RepoPullFile]? = try? await APIClient.shared.model(with: router)
+    return files ?? []
+  }
+  
+  static func repoCanMerge(with userName: String, repoName: String, pullNum: Int) async -> Bool {
+    let router = GithubRouter.repoBranchCanMerge(userName: userName, repoName: repoName, pullNum: pullNum)
+    let status: StatusModel? = try? await APIClient.shared.model(with: router)
+    if let status = status {
+      return status.isStatus404
+    }
+    return false
+  }
+  
+  static func mergePullRequest(with userName: String, repoName: String, pullNum: Int, params: [String: String]) async -> RepoPullMerge? {
+    let router = GithubRouter.repoBranchMerge(userName: userName, repoName: repoName, pullNum: pullNum, params: params)
+    return try? await APIClient.shared.model(with: router)
+  }
 }

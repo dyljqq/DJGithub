@@ -103,8 +103,14 @@ extension UINavigationController {
     pushViewController(vc, animated: true)
   }
   
-  func pushToRepoBranchCommit(with base: String, head: String, urlString: String) {
+  func pushToRepoBranchCommit(with base: String, head: String, urlString: String, showCommitButton: Bool = false) {
     let vc = RepoBranchCommitViewController(head: head, base: base, urlString: urlString)
+    vc.showCommitButton = showCommitButton
+    pushViewController(vc, animated: true)
+  }
+  
+  func pushToRepoPull(with userName: String, repoName: String, pullNum: Int) {
+    let vc = RepoPullRequestViewController(userName: userName, repoName: repoName, pullNum: pullNum)
     pushViewController(vc, animated: true)
   }
 }

@@ -15,6 +15,8 @@ class TitleAndDescViewController: UIViewController {
     case issueComment(userName: String, repoName: String, issueNum: Int)
     case rssFeed
     case editRssFeedAtom(title: String, description: String, feedLink: String)
+    case createPullRequest(model: PullRequestModel)
+    case mergePullRequest(userName: String, repoName: String, pullNum: Int)
   }
   
   let type: VCType
@@ -113,6 +115,14 @@ class TitleAndDescViewController: UIViewController {
       self.titleTextField.text = title
       self.descTextView.placeholder = ""
       self.descTextView.text = description
+    case .createPullRequest(let model):
+      titleLabel.text = "create pull request"
+      self.titleTextField.text = model.title
+      self.descTextView.placeholder = "Leave a comment."
+    case .mergePullRequest:
+      titleLabel.text = "Merge Pull Request"
+      self.titleTextField.placeholder = "Dev"
+      self.descTextView.placeholder = "Leave a comment."
     }
   }
   
@@ -228,7 +238,33 @@ class TitleAndDescViewController: UIViewController {
         self.dismiss(animated: true, completion: { [weak self] in
           self?.completionHandler?()
         })
-        
+      case .createPullRequest(let model):
+        let params: [String: String] = [
+          "title": title,
+          "body": content,
+          "head": "\(model.commiterName):\(model.compare)",
+          "base": model.base
+        ]
+        if let pull = await RepoManager.createRepoPullRequest(with: model.userName, repoName: model.repoName, params: params) {
+          self.dismiss(animated: true, completion: { [weak self] in
+            self?.navigationController?.pushToRepoPull(with: model.userName, repoName: model.repoName, pullNum: pull.number)
+          })
+        } else {
+          HUD.show(with: "Error to create pull request.")
+        }
+      case .mergePullRequest(let userName, let repoName, let pullNum):
+        let params: [String: String] = [
+          "commit_title": title,
+          "commit_message": content
+        ]
+        if let merge = await RepoManager.mergePullRequest(with: userName, repoName: repoName, pullNum: pullNum, params: params),
+           merge.merged {
+          self.dismiss(animated: true) { [weak self] in
+            self?.completionHandler?()
+          }
+        } else {
+          HUD.show(with: "Error to merge this request.")
+        }
       }
       commitView.isLoading = false
     }

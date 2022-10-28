@@ -131,7 +131,8 @@ class RepoIssuesStateViewController: UIViewController {
           strongSelf.navigationController?.pushToRepoBranchCommit(
             with: strongSelf.defaultBranchName,
             head: branch.name,
-            urlString: branch.commit.url
+            urlString: branch.commit.url,
+            showCommitButton: true
           )
         }
       }
