@@ -35,6 +35,10 @@ class RepoPullRequestViewController: UIViewController {
       ).size.height
       return height + 20
     }
+    
+    mutating func update(height: CGFloat) {
+      self.height = height
+    }
   }
 
   let userName: String
@@ -118,12 +122,17 @@ class RepoPullRequestViewController: UIViewController {
         return
       }
       
-      // TODO
+      let vc = TitleAndDescViewController(with: .mergePullRequest(userName: userName, repoName: repoName, pullNum: pullNum))
+      vc.completionHandler = { [weak self] in
+        guard let strongSelf = self else { return }
+        strongSelf.loadData()
+      }
+      self.present(vc, animated: true)
     }
   }
   
   private func setUp() {
-    self.navigationItem.title = "Pull-#\(pullNum)"
+    self.navigationItem.title = "Pull request #\(pullNum)"
     view.addSubview(tableView)
     view.addSubview(mergeButton)
     
@@ -137,6 +146,10 @@ class RepoPullRequestViewController: UIViewController {
       make.bottom.equalTo(-60)
     }
     
+    loadData()
+  }
+  
+  private func loadData() {
     Task {
       await withThrowingTaskGroup(of: Void.self) { [weak self] group in
         guard let strongSelf = self else { return }
@@ -175,17 +188,23 @@ class RepoPullRequestViewController: UIViewController {
         if let changedRange = text.range(of: "\(info.changedFiles) changed files") {
           let range = NSRange(changedRange, in: text)
           attr.addAttribute(.foregroundColor, value: UIColor.lightBlue, range: range)
-          attr.addAttribute(.font, value: UIFont.systemFont(ofSize: 14, weight: .bold), range: range)
+          attr.addAttribute(.font, value: UIFont.systemFont(ofSize: 14), range: range)
         }
         if let additionRange = text.range(of: "\(info.additions) additions") {
           let range = NSRange(additionRange, in: text)
-          attr.addAttribute(.font, value: UIFont.systemFont(ofSize: 14, weight: .bold), range: range)
+          attr.addAttribute(.font, value: UIFont.systemFont(ofSize: 14), range: range)
         }
         if let deletionRange = text.range(of: "\(info.deletions) deletions") {
           let range = NSRange(deletionRange, in: text)
-          attr.addAttribute(.font, value: UIFont.systemFont(ofSize: 14, weight: .bold), range: range)
+          attr.addAttribute(.font, value: UIFont.systemFont(ofSize: 14), range: range)
         }
         self.filesSectionInfo?.attr = attr
+        
+        let height = attr.boundingRect(
+          with: CGSize(width: FrameGuide.screenWidth - 24, height: CGFLOAT_MAX),
+          options: .usesLineFragmentOrigin,
+          context: nil).height
+        self.filesSectionInfo?.update(height: height + 20)
         
         headerView.frame = CGRect(x: 0, y: 0, width: FrameGuide.screenWidth, height: headerView.calHeight(with: info))
         headerView.render(with: info)
@@ -224,7 +243,7 @@ extension RepoPullRequestViewController: UITableViewDelegate, UITableViewDataSou
   }
   
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    let view = UIView(frame: CGRect(x: 0, y: 0, width: FrameGuide.screenWidth, height: 30))
+    let view = UIView(frame: CGRect(x: 0, y: 0, width: FrameGuide.screenWidth, height: commitsSectionInfo?.height ?? 30))
     view.backgroundColor = .white
     
     let lineView = UIView()
@@ -363,6 +382,31 @@ class RepoPullRequestHeaderView: UIView {
     return label
   }()
   
+  lazy var mergeStateView: UIButton = {
+    let button = UIButton()
+    let image = UIImage(named: "git-merge")?.withRenderingMode(.alwaysTemplate)
+    image?.withTintColor(.white)
+    button.tintColor = .white
+    button.setImage(image, for: .normal)
+    button.setTitle("Merged", for: .normal)
+    button.setTitleColor(.white, for: .normal)
+    button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+    button.backgroundColor = UIColor(red: 111.0 / 255, green: 79.0 / 255, blue: 210.0 / 255.0, alpha: 1)
+    button.isUserInteractionEnabled = false
+    button.layer.cornerRadius = 20
+    button.layer.masksToBounds = true
+    button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
+    button.isHidden = true
+    return button
+  }()
+  
+  lazy var mergedLabel: UILabel = {
+    let label = UILabel()
+    label.textColor = .textColor
+    label.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+    return label
+  }()
+  
   init() {
     super.init(frame: .zero)
     setUp()
@@ -376,7 +420,36 @@ class RepoPullRequestHeaderView: UIView {
     } else {
       commentLabel.text = "\(model.user.login) commented on \(model.createdAt)"
     }
-    descLabel.text = model.body
+    if let body = model.body, !body.isEmpty {
+      descLabel.text = model.body
+      descLabel.isHidden = false
+    } else {
+      descLabel.isHidden = true
+    }
+    
+    if let merged = model.mergedBy {
+      self.mergedLabel.text = "Merged by \(merged.login)"
+      self.mergedLabel.textColor = .textColor
+      mergeStateView.isHidden = false
+      avatarImageView.snp.updateConstraints { make in
+        make.top.equalTo(titleLabel.snp.bottom).offset(64)
+      }
+      mergedLabel.snp.updateConstraints { make in
+        make.leading.equalTo(142)
+        make.centerY.equalTo(titleLabel.snp.bottom).offset(30)
+      }
+    } else {
+      self.mergedLabel.text = "Able to merge."
+      self.mergedLabel.textColor = UIColor(red: 66.0 / 255, green: 150.0 / 255, blue: 77.0 / 255, alpha: 1)
+      mergeStateView.isHidden = true
+      avatarImageView.snp.updateConstraints { make in
+        make.top.equalTo(titleLabel.snp.bottom).offset(34)
+      }
+      mergedLabel.snp.updateConstraints { make in
+        make.leading.equalTo(12)
+        make.centerY.equalTo(titleLabel.snp.bottom).offset(14)
+      }
+    }
   }
   
   required init?(coder: NSCoder) {
@@ -388,11 +461,24 @@ class RepoPullRequestHeaderView: UIView {
     addSubview(avatarImageView)
     addSubview(descLabel)
     addSubview(commentLabel)
+    addSubview(mergeStateView)
+    addSubview(mergedLabel)
     
     titleLabel.snp.makeConstraints { make in
       make.leading.equalTo(12)
       make.top.equalTo(10)
       make.trailing.equalTo(-12)
+    }
+    mergeStateView.snp.makeConstraints { make in
+      make.leading.equalTo(titleLabel)
+      make.top.equalTo(titleLabel.snp.bottom).offset(10)
+      make.height.equalTo(40)
+      make.width.equalTo(120)
+    }
+    mergedLabel.snp.makeConstraints { make in
+      make.leading.equalTo(142)
+      make.trailing.equalTo(-12)
+      make.centerY.equalTo(titleLabel.snp.bottom).offset(10)
     }
     avatarImageView.snp.makeConstraints { make in
       make.leading.equalTo(titleLabel)
@@ -421,12 +507,20 @@ extension RepoPullRequestHeaderView {
       attributes: [.font: titleLabel.font ?? UIFont.systemFont(ofSize: 16)],
       context: nil
     ).size.height
-    let bodyHeight = (model.desc as NSString).boundingRect(
-      with: CGSize(width: FrameGuide.screenWidth - 24, height: 0),
-      options: .usesLineFragmentOrigin,
-      attributes: [.font: descLabel.font ?? UIFont.systemFont(ofSize: 12)],
-      context: nil
-    ).size.height
-    return titleHeight + bodyHeight + 60
+    
+    var height = titleHeight
+    let bodyHeight: CGFloat
+    if let body = model.body, !body.isEmpty {
+      bodyHeight = (model.desc as NSString).boundingRect(
+        with: CGSize(width: FrameGuide.screenWidth - 24, height: 0),
+        options: .usesLineFragmentOrigin,
+        attributes: [.font: descLabel.font ?? UIFont.systemFont(ofSize: 12)],
+        context: nil
+      ).size.height
+      height += bodyHeight + (model.merged ? 124 : 94)
+    } else {
+      height += model.merged ? 114 : 84
+    }
+    return height
   }
 }

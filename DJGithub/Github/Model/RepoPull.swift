@@ -33,6 +33,12 @@ struct RepoPull: DJCodable {
   }
 }
 
+struct RepoPullMerge: DJCodable {
+  var merged: Bool
+  var messsage: String?
+  var sha: String
+}
+
 extension RepoPull {
   struct RepoPullBranch: DJCodable {
     var label: String

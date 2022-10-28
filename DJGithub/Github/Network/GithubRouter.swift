@@ -50,6 +50,7 @@ enum GithubRouter: Router {
   case repoPullIssues(userName: String, repoName: String, params: [String: String])
   case repoPull(userName: String, repoName: String, pullNum: Int)
   case repoBranchCanMerge(userName: String, repoName: String, pullNum: Int)
+  case repoBranchMerge(userName: String, repoName: String, pullNum: Int, params: [String: String])
   
   // Feed
   case feeds
@@ -74,6 +75,7 @@ enum GithubRouter: Router {
     case .userInfoEdit: return .PATCH
     case .graphql: return .POST
     case .createPullRequest: return .POST
+    case .repoBranchMerge: return .PUT
     default: return .GET
     }
   }
@@ -117,6 +119,7 @@ enum GithubRouter: Router {
     case .repoPullCommits(let userName, let repoName, let pullNum): return "repos/\(userName)/\(repoName)/pulls/\(pullNum)/commits"
     case .repoPullFiles(let userName, let repoName, let pullNum): return "repos/\(userName)/\(repoName)/pulls/\(pullNum)/files"
     case .repoBranchCanMerge(let userName, let repoName, let pullNum): return "repos/\(userName)/\(repoName)/pulls/\(pullNum)/merge"
+    case .repoBranchMerge(let userName, let repoName, let pullNum, _): return "repos/\(userName)/\(repoName)/pulls/\(pullNum)/merge"
     }
   }
   
@@ -141,6 +144,8 @@ enum GithubRouter: Router {
     case .repoIssueCommentCommit(_, _, _, let params):
       return params
     case .createPullRequest(_, _, let params):
+      return params
+    case .repoBranchMerge(_, _, _, let params):
       return params
     default: return [:]
     }
