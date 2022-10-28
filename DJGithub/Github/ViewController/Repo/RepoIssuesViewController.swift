@@ -37,10 +37,6 @@ class RepoIssuesViewController: UIViewController, NextPageLoadable {
     self.state = state
     self.issueState = issueState
     super.init(nibName: nil, bundle: nil)
-    
-    NotificationCenter.default.addObserver(forName: NotificationKeys.createPullRequestKey, object: nil, queue: .main) { [weak self] noti in
-      self?.refresh()
-    }
   }
   
   required init?(coder: NSCoder) {
