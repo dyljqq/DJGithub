@@ -245,9 +245,9 @@ class TitleAndDescViewController: UIViewController {
           "head": "\(model.commiterName):\(model.compare)",
           "base": model.base
         ]
-        if let pull = await RepoManager.createRepoPullRequest(with: model.userName, repoName: model.repoName, params: params) {
+        if let _ = await RepoManager.createRepoPullRequest(with: model.userName, repoName: model.repoName, params: params) {
           self.dismiss(animated: true, completion: { [weak self] in
-            self?.navigationController?.pushToRepoPull(with: model.userName, repoName: model.repoName, pullNum: pull.number)
+            self?.completionHandler?()
           })
         } else {
           HUD.show(with: "Error to create pull request.")

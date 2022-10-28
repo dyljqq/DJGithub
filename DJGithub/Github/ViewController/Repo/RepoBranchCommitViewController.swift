@@ -215,6 +215,9 @@ class RepoBranchCommitViewController: UIViewController {
       )
       let vc = TitleAndDescViewController(with: .createPullRequest(model: model))
       self.present(vc, animated: true)
+      vc.completionHandler = { [weak self] in
+        self?.navigationController?.popViewController(animated: true)
+      }
     }
   }
   

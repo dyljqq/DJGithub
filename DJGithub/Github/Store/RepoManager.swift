@@ -125,7 +125,16 @@ struct RepoManager {
   
   static func createRepoPullRequest(with userName: String, repoName: String, params: [String: String]) async -> RepoPull? {
     let router = GithubRouter.createPullRequest(userName: userName, repoName: repoName, params: params)
-    return try? await APIClient.shared.model(with: router)
+    do {
+      let data = try await APIClient.shared.data(with: router)
+      if  let dict = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed) as? [String: Any] {
+        let model: RepoPull? = try DJDecoder(dict: dict).decode()
+        return model
+      }
+    } catch {
+      print("error: \(error)")
+    }
+    return nil
   }
   
   static func getPullRequest(with userName: String, repoName: String, pullNum: Int) async -> RepoPull? {
