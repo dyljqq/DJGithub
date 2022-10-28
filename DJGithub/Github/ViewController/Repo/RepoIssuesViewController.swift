@@ -49,6 +49,10 @@ class RepoIssuesViewController: UIViewController, NextPageLoadable {
     setUp()
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+  }
+  
   private func setUp() {
     self.navigationItem.title = "issue"
     
@@ -69,7 +73,7 @@ class RepoIssuesViewController: UIViewController, NextPageLoadable {
       strongSelf.loadNext(start: strongSelf.nextPageState.start + 1)
     }
     nextPageState.update(start: 1, hasNext: true, isLoading: false)
-    self.loadNext(start: self.nextPageState.start)
+    self.loadNext(start: 1)
   }
   
   func refresh() {

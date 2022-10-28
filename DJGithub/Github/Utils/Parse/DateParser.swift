@@ -28,7 +28,7 @@ extension Date {
   var dateFormatString: String {
     let diff = (Date.now.timeIntervalSince1970 - self.timeIntervalSince1970)
     if diff < 60 {
-      return "\(diff) seconds ago"
+      return "\(Int(diff)) seconds ago"
     } else if diff >= 60 && diff < 3600 {
       return "\(Int(diff / 60)) minuts ago"
     } else if diff >= 3600 && diff < 24 * 3600 {

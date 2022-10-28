@@ -167,6 +167,7 @@
 		73EE0CFA290BB3F50010C54A /* RepoBranchCommitUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EE0CF9290BB3F50010C54A /* RepoBranchCommitUserView.swift */; };
 		73EE0CFC290BB48E0010C54A /* RepoBranchCommitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EE0CFB290BB48E0010C54A /* RepoBranchCommitCell.swift */; };
 		73EE0CFE290BB79A0010C54A /* RepoPullFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EE0CFD290BB79A0010C54A /* RepoPullFile.swift */; };
+		73EE0D00290C24AD0010C54A /* NotificationKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EE0CFF290C24AD0010C54A /* NotificationKeys.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -348,6 +349,7 @@
 		73EE0CF9290BB3F50010C54A /* RepoBranchCommitUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoBranchCommitUserView.swift; sourceTree = "<group>"; };
 		73EE0CFB290BB48E0010C54A /* RepoBranchCommitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoBranchCommitCell.swift; sourceTree = "<group>"; };
 		73EE0CFD290BB79A0010C54A /* RepoPullFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoPullFile.swift; sourceTree = "<group>"; };
+		73EE0CFF290C24AD0010C54A /* NotificationKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationKeys.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -658,6 +660,7 @@
 				73B7905328E533C2002A9CDC /* ConfigManager.swift */,
 				7339201428F56D2900DC76B0 /* RssFeedManager.swift */,
 				73D0DE2A2907D2DD00F385E6 /* DJUserDefaults.swift */,
+				73EE0CFF290C24AD0010C54A /* NotificationKeys.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1010,6 +1013,7 @@
 				7341DCC628DF2400009A3A3C /* TabBarController.swift in Sources */,
 				7320170128F47B76007B970F /* RegularParser.swift in Sources */,
 				73074C7E28ED5664001A90E7 /* IssueDetail.swift in Sources */,
+				73EE0D00290C24AD0010C54A /* NotificationKeys.swift in Sources */,
 				73DF6C0C28EC7A7A0003BDB8 /* RepoIssuesStateViewController.swift in Sources */,
 				73EE0CDE2909351A0010C54A /* PrimaryLanguageCell.swift in Sources */,
 				7339201528F56D2900DC76B0 /* RssFeedManager.swift in Sources */,

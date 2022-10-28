@@ -8,7 +8,7 @@
 import Foundation
 
 struct RepoPull: DJCodable {
-  var id: Int
+  var id: Int?
   var number: Int
   var state: String
   var title: String

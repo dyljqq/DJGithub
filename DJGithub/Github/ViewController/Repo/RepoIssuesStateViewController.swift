@@ -55,6 +55,15 @@ class RepoIssuesStateViewController: UIViewController {
     self.repoName = repoName
     self.issueState = issueState
     super.init(nibName: nil, bundle: nil)
+    
+    NotificationCenter.default.addObserver(forName: NotificationKeys.createPullRequestKey, object: nil, queue: .main) { [weak self] noti in
+      guard let strongSelf = self else { return }
+      strongSelf.refreshNotification(with: 0)
+    }
+    NotificationCenter.default.addObserver(forName: NotificationKeys.closePullRequestKey, object: nil, queue: .main) { [weak self] noti in
+      guard let strongSelf = self else { return }
+      strongSelf.refreshNotification(with: 1)
+    }
   }
   
   required init?(coder: NSCoder) {
@@ -154,6 +163,14 @@ class RepoIssuesStateViewController: UIViewController {
     let selectedNum = segment.selectedSegmentIndex
     scrollView.setContentOffset(
       CGPoint(x: CGFloat(selectedNum) * scrollView.bounds.width, y: scrollView.contentOffset.y), animated: true)
+  }
+  
+  private func refreshNotification(with index: Int) {
+    guard index >= 0 && index < vcs.count else { return }
+    segmentView.selectedSegmentIndex = index
+    scrollView.setContentOffset(
+      CGPoint(x: CGFloat(index) * FrameGuide.screenWidth, y: scrollView.contentOffset.y), animated: true)
+    vcs[index].refresh()
   }
 
 }
