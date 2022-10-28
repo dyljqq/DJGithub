@@ -158,8 +158,6 @@ class RepoPullRequestViewController: UIViewController {
       make.bottom.equalTo(-60)
     }
     
-    self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: closeButton)
-    
     loadData()
   }
 
@@ -196,6 +194,14 @@ class RepoPullRequestViewController: UIViewController {
     Task {
       if let info = await RepoManager.getPullRequest(with:userName, repoName:repoName, pullNum:pullNum) {
         self.pullInfo = info
+        
+        switch info.state {
+        case .open:
+          self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: closeButton)
+          self.mergeButton.isHidden = false
+        case .closed:
+          self.mergeButton.isHidden = true
+        }
         
         let dateString: String
         if let d = info.updatedAt.components(separatedBy: "T").first {
