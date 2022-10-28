@@ -37,6 +37,10 @@ class RepoIssuesViewController: UIViewController, NextPageLoadable {
     self.state = state
     self.issueState = issueState
     super.init(nibName: nil, bundle: nil)
+    
+    NotificationCenter.default.addObserver(forName: NotificationKeys.createPullRequestKey, object: nil, queue: .main) { [weak self] noti in
+      self?.refresh()
+    }
   }
   
   required init?(coder: NSCoder) {
@@ -51,8 +55,6 @@ class RepoIssuesViewController: UIViewController, NextPageLoadable {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    
-    self.refresh()
   }
   
   private func setUp() {
@@ -75,6 +77,7 @@ class RepoIssuesViewController: UIViewController, NextPageLoadable {
       strongSelf.loadNext(start: strongSelf.nextPageState.start + 1)
     }
     nextPageState.update(start: 1, hasNext: true, isLoading: false)
+    self.loadNext(start: 1)
   }
   
   func refresh() {

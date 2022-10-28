@@ -92,6 +92,18 @@ class RepoPullRequestViewController: UIViewController {
     return button
   }()
   
+  lazy var closeButton: UIButton = {
+    let button = UIButton(frame: CGRect(x: 0, y: 0, width: 70, height: 30))
+    button.backgroundColor = UIColor(red: 189.0 / 255, green: 49.0 / 255, blue: 46.0 / 255, alpha: 1)
+    button.setTitle("Close", for: .normal)
+    button.setTitleColor(.white, for: .normal)
+    button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+    button.addTarget(self, action: #selector(closePullRequest), for: .touchUpInside)
+    button.layer.cornerRadius = 15
+    button.layer.masksToBounds = true
+    return button
+  }()
+  
   init(userName: String, repoName: String, pullNum: Int) {
     self.userName = userName
     self.repoName = repoName
@@ -146,7 +158,18 @@ class RepoPullRequestViewController: UIViewController {
       make.bottom.equalTo(-60)
     }
     
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: closeButton)
+    
     loadData()
+  }
+
+  @objc func closePullRequest() {
+    Task {
+      if let _ = await RepoManager.updateIssue(with: userName, repoName: repoName, issueNum: pullNum, params: ["state": "closed"]) {
+        NotificationCenter.default.post(name: NotificationKeys.closePullRequestKey, object: nil)
+        self.navigationController?.popViewController(animated: true)
+      }
+    }
   }
   
   private func loadData() {
@@ -199,12 +222,6 @@ class RepoPullRequestViewController: UIViewController {
           attr.addAttribute(.font, value: UIFont.systemFont(ofSize: 14), range: range)
         }
         self.filesSectionInfo?.attr = attr
-        
-        let height = attr.boundingRect(
-          with: CGSize(width: FrameGuide.screenWidth - 24, height: CGFLOAT_MAX),
-          options: .usesLineFragmentOrigin,
-          context: nil).height
-        self.filesSectionInfo?.update(height: height + 20)
         
         headerView.frame = CGRect(x: 0, y: 0, width: FrameGuide.screenWidth, height: headerView.calHeight(with: info))
         headerView.render(with: info)

@@ -247,6 +247,7 @@ class TitleAndDescViewController: UIViewController {
         ]
         if let _ = await RepoManager.createRepoPullRequest(with: model.userName, repoName: model.repoName, params: params) {
           self.dismiss(animated: true, completion: { [weak self] in
+            NotificationCenter.default.post(name: NotificationKeys.createPullRequestKey, object: nil)
             self?.completionHandler?()
           })
         } else {

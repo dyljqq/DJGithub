@@ -55,6 +55,15 @@ class RepoIssuesStateViewController: UIViewController {
     self.repoName = repoName
     self.issueState = issueState
     super.init(nibName: nil, bundle: nil)
+    
+    NotificationCenter.default.addObserver(forName: NotificationKeys.closePullRequestKey, object: nil, queue: .main) { [weak self] noti in
+      guard let strongSelf = self else { return }
+      strongSelf.segmentView.selectedSegmentIndex = 1
+      strongSelf.scrollView.setContentOffset(
+        CGPoint(x: strongSelf.scrollView.bounds.width, y: strongSelf.scrollView.contentOffset.y), animated: true)
+      let vc = strongSelf.vcs[1]
+      vc.refresh()
+    }
   }
   
   required init?(coder: NSCoder) {
