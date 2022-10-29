@@ -40,11 +40,13 @@ class TabBarController: UITabBarController {
   }
   
   func setUp() {
-    let userName = ConfigManager.viewName
+    let userName = ConfigManager.shared.viewerName
+    let staredVc = UserStaredReposViewController(userRepoState: .star(userName))
+    staredVc.isViewer = true
     viewControllers = [
       setUp(for: DevelopersViewController(), tabTitle: "Developer", image: UIImage(named: "group"), selectedImage: UIImage(named: "people")),
       setUp(for: RssFeedAtomViewController(), tabTitle: "Rss", image: UIImage(named: "rss"), selectedImage: UIImage(named: "rss-feed")),
-      setUp(for: UserStaredReposViewController(userRepoState: .star(userName)), tabTitle: "Stars", image: UIImage(named: "star"), selectedImage: UIImage(named: "stared")),
+      setUp(for: staredVc, tabTitle: "Stars", image: UIImage(named: "star"), selectedImage: UIImage(named: "stared")),
       setUp(for: SearchViewController(with: [.users, .repos]), tabTitle: "Search", image: UIImage(named: "find"), selectedImage: UIImage(named: "search")),
       setUp(for: UserViewController(name: userName), tabTitle: "User", image: UIImage(named: "user"), selectedImage: UIImage(named: "person"))
     ]

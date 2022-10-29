@@ -179,7 +179,10 @@ query {\n      organization(login: \"\") {\n        __typename\n        database
       let data: Data = try await APIClient.shared.data(with: router)
       guard let d = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed) as? [String: Any],
       let data = d["data"] as? [String: Any],
-      let viewer = data[key] as? [String: Any] else { return nil }
+      let viewer = data[key] as? [String: Any] else {
+        print("data: \(try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed))")
+        return nil
+      }
       
       var userViewer: UserViewer? = try DJDecoder(dict: viewer).decode()
       if let contributionsCollection = viewer["contributionsCollection"] as? [String: Any],

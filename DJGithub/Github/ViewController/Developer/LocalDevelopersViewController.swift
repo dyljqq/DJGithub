@@ -31,6 +31,7 @@ class LocalDevelopersViewController: UIViewController {
   
   var dataSource: [DJCodable] = [] {
     didSet {
+      self.view.stopLoading()
       self.tableView.reloadData()
     }
   }
@@ -57,6 +58,7 @@ class LocalDevelopersViewController: UIViewController {
     case .developer: tableView.rowHeight = 50
     }
     
+    view.startLoading()
     updateLocalData()
     
     NotificationCenter.default.addObserver(

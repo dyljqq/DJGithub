@@ -27,6 +27,7 @@ class UserStaredReposViewController: UIViewController, NextPageLoadable {
   var nextPageState: NextPageState = NextPageState()
   var userRepoState: UserRepoState
   var repo: Repo?
+  var isViewer: Bool = false
   
   lazy var tableView: UITableView = {
     let tableView: UITableView = UITableView()
@@ -71,6 +72,7 @@ class UserStaredReposViewController: UIViewController, NextPageLoadable {
     nextPageState.update(start: firstPageIndex, hasNext: true, isLoading: false)
     
     view.startLoading()
+    loadCacheData()
 
     tableView.addHeader { [weak self] in
       guard let strongSelf = self else {
@@ -86,7 +88,6 @@ class UserStaredReposViewController: UIViewController, NextPageLoadable {
       }
       strongSelf.loadNext(start: strongSelf.nextPageState.start + 1)
     }
-
     loadNext(start: nextPageState.start)
   }
   
@@ -98,6 +99,19 @@ class UserStaredReposViewController: UIViewController, NextPageLoadable {
       strongSelf.view.stopLoading()
       strongSelf.tableView.dj_endRefresh()
       strongSelf.tableView.reloadData()
+    }
+  }
+  
+  private func loadCacheData() {
+    switch userRepoState {
+    case .star:
+      if let repos = DJUserDefaults.getStaredRepos() {
+        dataSource = repos
+        view.stopLoading()
+        tableView.reloadData()
+      }
+    default:
+      return
     }
   }
 
@@ -148,16 +162,13 @@ extension UserStaredReposViewController {
     Task {
       let repos: [Repo]
       switch self.userRepoState {
-      case .star(let userName):
+      case .star(var userName):
+        if isViewer && userName.isEmpty {
+          userName = LocalUserManager.getViewerName()
+        }
+        repos = await RepoManager.fetchStaredRepos(with: userName, page: nextPageState.start)
         if nextPageState.start == 1 {
-          if let cachedRepos = DJUserDefaults.getStaredRepos() {
-            repos = cachedRepos
-          } else {
-            repos = await RepoManager.fetchStaredRepos(with: userName, page: nextPageState.start)
-            DJUserDefaults.saveStaredRepos(repos)
-          }
-        } else {
-          repos = await RepoManager.fetchStaredRepos(with: userName, page: nextPageState.start)
+          DJUserDefaults.saveStaredRepos(repos)
         }
       case .fork(let content):
         repos = await RepoManager.fetchForkRepos(with: content, page: nextPageState.start)

@@ -16,7 +16,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     window = UIWindow(windowScene: scene)
     window?.backgroundColor = .white
-    window?.rootViewController = TabBarController()
+    
+    if ConfigManager.isLoadedViewer {
+      window?.rootViewController = TabBarController()
+    } else {
+      window?.rootViewController = LoadingViewerViewController()
+    }
     window?.makeKeyAndVisible()
 
     setUp()
@@ -27,18 +32,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     DJStuckMonitor.shared.config(with: mach_thread_self())
     DJStuckMonitor.shared.beginMonitor()
     
-    ConfigManager.shared.load()
+    if ConfigManager.isLoadedViewer {
+      ConfigManager.shared.load()
+    }
     
     Task {
       await withThrowingTaskGroup(of: Void.self) { group in
         group.addTask {
           await LanguageManager.loadLanguageMapping()
         }
-        group.addTask {
-          await UserFollowingManager.shared.fetchUserFollowingStatus()
-        }
-        group.addTask {
-          await DeveloperGroupManager.shared.updateAll()
+        if ConfigManager.isLoadedViewer {
+          group.addTask {
+            await DeveloperGroupManager.shared.updateAll()
+          }
+          group.addTask {
+            await UserFollowingManager.shared.fetchUserFollowingStatus()
+          }
         }
       }
     }
