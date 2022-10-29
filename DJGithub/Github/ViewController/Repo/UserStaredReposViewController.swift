@@ -72,6 +72,7 @@ class UserStaredReposViewController: UIViewController, NextPageLoadable {
     nextPageState.update(start: firstPageIndex, hasNext: true, isLoading: false)
     
     view.startLoading()
+    loadCacheData()
 
     tableView.addHeader { [weak self] in
       guard let strongSelf = self else {
