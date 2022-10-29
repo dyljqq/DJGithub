@@ -20,7 +20,6 @@ struct LocalUserManager {
   static func loadViewer() async -> UserViewer? {
     if let viewer = await UserManager.fetchUserInfo() {
       saveUser(viewer)
-      ConfigManager.shared.viewerName = viewer.login
       return viewer
     }
     return nil

@@ -98,7 +98,8 @@ struct RepoManager {
    query {\n      repository(owner: \"\(userName)\", name: \"\(repoName)\") {\n        url\n        homepageUrl\n        name\n        nameWithOwner\n        description\n        createdAt\n        updatedAt\n        pushedAt\n        isFork\n        isPrivate\n        viewerHasStarred\n        viewerSubscription\n        hasIssuesEnabled\n        forkCount\n        diskUsage\n        owner {\n          login\n          avatarUrl\n        }\n        parent {\n          name\n          owner {\n            login\n          }\n          nameWithOwner\n        }\n        primaryLanguage {\n          name\n          color\n        }\n        licenseInfo {\n          spdxId\n        }\n        stargazers {\n          totalCount\n        }\n        watchers {\n          totalCount\n        }\n        issues(states: OPEN) {\n          totalCount\n        }\n        pullRequests(states: OPEN) {\n          totalCount\n        }\n        refs(refPrefix: \"refs/heads/\") {\n          totalCount\n        }\n        releases {\n          totalCount\n        }\n        defaultBranchRef {\n          name\n          target {\n            ... on Commit {\n              history {\n                totalCount\n              }\n            }\n          }\n        }\n        languages(first: 30, orderBy: {field: SIZE, direction: DESC}) {\n          totalSize\n          edges {\n            node {\n              name\n              color\n            }\n            size\n          }\n        }\n      }\n    }
 """
     let router = GithubRouter.graphql(params: ["query": query])
-    guard let data = try? await APIClient.shared.data(with: router),
+    let data = try? await APIClient.shared.data(with: router)
+    guard let data = data,
           let dict = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
           let d = dict["data"] as? [String: Any],
           let repository = d["repository"] as? [String: Any] else {

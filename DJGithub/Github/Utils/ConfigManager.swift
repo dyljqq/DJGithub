@@ -34,7 +34,9 @@ class ConfigManager: NSObject {
     return LocalUserManager.getUser()
   }
 
-  var viewerName: String = ""
+  var viewerName: String {
+    return ConfigManager.viewer?.login ?? ""
+  }
   static var isLoadedViewer: Bool {
     return !LocalUserManager.getViewerName().isEmpty
   }
