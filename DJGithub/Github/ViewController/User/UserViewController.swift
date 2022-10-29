@@ -122,17 +122,22 @@ class UserViewController: UIViewController {
       make.edges.equalTo(view)
     }
     
+    if name.isEmpty || ConfigManager.checkOwner(by: name),
+       let userViewer = ConfigManager.viewer {
+      self.userViewer = userViewer
+      self.loadUserViewerInfo(with: userViewer)
+    } else {
+      self.view.startLoading()
+    }
+    
     Task {
-      if name.isEmpty || ConfigManager.checkOwner(by: name) {
-        self.userViewer = ConfigManager.viewer
-      } else {
-        self.view.startLoading()
-        if let userViewer = await UserManager.fetchUserInfo(by: self.name) {
-          self.userViewer = userViewer
-        }
-      }
-      if let viewer = self.userViewer {
+      if let viewer = await UserManager.fetchUserInfo(by: self.name) {
+        self.userViewer = viewer
         self.loadUserViewerInfo(with: viewer)
+        
+        if ConfigManager.checkOwner(by: viewer.login) {
+          LocalUserManager.saveUser(viewer)
+        }
       }
     }
     
