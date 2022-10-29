@@ -81,13 +81,13 @@ class UserInfoViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     Task {
-      self.user = await UserManager.getUser(with: ConfigManager.viewName)
+      self.user = await UserManager.getUser(with: ConfigManager.shared.viewerName)
       self.tableView.reloadData()
     }
   }
   
   private func setUp() {
-    self.navigationItem.title = ConfigManager.viewName
+    self.navigationItem.title = ConfigManager.shared.viewerName
     
     view.addSubview(tableView)
     tableView.snp.makeConstraints { make in

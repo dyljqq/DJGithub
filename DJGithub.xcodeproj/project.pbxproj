@@ -66,7 +66,7 @@
 		7374D19728E0BC1D00E6BE47 /* Readme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7374D19628E0BC1D00E6BE47 /* Readme.swift */; };
 		73AACAD528D308A60072B1DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD428D308A60072B1DF /* AppDelegate.swift */; };
 		73AACAD728D308A60072B1DF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD628D308A60072B1DF /* SceneDelegate.swift */; };
-		73AACAD928D308A60072B1DF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD828D308A60072B1DF /* ViewController.swift */; };
+		73AACAD928D308A60072B1DF /* LoadingViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD828D308A60072B1DF /* LoadingViewerViewController.swift */; };
 		73AACADC28D308A60072B1DF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73AACADA28D308A60072B1DF /* Main.storyboard */; };
 		73AACADE28D308A70072B1DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73AACADD28D308A70072B1DF /* Assets.xcassets */; };
 		73AACAE128D308A70072B1DF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73AACADF28D308A70072B1DF /* LaunchScreen.storyboard */; };
@@ -248,7 +248,7 @@
 		73AACAD128D308A60072B1DF /* DJGithub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DJGithub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73AACAD428D308A60072B1DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		73AACAD628D308A60072B1DF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		73AACAD828D308A60072B1DF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		73AACAD828D308A60072B1DF /* LoadingViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewerViewController.swift; sourceTree = "<group>"; };
 		73AACADB28D308A60072B1DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		73AACADD28D308A70072B1DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		73AACAE028D308A70072B1DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -483,7 +483,7 @@
 				73AACB0428D308E30072B1DF /* DJFoundation */,
 				73AACAD428D308A60072B1DF /* AppDelegate.swift */,
 				73AACAD628D308A60072B1DF /* SceneDelegate.swift */,
-				73AACAD828D308A60072B1DF /* ViewController.swift */,
+				73AACAD828D308A60072B1DF /* LoadingViewerViewController.swift */,
 				73AACADA28D308A60072B1DF /* Main.storyboard */,
 				73AACADD28D308A70072B1DF /* Assets.xcassets */,
 				73AACADF28D308A70072B1DF /* LaunchScreen.storyboard */,
@@ -1071,7 +1071,7 @@
 				7339201128F53DAC00DC76B0 /* RssFeedsViewController.swift in Sources */,
 				73E14E4F28F3477E00A9811D /* Feeds.swift in Sources */,
 				73074CC028EED421001A90E7 /* CommitView.swift in Sources */,
-				73AACAD928D308A60072B1DF /* ViewController.swift in Sources */,
+				73AACAD928D308A60072B1DF /* LoadingViewerViewController.swift in Sources */,
 				73AACB6C28D5AF7D0072B1DF /* LanguageManager.swift in Sources */,
 				73AACB2D28D32BB10072B1DF /* DJFileManager.swift in Sources */,
 				73EE0CE8290A6EC90010C54A /* RepoBranch.swift in Sources */,

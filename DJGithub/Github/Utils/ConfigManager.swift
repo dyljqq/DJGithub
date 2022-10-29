@@ -34,8 +34,9 @@ class ConfigManager: NSObject {
     return LocalUserManager.getUser()
   }
 
-  static var viewName: String {
-    return LocalUserManager.getViewerName()
+  var viewerName: String = ""
+  static var isLoadedViewer: Bool {
+    return !LocalUserManager.getViewerName().isEmpty
   }
   
   override init() {
@@ -47,7 +48,6 @@ class ConfigManager: NSObject {
   }
   
   func loadConfig(completionHandler: ((Config) -> ())? = nil) {
-    LocalUserManager.loadViewer()
     ConfigManager.config = loadBundleJSONFile("config")
   }
   

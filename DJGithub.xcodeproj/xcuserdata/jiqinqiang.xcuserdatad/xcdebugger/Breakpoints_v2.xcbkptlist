@@ -16,51 +16,5 @@
             stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "5E175DEB-7DEF-4860-A729-8CEB3B2EFF2F"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DJGithub/Github/ViewController/Repo/Views/RepoFooterView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59">
-            <Locations>
-               <Location
-                  uuid = "5E175DEB-7DEF-4860-A729-8CEB3B2EFF2F - 3f5524f3abce560a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "DJGithub.RepoFooterView.webView(_: __C.WKWebView, decidePolicyFor: __C.WKNavigationAction, decisionHandler: (__C.WKNavigationActionPolicy) -&gt; ()) -&gt; ()"
-                  moduleName = "DJGithub"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jiqinqiang/Desktop/OpenSource/MyGithub/DJGithub/DJGithub/Github/ViewController/Repo/Views/RepoFooterView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "59"
-                  endingLineNumber = "59"
-                  offsetFromSymbolStart = "772">
-               </Location>
-               <Location
-                  uuid = "5E175DEB-7DEF-4860-A729-8CEB3B2EFF2F - 3f5524f3abce560a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "DJGithub.RepoFooterView.webView(_: __C.WKWebView, decidePolicyFor: __C.WKNavigationAction, decisionHandler: (__C.WKNavigationActionPolicy) -&gt; ()) -&gt; ()"
-                  moduleName = "DJGithub"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jiqinqiang/Desktop/OpenSource/MyGithub/DJGithub/DJGithub/Github/ViewController/Repo/Views/RepoFooterView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "59"
-                  endingLineNumber = "59"
-                  offsetFromSymbolStart = "844">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
