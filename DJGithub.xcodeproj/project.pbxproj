@@ -168,6 +168,7 @@
 		73EE0CFC290BB48E0010C54A /* RepoBranchCommitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EE0CFB290BB48E0010C54A /* RepoBranchCommitCell.swift */; };
 		73EE0CFE290BB79A0010C54A /* RepoPullFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EE0CFD290BB79A0010C54A /* RepoPullFile.swift */; };
 		73EE0D00290C24AD0010C54A /* NotificationKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EE0CFF290C24AD0010C54A /* NotificationKeys.swift */; };
+		73FA3870290FBEE800FCEBC6 /* AppStartTimeMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FA386F290FBEE800FCEBC6 /* AppStartTimeMonitor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -350,6 +351,7 @@
 		73EE0CFB290BB48E0010C54A /* RepoBranchCommitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoBranchCommitCell.swift; sourceTree = "<group>"; };
 		73EE0CFD290BB79A0010C54A /* RepoPullFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoPullFile.swift; sourceTree = "<group>"; };
 		73EE0CFF290C24AD0010C54A /* NotificationKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationKeys.swift; sourceTree = "<group>"; };
+		73FA386F290FBEE800FCEBC6 /* AppStartTimeMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStartTimeMonitor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -449,6 +451,7 @@
 				735D0E032903115D00E618B3 /* DJStuckMonitor.swift */,
 				735D0E042903115D00E618B3 /* DJThreadInfoModel.swift */,
 				735D0E062903115D00E618B3 /* StackAddressInfo.swift */,
+				73FA386F290FBEE800FCEBC6 /* AppStartTimeMonitor.swift */,
 			);
 			path = DJMonitor;
 			sourceTree = "<group>";
@@ -1109,6 +1112,7 @@
 				73AACB5628D47FCB0072B1DF /* String+Ext.swift in Sources */,
 				73C598CD28D9E6A100DA86A1 /* URL+Ext.swift in Sources */,
 				7341DCD028E03B17009A3A3C /* RepoHeaderView.swift in Sources */,
+				73FA3870290FBEE800FCEBC6 /* AppStartTimeMonitor.swift in Sources */,
 				7339201928F5883500DC76B0 /* RssFeedDetailViewController.swift in Sources */,
 				73EE0CFE290BB79A0010C54A /* RepoPullFile.swift in Sources */,
 				7339201328F5458100DC76B0 /* DateHelper.swift in Sources */,

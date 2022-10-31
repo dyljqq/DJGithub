@@ -32,6 +32,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     DJStuckMonitor.shared.config(with: mach_thread_self())
     DJStuckMonitor.shared.beginMonitor()
     
+    AppStartTimeMonitor.shared.measure()
+    
     if ConfigManager.isLoadedViewer {
       ConfigManager.shared.load()
     }

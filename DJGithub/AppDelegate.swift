@@ -8,10 +8,16 @@
 import UIKit
 
 @main
+class MyApp {
+  static func main() {
+    print("pre main: \(AppStartTimeMonitor.shared.processLaunchTime())")
+    UIApplicationMain(CommandLine.argc, CommandLine.unsafeArgv, nil, NSStringFromClass(AppDelegate.self))
+  }
+}
+
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    // Override point for customization after application launch.
     return true
   }
 
