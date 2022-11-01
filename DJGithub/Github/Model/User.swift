@@ -11,7 +11,9 @@ struct User: DJCodable {
   var login: String
   var name: String?
   var id: Int
-  var bio: String?
+
+  @Default<String.UnProvidedDesc> var bio: String
+
   var avatarUrl: String
   var type: String
   var createdAt: String
@@ -23,15 +25,13 @@ struct User: DJCodable {
   var followingUrl: String
   var followersUrl: String
   
-  var company: String?
-  var location: String?
-  var email: String?
-  var blog: String?
-  
-  var md5: String?
+  @Default<String.Company> var company: String
+  @Default<String.Location> var location: String
+  @Default<String.Email> var email: String
+  @Default<String.Blog> var blog: String
   
   var desc: String {
-    return isEmpty(by: self.bio) ? "No description provided." : self.bio!
+    return isEmpty(by: self.bio) ? "No description provided." : self.bio
   }
 }
 

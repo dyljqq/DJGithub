@@ -66,6 +66,8 @@
 		7362FE7D291031D600D97E1A /* DJCrashManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7362FE7C291031D600D97E1A /* DJCrashManager.swift */; };
 		7362FE7F2910371700D97E1A /* DJMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7362FE7E2910371700D97E1A /* DJMonitor.swift */; };
 		7362FE812910BF2700D97E1A /* DJCrashLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7362FE802910BF2700D97E1A /* DJCrashLog.swift */; };
+		7362FE8329117D2000D97E1A /* DefaultValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7362FE8229117D2000D97E1A /* DefaultValue.swift */; };
+		7362FE852911816600D97E1A /* Default+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7362FE842911816600D97E1A /* Default+Ext.swift */; };
 		7374D19728E0BC1D00E6BE47 /* Readme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7374D19628E0BC1D00E6BE47 /* Readme.swift */; };
 		73AACAD528D308A60072B1DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD428D308A60072B1DF /* AppDelegate.swift */; };
 		73AACAD728D308A60072B1DF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD628D308A60072B1DF /* SceneDelegate.swift */; };
@@ -251,6 +253,8 @@
 		7362FE7C291031D600D97E1A /* DJCrashManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJCrashManager.swift; sourceTree = "<group>"; };
 		7362FE7E2910371700D97E1A /* DJMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJMonitor.swift; sourceTree = "<group>"; };
 		7362FE802910BF2700D97E1A /* DJCrashLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJCrashLog.swift; sourceTree = "<group>"; };
+		7362FE8229117D2000D97E1A /* DefaultValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultValue.swift; sourceTree = "<group>"; };
+		7362FE842911816600D97E1A /* Default+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Default+Ext.swift"; sourceTree = "<group>"; };
 		7374D19628E0BC1D00E6BE47 /* Readme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Readme.swift; sourceTree = "<group>"; };
 		73AACAD128D308A60072B1DF /* DJGithub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DJGithub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73AACAD428D308A60072B1DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -538,6 +542,7 @@
 				73AACB0928D30B0C0072B1DF /* URLConvertible.swift */,
 				732B21D528E22B9A005893C0 /* NextPageLoadable.swift */,
 				73DF6BF128EAE3060003BDB8 /* DJCodable.swift */,
+				7362FE8229117D2000D97E1A /* DefaultValue.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -657,6 +662,7 @@
 				73B7905728E541BE002A9CDC /* Bool+Ext.swift */,
 				73DF6C0328EC252E0003BDB8 /* String+File.swift */,
 				73074CC128EEE6C5001A90E7 /* UITextView+Placeholder.swift */,
+				7362FE842911816600D97E1A /* Default+Ext.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1121,6 +1127,7 @@
 				73AACB7928D5BBF50072B1DF /* SQLiteDatabase.swift in Sources */,
 				73AACB5028D4618F0072B1DF /* UIView+Ext.swift in Sources */,
 				73AACB5228D467850072B1DF /* UserContributionView.swift in Sources */,
+				7362FE852911816600D97E1A /* Default+Ext.swift in Sources */,
 				7341DCCE28E03505009A3A3C /* NormalHeaderView.swift in Sources */,
 				73AACB6228D4BEFE0072B1DF /* UserStaredRepoCell.swift in Sources */,
 				73E14E5328F34FF200A9811D /* Parser.swift in Sources */,
@@ -1144,6 +1151,7 @@
 				73AACB0C28D30B3D0072B1DF /* Error.swift in Sources */,
 				735D0E082903115E00E618B3 /* mach_stack_info.c in Sources */,
 				73EE0CEE290ABF7B0010C54A /* RepoBranchCommit.swift in Sources */,
+				7362FE8329117D2000D97E1A /* DefaultValue.swift in Sources */,
 				73AACB0A28D30B0C0072B1DF /* URLConvertible.swift in Sources */,
 				73AACB4A28D4463B0072B1DF /* UIView+Loading.swift in Sources */,
 				73AACB5E28D4BD3B0072B1DF /* UserStaredReposViewController.swift in Sources */,
