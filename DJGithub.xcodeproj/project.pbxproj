@@ -63,6 +63,9 @@
 		735D0E092903115E00E618B3 /* DJStuckMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D0E032903115D00E618B3 /* DJStuckMonitor.swift */; };
 		735D0E0A2903115E00E618B3 /* DJThreadInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D0E042903115D00E618B3 /* DJThreadInfoModel.swift */; };
 		735D0E0B2903115E00E618B3 /* StackAddressInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D0E062903115D00E618B3 /* StackAddressInfo.swift */; };
+		7362FE7D291031D600D97E1A /* DJCrashManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7362FE7C291031D600D97E1A /* DJCrashManager.swift */; };
+		7362FE7F2910371700D97E1A /* DJMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7362FE7E2910371700D97E1A /* DJMonitor.swift */; };
+		7362FE812910BF2700D97E1A /* DJCrashLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7362FE802910BF2700D97E1A /* DJCrashLog.swift */; };
 		7374D19728E0BC1D00E6BE47 /* Readme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7374D19628E0BC1D00E6BE47 /* Readme.swift */; };
 		73AACAD528D308A60072B1DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD428D308A60072B1DF /* AppDelegate.swift */; };
 		73AACAD728D308A60072B1DF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD628D308A60072B1DF /* SceneDelegate.swift */; };
@@ -245,6 +248,9 @@
 		735D0E042903115D00E618B3 /* DJThreadInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DJThreadInfoModel.swift; sourceTree = "<group>"; };
 		735D0E052903115D00E618B3 /* mach_stack_info.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mach_stack_info.h; sourceTree = "<group>"; };
 		735D0E062903115D00E618B3 /* StackAddressInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackAddressInfo.swift; sourceTree = "<group>"; };
+		7362FE7C291031D600D97E1A /* DJCrashManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJCrashManager.swift; sourceTree = "<group>"; };
+		7362FE7E2910371700D97E1A /* DJMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJMonitor.swift; sourceTree = "<group>"; };
+		7362FE802910BF2700D97E1A /* DJCrashLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJCrashLog.swift; sourceTree = "<group>"; };
 		7374D19628E0BC1D00E6BE47 /* Readme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Readme.swift; sourceTree = "<group>"; };
 		73AACAD128D308A60072B1DF /* DJGithub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DJGithub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73AACAD428D308A60072B1DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -445,6 +451,7 @@
 		735D0E002903115D00E618B3 /* DJMonitor */ = {
 			isa = PBXGroup;
 			children = (
+				73FA3871291031A800FCEBC6 /* DJCrash */,
 				735D0E052903115D00E618B3 /* mach_stack_info.h */,
 				735D0E022903115D00E618B3 /* mach_stack_info.c */,
 				735D0E012903115D00E618B3 /* DJCallStack.swift */,
@@ -452,6 +459,7 @@
 				735D0E042903115D00E618B3 /* DJThreadInfoModel.swift */,
 				735D0E062903115D00E618B3 /* StackAddressInfo.swift */,
 				73FA386F290FBEE800FCEBC6 /* AppStartTimeMonitor.swift */,
+				7362FE7E2910371700D97E1A /* DJMonitor.swift */,
 			);
 			path = DJMonitor;
 			sourceTree = "<group>";
@@ -849,6 +857,15 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		73FA3871291031A800FCEBC6 /* DJCrash */ = {
+			isa = PBXGroup;
+			children = (
+				7362FE7C291031D600D97E1A /* DJCrashManager.swift */,
+				7362FE802910BF2700D97E1A /* DJCrashLog.swift */,
+			);
+			path = DJCrash;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1008,6 +1025,7 @@
 				73074CBE28EEC4AF001A90E7 /* TitleAndDescViewController.swift in Sources */,
 				73C598C728D8617800DA86A1 /* UIApplication+Ext.swift in Sources */,
 				73AACB0828D30A3C0072B1DF /* Router.swift in Sources */,
+				7362FE7F2910371700D97E1A /* DJMonitor.swift in Sources */,
 				73DF6C0A28EC6A9C0003BDB8 /* IssueCell.swift in Sources */,
 				73074CD328F155CB001A90E7 /* UserInfoCell.swift in Sources */,
 				73DF6C0028EC00FD0003BDB8 /* RepoContentCell.swift in Sources */,
@@ -1110,6 +1128,7 @@
 				73074C7C28ED5507001A90E7 /* RepoIssueDetailViewController.swift in Sources */,
 				73AACAD728D308A60072B1DF /* SceneDelegate.swift in Sources */,
 				73AACB5628D47FCB0072B1DF /* String+Ext.swift in Sources */,
+				7362FE7D291031D600D97E1A /* DJCrashManager.swift in Sources */,
 				73C598CD28D9E6A100DA86A1 /* URL+Ext.swift in Sources */,
 				7341DCD028E03B17009A3A3C /* RepoHeaderView.swift in Sources */,
 				73FA3870290FBEE800FCEBC6 /* AppStartTimeMonitor.swift in Sources */,
@@ -1133,6 +1152,7 @@
 				73EE0CEA290A6FB40010C54A /* RepoBranchCell.swift in Sources */,
 				73101D3F28E3077C00DB5423 /* UserManager.swift in Sources */,
 				73AACB3E28D362430072B1DF /* Consts.swift in Sources */,
+				7362FE812910BF2700D97E1A /* DJCrashLog.swift in Sources */,
 				7374D19728E0BC1D00E6BE47 /* Readme.swift in Sources */,
 				73DF6BEE28EADD160003BDB8 /* LocalDeveloperSectionHeaderView.swift in Sources */,
 				73074CD128F1559D001A90E7 /* UserInfoViewController.swift in Sources */,

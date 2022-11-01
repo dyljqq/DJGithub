@@ -14,6 +14,7 @@ struct DJUserDefaults {
     case userInfo
     case staredRepos
     case viewerName
+    case crash
   }
   
   static func allHistorySearchWords() -> [String] {
@@ -68,6 +69,14 @@ struct DJUserDefaults {
   static func clearViewerInfo() {
     UserDefaults.standard.removeObject(forKey: Keys.userInfo.rawValue)
     UserDefaults.standard.removeObject(forKey: Keys.viewerName.rawValue)
+  }
+  
+  static func setCrashInfo(with info: [String: String]) {
+    UserDefaults.standard.set(info, forKey: Keys.crash.rawValue)
+  }
+  
+  static func getCrashInfo() -> [String: String] {
+    return UserDefaults.standard.value(forKey: Keys.crash.rawValue) as? [String: String] ?? [:]
   }
   
 }
