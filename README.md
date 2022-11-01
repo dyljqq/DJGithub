@@ -20,7 +20,9 @@ Personal access tokens的申请链接如下：
 {
  "authorization": "token \(personal token)", // person token
 }
+```
 
+```json
 // 可以在Config文件中手动配置authorization对应的用户名字.
 // app会在初始化的时候去加载authorization对应的用户的所有信息，并做缓存的操作。但是可能会因为网络等问题，初始化失败。因此可以在下面添加。
 struct Config: DJCodable {
@@ -38,6 +40,8 @@ struct Config: DJCodable {
 }
 ```
 
+
+
 如果Swift Package fetch过慢的话，可以使用以下命令行指令：
 
 ```
@@ -53,8 +57,10 @@ xcodebuild -resolvePackageDependencies -scmProvider system
 1. 关于DJGithub相关的网络数据下载与解析的模块可以看这篇文章：
 
    * 掘金地址：[如何使用异步方法构造一个简易的网络请求库 ](https://juejin.cn/post/7153533145168478245)
-   
    * github地址： [如何使用异步方法构造一个简易的网络请求库 ](https://github.com/dyljqq/Article/blob/master/Swift/%E4%BD%BF%E7%94%A8swift%E6%9E%84%E9%80%A0%E4%B8%80%E4%B8%AA%E5%BC%82%E6%AD%A5%E7%9A%84%E7%BD%91%E7%BB%9C%E6%95%B0%E6%8D%AE%E8%AF%B7%E6%B1%82%E7%B1%BB.md)
+2. 使用propertyWrapper重构Model。
+
+​	使用 Swift Codable 解码时难以设置默认值问题，并利用 Property Wrapper 给出了一种相对优雅的解决方式，来在 key 不存在时或者解码失败时，为某个属性设置默认值。参考文章: [使用 Property Wrapper 为 Codable 解码设定默认值](https://onevcat.com/2020/11/codable-default/)
 
 ### 已完成功能
 
