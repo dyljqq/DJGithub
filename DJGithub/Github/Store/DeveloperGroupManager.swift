@@ -46,7 +46,7 @@ struct DeveloperGroupManager {
   func update(with dev: LocalDeveloper, groupId: Int) async -> LocalDeveloper? {
     guard let user = await UserManager.getUser(with: dev.name) else { return nil }
     
-    let des = dev.des ?? user.bio ?? "No Description provided."
+    let des = dev.des ?? user.bio
     if let developer = LocalDeveloper.get(by: user.login) {
       return LocalDeveloper.update(
         with: developer.name, des: des, avatarUrl: user.avatarUrl, groupId: groupId)

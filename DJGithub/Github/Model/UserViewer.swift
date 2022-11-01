@@ -11,12 +11,14 @@ struct UserViewer: DJCodable {
   var name: String?
   var login: String
   var avatarUrl: String
-  var websiteUrl: String?
-  var bio: String?
-  var company: String?
-  var location: String?
+
+  @Default<String.Blog> var websiteUrl: String
+  @Default<String.UnProvidedDesc> var bio: String
+  @Default<String.Company> var company: String
+  @Default<String.Location> var location: String
+  @Default<String.Email> var email: String
+
   var createdAt: String
-  var email: String?
   
   var viewerCanFollow: Bool
   var viewerIsFollowing: Bool
@@ -29,10 +31,6 @@ struct UserViewer: DJCodable {
   
   var pinnedItems: PinnedRepos
   var userContribution: UserContribution?
-  
-  var desc: String {
-    return isEmpty(by: self.bio) ? "No description provided." : self.bio!
-  }
 }
 
 struct PinnedRepos: DJCodable {

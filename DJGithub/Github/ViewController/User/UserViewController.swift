@@ -9,6 +9,16 @@ import UIKit
 import SnapKit
 import Combine
 
+fileprivate struct ContentAndColorMapping {
+  let content: String
+  let color: UIColor
+  
+  init(content: String) {
+    self.content = content
+    self.color = content.isEmpty ? .textGrayColor : .textColor
+  }
+}
+
 fileprivate enum UserType {
   case email
   case location
@@ -28,23 +38,16 @@ fileprivate enum UserType {
     }
   }
   
-  func getContent(by user: UserViewer?) -> (String, UIColor) {
+  func getContent(by user: UserViewer?) -> ContentAndColorMapping {
     guard let user = user else {
-      return ("", .white)
+      return ContentAndColorMapping(content: "")
     }
     switch self {
-    case .email: return convertContent(user.email, placeHolder: "邮箱")
-    case .location: return convertContent(user.location, placeHolder: "地点")
-    case .company: return convertContent(user.company, placeHolder: "团队")
-    case .link: return convertContent(user.websiteUrl, placeHolder: "个人主页")
+    case .email: return ContentAndColorMapping(content: user.email)
+    case .location: return ContentAndColorMapping(content: user.location)
+    case .company: return ContentAndColorMapping(content: user.company)
+    case .link: return ContentAndColorMapping(content: user.websiteUrl)
     }
-  }
-  
-  func convertContent(_ content: String?, placeHolder: String) -> (String, UIColor) {
-    guard let content = content else {
-      return (placeHolder, UIColor.textGrayColor)
-    }
-    return !content.isEmpty ? (content, UIColor.textColor) : (placeHolder, UIColor.textGrayColor)
   }
 }
 
@@ -219,8 +222,8 @@ extension UserViewController: UITableViewDataSource {
       } else {
         cell.accessoryType = .none
       }
-      let (content, color) = userType.getContent(by: userViewer)
-      cell.render(with: userType.iconImageName, content: content, contentColor: color)
+      let contentModel = userType.getContent(by: userViewer)
+      cell.render(with: userType.iconImageName, content: contentModel.content, contentColor: contentModel.color)
       return cell
     case .pinnedItem(let pinnedItems):
       let cell = tableView.dequeueReusableCell(withIdentifier: PinnedItemsCell.className, for: indexPath) as! PinnedItemsCell
@@ -245,11 +248,11 @@ extension UserViewController: UITableViewDelegate {
     
     let cellType = self.dataSource[indexPath.row]
     if case CellType.user(let userType) = cellType {
-      let (content, _) = userType.getContent(by: self.userViewer)
+      let content = userType.getContent(by: self.userViewer)
       switch userType {
       case .email:
         if let email = userViewer?.email, !email.isEmpty {
-          UIPasteboard.general.string = content
+          UIPasteboard.general.string = content.content
           HUD.show(with: "已经复制到粘贴板")
         }
       case .link:
