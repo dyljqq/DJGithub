@@ -28,11 +28,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   }
   
   func setUp() {
-    // 开启卡顿检测
-    DJStuckMonitor.shared.config(with: mach_thread_self())
-    DJStuckMonitor.shared.beginMonitor()
-    
-    AppStartTimeMonitor.shared.measure()
+    DJMonitor.shared.monitor()
     
     if ConfigManager.isLoadedViewer {
       ConfigManager.shared.load()

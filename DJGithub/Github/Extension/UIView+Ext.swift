@@ -12,3 +12,9 @@ extension UIView {
     return String(describing: self.classForCoder())
   }
 }
+
+extension UIViewController {
+  static var className: String {
+    return String(describing: self.classForCoder())
+  }
+}
