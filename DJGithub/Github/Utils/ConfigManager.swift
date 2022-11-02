@@ -27,7 +27,8 @@ func loadDatabase() -> SQLiteDatabase? {
 class ConfigManager: NSObject {
   static let shared = ConfigManager()
   static var config: Config = Config()
-  let rssFeedManager: RssFeedManager = RssFeedManager()
+
+  let rssFeedManager = RssFeedManager.shared
   let languageManager = LanguageManager()
   
   static var viewer: UserViewer? {

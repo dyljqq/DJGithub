@@ -69,8 +69,17 @@ class RssFeedAtomViewController: UIViewController {
         }
     })
     NotificationCenter.default.addObserver(forName: RssFeedManager.RssFeedAtomReadFeedNotificationKey, object: nil, queue: .main, using: { [weak self] notification in
-      guard let strongSelf = self else { return }
-      strongSelf.loadData()
+      guard let strongSelf = self,
+      let dict = notification.object as? [String: Any],
+      let atomId = dict["atomId"] as? Int else { return }
+      for (index, model) in strongSelf.dataSource.enumerated() {
+        if model.atom.id == atomId,
+           let atom = RssFeedAtom.get(by: atomId) {
+          strongSelf.dataSource[index] = RssFeedAtomModel(readStr: RssFeedManager.shared.totalFeedsReadStr(with: atom.id), atom: atom)
+          strongSelf.tableView.reloadData()
+          return
+        }
+      }
     })
   }
   
@@ -79,7 +88,7 @@ class RssFeedAtomViewController: UIViewController {
       let atoms = await ConfigManager.shared.rssFeedManager.loadAtoms()
       var rs: [RssFeedAtomModel] = []
       for atom in atoms {
-        let str = RssFeedAtom.totalFeedsStr(with: atom.feedLink)
+        let str = RssFeedManager.shared.totalFeedsReadStr(with: atom.id)
         rs.append(RssFeedAtomModel(readStr: str, atom: atom))
       }
       dataSource = rs
@@ -122,6 +131,7 @@ extension RssFeedAtomViewController: UITableViewDelegate, UITableViewDataSource 
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
+    
     let model = dataSource[indexPath.row]
     if model.atom.hasFeeds {
       self.navigationController?.pushToRssFeeds(with: dataSource[indexPath.row].atom)

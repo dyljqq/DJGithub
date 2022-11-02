@@ -62,13 +62,9 @@ extension RssFeedAtom: SQLTable {
     return "rss_feed_atom"
   }
   
-  static var needFieldId: Bool {
-    return false
-  }
-  
   static var fields: [String] {
     return [
-      "id", "title", "des", "site_link", "feed_link",
+      "title", "des", "site_link", "feed_link",
       "create_time", "update_time"
     ]
   }
@@ -94,7 +90,6 @@ extension RssFeedAtom: SQLTable {
   var fieldsValueMapping: [String : Any] {
     return [
       "title": self.title,
-      "id": self.id,
       "des": self.des,
       "site_link": self.siteLink,
       "feed_link": self.feedLink,
@@ -116,15 +111,8 @@ extension RssFeedAtom {
     return getByFeedLink(feedLink) != nil
   }
   
-  static func totalFeedsStr(with feedLink: String) -> String {
-    let feeds: [RssFeed] = RssFeed.select(with: " where feed_link='\(feedLink)'")
-    let totalCount = feeds.count
-    let readedCount = feeds.filter { !$0.unread }.count
-    return "\(readedCount)/\(totalCount)"
-  }
-  
   var hasFeeds: Bool {
-    let feeds: [RssFeed] = RssFeed.select(with: " where feed_link='\(self.feedLink)'")
+    let feeds: [RssFeed] = RssFeed.select(with: " where atom_id=\(self.id)")
     return !feeds.isEmpty
   }
   

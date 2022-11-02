@@ -128,16 +128,14 @@ extension SQLTable {
           
           switch fieldType {
           case .int:
-            if let value = self.fieldsValueMapping[field] as? Int {
-              sqlite3_bind_int(insertStatement, offset, Int32(value))
-            }
+            let value = self.fieldsValueMapping[field] as? Int ?? 0
+            sqlite3_bind_int(insertStatement, offset, Int32(value))
           case .text:
             let text: String = self.fieldsValueMapping[field] as? String ?? ""
             sqlite3_bind_text(insertStatement, offset, (text as NSString).utf8String, -1, nil)
           case .bigint:
-            if let value = self.fieldsValueMapping[field] as? Int {
-              sqlite3_bind_int64(insertStatement, offset, Int64(value))
-            }
+            let value = self.fieldsValueMapping[field] as? Int ?? 0
+            sqlite3_bind_int64(insertStatement, offset, Int64(value))
           default:
             throw SQLiteError.Bind(message: "Field value mapping error.")
           }
@@ -208,7 +206,7 @@ extension SQLTable {
       defer {
         sqlite3_finalize(updateStatement)
       }
-      if sqlite3_step(updateStatement) == SQLITE_DONE {
+      if sqlite3_step(updateStatement) != SQLITE_DONE {
         throw SQLiteError.Step(message: Self.errorMessage)
       }
     }

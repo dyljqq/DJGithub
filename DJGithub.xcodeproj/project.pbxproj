@@ -68,6 +68,7 @@
 		7362FE812910BF2700D97E1A /* DJCrashLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7362FE802910BF2700D97E1A /* DJCrashLog.swift */; };
 		7362FE8329117D2000D97E1A /* DefaultValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7362FE8229117D2000D97E1A /* DefaultValue.swift */; };
 		7362FE852911816600D97E1A /* Default+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7362FE842911816600D97E1A /* Default+Ext.swift */; };
+		7362FEC729124F9000D97E1A /* RssFeedRead.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7362FEC629124F9000D97E1A /* RssFeedRead.swift */; };
 		7374D19728E0BC1D00E6BE47 /* Readme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7374D19628E0BC1D00E6BE47 /* Readme.swift */; };
 		73AACAD528D308A60072B1DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD428D308A60072B1DF /* AppDelegate.swift */; };
 		73AACAD728D308A60072B1DF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD628D308A60072B1DF /* SceneDelegate.swift */; };
@@ -255,6 +256,7 @@
 		7362FE802910BF2700D97E1A /* DJCrashLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJCrashLog.swift; sourceTree = "<group>"; };
 		7362FE8229117D2000D97E1A /* DefaultValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultValue.swift; sourceTree = "<group>"; };
 		7362FE842911816600D97E1A /* Default+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Default+Ext.swift"; sourceTree = "<group>"; };
+		7362FEC629124F9000D97E1A /* RssFeedRead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssFeedRead.swift; sourceTree = "<group>"; };
 		7374D19628E0BC1D00E6BE47 /* Readme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Readme.swift; sourceTree = "<group>"; };
 		73AACAD128D308A60072B1DF /* DJGithub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DJGithub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73AACAD428D308A60072B1DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -448,6 +450,7 @@
 			children = (
 				7320170828F535CB007B970F /* RssFeed.swift */,
 				7320170C28F5378E007B970F /* RssFeedAtom.swift */,
+				7362FEC629124F9000D97E1A /* RssFeedRead.swift */,
 			);
 			path = RssFeed;
 			sourceTree = "<group>";
@@ -1139,6 +1142,7 @@
 				73C598CD28D9E6A100DA86A1 /* URL+Ext.swift in Sources */,
 				7341DCD028E03B17009A3A3C /* RepoHeaderView.swift in Sources */,
 				73FA3870290FBEE800FCEBC6 /* AppStartTimeMonitor.swift in Sources */,
+				7362FEC729124F9000D97E1A /* RssFeedRead.swift in Sources */,
 				7339201928F5883500DC76B0 /* RssFeedDetailViewController.swift in Sources */,
 				73EE0CFE290BB79A0010C54A /* RepoPullFile.swift in Sources */,
 				7339201328F5458100DC76B0 /* DateHelper.swift in Sources */,
