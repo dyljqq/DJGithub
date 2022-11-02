@@ -55,7 +55,7 @@ struct RssFeedLink: DJCodable {
 }
 
 struct RssFeed: DJCodable {
-  var id: Int?
+  var id: Int
   var title: String
   var updated: String
   var content: String
@@ -66,14 +66,17 @@ struct RssFeed: DJCodable {
   var pubDate: String?
   var summary: String?
 
-  var rssFeedLink: RssFeedLink?
-  
+  var atomId: Int
   var feedLink: String?
-  var unread: Bool = true
+  
+  var unread: Bool {
+    let readId = RssFeedManager.readId(with: self.atomId, feedId: self.id)
+    return RssFeedManager.shared.readMapping[readId] == nil
+  }
   
   enum CodingKeys: String, CodingKey {
     case id, title, updated, content, link, feedLink, pubDate,
-         contentEncoded = "content:encoded", description, rssFeedLink, summary, unread
+         contentEncoded = "content:encoded", description, atomId, summary
   }
   
   init(from decoder: Decoder) throws {
@@ -95,9 +98,6 @@ struct RssFeed: DJCodable {
     
     if let link = try? container.decode(String.self, forKey: .link) {
       self.link = link
-    } else if let rssFeedLink = try? container.decode(RssFeedLink.self, forKey: .rssFeedLink) {
-      self.rssFeedLink = rssFeedLink
-      self.link = rssFeedLink.href ?? ""
     } else {
       self.link = ""
     }
@@ -114,12 +114,12 @@ struct RssFeed: DJCodable {
       self.content = ""
     }
     self.feedLink = try? container.decode(String.self, forKey: .feedLink)
-    self.id = try? container.decode(Int.self, forKey: .id)
-    if let unread = try? container.decode(Int.self, forKey: .unread) {
-      self.unread = unread == 0 ? false : true
+    if let id = try? container.decode(Int.self, forKey: .id) {
+      self.id = id
     } else {
-      self.unread = true
+      self.id = 0
     }
+    self.atomId = (try? container.decode(Int.self, forKey: .atomId)) ?? 0
   }
 }
 
@@ -130,7 +130,7 @@ extension RssFeed: SQLTable {
   
   static var fields: [String] {
     return [
-      "title", "updated", "content", "link", "feed_link", "unread"
+      "title", "updated", "content", "link", "feed_link", "atom_id"
     ]
   }
   
@@ -142,38 +142,56 @@ extension RssFeed: SQLTable {
       "link": .text,
       "feed_link": .text,
       "id": .int,
-      "unread": .int
+      "atom_id": .int
     ]
   }
   
   static var selectedFields: [String] {
     return [
-      "id", "title", "updated", "content", "link", "feed_link", "unread"
+      "id", "title", "updated", "content", "link", "feed_link", "atom_id"
     ]
   }
   
   var fieldsValueMapping: [String : Any] {
     return [
-      "id": self.id ?? 0,
+      "id": self.id,
       "title": self.title,
       "updated": self.updated,
       "content": self.content,
       "link": self.link,
       "feed_link": self.feedLink ?? "",
-      "unread": self.unread ? 1 : 0
+      "atom_id": self.atomId
     ]
   }
   
   func update(with rssFeed: RssFeed) {
-    guard let rssFeedId = self.id, rssFeedId > 0 else { return }
-    let sql = "update \(Self.tableName) set title=\"\(rssFeed.title)\", content=\"\(rssFeed.content)\", updated=\"\(rssFeed.updated)\", link=\"\(rssFeed.link)\" where id=\(rssFeedId)"
-    try? Self.update(with: sql)
+    guard self.id > 0 else { return }
+    let title = rssFeed.title.replacingOccurrences(of: "\"", with: "'")
+    let content = rssFeed.content.replacingOccurrences(of: "\"", with: "'")
+    let sql = "update \(Self.tableName) set title=\"\(title)\", content=\"\(content)\", updated=\"\(rssFeed.updated)\", link=\"\(rssFeed.link)\", atom_id=\(rssFeed.atomId) where id=\(self.id)"
+    do {
+      try Self.update(with: sql)
+    } catch {
+      print("update rss feed error: \(error)")
+    }
   }
   
-  func updateReadStatus() {
-    guard self.unread, let id = self.id else { return }
-    let sql = "update \(Self.tableName) set unread=0 where id=\(id)"
-    try? Self.update(with: sql)
+}
+extension RssFeed {
+  func updateReadStatus() async {
+    let readId = RssFeedManager.readId(with: self.atomId, feedId: self.id)
+    if let model = RssFeedRead.get(by: atomId, feedId: self.id) {
+      if model.increment() {
+        RssFeedManager.shared.readMapping[readId] = model.readCount + 1
+      }
+    } else {
+      let model = RssFeedRead(atomId: atomId, feedId: self.id)
+      do {
+        try model.insert()
+        RssFeedManager.shared.readMapping[readId] = model.readCount + 1
+      } catch {
+        print("insert error: \(error)")
+      }
+    }
   }
-  
 }

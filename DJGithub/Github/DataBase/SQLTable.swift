@@ -58,9 +58,10 @@ extension SQLTable {
     var rs: [String] = needFieldId ? ["id INTEGER PRIMARY KEY AUTOINCREMENT not null"] : []
     
     for field in Self.fields {
-      guard let typ = Self.fieldsTypeMapping[field], let name = typ.name else {
+      if needFieldId && field == "id" {
         continue
       }
+      guard let typ = Self.fieldsTypeMapping[field], let name = typ.name else { continue }
       rs.append("\(field) \(name)")
     }
     
@@ -112,5 +113,10 @@ extension SQLTable {
     let s = dict.map { "\($0)=\($1)" }.joined(separator: ", ")
     let sql = "update \(Self.tableName) set \(s);"
     try? update(with: sql)
+  }
+  
+  static func get<T: DJCodable>(by id: Int) -> T? {
+    let condition = " where id = \(id)"
+    return Self.select(with: condition).first
   }
 }

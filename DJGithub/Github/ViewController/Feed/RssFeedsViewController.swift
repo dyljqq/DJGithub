@@ -50,7 +50,7 @@ class RssFeedsViewController: UIViewController {
     view.startLoading()
     
     Task {
-      self.dataSource = await RssFeedManager.getFeeds(by: rssFeedAtom.feedLink)
+      self.dataSource = await RssFeedManager.getFeeds(by: rssFeedAtom.id)
       view.stopLoading()
       self.tableView.reloadData()
     }
@@ -94,8 +94,12 @@ extension RssFeedsViewController: UITableViewDelegate, UITableViewDataSource {
     let rssFeed = dataSource[indexPath.row]
     self.navigationController?.pushToRssFeedDetial(with: rssFeed)
     
-    rssFeed.updateReadStatus()
-    NotificationCenter.default.post(name: RssFeedManager.RssFeedAtomReadFeedNotificationKey, object: ["feedLink": rssFeedAtom.feedLink])
+    Task {
+      await rssFeed.updateReadStatus()
+      DispatchQueue.main.async {
+        NotificationCenter.default.post(name: RssFeedManager.RssFeedAtomReadFeedNotificationKey, object: ["atomId": self.rssFeedAtom.id])
+      }
+    }
   }
 }
 
