@@ -66,9 +66,10 @@ class DJXMLParser<T: DJCodable>: NSObject, Parsable, XMLParserDelegate {
     guard let data = data else { return nil }
     do {
       return try await withCheckedThrowingContinuation { [weak self] (continuation: CheckedContinuation<T?, Error>) in
-        self?.continuation = continuation
+        guard let strongSelf = self else { return }
+        strongSelf.continuation = continuation
         let parser = XMLParser(data: data)
-        parser.delegate = self
+        parser.delegate = strongSelf
         parser.parse()
       }
     } catch {
