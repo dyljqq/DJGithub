@@ -25,6 +25,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     window?.makeKeyAndVisible()
 
     setUp()
+    
+    DJMonitor.shared.addFPSMonitor(with: window)
   }
   
   func setUp() {

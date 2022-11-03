@@ -77,6 +77,7 @@
 		73936F3529137C4A00BC2901 /* DispatchQueue+Leak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F3429137C4A00BC2901 /* DispatchQueue+Leak.swift */; };
 		73936F3729137E7200BC2901 /* DJObjectProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F3629137E7200BC2901 /* DJObjectProxy.swift */; };
 		73936F39291385C700BC2901 /* DJProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F38291385C700BC2901 /* DJProperty.swift */; };
+		73936F8B2914030400BC2901 /* DJFPSLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F8A2914030400BC2901 /* DJFPSLabel.swift */; };
 		73AACAD528D308A60072B1DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD428D308A60072B1DF /* AppDelegate.swift */; };
 		73AACAD728D308A60072B1DF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD628D308A60072B1DF /* SceneDelegate.swift */; };
 		73AACAD928D308A60072B1DF /* LoadingViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD828D308A60072B1DF /* LoadingViewerViewController.swift */; };
@@ -272,6 +273,7 @@
 		73936F3429137C4A00BC2901 /* DispatchQueue+Leak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Leak.swift"; sourceTree = "<group>"; };
 		73936F3629137E7200BC2901 /* DJObjectProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJObjectProxy.swift; sourceTree = "<group>"; };
 		73936F38291385C700BC2901 /* DJProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJProperty.swift; sourceTree = "<group>"; };
+		73936F8A2914030400BC2901 /* DJFPSLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJFPSLabel.swift; sourceTree = "<group>"; };
 		73AACAD128D308A60072B1DF /* DJGithub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DJGithub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73AACAD428D308A60072B1DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		73AACAD628D308A60072B1DF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -472,6 +474,7 @@
 		735D0E002903115D00E618B3 /* DJMonitor */ = {
 			isa = PBXGroup;
 			children = (
+				73936F89291402E500BC2901 /* DJFPS */,
 				73936F29291377DD00BC2901 /* DJLeak */,
 				73FA3871291031A800FCEBC6 /* DJCrash */,
 				735D0E052903115D00E618B3 /* mach_stack_info.h */,
@@ -498,6 +501,14 @@
 				73936F38291385C700BC2901 /* DJProperty.swift */,
 			);
 			path = DJLeak;
+			sourceTree = "<group>";
+		};
+		73936F89291402E500BC2901 /* DJFPS */ = {
+			isa = PBXGroup;
+			children = (
+				73936F8A2914030400BC2901 /* DJFPSLabel.swift */,
+			);
+			path = DJFPS;
 			sourceTree = "<group>";
 		};
 		73AACAC828D308A60072B1DF = {
@@ -1121,6 +1132,7 @@
 				73E14E5828F3DAE200A9811D /* DJXMLParsable.swift in Sources */,
 				73074CC228EEE6C5001A90E7 /* UITextView+Placeholder.swift in Sources */,
 				73936F33291379DA00BC2901 /* NSObject+Leak.swift in Sources */,
+				73936F8B2914030400BC2901 /* DJFPSLabel.swift in Sources */,
 				73074CC728EF4809001A90E7 /* LocalRepo.swift in Sources */,
 				73101D4128E30C5200DB5423 /* SimpleUserCell.swift in Sources */,
 				73B7904A28E52450002A9CDC /* LocalDevelopersViewController.swift in Sources */,
