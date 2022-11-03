@@ -70,6 +70,13 @@
 		7362FE852911816600D97E1A /* Default+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7362FE842911816600D97E1A /* Default+Ext.swift */; };
 		7362FEC729124F9000D97E1A /* RssFeedRead.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7362FEC629124F9000D97E1A /* RssFeedRead.swift */; };
 		7374D19728E0BC1D00E6BE47 /* Readme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7374D19628E0BC1D00E6BE47 /* Readme.swift */; };
+		73936F2B291377F300BC2901 /* DJLeakSniffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F2A291377F300BC2901 /* DJLeakSniffer.swift */; };
+		73936F2D2913784500BC2901 /* NSNotificationName+Leak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F2C2913784500BC2901 /* NSNotificationName+Leak.swift */; };
+		73936F2F2913790F00BC2901 /* UIViewController+Leak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F2E2913790F00BC2901 /* UIViewController+Leak.swift */; };
+		73936F33291379DA00BC2901 /* NSObject+Leak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F32291379DA00BC2901 /* NSObject+Leak.swift */; };
+		73936F3529137C4A00BC2901 /* DispatchQueue+Leak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F3429137C4A00BC2901 /* DispatchQueue+Leak.swift */; };
+		73936F3729137E7200BC2901 /* DJObjectProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F3629137E7200BC2901 /* DJObjectProxy.swift */; };
+		73936F39291385C700BC2901 /* DJProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F38291385C700BC2901 /* DJProperty.swift */; };
 		73AACAD528D308A60072B1DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD428D308A60072B1DF /* AppDelegate.swift */; };
 		73AACAD728D308A60072B1DF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD628D308A60072B1DF /* SceneDelegate.swift */; };
 		73AACAD928D308A60072B1DF /* LoadingViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD828D308A60072B1DF /* LoadingViewerViewController.swift */; };
@@ -258,6 +265,13 @@
 		7362FE842911816600D97E1A /* Default+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Default+Ext.swift"; sourceTree = "<group>"; };
 		7362FEC629124F9000D97E1A /* RssFeedRead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssFeedRead.swift; sourceTree = "<group>"; };
 		7374D19628E0BC1D00E6BE47 /* Readme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Readme.swift; sourceTree = "<group>"; };
+		73936F2A291377F300BC2901 /* DJLeakSniffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJLeakSniffer.swift; sourceTree = "<group>"; };
+		73936F2C2913784500BC2901 /* NSNotificationName+Leak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotificationName+Leak.swift"; sourceTree = "<group>"; };
+		73936F2E2913790F00BC2901 /* UIViewController+Leak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Leak.swift"; sourceTree = "<group>"; };
+		73936F32291379DA00BC2901 /* NSObject+Leak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Leak.swift"; sourceTree = "<group>"; };
+		73936F3429137C4A00BC2901 /* DispatchQueue+Leak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Leak.swift"; sourceTree = "<group>"; };
+		73936F3629137E7200BC2901 /* DJObjectProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJObjectProxy.swift; sourceTree = "<group>"; };
+		73936F38291385C700BC2901 /* DJProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJProperty.swift; sourceTree = "<group>"; };
 		73AACAD128D308A60072B1DF /* DJGithub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DJGithub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73AACAD428D308A60072B1DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		73AACAD628D308A60072B1DF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -458,6 +472,7 @@
 		735D0E002903115D00E618B3 /* DJMonitor */ = {
 			isa = PBXGroup;
 			children = (
+				73936F29291377DD00BC2901 /* DJLeak */,
 				73FA3871291031A800FCEBC6 /* DJCrash */,
 				735D0E052903115D00E618B3 /* mach_stack_info.h */,
 				735D0E022903115D00E618B3 /* mach_stack_info.c */,
@@ -469,6 +484,20 @@
 				7362FE7E2910371700D97E1A /* DJMonitor.swift */,
 			);
 			path = DJMonitor;
+			sourceTree = "<group>";
+		};
+		73936F29291377DD00BC2901 /* DJLeak */ = {
+			isa = PBXGroup;
+			children = (
+				73936F2A291377F300BC2901 /* DJLeakSniffer.swift */,
+				73936F2C2913784500BC2901 /* NSNotificationName+Leak.swift */,
+				73936F2E2913790F00BC2901 /* UIViewController+Leak.swift */,
+				73936F32291379DA00BC2901 /* NSObject+Leak.swift */,
+				73936F3429137C4A00BC2901 /* DispatchQueue+Leak.swift */,
+				73936F3629137E7200BC2901 /* DJObjectProxy.swift */,
+				73936F38291385C700BC2901 /* DJProperty.swift */,
+			);
+			path = DJLeak;
 			sourceTree = "<group>";
 		};
 		73AACAC828D308A60072B1DF = {
@@ -1048,6 +1077,7 @@
 				73EE0CDE2909351A0010C54A /* PrimaryLanguageCell.swift in Sources */,
 				7339201528F56D2900DC76B0 /* RssFeedManager.swift in Sources */,
 				73EE0CFA290BB3F50010C54A /* RepoBranchCommitUserView.swift in Sources */,
+				73936F3529137C4A00BC2901 /* DispatchQueue+Leak.swift in Sources */,
 				73EE0CF0290AC4B30010C54A /* RepoBranchCommitViewController.swift in Sources */,
 				73EE0CE6290A6E040010C54A /* RepoBranchListView.swift in Sources */,
 				73AACB2928D321480072B1DF /* Result.swift in Sources */,
@@ -1087,12 +1117,15 @@
 				73B7906028E7E805002A9CDC /* SearchManager.swift in Sources */,
 				73AACB0F28D30C470072B1DF /* APIClient.swift in Sources */,
 				73AACB8B28D708740072B1DF /* UIScrollView+Refresh.swift in Sources */,
+				73936F39291385C700BC2901 /* DJProperty.swift in Sources */,
 				73E14E5828F3DAE200A9811D /* DJXMLParsable.swift in Sources */,
 				73074CC228EEE6C5001A90E7 /* UITextView+Placeholder.swift in Sources */,
+				73936F33291379DA00BC2901 /* NSObject+Leak.swift in Sources */,
 				73074CC728EF4809001A90E7 /* LocalRepo.swift in Sources */,
 				73101D4128E30C5200DB5423 /* SimpleUserCell.swift in Sources */,
 				73B7904A28E52450002A9CDC /* LocalDevelopersViewController.swift in Sources */,
 				735D0E0B2903115E00E618B3 /* StackAddressInfo.swift in Sources */,
+				73936F2D2913784500BC2901 /* NSNotificationName+Leak.swift in Sources */,
 				73074CD528F166D8001A90E7 /* UserInfoEditViewController.swift in Sources */,
 				73074CCD28EF4AFE001A90E7 /* LocalDataManager.swift in Sources */,
 				73AACB3C28D35C360072B1DF /* Utils.swift in Sources */,
@@ -1151,6 +1184,8 @@
 				73DF6C0828EC69840003BDB8 /* Issue.swift in Sources */,
 				73B7904828E51A3A002A9CDC /* UIImage+Ext.swift in Sources */,
 				73EE0CEC290A72560010C54A /* DJMaskView.swift in Sources */,
+				73936F3729137E7200BC2901 /* DJObjectProxy.swift in Sources */,
+				73936F2F2913790F00BC2901 /* UIViewController+Leak.swift in Sources */,
 				73AACB5828D483CA0072B1DF /* UserContributionCell.swift in Sources */,
 				73AACB0C28D30B3D0072B1DF /* Error.swift in Sources */,
 				735D0E082903115E00E618B3 /* mach_stack_info.c in Sources */,
@@ -1174,6 +1209,7 @@
 				73101D5028E4A10400DB5423 /* LocalDeveloperGroup.swift in Sources */,
 				735D0E092903115E00E618B3 /* DJStuckMonitor.swift in Sources */,
 				73DF6BEC28EACF340003BDB8 /* SearchWordHeaderView.swift in Sources */,
+				73936F2B291377F300BC2901 /* DJLeakSniffer.swift in Sources */,
 				73074CC428EEF54F001A90E7 /* HUD.swift in Sources */,
 				73EE0CF6290BA8F10010C54A /* RepoPullRequestViewController.swift in Sources */,
 				73B7905228E53353002A9CDC /* Config.swift in Sources */,

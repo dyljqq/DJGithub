@@ -111,6 +111,10 @@ xcodebuild -resolvePackageDependencies -scmProvider system
       2. 打印主线程的调用栈（swift通过dl_info结构，可以很方便的输出我们想要的信息）
 
       具体的实现可以看DJMonitor目录下的实现。
+      
+    * 内存泄漏检测
+    
+      主要思路就是通过标活的对象不断的发送通知，如果一个对象已经被标记为不存活了，却还在接收消息的话，那么就认为这个对象存在泄漏。
 
 ### 待完成(目前想到的)
 
