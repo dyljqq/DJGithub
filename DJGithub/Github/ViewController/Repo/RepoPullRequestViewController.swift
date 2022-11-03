@@ -418,7 +418,11 @@ class RepoPullRequestHeaderView: UIView {
     button.isUserInteractionEnabled = false
     button.layer.cornerRadius = 20
     button.layer.masksToBounds = true
-    button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
+    if #available(iOS 15.0, *) {
+      button.configuration?.imagePadding = 10
+    } else {
+      button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
+    }
     button.isHidden = true
     return button
   }()
@@ -462,8 +466,14 @@ class RepoPullRequestHeaderView: UIView {
         make.centerY.equalTo(titleLabel.snp.bottom).offset(30)
       }
     } else {
-      self.mergedLabel.text = "Able to merge."
-      self.mergedLabel.textColor = UIColor(red: 66.0 / 255, green: 150.0 / 255, blue: 77.0 / 255, alpha: 1)
+      switch model.state {
+      case .closed:
+        self.mergedLabel.text = "The pull request has been closed."
+        self.mergedLabel.textColor = UIColor(red: 189.0 / 255, green: 49.0 / 255, blue: 46.0 / 255, alpha: 1)
+      case .open:
+        self.mergedLabel.text = "Able to merge."
+        self.mergedLabel.textColor = UIColor(red: 66.0 / 255, green: 150.0 / 255, blue: 77.0 / 255, alpha: 1)
+      }
       mergeStateView.isHidden = true
       avatarImageView.snp.updateConstraints { make in
         make.top.equalTo(titleLabel.snp.bottom).offset(34)

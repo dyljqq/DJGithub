@@ -36,14 +36,14 @@ class DJCrashManager: NSObject {
     userInfo[DJCrashExceptionKey.address.key] = DJCrashManager.shared.stackSymbolsStr()
     
     let signalException = NSException(name: NSExceptionName(DJCrashExceptionKey.signalException.key), reason: "Signal \(sig) was raised.", userInfo: userInfo)
-    DJCrashManager.shared.perform(#selector(handle(with:)), on: .main, with: signalException, waitUntilDone: true)
+    DJCrashManager.shared.performSelector(onMainThread: #selector(handle(with:)), with: signalException, waitUntilDone: true, modes: [RunLoop.Mode.default.rawValue])
   }
   
   let myExceptionHandler: (@convention(c) (NSException) -> Void)? = { exception in
     guard var info = exception.userInfo else { return }
     info[DJCrashExceptionKey.address.key] = DJCrashManager.shared.stackSymbolsStr()
     let exception = NSException(name: exception.name, reason: exception.reason, userInfo: info)
-    DJCrashManager.shared.perform(#selector(handle(with:)), on: .main, with: exception, waitUntilDone: true)
+    DJCrashManager.shared.performSelector(onMainThread: #selector(handle(with:)), with: exception, waitUntilDone: true, modes: [RunLoop.Mode.default.rawValue])
     DJCrashManager.shared.lastExceptionHandler?(exception)
   }
   
