@@ -24,5 +24,8 @@ struct DJMonitor {
     
     // 开启crash监控
     DJCrashManager.shared.registerHandler()
+    
+    // 开启内存泄漏检测
+    DJLeakSniffer.shared.install()
   }
 }
