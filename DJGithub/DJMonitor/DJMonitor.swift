@@ -5,7 +5,7 @@
 //  Created by jiqinqiang on 2022/11/1.
 //
 
-import Foundation
+import UIKit
 
 struct DJMonitor {
   static let shared = DJMonitor()
@@ -27,5 +27,13 @@ struct DJMonitor {
     
     // 开启内存泄漏检测
     DJLeakSniffer.shared.install()
+  }
+  
+  func addFPSMonitor(with window: UIWindow?) {
+    if let window = window {
+      let label = DJFPSLabel(
+        frame: CGRect(x: FrameGuide.screenWidth - 71, y: FrameGuide.screenHeight - FrameGuide.tabbarHeight - 44, width: 55, height: 20))
+      window.addSubview(label)
+    }
   }
 }
