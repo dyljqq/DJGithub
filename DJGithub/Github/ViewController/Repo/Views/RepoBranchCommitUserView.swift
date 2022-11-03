@@ -65,6 +65,7 @@ class RepoBranchCommitUserView: UIView {
     titleLabel.snp.makeConstraints { make in
       make.leading.equalTo(12)
       make.top.equalTo(10)
+      make.trailing.equalTo(-12)
     }
     avatarImageView.snp.makeConstraints { make in
       make.leading.equalTo(titleLabel)
