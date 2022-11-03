@@ -60,12 +60,10 @@ extension NSObject {
   }
   
   func isAlive() -> Bool {
-    if self.proxy?.weakHost == nil {
-      return false
-    }
-    
     if let vc = self as? UIViewController {
       return judgeAlive(for: vc)
+    } else if let v = self as? UIView {
+      return judgeAlive(for: v)
     }
     return true
   }
@@ -91,14 +89,18 @@ extension NSObject {
     }
   }
   
+  // swift4.0之后无效
   func getAllProperties(by cls: AnyClass?) -> [DJProperty] {
     guard let cls = cls else { return [] }
-    var count: UInt32 = 0
+    let count = UnsafeMutablePointer<UInt32>.allocate(capacity: 0)
     let className = NSStringFromClass(cls)
-    guard !isSystemClass(className), let ps = class_copyPropertyList(cls, &count) else { return [] }
+    guard !isSystemClass(className) else { return [] }
+    let ps = class_copyPropertyList(cls, count)
+    defer { free(ps) }
+    guard let ps = ps else { return [] }
     
     var properties: [DJProperty] = []
-    for i in 0..<Int(count) {
+    for i in 0..<Int(count[0]) {
       let p = DJProperty(with: ps[i])
       if p.name == "DJObjectProxy" ||
           p.name.hasPrefix("UI") ||
@@ -115,6 +117,8 @@ extension NSObject {
 }
 
 extension NSObject {
+  
+  // 判断vc是否存活
   func judgeAlive(for vc: UIViewController) -> Bool {
     var alive = true
     var visibleOnScreen = false
@@ -131,6 +135,46 @@ extension NSObject {
     if !beingHeld && !visibleOnScreen {
       alive = false
     }
+    return alive
+  }
+  
+  // 判断UIView是否存活
+  func judgeAlive(for view: UIView) -> Bool {
+    var alive = true
+    var onUIStack = false
+    
+    var v: UIView? = view
+    while v?.superview != nil {
+      v = v?.superview
+    }
+    
+    if let v = v, v.isKind(of: UIWindow.classForCoder()) {
+      onUIStack = true
+    }
+    
+    if view.proxy?.responder == nil {
+      var r = view.next
+      while r != nil {
+        if r?.next == nil {
+          break
+        }
+        r = r?.next
+        
+        if let r = r, r.isKind(of: UIViewController.classForCoder()) {
+          break
+        }
+      }
+      view.proxy?.responder = r
+    }
+    
+    if !onUIStack {
+      alive = false
+      
+      if let v = view.proxy?.responder?.isKind(of: UIViewController.classForCoder()), v {
+        alive = true
+      }
+    }
+    
     return alive
   }
 }
