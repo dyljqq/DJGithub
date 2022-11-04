@@ -78,6 +78,7 @@
 		73936F3729137E7200BC2901 /* DJObjectProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F3629137E7200BC2901 /* DJObjectProxy.swift */; };
 		73936F39291385C700BC2901 /* DJProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F38291385C700BC2901 /* DJProperty.swift */; };
 		73936F8B2914030400BC2901 /* DJFPSLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F8A2914030400BC2901 /* DJFPSLabel.swift */; };
+		73936F8D2914BABF00BC2901 /* SqlCountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F8C2914BABF00BC2901 /* SqlCountModel.swift */; };
 		73AACAD528D308A60072B1DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD428D308A60072B1DF /* AppDelegate.swift */; };
 		73AACAD728D308A60072B1DF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD628D308A60072B1DF /* SceneDelegate.swift */; };
 		73AACAD928D308A60072B1DF /* LoadingViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD828D308A60072B1DF /* LoadingViewerViewController.swift */; };
@@ -274,6 +275,7 @@
 		73936F3629137E7200BC2901 /* DJObjectProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJObjectProxy.swift; sourceTree = "<group>"; };
 		73936F38291385C700BC2901 /* DJProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJProperty.swift; sourceTree = "<group>"; };
 		73936F8A2914030400BC2901 /* DJFPSLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJFPSLabel.swift; sourceTree = "<group>"; };
+		73936F8C2914BABF00BC2901 /* SqlCountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SqlCountModel.swift; sourceTree = "<group>"; };
 		73AACAD128D308A60072B1DF /* DJGithub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DJGithub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73AACAD428D308A60072B1DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		73AACAD628D308A60072B1DF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -684,6 +686,7 @@
 				73EE0CED290ABF7B0010C54A /* RepoBranchCommit.swift */,
 				73EE0CF7290BAE7D0010C54A /* RepoPull.swift */,
 				73EE0CFD290BB79A0010C54A /* RepoPullFile.swift */,
+				73936F8C2914BABF00BC2901 /* SqlCountModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1173,6 +1176,7 @@
 				73B7906228E7EB8A002A9CDC /* SearchList.swift in Sources */,
 				73E14E5F28F415AD00A9811D /* FeedCell.swift in Sources */,
 				73AACB7928D5BBF50072B1DF /* SQLiteDatabase.swift in Sources */,
+				73936F8D2914BABF00BC2901 /* SqlCountModel.swift in Sources */,
 				73AACB5028D4618F0072B1DF /* UIView+Ext.swift in Sources */,
 				73AACB5228D467850072B1DF /* UserContributionView.swift in Sources */,
 				7362FE852911816600D97E1A /* Default+Ext.swift in Sources */,

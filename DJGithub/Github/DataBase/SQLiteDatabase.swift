@@ -43,7 +43,7 @@ class SQLiteDatabase {
   static func open(path: String) throws -> SQLiteDatabase {
     var db: OpaquePointer?
     
-    if sqlite3_open(path, &db) == SQLITE_OK {
+    if sqlite3_open_v2(path, &db, SQLITE_OPEN_CREATE | SQLITE_OPEN_READWRITE, nil) == SQLITE_OK {
       return SQLiteDatabase(with: db)
     } else {
       defer {
@@ -68,6 +68,22 @@ class SQLiteDatabase {
   
   deinit {
     self.closeDatabase(self.db)
+  }
+}
+
+extension SQLiteDatabase {
+  static func queryCount(with querySql: String) throws -> [String: Any] {
+    guard let queryStatement = try? store?.prepareStatement(sql: querySql) else {
+      return [:]
+    }
+    defer {
+      sqlite3_finalize(queryStatement)
+    }
+    var rs: [String: Any] = [:]
+    while sqlite3_step(queryStatement) == SQLITE_ROW {
+      rs["count"] = sqlite3_column_int64(queryStatement, 0)
+    }
+    return rs
   }
 }
 

@@ -22,7 +22,6 @@ extension UIView {
       make.size.equalTo(self.bounds.size)
     }
     loadingView.startAnimation()
-    
     objc_setAssociatedObject(self, &loadingKey, loadingView, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
   }
   

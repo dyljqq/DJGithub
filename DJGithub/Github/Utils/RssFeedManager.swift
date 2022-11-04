@@ -14,7 +14,9 @@ class RssFeedManager: NSObject {
   
   static let shared = RssFeedManager()
   
+  var atoms: [RssFeedAtom] = []
   var readMapping: [String: Int] = [:]
+  var loadedFeedsFinishedClosure: (() -> ())?
   
   override init() {
     super.init()
@@ -24,20 +26,24 @@ class RssFeedManager: NSObject {
     try? RssFeedRead.createTable()
     
     loadReadStatus()
-
+    
     Task {
-      let atoms = await loadAtoms()
+      self.atoms = await loadAtoms()
       await withThrowingTaskGroup(of: Void.self) { group in
         for atom in atoms {
           group.addTask {
             await self.loadFeeds(by: atom)
           }
         }
+        loadedFeedsFinishedClosure?()
       }
     }
   }
   
   func loadAtoms() async -> [RssFeedAtom] {
+    guard self.atoms.isEmpty else {
+      return atoms
+    }
     let atoms: [RssFeedAtom] = RssFeedAtom.select(with: " order by update_time desc")
     if atoms.isEmpty {
       await self.saveAtoms()
@@ -70,21 +76,14 @@ class RssFeedManager: NSObject {
       return
     }
     print("[\(atom.title)] fetches \(info.entries.count)'s items.")
+    let lastFeeds: [RssFeed]? = RssFeed.select(with: " where atom_id=\(atom.id) order by updated desc")
     for var feed in info.entries {
-      let selectedTitle = feed.title.replacingOccurrences(of: "\"", with: "'")
-      let selectedFeeds: [RssFeed] = RssFeed.select(with: " where title=\"\(selectedTitle)\" order by updated desc")
-      if let _ = selectedFeeds.first {
-        feed.atomId = atom.id
-        feed.update(with: feed)
-      } else {
-        feed.feedLink = atom.feedLink
-        feed.atomId = atom.id
-        do {
-          try feed.insert()
-        } catch {
-          print("rss feed insert error: \(error)")
-        }
+      if let lastFeed = lastFeeds?.first, lastFeed.updated >= feed.updated {
+        break
       }
+      feed.feedLink = atom.feedLink
+      feed.atomId = atom.id
+      try? feed.insert()
     }
     print("end fetch \(atom.title)'s feeds")
     print("----------------------------------")
@@ -121,13 +120,13 @@ class RssFeedManager: NSObject {
   }
   
   func readFeedCount(with atomId: Int) -> Int {
-    let feeds: [RssFeed] = RssFeed.select(with: " where atom_id=\(atomId)")
-    return feeds.reduce(0) { $0 + (readMapping[Self.readId(with: atomId, feedId: $1.id), default: 0] > 0 ? 1 : 0) }
+    guard let model = SqlCountModel.query(with: RssFeedRead.tableName, condition: " where atom_id=\(atomId)") else { return 0 }
+    return model.count
   }
   
   func totalFeedsCount(with atomId: Int) -> Int {
-    let feeds: [RssFeed] = RssFeed.select(with: " where atom_id=\(atomId)")
-    return feeds.count
+    guard let model = SqlCountModel.query(with: RssFeed.tableName, condition: "where atom_id=\(atomId)") else { return 0 }
+    return model.count
   }
   
   func totalFeedsReadStr(with atomId: Int) -> String {
