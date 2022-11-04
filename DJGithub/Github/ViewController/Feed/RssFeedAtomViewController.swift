@@ -84,15 +84,22 @@ class RssFeedAtomViewController: UIViewController {
   }
   
   private func loadData() {
+    self.configDataSource()
+    RssFeedManager.shared.loadedFeedsFinishedClosure = { [weak self] in
+      guard let strongSelf = self else { return }
+      strongSelf.configDataSource()
+    }
+  }
+  
+  private func configDataSource() {
     Task {
-      let atoms = await ConfigManager.shared.rssFeedManager.loadAtoms()
+      let atoms = await RssFeedManager.shared.loadAtoms()
       var rs: [RssFeedAtomModel] = []
       for atom in atoms {
         let str = RssFeedManager.shared.totalFeedsReadStr(with: atom.id)
         rs.append(RssFeedAtomModel(readStr: str, atom: atom))
       }
       dataSource = rs
-      
       view.stopLoading()
       self.tableView.reloadData()
     }

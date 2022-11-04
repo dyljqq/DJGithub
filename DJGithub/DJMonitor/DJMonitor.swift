@@ -29,11 +29,13 @@ struct DJMonitor {
     DJLeakSniffer.shared.install()
   }
   
-  func addFPSMonitor(with window: UIWindow?) {
-    if let window = window {
-      let label = DJFPSLabel(
-        frame: CGRect(x: FrameGuide.screenWidth - 71, y: FrameGuide.screenHeight - FrameGuide.tabbarHeight - 44, width: 55, height: 20))
-      window.addSubview(label)
+  func addFPSMonitor() {
+    for scene in UIApplication.shared.connectedScenes {
+      if let sc = scene as? UIWindowScene, let window = sc.keyWindow {
+        let label = DJFPSLabel(
+          frame: CGRect(x: FrameGuide.screenWidth - 71, y: FrameGuide.screenHeight - FrameGuide.tabbarHeight - 44, width: 55, height: 20))
+        window.addSubview(label)
+      }
     }
   }
 }
