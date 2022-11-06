@@ -12,7 +12,21 @@ private var loadingKey = 0
 
 extension UIView {
   
+ private var _loadingView: LoadingView? {
+    get {
+      return objc_getAssociatedObject(self, &loadingKey) as? LoadingView
+    }
+    set {
+      objc_setAssociatedObject(self, &loadingKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+    }
+  }
+  
   func startLoading(by size: CGSize = CGSize(width: 50, height: 50)) {
+    if let loadingView = _loadingView {
+      loadingView.startAnimation()
+      return
+    }
+
     let loadingView = LoadingView(with: size)
     loadingView.backgroundColor = .white
     addSubview(loadingView)
@@ -22,15 +36,14 @@ extension UIView {
       make.size.equalTo(self.bounds.size)
     }
     loadingView.startAnimation()
-    objc_setAssociatedObject(self, &loadingKey, loadingView, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+    self._loadingView = loadingView
   }
   
   func stopLoading() {
-    guard let loadingView = objc_getAssociatedObject(self, &loadingKey) as? LoadingView else {
-      return
-    }
+    guard let loadingView = self._loadingView else { return }
     loadingView.stopAnimation()
     loadingView.removeFromSuperview()
+    objc_removeAssociatedObjects(loadingView)
   }
   
 }

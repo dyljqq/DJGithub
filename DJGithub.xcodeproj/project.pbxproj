@@ -79,6 +79,7 @@
 		73936F39291385C700BC2901 /* DJProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F38291385C700BC2901 /* DJProperty.swift */; };
 		73936F8B2914030400BC2901 /* DJFPSLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F8A2914030400BC2901 /* DJFPSLabel.swift */; };
 		73936F8D2914BABF00BC2901 /* SqlCountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F8C2914BABF00BC2901 /* SqlCountModel.swift */; };
+		73936F932917BF8C00BC2901 /* UIView+Leak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F922917BF8C00BC2901 /* UIView+Leak.swift */; };
 		73AACAD528D308A60072B1DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD428D308A60072B1DF /* AppDelegate.swift */; };
 		73AACAD728D308A60072B1DF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD628D308A60072B1DF /* SceneDelegate.swift */; };
 		73AACAD928D308A60072B1DF /* LoadingViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD828D308A60072B1DF /* LoadingViewerViewController.swift */; };
@@ -276,6 +277,7 @@
 		73936F38291385C700BC2901 /* DJProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJProperty.swift; sourceTree = "<group>"; };
 		73936F8A2914030400BC2901 /* DJFPSLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJFPSLabel.swift; sourceTree = "<group>"; };
 		73936F8C2914BABF00BC2901 /* SqlCountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SqlCountModel.swift; sourceTree = "<group>"; };
+		73936F922917BF8C00BC2901 /* UIView+Leak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Leak.swift"; sourceTree = "<group>"; };
 		73AACAD128D308A60072B1DF /* DJGithub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DJGithub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73AACAD428D308A60072B1DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		73AACAD628D308A60072B1DF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -501,6 +503,7 @@
 				73936F3429137C4A00BC2901 /* DispatchQueue+Leak.swift */,
 				73936F3629137E7200BC2901 /* DJObjectProxy.swift */,
 				73936F38291385C700BC2901 /* DJProperty.swift */,
+				73936F922917BF8C00BC2901 /* UIView+Leak.swift */,
 			);
 			path = DJLeak;
 			sourceTree = "<group>";
@@ -1155,6 +1158,7 @@
 				73EE0CE8290A6EC90010C54A /* RepoBranch.swift in Sources */,
 				73AACB6428D4E5000072B1DF /* Int+Ext.swift in Sources */,
 				73AACB2428D31A440072B1DF /* User.swift in Sources */,
+				73936F932917BF8C00BC2901 /* UIView+Leak.swift in Sources */,
 				73AACB6028D4BE4F0072B1DF /* RepoManager.swift in Sources */,
 				73AACAD528D308A60072B1DF /* AppDelegate.swift in Sources */,
 				73074CCB28EF4AD0001A90E7 /* LocalDataViewController.swift in Sources */,

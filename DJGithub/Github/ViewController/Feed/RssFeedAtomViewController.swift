@@ -12,6 +12,7 @@ class RssFeedAtomViewController: UIViewController {
   struct RssFeedAtomModel {
     let readStr: String
     let atom: RssFeedAtom
+    let layout: RssFeedSimpleCellLayout
   }
   
   var dataSource: [RssFeedAtomModel] = []
@@ -60,7 +61,7 @@ class RssFeedAtomViewController: UIViewController {
           for (index, model) in strongSelf.dataSource.enumerated() {
             if model.atom.feedLink == feedLink {
               if let atom = RssFeedAtom.getByFeedLink(feedLink) {
-                strongSelf.dataSource[index] = RssFeedAtomModel(readStr: model.readStr, atom: atom)
+                strongSelf.dataSource[index] = RssFeedAtomModel(readStr: model.readStr, atom: atom, layout: model.layout)
                 strongSelf.tableView.reloadData()
                 return
               }
@@ -75,7 +76,11 @@ class RssFeedAtomViewController: UIViewController {
       for (index, model) in strongSelf.dataSource.enumerated() {
         if model.atom.id == atomId,
            let atom = RssFeedAtom.get(by: atomId) {
-          strongSelf.dataSource[index] = RssFeedAtomModel(readStr: RssFeedManager.shared.totalFeedsReadStr(with: atom.id), atom: atom)
+          strongSelf.dataSource[index] = RssFeedAtomModel(
+            readStr: RssFeedManager.shared.totalFeedsReadStr(with: atom.id),
+            atom: atom,
+            layout: model.layout
+          )
           strongSelf.tableView.reloadData()
           return
         }
@@ -97,7 +102,8 @@ class RssFeedAtomViewController: UIViewController {
       var rs: [RssFeedAtomModel] = []
       for atom in atoms {
         let str = RssFeedManager.shared.totalFeedsReadStr(with: atom.id)
-        rs.append(RssFeedAtomModel(readStr: str, atom: atom))
+        let layout = RssFeedSimpleCellLayout(with: atom.title, content: atom.des)
+        rs.append(RssFeedAtomModel(readStr: str, atom: atom, layout: layout))
       }
       dataSource = rs
       view.stopLoading()
@@ -125,7 +131,7 @@ extension RssFeedAtomViewController: UITableViewDelegate, UITableViewDataSource 
     let model = self.dataSource[indexPath.row]
     cell.render(with: RssFeedSimpleCell.RssFeedSimpleModel(
       title: model.atom.title,
-      content: model.atom.des.isEmpty ? "No description provided." : model.atom.des,
+      content: model.atom.des,
       readStr: model.readStr)
     )
     return cell
@@ -133,24 +139,13 @@ extension RssFeedAtomViewController: UITableViewDelegate, UITableViewDataSource 
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     let model = self.dataSource[indexPath.row]
-    return RssFeedSimpleCell.cellHeight(by: model.atom.title, content: model.atom.des)
+    return model.layout.totalHeight
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
     
     let model = dataSource[indexPath.row]
-    if model.atom.hasFeeds {
-      self.navigationController?.pushToRssFeeds(with: dataSource[indexPath.row].atom)
-    } else {
-      let vc = UIAlertController(title: "", message: "The feeds is now on downloading.", preferredStyle: .alert)
-      self.present(vc, animated: true)
-      
-      DispatchQueue.global().asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
-        DispatchQueue.main.async {
-          vc.dismiss(animated: true)
-        }
-      })
-    }
+    self.navigationController?.pushToRssFeeds(with: model.atom)
   }
 }

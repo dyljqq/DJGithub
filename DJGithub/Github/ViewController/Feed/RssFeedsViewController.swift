@@ -50,12 +50,22 @@ class RssFeedsViewController: UIViewController {
     view.startLoading()
     
     Task {
+      self.loadLocalFeeds()
+      let isUpdated = await RssFeedManager.shared.loadFeeds(by: rssFeedAtom)
+      if isUpdated {
+        self.loadLocalFeeds()
+      }
+    }
+    
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editAtomAction))
+  }
+  
+  private func loadLocalFeeds() {
+    Task {
       self.dataSource = await RssFeedManager.getFeeds(by: rssFeedAtom.id)
       view.stopLoading()
       self.tableView.reloadData()
     }
-    
-    self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editAtomAction))
   }
   
   @objc func editAtomAction() {
