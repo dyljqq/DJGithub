@@ -152,19 +152,9 @@ extension NSObject {
       onUIStack = true
     }
     
-    if view.proxy?.responder == nil {
-      var r = view.next
-      while r != nil {
-        if r?.next == nil {
-          break
-        }
-        r = r?.next
-        
-        if let r = r, r.isKind(of: UIViewController.classForCoder()) {
-          break
-        }
-      }
-      view.proxy?.responder = r
+    if view.proxy?.responder == nil,
+       let vc = view.responseVC {
+      view.proxy?.responder = vc
     }
     
     if !onUIStack {

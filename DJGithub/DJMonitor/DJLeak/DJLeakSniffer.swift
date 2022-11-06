@@ -44,12 +44,22 @@ class DJLeakSniffer {
   }
   
   private func detectPong(with noti: Notification) {
+    print("-------------")
     let leakObject = noti.object
     if let vc = leakObject as? UIViewController {
       print("Detect controller leak: \(vc.classForCoder)")
+    } else if let view = leakObject as? UIView {
+      print("Detect view leak: \(view.classForCoder)")
+      print("Responser VC: \(view.responseVC)")
+      var v = view.superview
+      while v != nil {
+        print("super view: \(v)")
+        v = v?.superview
+      }
     } else {
       print("something may be leaked: \(leakObject)")
     }
+    print("-------------")
   }
   
 }

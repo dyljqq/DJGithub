@@ -29,14 +29,6 @@ class RssFeedManager: NSObject {
     
     Task {
       self.atoms = await loadAtoms()
-      await withThrowingTaskGroup(of: Void.self) { group in
-        for atom in atoms {
-          group.addTask {
-            await self.loadFeeds(by: atom)
-          }
-        }
-        loadedFeedsFinishedClosure?()
-      }
     }
   }
   
@@ -68,29 +60,32 @@ class RssFeedManager: NSObject {
     NotificationCenter.default.post(name: RssFeedAtomUpdateNotificationKey, object: ["feedLink": feedLink])
   }
   
-  func loadFeeds(by atom: RssFeedAtom) async {
+  @discardableResult
+  func loadFeeds(by atom: RssFeedAtom) async -> Bool {
     print("----------------------------------")
     print("start fetch \(atom.title)'s feeds")
     guard let info = await FeedManager.fetchRssInfo(with: atom.feedLink) as RssFeedInfo? else {
       print("failed to load feeds: \(atom.title)")
-      return
+      return false
     }
     print("[\(atom.title)] fetches \(info.entries.count)'s items.")
     let lastFeeds: [RssFeed]? = RssFeed.select(with: " where atom_id=\(atom.id) order by updated desc")
+    
+    var isUpdated = false
     for var feed in info.entries {
-      if let lastFeed = lastFeeds?.first, lastFeed.updated >= feed.updated {
-        break
-      }
+      if let lastFeed = lastFeeds?.first, lastFeed.updated >= feed.updated { break }
       feed.feedLink = atom.feedLink
       feed.atomId = atom.id
       try? feed.insert()
+      isUpdated = true
     }
     print("end fetch \(atom.title)'s feeds")
     print("----------------------------------")
+    return isUpdated
   }
   
   static func getFeeds(by atom_id: Int) async -> [RssFeed] {
-    return RssFeed.select(with: " where atom_id=\(atom_id)")
+    return RssFeed.select(with: " where atom_id=\(atom_id) order by updated desc;")
   }
   
   func addAtom(with atomUrl: String, desc: String) async -> Bool {

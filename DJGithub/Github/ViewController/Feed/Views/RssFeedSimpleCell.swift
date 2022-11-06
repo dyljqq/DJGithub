@@ -7,6 +7,28 @@
 
 import UIKit
 
+struct RssFeedSimpleCellLayout {
+  let titleHeight: CGFloat
+  let contentHeight: CGFloat
+  
+  var totalHeight: CGFloat {
+    return titleHeight + contentHeight + 27
+  }
+  
+  init(with title: String, content: String) {
+    self.titleHeight = (title as NSString).boundingRect(
+      with: CGSize(width: FrameGuide.screenWidth - 24, height: 0),
+      options: .usesLineFragmentOrigin,
+      attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)],
+      context: nil).height
+    self.contentHeight = (content as NSString).boundingRect(
+      with: CGSize(width: FrameGuide.screenWidth - 24, height: 0),
+      options: .usesLineFragmentOrigin,
+      attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)],
+      context: nil).height
+  }
+}
+
 class RssFeedSimpleCell: UITableViewCell {
   
   struct RssFeedSimpleModel {
