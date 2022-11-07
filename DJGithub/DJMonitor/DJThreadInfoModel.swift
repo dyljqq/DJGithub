@@ -8,20 +8,11 @@
 import Foundation
 
 struct DJThreadInfoModel {
-  var cpuUsage: Double
-  var userTime: Int
-  
-  init() {
-    self.cpuUsage = 0
-    self.userTime = 0
-  }
-  
-  init(cpuUsage: Double, userTime: Int) {
-    self.cpuUsage = cpuUsage
-    self.userTime = userTime
-  }
+  let thread: thread_t
+  let cpuUsage: Double
+  let userTime: Double
   
   var description: String {
-    return "Thread CPU usage: \(self.cpuUsage), use \(self.userTime) microseconds."
+    return "Thread: \(thread), CPU usage: \(self.cpuUsage), use \(self.userTime) seconds."
   }
 }

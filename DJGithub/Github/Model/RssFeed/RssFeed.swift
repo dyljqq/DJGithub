@@ -70,8 +70,10 @@ struct RssFeed: DJCodable {
   var feedLink: String?
   
   var unread: Bool {
-    let readId = RssFeedManager.readId(with: self.atomId, feedId: self.id)
-    return RssFeedManager.shared.readMapping[readId] == nil
+    if let v = RssFeedManager.shared.feedReadMapping[self.id], v {
+      return false
+    }
+    return true
   }
   
   enum CodingKeys: String, CodingKey {
@@ -179,16 +181,13 @@ extension RssFeed: SQLTable {
 }
 extension RssFeed {
   func updateReadStatus() async {
-    let readId = RssFeedManager.readId(with: self.atomId, feedId: self.id)
     if let model = RssFeedRead.get(by: atomId, feedId: self.id) {
-      if model.increment() {
-        RssFeedManager.shared.readMapping[readId] = model.readCount + 1
-      }
+      model.increment()
     } else {
       let model = RssFeedRead(atomId: atomId, feedId: self.id)
       do {
         try model.insert()
-        RssFeedManager.shared.readMapping[readId] = model.readCount + 1
+        RssFeedManager.shared.feedReadMapping[self.id] = true
       } catch {
         print("insert error: \(error)")
       }

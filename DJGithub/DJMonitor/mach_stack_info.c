@@ -55,10 +55,9 @@ int mach_frame_count(thread_t thread, void **stack, int maxSymbolCount) {
   stack[i++] = (void *)machineContext.__ss.__lr;
 
   void **currentFramePointer = (void **)machineContext.__ss.__fp;
-  void **previous = *currentFramePointer;
-  while (i < maxSymbolCount && !currentFramePointer && !(*previous)) {
-    previous = *currentFramePointer;
-    if (!previous) break;
+  while (i < maxSymbolCount && currentFramePointer != NULL && !(*currentFramePointer)) {
+    void **previous = *currentFramePointer;
+    if (previous == NULL) break;
     stack[i++] = *(currentFramePointer + 1);
     currentFramePointer = previous;
   }

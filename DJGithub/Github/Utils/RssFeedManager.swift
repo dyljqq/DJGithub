@@ -15,8 +15,9 @@ class RssFeedManager: NSObject {
   static let shared = RssFeedManager()
   
   var atoms: [RssFeedAtom] = []
-  var readMapping: [String: Int] = [:]
-  var loadedFeedsFinishedClosure: (() -> ())?
+  var readMapping: [Int: (Int, Int)] = [:]
+  var feedReadMapping: [Int: Bool] = [:]
+  var loadedReadMappingCountClosure: (() -> ())?
   
   override init() {
     super.init()
@@ -24,8 +25,6 @@ class RssFeedManager: NSObject {
     try? RssFeedAtom.createTable()
     try? RssFeed.createTable()
     try? RssFeedRead.createTable()
-    
-    loadReadStatus()
     
     Task {
       self.atoms = await loadAtoms()
@@ -69,7 +68,8 @@ class RssFeedManager: NSObject {
       return false
     }
     print("[\(atom.title)] fetches \(info.entries.count)'s items.")
-    let lastFeeds: [RssFeed]? = RssFeed.select(with: " where atom_id=\(atom.id) order by updated desc")
+  
+    let lastFeeds: [RssFeed]? = RssFeed.select(with: " where atom_id=\(atom.id) order by updated desc limit 1;")
     
     var isUpdated = false
     for var feed in info.entries {
@@ -82,6 +82,13 @@ class RssFeedManager: NSObject {
     print("end fetch \(atom.title)'s feeds")
     print("----------------------------------")
     return isUpdated
+  }
+  
+  func loadFeedReadMapping(with atomId: Int) {
+    guard let reads = RssFeedRead.select(with: " where atom_id=\(atomId)") as [RssFeedRead]? else { return }
+    for read in reads {
+      feedReadMapping[read.feedId] = true
+    }
   }
   
   static func getFeeds(by atom_id: Int) async -> [RssFeed] {
@@ -103,13 +110,6 @@ class RssFeedManager: NSObject {
     return false
   }
   
-  func loadReadStatus() {
-    let models: [RssFeedRead] = RssFeedRead.selectAll()
-    for model in models {
-      readMapping[Self.readId(with: model.atomId, feedId: model.feedId)] = model.readCount
-    }
-  }
-  
   static func readId(with atomId: Int, feedId: Int) -> String {
     return "\(atomId)_\(feedId)"
   }
@@ -126,6 +126,28 @@ class RssFeedManager: NSObject {
   
   func totalFeedsReadStr(with atomId: Int) -> String {
     return "\(readFeedCount(with: atomId))/\(totalFeedsCount(with: atomId))"
+  }
+  
+  func asyncLoadReadMapping() async -> [Int: (Int, Int)]? {
+    try? await withCheckedThrowingContinuation { continuation in
+      self.loadReadMapping { mapping in
+        continuation.resume(returning: mapping)
+      }
+    }
+  }
+  
+  func loadReadMapping(_ completionHandler: @escaping ([Int: (Int, Int)]) -> ()) {
+    DispatchQueue.global(qos: .default).async {
+      var mapping: [Int: (Int, Int)] = [:]
+      for atom in self.atoms {
+        let total = self.totalFeedsCount(with: atom.id)
+        let totalReadCount = self.readFeedCount(with: atom.id)
+        mapping[atom.id] = (total, totalReadCount)
+      }
+      DispatchQueue.main.async {
+        completionHandler(mapping)
+      }
+    }
   }
 }
 

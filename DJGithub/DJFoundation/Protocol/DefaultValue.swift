@@ -20,7 +20,11 @@ struct Default<T: DefaultValue> {
 extension Default: Decodable {
   init(from decoder: Decoder) throws {
     let container = try decoder.singleValueContainer()
-    wrappedValue = (try? container.decode(T.Value.self)) ?? T.defaultValue
+    if let v = try? container.decode(T.Value.self) as? String, v.isEmpty {
+      wrappedValue = T.defaultValue
+    } else {
+      wrappedValue = (try? container.decode(T.Value.self)) ?? T.defaultValue
+    }
   }
 }
 

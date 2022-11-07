@@ -27,6 +27,9 @@ extension String: DefaultValue {
   enum UnProvidedDesc: DefaultValue {
     static let defaultValue = "No description provided."
   }
+  enum UnProviedTitle: DefaultValue {
+    static let defaultValue = "No title provided."
+  }
   enum Company: DefaultValue {
     static let defaultValue = "团队"
   }
@@ -38,5 +41,8 @@ extension String: DefaultValue {
   }
   enum Blog: DefaultValue {
     static let defaultValue = "个人主页"
+  }
+  enum Now: DefaultValue {
+    static let defaultValue = DateHelper.standard.dateToString(Date.now)
   }
 }

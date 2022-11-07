@@ -33,7 +33,6 @@ struct DJCallStack {
 
 extension DJCallStack {
   fileprivate static func getStackInfo(by thread: thread_t) -> [String] {
-    var threadInfoModel = DJThreadInfoModel()
     var info = thread_basic_info()
     var infoCount = TASK_BASIC_INFO_COUNT
     let kerr = withUnsafeMutablePointer(to: &info) {
@@ -44,9 +43,10 @@ extension DJCallStack {
     guard kerr == KERN_SUCCESS else { return [] }
     
     var rs = [String]()
-    if info.flags & TH_FLAGS_IDLE == 0 {
-      threadInfoModel.cpuUsage = Double(info.cpu_usage) / 10
-      threadInfoModel.userTime = Int(info.system_time.microseconds)
+    if (info.flags & TH_FLAGS_IDLE) == 0 {
+      let cpuUsage = Double(info.cpu_usage) / 10
+      let userTime = Double(info.system_time.seconds) + Double(info.system_time.microseconds / 1000000)
+      let threadInfoModel = DJThreadInfoModel(thread: thread, cpuUsage: cpuUsage, userTime: userTime)
       rs.append(threadInfoModel.description)
     }
     

@@ -65,6 +65,7 @@ extension RssFeedRead: SQLTable {
     return model
   }
   
+  @discardableResult
   func increment() -> Bool {
     let sql = "update \(Self.tableName) set read_count = \(self.readCount + 1) where id=\(self.id)"
     do {

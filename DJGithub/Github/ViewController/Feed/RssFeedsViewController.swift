@@ -11,7 +11,7 @@ class RssFeedsViewController: UIViewController {
 
   let rssFeedAtom: RssFeedAtom
   
-  var dataSource: [RssFeed] = []
+  var dataSource: [RssFeedsViewControllerModel] = []
   
   lazy var tableView: UITableView = {
     let tableView = UITableView()
@@ -49,8 +49,8 @@ class RssFeedsViewController: UIViewController {
     
     view.startLoading()
     
+    self.loadLocalFeeds()
     Task {
-      self.loadLocalFeeds()
       let isUpdated = await RssFeedManager.shared.loadFeeds(by: rssFeedAtom)
       if isUpdated {
         self.loadLocalFeeds()
@@ -62,7 +62,9 @@ class RssFeedsViewController: UIViewController {
   
   private func loadLocalFeeds() {
     Task {
-      self.dataSource = await RssFeedManager.getFeeds(by: rssFeedAtom.id)
+      RssFeedManager.shared.loadFeedReadMapping(with: self.rssFeedAtom.id)
+      let feeds = await RssFeedManager.getFeeds(by: rssFeedAtom.id)
+      self.dataSource = feeds.map { RssFeedsViewControllerModel(model: $0, layout: RssFeedSimpleCellLayout(with: $0.title, content: $0.displayDateString)) }
       view.stopLoading()
       self.tableView.reloadData()
     }
@@ -87,7 +89,7 @@ extension RssFeedsViewController: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: RssFeedSimpleCell.className, for: indexPath) as! RssFeedSimpleCell
-    let rssFeed = self.dataSource[indexPath.row]
+    let rssFeed = self.dataSource[indexPath.row].model
     let model = RssFeedSimpleCell.RssFeedSimpleModel(title: rssFeed.title, content: rssFeed.displayDateString, unread: rssFeed.unread)
     cell.render(with: model)
     return cell
@@ -95,13 +97,13 @@ extension RssFeedsViewController: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     let feed = self.dataSource[indexPath.row]
-    return RssFeedSimpleCell.cellHeight(by: feed.title, content: feed.updated)
+    return feed.layout.totalHeight
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
     
-    let rssFeed = dataSource[indexPath.row]
+    let rssFeed = dataSource[indexPath.row].model
     self.navigationController?.pushToRssFeedDetial(with: rssFeed)
     
     Task {
@@ -116,5 +118,12 @@ extension RssFeedsViewController: UITableViewDelegate, UITableViewDataSource {
 extension RssFeed {
   var displayDateString: String {
     return "updated on \(self.updated.components(separatedBy: " ").first ?? self.updated)"
+  }
+}
+
+extension RssFeedsViewController {
+  struct RssFeedsViewControllerModel {
+    let model: RssFeed
+    let layout: RssFeedSimpleCellLayout
   }
 }

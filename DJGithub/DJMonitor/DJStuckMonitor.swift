@@ -81,7 +81,7 @@ open class DJStuckMonitor {
   
   private func getStackInfos() {
     queue.async {
-      self.timer = Timer(timeInterval: 3, repeats: true, block: { [weak self] timer in
+      self.timer = Timer(timeInterval: 1, repeats: true, block: { [weak self] timer in
         guard let strongSelf = self, let thread = strongSelf.thread else { return }
         let infos = DJCallStack.fetchStackInfo(from: thread)
         if strongSelf.stackInfos.count > 20 {
@@ -143,8 +143,8 @@ extension DJStuckMonitor {
 extension DJStuckMonitor {
   private func outputInfos() {
     print("current info: \(self.currentStackInfo.joined(separator: "\n"))")
-//    for info in self.stackInfos {
-//      print("info: \(info.joined(separator: "\n"))")
-//    }
+    for info in self.stackInfos {
+      print("info: \(info.joined(separator: "\n"))")
+    }
   }
 }
