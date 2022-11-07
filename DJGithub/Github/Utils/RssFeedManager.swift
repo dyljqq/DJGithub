@@ -15,6 +15,7 @@ class RssFeedManager: NSObject {
   static let shared = RssFeedManager()
   
   var atoms: [RssFeedAtom] = []
+  var atomMapping: [Int: RssFeedAtom] = [:]
   var readMapping: [Int: (Int, Int)] = [:]
   var feedReadMapping: [Int: Bool] = [:]
   var loadedReadMappingCountClosure: (() -> ())?
@@ -28,6 +29,7 @@ class RssFeedManager: NSObject {
     
     Task {
       self.atoms = await loadAtoms()
+      self.atoms.forEach { atomMapping[$0.id] = $0 }
     }
   }
   
@@ -147,6 +149,27 @@ class RssFeedManager: NSObject {
       DispatchQueue.main.async {
         completionHandler(mapping)
       }
+    }
+  }
+  
+  func loadLatestFeeds(by limit: Int = 5, completionHandler: @escaping ([RssFeedLatestCellModel]) -> ()) {
+    DispatchQueue.global(qos: .utility).async {
+      let feeds: [RssFeed] = RssFeed.select(with: " order by id desc limit \(limit)")
+      let models = feeds.compactMap { feed in
+        if let atom = self.atomMapping[feed.atomId] {
+          return RssFeedLatestCellModel(title: feed.title, from: atom.title, feedId: feed.id)
+        }
+        return nil
+      }
+      DispatchQueue.main.async {
+        completionHandler(models)
+      }
+    }
+  }
+  
+  func asyncLoadLatestFeeds(by limit: Int = 5) async throws -> [RssFeedLatestCellModel] {
+    return try await withCheckedThrowingContinuation { continuation in
+      self.loadLatestFeeds { continuation.resume(returning: $0) }
     }
   }
 }
