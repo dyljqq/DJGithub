@@ -9,13 +9,13 @@ import Foundation
 
 struct RssFeedAtom: DJCodable {
   var id: Int
-  var title: String
+  @Default<String.UnProviedTitle> var title: String
   @Default<String.UnProvidedDesc> var des: String
   var siteLink: String
   var feedLink: String
   
-  var createTime: String
-  var updateTime: String
+  @Default<String.Now> var createTime: String
+  @Default<String.Now> var updateTime: String
   
   var description: String?
   
@@ -28,32 +28,6 @@ struct RssFeedAtom: DJCodable {
     self.id = 0
     self.createTime = ""
     self.updateTime = ""
-  }
-  
-  init(from decoder: Decoder) throws {
-    let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.id = try container.decode(Int.self, forKey: .id)
-    if let title = try? container.decode(String.self, forKey: .title), !title.isEmpty {
-      self.title = title
-    } else {
-      let title =  try? container.decode(String.self, forKey: .description)
-      self.title = title ?? "No title provided."
-    }
-    self.title = try container.decode(String.self, forKey: .title)
-    self.des = try container.decode(String.self, forKey: .des)
-    self.siteLink = try container.decode(String.self, forKey: .siteLink)
-    self.feedLink = try container.decode(String.self, forKey: .feedLink)
-    if let createTime = try? container.decode(String.self, forKey: .createTime) {
-      self.createTime = createTime
-    } else {
-      self.createTime = DateHelper.standard.dateToString(Date.now)
-    }
-    
-    if let updateTime = try? container.decode(String.self, forKey: .updateTime) {
-      self.updateTime = updateTime
-    } else {
-      self.updateTime = DateHelper.standard.dateToString(Date.now)
-    }
   }
 }
 

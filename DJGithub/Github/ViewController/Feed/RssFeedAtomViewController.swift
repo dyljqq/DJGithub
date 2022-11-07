@@ -10,9 +10,19 @@ import UIKit
 class RssFeedAtomViewController: UIViewController {
 
   struct RssFeedAtomModel {
-    let readStr: String
+    var readStr: String
     let atom: RssFeedAtom
     let layout: RssFeedSimpleCellLayout
+    
+    mutating func update(_ readStr: String) {
+      self.readStr = readStr
+    }
+    
+    var simpleModel: RssFeedSimpleCell.RssFeedSimpleModel {
+      return RssFeedSimpleCell.RssFeedSimpleModel(
+        title: atom.title, content: atom.des, readStr: readStr
+      )
+    }
   }
   
   var dataSource: [RssFeedAtomModel] = []
@@ -32,10 +42,6 @@ class RssFeedAtomViewController: UIViewController {
     setUp()
   }
   
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-  }
-  
   private func setUp() {
     self.navigationItem.title = "Rss"
     view.backgroundColor = .backgroundColor
@@ -49,7 +55,13 @@ class RssFeedAtomViewController: UIViewController {
     
     view.startLoading()
     self.loadData()
-    
+    self.addNotification()
+  }
+  
+  private func addNotification() {
+    NotificationCenter.default.removeObserver(self, name: RssFeedManager.RssFeedAtomUpdateNotificationKey, object: nil)
+    NotificationCenter.default.removeObserver(self, name: RssFeedManager.RssFeedAtomReadFeedNotificationKey, object: nil)
+
     NotificationCenter.default.addObserver(
       forName: RssFeedManager.RssFeedAtomUpdateNotificationKey,
       object: nil,
@@ -89,26 +101,33 @@ class RssFeedAtomViewController: UIViewController {
   }
   
   private func loadData() {
-    self.configDataSource()
-    RssFeedManager.shared.loadedFeedsFinishedClosure = { [weak self] in
-      guard let strongSelf = self else { return }
-      strongSelf.configDataSource()
+    Task {
+      await self.configDataSource()
     }
   }
   
-  private func configDataSource() {
+  private func configDataSource() async {
+    let atoms = await RssFeedManager.shared.loadAtoms()
+    configDataSource(with: atoms)
     Task {
-      let atoms = await RssFeedManager.shared.loadAtoms()
-      var rs: [RssFeedAtomModel] = []
-      for atom in atoms {
-        let str = RssFeedManager.shared.totalFeedsReadStr(with: atom.id)
-        let layout = RssFeedSimpleCellLayout(with: atom.title, content: atom.des)
-        rs.append(RssFeedAtomModel(readStr: str, atom: atom, layout: layout))
+      if let mapping = await RssFeedManager.shared.asyncLoadReadMapping() {
+        configDataSource(with: atoms, mapping: mapping)
       }
-      dataSource = rs
-      view.stopLoading()
-      self.tableView.reloadData()
     }
+  }
+  
+  private func configDataSource(with atoms: [RssFeedAtom], mapping: [Int: (Int, Int)] = [:]) {
+    dataSource = atoms.map { atom in
+      let readStr: String
+      if let (total, readCount) = mapping[atom.id] {
+        readStr = "\(readCount)/\(total)"
+      } else {
+        readStr = ""
+      }
+      return RssFeedAtomModel(readStr: readStr, atom: atom, layout: RssFeedSimpleCellLayout(with: atom.title, content: atom.des))
+    }
+    view.stopLoading()
+    self.tableView.reloadData()
   }
   
   @objc func addAction() {
@@ -128,12 +147,7 @@ extension RssFeedAtomViewController: UITableViewDelegate, UITableViewDataSource 
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: RssFeedSimpleCell.className, for: indexPath) as! RssFeedSimpleCell
-    let model = self.dataSource[indexPath.row]
-    cell.render(with: RssFeedSimpleCell.RssFeedSimpleModel(
-      title: model.atom.title,
-      content: model.atom.des,
-      readStr: model.readStr)
-    )
+    cell.render(with: self.dataSource[indexPath.row].simpleModel)
     return cell
   }
   

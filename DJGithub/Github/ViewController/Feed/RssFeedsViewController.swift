@@ -62,6 +62,7 @@ class RssFeedsViewController: UIViewController {
   
   private func loadLocalFeeds() {
     Task {
+      RssFeedManager.shared.loadFeedReadMapping(with: self.rssFeedAtom.id)
       self.dataSource = await RssFeedManager.getFeeds(by: rssFeedAtom.id)
       view.stopLoading()
       self.tableView.reloadData()
