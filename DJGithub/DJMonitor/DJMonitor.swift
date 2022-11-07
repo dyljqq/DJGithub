@@ -27,6 +27,9 @@ struct DJMonitor {
     
     // 开启内存泄漏检测
     DJLeakSniffer.shared.install()
+    
+    // 检查是否有不在主线程的UI
+    DJUIThreadMonitor.start()
   }
   
   func addFPSMonitor() {

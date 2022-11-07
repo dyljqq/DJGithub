@@ -27,6 +27,20 @@ class RssFeedAtomViewController: UIViewController {
   
   var dataSource: [RssFeedAtomModel] = []
   
+  lazy var headerView: RssFeedLatestView = {
+    let view = RssFeedLatestView()
+    view.didSelectItemClosure = { [weak self] feedId in
+      if let feed = RssFeed.get(by: feedId) as RssFeed? {
+        Task {
+          await feed.updateReadStatus()
+          NotificationCenter.default.post(name: RssFeedManager.RssFeedAtomReadFeedNotificationKey, object: ["atomId": feed.atomId])
+        }
+        self?.navigationController?.pushToRssFeedDetial(with: feed)
+      }
+    }
+    return view
+  }()
+  
   lazy var tableView: UITableView = {
     let tableView = UITableView()
     tableView.delegate = self
@@ -42,15 +56,32 @@ class RssFeedAtomViewController: UIViewController {
     setUp()
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    Task {
+      if let models = try? await RssFeedManager.shared.asyncLoadLatestFeeds(), !models.isEmpty {
+        headerView.render(with: models)
+      }
+    }
+  }
+  
   private func setUp() {
     self.navigationItem.title = "Rss"
     view.backgroundColor = .backgroundColor
     
     navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addAction))
     
+    view.addSubview(headerView)
     view.addSubview(tableView)
+    headerView.snp.makeConstraints { make in
+      make.height.equalTo(132)
+      make.top.equalTo(FrameGuide.navigationBarAndStatusBarHeight)
+      make.leading.trailing.equalToSuperview()
+    }
     tableView.snp.makeConstraints { make in
-      make.edges.equalToSuperview()
+      make.top.equalTo(headerView.snp.bottom)
+      make.leading.trailing.bottom.equalToSuperview()
     }
     
     view.startLoading()

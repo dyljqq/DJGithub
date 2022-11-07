@@ -80,6 +80,9 @@
 		73936F8B2914030400BC2901 /* DJFPSLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F8A2914030400BC2901 /* DJFPSLabel.swift */; };
 		73936F8D2914BABF00BC2901 /* SqlCountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F8C2914BABF00BC2901 /* SqlCountModel.swift */; };
 		73936F932917BF8C00BC2901 /* UIView+Leak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F922917BF8C00BC2901 /* UIView+Leak.swift */; };
+		73936F9829197E4300BC2901 /* DJUIThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F9729197E4300BC2901 /* DJUIThread.swift */; };
+		73936F9A2919BB7800BC2901 /* RssFeedLatestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F992919BB7800BC2901 /* RssFeedLatestCell.swift */; };
+		73936F9C2919BFBA00BC2901 /* RssFeedLatestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F9B2919BFBA00BC2901 /* RssFeedLatestView.swift */; };
 		73AACAD528D308A60072B1DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD428D308A60072B1DF /* AppDelegate.swift */; };
 		73AACAD728D308A60072B1DF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD628D308A60072B1DF /* SceneDelegate.swift */; };
 		73AACAD928D308A60072B1DF /* LoadingViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD828D308A60072B1DF /* LoadingViewerViewController.swift */; };
@@ -278,6 +281,9 @@
 		73936F8A2914030400BC2901 /* DJFPSLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJFPSLabel.swift; sourceTree = "<group>"; };
 		73936F8C2914BABF00BC2901 /* SqlCountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SqlCountModel.swift; sourceTree = "<group>"; };
 		73936F922917BF8C00BC2901 /* UIView+Leak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Leak.swift"; sourceTree = "<group>"; };
+		73936F9729197E4300BC2901 /* DJUIThread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJUIThread.swift; sourceTree = "<group>"; };
+		73936F992919BB7800BC2901 /* RssFeedLatestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssFeedLatestCell.swift; sourceTree = "<group>"; };
+		73936F9B2919BFBA00BC2901 /* RssFeedLatestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssFeedLatestView.swift; sourceTree = "<group>"; };
 		73AACAD128D308A60072B1DF /* DJGithub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DJGithub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73AACAD428D308A60072B1DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		73AACAD628D308A60072B1DF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -478,6 +484,7 @@
 		735D0E002903115D00E618B3 /* DJMonitor */ = {
 			isa = PBXGroup;
 			children = (
+				73936F9629197E3000BC2901 /* UIThread */,
 				73936F89291402E500BC2901 /* DJFPS */,
 				73936F29291377DD00BC2901 /* DJLeak */,
 				73FA3871291031A800FCEBC6 /* DJCrash */,
@@ -514,6 +521,14 @@
 				73936F8A2914030400BC2901 /* DJFPSLabel.swift */,
 			);
 			path = DJFPS;
+			sourceTree = "<group>";
+		};
+		73936F9629197E3000BC2901 /* UIThread */ = {
+			isa = PBXGroup;
+			children = (
+				73936F9729197E4300BC2901 /* DJUIThread.swift */,
+			);
+			path = UIThread;
 			sourceTree = "<group>";
 		};
 		73AACAC828D308A60072B1DF = {
@@ -908,6 +923,8 @@
 			children = (
 				73E14E5E28F415AD00A9811D /* FeedCell.swift */,
 				7320170E28F5385B007B970F /* RssFeedSimpleCell.swift */,
+				73936F992919BB7800BC2901 /* RssFeedLatestCell.swift */,
+				73936F9B2919BFBA00BC2901 /* RssFeedLatestView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1075,6 +1092,7 @@
 				73EE0CE2290968310010C54A /* PinnedItemsCell.swift in Sources */,
 				73101D4328E310D900DB5423 /* UserFollowingViewController.swift in Sources */,
 				73B7906628E7F133002A9CDC /* SearchViewController.swift in Sources */,
+				73936F9C2919BFBA00BC2901 /* RssFeedLatestView.swift in Sources */,
 				73B7905828E541BE002A9CDC /* Bool+Ext.swift in Sources */,
 				73074C8028EDB955001A90E7 /* WebViewFooterView.swift in Sources */,
 				73074CBE28EEC4AF001A90E7 /* TitleAndDescViewController.swift in Sources */,
@@ -1103,6 +1121,7 @@
 				735D0E0A2903115E00E618B3 /* DJThreadInfoModel.swift in Sources */,
 				732B21D328E228FD005893C0 /* NextPageModel.swift in Sources */,
 				73D0DE2B2907D2DD00F385E6 /* DJUserDefaults.swift in Sources */,
+				73936F9A2919BB7800BC2901 /* RssFeedLatestCell.swift in Sources */,
 				7341DCD428E0422F009A3A3C /* RepoCell.swift in Sources */,
 				7320170F28F5385B007B970F /* RssFeedSimpleCell.swift in Sources */,
 				73EE0CE0290962CE0010C54A /* PinnedRepoCell.swift in Sources */,
@@ -1226,6 +1245,7 @@
 				73D0DE292907D21F00F385E6 /* LocalUserManager.swift in Sources */,
 				7320170928F535CB007B970F /* RssFeed.swift in Sources */,
 				73AACB1828D312D30072B1DF /* GithubRouter.swift in Sources */,
+				73936F9829197E4300BC2901 /* DJUIThread.swift in Sources */,
 				73101D5028E4A10400DB5423 /* LocalDeveloperGroup.swift in Sources */,
 				735D0E092903115E00E618B3 /* DJStuckMonitor.swift in Sources */,
 				73DF6BEC28EACF340003BDB8 /* SearchWordHeaderView.swift in Sources */,
