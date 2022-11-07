@@ -56,10 +56,20 @@ class TabBarController: UITabBarController {
                      tabTitle title: String, image: UIImage?, selectedImage: UIImage?) -> UIViewController {
     let nav = NavigationController(rootViewController: vc)
     if let image = image, let data = image.pngData() {
-      nav.tabBarItem.image = ImageDecoder.downsampledImage(data: data, to: itemImageSize, scale: 1)?.withRenderingMode(.alwaysOriginal)
+      DispatchQueue.global().async {
+        let img = ImageDecoder.downsampledImage(data: data, to: self.itemImageSize, scale: 1)?.withRenderingMode(.alwaysOriginal)
+        DispatchQueue.main.async {
+          nav.tabBarItem.image = img
+        }
+      }
     }
     if let selectedImage = selectedImage, let data = selectedImage.pngData() {
-      nav.tabBarItem.selectedImage = ImageDecoder.downsampledImage(data: data, to: itemImageSize, scale: 1)?.withRenderingMode(.alwaysOriginal)
+      DispatchQueue.global().async {
+        let img = ImageDecoder.downsampledImage(data: data, to: self.itemImageSize, scale: 1)?.withRenderingMode(.alwaysOriginal)
+        DispatchQueue.main.async {
+          nav.tabBarItem.selectedImage = img
+        }
+      }
     }
     nav.tabBarItem.title = title
     return nav
