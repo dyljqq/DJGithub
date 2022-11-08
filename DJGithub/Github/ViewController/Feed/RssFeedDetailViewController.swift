@@ -74,6 +74,17 @@ class RssFeedDetailViewController: UIViewController {
       content = rssFeed.content
     }
     webView.loadHTMLString(content, baseURL: nil)
+    
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+      barButtonSystemItem: .action, target: self, action: #selector(shareTo))
+  }
+  
+  @objc func shareTo() {
+    if let sharedURL = URL(string: rssFeed.link) {
+      let sharedItems: [Any] = [sharedURL]
+      let activityVC = UIActivityViewController(activityItems: sharedItems, applicationActivities: nil)
+      self.present(activityVC, animated: true)
+    }
   }
 
 }
