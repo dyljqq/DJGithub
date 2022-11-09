@@ -49,8 +49,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
       }
     }
-    
-    DJMonitor.shared.addFPSMonitor()
   }
 
   func sceneDidDisconnect(_ scene: UIScene) {

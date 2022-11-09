@@ -19,6 +19,7 @@ class RssFeedManager: NSObject {
   var readMapping: [Int: (Int, Int)] = [:]
   var feedReadMapping: [Int: Bool] = [:]
   var loadedReadMappingCountClosure: (() -> ())?
+  var finishedLoadFeeds: (([RssFeedLatestCellModel]) -> ())?
   
   override init() {
     super.init()
@@ -30,6 +31,15 @@ class RssFeedManager: NSObject {
     Task {
       self.atoms = await loadAtoms()
       self.atoms.forEach { atomMapping[$0.id] = $0 }
+      
+      await withThrowingTaskGroup(of: Void.self) { group in
+        for atom in atoms {
+          group.addTask(priority: .utility) {
+            await self.loadFeeds(by: atom)
+          }
+        }
+      }
+      await self.finishedLoadFeeds?((try? self.asyncLoadLatestFeeds()) ?? [])
     }
   }
   
@@ -154,7 +164,7 @@ class RssFeedManager: NSObject {
   
   func loadLatestFeeds(by limit: Int = 5, completionHandler: @escaping ([RssFeedLatestCellModel]) -> ()) {
     DispatchQueue.global(qos: .utility).async {
-      let feeds: [RssFeed] = RssFeed.select(with: " order by id desc limit \(limit)")
+      let feeds: [RssFeed] = RssFeed.select(with: " order by updated desc limit \(limit)")
       let models = feeds.compactMap { feed in
         if let atom = self.atomMapping[feed.atomId] {
           return RssFeedLatestCellModel(title: feed.title, from: atom.title, feedId: feed.id)
