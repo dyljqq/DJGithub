@@ -131,7 +131,7 @@ class UserStaredRepoCell: UITableViewCell {
   
   func render(with repo: Repo) {
     self.repo = repo
-    avatarImageView.setImage(with: URL(string: repo.owner?.avatarUrl ?? ""))
+    avatarImageView.setImage(with: URL(string: repo.owner?.avatarUrl ?? ""), placeHolder: UIImage(named: "person"))
     repoNameLabel.text = repo.fullName
     descLabel.text = repo.desc
     
