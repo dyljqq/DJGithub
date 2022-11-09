@@ -47,11 +47,11 @@ struct DJEncoder<T: Encodable> {
     encoder.keyEncodingStrategy = .convertToSnakeCase
   }
   
-  func encode() -> [String: Any]? {
+  func encode() -> Any? {
     guard let model = model else { return nil }
     do {
       let data = try encoder.encode(model)
-      return try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed) as? [String: Any]
+      return try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
     } catch {
       print("JDEncode Error: \(error)")
     }

@@ -84,6 +84,7 @@ struct UserFollowingManager {
     let perpage = 100
     let totalPage = total / perpage
     while page <= totalPage {
+      guard !ConfigManager.shared.viewerName.isEmpty else { continue }
       let users = await UserManager.getUserFollowing(with: ConfigManager.shared.viewerName, page: page, perpage: 100)
       var hash: [String: Bool] = [:]
       users.forEach { hash[$0.login] = true }

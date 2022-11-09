@@ -36,8 +36,9 @@ class ConfigManager: NSObject {
   }
 
   var viewerName: String {
-    return ConfigManager.viewer?.login ?? ""
+    return ConfigManager.viewer?.login ?? LocalUserManager.getViewerName()
   }
+
   static var isLoadedViewer: Bool {
     return !LocalUserManager.getViewerName().isEmpty
   }
@@ -57,10 +58,6 @@ class ConfigManager: NSObject {
   static func checkOwner(by userName: String) -> Bool {
     if let viewer = viewer {
       return viewer.login == userName
-    } else {
-      if let viewer = LocalUserManager.getUser() {
-        return viewer.login == userName
-      }
     }
     return userName == config.userName
   }
