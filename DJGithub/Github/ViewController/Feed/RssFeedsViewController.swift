@@ -108,8 +108,10 @@ extension RssFeedsViewController: UITableViewDelegate, UITableViewDataSource {
     
     Task {
       await rssFeed.updateReadStatus()
-      self.tableView.reloadData()
-      NotificationCenter.default.post(name: RssFeedManager.RssFeedAtomReadFeedNotificationKey, object: ["atomId": self.rssFeedAtom.id])
+      DispatchQueue.main.async {
+        self.tableView.reloadData()
+        NotificationCenter.default.post(name: RssFeedManager.RssFeedAtomReadFeedNotificationKey, object: ["atomId": self.rssFeedAtom.id])
+      }
     }
   }
 }

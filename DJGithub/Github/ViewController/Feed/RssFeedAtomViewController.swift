@@ -87,6 +87,13 @@ class RssFeedAtomViewController: UIViewController {
     view.startLoading()
     self.loadData()
     self.addNotification()
+    
+    RssFeedManager.shared.finishedLoadFeeds = { [weak self] feeds in
+      guard let strongSelf = self else { return }
+      DispatchQueue.main.async {
+        strongSelf.headerView.render(with: feeds)
+      }
+    }
   }
   
   private func addNotification() {
