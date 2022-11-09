@@ -70,8 +70,7 @@ class UserStaredReposViewController: UIViewController, NextPageLoadable {
     }
     // github的首页数据为1
     nextPageState.update(start: firstPageIndex, hasNext: true, isLoading: false)
-    
-    view.startLoading()
+
     loadCacheData()
 
     tableView.addHeader { [weak self] in
@@ -107,10 +106,10 @@ class UserStaredReposViewController: UIViewController, NextPageLoadable {
     case .star:
       if let repos = DJUserDefaults.getStaredRepos() {
         dataSource = repos
-        view.stopLoading()
         tableView.reloadData()
       }
     default:
+      view.startLoading()
       return
     }
   }

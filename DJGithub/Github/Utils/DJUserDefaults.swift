@@ -41,9 +41,14 @@ struct DJUserDefaults {
     saveViewerName(user.login)
 
     guard let dict = DJEncoder(model: user).encode(),
-    let data = try? JSONSerialization.data(withJSONObject: dict),
-    let userInfo = String(data: data, encoding: .utf8) else { return }
+          let data = try? JSONSerialization.data(withJSONObject: dict),
+          let userInfo = String(data: data, encoding: .utf8) else { return }
     UserDefaults.standard.set(userInfo, forKey: Keys.userInfo.rawValue)
+  }
+  
+  static func removeUserInfo() {
+    UserDefaults.standard.removeObject(forKey: Keys.viewerName.rawValue)
+    UserDefaults.standard.removeObject(forKey: Keys.userInfo.rawValue)
   }
   
   static func getStaredRepos() -> [Repo]? {
@@ -53,9 +58,11 @@ struct DJUserDefaults {
   
   static func saveStaredRepos(_ repos: [Repo]) {
     guard let dict = DJEncoder(model: repos).encode(),
-    let data = try? JSONSerialization.data(withJSONObject: dict),
-    let values = String(data: data, encoding: .utf8) else { return }
-    UserDefaults.standard.set(values, forKey: Keys.userInfo.rawValue)
+          let data = try? JSONSerialization.data(withJSONObject: dict),
+          let values = String(data: data, encoding: .utf8) else {
+      return
+    }
+    UserDefaults.standard.set(values, forKey: Keys.staredRepos.rawValue)
   }
   
   static func viewerName() -> String {

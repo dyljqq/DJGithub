@@ -83,6 +83,7 @@
 		73936F9829197E4300BC2901 /* DJUIThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F9729197E4300BC2901 /* DJUIThread.swift */; };
 		73936F9A2919BB7800BC2901 /* RssFeedLatestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F992919BB7800BC2901 /* RssFeedLatestCell.swift */; };
 		73936F9C2919BFBA00BC2901 /* RssFeedLatestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F9B2919BFBA00BC2901 /* RssFeedLatestView.swift */; };
+		73936FA0291A4C8C00BC2901 /* UIViewController+Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F9F291A4C8C00BC2901 /* UIViewController+Share.swift */; };
 		73AACAD528D308A60072B1DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD428D308A60072B1DF /* AppDelegate.swift */; };
 		73AACAD728D308A60072B1DF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD628D308A60072B1DF /* SceneDelegate.swift */; };
 		73AACAD928D308A60072B1DF /* LoadingViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD828D308A60072B1DF /* LoadingViewerViewController.swift */; };
@@ -284,6 +285,7 @@
 		73936F9729197E4300BC2901 /* DJUIThread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJUIThread.swift; sourceTree = "<group>"; };
 		73936F992919BB7800BC2901 /* RssFeedLatestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssFeedLatestCell.swift; sourceTree = "<group>"; };
 		73936F9B2919BFBA00BC2901 /* RssFeedLatestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssFeedLatestView.swift; sourceTree = "<group>"; };
+		73936F9F291A4C8C00BC2901 /* UIViewController+Share.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Share.swift"; sourceTree = "<group>"; };
 		73AACAD128D308A60072B1DF /* DJGithub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DJGithub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73AACAD428D308A60072B1DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		73AACAD628D308A60072B1DF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -727,6 +729,7 @@
 				73DF6C0328EC252E0003BDB8 /* String+File.swift */,
 				73074CC128EEE6C5001A90E7 /* UITextView+Placeholder.swift */,
 				7362FE842911816600D97E1A /* Default+Ext.swift */,
+				73936F9F291A4C8C00BC2901 /* UIViewController+Share.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1183,6 +1186,7 @@
 				73074CCB28EF4AD0001A90E7 /* LocalDataViewController.swift in Sources */,
 				73074CC928EF4992001A90E7 /* LocalRepoManager.swift in Sources */,
 				73AACB5428D47ECB0072B1DF /* UserContrbutionItemCell.swift in Sources */,
+				73936FA0291A4C8C00BC2901 /* UIViewController+Share.swift in Sources */,
 				7341DCC828DF24CB009A3A3C /* NavigationController.swift in Sources */,
 				73AACB4328D42C1B0072B1DF /* UINavigation+Router.swift in Sources */,
 				73EE0CFC290BB48E0010C54A /* RepoBranchCommitCell.swift in Sources */,

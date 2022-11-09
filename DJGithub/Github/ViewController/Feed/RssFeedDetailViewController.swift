@@ -80,11 +80,7 @@ class RssFeedDetailViewController: UIViewController {
   }
   
   @objc func shareTo() {
-    if let sharedURL = URL(string: rssFeed.link) {
-      let sharedItems: [Any] = [sharedURL]
-      let activityVC = UIActivityViewController(activityItems: sharedItems, applicationActivities: nil)
-      self.present(activityVC, animated: true)
-    }
+    share(with: rssFeed.link)
   }
 
 }
