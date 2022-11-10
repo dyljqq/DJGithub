@@ -78,14 +78,10 @@ class UserStaredRepoCell: UITableViewCell {
   
   var avatarImageViewTappedClosure: ((String) -> Void)?
 
-  lazy var avatarImageView: UIImageView = {
-    let imageView = UIImageView()
+  lazy var avatarImageView: AvatarImageView = {
+    let imageView = AvatarImageView()
     imageView.layer.masksToBounds = true
     imageView.layer.cornerRadius = 4
-    
-    let tap = UITapGestureRecognizer(target: self, action: #selector(avatarImageViewTapped))
-    imageView.addGestureRecognizer(tap)
-    imageView.isUserInteractionEnabled = true
     return imageView
   }()
   
@@ -131,7 +127,13 @@ class UserStaredRepoCell: UITableViewCell {
   
   func render(with repo: Repo) {
     self.repo = repo
-    avatarImageView.setImage(with: URL(string: repo.owner?.avatarUrl ?? ""), placeHolder: UIImage(named: "person"))
+    avatarImageView.render(
+      with: AvatarImageView.AvatarModel(
+        imageUrl: repo.owner?.avatarUrl,
+        placeholder: .defaultPersonImage,
+        userName: repo.owner?.login
+      )
+    )
     repoNameLabel.text = repo.fullName
     descLabel.text = repo.desc
     
@@ -155,12 +157,6 @@ class UserStaredRepoCell: UITableViewCell {
   class func cellHeight(by repo: Repo) -> CGFloat {
     let descLabelHeight = NSString(string: repo.desc).boundingRect(with: CGSize(width: FrameGuide.screenWidth - 64, height: 0), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)], context: nil).size.height
     return 82 + descLabelHeight
-  }
-  
-  @objc func avatarImageViewTapped() {
-    if let repo = repo, let owner = repo.owner {
-      avatarImageViewTappedClosure?(owner.login)
-    }
   }
   
   func setUp() {

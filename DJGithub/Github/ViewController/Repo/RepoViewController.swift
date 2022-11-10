@@ -202,12 +202,10 @@ class RepoViewController: UIViewController {
       let branches = await RepoManager.fetchRepoBranches(with: userName, repoName: repoName, params: ["page": "1"])
       repoBranchView.render(with: branches)
       
-      DispatchQueue.main.async {
-        DJMaskView.show(with: DJMaskContentConfig(
-          view: self.repoBranchView,
-          size: CGSize(width: 300, height: 300)
-        ))
-      }
+      DJMaskView.show(with: DJMaskContentConfig(
+        view: self.repoBranchView,
+        size: CGSize(width: 300, height: 300)
+      ))
     }
   }
 

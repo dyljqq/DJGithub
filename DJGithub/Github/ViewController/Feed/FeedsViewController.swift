@@ -57,7 +57,7 @@ class FeedsViewController: UIViewController, NextPageLoadable {
         }
         self.loadNext(start: nextPageState.start)
       } else {
-        self.view.stopLoading()
+        view.stopLoading()
       }
     }
   }

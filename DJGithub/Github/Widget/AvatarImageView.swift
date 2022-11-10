@@ -10,11 +10,11 @@ import UIKit
 class AvatarImageView: UIImageView {
   
   struct AvatarModel {
-    let imageUrl: String
+    let imageUrl: String?
     let placeholder: UIImage?
     let userName: String?
     
-    init(imageUrl: String, placeholder: UIImage? = nil, userName: String?) {
+    init(imageUrl: String?, placeholder: UIImage? = nil, userName: String?) {
       self.imageUrl = imageUrl
       self.placeholder = placeholder
       self.userName = userName
