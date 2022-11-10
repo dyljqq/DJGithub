@@ -68,8 +68,8 @@ class NormalHeaderView: UIView {
     
   }
   
-  lazy var avatarImageView: UIImageView = {
-    let imageView = UIImageView()
+  lazy var avatarImageView: AvatarImageView = {
+    let imageView = AvatarImageView()
     imageView.layer.cornerRadius = 8
     imageView.layer.masksToBounds = true
     return imageView

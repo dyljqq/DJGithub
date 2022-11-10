@@ -84,6 +84,7 @@
 		73936F9A2919BB7800BC2901 /* RssFeedLatestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F992919BB7800BC2901 /* RssFeedLatestCell.swift */; };
 		73936F9C2919BFBA00BC2901 /* RssFeedLatestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F9B2919BFBA00BC2901 /* RssFeedLatestView.swift */; };
 		73936FA0291A4C8C00BC2901 /* UIViewController+Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F9F291A4C8C00BC2901 /* UIViewController+Share.swift */; };
+		73936FC1291D422800BC2901 /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936FC0291D422800BC2901 /* AvatarImageView.swift */; };
 		73AACAD528D308A60072B1DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD428D308A60072B1DF /* AppDelegate.swift */; };
 		73AACAD728D308A60072B1DF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD628D308A60072B1DF /* SceneDelegate.swift */; };
 		73AACAD928D308A60072B1DF /* LoadingViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD828D308A60072B1DF /* LoadingViewerViewController.swift */; };
@@ -286,6 +287,7 @@
 		73936F992919BB7800BC2901 /* RssFeedLatestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssFeedLatestCell.swift; sourceTree = "<group>"; };
 		73936F9B2919BFBA00BC2901 /* RssFeedLatestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssFeedLatestView.swift; sourceTree = "<group>"; };
 		73936F9F291A4C8C00BC2901 /* UIViewController+Share.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Share.swift"; sourceTree = "<group>"; };
+		73936FC0291D422800BC2901 /* AvatarImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarImageView.swift; sourceTree = "<group>"; };
 		73AACAD128D308A60072B1DF /* DJGithub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DJGithub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73AACAD428D308A60072B1DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		73AACAD628D308A60072B1DF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -800,6 +802,7 @@
 				73B7905B28E59104002A9CDC /* HeaderSegmentView.swift */,
 				73EE0CDB29092F960010C54A /* LanguageGradientView.swift */,
 				73EE0CEB290A72560010C54A /* DJMaskView.swift */,
+				73936FC0291D422800BC2901 /* AvatarImageView.swift */,
 			);
 			path = Widget;
 			sourceTree = "<group>";
@@ -1161,6 +1164,7 @@
 				73074CC228EEE6C5001A90E7 /* UITextView+Placeholder.swift in Sources */,
 				73936F33291379DA00BC2901 /* NSObject+Leak.swift in Sources */,
 				73936F8B2914030400BC2901 /* DJFPSLabel.swift in Sources */,
+				73936FC1291D422800BC2901 /* AvatarImageView.swift in Sources */,
 				73074CC728EF4809001A90E7 /* LocalRepo.swift in Sources */,
 				73101D4128E30C5200DB5423 /* SimpleUserCell.swift in Sources */,
 				73B7904A28E52450002A9CDC /* LocalDevelopersViewController.swift in Sources */,
