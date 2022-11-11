@@ -84,6 +84,10 @@
 		73936F9A2919BB7800BC2901 /* RssFeedLatestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F992919BB7800BC2901 /* RssFeedLatestCell.swift */; };
 		73936F9C2919BFBA00BC2901 /* RssFeedLatestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F9B2919BFBA00BC2901 /* RssFeedLatestView.swift */; };
 		73936FA0291A4C8C00BC2901 /* UIViewController+Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F9F291A4C8C00BC2901 /* UIViewController+Share.swift */; };
+		73936FC1291D422800BC2901 /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936FC0291D422800BC2901 /* AvatarImageView.swift */; };
+		73936FC5291E3E4500BC2901 /* Organization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936FC4291E3E4500BC2901 /* Organization.swift */; };
+		73936FC7291E3F7F00BC2901 /* OrganizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936FC6291E3F7F00BC2901 /* OrganizationViewController.swift */; };
+		73936FC9291E484A00BC2901 /* UserContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936FC8291E484A00BC2901 /* UserContainerViewController.swift */; };
 		73AACAD528D308A60072B1DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD428D308A60072B1DF /* AppDelegate.swift */; };
 		73AACAD728D308A60072B1DF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD628D308A60072B1DF /* SceneDelegate.swift */; };
 		73AACAD928D308A60072B1DF /* LoadingViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD828D308A60072B1DF /* LoadingViewerViewController.swift */; };
@@ -286,6 +290,10 @@
 		73936F992919BB7800BC2901 /* RssFeedLatestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssFeedLatestCell.swift; sourceTree = "<group>"; };
 		73936F9B2919BFBA00BC2901 /* RssFeedLatestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssFeedLatestView.swift; sourceTree = "<group>"; };
 		73936F9F291A4C8C00BC2901 /* UIViewController+Share.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Share.swift"; sourceTree = "<group>"; };
+		73936FC0291D422800BC2901 /* AvatarImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarImageView.swift; sourceTree = "<group>"; };
+		73936FC4291E3E4500BC2901 /* Organization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Organization.swift; sourceTree = "<group>"; };
+		73936FC6291E3F7F00BC2901 /* OrganizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizationViewController.swift; sourceTree = "<group>"; };
+		73936FC8291E484A00BC2901 /* UserContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserContainerViewController.swift; sourceTree = "<group>"; };
 		73AACAD128D308A60072B1DF /* DJGithub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DJGithub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73AACAD428D308A60072B1DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		73AACAD628D308A60072B1DF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -707,6 +715,7 @@
 				73EE0CF7290BAE7D0010C54A /* RepoPull.swift */,
 				73EE0CFD290BB79A0010C54A /* RepoPullFile.swift */,
 				73936F8C2914BABF00BC2901 /* SqlCountModel.swift */,
+				73936FC4291E3E4500BC2901 /* Organization.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -769,6 +778,8 @@
 				73101D4228E310D900DB5423 /* UserFollowingViewController.swift */,
 				73074CD028F1559D001A90E7 /* UserInfoViewController.swift */,
 				73074CD428F166D8001A90E7 /* UserInfoEditViewController.swift */,
+				73936FC6291E3F7F00BC2901 /* OrganizationViewController.swift */,
+				73936FC8291E484A00BC2901 /* UserContainerViewController.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -800,6 +811,7 @@
 				73B7905B28E59104002A9CDC /* HeaderSegmentView.swift */,
 				73EE0CDB29092F960010C54A /* LanguageGradientView.swift */,
 				73EE0CEB290A72560010C54A /* DJMaskView.swift */,
+				73936FC0291D422800BC2901 /* AvatarImageView.swift */,
 			);
 			path = Widget;
 			sourceTree = "<group>";
@@ -1145,6 +1157,7 @@
 				73101D5F28E4A5E400DB5423 /* DevelopersViewController.swift in Sources */,
 				73DF6BFE28EBFEE30003BDB8 /* RepoContentsViewController.swift in Sources */,
 				735D0E072903115E00E618B3 /* DJCallStack.swift in Sources */,
+				73936FC7291E3F7F00BC2901 /* OrganizationViewController.swift in Sources */,
 				73101D4B28E4889B00DB5423 /* UserStatusView.swift in Sources */,
 				734D676329084571006A0BFA /* Repository.swift in Sources */,
 				73E14E5628F3DAC800A9811D /* DJJSONParser.swift in Sources */,
@@ -1152,6 +1165,7 @@
 				7341DCD828E05D98009A3A3C /* RepoFooterView.swift in Sources */,
 				73DE29CE28E0C35200B48009 /* WebViewController.swift in Sources */,
 				73B7905428E533C2002A9CDC /* ConfigManager.swift in Sources */,
+				73936FC9291E484A00BC2901 /* UserContainerViewController.swift in Sources */,
 				73B7905A28E56003002A9CDC /* RepoInteractViewController.swift in Sources */,
 				73B7906028E7E805002A9CDC /* SearchManager.swift in Sources */,
 				73AACB0F28D30C470072B1DF /* APIClient.swift in Sources */,
@@ -1161,6 +1175,7 @@
 				73074CC228EEE6C5001A90E7 /* UITextView+Placeholder.swift in Sources */,
 				73936F33291379DA00BC2901 /* NSObject+Leak.swift in Sources */,
 				73936F8B2914030400BC2901 /* DJFPSLabel.swift in Sources */,
+				73936FC1291D422800BC2901 /* AvatarImageView.swift in Sources */,
 				73074CC728EF4809001A90E7 /* LocalRepo.swift in Sources */,
 				73101D4128E30C5200DB5423 /* SimpleUserCell.swift in Sources */,
 				73B7904A28E52450002A9CDC /* LocalDevelopersViewController.swift in Sources */,
@@ -1221,6 +1236,7 @@
 				7362FEC729124F9000D97E1A /* RssFeedRead.swift in Sources */,
 				7339201928F5883500DC76B0 /* RssFeedDetailViewController.swift in Sources */,
 				73EE0CFE290BB79A0010C54A /* RepoPullFile.swift in Sources */,
+				73936FC5291E3E4500BC2901 /* Organization.swift in Sources */,
 				7339201328F5458100DC76B0 /* DateHelper.swift in Sources */,
 				7320170328F48227007B970F /* FeedViewController.swift in Sources */,
 				73DF6BF028EAE0A00003BDB8 /* DeveloperGroupManager.swift in Sources */,

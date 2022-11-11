@@ -27,7 +27,7 @@ actor UserFollowingHolder {
   }
   
   func update(with userName: String) async -> UserFollowingStatus {
-    let task = Task { () -> UserFollowingStatus in
+    let task = Task(priority: .utility) { () -> UserFollowingStatus in
       if let followingStatus = await UserManager.checkFollowStatus(with: userName) {
         let type: UserFollowingStatus = followingStatus.isStatus204 ? .following : .unfollow
         self.mapping[userName] = type

@@ -16,53 +16,5 @@
             stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "AE0B8847-1330-4FC3-9541-C5198B9FBD6E"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DJGithub/DJFoundation/Utils/DJParser.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
-            landmarkName = "decode()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "AE0B8847-1330-4FC3-9541-C5198B9FBD6E - db7827ba043c8424"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "DJGithub.DJDecoder.decode() throws -&gt; Swift.Optional&lt;&#x3c4;_0_0&gt;"
-                  moduleName = "DJGithub"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jiqinqiang/Desktop/OpenSource/MyGithub/DJGithub/DJGithub/DJFoundation/Utils/DJParser.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "35"
-                  endingLineNumber = "35"
-                  offsetFromSymbolStart = "408">
-               </Location>
-               <Location
-                  uuid = "AE0B8847-1330-4FC3-9541-C5198B9FBD6E - db7827ba043c8424"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "DJGithub.DJDecoder.decode() throws -&gt; Swift.Optional&lt;&#x3c4;_0_0&gt;"
-                  moduleName = "DJGithub"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jiqinqiang/Desktop/OpenSource/MyGithub/DJGithub/DJGithub/DJFoundation/Utils/DJParser.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "35"
-                  endingLineNumber = "35"
-                  offsetFromSymbolStart = "688">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

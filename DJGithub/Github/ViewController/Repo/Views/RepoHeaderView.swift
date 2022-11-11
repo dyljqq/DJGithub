@@ -10,7 +10,13 @@ import UIKit
 class RepoHeaderView: NormalHeaderView {
   
   func render(with repo: Repository) {
-    avatarImageView.setImage(with: URL(string: repo.owner?.avatarUrl ?? ""))
+    avatarImageView.render(
+      with: AvatarImageView.AvatarModel(
+        imageUrl: repo.owner?.avatarUrl,
+        placeholder: .defaultPersonImage,
+        userName: repo.owner?.login
+      )
+    )
     nameLabel.text = repo.nameWithOwner
     bioLabel.text = repo.desc
     if let joined = repo.updatedAt.split(separator: "T").first {

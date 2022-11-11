@@ -34,6 +34,7 @@ class DJMaskView: UIView {
   
   let contentModel: DJMaskContentConfig
   
+  @discardableResult
   class func show(with contentModel: DJMaskContentConfig) -> DJMaskView? {
     guard let window = UIApplication.shared.keyWindow else { return nil }
     let maskView = DJMaskView(with: contentModel)

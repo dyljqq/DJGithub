@@ -9,8 +9,20 @@ import UIKit
 
 extension UINavigationController {
   
-  func pushToUser(with userName: String) {
-    let vc = UserViewController(name: userName)
+  func pushToUser(with name: String, type: UserContainerViewController.UserContainerType? = nil) {
+    let vc = UserContainerViewController(name: name)
+    vc.type = type
+    self.pushViewController(vc, animated: true)
+  }
+  
+  func pushToOrganization(with name: String) {
+    let vc = OrganizationViewController(with: name)
+    self.pushViewController(vc, animated: true)
+  }
+  
+  func pushToUserContainer(with name: String, type: UserContainerViewController.UserContainerType? = nil) {
+    let vc = UserContainerViewController(name: name)
+    vc.type = type
     self.pushViewController(vc, animated: true)
   }
   
