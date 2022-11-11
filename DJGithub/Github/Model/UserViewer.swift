@@ -20,9 +20,9 @@ struct UserViewer: DJCodable {
 
   var createdAt: String
   
-  var viewerCanFollow: Bool
-  var viewerIsFollowing: Bool
-  var isViewer: Bool
+  @Default<Bool.False> var viewerCanFollow: Bool
+  @Default<Bool.False> var viewerIsFollowing: Bool
+  @Default<Bool.False> var isViewer: Bool
   
   var following: TotalCountModel
   var followers: TotalCountModel

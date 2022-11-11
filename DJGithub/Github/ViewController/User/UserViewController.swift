@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Combine
 
-fileprivate struct ContentAndColorMapping {
+struct ContentAndColorMapping {
   let content: String
   let color: UIColor
   
@@ -19,14 +19,14 @@ fileprivate struct ContentAndColorMapping {
   }
 }
 
-fileprivate enum UserType {
+enum UserCellType {
   case email
   case location
   case company
   case link
   
   var isShowAccessory: Bool {
-    return [UserType.email, UserType.link].contains(self)
+    return [UserCellType.email, UserCellType.link].contains(self)
   }
   
   var iconImageName: String {
@@ -49,12 +49,24 @@ fileprivate enum UserType {
     case .link: return ContentAndColorMapping(content: user.websiteUrl)
     }
   }
+  
+  func getContent(by organization: Organization?) -> ContentAndColorMapping {
+    guard let organization = organization else {
+      return ContentAndColorMapping(content: "")
+    }
+    switch self {
+    case .email: return ContentAndColorMapping(content: organization.email)
+    case .location: return ContentAndColorMapping(content: organization.location)
+    case .company: return ContentAndColorMapping(content: "团队")
+    case .link: return ContentAndColorMapping(content: organization.websiteUrl)
+    }
+  }
 }
 
 fileprivate enum CellType {
   case userContribution(UserContribution)
   case blank
-  case user(UserType)
+  case user(UserCellType)
   case pinnedItem(PinnedRepos)
   
   var height: CGFloat {
@@ -129,17 +141,22 @@ class UserViewController: UIViewController {
        let userViewer = ConfigManager.viewer {
       self.userViewer = userViewer
       self.loadUserViewerInfo(with: userViewer)
-    } else {
-      self.view.startLoading()
     }
     
-    Task {
-      if let viewer = await UserManager.fetchUserInfo(by: self.name) {
-        self.userViewer = viewer
-        self.loadUserViewerInfo(with: viewer)
-        
-        if ConfigManager.checkOwner(by: viewer.login) {
-          LocalUserManager.saveUser(viewer)
+    if let viewer = self.userViewer {
+      self.loadUserViewerInfo(with: viewer)
+    } else {
+      Task {
+        view.startLoading()
+        if let viewer = await UserManager.fetchUserInfo(by: self.name) {
+          self.userViewer = viewer
+          self.loadUserViewerInfo(with: viewer)
+          
+          if ConfigManager.checkOwner(by: viewer.login) {
+            LocalUserManager.saveUser(viewer)
+          }
+        } else {
+          view.stopLoading()
         }
       }
     }
@@ -151,7 +168,16 @@ class UserViewController: UIViewController {
       strongSelf.tableView.endUpdates()
     }
     userHeaderView.jumpClosure = { [weak self] in
-      self?.navigationController?.pushToUserInfo()
+      guard let strongSelf = self, ConfigManager.checkOwner(by: strongSelf.name) else { return }
+      strongSelf.naviVc?.navigationController?.pushToUserInfo()
+    }
+    userHeaderView.tapCounterClosure = { [weak self] index in
+      guard let strongSelf = self else { return }
+      strongSelf.naviVc?.navigationController?.pushToUserInteract(
+        with: strongSelf.userViewer?.login ?? "",
+        title: strongSelf.userViewer?.name ?? "",
+        selectedIndex: index
+      )
     }
   }
   
@@ -170,29 +196,12 @@ class UserViewController: UIViewController {
     }
     self.dataSource.append(contentsOf: [.blank, .user(.company), .user(.location), .user(.email), .user(.link)])
     tableView.reloadData()
-    
-    userHeaderView.tapCounterClosure = { [weak self] index in
-      guard let strongSelf = self, ConfigManager.checkOwner(by: strongSelf.name) else { return }
-      strongSelf.navigationController?.pushToUserInteract(
-        with: strongSelf.userViewer?.login ?? "",
-        title: strongSelf.userViewer?.name ?? "",
-        selectedIndex: index
-      )
-    }
   }
   
   private func handle(with contribution: UserContribution) {
     self.dataSource.insert(.blank, at: 0)
     self.dataSource.insert(.userContribution(contribution), at: 1)
     tableView.reloadData()
-  }
-  
-  private func configNavigationRightButton() {
-    Task {
-      if let status = await UserManager.checkFollowStatus(with: self.name) {
-        self.followStatusView.active = status.isStatus204
-      }
-    }
   }
 
 }
@@ -231,7 +240,7 @@ extension UserViewController: UITableViewDataSource {
       cell.separatorInset = UIEdgeInsets(top: 0, left: tableView.bounds.width, bottom: 0, right: 0)
       cell.onTouchPinnedItem = { [weak self] item in
         guard let strongSelf = self else { return }
-        strongSelf.navigationController?.pushToRepo(with: strongSelf.name, repoName: item.name)
+        strongSelf.naviVc?.navigationController?.pushToRepo(with: strongSelf.name, repoName: item.name)
       }
       return cell
     }
@@ -257,7 +266,7 @@ extension UserViewController: UITableViewDelegate {
         }
       case .link:
         if let link = userViewer?.websiteUrl, !link.isEmpty {
-          self.navigationController?.pushToWebView(with: link)
+          self.naviVc?.navigationController?.pushToWebView(with: link)
         }
       default:
         break

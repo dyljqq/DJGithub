@@ -40,4 +40,21 @@ class UserHeaderView: NormalHeaderView {
     followersView.render(with: userViewer.followers.totalCount, name: "Followers")
     followingView.render(with: userViewer.following.totalCount, name: "Following")
   }
+  
+  func render(with organization: Organization) {
+    avatarImageView.setImage(with: organization.avatarUrl)
+    self.arrowImageView.isHidden = true
+    
+    nameLabel.text = organization.name.isEmpty ? organization.login : organization.name
+    loginLabel.text = organization.login
+    bioLabel.text = organization.description.trimmingCharacters(in: .whitespacesAndNewlines)
+    if let joined = organization.createdAt.split(separator: "T").first {
+      joinedLabel.text = "Joined on \(String(describing: joined))"
+    } else {
+      joinedLabel.text = "Joined on \(organization.createdAt)"
+    }
+    repoView.render(with: organization.pinnableItems.totalCount, name: "Repos")
+    followersView.render(with: 0, name: "Followers")
+    followingView.render(with: 0, name: "Following")
+  }
 }

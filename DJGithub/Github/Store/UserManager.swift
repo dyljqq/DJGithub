@@ -161,10 +161,41 @@ user(login: "\(name)") {
   }
   
   static func fetchUserInfo(by userName: String? = nil) async -> UserViewer? {
+    guard let viewer = await fetchUserDict(by: userName) else { return nil }
+
+    do {
+      var userViewer: UserViewer? = try DJDecoder(dict: viewer).decode()
+      if let contributionsCollection = viewer["contributionsCollection"] as? [String: Any],
+         let contributionCalendar = contributionsCollection["contributionCalendar"] as? [String: Any] {
+        let userContribution = UserContribution(with: contributionCalendar)
+        userViewer?.userContribution = userContribution
+      }
+      return userViewer
+    } catch {
+      print("fetchUserInfo parse error: \(error)")
+    }
+    return nil
+  }
+  
+  static func fetchOrganizationInfo(by name: String) async -> Organization? {
+    guard let dict = await fetchUserDict(by: name, typeName: "organization") else { return nil }
+    do {
+      return try DJDecoder(dict: dict).decode()
+    } catch {
+      print("fetchOrganizationInfo error: \(error)")
+    }
+    return nil
+  }
+  
+  static func fetchUserDict(by userName: String? = nil, typeName: String = "User") async -> [String: Any]? {
     let query: String
     let key: String
     if let userName = userName {
-      key = "user"
+      if typeName == "organization" {
+        key = "organization"
+      } else {
+        key = "user"
+      }
       query = """
    query {\n      organization(login: \"\(userName)\") {\n        __typename\n        databaseId\n        name\n        login\n        avatarUrl\n        email\n        location\n        description\n        createdAt\n        websiteUrl\n        pinnableItems {\n          totalCount\n        }\n        membersWithRole {\n          totalCount\n        }\n        pinnedItems(first: 6) {\n          nodes {\n            ...RepositoryDetails\n          }\n        }\n      }\n      user(login: \"\(userName)\") {\n        __typename\n        databaseId\n        name\n        login\n        avatarUrl\n        websiteUrl\n        bio\n        company\n        email\n        location\n        createdAt\n        viewerCanFollow\n        viewerIsFollowing\n        isViewer\n        status {\n          emoji\n          message\n          indicatesLimitedAvailability\n        }\n        followers {\n          totalCount\n        }\n        following {\n          totalCount\n        }\n        starredRepositories {\n          totalCount\n        }\n        repositories(ownerAffiliations: [OWNER]) {\n          totalCount\n        }\n        pinnedItems(first: 6) {\n          nodes {\n            ...RepositoryDetails\n          }\n        }\n        organizations(first: 10) {\n          nodes {\n            name\n            login\n            avatarUrl\n            ... on Organization {\n              description\n            }\n          }\n        }\n        contributionsCollection {\n          contributionCalendar {\n     colors\n       totalContributions\n            weeks {\n              contributionDays {\n                date\n                contributionCount\n                weekday\n    color\n          }\n            }\n          }\n        }\n      }\n    }\n\n    fragment RepositoryDetails on Repository {\n      name\n      nameWithOwner\n      description\n      owner {\n        avatarUrl\n      }\n      updatedAt\n      viewerHasStarred\n      primaryLanguage {\n        name\n        color\n      }\n      stargazers {\n        totalCount\n      }\n    }
 """
@@ -178,23 +209,14 @@ query {\n      organization(login: \"\") {\n        __typename\n        database
     do {
       let data: Data = try await APIClient.shared.data(with: router)
       guard let d = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed) as? [String: Any],
-      let data = d["data"] as? [String: Any],
-      let viewer = data[key] as? [String: Any] else {
-        print("data: \(try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed))")
+            let data = d["data"] as? [String: Any],
+            let dict = data[key] as? [String: Any] else {
         return nil
       }
-      
-      var userViewer: UserViewer? = try DJDecoder(dict: viewer).decode()
-      if let contributionsCollection = viewer["contributionsCollection"] as? [String: Any],
-         let contributionCalendar = contributionsCollection["contributionCalendar"] as? [String: Any] {
-        let userContribution = UserContribution(with: contributionCalendar)
-        userViewer?.userContribution = userContribution
-      }
-      return userViewer
+      return dict
     } catch {
-      print("error: \(error)")
+      print("fetch error: \(error)")
     }
     return nil
   }
-  
 }
