@@ -63,8 +63,6 @@ class AppStartTimeMonitor {
         DJUserDefaults.setAppStartTime(weakSelf.times)
         print("app launce time: \(weakSelf.times)")
         CFRunLoopRemoveObserver(CFRunLoopGetMain(), observer, .commonModes)
-//        
-//        ClangTrace.shared.outputOrderFile()
       }
     }
   }

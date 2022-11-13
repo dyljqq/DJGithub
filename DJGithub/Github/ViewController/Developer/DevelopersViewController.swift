@@ -52,6 +52,11 @@ class DevelopersViewController: UIViewController {
     }
   }
   
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    ClangTrace.shared.outputOrderFile()
+  }
+  
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     scrollView.contentSize = CGSize(width: FrameGuide.screenWidth * CGFloat(vcs.count), height: scrollView.bounds.height)

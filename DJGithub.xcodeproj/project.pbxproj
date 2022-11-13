@@ -149,6 +149,7 @@
 		73C43B8E29215137008E71DB /* dj_trace_pc_guard_cb.c in Sources */ = {isa = PBXBuildFile; fileRef = 73C43B8D29215137008E71DB /* dj_trace_pc_guard_cb.c */; };
 		73C43B91292152E6008E71DB /* DJClangTrace.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C43B90292152E6008E71DB /* DJClangTrace.m */; };
 		73C43B9329215496008E71DB /* ClangTrace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C43B9229215496008E71DB /* ClangTrace.swift */; };
+		73C43B9729216CF0008E71DB /* trace.order in Resources */ = {isa = PBXBuildFile; fileRef = 73C43B9629216CF0008E71DB /* trace.order */; };
 		73C598C528D85EF100DA86A1 /* PopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C598C428D85EF100DA86A1 /* PopoverView.swift */; };
 		73C598C728D8617800DA86A1 /* UIApplication+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C598C628D8617800DA86A1 /* UIApplication+Ext.swift */; };
 		73C598CD28D9E6A100DA86A1 /* URL+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C598CC28D9E6A100DA86A1 /* URL+Ext.swift */; };
@@ -363,6 +364,7 @@
 		73C43B90292152E6008E71DB /* DJClangTrace.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DJClangTrace.m; sourceTree = "<group>"; };
 		73C43B9229215496008E71DB /* ClangTrace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClangTrace.swift; sourceTree = "<group>"; };
 		73C43B9529215773008E71DB /* DJGithub-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DJGithub-Bridging-Header.h"; sourceTree = "<group>"; };
+		73C43B9629216CF0008E71DB /* trace.order */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = trace.order; sourceTree = "<group>"; };
 		73C598C428D85EF100DA86A1 /* PopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverView.swift; sourceTree = "<group>"; };
 		73C598C628D8617800DA86A1 /* UIApplication+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Ext.swift"; sourceTree = "<group>"; };
 		73C598CC28D9E6A100DA86A1 /* URL+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Ext.swift"; sourceTree = "<group>"; };
@@ -576,6 +578,7 @@
 		73AACAD328D308A60072B1DF /* DJGithub */ = {
 			isa = PBXGroup;
 			children = (
+				73C43B9629216CF0008E71DB /* trace.order */,
 				735D0E002903115D00E618B3 /* DJMonitor */,
 				73AACB1528D311C30072B1DF /* Github */,
 				73AACB0428D308E30072B1DF /* DJFoundation */,
@@ -1095,6 +1098,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73C43B9729216CF0008E71DB /* trace.order in Resources */,
 				73AACAE128D308A70072B1DF /* LaunchScreen.storyboard in Resources */,
 				7339201F28F693EA00DC76B0 /* config.json in Resources */,
 				73AACADE28D308A70072B1DF /* Assets.xcassets in Resources */,
@@ -1491,6 +1495,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				ORDER_FILE = DJGithub/trace.order;
 				OTHER_CFLAGS = "-fsanitize-coverage=func,trace-pc-guard";
 				OTHER_SWIFT_FLAGS = "-sanitize-coverage=func -sanitize=undefined";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dyljqq.DJGithub;
@@ -1528,6 +1533,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				ORDER_FILE = DJGithub/trace.order;
 				OTHER_CFLAGS = "-fsanitize-coverage=func,trace-pc-guard";
 				OTHER_SWIFT_FLAGS = "-sanitize-coverage=func -sanitize=undefined";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dyljqq.DJGithub;
