@@ -10,7 +10,7 @@ import UIKit
 @main
 class MyApp {
   static func main() {
-    print("pre main: \(AppStartTimeMonitor.shared.processLaunchTime())")
+    AppStartTimeMonitor.shared.addPremainTime()
     UIApplicationMain(CommandLine.argc, CommandLine.unsafeArgv, nil, NSStringFromClass(AppDelegate.self))
   }
 }

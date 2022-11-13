@@ -15,6 +15,7 @@ struct DJUserDefaults {
     case staredRepos
     case viewerName
     case crash
+    case appStartTime
   }
   
   static func allHistorySearchWords() -> [String] {
@@ -84,6 +85,17 @@ struct DJUserDefaults {
   
   static func getCrashInfo() -> [String: String] {
     return UserDefaults.standard.value(forKey: Keys.crash.rawValue) as? [String: String] ?? [:]
+  }
+  
+  static func setAppStartTime(_ times: [Double]) {
+    UserDefaults.standard.set(times, forKey: Keys.appStartTime.rawValue)
+  }
+  
+  static func getAppStartTime() -> [Double] {
+    if let times = UserDefaults.standard.array(forKey: Keys.appStartTime.rawValue) as? [Double] {
+      return times
+    }
+    return []
   }
   
 }

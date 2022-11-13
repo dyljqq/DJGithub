@@ -11,6 +11,8 @@ class AppStartTimeMonitor {
   
   static let shared = AppStartTimeMonitor()
   
+  private var times: [Double] = []
+  
   private var runloopObserver: CFRunLoopObserver?
   
   private let pid = ProcessInfo().processIdentifier
@@ -23,11 +25,19 @@ class AppStartTimeMonitor {
     mib = [CTL_KERN, KERN_PROC, KERN_PROC_PID, pid]
   }
   
-  func processLaunchTime() -> Double {
+  var processLaunchTime: Double {
     sysctl(&mib, u_int(mib.count), &kp, &size, nil, 0)
     gettimeofday(&currentTime, nil)
     let bootTime = kp.kp_proc.p_un.__p_starttime  // this is a timeval struct
     return toSeconds(time: currentTime) - toSeconds(time: bootTime)
+  }
+  
+  func addPremainTime() {
+    times.append(AppStartTimeMonitor.shared.processLaunchTime)
+  }
+  
+  func appStartTimes() -> [Double] {
+    return self.times
   }
   
   private func toSeconds(time: timeval) -> Double {
@@ -49,7 +59,9 @@ class AppStartTimeMonitor {
       let weakSelf = Unmanaged<AppStartTimeMonitor>.fromOpaque(info).takeUnretainedValue()
       if (activity == .beforeTimers) {
         // use before timers to cal app launch time.
-        print("runloop beforetimers launch: \(weakSelf.processLaunchTime())")
+        weakSelf.times.append(AppStartTimeMonitor.shared.processLaunchTime)
+        DJUserDefaults.setAppStartTime(weakSelf.times)
+        print("app launce time: \(weakSelf.times)")
         CFRunLoopRemoveObserver(CFRunLoopGetMain(), observer, .commonModes)
       }
     }
