@@ -146,6 +146,9 @@
 		73B7906228E7EB8A002A9CDC /* SearchList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7906128E7EB8A002A9CDC /* SearchList.swift */; };
 		73B7906628E7F133002A9CDC /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7906528E7F133002A9CDC /* SearchViewController.swift */; };
 		73B7906D28E972A9002A9CDC /* SearchWordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B7906C28E972A9002A9CDC /* SearchWordManager.swift */; };
+		73C43B8E29215137008E71DB /* dj_trace_pc_guard_cb.c in Sources */ = {isa = PBXBuildFile; fileRef = 73C43B8D29215137008E71DB /* dj_trace_pc_guard_cb.c */; };
+		73C43B91292152E6008E71DB /* DJClangTrace.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C43B90292152E6008E71DB /* DJClangTrace.m */; };
+		73C43B9329215496008E71DB /* ClangTrace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C43B9229215496008E71DB /* ClangTrace.swift */; };
 		73C598C528D85EF100DA86A1 /* PopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C598C428D85EF100DA86A1 /* PopoverView.swift */; };
 		73C598C728D8617800DA86A1 /* UIApplication+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C598C628D8617800DA86A1 /* UIApplication+Ext.swift */; };
 		73C598CD28D9E6A100DA86A1 /* URL+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C598CC28D9E6A100DA86A1 /* URL+Ext.swift */; };
@@ -354,6 +357,12 @@
 		73B7906128E7EB8A002A9CDC /* SearchList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchList.swift; sourceTree = "<group>"; };
 		73B7906528E7F133002A9CDC /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		73B7906C28E972A9002A9CDC /* SearchWordManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWordManager.swift; sourceTree = "<group>"; };
+		73C43B8C29215137008E71DB /* dj_trace_pc_guard_cb.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dj_trace_pc_guard_cb.h; sourceTree = "<group>"; };
+		73C43B8D29215137008E71DB /* dj_trace_pc_guard_cb.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dj_trace_pc_guard_cb.c; sourceTree = "<group>"; };
+		73C43B8F292152E6008E71DB /* DJClangTrace.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DJClangTrace.h; sourceTree = "<group>"; };
+		73C43B90292152E6008E71DB /* DJClangTrace.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DJClangTrace.m; sourceTree = "<group>"; };
+		73C43B9229215496008E71DB /* ClangTrace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClangTrace.swift; sourceTree = "<group>"; };
+		73C43B9529215773008E71DB /* DJGithub-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DJGithub-Bridging-Header.h"; sourceTree = "<group>"; };
 		73C598C428D85EF100DA86A1 /* PopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverView.swift; sourceTree = "<group>"; };
 		73C598C628D8617800DA86A1 /* UIApplication+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Ext.swift"; sourceTree = "<group>"; };
 		73C598CC28D9E6A100DA86A1 /* URL+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Ext.swift"; sourceTree = "<group>"; };
@@ -494,6 +503,7 @@
 		735D0E002903115D00E618B3 /* DJMonitor */ = {
 			isa = PBXGroup;
 			children = (
+				73C43B8B29215105008E71DB /* ClangTrace */,
 				73936F9629197E3000BC2901 /* UIThread */,
 				73936F89291402E500BC2901 /* DJFPS */,
 				73936F29291377DD00BC2901 /* DJLeak */,
@@ -576,6 +586,7 @@
 				73AACADD28D308A70072B1DF /* Assets.xcassets */,
 				73AACADF28D308A70072B1DF /* LaunchScreen.storyboard */,
 				73AACAE228D308A70072B1DF /* Info.plist */,
+				73C43B9529215773008E71DB /* DJGithub-Bridging-Header.h */,
 			);
 			path = DJGithub;
 			sourceTree = "<group>";
@@ -884,6 +895,18 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		73C43B8B29215105008E71DB /* ClangTrace */ = {
+			isa = PBXGroup;
+			children = (
+				73C43B8C29215137008E71DB /* dj_trace_pc_guard_cb.h */,
+				73C43B8D29215137008E71DB /* dj_trace_pc_guard_cb.c */,
+				73C43B8F292152E6008E71DB /* DJClangTrace.h */,
+				73C43B90292152E6008E71DB /* DJClangTrace.m */,
+				73C43B9229215496008E71DB /* ClangTrace.swift */,
+			);
+			path = ClangTrace;
+			sourceTree = "<group>";
+		};
 		73C598C328D85ECF00DA86A1 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -1176,6 +1199,7 @@
 				73936F33291379DA00BC2901 /* NSObject+Leak.swift in Sources */,
 				73936F8B2914030400BC2901 /* DJFPSLabel.swift in Sources */,
 				73936FC1291D422800BC2901 /* AvatarImageView.swift in Sources */,
+				73C43B9329215496008E71DB /* ClangTrace.swift in Sources */,
 				73074CC728EF4809001A90E7 /* LocalRepo.swift in Sources */,
 				73101D4128E30C5200DB5423 /* SimpleUserCell.swift in Sources */,
 				73B7904A28E52450002A9CDC /* LocalDevelopersViewController.swift in Sources */,
@@ -1189,6 +1213,7 @@
 				7339201128F53DAC00DC76B0 /* RssFeedsViewController.swift in Sources */,
 				73E14E4F28F3477E00A9811D /* Feeds.swift in Sources */,
 				73074CC028EED421001A90E7 /* CommitView.swift in Sources */,
+				73C43B91292152E6008E71DB /* DJClangTrace.m in Sources */,
 				73AACAD928D308A60072B1DF /* LoadingViewerViewController.swift in Sources */,
 				73AACB6C28D5AF7D0072B1DF /* LanguageManager.swift in Sources */,
 				73AACB2D28D32BB10072B1DF /* DJFileManager.swift in Sources */,
@@ -1243,6 +1268,7 @@
 				73DF6C0828EC69840003BDB8 /* Issue.swift in Sources */,
 				73B7904828E51A3A002A9CDC /* UIImage+Ext.swift in Sources */,
 				73EE0CEC290A72560010C54A /* DJMaskView.swift in Sources */,
+				73C43B8E29215137008E71DB /* dj_trace_pc_guard_cb.c in Sources */,
 				73936F3729137E7200BC2901 /* DJObjectProxy.swift in Sources */,
 				73936F2F2913790F00BC2901 /* UIViewController+Leak.swift in Sources */,
 				73AACB5828D483CA0072B1DF /* UserContributionCell.swift in Sources */,
@@ -1459,11 +1485,14 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				LD_GENERATE_MAP_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_CFLAGS = "-fsanitize-coverage=func,trace-pc-guard";
+				OTHER_SWIFT_FLAGS = "-sanitize-coverage=func -sanitize=undefined";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dyljqq.DJGithub;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1471,6 +1500,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "DJGithub/DJGithub-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1492,11 +1522,14 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				LD_GENERATE_MAP_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_CFLAGS = "-fsanitize-coverage=func,trace-pc-guard";
+				OTHER_SWIFT_FLAGS = "-sanitize-coverage=func -sanitize=undefined";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dyljqq.DJGithub;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1504,6 +1537,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "DJGithub/DJGithub-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
