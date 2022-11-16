@@ -15,7 +15,7 @@ enum DJError: Error {
   case dataError
   case other(Error)
   case unknown
-  
+
   static func map(_ error: Error) -> DJError {
     return (error as? DJError) ?? .other(error)
   }

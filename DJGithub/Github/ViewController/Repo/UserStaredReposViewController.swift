@@ -22,13 +22,13 @@ class UserStaredReposViewController: UIViewController, NextPageLoadable {
   var firstPageIndex: Int {
     return 1
   }
-  
+
   var dataSource: [Repo] = []
   var nextPageState: NextPageState = NextPageState()
   var userRepoState: UserRepoState
   var repo: Repo?
   var isViewer: Bool = false
-  
+
   lazy var tableView: UITableView = {
     let tableView: UITableView = UITableView()
     tableView.delegate = self
@@ -38,30 +38,30 @@ class UserStaredReposViewController: UIViewController, NextPageLoadable {
     tableView.register(UserStaredRepoCell.classForCoder(), forCellReuseIdentifier: UserStaredRepoCell.className)
     return tableView
   }()
-  
+
   init(userRepoState: UserRepoState) {
     self.userRepoState = userRepoState
     super.init(nibName: nil, bundle: nil)
   }
-  
+
   init(with state: UserRepoState, repo: Repo? = nil) {
     self.userRepoState = state
     self.repo = repo
     super.init(nibName: nil, bundle: nil)
   }
-  
+
   required init?(coder: NSCoder) {
     self.userRepoState = .unknown
     super.init(coder: coder)
   }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
     self.navigationItem.title = "Stars"
     setUp()
   }
-  
+
   func setUp() {
     view.backgroundColor = .backgroundColor
     view.addSubview(tableView)
@@ -80,7 +80,7 @@ class UserStaredReposViewController: UIViewController, NextPageLoadable {
       strongSelf.nextPageState.update(start: strongSelf.firstPageIndex, hasNext: true, isLoading: false)
       strongSelf.loadNext(start: strongSelf.nextPageState.start)
     }
-    
+
     tableView.addFooter { [weak self] in
       guard let strongSelf = self else {
         return
@@ -89,7 +89,7 @@ class UserStaredReposViewController: UIViewController, NextPageLoadable {
     }
     loadNext(start: nextPageState.start)
   }
-  
+
   func loadNext(start: Int) {
     loadNext(start: start) { [weak self] in
       guard let strongSelf = self else {
@@ -100,7 +100,7 @@ class UserStaredReposViewController: UIViewController, NextPageLoadable {
       strongSelf.tableView.reloadData()
     }
   }
-  
+
   private func loadCacheData() {
     switch userRepoState {
     case .star:
@@ -120,7 +120,7 @@ extension UserStaredReposViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return dataSource.count
   }
-  
+
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: UserStaredRepoCell.className, for: indexPath) as! UserStaredRepoCell
     var r = dataSource[indexPath.row]
@@ -138,7 +138,7 @@ extension UserStaredReposViewController: UITableViewDataSource {
     }
     return cell
   }
-  
+
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return UserStaredRepoCell.cellHeight(by: dataSource[indexPath.row])
   }
@@ -147,7 +147,7 @@ extension UserStaredReposViewController: UITableViewDataSource {
 extension UserStaredReposViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
-    
+
     let repo = dataSource[indexPath.row]
     if let userName = repo.owner?.login {
       self.navigationController?.pushToRepo(with: userName, repoName: repo.name)
@@ -156,8 +156,8 @@ extension UserStaredReposViewController: UITableViewDelegate {
 }
 
 extension UserStaredReposViewController {
-  
-  func performLoad(successHandler: @escaping ([Repo], Bool) -> (), failureHandler: @escaping (String) -> ()) {
+
+  func performLoad(successHandler: @escaping ([Repo], Bool) -> Void, failureHandler: @escaping (String) -> Void) {
     Task {
       let repos: [Repo]
       switch self.userRepoState {
@@ -185,5 +185,5 @@ extension UserStaredReposViewController {
       successHandler(repos, repos.count > 0)
     }
   }
-  
+
 }

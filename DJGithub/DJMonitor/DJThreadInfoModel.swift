@@ -11,7 +11,7 @@ struct DJThreadInfoModel {
   let thread: thread_t
   let cpuUsage: Double
   let userTime: Double
-  
+
   var description: String {
     return "Thread: \(thread), CPU usage: \(self.cpuUsage), use \(self.userTime) seconds."
   }

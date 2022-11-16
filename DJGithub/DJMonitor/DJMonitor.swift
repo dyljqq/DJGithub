@@ -9,29 +9,29 @@ import UIKit
 
 struct DJMonitor {
   static let shared = DJMonitor()
-  
-  init(){
-    
+
+  init() {
+
   }
-  
+
   func monitor() {
     // 获取APP启动时间
     AppStartTimeMonitor.shared.measure()
-    
+
     // 开启卡顿检测
     DJStuckMonitor.shared.config(with: mach_thread_self())
     DJStuckMonitor.shared.beginMonitor()
-    
+
     // 开启crash监控
     DJCrashManager.shared.registerHandler()
-    
+
     // 开启内存泄漏检测
     DJLeakSniffer.shared.install()
-    
+
     // 检查是否有不在主线程的UI
     DJUIThreadMonitor.start()
   }
-  
+
   func addFPSMonitor() {
     for scene in UIApplication.shared.connectedScenes {
       if let sc = scene as? UIWindowScene, let window = sc.keyWindow {

@@ -9,7 +9,7 @@ import UIKit
 
 enum UserInfoType: String {
   case name, bio, company, location, email, blog
-  
+
   var name: String {
     switch self {
     case .name: return "Name"
@@ -20,10 +20,10 @@ enum UserInfoType: String {
     case .blog: return "URL"
     }
   }
-  
+
   func getContent(by user: User?) -> String? {
     guard let user = user else { return nil }
-    
+
     switch self {
     case .name: return user.name
     case .bio: return user.bio
@@ -36,10 +36,10 @@ enum UserInfoType: String {
 }
 
 class UserInfoViewController: UIViewController {
-  
+
   enum CellType {
     case blank, userInfo(UserInfoType)
-    
+
     var height: CGFloat {
       switch self {
       case .blank: return 20
@@ -47,9 +47,9 @@ class UserInfoViewController: UIViewController {
       }
     }
   }
-  
+
   var user: User?
-  
+
   var dataSource: [CellType] = [
     .blank,
     .userInfo(.name),
@@ -58,9 +58,9 @@ class UserInfoViewController: UIViewController {
     .userInfo(.email),
     .userInfo(.location),
     .userInfo(.company),
-    .userInfo(.blog),
+    .userInfo(.blog)
   ]
-  
+
   lazy var tableView: UITableView = {
     let tableView = UITableView()
     tableView.delegate = self
@@ -71,13 +71,13 @@ class UserInfoViewController: UIViewController {
     tableView.register(UserInfoCell.classForCoder(), forCellReuseIdentifier: UserInfoCell.className)
     return tableView
   }()
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
     setUp()
   }
-  
+
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     Task {
@@ -85,10 +85,10 @@ class UserInfoViewController: UIViewController {
       self.tableView.reloadData()
     }
   }
-  
+
   private func setUp() {
     self.navigationItem.title = ConfigManager.shared.viewerName
-    
+
     view.addSubview(tableView)
     tableView.snp.makeConstraints { make in
       make.edges.equalToSuperview()
@@ -97,11 +97,11 @@ class UserInfoViewController: UIViewController {
 }
 
 extension UserInfoViewController: UITableViewDelegate, UITableViewDataSource {
-  
+
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return dataSource.count
   }
-  
+
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cellType = self.dataSource[indexPath.row]
     switch cellType {
@@ -117,15 +117,15 @@ extension UserInfoViewController: UITableViewDelegate, UITableViewDataSource {
       return cell
     }
   }
-  
+
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     let type = self.dataSource[indexPath.row]
     return type.height
   }
-  
+
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
-    
+
     let type = self.dataSource[indexPath.row]
     switch type {
     case .userInfo(let userType):
@@ -134,5 +134,5 @@ extension UserInfoViewController: UITableViewDelegate, UITableViewDataSource {
       break
     }
   }
-  
+
 }

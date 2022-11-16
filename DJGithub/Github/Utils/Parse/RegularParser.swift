@@ -18,7 +18,7 @@ struct RegularParser {
     }
     return []
   }
-  
+
   static func matches(with pattern: String, validateString: String) -> [NSTextCheckingResult] {
     do {
       let expression = try NSRegularExpression(pattern: pattern)

@@ -14,13 +14,13 @@ class XMLNode {
   var isRoot = false
   var attributeDict: [String: String] = [:]
   var nodes: [XMLNode] = []
-  
+
   var dict: [String: Any] = [:]
-  
+
   init(with key: String) {
     self.key = key
   }
-  
+
   func parseNodes() {
     for node in nodes {
       if node.nodes.isEmpty {
@@ -51,9 +51,9 @@ class XMLNode {
 
 class DJXMLParser<T: DJCodable>: NSObject, Parsable, XMLParserDelegate {
   typealias DataType = T
-  
+
   var continuation: CheckedContinuation<T?, Error>?
-  
+
   var dict: [String: Any] = [:]
   var currentElement: String = ""
   var currentValue: String = ""
@@ -61,7 +61,7 @@ class DJXMLParser<T: DJCodable>: NSObject, Parsable, XMLParserDelegate {
 
   var nodes: [XMLNode] = []
   var stack: [XMLNode] = []
-  
+
   func parse(with data: Data?) async throws -> T? {
     guard let data = data else { return nil }
     do {
@@ -77,8 +77,8 @@ class DJXMLParser<T: DJCodable>: NSObject, Parsable, XMLParserDelegate {
       return nil
     }
   }
-  
-  func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
+
+  func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String: String] = [:]) {
     let node = XMLNode(with: elementName)
     if stack.isEmpty {
       node.isRoot = true
@@ -88,14 +88,14 @@ class DJXMLParser<T: DJCodable>: NSObject, Parsable, XMLParserDelegate {
     }
     stack.append(node)
   }
-  
+
   func parser(_ parser: XMLParser, foundCharacters string: String) {
     let data = string.trimmingCharacters(in: .whitespaces).trimmingCharacters(in: .newlines)
     if let topNode = stack.last {
       topNode.value = topNode.value + data
     }
   }
-  
+
   func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
     if let topNode = stack.last, topNode.key == elementName {
       let node = stack.removeLast()
@@ -108,7 +108,7 @@ class DJXMLParser<T: DJCodable>: NSObject, Parsable, XMLParserDelegate {
       }
     }
   }
-  
+
   func parserDidEndDocument(_ parser: XMLParser) {
     rootNode?.parseNodes()
     guard var dict = rootNode?.dict else { return }

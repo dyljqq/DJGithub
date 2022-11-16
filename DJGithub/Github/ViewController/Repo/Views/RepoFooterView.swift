@@ -10,7 +10,7 @@ import WebKit
 import MarkdownView
 
 class RepoFooterView: UIView {
-  
+
   var fetchHeightClosure: ((CGFloat) -> Void)?
   var touchLink: ((URLRequest?) -> Void)?
 
@@ -19,25 +19,25 @@ class RepoFooterView: UIView {
     mdView.isScrollEnabled = false
     return mdView
   }()
-  
+
   init() {
     super.init(frame: .zero)
-    
+
     addSubview(self.mdView)
     mdView.snp.makeConstraints { make in
       make.edges.equalTo(self)
     }
-    
+
     self.mdView.onRendered = { [weak self] height in
       self?.fetchHeightClosure?(height)
     }
-    
+
     self.mdView.onTouchLink = { [weak self] req in
       self?.touchLink?(req)
       return false
     }
   }
-  
+
   func render(with content: String?) {
     guard let content = content else { return }
     DispatchQueue.global().async {
@@ -53,5 +53,5 @@ class RepoFooterView: UIView {
   required init?(coder: NSCoder) {
     super.init(coder: coder)
   }
-  
+
 }

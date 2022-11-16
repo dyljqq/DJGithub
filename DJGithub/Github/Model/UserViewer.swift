@@ -19,16 +19,16 @@ struct UserViewer: DJCodable {
   @Default<String.Email> var email: String
 
   var createdAt: String
-  
+
   @Default<Bool.False> var viewerCanFollow: Bool
   @Default<Bool.False> var viewerIsFollowing: Bool
   @Default<Bool.False> var isViewer: Bool
-  
+
   var following: TotalCountModel
   var followers: TotalCountModel
   var starredRepositories: TotalCountModel
   var repositories: TotalCountModel
-  
+
   var pinnedItems: PinnedRepos
   var userContribution: UserContribution?
 }

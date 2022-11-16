@@ -19,10 +19,10 @@ struct Repo: DJCodable {
   var updatedAt: String
   var language: String?
   var defaultBranch: String?
-  
+
   var owner: RepoOwner?
   var license: License?
-  
+
   var desc: String {
     return self.description ?? "No description provided."
   }
@@ -40,7 +40,7 @@ struct License: DJCodable {
   var key: String
   var url: String?
   var spdxId: String?
-  
+
   var licenseKey: String {
     return self.spdxId ?? self.key
   }

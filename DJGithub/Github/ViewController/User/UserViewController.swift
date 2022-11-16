@@ -12,7 +12,7 @@ import Combine
 struct ContentAndColorMapping {
   let content: String
   let color: UIColor
-  
+
   init(content: String) {
     self.content = content
     self.color = content.isEmpty ? .textGrayColor : .textColor
@@ -24,11 +24,11 @@ enum UserCellType {
   case location
   case company
   case link
-  
+
   var isShowAccessory: Bool {
     return [UserCellType.email, UserCellType.link].contains(self)
   }
-  
+
   var iconImageName: String {
     switch self {
     case .email: return "email"
@@ -37,7 +37,7 @@ enum UserCellType {
     case .location: return "location"
     }
   }
-  
+
   func getContent(by user: UserViewer?) -> ContentAndColorMapping {
     guard let user = user else {
       return ContentAndColorMapping(content: "")
@@ -49,7 +49,7 @@ enum UserCellType {
     case .link: return ContentAndColorMapping(content: user.websiteUrl)
     }
   }
-  
+
   func getContent(by organization: Organization?) -> ContentAndColorMapping {
     guard let organization = organization else {
       return ContentAndColorMapping(content: "")
@@ -63,12 +63,12 @@ enum UserCellType {
   }
 }
 
-fileprivate enum CellType {
+private enum CellType {
   case userContribution(UserContribution)
   case blank
   case user(UserCellType)
   case pinnedItem(PinnedRepos)
-  
+
   var height: CGFloat {
     switch self {
     case .blank: return 10
@@ -87,12 +87,12 @@ class UserViewController: UIViewController {
     view.isHidden = true
     return view
   }()
-  
+
   lazy var userHeaderView: UserHeaderView = {
     let view = UserHeaderView(frame: CGRect(x: 0, y: 0, width: FrameGuide.screenWidth, height: 135))
     return view
   }()
-  
+
   lazy var tableView: UITableView = {
     let tableView = UITableView()
     tableView.delegate = self
@@ -105,44 +105,44 @@ class UserViewController: UIViewController {
     tableView.register(PinnedItemsCell.classForCoder(), forCellReuseIdentifier: PinnedItemsCell.className)
     return tableView
   }()
-    
+
   let name: String
 
   var userViewer: UserViewer?
-  
+
   fileprivate var dataSource: [CellType] = []
-  
+
   init(name: String) {
     self.name = name
     super.init(nibName: nil, bundle: nil)
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
     setUp()
   }
-  
+
   private func setUp() {
     self.navigationItem.title = "User"
     view.backgroundColor = .backgroundColor
     self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.followStatusView)
-    
+
     view.addSubview(tableView)
     tableView.snp.makeConstraints { make in
       make.edges.equalTo(view)
     }
-    
+
     if name.isEmpty || ConfigManager.checkOwner(by: name),
        let userViewer = ConfigManager.viewer {
       self.userViewer = userViewer
       self.loadUserViewerInfo(with: userViewer)
     }
-    
+
     if let viewer = self.userViewer {
       self.loadUserViewerInfo(with: viewer)
     } else {
@@ -151,7 +151,7 @@ class UserViewController: UIViewController {
         if let viewer = await UserManager.fetchUserInfo(by: self.name) {
           self.userViewer = viewer
           self.loadUserViewerInfo(with: viewer)
-          
+
           if ConfigManager.checkOwner(by: viewer.login) {
             LocalUserManager.saveUser(viewer)
           }
@@ -160,7 +160,7 @@ class UserViewController: UIViewController {
         }
       }
     }
-    
+
     userHeaderView.renderHeightClosure = { [weak self] height in
       guard let strongSelf = self else { return }
       strongSelf.userHeaderView.frame = CGRect(x: 0, y: 0, width: FrameGuide.screenWidth, height: height)
@@ -180,10 +180,10 @@ class UserViewController: UIViewController {
       )
     }
   }
-  
+
   private func loadUserViewerInfo(with userViewer: UserViewer) {
     view.stopLoading()
-    
+
     self.followStatusView.isHidden = userViewer.isViewer
     self.followStatusView.active = userViewer.viewerIsFollowing
     self.navigationItem.title = userViewer.name
@@ -197,7 +197,7 @@ class UserViewController: UIViewController {
     self.dataSource.append(contentsOf: [.blank, .user(.company), .user(.location), .user(.email), .user(.link)])
     tableView.reloadData()
   }
-  
+
   private func handle(with contribution: UserContribution) {
     self.dataSource.insert(.blank, at: 0)
     self.dataSource.insert(.userContribution(contribution), at: 1)
@@ -210,7 +210,7 @@ extension UserViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return dataSource.count
   }
-  
+
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cellType = self.dataSource[indexPath.row]
     switch cellType {
@@ -245,7 +245,7 @@ extension UserViewController: UITableViewDataSource {
       return cell
     }
   }
-  
+
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return self.dataSource[indexPath.row].height
   }
@@ -254,7 +254,7 @@ extension UserViewController: UITableViewDataSource {
 extension UserViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
-    
+
     let cellType = self.dataSource[indexPath.row]
     if case CellType.user(let userType) = cellType {
       let content = userType.getContent(by: self.userViewer)

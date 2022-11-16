@@ -35,10 +35,10 @@ struct Feed: DJCodable {
   var author: FeedAuthor?
   var thumbnail: FeedAuthorThumbnail?
   var link: FeedLink?
-  
+
   var formatedDate: String? {
     guard let published = published,
-          let date = FeedDateParser.date(from: published)else {
+          let date = feedDateParser.date(from: published)else {
       return published
     }
     let diff = (Date.now.timeIntervalSince1970 - date.timeIntervalSince1970)
@@ -59,18 +59,18 @@ struct Feed: DJCodable {
     }
     return published
   }
-  
+
   var eventName: String? {
     return RegularParser.parse(with: ":([a-zA-Z]+)Event", validateString: self.id).first
   }
-  
+
   var eventType: FeedEventType {
     if let eventName = eventName, let type = FeedEventType(rawValue: eventName) {
       return type
     }
     return .UnKnown
   }
-  
+
   enum CodingKeys: String, CodingKey {
     case id, published, title, content, author, thumbnail = "media:thumbnail", link
   }
@@ -91,7 +91,7 @@ struct FeedAuthorThumbnail: DJCodable {
 struct FeedLink: DJCodable {
   var type: String?
   var href: String?
-  
+
   var path: String? {
     guard let href = href else { return nil }
     if var path = URLComponents(string: href)?.path {
@@ -132,7 +132,7 @@ extension Feed {
     case .UnKnown:
       break
     }
-    
+
     for (checked, type) in checkedTexts {
       if let match = RegularParser.matches(with: checked, validateString: title).first {
         let range = match.range(at: 0)
@@ -142,7 +142,7 @@ extension Feed {
     attr.addAttribute(NSAttributedString.Key.font, value: UIFont.systemFont(ofSize: 14), range: NSRange(location: 0, length: title.count))
     return attr
   }
-  
+
   var titleHeight: CGFloat {
     guard let title = title, let titleAttr = titleAttr else { return 0 }
     var range = NSRange(location: 0, length: title.count)

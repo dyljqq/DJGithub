@@ -8,7 +8,7 @@
 import UIKit
 
 extension UIView {
-  
+
   var responseVC: UIViewController? {
     var next = self.next
     while let n = next {
@@ -19,5 +19,5 @@ extension UIView {
     }
     return nil
   }
-  
+
 }

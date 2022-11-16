@@ -8,13 +8,13 @@
 import Foundation
 
 extension Bool {
-  
+
   var followText: String {
     return self ? "UnFollow" : "Follow"
   }
-  
+
   var starText: String {
     return self ? "UnStar" : "Star"
   }
-  
+
 }

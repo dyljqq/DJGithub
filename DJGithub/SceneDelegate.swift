@@ -13,10 +13,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
   func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
     guard let scene = (scene as? UIWindowScene) else { return }
-    
+
     window = UIWindow(windowScene: scene)
     window?.backgroundColor = .white
-    
+
     if ConfigManager.isLoadedViewer {
       window?.rootViewController = TabBarController()
     } else {
@@ -26,14 +26,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     setUp()
   }
-  
+
   func setUp() {
     DJMonitor.shared.monitor()
-    
+
     if ConfigManager.isLoadedViewer {
       ConfigManager.shared.load()
     }
-    
+
     Task {
       await withThrowingTaskGroup(of: Void.self) { group in
         group.addTask {
@@ -79,6 +79,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // to restore the scene back to its current state.
   }
 
-
 }
-

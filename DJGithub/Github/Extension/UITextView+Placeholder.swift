@@ -10,7 +10,7 @@ import UIKit
 private var placeholderLabelKey: UInt8 = 0
 
 extension UITextView: UITextViewDelegate {
-  
+
   var placeholderLabel: UILabel? {
     get {
       return objc_getAssociatedObject(self, &placeholderLabelKey) as? UILabel
@@ -19,7 +19,7 @@ extension UITextView: UITextViewDelegate {
       objc_setAssociatedObject(self, &placeholderLabelKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
     }
   }
-  
+
   var placeholder: String? {
     get {
       return self.placeholderLabel?.text
@@ -37,15 +37,15 @@ extension UITextView: UITextViewDelegate {
       self.resizePlaceholderLabel()
     }
   }
-  
+
   public func textViewDidChange(_ textView: UITextView) {
     placeholderLabel?.isHidden = !textView.text.isEmpty
   }
-  
+
   private func resizePlaceholderLabel() {
     let x = self.textContainer.lineFragmentPadding
     let y = self.textContainerInset.top
-    
+
     if let placeholder = placeholder {
       let rect = (placeholder as NSString).boundingRect(
         with: CGSize(width: 0, height: 20),
@@ -55,7 +55,7 @@ extension UITextView: UITextViewDelegate {
       placeholderLabel?.frame = CGRect(x: x, y: y, width: rect.width, height: 20)
     }
   }
-  
+
   private func addPlaceholder(with placeholder: String?) {
     let label = UILabel()
     label.textColor = .lightGray
@@ -65,8 +65,8 @@ extension UITextView: UITextViewDelegate {
     self.addSubview(label)
     self.delegate = self
     self.placeholderLabel = label
-    
+
     self.resizePlaceholderLabel()
   }
-  
+
 }

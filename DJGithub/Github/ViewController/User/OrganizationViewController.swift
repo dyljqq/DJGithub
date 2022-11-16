@@ -8,17 +8,17 @@
 import UIKit
 
 class OrganizationViewController: UIViewController {
-  
+
   private let name: String
 
   var organization: Organization?
   fileprivate var dataSource: [CellType] = []
-  
+
   lazy var userHeaderView: UserHeaderView = {
     let view = UserHeaderView(frame: CGRect(x: 0, y: 0, width: FrameGuide.screenWidth, height: 135))
     return view
   }()
-  
+
   lazy var tableView: UITableView = {
     let tableView = UITableView()
     tableView.delegate = self
@@ -31,24 +31,24 @@ class OrganizationViewController: UIViewController {
     tableView.register(PinnedItemsCell.classForCoder(), forCellReuseIdentifier: PinnedItemsCell.className)
     return tableView
   }()
-  
+
   init(with name: String) {
     self.name = name
     super.init(nibName: nil, bundle: nil)
   }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
     setUp()
   }
-  
+
   private func setUp() {
     view.addSubview(tableView)
     tableView.snp.makeConstraints { make in
       make.edges.equalToSuperview()
     }
-    
+
     if let organization = organization {
       self.reload(with: organization)
     } else {
@@ -60,7 +60,7 @@ class OrganizationViewController: UIViewController {
         view.stopLoading()
       }
     }
-    
+
     userHeaderView.renderHeightClosure = { [weak self] height in
       guard let strongSelf = self else { return }
       strongSelf.userHeaderView.frame = CGRect(x: 0, y: 0, width: FrameGuide.screenWidth, height: height)
@@ -68,11 +68,11 @@ class OrganizationViewController: UIViewController {
       strongSelf.tableView.endUpdates()
     }
   }
-  
+
   private func reload(with organization: Organization?) {
     guard let organization = organization else { return }
     self.userHeaderView.render(with: organization)
-    
+
     dataSource = []
     if !organization.pinnedItems.nodes.isEmpty {
       dataSource.append(contentsOf: [.blank, .pinnedItems])
@@ -84,18 +84,18 @@ class OrganizationViewController: UIViewController {
     dataSource.append(.user(.link))
     tableView.reloadData()
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
 }
 
 extension OrganizationViewController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return dataSource.count
   }
-  
+
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let model = dataSource[indexPath.row]
     switch model {
@@ -128,7 +128,7 @@ extension OrganizationViewController: UITableViewDelegate, UITableViewDataSource
       return cell
     }
   }
-  
+
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return dataSource[indexPath.row].height
   }
@@ -139,7 +139,7 @@ extension OrganizationViewController {
     case blank
     case pinnedItems
     case user(UserCellType)
-    
+
     var height: CGFloat {
       switch self {
       case .blank: return 12

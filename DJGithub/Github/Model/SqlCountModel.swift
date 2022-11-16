@@ -9,7 +9,7 @@ import Foundation
 
 struct SqlCountModel: DJCodable {
   var count: Int
-  
+
   static func query(with tableName: String, condition: String = "") -> Self? {
     serialQueue.sync {
       let sql = "select count(1) from \(tableName) \(condition);"
@@ -23,7 +23,7 @@ struct SqlCountModel: DJCodable {
 
 struct SqlMaxModel: DJCodable {
   var maxValue: String
-  
+
   static func query(with tableName: String, fieldName: String, condition: String = "") -> Self? {
     let sql = "select max(\(fieldName)) from \(tableName) \(condition)"
     if let rs = try? SQLiteDatabase.queryCount(with: sql) {

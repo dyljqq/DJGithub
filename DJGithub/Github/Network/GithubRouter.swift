@@ -8,7 +8,7 @@
 import Foundation
 
 enum GithubRouter: Router {
-  
+
   case userInfo(String)
   case userInfoEdit(params: [String: String])
   case userContribution(parameters: [String: Any])
@@ -29,18 +29,18 @@ enum GithubRouter: Router {
   case userRepos(String, [String: String])
   case userFollowers(String, [String: String])
   case userSubscription(String, [String: String])
-  
+
   // search
   case searchUser([String: String])
   case searchRepos([String: String])
-  
+
   // repo
   case repoContents(userName: String, repoName: String)
   case branches(userName: String, repoName: String, params: [String: String])
   case createPullRequest(userName: String, repoName: String, params: [String: String])
   case repoPullCommits(userName: String, repoName: String, pullNum: Int)
   case repoPullFiles(userName: String, repoName: String, pullNum: Int)
-  
+
   // repo issues
   case repoIssues(userName: String, repoName: String, params: [String: String])
   case repoIssue(userName: String, repoName: String, issueNum: Int)
@@ -51,17 +51,17 @@ enum GithubRouter: Router {
   case repoPull(userName: String, repoName: String, pullNum: Int)
   case repoBranchCanMerge(userName: String, repoName: String, pullNum: Int)
   case repoBranchMerge(userName: String, repoName: String, pullNum: Int, params: [String: String])
-  
+
   // Feed
   case feeds
-  
+
   // graph
   case graphql(params: [String: String])
-  
+
   var baseURLString: String {
     return "https://api.github.com/"
   }
-  
+
   var method: HTTPMethod {
     switch self {
     case .userContribution: return .POST
@@ -79,7 +79,7 @@ enum GithubRouter: Router {
     default: return .GET
     }
   }
-  
+
   var path: String {
     switch self {
     case .userInfo(let name): return "users/\(name)"
@@ -122,14 +122,14 @@ enum GithubRouter: Router {
     case .repoBranchMerge(let userName, let repoName, let pullNum, _): return "repos/\(userName)/\(repoName)/pulls/\(pullNum)/merge"
     }
   }
-  
-  var headers: [String : String] {
+
+  var headers: [String: String] {
     return [
       "Accept": "application/vnd.github+json"
     ]
   }
-  
-  var parameters: [String : Any] {
+
+  var parameters: [String: Any] {
     switch self {
     case .userContribution(let params):
       return params
@@ -150,10 +150,10 @@ enum GithubRouter: Router {
     default: return [:]
     }
   }
-  
+
   func asURLRequest() -> URLRequest? {
     var queryItems: [String: String] = [:]
-    
+
     switch self {
     case .userStartedRepos(_, let items),
         .userFollowing(_, let items),
@@ -171,8 +171,8 @@ enum GithubRouter: Router {
         .branches(_, _, let items),
         .forks(_, let items):
       queryItems = items
-    case .repoPullFiles(_, _, _),
-        .repoPullCommits(_, _, _):
+    case .repoPullFiles,
+        .repoPullCommits:
       queryItems = ["per_page": "100"]
     default:
       break

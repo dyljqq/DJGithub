@@ -11,7 +11,7 @@ extension UIColor {
   static var randomColor: UIColor? {
     return randomHex.toColor
   }
-  
+
   static var randomHex: String {
     let red = arc4random() % 256
     let green = arc4random() % 256

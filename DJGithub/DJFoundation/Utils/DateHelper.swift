@@ -22,25 +22,25 @@ func getRssFeedDateFormatter() -> DateFormatter {
 }
 
 struct DateHelper {
-  
+
   static let standard = DateHelper()
-  
+
   static let rssFeedDateFormatter = getRssFeedDateFormatter()
   static let internetDateFormatter = getInternetDateFormatter()
-  
+
   let formatters = [
     "EEE, d MMM yyyy HH:mm:ss zzz",
     "EEE, d MMM yyyy HH:mm zzz",
     "EEE, d MMM yyyy HH:mm:ss",
     "EEE, d MMM yyyy HH:mm"
   ]
-  
+
   func dateFromRFC822String(_ dateString: String) -> Date? {
     let formatter = DateHelper.internetDateFormatter
     let RFC822String = dateString.uppercased()
     if RFC822String.contains(",") {
-      for f in formatters {
-        formatter.dateFormat = f
+      for format in formatters {
+        formatter.dateFormat = format
         if let date = formatter.date(from: dateString) {
           return date
         }
@@ -52,21 +52,21 @@ struct DateHelper {
         "yyyy-MM-dd'T'HH:mm:ss-mm:ss",
         "yyyy-MM-dd'T'HH:mm:ss+mm:ss",
         "yyyy-MM-dd'T'HH:mm:ss.SSSZ",
-        "yyyy/MM/dd",
+        "yyyy/MM/dd"
       ]
-      for f in formatters {
-        formatter.dateFormat = f
+      for format in formatters {
+        formatter.dateFormat = format
         if let date = formatter.date(from: dateString) {
           return date
         }
       }
     }
-    
+
     return nil
   }
-  
+
   func dateToString(_ date: Date) -> String {
     return DateHelper.rssFeedDateFormatter.string(from: date)
   }
-  
+
 }

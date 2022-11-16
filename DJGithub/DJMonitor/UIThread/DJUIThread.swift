@@ -21,17 +21,17 @@ class DJUIThreadMonitor {
 }
 
 extension UIView {
-  
+
   @objc func swizzled_setNeedsLayout() {
     self.checkThread()
     self.swizzled_setNeedsLayout()
   }
-  
+
   @objc func swizzled_setNeedsDisplay(_ rect: CGRect) {
     self.checkThread()
     self.swizzled_setNeedsDisplay(rect)
   }
-  
+
   private func checkThread() {
     if !Thread.isMainThread {
       print("-------------")
@@ -40,5 +40,5 @@ extension UIView {
       print("-------------")
     }
   }
-  
+
 }

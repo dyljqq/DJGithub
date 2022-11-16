@@ -10,13 +10,13 @@ import UIKit
 extension UIViewController {
   @objc func swizzled_present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
     swizzled_present(viewControllerToPresent, animated: flag)
-    
-    let _ = viewControllerToPresent.markAlive()
+
+    _ = viewControllerToPresent.markAlive()
   }
-  
+
   @objc func swizzled_viewDidAppear(_ animated: Bool) {
     swizzled_viewDidAppear(animated)
-    
+
     watchAllProperties(with: 5)
   }
 }
@@ -24,7 +24,7 @@ extension UIViewController {
 extension UINavigationController {
   @objc func swizzled_pushViewController(_ viewController: UIViewController, animated: Bool) {
     self.swizzled_pushViewController(viewController, animated: animated)
-    let _ = viewController.markAlive()
+    _ = viewController.markAlive()
   }
 }
 
@@ -41,7 +41,7 @@ extension UIView {
       r = r!.next
     }
     if hasAliveParent {
-      let _ = self.markAlive()
+      _ = self.markAlive()
     }
   }
 }

@@ -14,7 +14,7 @@ extension UIViewController {
     let activityVC = UIActivityViewController(activityItems: sharedItems, applicationActivities: nil)
     self.present(activityVC, animated: true)
   }
-  
+
   var naviVc: UIViewController? {
     var vc: UIViewController? = self
     while vc?.parent != nil && !(vc?.parent is UINavigationController) {

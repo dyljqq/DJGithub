@@ -12,9 +12,9 @@ struct RepoBranch: DJCodable {
     var sha: String
     var url: String
   }
-  
+
   var name: String
   var protected: Bool
-  
+
   var commit: RepoBranchCommit
 }

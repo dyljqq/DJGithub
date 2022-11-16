@@ -8,7 +8,7 @@
 import Foundation
 
 extension Result {
-  
+
   func parse<T: DJCodable>() -> T? {
     switch self {
     case .success(let d):
@@ -26,5 +26,5 @@ extension Result {
     }
     return nil
   }
-  
+
 }

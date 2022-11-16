@@ -13,7 +13,7 @@ class IssueCell: UITableViewCell {
     let imageView = UIImageView()
     return imageView
   }()
-  
+
   lazy var titleLabel: UILabel = {
     let label = UILabel()
     label.textColor = .blue
@@ -21,21 +21,21 @@ class IssueCell: UITableViewCell {
     label.numberOfLines = 0
     return label
   }()
-  
+
   lazy var avatarImageView: UIImageView = {
     let imageView = UIImageView()
     imageView.layer.cornerRadius = 3
     imageView.layer.masksToBounds = true
     return imageView
   }()
-  
+
   lazy var nameLabel: UILabel = {
     let label = UILabel()
     label.textColor = .textColor
     label.font = UIFont.systemFont(ofSize: 10)
     return label
   }()
-  
+
   lazy var updateAtLabel: UILabel = {
     let label = UILabel()
     label.textColor = .textColor
@@ -48,20 +48,20 @@ class IssueCell: UITableViewCell {
     imageView.image = UIImage(named: "message")
     return imageView
   }()
-  
+
   lazy var commentsLabel: UILabel = {
     let label = UILabel()
     label.textColor = .textColor
     label.font = UIFont.systemFont(ofSize: 10)
     return label
   }()
-  
+
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
-    
+
     setUp()
   }
-  
+
   func render(with issueLayout: IssueLayout) {
     let issue = issueLayout.issue
     stateImageView.image = UIImage(named: issueLayout.imageName)
@@ -78,7 +78,7 @@ class IssueCell: UITableViewCell {
     }
     commentsLabel.text = "\(issue.comments ?? 0)"
   }
-  
+
   private func setUp() {
     contentView.addSubview(stateImageView)
     contentView.addSubview(titleLabel)
@@ -87,7 +87,7 @@ class IssueCell: UITableViewCell {
     contentView.addSubview(updateAtLabel)
     contentView.addSubview(messageImageView)
     contentView.addSubview(commentsLabel)
-    
+
     stateImageView.snp.makeConstraints { make in
       make.leading.equalTo(12)
       make.top.equalTo(12)
@@ -121,9 +121,9 @@ class IssueCell: UITableViewCell {
       make.centerY.equalTo(avatarImageView)
     }
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
 }

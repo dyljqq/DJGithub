@@ -23,7 +23,7 @@ extension Default {
 
 extension String: DefaultValue {
   static let defaultValue = ""
-  
+
   enum UnProvidedDesc: DefaultValue {
     static let defaultValue = "No description provided."
   }

@@ -24,12 +24,12 @@ struct User: DJCodable {
   var reposUrl: String
   var followingUrl: String
   var followersUrl: String
-  
+
   @Default<String.Company> var company: String
   @Default<String.Location> var location: String
   @Default<String.Email> var email: String
   @Default<String.Blog> var blog: String
-  
+
   var desc: String {
     return isEmpty(by: self.bio) ? "No description provided." : self.bio
   }
@@ -39,7 +39,7 @@ struct UserContribution: DJCodable {
   var totalContributions: Int
   var colors: [String]
   var items: [UserContributionItem]
-  
+
   init(with dict: [String: Any]) {
     totalContributions = dict["totalContributions"] as? Int ?? 0
     colors = dict["colors"] as? [String] ?? []
@@ -47,7 +47,7 @@ struct UserContribution: DJCodable {
       items = []
       return
     }
-    
+
     items = []
     for week in weeks {
       if let days = week["contributionDays"] as? [[String: Any]] {
@@ -66,7 +66,7 @@ struct UserContributionItem: DJCodable {
   var contributionCount: Int
   var date: String
   var weekday: Int
-  
+
   var contributionDesc: String {
     let dateStr: String
     if let date = self.date.split(separator: "T").first {

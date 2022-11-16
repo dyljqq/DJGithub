@@ -15,7 +15,7 @@ enum UserFollowingStatus {
 
 actor UserFollowingHolder {
   var mapping = [String: UserFollowingStatus]()
-  
+
   func batchUpdate(with users: [UserFollowing]) {
     Task {
       for user in users {
@@ -25,7 +25,7 @@ actor UserFollowingHolder {
       }
     }
   }
-  
+
   func update(with userName: String) async -> UserFollowingStatus {
     let task = Task(priority: .utility) { () -> UserFollowingStatus in
       if let followingStatus = await UserManager.checkFollowStatus(with: userName) {
@@ -37,48 +37,48 @@ actor UserFollowingHolder {
     }
     return await task.value
   }
-  
+
   func update(with userName: String, following: Bool) {
     mapping[userName] = following ? .following : .unfollow
   }
-  
+
   func batchUpdate(with dict: [String: Bool]) {
     for (key, value) in dict {
       mapping[key] = value ? .following : .unfollow
     }
   }
-  
+
   func followingStatus(with userName: String) -> UserFollowingStatus {
     return mapping[userName, default: .unknown]
   }
 }
 
 struct UserFollowingManager {
-  
+
   static let shared = UserFollowingManager()
-  
+
   var holder = UserFollowingHolder()
-  
+
   func update(with userName: String, following: Bool) async {
     await holder.update(with: userName, following: following)
   }
-  
+
   func update(with user: UserFollowing) async {
     await holder.batchUpdate(with: [user])
   }
-  
+
   func batchUpdate(with users: [UserFollowing]) async {
     await holder.batchUpdate(with: users)
   }
-  
+
   func followingStatus(with userName: String) async -> UserFollowingStatus {
     return await holder.followingStatus(with: userName)
   }
-  
+
   func update(with userName: String) async -> UserFollowingStatus {
     return await self.holder.update(with: userName)
   }
-  
+
   func fetchUserFollowingStatus(total: Int = 1000) async {
     var page = 1
     let perpage = 100
@@ -95,5 +95,5 @@ struct UserFollowingManager {
       page += 1
     }
   }
-  
+
 }

@@ -8,7 +8,7 @@
 import UIKit
 
 class RepoHeaderView: NormalHeaderView {
-  
+
   func render(with repo: Repository) {
     avatarImageView.render(
       with: AvatarImageView.AvatarModel(
@@ -28,5 +28,5 @@ class RepoHeaderView: NormalHeaderView {
     followersView.render(with: repo.stargazers.totalCount, name: "Stars")
     followingView.render(with: repo.forkCount, name: "forks")
   }
-  
+
 }

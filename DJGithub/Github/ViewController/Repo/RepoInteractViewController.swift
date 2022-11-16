@@ -19,7 +19,7 @@ class RepoInteractViewController: UIViewController {
     case following(String)
     case userWatches(String)
     case userStar(String)
-    
+
     var title: String {
       switch self {
       case .watches: return "Watches"
@@ -33,7 +33,7 @@ class RepoInteractViewController: UIViewController {
       case .userStar: return "Stars"
       }
     }
-    
+
     var userFollowingType: UserFollowingType {
       switch self {
       case .watches(let name): return UserFollowingType.watches(name)
@@ -44,7 +44,7 @@ class RepoInteractViewController: UIViewController {
       default: return UserFollowingType.unknown
       }
     }
-    
+
     var userRepoState: UserRepoState {
       switch self {
       case .forks(let name): return UserRepoState.fork(name)
@@ -61,7 +61,7 @@ class RepoInteractViewController: UIViewController {
       self.update(with: selectedIndex)
     }
   }
-  
+
   lazy var vcs: [UIViewController] = {
     return types.map { type in
       switch type {
@@ -72,13 +72,13 @@ class RepoInteractViewController: UIViewController {
       }
     }
   }()
-  
+
   lazy var headerSegmentView: HeaderSegmentView = {
     let arr: [String] = types.map { $0.title }
     let headerView = HeaderSegmentView(with: arr, selectedIndex: 0)
     return headerView
   }()
-  
+
   lazy var scrollView: UIScrollView = {
     let scrollView = UIScrollView()
     scrollView.delegate = self
@@ -88,64 +88,64 @@ class RepoInteractViewController: UIViewController {
     scrollView.bounces = false
     return scrollView
   }()
-  
+
   let types: [RepoInteractType]
   let interactTitle: String
   var needUpdateHeader: Bool = true
-  
+
   init(with types: [RepoInteractType], title: String = "", selectedIndex: Int = 0) {
     self.types = types
     self.interactTitle = title
     self.selectedIndex = selectedIndex
     super.init(nibName: nil, bundle: nil)
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
     setUp()
   }
-  
+
   private func setUp() {
     self.navigationItem.title = interactTitle
 
     view.backgroundColor = .white
     view.addSubview(headerSegmentView)
     view.addSubview(scrollView)
-    
+
     headerSegmentView.frame = CGRect(
       x: 0, y: FrameGuide.navigationBarAndStatusBarHeight, width: FrameGuide.screenWidth, height: 44)
     scrollView.frame = CGRect(
       x: 0, y: headerSegmentView.frame.maxY, width: FrameGuide.screenWidth, height: FrameGuide.screenHeight - FrameGuide.navigationBarAndStatusBarHeight)
-    
+
     for vc in vcs {
       addChild(vc)
       scrollView.addSubview(vc.view)
     }
-    
+
     headerSegmentView.selectedClosure = { [weak self] index in
       guard let strongSelf = self else { return }
       strongSelf.needUpdateHeader = false
       strongSelf.scrollView.setContentOffset(
         CGPoint(x: strongSelf.scrollView.frame.width * CGFloat(index), y: 0), animated: true)
     }
-    
+
     update(with: self.selectedIndex)
   }
-  
+
   private func update(with index: Int) {
     self.scrollView.setContentOffset(
       CGPoint(x: self.scrollView.frame.width * CGFloat(index), y: 0), animated: true)
     self.headerSegmentView.selectedIndex = index
   }
-  
+
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
-    
+
     for (index, vc) in vcs.enumerated() {
       vc.view.frame = CGRect(x: FrameGuide.screenWidth * CGFloat(index), y: 0, width: scrollView.bounds.width, height: scrollView.bounds.height)
     }
@@ -154,14 +154,14 @@ class RepoInteractViewController: UIViewController {
 
 }
 
-extension RepoInteractViewController: UIScrollViewDelegate {  
+extension RepoInteractViewController: UIScrollViewDelegate {
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
     let page = Int(scrollView.contentOffset.x / scrollView.bounds.width + 0.5)
     if needUpdateHeader && page != self.headerSegmentView.selectedIndex {
       self.headerSegmentView.selectedIndex = page
     }
   }
-  
+
   func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
     needUpdateHeader = true
   }

@@ -10,14 +10,14 @@ import UIKit
 class TabBarController: UITabBarController {
 
   let itemImageSize = CGSize(width: 30, height: 30)
-  
+
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    
+
     let barAppearance = UITabBarAppearance()
     barAppearance.configureWithOpaqueBackground()
     barAppearance.backgroundEffect = UIBlurEffect(style: .regular)
-    
+
     let itemAppearance = UITabBarItemAppearance()
     itemAppearance.normal.titleTextAttributes = [
       NSAttributedString.Key.font: UIFont.systemFont(ofSize: 10),
@@ -27,23 +27,23 @@ class TabBarController: UITabBarController {
       NSAttributedString.Key.font: UIFont.systemFont(ofSize: 10),
       NSAttributedString.Key.foregroundColor: UIColor.black
     ]
-    
+
     barAppearance.stackedLayoutAppearance = itemAppearance
     tabBar.scrollEdgeAppearance = barAppearance
     tabBar.standardAppearance = barAppearance
   }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
     setUp()
   }
-  
+
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     DJMonitor.shared.addFPSMonitor()
   }
-  
+
   func setUp() {
     let userName = ConfigManager.shared.viewerName
     let staredVc = UserStaredReposViewController(userRepoState: .star(userName))
@@ -56,7 +56,7 @@ class TabBarController: UITabBarController {
       setUp(for: UserViewController(name: userName), tabTitle: "User", image: UIImage(named: "user"), selectedImage: UIImage(named: "person"))
     ]
   }
-  
+
   private func setUp(for vc: UIViewController,
                      tabTitle title: String, image: UIImage?, selectedImage: UIImage?) -> UIViewController {
     let nav = NavigationController(rootViewController: vc)
@@ -79,9 +79,9 @@ class TabBarController: UITabBarController {
     nav.tabBarItem.title = title
     return nav
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
 }

@@ -17,11 +17,11 @@ struct LocalRepo: DJCodable {
   var id: String
   var des: String?
   var groupId: Int?
-  
+
   var description: String {
     return self.des ?? "No description provided."
   }
-  
+
   enum CodingKeys: String, CodingKey {
     case id, des
   }

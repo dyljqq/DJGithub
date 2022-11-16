@@ -8,40 +8,40 @@
 import UIKit
 
 class HeaderSegmentCell: UICollectionViewCell {
-  
+
   lazy var titleLabel: UILabel = {
     let label = UILabel()
     label.font = UIFont.systemFont(ofSize: 14, weight: .bold)
     label.textColor = .lightBlue
     return label
   }()
-  
+
   lazy var indicatorLineView: UIView = {
     let view = UIView()
     view.backgroundColor = .lightBlue
     view.layer.cornerRadius = 2
     return view
   }()
-  
+
   override init(frame: CGRect) {
     super.init(frame: frame)
-    
+
     setUp()
   }
-  
+
   func render(with model: HeaderSegmentView.HeaderModel) {
     titleLabel.text = model.title
     self.indicatorLineView.isHidden = !model.selected
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   private func setUp() {
     contentView.addSubview(titleLabel)
     contentView.addSubview(indicatorLineView)
-    
+
     titleLabel.snp.makeConstraints { make in
       make.center.equalTo(self.contentView)
     }
@@ -52,26 +52,26 @@ class HeaderSegmentCell: UICollectionViewCell {
       make.width.equalTo(30)
     }
   }
-  
+
 }
 
 class HeaderSegmentView: UIView {
-  
+
   struct HeaderModel {
     var title: String
-    
+
     var width: CGFloat = 0
     var selected: Bool = false
-    
+
     init(title: String, width: CGFloat = 0, selected: Bool = false) {
       self.title = title
       self.width = width
       self.selected = selected
     }
   }
-  
-  var selectedClosure: ((Int) -> ())?
-  
+
+  var selectedClosure: ((Int) -> Void)?
+
   lazy var layout: UICollectionViewFlowLayout = {
     let layout = UICollectionViewFlowLayout()
     layout.minimumLineSpacing = 0
@@ -79,7 +79,7 @@ class HeaderSegmentView: UIView {
     layout.scrollDirection = .horizontal
     return layout
   }()
-  
+
   lazy var collectionView: UICollectionView = {
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
     collectionView.delegate = self
@@ -88,7 +88,7 @@ class HeaderSegmentView: UIView {
     collectionView.register(HeaderSegmentCell.classForCoder(), forCellWithReuseIdentifier: HeaderSegmentCell.className)
     return collectionView
   }()
-  
+
   let items: [String]
   var selectedIndex: Int = 0 {
     didSet {
@@ -96,19 +96,19 @@ class HeaderSegmentView: UIView {
     }
   }
   var dataSource: [HeaderModel] = []
-  
+
   init(with items: [String], selectedIndex: Int = 0) {
     self.items = items
     super.init(frame: .zero)
-    
+
     self.selectedIndex = selectedIndex
     setUp()
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   private func setUp() {
     self.backgroundColor = .white
     addSubview(collectionView)
@@ -116,11 +116,15 @@ class HeaderSegmentView: UIView {
       make.top.bottom.centerX.equalTo(self)
       make.width.equalTo(FrameGuide.screenWidth)
     }
-    
+
     var totalWidth: CGFloat = 0
     DispatchQueue.global().async {
       for (index, item) in self.items.enumerated() {
-        let width = (item as NSString).boundingRect(with: CGSize(width: 0, height: 14), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14, weight: .bold)], context: nil).size.width + 30
+        let width = (item as NSString).boundingRect(
+          with: CGSize(width: 0, height: 14),
+          options: .usesLineFragmentOrigin,
+          attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14, weight: .bold)],
+          context: nil).size.width + 30
         self.dataSource.append(HeaderModel(title: item, width: width, selected: index == self.selectedIndex))
         totalWidth += width
       }
@@ -134,7 +138,7 @@ class HeaderSegmentView: UIView {
       }
     }
   }
-  
+
   fileprivate func update(selectedIndex: Int) {
     self.dataSource = self.dataSource.enumerated().map { (index, model) in
       return HeaderModel(title: model.title, width: model.width, selected: index == selectedIndex)
@@ -147,26 +151,26 @@ class HeaderSegmentView: UIView {
 }
 
 extension HeaderSegmentView: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
-  
+
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return dataSource.count
   }
-  
+
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HeaderSegmentCell.className, for: indexPath) as! HeaderSegmentCell
     cell.render(with: self.dataSource[indexPath.row])
     return cell
   }
-  
+
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     let model = self.dataSource[indexPath.row]
     return CGSize(width: model.width, height: collectionView.frame.height)
   }
-  
+
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     collectionView.deselectItem(at: indexPath, animated: true)
     self.selectedIndex = indexPath.row
     selectedClosure?(indexPath.row)
   }
-  
+
 }

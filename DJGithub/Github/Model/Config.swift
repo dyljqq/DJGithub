@@ -10,11 +10,11 @@ import Foundation
 struct Config: DJCodable {
   var authorization: String = ""
   let userName: String = ""
-  
+
   init() {
-    
+
   }
-  
+
   enum CodingKeys: String, CodingKey {
     case authorization
   }

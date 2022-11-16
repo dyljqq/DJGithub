@@ -8,9 +8,9 @@
 import UIKit
 
 class SearchWordHeaderView: UIView {
-  
-  var eraseClosure: (() -> ())?
-  
+
+  var eraseClosure: (() -> Void)?
+
   lazy var titleLabel: UILabel = {
     let label = UILabel()
     label.text = "History search words"
@@ -18,7 +18,7 @@ class SearchWordHeaderView: UIView {
     label.font = UIFont.systemFont(ofSize: 14, weight: .bold)
     return label
   }()
-  
+
   lazy var eraseImageView: UIImageView = {
     let imageView = UIImageView()
     imageView.image = ImageDecoder.downsampledImage(
@@ -28,17 +28,17 @@ class SearchWordHeaderView: UIView {
     imageView.addGestureRecognizer(tap)
     return imageView
   }()
-  
+
   init() {
     super.init(frame: .zero)
-    
+
     setUp()
   }
-  
+
   @objc func eraseAction() {
     eraseClosure?()
   }
-  
+
   private func setUp() {
     addSubview(titleLabel)
     addSubview(eraseImageView)
@@ -52,9 +52,9 @@ class SearchWordHeaderView: UIView {
       make.width.height.equalTo(25)
     }
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
 }

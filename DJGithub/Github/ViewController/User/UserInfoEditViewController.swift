@@ -11,7 +11,7 @@ class UserInfoEditViewController: UIViewController {
 
   let type: UserInfoType
   let user: User?
-  
+
   lazy var textField: UITextField = {
     let textField = UITextField()
     textField.backgroundColor = .white
@@ -23,7 +23,7 @@ class UserInfoEditViewController: UIViewController {
     textField.leftViewMode = UITextField.ViewMode.always
     return textField
   }()
-  
+
   lazy var textView: UITextView = {
     let textView = UITextView()
     textView.text = type.getContent(by: user)
@@ -32,37 +32,37 @@ class UserInfoEditViewController: UIViewController {
     textView.backgroundColor = .white
     return textView
   }()
-  
+
   lazy var commitView: CommitView = {
     let commitView = CommitView(with: "commit")
     commitView.backgroundColor = .lightBlue
     return commitView
   }()
-  
+
   init(with type: UserInfoType, user: User?) {
     self.type = type
     self.user = user
     super.init(nibName: nil, bundle: nil)
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
     setUp()
   }
-  
+
   private func setUp() {
     view.backgroundColor = .backgroundColor
     self.navigationItem.title = type.name
-    
+
     view.addSubview(textField)
     view.addSubview(textView)
     view.addSubview(commitView)
-    
+
     if case UserInfoType.bio = self.type {
       textField.isHidden = true
       textView.isHidden = false
@@ -92,7 +92,7 @@ class UserInfoEditViewController: UIViewController {
         make.height.equalTo(34)
       }
     }
-    
+
     commitView.commitClosure = { [weak self] in
       guard let strongSelf = self else { return }
       strongSelf.commitView.isLoading = true
@@ -105,7 +105,7 @@ class UserInfoEditViewController: UIViewController {
       let key = strongSelf.type.rawValue
       Task {
         if let _ = await UserManager.editUserInfo(with: [key: text ?? ""]) {
-          let _ = strongSelf.navigationController?.popViewController(animated: true)
+          _ = strongSelf.navigationController?.popViewController(animated: true)
         } else {
           HUD.show(with: "Failed to update \(strongSelf.type.name)")
         }

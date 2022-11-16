@@ -8,10 +8,10 @@
 import Foundation
 
 struct DJCrashLogManager {
-  
+
   static let crashLogName: String = "crashLog.log"
   static let crashLogDir: String = "CrashLog"
-  
+
   static var crashLogs: [DJCrashLog] {
     guard let dir = crashLogPath() else { return [] }
     do {
@@ -25,7 +25,7 @@ struct DJCrashLogManager {
     }
     return []
   }
-  
+
   static func collect(with exception: NSException, stackInfo: String, viewControllerInfo: String) {
     let enviroment: String
 #if DEBUG
@@ -33,7 +33,7 @@ struct DJCrashLogManager {
 #else
     enviroment = "RELEASE"
 #endif
-    
+
     let dict: [String: Any] = [
       "logDate": String(format: "%.2f", Date.now.timeIntervalSince1970),
       "type": exception.name,
@@ -46,7 +46,7 @@ struct DJCrashLogManager {
         "stackInfo": stackInfo
       ]
     ]
-    
+
     guard let logDir = crashLogPath() else { return }
     do {
       let logPath = logDir.appendingPathComponent(crashLogName, isDirectory: true)
@@ -62,7 +62,7 @@ struct DJCrashLogManager {
       print("DJCrashLogManager collect error: \(error)")
     }
   }
-  
+
   static func crashLogPath() -> URL? {
     guard let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return nil }
     let url = documentURL.appendingPathComponent(crashLogDir, isDirectory: true)
@@ -79,7 +79,7 @@ struct DJCrashLogManager {
     }
     return url
   }
-  
+
   static func clearAll() {
     guard let dir = crashLogPath() else { return }
     let logPath = dir.appendingPathComponent(crashLogName)

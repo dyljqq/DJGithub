@@ -15,17 +15,17 @@ public func getMachFrameCount(
     maxSymbolCount: Int32
 ) -> Int
 
-private let TASK_BASIC_INFO_COUNT = mach_msg_type_number_t(MemoryLayout<task_basic_info_data_t>.size /  MemoryLayout<UInt32>.size)
-public typealias mcontext_t = UnsafeMutablePointer<__darwin_mcontext64>
+private let taskBasicInfoCount = mach_msg_type_number_t(MemoryLayout<task_basic_info_data_t>.size /  MemoryLayout<UInt32>.size)
+public typealias Mcontext = UnsafeMutablePointer<__darwin_mcontext64>
 
 struct DJCallStack {
-  static func fetchStackInfo(_ completionHandler: @escaping ([String]) -> ()) {
+  static func fetchStackInfo(_ completionHandler: @escaping ([String]) -> Void) {
     DispatchQueue.main.async {
       let infos = getStackInfo(by: mach_thread_self())
       completionHandler(infos)
     }
   }
-  
+
   static func fetchStackInfo(from thread: thread_t) -> [String] {
     return getStackInfo(by: thread)
   }
@@ -34,14 +34,14 @@ struct DJCallStack {
 extension DJCallStack {
   fileprivate static func getStackInfo(by thread: thread_t) -> [String] {
     var info = thread_basic_info()
-    var infoCount = TASK_BASIC_INFO_COUNT
+    var infoCount = taskBasicInfoCount
     let kerr = withUnsafeMutablePointer(to: &info) {
       $0.withMemoryRebound(to: integer_t.self, capacity: 1) {
         thread_info(thread, thread_flavor_t(THREAD_BASIC_INFO), $0, &infoCount)
       }
     }
     guard kerr == KERN_SUCCESS else { return [] }
-    
+
     var rs = [String]()
     if (info.flags & TH_FLAGS_IDLE) == 0 {
       let cpuUsage = Double(info.cpu_usage) / 10
@@ -49,13 +49,13 @@ extension DJCallStack {
       let threadInfoModel = DJThreadInfoModel(thread: thread, cpuUsage: cpuUsage, userTime: userTime)
       rs.append(threadInfoModel.description)
     }
-    
+
     let maxSize: Int32 = 100
     let address = UnsafeMutablePointer<UnsafeMutableRawPointer?>.allocate(capacity: Int(maxSize))
     defer {
       address.deallocate()
     }
-    
+
     let frameCount = getMachFrameCount(from: thread, stack: address, maxSymbolCount: maxSize)
     let frames = UnsafeBufferPointer(start: address, count: frameCount)
     for (idx, frame) in frames.enumerated() {

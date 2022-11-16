@@ -12,7 +12,7 @@ let store = loadDatabase()
 func loadDatabase() -> SQLiteDatabase? {
   let db: SQLiteDatabase?
   do {
-    let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+    let fileURL = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
       .appendingPathComponent("github.sqlite")
     db = try SQLiteDatabase.open(path: fileURL.path)
     print("Successfully opened connection to database.")
@@ -20,7 +20,7 @@ func loadDatabase() -> SQLiteDatabase? {
     print("Unable to open database.")
     db = nil
   }
-  
+
   return db
 }
 
@@ -30,7 +30,7 @@ class ConfigManager: NSObject {
 
   let rssFeedManager = RssFeedManager.shared
   let languageManager = LanguageManager()
-  
+
   static var viewer: UserViewer? {
     return LocalUserManager.getUser()
   }
@@ -42,24 +42,24 @@ class ConfigManager: NSObject {
   static var isLoadedViewer: Bool {
     return !LocalUserManager.getViewerName().isEmpty
   }
-  
+
   override init() {
     super.init()
   }
-  
+
   func load() {
     loadConfig()
   }
-  
-  func loadConfig(completionHandler: ((Config) -> ())? = nil) {
+
+  func loadConfig(completionHandler: ((Config) -> Void)? = nil) {
     ConfigManager.config = loadBundleJSONFile("config")
   }
-  
+
   static func checkOwner(by userName: String) -> Bool {
     if let viewer = viewer {
       return viewer.login == userName
     }
     return userName == config.userName
   }
-  
+
 }

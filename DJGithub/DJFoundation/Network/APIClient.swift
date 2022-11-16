@@ -10,13 +10,13 @@ import Combine
 
 open class APIClient {
   static let shared = APIClient()
-  
+
   lazy var decoder: JSONDecoder = {
     let decoder = JSONDecoder()
     decoder.keyDecodingStrategy = .convertFromSnakeCase
     return decoder
   }()
-  
+
   func data(with urlString: String) async throws -> Data? {
     do {
       guard let url = URL(string: urlString) else { return nil }
@@ -29,7 +29,7 @@ open class APIClient {
     }
     return nil
   }
-  
+
   func data(with router: Router) async throws -> Data {
     guard let request = router.asURLRequest() else { throw DJError.requestError }
     do {
@@ -40,7 +40,7 @@ open class APIClient {
       throw DJError.dataError
     }
   }
-  
+
   func model<T: DJCodable>(with router: Router, decoder: any Parsable = DJJSONParser<T>()) async throws -> T? {
     guard let request = router.asURLRequest() else { throw DJError.requestError }
     do {
@@ -55,7 +55,7 @@ open class APIClient {
       throw DJError.dataError
     }
   }
-  
+
   func data<T: DJCodable>(with urlString: String, decoder: any Parsable = DJJSONParser<T>()) async throws -> T? {
     do {
       guard let url = URL(string: urlString) else { return nil }

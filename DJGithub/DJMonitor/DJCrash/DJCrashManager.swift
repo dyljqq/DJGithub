@@ -13,7 +13,7 @@ enum DJCrashExceptionKey {
   case address
   case signal
   case signalException
-  
+
   var key: String {
     switch self {
     case .address: return "UncaughtExceptionHandlerAddressesKey"
@@ -24,51 +24,65 @@ enum DJCrashExceptionKey {
 }
 
 class DJCrashManager: NSObject {
-  
+
   static let shared = DJCrashManager()
-  
+
   var dismissed: Bool = false
   var lastExceptionHandler: (@convention(c) (NSException) -> Void)?
-  
-  let SignalHandler: @convention(c) (Int32) -> Void = { sig in
+
+  let signalHandler: @convention(c) (Int32) -> Void = { sig in
     var userInfo: [String: Any] = [:]
     userInfo[DJCrashExceptionKey.signal.key] = "\(sig)"
     userInfo[DJCrashExceptionKey.address.key] = DJCrashManager.shared.stackSymbolsStr()
-    
-    let signalException = NSException(name: NSExceptionName(DJCrashExceptionKey.signalException.key), reason: "Signal \(sig) was raised.", userInfo: userInfo)
-    DJCrashManager.shared.performSelector(onMainThread: #selector(handle(with:)), with: signalException, waitUntilDone: true, modes: [RunLoop.Mode.default.rawValue])
+
+    let signalException = NSException(
+      name: NSExceptionName(DJCrashExceptionKey.signalException.key),
+      reason: "Signal \(sig) was raised.",
+      userInfo: userInfo
+    )
+    DJCrashManager.shared.performSelector(
+      onMainThread: #selector(handle(with:)),
+      with: signalException,
+      waitUntilDone: true,
+      modes: [RunLoop.Mode.default.rawValue]
+    )
   }
-  
+
   let myExceptionHandler: (@convention(c) (NSException) -> Void)? = { exception in
     guard var info = exception.userInfo else { return }
     info[DJCrashExceptionKey.address.key] = DJCrashManager.shared.stackSymbolsStr()
     let exception = NSException(name: exception.name, reason: exception.reason, userInfo: info)
-    DJCrashManager.shared.performSelector(onMainThread: #selector(handle(with:)), with: exception, waitUntilDone: true, modes: [RunLoop.Mode.default.rawValue])
+    DJCrashManager.shared.performSelector(
+      onMainThread: #selector(handle(with:)),
+      with: exception,
+      waitUntilDone: true,
+      modes: [RunLoop.Mode.default.rawValue]
+    )
     DJCrashManager.shared.lastExceptionHandler?(exception)
   }
-  
+
   func registerHandler() {
     registerSignalHandler()
     registerExceptionHandler()
   }
-  
+
   func registerSignalHandler() {
-    signal(SIGHUP, SignalHandler)
-    signal(SIGINT, SignalHandler)
-    signal(SIGQUIT, SignalHandler)
-    signal(SIGABRT, SignalHandler)
-    signal(SIGILL, SignalHandler)
-    signal(SIGSEGV, SignalHandler)
-    signal(SIGFPE, SignalHandler)
-    signal(SIGBUS, SignalHandler)
-    signal(SIGPIPE, SignalHandler)
+    signal(SIGHUP, signalHandler)
+    signal(SIGINT, signalHandler)
+    signal(SIGQUIT, signalHandler)
+    signal(SIGABRT, signalHandler)
+    signal(SIGILL, signalHandler)
+    signal(SIGSEGV, signalHandler)
+    signal(SIGFPE, signalHandler)
+    signal(SIGBUS, signalHandler)
+    signal(SIGPIPE, signalHandler)
   }
-  
+
   func registerExceptionHandler() {
     self.lastExceptionHandler = NSGetUncaughtExceptionHandler()
     NSSetUncaughtExceptionHandler(myExceptionHandler)
   }
-  
+
   @objc func handle(with exception: NSException) {
     guard let stack = exception.userInfo?[DJCrashExceptionKey.address.key] as? String else { return }
 
@@ -93,13 +107,13 @@ class DJCrashManager: NSObject {
       exception.raise()
     }
   }
-  
+
   func showCrashToast(with message: String) {
     let vc = UIAlertController(title: "Crash", message: message, preferredStyle: .alert)
-    vc.addAction(UIAlertAction(title: "Continue", style: .default, handler: { action in
-      
+    vc.addAction(UIAlertAction(title: "Continue", style: .default, handler: { _ in
+
     }))
-    vc.addAction(UIAlertAction(title: "Exit", style: .cancel, handler: { action in
+    vc.addAction(UIAlertAction(title: "Exit", style: .cancel, handler: { _ in
       self.dismissed = true
     }))
     let rootVC = UIApplication.shared.keyWindow?.rootViewController
@@ -108,7 +122,7 @@ class DJCrashManager: NSObject {
       selectedVC.topViewController?.present(vc, animated: true)
     }
   }
-  
+
   private func getCurrentVCStackInfo() -> String {
     guard let vc = UIApplication.shared.keyWindow?.rootViewController else { return "" }
     var stackInfo: [String] = [NSStringFromClass(vc.classForCoder)]
@@ -119,7 +133,7 @@ class DJCrashManager: NSObject {
     }
     return stackInfo.joined(separator: "-")
   }
-  
+
   func stackSymbolsStr() -> String? {
     let symbols = Thread.callStackSymbols
     if let data = try? JSONSerialization.data(withJSONObject: symbols) {
@@ -127,29 +141,29 @@ class DJCrashManager: NSObject {
     }
     return nil
   }
-  
+
 }
 
 private var tapClosureKey: UInt8 = 0
 
 fileprivate extension UIView {
-  
-  var tapClosure: ((Bool) -> ())? {
+
+  var tapClosure: ((Bool) -> Void)? {
     get {
-      return objc_getAssociatedObject(self, &tapClosureKey) as? ((Bool) -> ())
+      return objc_getAssociatedObject(self, &tapClosureKey) as? ((Bool) -> Void)
     }
     set {
       objc_setAssociatedObject(self, &tapClosureKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
     }
   }
-  
-  func addTapGesture(_ tapClosure: @escaping (Bool) -> ()) {
+
+  func addTapGesture(_ tapClosure: @escaping (Bool) -> Void) {
     let tap = UITapGestureRecognizer(target: self, action: #selector(tapAction))
     self.isUserInteractionEnabled = true
     self.addGestureRecognizer(tap)
     self.tapClosure = tapClosure
   }
-  
+
   @objc func tapAction(tap: UITapGestureRecognizer) {
     guard let label = tap.view as? UILabel else { return }
     UIPasteboard.general.string = label.text

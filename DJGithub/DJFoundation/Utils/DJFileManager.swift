@@ -8,9 +8,9 @@
 import Foundation
 
 struct DJFileManager {
-  
+
   static let shared = DJFileManager()
-  
+
   func getFile(with fileName: String) -> [String: Any] {
     guard let filePath = Bundle.main.path(forResource: fileName, ofType: "plist") else {
       return [:]
@@ -20,5 +20,5 @@ struct DJFileManager {
     }
     return dict
   }
-  
+
 }

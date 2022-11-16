@@ -10,11 +10,11 @@ import UIKit
 struct RssFeedSimpleCellLayout {
   let titleHeight: CGFloat
   let contentHeight: CGFloat
-  
+
   var totalHeight: CGFloat {
     return titleHeight + contentHeight + 27
   }
-  
+
   init(with title: String, content: String) {
     self.titleHeight = (title as NSString).boundingRect(
       with: CGSize(width: FrameGuide.screenWidth - 24, height: 0),
@@ -30,13 +30,13 @@ struct RssFeedSimpleCellLayout {
 }
 
 class RssFeedSimpleCell: UITableViewCell {
-  
+
   struct RssFeedSimpleModel {
     let title: String
     let content: String
     let unread: Bool
     let readStr: String
-    
+
     init(title: String, content: String, unread: Bool = true, readStr: String = "") {
       self.title = title
       self.content = content
@@ -44,7 +44,7 @@ class RssFeedSimpleCell: UITableViewCell {
       self.readStr = readStr
     }
   }
-  
+
   lazy var titleLabel: UILabel = {
     let label = UILabel()
     label.textColor = .textColor
@@ -52,7 +52,7 @@ class RssFeedSimpleCell: UITableViewCell {
     label.numberOfLines = 0
     return label
   }()
-  
+
   lazy var contentLabel: UILabel = {
     let label = UILabel()
     label.textColor = .textGrayColor
@@ -60,30 +60,30 @@ class RssFeedSimpleCell: UITableViewCell {
     label.numberOfLines = 0
     return label
   }()
-  
+
   lazy var readStrLabel: UILabel = {
     let label = UILabel()
     label.textColor = .textGrayColor
     label.font = UIFont.systemFont(ofSize: 12)
     return label
   }()
-  
+
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
-    
+
     setUp()
   }
-  
+
   func render(with model: RssFeedSimpleModel) {
     titleLabel.text = model.title
     contentLabel.text = model.content
-    
+
     if model.unread {
       titleLabel.textColor = .textColor
     } else {
       titleLabel.textColor = .textGrayColor
     }
-    
+
     if model.readStr.isEmpty {
       readStrLabel.isHidden = true
     } else {
@@ -91,12 +91,12 @@ class RssFeedSimpleCell: UITableViewCell {
       readStrLabel.text = model.readStr
     }
   }
-  
+
   private func setUp() {
     contentView.addSubview(titleLabel)
     contentView.addSubview(contentLabel)
     contentView.addSubview(readStrLabel)
-    
+
     titleLabel.snp.makeConstraints { make in
       make.leading.equalTo(12)
       make.top.equalTo(10)
@@ -112,7 +112,7 @@ class RssFeedSimpleCell: UITableViewCell {
       make.trailing.equalTo(-12)
     }
   }
-  
+
   static func cellHeight(by title: String, content: String) -> CGFloat {
     let titleHeight = (title as NSString).boundingRect(
       with: CGSize(width: FrameGuide.screenWidth - 24, height: 0),
@@ -126,7 +126,7 @@ class RssFeedSimpleCell: UITableViewCell {
       context: nil).height
     return titleHeight + contentHeight + 27
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }

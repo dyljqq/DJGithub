@@ -32,13 +32,13 @@ class RepoBranchCommitUserView: UIView {
     label.font = UIFont.systemFont(ofSize: 12)
     return label
   }()
-  
+
   init() {
     super.init(frame: .zero)
-    
+
     setUp()
   }
-  
+
   func render(with commit: RepoBranchCommitInfo) {
     titleLabel.text = commit.commit.message
     if let committer = commit.committer {
@@ -51,17 +51,17 @@ class RepoBranchCommitUserView: UIView {
       dateLabel.text = commit.commit.committer.date
     }
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   private func setUp() {
     addSubview(titleLabel)
     addSubview(avatarImageView)
     addSubview(nameLabel)
     addSubview(dateLabel)
-    
+
     titleLabel.snp.makeConstraints { make in
       make.leading.equalTo(12)
       make.top.equalTo(10)
