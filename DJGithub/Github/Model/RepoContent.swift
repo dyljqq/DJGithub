@@ -11,7 +11,7 @@ struct RepoContent: DJCodable {
   enum RepoContentType: String, DJCodable {
     case file, dir
   }
-  
+
   var name: String
   var path: String
   var size: Int
@@ -19,15 +19,15 @@ struct RepoContent: DJCodable {
   var content: String?
   var downloadUrl: String?
   var type: RepoContentType
-  
+
   var deepLength: Int = 0
   var isExpanded: Bool = false
   var contents: [RepoContent] = []
-  
+
   enum CodingKeys: String, CodingKey {
     case name, path, size, url, downloadUrl, type, content
   }
-  
+
   var isDir: Bool {
     if case RepoContentType.dir = self.type {
       return true

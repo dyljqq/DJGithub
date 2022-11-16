@@ -7,32 +7,32 @@
 
 import UIKit
 
-fileprivate class IconAndLabelView: UIView {
-  
+private class IconAndLabelView: UIView {
+
   enum ViewType {
     case language(UIColor, String)
     case star(String, String)
     case fork(String, String)
   }
-  
+
   lazy var iconImageView: UIImageView = {
     let imageView = UIImageView()
     return imageView
   }()
-  
+
   lazy var contentLabel: UILabel = {
     let label = UILabel()
     label.textColor = .textColor
     label.font = UIFont.systemFont(ofSize: 12)
     return label
   }()
-  
+
   init() {
     super.init(frame: CGRect.zero)
-    
+
     setUp()
   }
-  
+
   func render(with type: ViewType) {
     if case ViewType.language(let color, let content) = type {
       iconImageView.layer.cornerRadius = 6
@@ -51,11 +51,11 @@ fileprivate class IconAndLabelView: UIView {
       }
     }
   }
-  
+
   func setUp() {
     addSubview(iconImageView)
     addSubview(contentLabel)
-    
+
     iconImageView.snp.makeConstraints { make in
       make.centerY.equalTo(self)
       make.leading.equalTo(0)
@@ -66,16 +66,16 @@ fileprivate class IconAndLabelView: UIView {
       make.centerY.equalTo(iconImageView)
     }
   }
-  
+
   required init?(coder: NSCoder) {
     super.init(coder: coder)
   }
 }
 
 class UserStaredRepoCell: UITableViewCell {
-  
+
   var repo: Repo?
-  
+
   var avatarImageViewTappedClosure: ((String) -> Void)?
 
   lazy var avatarImageView: AvatarImageView = {
@@ -84,14 +84,14 @@ class UserStaredRepoCell: UITableViewCell {
     imageView.layer.cornerRadius = 4
     return imageView
   }()
-  
+
   lazy var repoNameLabel: UILabel = {
     let label = UILabel()
     label.textColor = .blue
     label.font = UIFont.systemFont(ofSize: 14)
     return label
   }()
-  
+
   lazy var descLabel: UILabel = {
     let label = UILabel()
     label.textColor = .textColor
@@ -99,32 +99,32 @@ class UserStaredRepoCell: UITableViewCell {
     label.numberOfLines = 0
     return label
   }()
-  
+
   lazy var updatedAtLabel: UILabel = {
     let label = UILabel()
     label.textColor = .textColor
     label.font = UIFont.systemFont(ofSize: 12)
     return label
   }()
-  
+
   fileprivate lazy var languageView: IconAndLabelView = {
     return IconAndLabelView()
   }()
-  
+
   fileprivate lazy var starView: IconAndLabelView = {
     return IconAndLabelView()
   }()
-  
+
   fileprivate lazy var forkView: IconAndLabelView = {
     return IconAndLabelView()
   }()
-  
+
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
-    
+
     setUp()
   }
-  
+
   func render(with repo: Repo) {
     self.repo = repo
     avatarImageView.render(
@@ -136,13 +136,13 @@ class UserStaredRepoCell: UITableViewCell {
     )
     repoNameLabel.text = repo.fullName
     descLabel.text = repo.desc
-    
+
     if let updatedAt = repo.updatedAt.split(separator: "T").first {
       updatedAtLabel.text = "Updated on \(String(describing: updatedAt))"
     } else {
       updatedAtLabel.text = "Updated on \(repo.updatedAt)"
     }
-    
+
     let color: UIColor
     if let hex = LanguageManager.mapping[repo.language ?? "Unknown"] {
       color = hex.toColor ?? .lightGray
@@ -153,12 +153,12 @@ class UserStaredRepoCell: UITableViewCell {
     starView.render(with: .star("stared", repo.stargazersCount.toGitNum))
     forkView.render(with: .fork("git-branch", repo.forksCount.toGitNum))
   }
-  
+
   class func cellHeight(by repo: Repo) -> CGFloat {
     let descLabelHeight = NSString(string: repo.desc).boundingRect(with: CGSize(width: FrameGuide.screenWidth - 64, height: 0), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)], context: nil).size.height
     return 82 + descLabelHeight
   }
-  
+
   func setUp() {
     contentView.addSubview(avatarImageView)
     contentView.addSubview(repoNameLabel)
@@ -167,7 +167,7 @@ class UserStaredRepoCell: UITableViewCell {
     contentView.addSubview(languageView)
     contentView.addSubview(starView)
     contentView.addSubview(forkView)
-    
+
     avatarImageView.snp.makeConstraints { make in
       make.leading.equalTo(12)
       make.top.equalTo(10)
@@ -204,9 +204,9 @@ class UserStaredRepoCell: UITableViewCell {
       make.leading.equalTo(starView.snp.trailing).offset(40)
     }
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
 }

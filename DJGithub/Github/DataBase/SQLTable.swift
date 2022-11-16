@@ -12,7 +12,7 @@ enum FieldType {
   case text
   case bigint
   case unknown
-  
+
   var name: String? {
     switch self {
     case .int: return "INTEGER"
@@ -36,11 +36,11 @@ protocol SQLTable {
 let serialQueue = DispatchQueue(label: "com.dyljqq.dbmanager")
 
 extension SQLTable {
-  
+
   static var needFieldId: Bool {
     return true
   }
-  
+
   static var selectedFields: [String] {
     var fs: [String] = []
     if needFieldId {
@@ -49,14 +49,14 @@ extension SQLTable {
     fs.append(contentsOf: fields)
     return fs
   }
-  
+
   static var uniqueKeys: [String] {
     return []
   }
-  
+
   static var tableSql: String {
     var rs: [String] = needFieldId ? ["id INTEGER PRIMARY KEY AUTOINCREMENT not null"] : []
-    
+
     for field in Self.fields {
       if needFieldId && field == "id" {
         continue
@@ -64,22 +64,22 @@ extension SQLTable {
       guard let typ = Self.fieldsTypeMapping[field], let name = typ.name else { continue }
       rs.append("\(field) \(name)")
     }
-    
+
     for uk in uniqueKeys {
       rs.append("UNIQUE(\(uk))")
     }
-    
+
     return "CREATE TABLE IF NOT EXISTS \(Self.tableName)(\(rs.joined(separator: ",")))"
   }
-  
+
   var fieldsValueMapping: [String: Any] {
     return [:]
   }
-  
+
   static var insertSql: String {
     return "insert into \(tableName)(\(fields.joined(separator: ","))) values(\(fields.compactMap { _ in  "?" }.joined(separator: ",")));"
   }
-  
+
   static func select<T: DJCodable>(with condition: String? = nil) -> [T] {
     serialQueue.sync {
       var sql = "select \(Self.selectedFields.joined(separator: ",")) from \(Self.tableName)"
@@ -93,11 +93,11 @@ extension SQLTable {
       return []
     }
   }
-  
+
   static func selectAll<T: DJCodable>() -> [T] {
     return Self.select()
   }
-  
+
   static func addNewFields(with dict: [String: Any]) {
     for key in dict.keys {
       do {
@@ -108,13 +108,13 @@ extension SQLTable {
     }
     updateNewFields(with: dict)
   }
-  
+
   static func updateNewFields(with dict: [String: Any]) {
     let s = dict.map { "\($0)=\($1)" }.joined(separator: ", ")
     let sql = "update \(Self.tableName) set \(s);"
     try? update(with: sql)
   }
-  
+
   static func get<T: DJCodable>(by id: Int) -> T? {
     let condition = " where id = \(id)"
     return Self.select(with: condition).first

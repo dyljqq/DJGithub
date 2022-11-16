@@ -9,23 +9,23 @@ import UIKit
 import SafariServices
 
 class RepoPullRequestViewController: UIViewController {
-  
+
   enum CellType {
     case commits
     case files
     case blank
   }
-  
+
   struct SectionInfo {
     let title: String
     var height: CGFloat = 0
     var attr: NSAttributedString?
-    
+
     init(with title: String) {
       self.title = title
       self.height = calHeight()
     }
-    
+
     func calHeight() -> CGFloat {
       let height = (self.title as NSString).boundingRect(
         with: CGSize(width: FrameGuide.screenWidth - 24, height: 0),
@@ -35,7 +35,7 @@ class RepoPullRequestViewController: UIViewController {
       ).size.height
       return height + 20
     }
-    
+
     mutating func update(height: CGFloat) {
       self.height = height
     }
@@ -44,27 +44,27 @@ class RepoPullRequestViewController: UIViewController {
   let userName: String
   let repoName: String
   let pullNum: Int
-  
+
   var pullInfo: RepoPull?
   var commitsSectionInfo: SectionInfo?
   var filesSectionInfo: SectionInfo?
-  
+
   var dataSource: [CellType] = [.blank, .commits, .blank, .files]
   var commits: [RepoBranchCommitInfo] = []
   var files: [RepoPullFile] = []
-  
+
   var canMerge: Bool = false {
     didSet {
       self.mergeButton.isHidden = !canMerge
     }
   }
-  
+
   lazy var headerView: RepoPullRequestHeaderView = {
     let view = RepoPullRequestHeaderView()
     view.backgroundColor = .white
     return view
   }()
-  
+
   lazy var tableView: UITableView = {
     let tableView = UITableView()
     tableView.tableHeaderView = headerView
@@ -79,7 +79,7 @@ class RepoPullRequestViewController: UIViewController {
     tableView.register(RepoBranchCommitFileCell.classForCoder(), forCellReuseIdentifier: RepoBranchCommitFileCell.className)
     return tableView
   }()
-  
+
   lazy var mergeButton: UIButton = {
     let button = UIButton()
     button.backgroundColor = UIColor(red: 66.0 / 255, green: 150.0 / 255, blue: 77.0 / 255, alpha: 1)
@@ -91,7 +91,7 @@ class RepoPullRequestViewController: UIViewController {
     button.addTarget(self, action: #selector(mergeAction), for: .touchUpInside)
     return button
   }()
-  
+
   lazy var closeButton: UIButton = {
     let button = UIButton(frame: CGRect(x: 0, y: 0, width: 70, height: 30))
     button.backgroundColor = UIColor(red: 189.0 / 255, green: 49.0 / 255, blue: 46.0 / 255, alpha: 1)
@@ -103,37 +103,37 @@ class RepoPullRequestViewController: UIViewController {
     button.layer.masksToBounds = true
     return button
   }()
-  
+
   init(userName: String, repoName: String, pullNum: Int) {
     self.userName = userName
     self.repoName = repoName
     self.pullNum = pullNum
     super.init(nibName: nil, bundle: nil)
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
     setUp()
   }
-  
+
   @objc func mergeAction() {
     Task {
       let canMerge = await RepoManager.repoCanMerge(with: userName, repoName: repoName, pullNum: pullNum)
       guard canMerge else {
         let vc = UIAlertController(title: "Hint", message: "This pull request has been merged.", preferredStyle: .alert)
-        vc.addAction(UIAlertAction(title: "sure", style: .default, handler: { [weak self] action in
+        vc.addAction(UIAlertAction(title: "sure", style: .default, handler: { [weak self] _ in
           self?.dismiss(animated: true)
         }))
         vc.addAction(UIAlertAction(title: "cancel", style: .cancel))
         self.present(vc, animated: true)
         return
       }
-      
+
       let vc = TitleAndDescViewController(with: .mergePullRequest(userName: userName, repoName: repoName, pullNum: pullNum))
       vc.completionHandler = { [weak self] in
         guard let strongSelf = self else { return }
@@ -142,12 +142,12 @@ class RepoPullRequestViewController: UIViewController {
       self.present(vc, animated: true)
     }
   }
-  
+
   private func setUp() {
     self.navigationItem.title = "Pull request #\(pullNum)"
     view.addSubview(tableView)
     view.addSubview(mergeButton)
-    
+
     tableView.snp.makeConstraints { make in
       make.edges.equalToSuperview()
     }
@@ -157,7 +157,7 @@ class RepoPullRequestViewController: UIViewController {
       make.height.equalTo(44)
       make.bottom.equalTo(-60)
     }
-    
+
     loadData()
   }
 
@@ -169,7 +169,7 @@ class RepoPullRequestViewController: UIViewController {
       }
     }
   }
-  
+
   private func loadData() {
     Task {
       await withThrowingTaskGroup(of: Void.self) { [weak self] group in
@@ -189,12 +189,12 @@ class RepoPullRequestViewController: UIViewController {
       }
     }
   }
-  
+
   private func fetchPullInfo() {
     Task {
-      if let info = await RepoManager.getPullRequest(with:userName, repoName:repoName, pullNum:pullNum) {
+      if let info = await RepoManager.getPullRequest(with: userName, repoName: repoName, pullNum: pullNum) {
         self.pullInfo = info
-        
+
         switch info.state {
         case .open:
           self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: closeButton)
@@ -202,7 +202,7 @@ class RepoPullRequestViewController: UIViewController {
         case .closed:
           self.mergeButton.isHidden = true
         }
-        
+
         let dateString: String
         if let d = info.updatedAt.components(separatedBy: "T").first {
           dateString = d
@@ -210,7 +210,7 @@ class RepoPullRequestViewController: UIViewController {
           dateString = info.updatedAt
         }
         self.commitsSectionInfo = SectionInfo(with: "Commits on \(dateString)")
-        
+
         let text = "Showing \(info.changedFiles) changed files with \(info.additions) additions and \(info.deletions) deletions"
         self.filesSectionInfo = SectionInfo(with: text)
         let attr = NSMutableAttributedString(string: self.filesSectionInfo!.title)
@@ -228,7 +228,7 @@ class RepoPullRequestViewController: UIViewController {
           attr.addAttribute(.font, value: UIFont.systemFont(ofSize: 14), range: range)
         }
         self.filesSectionInfo?.attr = attr
-        
+
         headerView.frame = CGRect(x: 0, y: 0, width: FrameGuide.screenWidth, height: headerView.calHeight(with: info))
         headerView.render(with: info)
         tableView.reloadData()
@@ -237,21 +237,21 @@ class RepoPullRequestViewController: UIViewController {
       }
     }
   }
-  
+
   private func fetchRepoPullCommits() {
     Task {
       self.commits = await RepoManager.fetchRepoPullCommits(with: userName, repoName: repoName, pullNum: pullNum)
       self.tableView.reloadData()
     }
   }
-  
+
   private func fetchRepoPullFiles() {
     Task {
       self.files = await RepoManager.fetchRepoPullFiles(with: userName, repoName: repoName, pullNum: pullNum)
       self.tableView.reloadData()
     }
   }
-  
+
   private func checkMergeStatus() {
     Task {
       self.canMerge = await RepoManager.repoCanMerge(with: userName, repoName: repoName, pullNum: pullNum)
@@ -264,11 +264,11 @@ extension RepoPullRequestViewController: UITableViewDelegate, UITableViewDataSou
   func numberOfSections(in tableView: UITableView) -> Int {
     return dataSource.count
   }
-  
+
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     let view = UIView(frame: CGRect(x: 0, y: 0, width: FrameGuide.screenWidth, height: commitsSectionInfo?.height ?? 30))
     view.backgroundColor = .white
-    
+
     let lineView = UIView()
     lineView.backgroundColor = UIColorFromRGB(0xeeeeee)
     view.addSubview(lineView)
@@ -278,7 +278,7 @@ extension RepoPullRequestViewController: UITableViewDelegate, UITableViewDataSou
     titleLabel.textColor = .textColor
     titleLabel.numberOfLines = 0
     view.addSubview(titleLabel)
-    
+
     titleLabel.snp.makeConstraints { make in
       make.leading.equalTo(12)
       make.trailing.equalTo(-12)
@@ -290,7 +290,7 @@ extension RepoPullRequestViewController: UITableViewDelegate, UITableViewDataSou
       make.height.equalTo(0.5)
       make.trailing.equalToSuperview()
     }
-    
+
     switch dataSource[section] {
     case .commits: titleLabel.text = commitsSectionInfo?.title
     case .files:
@@ -298,10 +298,10 @@ extension RepoPullRequestViewController: UITableViewDelegate, UITableViewDataSou
       titleLabel.attributedText = filesSectionInfo?.attr
     case .blank: return nil
     }
-      
+
     return view
   }
-  
+
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     let type = dataSource[section]
     switch type {
@@ -310,11 +310,11 @@ extension RepoPullRequestViewController: UITableViewDelegate, UITableViewDataSou
     case .files: return filesSectionInfo?.height ?? 0
     }
   }
-  
+
   func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
     return 0.1
   }
-  
+
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     switch dataSource[section] {
     case .commits: return commits.count
@@ -322,7 +322,7 @@ extension RepoPullRequestViewController: UITableViewDelegate, UITableViewDataSou
     case .blank: return 1
     }
   }
-  
+
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     let type = dataSource[indexPath.section]
     switch type {
@@ -331,7 +331,7 @@ extension RepoPullRequestViewController: UITableViewDelegate, UITableViewDataSou
     case .blank: return 10
     }
   }
-  
+
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let type = dataSource[indexPath.section]
     switch type {
@@ -351,12 +351,12 @@ extension RepoPullRequestViewController: UITableViewDelegate, UITableViewDataSou
       return cell
     }
   }
-  
+
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
-    
+
     guard let info = pullInfo else { return }
-    
+
     switch dataSource[indexPath.section] {
     case .commits:
       let urlString = "https://api.github.com/repos/\(userName)/\(repoName)/commits/\(info.head.sha)"
@@ -374,7 +374,7 @@ extension RepoPullRequestViewController: UITableViewDelegate, UITableViewDataSou
 }
 
 class RepoPullRequestHeaderView: UIView {
-  
+
   lazy var titleLabel: UILabel = {
     let label = UILabel()
     label.textColor = .lightBlue
@@ -382,21 +382,21 @@ class RepoPullRequestHeaderView: UIView {
     label.numberOfLines = 0
     return label
   }()
-  
+
   lazy var avatarImageView: UIImageView = {
     let imageView = UIImageView()
     imageView.layer.cornerRadius = 10
     imageView.layer.masksToBounds = true
     return imageView
   }()
-  
+
   lazy var commentLabel: UILabel = {
     let label = UILabel()
     label.font = UIFont.systemFont(ofSize: 14)
     label.textColor = .textColor
     return label
   }()
-  
+
   lazy var descLabel: UILabel = {
     let label = UILabel()
     label.textColor = .textColor
@@ -404,7 +404,7 @@ class RepoPullRequestHeaderView: UIView {
     label.numberOfLines = 0
     return label
   }()
-  
+
   lazy var mergeStateView: UIButton = {
     let button = UIButton()
     let image = UIImage(named: "git-merge")?.withRenderingMode(.alwaysTemplate)
@@ -426,19 +426,19 @@ class RepoPullRequestHeaderView: UIView {
     button.isHidden = true
     return button
   }()
-  
+
   lazy var mergedLabel: UILabel = {
     let label = UILabel()
     label.textColor = .textColor
     label.font = UIFont.systemFont(ofSize: 14, weight: .bold)
     return label
   }()
-  
+
   init() {
     super.init(frame: .zero)
     setUp()
   }
-  
+
   func render(with model: RepoPull) {
     titleLabel.text = model.title
     avatarImageView.setImage(with: model.user.avatarUrl)
@@ -453,7 +453,7 @@ class RepoPullRequestHeaderView: UIView {
     } else {
       descLabel.isHidden = true
     }
-    
+
     if let merged = model.mergedBy {
       self.mergedLabel.text = "Merged by \(merged.login)"
       self.mergedLabel.textColor = .textColor
@@ -484,11 +484,11 @@ class RepoPullRequestHeaderView: UIView {
       }
     }
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   private func setUp() {
     addSubview(titleLabel)
     addSubview(avatarImageView)
@@ -496,7 +496,7 @@ class RepoPullRequestHeaderView: UIView {
     addSubview(commentLabel)
     addSubview(mergeStateView)
     addSubview(mergedLabel)
-    
+
     titleLabel.snp.makeConstraints { make in
       make.leading.equalTo(12)
       make.top.equalTo(10)
@@ -529,7 +529,7 @@ class RepoPullRequestHeaderView: UIView {
       make.trailing.equalTo(commentLabel)
     }
   }
-  
+
 }
 
 extension RepoPullRequestHeaderView {
@@ -540,7 +540,7 @@ extension RepoPullRequestHeaderView {
       attributes: [.font: titleLabel.font ?? UIFont.systemFont(ofSize: 16)],
       context: nil
     ).size.height
-    
+
     var height = titleHeight
     let bodyHeight: CGFloat
     if let body = model.body, !body.isEmpty {

@@ -16,16 +16,16 @@ struct UserFollowing: DJCodable {
   var login: String
   var url: String
   var avatarUrl: String
-  
+
   var followingStatus: UserFollowingStatus = .unknown
-  
+
   enum CodingKeys: String, CodingKey {
     case id, login, url, avatarUrl
   }
 }
 
 struct UserManager {
-  
+
   /**
    "avatar_url" = "https://avatars.githubusercontent.com/u/2971?v=4";
    "events_url" = "https://api.github.com/users/rentzsch/events{/privacy}";
@@ -51,30 +51,30 @@ struct UserManager {
     let userFollowings = try? await APIClient.shared.model(with: router) as [UserFollowing]?
     return userFollowings ?? []
   }
-  
+
   static func getUserFollowers(with userName: String, page: Int = 1) async -> [UserFollowing] {
     let router = GithubRouter.userFollowers(userName, ["page": "\(page)"])
     let userFollowers = try? await APIClient.shared.model(with: router) as [UserFollowing]?
     return userFollowers ?? []
   }
-  
+
   static func getUserSubscription(with userName: String, page: Int = 1) async -> [Repo] {
     let router = GithubRouter.userSubscription(userName, ["page": "\(page)"])
     let repos = try? await APIClient.shared.model(with: router) as [Repo]?
     return repos ?? []
   }
-  
+
   static func followUser(with userName: String) async -> StatusModel? {
     let router = GithubRouter.followUser(userName)
     let status = try? await APIClient.shared.model(with: router) as StatusModel?
-    
+
     // sync follow status
     if let status = status, status.isStatus204 {
       await UserFollowingManager.shared.update(with: userName, following: true)
     }
     return status
   }
-  
+
   static func unFollowUser(with userName: String) async -> StatusModel? {
     let router = GithubRouter.unfollowUser(userName)
     let status: StatusModel? = try? await APIClient.shared.model(with: router) as StatusModel?
@@ -83,13 +83,13 @@ struct UserManager {
     }
     return status
   }
-  
+
   static func checkFollowStatus(with userName: String) async -> StatusModel? {
     let router = GithubRouter.checkFollowStatus(userName)
     return try? await APIClient.shared.model(with: router)
   }
-  
-  static func loadLocalDevelopers(completionHandler: @escaping ([LocalDeveloperGroup]) -> ()) {
+
+  static func loadLocalDevelopers(completionHandler: @escaping ([LocalDeveloperGroup]) -> Void) {
     DispatchQueue.global().async {
       let rs: [LocalDeveloperGroup] = loadBundleJSONFile("developers.json")
       DispatchQueue.main.async {
@@ -97,7 +97,7 @@ struct UserManager {
       }
     }
   }
-  
+
   static func loadLocalDevelopersAsync() async throws -> [LocalDeveloperGroup] {
     try await withCheckedThrowingContinuation { continuation in
       loadLocalDevelopers { groups in
@@ -105,16 +105,16 @@ struct UserManager {
       }
     }
   }
-  
+
   static func fetch(by router: GithubRouter) async -> [UserFollowing] {
     return (try? await APIClient.shared.model(with: router) as [UserFollowing]?) ?? []
   }
-  
+
   static func getUser(with name: String) async -> User? {
     let router = GithubRouter.userInfo(name)
     return try? await APIClient.shared.model(with: router)
   }
-  
+
   static func fetchUserContributions(with name: String) async -> UserContribution? {
     let query = """
 query {
@@ -154,12 +154,12 @@ user(login: "\(name)") {
     }
     return nil
   }
-  
+
   static func editUserInfo(with params: [String: String]) async -> User? {
     let router = GithubRouter.userInfoEdit(params: params)
     return try? await APIClient.shared.model(with: router)
   }
-  
+
   static func fetchUserInfo(by userName: String? = nil) async -> UserViewer? {
     guard let viewer = await fetchUserDict(by: userName) else { return nil }
 
@@ -176,7 +176,7 @@ user(login: "\(name)") {
     }
     return nil
   }
-  
+
   static func fetchOrganizationInfo(by name: String) async -> Organization? {
     guard let dict = await fetchUserDict(by: name, typeName: "organization") else { return nil }
     do {
@@ -186,7 +186,7 @@ user(login: "\(name)") {
     }
     return nil
   }
-  
+
   static func fetchUserDict(by userName: String? = nil, typeName: String = "User") async -> [String: Any]? {
     let query: String
     let key: String

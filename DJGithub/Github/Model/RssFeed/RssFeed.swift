@@ -12,34 +12,34 @@ struct RssFeedInfo: DJCodable {
   var updated: String
   var link: String
   var entries: [RssFeed]
-  
+
   var lastBuildDate: String?
   var item: [RssFeed]?
   var entry: [RssFeed]?
-  
+
   init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.title = try container.decode(String.self, forKey: .title)
-    
+
     var dateString = ""
     if let updated = try? container.decode(String.self, forKey: .updated) {
       dateString = updated
     } else if let updated = try? container.decode(String.self, forKey: .lastBuildDate) {
       dateString = updated
     }
-    
+
     if !dateString.isEmpty, let date = DateHelper.standard.dateFromRFC822String(dateString) {
       self.updated = DateHelper.standard.dateToString(date)
     } else {
       self.updated = dateString
     }
-    
+
     if let link = try? container.decode(String.self, forKey: .link) {
       self.link = link
     } else {
       self.link = ""
     }
-    
+
     if let entries = try? container.decode([RssFeed].self, forKey: .entry) {
       self.entries = entries
     } else if let entries = try? container.decode([RssFeed].self, forKey: .item) {
@@ -60,7 +60,7 @@ struct RssFeed: DJCodable {
   var updated: String
   var content: String
   var link: String
-  
+
   var contentEncoded: String?
   var description: String?
   var pubDate: String?
@@ -68,42 +68,42 @@ struct RssFeed: DJCodable {
 
   var atomId: Int
   var feedLink: String?
-  
+
   var unread: Bool {
     if let v = RssFeedManager.shared.feedReadMapping[self.id], v {
       return false
     }
     return true
   }
-  
+
   enum CodingKeys: String, CodingKey {
     case id, title, updated, content, link, feedLink, pubDate,
          contentEncoded = "content:encoded", description, atomId, summary
   }
-  
+
   init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.title = try container.decode(String.self, forKey: .title)
-    
+
     var dateString = ""
     if let updated = try? container.decode(String.self, forKey: .updated) {
       dateString = updated
     } else if let pubDate = try? container.decode(String.self, forKey: .pubDate) {
       dateString = pubDate
     }
-    
+
     if !dateString.isEmpty, let date = DateHelper.standard.dateFromRFC822String(dateString) {
       self.updated = DateHelper.standard.dateToString(date)
     } else {
       self.updated = dateString
     }
-    
+
     if let link = try? container.decode(String.self, forKey: .link) {
       self.link = link
     } else {
       self.link = ""
     }
-    
+
     if let content = try? container.decode(String.self, forKey: .content) {
       self.content = content
     } else if let content = try? container.decode(String.self, forKey: .contentEncoded) {
@@ -129,14 +129,14 @@ extension RssFeed: SQLTable {
   static var tableName: String {
     return "rss_feed"
   }
-  
+
   static var fields: [String] {
     return [
       "title", "updated", "content", "link", "feed_link", "atom_id"
     ]
   }
-  
-  static var fieldsTypeMapping: [String : FieldType] {
+
+  static var fieldsTypeMapping: [String: FieldType] {
     return [
       "title": .text,
       "updated": .text,
@@ -147,14 +147,14 @@ extension RssFeed: SQLTable {
       "atom_id": .int
     ]
   }
-  
+
   static var selectedFields: [String] {
     return [
       "id", "title", "updated", "content", "link", "feed_link", "atom_id"
     ]
   }
-  
-  var fieldsValueMapping: [String : Any] {
+
+  var fieldsValueMapping: [String: Any] {
     return [
       "id": self.id,
       "title": self.title,
@@ -165,7 +165,7 @@ extension RssFeed: SQLTable {
       "atom_id": self.atomId
     ]
   }
-  
+
   func update(with rssFeed: RssFeed) {
     guard self.id > 0 else { return }
     let title = rssFeed.title.replacingOccurrences(of: "\"", with: "'")
@@ -177,7 +177,7 @@ extension RssFeed: SQLTable {
       print("update rss feed error: \(error)")
     }
   }
-  
+
 }
 extension RssFeed {
   func updateReadStatus() async {

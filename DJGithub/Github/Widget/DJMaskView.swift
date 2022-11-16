@@ -12,17 +12,17 @@ struct DJMaskContentConfig {
     case origin(CGPoint)
     case center
   }
-  
+
   let view: UIView
   let size: CGSize
   let postion: Position
-  
+
   init(view: UIView, size: CGSize, postion: Position = .center) {
     self.view = view
     self.size = size
     self.postion = postion
   }
-  
+
   func render(with branches: [RepoBranch], title: String) {
     if let view = view as? RepoBranchListView {
       view.render(with: branches, title: title)
@@ -31,28 +31,28 @@ struct DJMaskContentConfig {
 }
 
 class DJMaskView: UIView {
-  
+
   let contentModel: DJMaskContentConfig
-  
+
   @discardableResult
   class func show(with contentModel: DJMaskContentConfig) -> DJMaskView? {
     guard let window = UIApplication.shared.keyWindow else { return nil }
     let maskView = DJMaskView(with: contentModel)
     window.addSubview(maskView)
-    
+
     maskView.snp.makeConstraints { make in
       make.edges.equalToSuperview()
     }
     return maskView
   }
-  
+
   init(with contentModel: DJMaskContentConfig) {
     self.contentModel = contentModel
     super.init(frame: .zero)
-    
+
     setUp()
   }
-  
+
   private func setUp() {
     backgroundColor = UIColor.black.withAlphaComponent(0.3)
     addSubview(contentModel.view)
@@ -69,7 +69,7 @@ class DJMaskView: UIView {
       }
     }
   }
-  
+
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     guard var point = touches.first?.location(in: self) else { return }
     point = contentModel.view.convert(point, from: self)
@@ -77,16 +77,16 @@ class DJMaskView: UIView {
       hide()
     }
   }
-  
-  func hide(completionHandler: (() -> ())? = nil) {
+
+  func hide(completionHandler: (() -> Void)? = nil) {
     UIView.animate(withDuration: 0.3, animations: {
       self.alpha = 0
-    }, completion: { stop in
+    }, completion: { _ in
       self.removeFromSuperview()
       completionHandler?()
     })
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }

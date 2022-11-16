@@ -8,17 +8,17 @@
 import UIKit
 
 class CommitView: UIView {
-  
+
   let content: String
-  
-  var commitClosure: (() -> ())?
-  
+
+  var commitClosure: (() -> Void)?
+
   var isLoading: Bool = false {
     didSet {
       update(with: isLoading)
     }
   }
-  
+
   var indicatorView = UIActivityIndicatorView(style: .medium)
   lazy var contentLabel: UILabel = {
     let label = UILabel()
@@ -27,14 +27,14 @@ class CommitView: UIView {
     label.text = content
     return label
   }()
-  
+
   init(with content: String) {
     self.content = content
     super.init(frame: .zero)
-    
+
     setUp()
   }
-  
+
   private func update(with isLoading: Bool) {
     if isLoading {
       self.indicatorView.isHidden = false
@@ -48,7 +48,7 @@ class CommitView: UIView {
       self.isUserInteractionEnabled = true
     }
   }
-  
+
   private func setUp() {
     self.backgroundColor = .lightBlue
     self.layer.cornerRadius = 5
@@ -56,23 +56,23 @@ class CommitView: UIView {
 
     addSubview(indicatorView)
     addSubview(contentLabel)
-    
+
     indicatorView.snp.makeConstraints { make in
       make.center.equalTo(self)
     }
     contentLabel.snp.makeConstraints { make in
       make.center.equalTo(self)
     }
-    
+
     let tap = UITapGestureRecognizer(target: self, action: #selector(commitAction))
     self.addGestureRecognizer(tap)
     self.isUserInteractionEnabled = true
   }
-  
+
   @objc func commitAction() {
     commitClosure?()
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }

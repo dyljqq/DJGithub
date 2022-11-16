@@ -8,14 +8,14 @@
 import UIKit
 
 class UserInfoCell: UITableViewCell {
-  
+
   lazy var nameLabel: UILabel = {
     let label = UILabel()
     label.textColor = .textGrayColor
     label.font = UIFont.systemFont(ofSize: 14)
     return label
   }()
-  
+
   lazy var contentLabel: UILabel = {
     let label = UILabel()
     label.textColor = .textColor
@@ -23,18 +23,18 @@ class UserInfoCell: UITableViewCell {
     label.textAlignment = .left
     return label
   }()
-  
+
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
-    
+
     setUp()
   }
-  
+
   func render(with name: String, content: String?) {
     self.nameLabel.text = "\(name):"
     self.contentLabel.text = content
   }
-  
+
   private func setUp() {
     contentView.addSubview(nameLabel)
     contentView.addSubview(contentLabel)
@@ -49,9 +49,9 @@ class UserInfoCell: UITableViewCell {
       make.centerY.equalTo(nameLabel)
     }
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
 }

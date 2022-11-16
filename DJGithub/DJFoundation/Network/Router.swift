@@ -27,15 +27,15 @@ extension Router {
   var method: HTTPMethod {
     return .GET
   }
-  
+
   var headers: [String: String] {
     return [:]
   }
-  
+
   var path: String {
     return ""
   }
-  
+
   var urlString: String {
     guard let request = self.asURLRequest(), var str = request.url?.absoluteString else {
       return ""
@@ -45,7 +45,7 @@ extension Router {
     }
     return str
   }
-  
+
   func configURLRequest(with queryItems: [String: String]? = nil) -> URLRequest? {
     guard var url = try? baseURLString.asURL().appendingPathComponent(path.toValidPath) else {
         return nil
@@ -59,11 +59,11 @@ extension Router {
     request.timeoutInterval = TimeInterval(10 * 1000)
     return request
   }
-  
+
   func asURLRequest() -> URLRequest? {
     return configURLRequest()
   }
-  
+
   func printDebugInfo(with error: Error, other message: String? = nil) {
     print("debug info:")
     print("url: \(self.urlString)")

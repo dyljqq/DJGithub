@@ -8,51 +8,51 @@
 import UIKit
 
 class SimpleUserCell: UITableViewCell {
-  
-  var avatarClosure: (() -> ())?
-  var followClosure: (() -> ())?
-  
+
+  var avatarClosure: (() -> Void)?
+  var followClosure: (() -> Void)?
+
   lazy var avatarImageView: UIImageView = {
     let imageView = UIImageView()
     imageView.layer.cornerRadius = 5
     imageView.layer.masksToBounds = true
-    
+
     let tap = UITapGestureRecognizer(target: self, action: #selector(avatarTapped))
     imageView.isUserInteractionEnabled = true
     imageView.addGestureRecognizer(tap)
-    
+
     return imageView
   }()
-  
+
   lazy var loginLabel: UILabel = {
     let label = UILabel()
     label.textColor = .textColor
     label.font = UIFont.systemFont(ofSize: 14)
     return label
   }()
-  
+
   lazy var urlLabel: UILabel = {
     let label = UILabel()
     label.textColor = .textGrayColor
     label.font = UIFont.systemFont(ofSize: 12)
     return label
   }()
-  
+
   lazy var followingView: FollowUserStatusView = {
     let view = FollowUserStatusView()
     return view
   }()
-  
+
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     setUp()
   }
-  
+
   func render(with user: UserFollowing) {
     avatarImageView.setImage(with: URL(string: user.avatarUrl))
     loginLabel.text = user.login
     urlLabel.text = user.url
-    
+
     if !ConfigManager.checkOwner(by: user.login) {
       self.followingView.isHidden = false
       self.followingView.render(with: user.login)
@@ -60,15 +60,15 @@ class SimpleUserCell: UITableViewCell {
       self.followingView.isHidden = true
     }
   }
-  
+
   private func setUp() {
     contentView.backgroundColor = .white
-    
+
     contentView.addSubview(avatarImageView)
     contentView.addSubview(loginLabel)
     contentView.addSubview(urlLabel)
     contentView.addSubview(followingView)
-    
+
     avatarImageView.snp.makeConstraints { make in
       make.centerY.equalTo(contentView)
       make.leading.equalTo(12)
@@ -89,16 +89,16 @@ class SimpleUserCell: UITableViewCell {
       make.width.equalTo(70)
       make.height.equalTo(30)
     }
-    
+
     followingView.touchClosure = { [weak self] in
       self?.followClosure?()
     }
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   @objc func avatarTapped() {
     avatarClosure?()
   }

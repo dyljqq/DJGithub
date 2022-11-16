@@ -8,22 +8,22 @@
 import UIKit
 
 class DJLeakSniffer {
-  
+
   static let shared = DJLeakSniffer()
-  
+
   private var timer: Timer?
-  
+
   init() {
     NotificationCenter.default.addObserver(forName: .snifferPong, object: nil, queue: .main, using: { [weak self] noti in
       self?.detectPong(with: noti)
     })
   }
-  
+
   func install() {
     NSObject.prepareForSniffer()
     self.startPing()
   }
-  
+
   private func startPing() {
     if !Thread.isMainThread {
       DispatchQueue.main.async {
@@ -31,18 +31,18 @@ class DJLeakSniffer {
       }
       return
     }
-    
+
     if timer != nil {
       return
     }
-    
+
     self.timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true, block: { _ in
       DispatchQueue.main.async {
         NotificationCenter.default.post(name: .snifferPing, object: nil)
       }
     })
   }
-  
+
   private func detectPong(with noti: Notification) {
     print("-------------")
     let leakObject = noti.object
@@ -61,5 +61,5 @@ class DJLeakSniffer {
     }
     print("-------------")
   }
-  
+
 }

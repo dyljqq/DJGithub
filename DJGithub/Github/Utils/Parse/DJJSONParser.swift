@@ -8,14 +8,14 @@
 import Foundation
 
 class DJJSONParser<T: DJCodable>: JSONDecoder, Parsable {
-  
+
   typealias DataType = T
-  
+
   override init() {
     super.init()
     self.keyDecodingStrategy = .convertFromSnakeCase
   }
-  
+
   func parse(with data: Data?) async throws -> T? {
     guard let data = data else { return nil }
     do {

@@ -8,9 +8,9 @@
 import UIKit
 
 class DevelopersViewController: UIViewController {
-  
+
   var isSelectedSegment = false
-  
+
   lazy var segmentView: UISegmentedControl = {
     let segment = UISegmentedControl(items: ["Repos", "Feeds", "Developers"])
     segment.selectedSegmentIndex = 0
@@ -18,7 +18,7 @@ class DevelopersViewController: UIViewController {
     segment.addTarget(self, action: #selector(segmentSelectAction), for: .valueChanged)
     return segment
   }()
-  
+
   lazy var scrollView: UIScrollView = {
     let scrollView = UIScrollView()
     scrollView.delegate = self
@@ -28,30 +28,35 @@ class DevelopersViewController: UIViewController {
     scrollView.isPagingEnabled = true
     return scrollView
   }()
-  
+
   lazy var vcs: [UIViewController] =  {
     return [
       LocalDevelopersViewController(with: .repo),
       FeedsViewController(),
-      LocalDevelopersViewController(with: .developer),
+      LocalDevelopersViewController(with: .developer)
     ]
   }()
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
     view.backgroundColor = .backgroundColor
     self.navigationItem.titleView = segmentView
-    
+
     view.addSubview(scrollView)
-    scrollView.frame = CGRect(x: 0, y: FrameGuide.navigationBarAndStatusBarHeight, width: FrameGuide.screenWidth, height: FrameGuide.screenHeight - FrameGuide.navigationBarAndStatusBarHeight - FrameGuide.tabbarHeight)
-    
+    scrollView.frame = CGRect(
+      x: 0,
+      y: FrameGuide.navigationBarAndStatusBarHeight,
+      width: FrameGuide.screenWidth,
+      height: FrameGuide.screenHeight - FrameGuide.navigationBarAndStatusBarHeight - FrameGuide.tabbarHeight
+    )
+
     for (_, vc) in vcs.enumerated() {
       addChild(vc)
       scrollView.addSubview(vc.view)
     }
   }
-  
+
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     scrollView.contentSize = CGSize(width: FrameGuide.screenWidth * CGFloat(vcs.count), height: scrollView.bounds.height)
@@ -61,7 +66,7 @@ class DevelopersViewController: UIViewController {
       vc.view.frame = frame
     }
   }
-  
+
   @objc func segmentSelectAction(segment: UISegmentedControl) {
     isSelectedSegment = true
     let selectedNum = segment.selectedSegmentIndex
@@ -75,7 +80,7 @@ extension DevelopersViewController: UIScrollViewDelegate {
   func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
     isSelectedSegment = false
   }
-  
+
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
     guard !isSelectedSegment else { return }
     let page = Int(scrollView.contentOffset.x / scrollView.bounds.width + 0.5)

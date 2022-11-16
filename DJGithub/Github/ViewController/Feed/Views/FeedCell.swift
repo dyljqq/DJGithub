@@ -8,7 +8,7 @@
 import UIKit
 
 class FeedCell: UITableViewCell {
-  
+
   lazy var avatarImageView: UIImageView = {
     let imageView = UIImageView()
     imageView.layer.cornerRadius = 5
@@ -18,7 +18,7 @@ class FeedCell: UITableViewCell {
     imageView.addGestureRecognizer(tap)
     return imageView
   }()
-  
+
   lazy var titleTextView: UITextView = {
     let textView = UITextView()
     textView.backgroundColor = .clear
@@ -31,46 +31,46 @@ class FeedCell: UITableViewCell {
     textView.isEditable = false
     return textView
   }()
-  
+
   lazy var dateLabel: UILabel = {
     let label = UILabel()
     label.textColor = .textGrayColor
     label.font = UIFont.systemFont(ofSize: 12)
     return label
   }()
-  
+
   var feed: Feed?
-  
-  var tappedClosure: ((FeedPushType) -> ())? = nil
-  
+
+  var tappedClosure: ((FeedPushType) -> Void)?
+
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
-    
+
     setUp()
   }
-  
+
   func render(with feed: Feed) {
     self.feed = feed
     avatarImageView.setImage(with: feed.thumbnail?.url)
     titleTextView.text = feed.title
     dateLabel.text = feed.formatedDate
-    
+
     titleTextView.attributedText = feed.titleAttr
     titleTextView.linkTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.lightBlue]
     titleTextView.snp.updateConstraints { make in
       make.height.equalTo(feed.titleHeight)
     }
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   private func setUp() {
     contentView.addSubview(avatarImageView)
     contentView.addSubview(titleTextView)
     contentView.addSubview(dateLabel)
-    
+
     avatarImageView.snp.makeConstraints { make in
       make.leading.equalTo(12)
       make.top.equalTo(10)
@@ -87,13 +87,13 @@ class FeedCell: UITableViewCell {
       make.leading.trailing.equalTo(titleTextView)
     }
   }
-  
+
   @objc func avatarImageViewTapped() {
     if let userName = feed?.author?.name {
       self.tappedClosure?(FeedPushType.user(userName))
     }
   }
-  
+
   static func cellHeight(with feed: Feed) -> CGFloat {
     return feed.titleHeight + 44
   }
@@ -110,7 +110,7 @@ extension FeedCell: UITextViewDelegate {
       let value = b.last ?? ""
       d[key] = value
     }
-    
+
     if let type = d["type"] {
       let pushType: FeedPushType
       let value = d["value"] ?? ""
@@ -122,10 +122,10 @@ extension FeedCell: UITextViewDelegate {
       default:
         pushType = .unknown
       }
-      
+
       self.tappedClosure?(pushType)
     }
-    
+
     return false
   }
 }

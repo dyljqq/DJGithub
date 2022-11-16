@@ -13,12 +13,12 @@ struct RepoBranchCommitInfo: DJCodable {
   var htmlUrl: String
   var commentsUrl: String
   var stats: RepoBranchCommitStats?
-  
+
   var files: [RepoPullFile]?
   var displayedFiles: [RepoPullFile] {
     return files ?? []
   }
-  
+
   var author: RepoBranchCommitInfoUser?
   var committer: RepoBranchCommitInfoUser?
 }
@@ -29,10 +29,10 @@ struct RepoBranchCommit: DJCodable {
     var email: String?
     var date: String
   }
-  
+
   var message: String
   var commentCount: Int
-  
+
   var author: RepoBranchCommitAuthor
   var committer: RepoBranchCommitAuthor
 }
@@ -43,7 +43,7 @@ extension RepoBranchCommitInfo {
     var login: String
     var avatarUrl: String
   }
-  
+
   struct RepoBranchCommitStats: DJCodable {
     var total: Int
     var additions: Int

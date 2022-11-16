@@ -13,17 +13,17 @@ struct RssFeedAtom: DJCodable {
   @Default<String.UnProvidedDesc> var des: String
   var siteLink: String
   var feedLink: String
-  
+
   @Default<String.Now> var createTime: String
   @Default<String.Now> var updateTime: String
-  
+
   var description: String?
-  
+
   init(title: String, desc: String, feedLink: String) {
     self.title = title
     self.des = desc
     self.feedLink = feedLink
-    
+
     self.siteLink = ""
     self.id = 0
     self.createTime = ""
@@ -35,15 +35,15 @@ extension RssFeedAtom: SQLTable {
   static var tableName: String {
     return "rss_feed_atom"
   }
-  
+
   static var fields: [String] {
     return [
       "title", "des", "site_link", "feed_link",
       "create_time", "update_time"
     ]
   }
-  
-  static var fieldsTypeMapping: [String : FieldType] {
+
+  static var fieldsTypeMapping: [String: FieldType] {
     return [
       "id": .bigint,
       "title": .text,
@@ -54,14 +54,14 @@ extension RssFeedAtom: SQLTable {
       "update_time": .text
     ]
   }
-  
+
   static var selectedFields: [String] {
     return [
       "id", "title", "des", "site_link", "feed_link", "create_time", "update_time"
     ]
   }
-  
-  var fieldsValueMapping: [String : Any] {
+
+  var fieldsValueMapping: [String: Any] {
     return [
       "title": self.title,
       "des": self.des,
@@ -71,7 +71,7 @@ extension RssFeedAtom: SQLTable {
       "update_time": self.updateTime
     ]
   }
-  
+
 }
 
 extension RssFeedAtom {
@@ -80,16 +80,16 @@ extension RssFeedAtom {
     let atoms: [RssFeedAtom] = Self.select(with: condition)
     return atoms.first
   }
-  
+
   static func isExistedByFeedLink(_ feedLink: String) -> Bool {
     return getByFeedLink(feedLink) != nil
   }
-  
+
   var hasFeeds: Bool {
     let feeds: [RssFeed] = RssFeed.select(with: " where atom_id=\(self.id)")
     return !feeds.isEmpty
   }
-  
+
   static func get(by id: Int) -> RssFeedAtom? {
     let condition = " where id=\(id)"
     let atoms: [RssFeedAtom] = Self.select(with: condition)

@@ -12,11 +12,11 @@ struct RssFeedRead: DJCodable {
   let atomId: Int
   let feedId: Int
   let readCount: Int
-  
+
   var unread: Bool {
     return readCount == 0
   }
-  
+
   init(atomId: Int, feedId: Int, readCount: Int = 0) {
     self.id = 0
     self.atomId = atomId
@@ -29,22 +29,22 @@ extension RssFeedRead: SQLTable {
   static var tableName: String {
     return "rss_feed_read"
   }
-  
+
   static var fields: [String] {
     return [
       "atom_id", "feed_id", "read_count"
     ]
   }
-  
-  var fieldsValueMapping: [String : Any] {
+
+  var fieldsValueMapping: [String: Any] {
     return [
       "atom_id": self.atomId,
       "feed_id": self.feedId,
       "read_count": self.readCount
     ]
   }
-  
-  static var fieldsTypeMapping: [String : FieldType] {
+
+  static var fieldsTypeMapping: [String: FieldType] {
     return [
       "id": .int,
       "atom_id": .int,
@@ -52,19 +52,19 @@ extension RssFeedRead: SQLTable {
       "read_count": .int
     ]
   }
-  
+
   static var selectedFields: [String] {
     return [
       "id", "atom_id", "feed_id", "read_count"
     ]
   }
-  
+
   static func get(by atomId: Int, feedId: Int) -> Self? {
     let condition = " where atom_id=\(atomId) and feed_id=\(feedId)"
     let model: Self? = Self.select(with: condition).first
     return model
   }
-  
+
   @discardableResult
   func increment() -> Bool {
     let sql = "update \(Self.tableName) set read_count = \(self.readCount + 1) where id=\(self.id)"

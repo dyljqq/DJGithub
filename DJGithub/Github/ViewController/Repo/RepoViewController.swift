@@ -16,28 +16,28 @@ class RepoViewController: UIViewController {
 
   let userName: String
   let repoName: String
-  
+
   var repo: Repository?
   var dataSouce: [RepoCellType] = []
-  
+
   lazy var userStatusView: UserStatusView = {
     let view = UserStatusView(layoutLay: .normal)
     view.type = .star("\(userName)/\(repoName)")
     return view
   }()
-  
+
   lazy var headerView: RepoHeaderView = {
     let headerView = RepoHeaderView()
     return headerView
   }()
-  
+
   lazy var footerView: RepoFooterView = {
     let footerView = RepoFooterView()
     footerView.frame = CGRect(x: 0, y: 0, width: FrameGuide.screenWidth, height: 0)
     footerView.backgroundColor = UIColor.white
     return footerView
   }()
-  
+
   lazy var tableView: UITableView = {
     let tableView = UITableView()
     tableView.delegate = self
@@ -50,28 +50,28 @@ class RepoViewController: UIViewController {
     tableView.register(PrimaryLanguageCell.classForCoder(), forCellReuseIdentifier: PrimaryLanguageCell.className)
     return tableView
   }()
-  
+
   lazy var repoBranchView: RepoBranchListView = {
     let view = RepoBranchListView()
     return view
   }()
-  
+
   init(with userName: String, repoName: String) {
     self.repoName = repoName
     self.userName = userName
     super.init(nibName: nil, bundle: nil)
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
     setUp()
   }
-  
+
   private func setUp() {
     self.navigationItem.title = "Repository"
     view.backgroundColor = .backgroundColor
@@ -81,7 +81,7 @@ class RepoViewController: UIViewController {
     }
 
     view.startLoading()
-    
+
     Task {
       await withThrowingTaskGroup(of: Void.self) { group in
         group.addTask {
@@ -92,11 +92,11 @@ class RepoViewController: UIViewController {
         }
       }
     }
-    
+
     tableView.addHeader { [weak self] in
       self?.fetchRepo()
     }
-    
+
     footerView.fetchHeightClosure = { [weak self] height in
       guard let strongSelf = self else {
         return
@@ -109,7 +109,7 @@ class RepoViewController: UIViewController {
       guard let strongSelf = self else { return }
       if let req = req,
          let url = req.url {
-        
+
         // github readme中会存在这种链接，比如docs/issue-227.md，那么这种链接会跳转到对应的repo中去。
         var u = url
         if url.isFileURL {
@@ -122,24 +122,24 @@ class RepoViewController: UIViewController {
         self?.navigationController?.present(vc, animated: true)
       }
     }
-    
+
     headerView.tapCounterClosure = { [weak self] index in
       guard let strongSelf = self else { return }
       if let repo = strongSelf.repo {
         strongSelf.navigationController?.pushToRepoInteract(with: repo.nameWithOwner, selectedIndex: index)
       }
     }
-    
+
     headerView.renderHeightClosure = { [weak self] height in
       guard let strongSelf = self else { return }
       strongSelf.headerView.frame = CGRect(x: 0, y: 0, width: FrameGuide.screenWidth, height: height)
       strongSelf.tableView.beginUpdates()
       strongSelf.tableView.endUpdates()
     }
-    
+
     self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: userStatusView)
   }
-  
+
   private func fetchRepo() {
     Task {
       if let repo = await RepoManager.fetchRepository(with: userName, repoName: repoName) {
@@ -155,7 +155,7 @@ class RepoViewController: UIViewController {
         if let license = repo.licenseInfo?.spdxId {
           languageDes = "\(license) - " + languageDes
         }
-        
+
         dataSouce = [.blank]
         if let _ = repo.primaryLanguage {
           dataSouce.append(.primaryLanguage)
@@ -176,19 +176,19 @@ class RepoViewController: UIViewController {
       tableView.dj_endRefresh()
     }
   }
-  
+
   func fetchReadme() async {
     if let readme = await RepoManager.fetchREADME(with: "\(userName)/\(repoName)") {
       self.footerView.render(with: readme.content)
     }
   }
-  
+
   private func updateRepoLanguage(repo: Repository) {
     Task {
       if let primaryLanguage = repo.primaryLanguage {
         await LanguageManager.save(with: primaryLanguage.name, color: primaryLanguage.color)
       }
-      
+
       for edge in (repo.languages?.edges ?? []) {
         if let node = edge.node, let name = node.name, let color = node.color {
           await LanguageManager.save(with: name, color: color)
@@ -196,12 +196,12 @@ class RepoViewController: UIViewController {
       }
     }
   }
-  
+
   private func showBranchesView() {
     Task {
       let branches = await RepoManager.fetchRepoBranches(with: userName, repoName: repoName, params: ["page": "1"])
       repoBranchView.render(with: branches)
-      
+
       DJMaskView.show(with: DJMaskContentConfig(
         view: self.repoBranchView,
         size: CGSize(width: 300, height: 300)
@@ -212,11 +212,11 @@ class RepoViewController: UIViewController {
 }
 
 extension RepoViewController: UITableViewDelegate, UITableViewDataSource {
-  
+
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return dataSouce.count
   }
-  
+
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let data = dataSouce[indexPath.row]
     switch data {
@@ -234,7 +234,7 @@ extension RepoViewController: UITableViewDelegate, UITableViewDataSource {
     default:
       let cell = tableView.dequeueReusableCell(withIdentifier: RepoCell.className, for: indexPath) as! RepoCell
       cell.render(with: data)
-      
+
       if case RepoCellType.readme = data {
         cell.accessoryType = .none
         cell.selectionStyle = .none
@@ -246,18 +246,18 @@ extension RepoViewController: UITableViewDelegate, UITableViewDataSource {
       } else {
         cell.accessoryType = .disclosureIndicator
       }
-      
+
       return cell
     }
   }
-  
+
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return dataSouce[indexPath.row].height
   }
-  
+
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
-    
+
     let type = self.dataSouce[indexPath.row]
     switch type {
     case .language:
@@ -272,7 +272,7 @@ extension RepoViewController: UITableViewDelegate, UITableViewDataSource {
       break
     }
   }
-  
+
 }
 
 extension RepoViewController: UIScrollViewDelegate {
@@ -304,7 +304,7 @@ extension RepoCellType {
     default: return ""
     }
   }
-  
+
   var name: String {
     switch self {
     case .language(let language, _): return language
@@ -315,7 +315,7 @@ extension RepoCellType {
     default: return ""
     }
   }
-  
+
   var desc: String {
     switch self {
     case .language(_, let desc): return desc

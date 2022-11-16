@@ -24,7 +24,7 @@ enum SQLiteError: Error {
 }
 
 class SQLiteDatabase {
-  
+
   var errorMessage: String {
     if let errorPointer = sqlite3_errmsg(db) {
       let errorMessage = String(cString: errorPointer)
@@ -33,16 +33,16 @@ class SQLiteDatabase {
       return "No error message provided from sqlite."
     }
   }
-  
+
   private let db: OpaquePointer?
-  
+
   init(with db: OpaquePointer?) {
     self.db = db
   }
-  
+
   static func open(path: String) throws -> SQLiteDatabase {
     var db: OpaquePointer?
-    
+
     if sqlite3_open_v2(path, &db, SQLITE_OPEN_CREATE | SQLITE_OPEN_READWRITE, nil) == SQLITE_OK {
       return SQLiteDatabase(with: db)
     } else {
@@ -51,7 +51,7 @@ class SQLiteDatabase {
           sqlite3_close(db)
         }
       }
-      
+
       if let errorPointer = sqlite3_errmsg(db) {
         let message = String(cString: errorPointer)
         throw SQLiteError.OpenDatabase(message: message)
@@ -61,11 +61,11 @@ class SQLiteDatabase {
       }
     }
   }
-  
+
   func closeDatabase(_ db: OpaquePointer?) {
     sqlite3_close(db)
   }
-  
+
   deinit {
     self.closeDatabase(self.db)
   }
@@ -98,7 +98,7 @@ extension SQLiteDatabase {
 }
 
 extension SQLTable {
-  
+
   static func createTable() throws {
     try serialQueue.sync {
       guard let createTableStatement = try? store?.prepareStatement(sql: tableSql) else {
@@ -113,7 +113,7 @@ extension SQLTable {
       print("create table: \(tableSql)")
     }
   }
-  
+
   static func addNewField(with fieldName: String, comment: String = "") throws {
     try serialQueue.sync {
       guard let fieldType = fieldsTypeMapping[fieldName], let fieldTypeName = fieldType.name else { return }
@@ -130,18 +130,18 @@ extension SQLTable {
       }
     }
   }
-  
+
   func insert() throws {
     try serialQueue.sync {
       let insertStatement = try store?.prepareStatement(sql: Self.insertSql)
       defer {
         sqlite3_finalize(insertStatement)
       }
-      
+
       for (index, field) in Self.fields.enumerated() {
         if let fieldType = Self.fieldsTypeMapping[field] {
           let offset = Int32(index) + 1
-          
+
           switch fieldType {
           case .int:
             let value = self.fieldsValueMapping[field] as? Int ?? 0
@@ -157,13 +157,13 @@ extension SQLTable {
           }
         }
       }
-      
+
       if sqlite3_step(insertStatement) != SQLITE_DONE {
         throw SQLiteError.Bind(message: Self.errorMessage)
       }
     }
   }
-  
+
   static func query(with querySql: String) throws -> [[String: Any]]? {
     guard let queryStatement = try? store?.prepareStatement(sql: querySql) else {
       return nil
@@ -194,12 +194,12 @@ extension SQLTable {
     }
     return rs
   }
-  
+
   static func dropTable() throws {
     let sql = "drop table \(tableName)"
     try delete(with: sql)
   }
-  
+
   static func delete(with sql: String) throws {
     try serialQueue.sync {
       guard let dropStatement = try? store?.prepareStatement(sql: sql) else {
@@ -213,7 +213,7 @@ extension SQLTable {
       }
     }
   }
-  
+
   static func update(with sql: String) throws {
     try serialQueue.sync {
       guard let updateStatement = try? store?.prepareStatement(sql: sql) else {
@@ -227,7 +227,7 @@ extension SQLTable {
       }
     }
   }
-  
+
   static var errorMessage: String {
     return store?.errorMessage ?? "May something went wrong."
   }

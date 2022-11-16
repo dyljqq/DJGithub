@@ -10,7 +10,7 @@ import Foundation
 enum SearchType {
   case users
   case repos
-  
+
   var title: String {
     switch self {
     case .users: return "users"

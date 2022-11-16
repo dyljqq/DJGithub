@@ -17,7 +17,7 @@ struct Organization: DJCodable {
   @Default<String.Email> var email: String
   @Default<String.Location> var location: String
   @Default<String.Blog> var websiteUrl: String
-  
+
   var membersWithRole: TotalCountModel
   var pinnableItems: TotalCountModel
   var pinnedItems: PinnedRepos

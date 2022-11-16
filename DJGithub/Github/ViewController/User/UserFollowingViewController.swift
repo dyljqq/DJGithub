@@ -15,7 +15,7 @@ enum UserFollowingType {
   case followers(String)
   case search(String)
   case unknown
-  
+
   var title: String {
     switch self {
     case .watches: return "Watches"
@@ -32,32 +32,32 @@ enum UserFollowingType {
 class UserFollowingViewController: UIViewController, NextPageLoadable {
 
   var nextPageState: NextPageState = NextPageState()
-  
+
   typealias DataType = UserFollowing
-  
+
   var dataSource: [DataType] = []
-  
+
   var firstPageIndex: Int {
     return 1
   }
-  
+
   let pageSize = 30
   var type: UserFollowingType = .unknown
-  
+
   init(with type: UserFollowingType) {
     self.type = type
     super.init(nibName: nil, bundle: nil)
   }
-  
+
   init() {
     self.type = .following("")
     super.init(nibName: nil, bundle: nil)
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   lazy var tableView: UITableView = {
     let tableView = UITableView()
     tableView.delegate = self
@@ -68,25 +68,25 @@ class UserFollowingViewController: UIViewController, NextPageLoadable {
     tableView.register(SimpleUserCell.classForCoder(), forCellReuseIdentifier: SimpleUserCell.className)
     return tableView
   }()
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
     setUp()
   }
-  
+
   private func setUp() {
     self.navigationItem.title = "Developers"
     self.view.backgroundColor = .backgroundColor
-    
+
     view.addSubview(tableView)
     tableView.snp.makeConstraints { make in
       make.edges.equalTo(self.view)
     }
-    
+
     nextPageState.update(start: firstPageIndex, hasNext: true, isLoading: false)
     view.startLoading()
-    
+
     tableView.addHeader { [weak self] in
       guard let strongSelf = self else {
         return
@@ -102,7 +102,7 @@ class UserFollowingViewController: UIViewController, NextPageLoadable {
     }
     loadData(start: nextPageState.start)
   }
-  
+
   func loadData(start: Int) {
     loadNext(start: start) { [weak self] in
       guard let strongSelf = self else {
@@ -120,7 +120,7 @@ extension UserFollowingViewController: UITableViewDelegate, UITableViewDataSourc
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return dataSource.count
   }
-  
+
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: SimpleUserCell.className, for: indexPath) as! SimpleUserCell
     cell.render(with: dataSource[indexPath.row])
@@ -133,14 +133,14 @@ extension UserFollowingViewController: UITableViewDelegate, UITableViewDataSourc
     }
     return cell
   }
-  
+
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 60
   }
-  
+
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
-    
+
     let user = self.dataSource[indexPath.row]
     self.navigationController?.pushToUser(with: user.login)
   }
@@ -154,15 +154,15 @@ extension UserFollowingViewController: UITableViewDataSourcePrefetching {
       UIImageView().setImage(with: user.avatarUrl)
     }
   }
-  
+
   func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
-    
+
   }
 }
 
 extension UserFollowingViewController {
-  
-  func performLoad(successHandler: @escaping ([UserFollowing], Bool) -> (), failureHandler: @escaping (String) -> ()) {
+
+  func performLoad(successHandler: @escaping ([UserFollowing], Bool) -> Void, failureHandler: @escaping (String) -> Void) {
     Task {
       let users: [UserFollowing]
       switch type {
@@ -177,7 +177,7 @@ extension UserFollowingViewController {
       case .followers(let name):
         users = await UserManager.getUserFollowers(with: name, page: nextPageState.start)
       case .search(let q):
-        if let r = await SearchManager.searchUsers(with: q, page: nextPageState.start){
+        if let r = await SearchManager.searchUsers(with: q, page: nextPageState.start) {
           users = r.items
         } else {
           users = []
@@ -188,5 +188,5 @@ extension UserFollowingViewController {
       successHandler(users, users.count == pageSize)
     }
   }
-  
+
 }

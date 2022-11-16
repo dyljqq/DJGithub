@@ -15,7 +15,7 @@ struct RepoPull: DJCodable {
   var body: String?
   var createdAt: String
   var updatedAt: String
-  
+
   var merged: Bool
   var mergeable: Bool?
   var mergedBy: UserFollowing?
@@ -23,11 +23,11 @@ struct RepoPull: DJCodable {
   var additions: Int
   var deletions: Int
   var changedFiles: Int
-  
+
   var user: UserFollowing
   var head: RepoPullBranch
   var base: RepoPullBranch
-  
+
   var desc: String {
     return self.body ?? ""
   }

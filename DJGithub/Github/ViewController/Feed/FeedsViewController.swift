@@ -8,12 +8,12 @@
 import UIKit
 
 class FeedsViewController: UIViewController, NextPageLoadable {
-  
+
   typealias DataType = Feed
-  
+
   var dataSource: [DataType] = []
   var nextPageState: NextPageState = NextPageState()
-  
+
   var feeds: Feeds?
 
   lazy var tableView: UITableView = {
@@ -25,24 +25,24 @@ class FeedsViewController: UIViewController, NextPageLoadable {
     tableView.register(FeedCell.classForCoder(), forCellReuseIdentifier: FeedCell.className)
     return tableView
   }()
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
 
     setUp()
   }
-  
+
   private func setUp() {
     view.backgroundColor = .backgroundColor
-    
+
     view.addSubview(tableView)
     tableView.snp.makeConstraints { make in
       make.edges.equalToSuperview()
     }
-    
+
     view.startLoading()
     nextPageState.update(start: 1, hasNext: true, isLoading: false)
-    
+
     Task {
       self.feeds = await FeedManager.getFeeds()
       if let _ = self.feeds {
@@ -61,7 +61,7 @@ class FeedsViewController: UIViewController, NextPageLoadable {
       }
     }
   }
-  
+
   func loadNext(start: Int) {
     self.loadNext(start: start) { [weak self] in
       guard let strongSelf = self else { return }
@@ -70,8 +70,8 @@ class FeedsViewController: UIViewController, NextPageLoadable {
       strongSelf.tableView.reloadData()
     }
   }
-  
-  func performLoad(successHandler: @escaping ([DataType], Bool) -> (), failureHandler: @escaping (String) -> ()) {
+
+  func performLoad(successHandler: @escaping ([DataType], Bool) -> Void, failureHandler: @escaping (String) -> Void) {
     guard let feeds = self.feeds else {
       failureHandler("no valid url.")
       return
@@ -90,11 +90,11 @@ class FeedsViewController: UIViewController, NextPageLoadable {
 }
 
 extension FeedsViewController: UITableViewDelegate, UITableViewDataSource {
-  
+
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return dataSource.count
   }
-  
+
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: FeedCell.className, for: indexPath) as! FeedCell
     cell.render(with: dataSource[indexPath.row])
@@ -111,7 +111,7 @@ extension FeedsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     return cell
   }
-  
+
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
     let feed = dataSource[indexPath.row]
@@ -128,11 +128,11 @@ extension FeedsViewController: UITableViewDelegate, UITableViewDataSource {
       }
     }
   }
-  
+
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     let feed = dataSource[indexPath.row]
     let height = FeedCell.cellHeight(with: feed)
     return height
   }
-  
+
 }

@@ -9,15 +9,15 @@ import Foundation
 
 struct StatusModel: DJCodable {
   var statusCode: Int
-  
+
   var isStatus204: Bool {
     return statusCode == 204
   }
-  
+
   var isStatus201: Bool {
     return statusCode == 201
   }
-  
+
   var isStatus404: Bool {
     return statusCode == 404
   }

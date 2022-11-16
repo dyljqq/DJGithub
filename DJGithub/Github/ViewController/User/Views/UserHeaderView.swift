@@ -24,7 +24,7 @@ class UserHeaderView: NormalHeaderView {
     followersView.render(with: model.followers, name: "Followers")
     followingView.render(with: model.following, name: "Following")
   }
-  
+
   func render(with userViewer: UserViewer) {
     avatarImageView.setImage(with: userViewer.avatarUrl)
     self.arrowImageView.isHidden = userViewer.viewerCanFollow
@@ -40,11 +40,11 @@ class UserHeaderView: NormalHeaderView {
     followersView.render(with: userViewer.followers.totalCount, name: "Followers")
     followingView.render(with: userViewer.following.totalCount, name: "Following")
   }
-  
+
   func render(with organization: Organization) {
     avatarImageView.setImage(with: organization.avatarUrl)
     self.arrowImageView.isHidden = true
-    
+
     nameLabel.text = organization.name.isEmpty ? organization.login : organization.name
     loginLabel.text = organization.login
     bioLabel.text = organization.description.trimmingCharacters(in: .whitespacesAndNewlines)

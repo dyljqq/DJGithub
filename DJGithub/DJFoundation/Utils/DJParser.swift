@@ -7,16 +7,16 @@
 
 import Foundation
 
-struct DJDecoder<T:DJCodable> {
+struct DJDecoder<T: DJCodable> {
   let decoder = JSONDecoder()
-  
+
   private var data: Data?
-  
+
   init(dict: [String: Any]) {
     let data = try? JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted)
     self.init(data: data)
   }
-  
+
   init(data: Data?) {
     self.data = data
     decoder.keyDecodingStrategy = .convertFromSnakeCase
@@ -26,7 +26,7 @@ struct DJDecoder<T:DJCodable> {
     let data = try? JSONSerialization.data(withJSONObject: value)
     self.init(data: data)
   }
-  
+
   func decode() throws -> T? {
     guard let data = data else { return nil }
     do {
@@ -39,14 +39,14 @@ struct DJDecoder<T:DJCodable> {
 
 struct DJEncoder<T: Encodable> {
   let encoder = JSONEncoder()
-  
+
   let model: T?
-  
+
   init(model: T?) {
     self.model = model
     encoder.keyEncodingStrategy = .convertToSnakeCase
   }
-  
+
   func encode() -> Any? {
     guard let model = model else { return nil }
     do {

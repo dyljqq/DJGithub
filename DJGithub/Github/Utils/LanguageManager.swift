@@ -11,11 +11,11 @@ import CoreData
 struct LanguageManager {
 
   static var mapping: [String: String] = [:]
-  
+
   init() {
     try? Language.createTable()
   }
-  
+
   static func save(_ languages: [Language]) async {
     Task {
       for language in languages {
@@ -26,7 +26,7 @@ struct LanguageManager {
       await loadLanguageMapping()
     }
   }
-  
+
   static func loadLanguageMapping() async {
     var rs = [String: String]()
     let languages: [Language] = Language.selectAll()
@@ -35,7 +35,7 @@ struct LanguageManager {
     }
     LanguageManager.mapping = rs
   }
-  
+
   static func save(with languageName: String, color: String) async {
     var col = color
     if color.hasPrefix("#") {
@@ -50,5 +50,5 @@ struct LanguageManager {
     }
     mapping[languageName] = color
   }
-  
+
 }

@@ -18,17 +18,17 @@ class TitleAndDescViewController: UIViewController {
     case createPullRequest(model: PullRequestModel)
     case mergePullRequest(userName: String, repoName: String, pullNum: Int)
   }
-  
+
   let type: VCType
-  var completionHandler: (() -> ())? = nil
-  
+  var completionHandler: (() -> Void)?
+
   lazy var titleLabel: UILabel = {
     let label = UILabel()
     label.textColor = .textColor
     label.font = UIFont.systemFont(ofSize: 14, weight: .bold)
     return label
   }()
-  
+
   lazy var cancelButton: UIButton = {
     let button = UIButton()
     button.setTitle("cancel", for: .normal)
@@ -37,7 +37,7 @@ class TitleAndDescViewController: UIViewController {
     button.addTarget(self, action: #selector(cancelAction), for: .touchUpInside)
     return button
   }()
-  
+
   lazy var titleTextField: UITextField = {
     let textField = UITextField()
     textField.textColor = .textColor
@@ -46,14 +46,14 @@ class TitleAndDescViewController: UIViewController {
     textField.layer.cornerRadius = 5
     textField.layer.masksToBounds = true
     textField.backgroundColor = .white
-    
+
     let leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: 40))
     textField.leftView = leftView
     textField.leftViewMode = .always
-    
+
     return textField
   }()
-  
+
   lazy var descTextView: UITextView = {
     let textView = UITextView()
     textView.textColor = .textColor
@@ -65,7 +65,7 @@ class TitleAndDescViewController: UIViewController {
     textView.placeholder = "Issue content"
     return textView
   }()
-  
+
   lazy var commitView: CommitView = {
     let view = CommitView(with: "commit")
     view.backgroundColor = .lightBlue
@@ -76,23 +76,23 @@ class TitleAndDescViewController: UIViewController {
     view.addGestureRecognizer(tap)
     return view
   }()
-  
+
   let headerView = UIView()
-  
+
   init(with type: VCType) {
     self.type = type
     super.init(nibName: nil, bundle: nil)
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
     setUp()
-    
+
     switch type {
     case .editIssue(let userName, let repoName, let issueNum):
       titleLabel.text = "Edit Issue"
@@ -125,7 +125,7 @@ class TitleAndDescViewController: UIViewController {
       self.descTextView.placeholder = "Leave a comment."
     }
   }
-  
+
   private func fetchIssueDetail(with userName: String, repoName: String, issueNum: Int) {
     Task {
       if let issue = await RepoManager.getRepoIssueDetail(with: userName, repoName: repoName, issueNum: issueNum) {
@@ -135,20 +135,20 @@ class TitleAndDescViewController: UIViewController {
       }
     }
   }
-  
+
   private func setUp() {
     view.backgroundColor = .backgroundColor
-    
+
     headerView.backgroundColor = .white
     view.addSubview(headerView)
-    
+
     headerView.addSubview(self.titleLabel)
     headerView.addSubview(self.cancelButton)
-    
+
     view.addSubview(titleTextField)
     view.addSubview(descTextView)
     view.addSubview(commitView)
-    
+
     headerView.snp.makeConstraints { make in
       make.height.equalTo(44)
       make.top.leading.trailing.equalToSuperview()
@@ -179,14 +179,14 @@ class TitleAndDescViewController: UIViewController {
       make.height.equalTo(44)
     }
   }
-  
+
   @objc func commitAction() {
     commitView.isLoading = true
-    
+
     Task {
       let title = titleTextField.text ?? ""
       let content = descTextView.text ?? ""
-      
+
       let params: [String: String] = [
         "title": title,
         "body": content
@@ -271,7 +271,7 @@ class TitleAndDescViewController: UIViewController {
       commitView.isLoading = false
     }
   }
-  
+
   @objc func cancelAction() {
     self.dismiss(animated: true)
   }

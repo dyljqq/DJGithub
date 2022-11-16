@@ -13,20 +13,20 @@ class RssFeedAtomViewController: UIViewController {
     var readStr: String
     let atom: RssFeedAtom
     let layout: RssFeedSimpleCellLayout
-    
+
     mutating func update(_ readStr: String) {
       self.readStr = readStr
     }
-    
+
     var simpleModel: RssFeedSimpleCell.RssFeedSimpleModel {
       return RssFeedSimpleCell.RssFeedSimpleModel(
         title: atom.title, content: atom.des, readStr: readStr
       )
     }
   }
-  
+
   var dataSource: [RssFeedAtomModel] = []
-  
+
   lazy var headerView: RssFeedLatestView = {
     let view = RssFeedLatestView()
     view.didSelectItemClosure = { [weak self] feedId in
@@ -40,7 +40,7 @@ class RssFeedAtomViewController: UIViewController {
     }
     return view
   }()
-  
+
   lazy var tableView: UITableView = {
     let tableView = UITableView()
     tableView.delegate = self
@@ -50,28 +50,28 @@ class RssFeedAtomViewController: UIViewController {
     tableView.register(RssFeedSimpleCell.classForCoder(), forCellReuseIdentifier: RssFeedSimpleCell.className)
     return tableView
   }()
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     setUp()
   }
-  
+
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    
+
     Task {
       if let models = try? await RssFeedManager.shared.asyncLoadLatestFeeds(), !models.isEmpty {
         headerView.render(with: models)
       }
     }
   }
-  
+
   private func setUp() {
     self.navigationItem.title = "Rss"
     view.backgroundColor = .backgroundColor
-    
+
     navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addAction))
-    
+
     view.addSubview(headerView)
     view.addSubview(tableView)
     headerView.snp.makeConstraints { make in
@@ -83,11 +83,11 @@ class RssFeedAtomViewController: UIViewController {
       make.top.equalTo(headerView.snp.bottom)
       make.leading.trailing.bottom.equalToSuperview()
     }
-    
+
     view.startLoading()
     self.loadData()
     self.addNotification()
-    
+
     RssFeedManager.shared.finishedLoadFeeds = { [weak self] feeds in
       guard let strongSelf = self else { return }
       DispatchQueue.main.async {
@@ -95,7 +95,7 @@ class RssFeedAtomViewController: UIViewController {
       }
     }
   }
-  
+
   private func addNotification() {
     NotificationCenter.default.removeObserver(self, name: RssFeedManager.RssFeedAtomUpdateNotificationKey, object: nil)
     NotificationCenter.default.removeObserver(self, name: RssFeedManager.RssFeedAtomReadFeedNotificationKey, object: nil)
@@ -137,13 +137,13 @@ class RssFeedAtomViewController: UIViewController {
       }
     })
   }
-  
+
   private func loadData() {
     Task {
       await self.configDataSource()
     }
   }
-  
+
   private func configDataSource() async {
     let atoms = await RssFeedManager.shared.loadAtoms()
     configDataSource(with: atoms)
@@ -153,7 +153,7 @@ class RssFeedAtomViewController: UIViewController {
       }
     }
   }
-  
+
   private func configDataSource(with atoms: [RssFeedAtom], mapping: [Int: (Int, Int)] = [:]) {
     dataSource = atoms.map { atom in
       let readStr: String
@@ -167,7 +167,7 @@ class RssFeedAtomViewController: UIViewController {
     view.stopLoading()
     self.tableView.reloadData()
   }
-  
+
   @objc func addAction() {
     let vc = TitleAndDescViewController(with: .rssFeed)
     vc.completionHandler = { [weak self] in
@@ -182,21 +182,21 @@ extension RssFeedAtomViewController: UITableViewDelegate, UITableViewDataSource 
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return dataSource.count
   }
-  
+
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: RssFeedSimpleCell.className, for: indexPath) as! RssFeedSimpleCell
     cell.render(with: self.dataSource[indexPath.row].simpleModel)
     return cell
   }
-  
+
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     let model = self.dataSource[indexPath.row]
     return model.layout.totalHeight
   }
-  
+
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
-    
+
     let model = dataSource[indexPath.row]
     self.navigationController?.pushToRssFeeds(with: model.atom)
   }

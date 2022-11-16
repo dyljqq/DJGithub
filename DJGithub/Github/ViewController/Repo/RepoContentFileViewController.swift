@@ -11,46 +11,46 @@ import MarkdownView
 class RepoContentFileViewController: UIViewController {
   let urlString: String
   var repoContent: RepoContent?
-  
+
   lazy var fileView: MarkdownView = {
     let view = MarkdownView()
     return view
   }()
-  
+
   lazy var fileImageView: UIImageView = {
     let imageView = UIImageView()
     return imageView
   }()
-  
+
   lazy var scrollView: UIScrollView = {
     let scrollView = UIScrollView()
     scrollView.backgroundColor = .backgroundColor
     scrollView.showsVerticalScrollIndicator = false
     return scrollView
   }()
-  
+
   init(with urlString: String) {
     self.urlString = urlString
     super.init(nibName: nil, bundle: nil)
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
     setUp()
   }
-  
+
   private func setUp() {
     view.backgroundColor = .backgroundColor
-    
+
     Task {
       self.repoContent = await RepoManager.getRepoContentFile(with: self.urlString)
       self.navigationItem.title = self.repoContent?.name
-      
+
       if let urlString = self.repoContent?.downloadUrl,
          let fileSuffix = self.repoContent?.name.fileSuffix,
          ["bmp", "jpg", "jpeg", "png", "gif"].contains(fileSuffix) {
@@ -82,7 +82,7 @@ class RepoContentFileViewController: UIViewController {
         }
         return
       }
-      
+
       view.addSubview(fileView)
       fileView.snp.makeConstraints { make in
         make.edges.equalTo(self.view)
@@ -98,7 +98,7 @@ class RepoContentFileViewController: UIViewController {
         }
       }
     }
-    
+
     fileView.onTouchLink = { [weak self] request in
       guard let strongSelf = self else { return false }
       strongSelf.navigationController?.pushToWebView(request: request)

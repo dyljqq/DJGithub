@@ -9,7 +9,7 @@ import UIKit
 import SafariServices
 
 class RepoBranchCommitViewController: UIViewController {
-  
+
   // 分支名
   let head: String
   // master
@@ -21,10 +21,10 @@ class RepoBranchCommitViewController: UIViewController {
       createButton.isHidden = !showCommitButton
     }
   }
-  
+
   var branchCommit: RepoBranchCommitInfo?
   var files: [RepoPullFile] = []
-  
+
   lazy var compareLabel: UILabel = {
     let label = UILabel()
     label.text = "compare: \(head)"
@@ -32,7 +32,7 @@ class RepoBranchCommitViewController: UIViewController {
     label.textColor = .textColor
     return label
   }()
-  
+
   lazy var baseLabel: UILabel = {
     let label = UILabel()
     label.text = "base: \(base)"
@@ -40,7 +40,7 @@ class RepoBranchCommitViewController: UIViewController {
     label.textColor = .textColor
     return label
   }()
-  
+
   lazy var commitUserView: RepoBranchCommitUserView = {
     let view = RepoBranchCommitUserView()
     view.layer.borderWidth = 1
@@ -48,7 +48,7 @@ class RepoBranchCommitViewController: UIViewController {
     view.layer.cornerRadius = 5
     return view
   }()
-  
+
   lazy var descLabel: UILabel = {
     let label = UILabel()
     label.textColor = .textColor
@@ -56,18 +56,18 @@ class RepoBranchCommitViewController: UIViewController {
     label.numberOfLines = 0
     return label
   }()
-  
+
   lazy var headerView: UIView = {
     let view = UIView(frame: CGRect(x: 0, y: 0, width: FrameGuide.screenWidth, height: 150))
     return view
   }()
-  
+
   lazy var lineView: UIView = {
     let view = UIView()
     view.backgroundColor = UIColorFromRGB(0xeeeeee)
     return view
   }()
-  
+
   lazy var createButton: UIButton = {
     let createButton = UIButton()
     createButton.backgroundColor = UIColor(red: 66.0 / 255, green: 150.0 / 255, blue: 77.0 / 255, alpha: 1)
@@ -78,7 +78,7 @@ class RepoBranchCommitViewController: UIViewController {
     createButton.addTarget(self, action: #selector(createAction), for: .touchUpInside)
     return createButton
   }()
-  
+
   lazy var footerView: UIView = {
     let view = UIView(frame: CGRect(x: 0, y: 0, width: FrameGuide.screenWidth, height: 80))
     view.addSubview(createButton)
@@ -89,7 +89,7 @@ class RepoBranchCommitViewController: UIViewController {
     }
     return view
   }()
-  
+
   lazy var tableView: UITableView = {
     let tableView = UITableView()
     tableView.delegate = self
@@ -101,25 +101,25 @@ class RepoBranchCommitViewController: UIViewController {
     tableView.register(RepoBranchCommitFileCell.classForCoder(), forCellReuseIdentifier: RepoBranchCommitFileCell.className)
     return tableView
   }()
-  
+
   init(head: String, base: String, urlString: String) {
     self.head = head
     self.base = base
     self.urlString = urlString
     super.init(nibName: nil, bundle: nil)
   }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     setUp()
   }
-  
+
   private func fetchRepoBranchCommitInfo() {
     Task {
       if let info = await RepoManager.fetchRepoBranchCommit(with: urlString) {
         self.branchCommit = info
         commitUserView.render(with: info)
-        
+
         if let stats = info.stats {
           let text = "Showing \(info.displayedFiles.count) changed files with \(stats.additions) additions and \(stats.deletions) deletions."
           let attr = NSMutableAttributedString(string: text)
@@ -138,16 +138,16 @@ class RepoBranchCommitViewController: UIViewController {
           }
           descLabel.attributedText = attr
         }
-        
+
         self.files = info.displayedFiles
         self.tableView.reloadData()
       }
     }
   }
-  
+
   private func setUp() {
     self.navigationItem.title = "Comparing changes"
-    
+
     view.backgroundColor = .white
     headerView.addSubview(compareLabel)
     headerView.addSubview(baseLabel)
@@ -155,7 +155,7 @@ class RepoBranchCommitViewController: UIViewController {
     headerView.addSubview(descLabel)
     headerView.addSubview(lineView)
     view.addSubview(tableView)
-    
+
     baseLabel.snp.makeConstraints { make in
       make.leading.equalTo(12)
       make.top.equalTo(10)
@@ -184,22 +184,22 @@ class RepoBranchCommitViewController: UIViewController {
     tableView.snp.makeConstraints { make in
       make.edges.equalToSuperview()
     }
-    
+
     let baseText = "base: \(base)"
     let baseAttr = NSMutableAttributedString(string: baseText)
     baseAttr.addAttribute(.foregroundColor, value: UIColor.black, range: NSRange(location: 6, length: base.count))
     baseAttr.addAttribute(.font, value: UIFont.systemFont(ofSize: 14, weight: .bold), range: NSRange(location: 6, length: base.count))
     baseLabel.attributedText = baseAttr
-    
+
     let compareText = "compare: \(head)"
     let compareAttr = NSMutableAttributedString(string: compareText)
     compareAttr.addAttribute(.foregroundColor, value: UIColor.black, range: NSRange(location: 9, length: head.count))
     compareAttr.addAttribute(.font, value: UIFont.systemFont(ofSize: 14, weight: .bold), range: NSRange(location: 9, length: head.count))
     compareLabel.attributedText = compareAttr
-    
+
     fetchRepoBranchCommitInfo()
   }
-  
+
   @objc func createAction() {
     if let branchCommit = branchCommit,
        let repoName = getRepoName(by: urlString),
@@ -220,11 +220,11 @@ class RepoBranchCommitViewController: UIViewController {
       }
     }
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
 }
 
 extension RepoBranchCommitViewController: UITableViewDelegate, UITableViewDataSource {
@@ -233,14 +233,14 @@ extension RepoBranchCommitViewController: UITableViewDelegate, UITableViewDataSo
     cell.render(with: files[indexPath.row])
     return cell
   }
-  
+
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return files.count
   }
-  
+
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
-    
+
     let file = files[indexPath.row]
     if let url = URL(string: file.blobUrl) {
       let vc = SFSafariViewController(url: url)

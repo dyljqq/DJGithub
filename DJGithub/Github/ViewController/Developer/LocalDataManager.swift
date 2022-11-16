@@ -13,13 +13,13 @@ enum LocalDataType {
 }
 
 struct LocalDataViewModel {
-  
+
   let type: LocalDataType
-  
+
   init(type: LocalDataType) {
     self.type = type
   }
-  
+
   func loadData() async -> [DJCodable] {
     let task = Task { () -> [DJCodable] in
       switch type {
@@ -35,5 +35,5 @@ struct LocalDataViewModel {
     }
     return await task.value
   }
-  
+
 }

@@ -8,27 +8,27 @@
 import UIKit
 
 class PinnedRepoCell: UICollectionViewCell {
-  
+
   lazy var nameLabel: UILabel = {
     let label = UILabel()
     label.font = UIFont.systemFont(ofSize: 14, weight: .bold)
     label.textColor = .lightBlue
     return label
   }()
-  
+
   lazy var repoIconImageView: UIImageView = {
     let imageView = UIImageView()
     imageView.image = UIImage(named: "book")
     return imageView
   }()
-  
+
   lazy var updatedLabel: UILabel = {
     let label = UILabel()
     label.font = UIFont.systemFont(ofSize: 12)
     label.textColor = .textGrayColor
     return label
   }()
-  
+
   lazy var descLabel: UILabel = {
     let label = UILabel()
     label.font = UIFont.systemFont(ofSize: 14)
@@ -36,38 +36,38 @@ class PinnedRepoCell: UICollectionViewCell {
     label.numberOfLines = 2
     return label
   }()
-  
+
   lazy var languageColorView: UIView = {
     let view = UIView()
     view.layer.cornerRadius = 7
     return view
   }()
-  
+
   lazy var languageLabel: UILabel = {
     let label = UILabel()
     label.textColor = .textColor
     label.font = UIFont.systemFont(ofSize: 12)
     return label
   }()
-  
+
   lazy var starImageView: UIImageView = {
     let imageView = UIImageView()
     imageView.image = UIImage(named: "star")
     return imageView
   }()
-  
+
   lazy var starCountLabel: UILabel = {
     let label = UILabel()
     label.font = UIFont.systemFont(ofSize: 12)
     label.textColor = .textColor
     return label
   }()
-  
+
   override init(frame: CGRect) {
     super.init(frame: frame)
     setUp()
   }
-  
+
   func render(with pinnedItem: PinnedRepoNode) {
     nameLabel.text = pinnedItem.name
     descLabel.text = pinnedItem.description ?? "No Description Provided."
@@ -80,11 +80,11 @@ class PinnedRepoCell: UICollectionViewCell {
     }
     starCountLabel.text = "\(pinnedItem.stargazers.totalCount)"
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   private func setUp() {
     contentView.backgroundColor = .white
     contentView.layer.cornerRadius = 5
@@ -98,7 +98,7 @@ class PinnedRepoCell: UICollectionViewCell {
     contentView.addSubview(languageLabel)
     contentView.addSubview(starImageView)
     contentView.addSubview(starCountLabel)
-    
+
     repoIconImageView.snp.makeConstraints { make in
       make.leading.equalTo(12)
       make.top.equalTo(12)
