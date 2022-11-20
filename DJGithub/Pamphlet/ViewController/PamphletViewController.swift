@@ -20,7 +20,7 @@ class PamphletViewController: UIViewController {
     fatalError("init(coder:) has not been implemented")
   }
 
-  var dataSource: [PamphletSectionModel] = []
+  var dataSource: [CellModel] = []
 
   lazy var tableView: UITableView = {
     let tableView = UITableView()
@@ -50,7 +50,8 @@ class PamphletViewController: UIViewController {
     }
 
     Task {
-      dataSource = await type.loadData()
+      let items = await type.loadData()
+      dataSource = items.map { CellModel.convert(with: $0) }
       self.tableView.reloadData()
     }
   }
@@ -78,6 +79,7 @@ extension PamphletViewController: UITableViewDelegate, UITableViewDataSource {
 
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     let view = UIView(frame: CGRect(x: 0, y: 0, width: FrameGuide.screenWidth, height: 30))
+    view.backgroundColor = .white
 
     let label = UILabel()
     label.text = dataSource[section].sectionName
@@ -103,10 +105,14 @@ extension PamphletViewController: UITableViewDelegate, UITableViewDataSource {
     tableView.deselectRow(at: indexPath, animated: true)
 
     guard let model = dataSource[indexPath] else { return }
+    let originModel = dataSource[indexPath.section].originModel
     if type == VCType.resource {
       let filename = "D-\(model.title)"
       let vc = PamphletResourceViewController(naviTitle: model.title, filename: filename)
       self.navigationController?.pushViewController(vc, animated: true)
+    } else if originModel.type == PamphletSectionModel.PSType.issue {
+      let url = "djgithub://githubIssue?userName=ming1016&repoName=SwiftPamphletApp&issueNumber=\(model.issueNumber)"
+      URLRouter.open(with: url)
     } else {
       URLRouter.open(with: model.jumpUrl)
     }
@@ -119,6 +125,7 @@ extension PamphletViewController {
     case explore
     case archive
     case resource
+    case guideSyntax
 
     var title: String {
       switch self {
@@ -126,6 +133,7 @@ extension PamphletViewController {
       case .archive: return "库存档"
       case .resource: return "资料整理"
       case .main: return "Pamphlet"
+      case .guideSyntax: return "语法速查"
       }
     }
 
@@ -133,6 +141,7 @@ extension PamphletViewController {
       switch self {
       case .main: return "PamphletData"
       case .resource: return "PamphletSectionContentResource"
+      case .guideSyntax: return "guide-syntax"
       default: return ""
       }
     }
@@ -141,5 +150,45 @@ extension PamphletViewController {
       guard let fileName = jsonFileName else { return [] }
       return loadBundleJSONFile(fileName)
     }
+  }
+
+  struct CellModel {
+
+    let sectionName: String
+    let items: [SectionItemModel]
+    let originModel: PamphletSectionModel
+
+    static func convert(with model: PamphletSectionModel) -> CellModel {
+      let items = model.displayItems.compactMap { item in
+        switch model.type {
+        case .issue:
+          if let item = item as? PamphletSectionModel.PamphletIssueModel {
+            return SectionItemModel(title: item.title, imageName: "", jumpUrl: "", issueNumber: item.number)
+          }
+        case .item:
+          if let item = item as? PamphletSectionModel.PamphletSimpleModel {
+            return SectionItemModel(title: item.title, imageName: item.imageName, jumpUrl: item.jumpUrl, issueNumber: 0)
+          }
+        }
+        return nil
+      }
+      return CellModel(sectionName: model.sectionName, items: items, originModel: model)
+    }
+  }
+
+  struct SectionItemModel {
+    let title: String
+    let imageName: String?
+    let jumpUrl: String?
+    let issueNumber: Int
+  }
+}
+
+fileprivate extension Array where Element == PamphletViewController.CellModel {
+  subscript(indexPath: IndexPath) -> PamphletViewController.SectionItemModel? {
+    guard indexPath.section < self.count else { return nil }
+    let sectionModel = self[indexPath.section]
+    guard indexPath.row < sectionModel.items.count else { return nil }
+    return sectionModel.items[indexPath.row]
   }
 }

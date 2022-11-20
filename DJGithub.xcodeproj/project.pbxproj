@@ -37,6 +37,12 @@
 		7311A526292A68DA00B1A2A6 /* PamphletResourceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7311A525292A68DA00B1A2A6 /* PamphletResourceModel.swift */; };
 		7311A528292A69A600B1A2A6 /* PamphletResourceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7311A527292A69A600B1A2A6 /* PamphletResourceViewController.swift */; };
 		7311A52A292A6A2B00B1A2A6 /* PamphletResourceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7311A529292A6A2B00B1A2A6 /* PamphletResourceCell.swift */; };
+		7311A52C292A830A00B1A2A6 /* guide-syntax.json in Resources */ = {isa = PBXBuildFile; fileRef = 7311A52B292A830A00B1A2A6 /* guide-syntax.json */; };
+		7311A532292A832300B1A2A6 /* guide-subject.json in Resources */ = {isa = PBXBuildFile; fileRef = 7311A52D292A832300B1A2A6 /* guide-subject.json */; };
+		7311A533292A832300B1A2A6 /* lib-Combine.json in Resources */ = {isa = PBXBuildFile; fileRef = 7311A52E292A832300B1A2A6 /* lib-Combine.json */; };
+		7311A534292A832300B1A2A6 /* guide-features.json in Resources */ = {isa = PBXBuildFile; fileRef = 7311A52F292A832300B1A2A6 /* guide-features.json */; };
+		7311A535292A832300B1A2A6 /* lib-Concurrency.json in Resources */ = {isa = PBXBuildFile; fileRef = 7311A530292A832300B1A2A6 /* lib-Concurrency.json */; };
+		7311A536292A832300B1A2A6 /* lib-SwiftUI.json in Resources */ = {isa = PBXBuildFile; fileRef = 7311A531292A832300B1A2A6 /* lib-SwiftUI.json */; };
 		732016FF28F46DFB007B970F /* DateParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732016FE28F46DFB007B970F /* DateParser.swift */; };
 		7320170128F47B76007B970F /* RegularParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7320170028F47B76007B970F /* RegularParser.swift */; };
 		7320170328F48227007B970F /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7320170228F48227007B970F /* FeedViewController.swift */; };
@@ -264,6 +270,12 @@
 		7311A525292A68DA00B1A2A6 /* PamphletResourceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PamphletResourceModel.swift; sourceTree = "<group>"; };
 		7311A527292A69A600B1A2A6 /* PamphletResourceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PamphletResourceViewController.swift; sourceTree = "<group>"; };
 		7311A529292A6A2B00B1A2A6 /* PamphletResourceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PamphletResourceCell.swift; sourceTree = "<group>"; };
+		7311A52B292A830A00B1A2A6 /* guide-syntax.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "guide-syntax.json"; sourceTree = "<group>"; };
+		7311A52D292A832300B1A2A6 /* guide-subject.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "guide-subject.json"; sourceTree = "<group>"; };
+		7311A52E292A832300B1A2A6 /* lib-Combine.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "lib-Combine.json"; sourceTree = "<group>"; };
+		7311A52F292A832300B1A2A6 /* guide-features.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "guide-features.json"; sourceTree = "<group>"; };
+		7311A530292A832300B1A2A6 /* lib-Concurrency.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "lib-Concurrency.json"; sourceTree = "<group>"; };
+		7311A531292A832300B1A2A6 /* lib-SwiftUI.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "lib-SwiftUI.json"; sourceTree = "<group>"; };
 		732016FE28F46DFB007B970F /* DateParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateParser.swift; sourceTree = "<group>"; };
 		7320170028F47B76007B970F /* RegularParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularParser.swift; sourceTree = "<group>"; };
 		7320170228F48227007B970F /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
@@ -569,6 +581,12 @@
 		737EF2672929FB700060C64F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7311A52F292A832300B1A2A6 /* guide-features.json */,
+				7311A52D292A832300B1A2A6 /* guide-subject.json */,
+				7311A52E292A832300B1A2A6 /* lib-Combine.json */,
+				7311A530292A832300B1A2A6 /* lib-Concurrency.json */,
+				7311A531292A832300B1A2A6 /* lib-SwiftUI.json */,
+				7311A52B292A830A00B1A2A6 /* guide-syntax.json */,
 				7311A523292A433100B1A2A6 /* archiveRepos.json */,
 				737EF2682929FB960060C64F /* Data */,
 				737EF28D292A0EF80060C64F /* PamphletSectionContentResource.json */,
@@ -1224,24 +1242,30 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7311A535292A832300B1A2A6 /* lib-Concurrency.json in Resources */,
 				73AACAE128D308A70072B1DF /* LaunchScreen.storyboard in Resources */,
 				737EF2772929FB960060C64F /* D-Swift 技术.json in Resources */,
 				737EF2762929FB960060C64F /* D-播客.json in Resources */,
+				7311A534292A832300B1A2A6 /* guide-features.json in Resources */,
 				7339201F28F693EA00DC76B0 /* config.json in Resources */,
 				7311A524292A433100B1A2A6 /* archiveRepos.json in Resources */,
 				737EF2732929FB960060C64F /* D-图片工具.json in Resources */,
+				7311A52C292A830A00B1A2A6 /* guide-syntax.json in Resources */,
 				73AACADE28D308A70072B1DF /* Assets.xcassets in Resources */,
 				73101D5A28E4A2AB00DB5423 /* rssfeed.json in Resources */,
+				7311A532292A832300B1A2A6 /* guide-subject.json in Resources */,
 				737EF2752929FB960060C64F /* D-周报.json in Resources */,
 				737EF2792929FB960060C64F /* D-SwiftUI.json in Resources */,
 				737EF2782929FB960060C64F /* D-Swift 官方.json in Resources */,
 				7339201728F587F100DC76B0 /* css.html in Resources */,
+				7311A533292A832300B1A2A6 /* lib-Combine.json in Resources */,
 				73101D5B28E4A2AB00DB5423 /* repos.json in Resources */,
 				737EF28E292A0EF80060C64F /* PamphletSectionContentResource.json in Resources */,
 				737EF2742929FB960060C64F /* D-美术素材.json in Resources */,
 				73DF6BF428EB0DCB0003BDB8 /* developers.json in Resources */,
 				737EF288292A069C0060C64F /* PamphletData.json in Resources */,
 				73AACADC28D308A60072B1DF /* Main.storyboard in Resources */,
+				7311A536292A832300B1A2A6 /* lib-SwiftUI.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

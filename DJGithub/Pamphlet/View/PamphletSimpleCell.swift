@@ -27,9 +27,9 @@ class PamphletSimpleCell: UITableViewCell {
     setUp()
   }
 
-  func render(with model: PamphletSectionModel.PamphletSimpleModel?) {
+  func render(with model: PamphletViewController.SectionItemModel?) {
     guard let model else { return }
-    if let imageName = model.imageName {
+    if let imageName = model.imageName, !imageName.isEmpty {
       iconImageView.image = UIImage(named: imageName)
       titleLabel.snp.updateConstraints { make in
         make.leading.equalTo(52)

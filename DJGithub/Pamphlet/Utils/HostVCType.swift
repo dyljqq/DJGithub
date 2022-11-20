@@ -19,6 +19,7 @@ enum HostVCType: String {
   case archive
   case github
   case web
+  case githubIssue
   case unknown
 
   func getVC(with params: [String: String] = [:]) -> UIViewController? {
@@ -47,6 +48,12 @@ enum HostVCType: String {
     case .web:
       if let urlString = params["url"] {
         return configWebVC(with: urlString)
+      }
+    case .githubIssue:
+      if let userName = params["userName"],
+         let repoName = params["repoName"],
+         let issueNumber = Int(params["issueNumber"] ?? "") {
+        return configGithubIssueVC(with: userName, repoName: repoName, issueNumber: issueNumber)
       }
     case .unknown:
       return nil
@@ -81,5 +88,9 @@ fileprivate extension HostVCType {
   func configWebVC(with urlString: String) -> WebViewController? {
     let vc = WebViewController(with: urlString)
     return vc
+  }
+
+  func configGithubIssueVC(with userName: String, repoName: String, issueNumber: Int) -> RepoIssueDetailViewController {
+    return RepoIssueDetailViewController(userName: userName, repoName: repoName, issueNum: issueNumber)
   }
 }

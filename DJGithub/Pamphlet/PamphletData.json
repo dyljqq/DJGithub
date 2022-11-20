@@ -34,7 +34,8 @@
     "items": [
       {
         "imageName": "p25",
-        "title": "语法速查"
+        "title": "语法速查",
+        "jumpUrl": "djgithub://pamphlet?type=guideSyntax"
       },
       {
         "imageName": "p26",
