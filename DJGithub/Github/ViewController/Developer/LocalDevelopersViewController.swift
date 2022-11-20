@@ -10,6 +10,8 @@ import UIKit
 class LocalDevelopersViewController: UIViewController {
 
   let type: LocalDataType
+  var filename: String?
+  var naviTitle: String?
 
   lazy var viewModel: LocalDataViewModel = {
     return LocalDataViewModel(type: type)
@@ -36,8 +38,10 @@ class LocalDevelopersViewController: UIViewController {
     }
   }
 
-  init(with type: LocalDataType) {
+  init(with type: LocalDataType, filename: String? = nil, title: String? = nil) {
     self.type = type
+    self.filename = filename
+    self.naviTitle = title
     super.init(nibName: nil, bundle: nil)
   }
 
@@ -47,6 +51,8 @@ class LocalDevelopersViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    navigationItem.title = naviTitle
 
     view.addSubview(tableView)
     tableView.snp.makeConstraints { make in
@@ -73,7 +79,7 @@ class LocalDevelopersViewController: UIViewController {
 
   func updateLocalData() {
     Task {
-      self.dataSource = await viewModel.loadData()
+      self.dataSource = await viewModel.loadData(with: self.filename)
     }
   }
 }

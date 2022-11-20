@@ -33,6 +33,7 @@ class FeedsViewController: UIViewController, NextPageLoadable {
   }
 
   private func setUp() {
+    navigationItem.title = "News"
     view.backgroundColor = .backgroundColor
 
     view.addSubview(tableView)
@@ -45,7 +46,7 @@ class FeedsViewController: UIViewController, NextPageLoadable {
 
     Task {
       self.feeds = await FeedManager.getFeeds()
-      if let _ = self.feeds {
+      if self.feeds != nil {
         tableView.addHeader { [weak self] in
           guard let strongSelf = self else { return }
           strongSelf.nextPageState.update(start: 1, hasNext: true, isLoading: false)

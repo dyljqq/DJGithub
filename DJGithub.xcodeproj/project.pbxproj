@@ -33,6 +33,10 @@
 		73101D5F28E4A5E400DB5423 /* DevelopersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73101D5E28E4A5E400DB5423 /* DevelopersViewController.swift */; };
 		7311A520292A36E800B1A2A6 /* URLRouterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7311A51F292A36E800B1A2A6 /* URLRouterModel.swift */; };
 		7311A522292A3CA600B1A2A6 /* HostVCType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7311A521292A3CA600B1A2A6 /* HostVCType.swift */; };
+		7311A524292A433100B1A2A6 /* archiveRepos.json in Resources */ = {isa = PBXBuildFile; fileRef = 7311A523292A433100B1A2A6 /* archiveRepos.json */; };
+		7311A526292A68DA00B1A2A6 /* PamphletResourceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7311A525292A68DA00B1A2A6 /* PamphletResourceModel.swift */; };
+		7311A528292A69A600B1A2A6 /* PamphletResourceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7311A527292A69A600B1A2A6 /* PamphletResourceViewController.swift */; };
+		7311A52A292A6A2B00B1A2A6 /* PamphletResourceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7311A529292A6A2B00B1A2A6 /* PamphletResourceCell.swift */; };
 		732016FF28F46DFB007B970F /* DateParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732016FE28F46DFB007B970F /* DateParser.swift */; };
 		7320170128F47B76007B970F /* RegularParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7320170028F47B76007B970F /* RegularParser.swift */; };
 		7320170328F48227007B970F /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7320170228F48227007B970F /* FeedViewController.swift */; };
@@ -83,7 +87,7 @@
 		737EF2812929FE740060C64F /* PamphletSimpleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737EF2802929FE740060C64F /* PamphletSimpleModel.swift */; };
 		737EF285292A000F0060C64F /* PamphletSimpleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737EF284292A000F0060C64F /* PamphletSimpleCell.swift */; };
 		737EF288292A069C0060C64F /* PamphletData.json in Resources */ = {isa = PBXBuildFile; fileRef = 737EF287292A069C0060C64F /* PamphletData.json */; };
-		737EF28A292A0DEC0060C64F /* PamphletSimpleContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737EF289292A0DEC0060C64F /* PamphletSimpleContentViewController.swift */; };
+		737EF28A292A0DEC0060C64F /* PamphletContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737EF289292A0DEC0060C64F /* PamphletContentViewController.swift */; };
 		737EF28E292A0EF80060C64F /* PamphletSectionContentResource.json in Resources */ = {isa = PBXBuildFile; fileRef = 737EF28D292A0EF80060C64F /* PamphletSectionContentResource.json */; };
 		737EF295292A11DF0060C64F /* Array+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737EF294292A11DF0060C64F /* Array+Ext.swift */; };
 		737EF298292A21080060C64F /* URLRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737EF297292A21080060C64F /* URLRouter.swift */; };
@@ -256,6 +260,10 @@
 		73101D5E28E4A5E400DB5423 /* DevelopersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopersViewController.swift; sourceTree = "<group>"; };
 		7311A51F292A36E800B1A2A6 /* URLRouterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRouterModel.swift; sourceTree = "<group>"; };
 		7311A521292A3CA600B1A2A6 /* HostVCType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostVCType.swift; sourceTree = "<group>"; };
+		7311A523292A433100B1A2A6 /* archiveRepos.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = archiveRepos.json; sourceTree = "<group>"; };
+		7311A525292A68DA00B1A2A6 /* PamphletResourceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PamphletResourceModel.swift; sourceTree = "<group>"; };
+		7311A527292A69A600B1A2A6 /* PamphletResourceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PamphletResourceViewController.swift; sourceTree = "<group>"; };
+		7311A529292A6A2B00B1A2A6 /* PamphletResourceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PamphletResourceCell.swift; sourceTree = "<group>"; };
 		732016FE28F46DFB007B970F /* DateParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateParser.swift; sourceTree = "<group>"; };
 		7320170028F47B76007B970F /* RegularParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularParser.swift; sourceTree = "<group>"; };
 		7320170228F48227007B970F /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
@@ -306,7 +314,7 @@
 		737EF2802929FE740060C64F /* PamphletSimpleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PamphletSimpleModel.swift; sourceTree = "<group>"; };
 		737EF284292A000F0060C64F /* PamphletSimpleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PamphletSimpleCell.swift; sourceTree = "<group>"; };
 		737EF287292A069C0060C64F /* PamphletData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PamphletData.json; sourceTree = "<group>"; };
-		737EF289292A0DEC0060C64F /* PamphletSimpleContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PamphletSimpleContentViewController.swift; sourceTree = "<group>"; };
+		737EF289292A0DEC0060C64F /* PamphletContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PamphletContentViewController.swift; sourceTree = "<group>"; };
 		737EF28D292A0EF80060C64F /* PamphletSectionContentResource.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PamphletSectionContentResource.json; sourceTree = "<group>"; };
 		737EF294292A11DF0060C64F /* Array+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Ext.swift"; sourceTree = "<group>"; };
 		737EF297292A21080060C64F /* URLRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRouter.swift; sourceTree = "<group>"; };
@@ -561,6 +569,7 @@
 		737EF2672929FB700060C64F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7311A523292A433100B1A2A6 /* archiveRepos.json */,
 				737EF2682929FB960060C64F /* Data */,
 				737EF28D292A0EF80060C64F /* PamphletSectionContentResource.json */,
 			);
@@ -609,7 +618,8 @@
 			isa = PBXGroup;
 			children = (
 				737EF27E2929FC390060C64F /* PamphletViewController.swift */,
-				737EF289292A0DEC0060C64F /* PamphletSimpleContentViewController.swift */,
+				737EF289292A0DEC0060C64F /* PamphletContentViewController.swift */,
+				7311A527292A69A600B1A2A6 /* PamphletResourceViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -618,6 +628,7 @@
 			isa = PBXGroup;
 			children = (
 				737EF284292A000F0060C64F /* PamphletSimpleCell.swift */,
+				7311A529292A6A2B00B1A2A6 /* PamphletResourceCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -626,6 +637,7 @@
 			isa = PBXGroup;
 			children = (
 				737EF2802929FE740060C64F /* PamphletSimpleModel.swift */,
+				7311A525292A68DA00B1A2A6 /* PamphletResourceModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1216,6 +1228,7 @@
 				737EF2772929FB960060C64F /* D-Swift 技术.json in Resources */,
 				737EF2762929FB960060C64F /* D-播客.json in Resources */,
 				7339201F28F693EA00DC76B0 /* config.json in Resources */,
+				7311A524292A433100B1A2A6 /* archiveRepos.json in Resources */,
 				737EF2732929FB960060C64F /* D-图片工具.json in Resources */,
 				73AACADE28D308A70072B1DF /* Assets.xcassets in Resources */,
 				73101D5A28E4A2AB00DB5423 /* rssfeed.json in Resources */,
@@ -1290,6 +1303,7 @@
 				73DF6C0428EC252E0003BDB8 /* String+File.swift in Sources */,
 				73AACB3428D357C80072B1DF /* UserViewController.swift in Sources */,
 				737EF285292A000F0060C64F /* PamphletSimpleCell.swift in Sources */,
+				7311A528292A69A600B1A2A6 /* PamphletResourceViewController.swift in Sources */,
 				7341DCC628DF2400009A3A3C /* TabBarController.swift in Sources */,
 				7320170128F47B76007B970F /* RegularParser.swift in Sources */,
 				73074C7E28ED5664001A90E7 /* IssueDetail.swift in Sources */,
@@ -1352,6 +1366,7 @@
 				73074CC728EF4809001A90E7 /* LocalRepo.swift in Sources */,
 				73101D4128E30C5200DB5423 /* SimpleUserCell.swift in Sources */,
 				73B7904A28E52450002A9CDC /* LocalDevelopersViewController.swift in Sources */,
+				7311A52A292A6A2B00B1A2A6 /* PamphletResourceCell.swift in Sources */,
 				735D0E0B2903115E00E618B3 /* StackAddressInfo.swift in Sources */,
 				73936F2D2913784500BC2901 /* NSNotificationName+Leak.swift in Sources */,
 				73074CD528F166D8001A90E7 /* UserInfoEditViewController.swift in Sources */,
@@ -1401,6 +1416,7 @@
 				73E14E5328F34FF200A9811D /* Parser.swift in Sources */,
 				73C598C528D85EF100DA86A1 /* PopoverView.swift in Sources */,
 				73074C7C28ED5507001A90E7 /* RepoIssueDetailViewController.swift in Sources */,
+				7311A526292A68DA00B1A2A6 /* PamphletResourceModel.swift in Sources */,
 				73AACAD728D308A60072B1DF /* SceneDelegate.swift in Sources */,
 				73AACB5628D47FCB0072B1DF /* String+Ext.swift in Sources */,
 				7362FE7D291031D600D97E1A /* DJCrashManager.swift in Sources */,
@@ -1419,7 +1435,7 @@
 				73EE0CEC290A72560010C54A /* DJMaskView.swift in Sources */,
 				73936F3729137E7200BC2901 /* DJObjectProxy.swift in Sources */,
 				73936F2F2913790F00BC2901 /* UIViewController+Leak.swift in Sources */,
-				737EF28A292A0DEC0060C64F /* PamphletSimpleContentViewController.swift in Sources */,
+				737EF28A292A0DEC0060C64F /* PamphletContentViewController.swift in Sources */,
 				73AACB5828D483CA0072B1DF /* UserContributionCell.swift in Sources */,
 				73AACB0C28D30B3D0072B1DF /* Error.swift in Sources */,
 				735D0E082903115E00E618B3 /* mach_stack_info.c in Sources */,

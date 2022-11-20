@@ -102,8 +102,14 @@ extension PamphletViewController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
 
-    let model = dataSource[indexPath]
-    URLRouter.open(with: model?.jumpUrl)
+    guard let model = dataSource[indexPath] else { return }
+    if type == VCType.resource {
+      let filename = "D-\(model.title)"
+      let vc = PamphletResourceViewController(naviTitle: model.title, filename: filename)
+      self.navigationController?.pushViewController(vc, animated: true)
+    } else {
+      URLRouter.open(with: model.jumpUrl)
+    }
   }
 }
 

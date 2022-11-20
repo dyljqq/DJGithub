@@ -19,11 +19,13 @@
     "items": [
       {
         "imageName": "p23",
-        "title": "探索库"
+        "title": "探索库",
+        "jumpUrl": "djgithub://explore?filename=repos&title=探索库"
       },
       {
         "imageName": "p24",
-        "title": "库存档"
+        "title": "库存档",
+        "jumpUrl": "djgithub://archive?filename=archiveRepos&title=库存档"
       },
     ]
   },

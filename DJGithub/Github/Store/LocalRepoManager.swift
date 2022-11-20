@@ -9,13 +9,9 @@ import Foundation
 
 struct LocalRepoManager {
 
-  static let fileName = "repos"
-
-  static func loadRepos() async -> [LocalRepoGroup] {
-    return await Task { () -> [LocalRepoGroup] in
-      let rs: [LocalRepoGroup] = loadBundleJSONFile(fileName)
-      return rs
-    }.value
+  static func loadRepos(with filename: String? = nil) async -> [LocalRepoGroup] {
+    guard let filename else { return [] }
+    return loadBundleJSONFile(filename)
   }
 
 }

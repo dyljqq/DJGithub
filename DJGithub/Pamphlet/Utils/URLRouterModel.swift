@@ -11,22 +11,12 @@ struct URLRouterModel {
   let scheme: String
   let host: String
   let path: String
-  let queryItems: [URLQueryItem]?
+  let type: HostVCType?
+  let queryItems: [String: String]
 
   var transition: VCTransition = .push
 
-  var mapping: [String: String] {
-    guard let queryItems = queryItems else { return [:] }
-    var hash: [String: String] = [:]
-    queryItems.forEach { hash[$0.name] = $0.value }
-    return hash
-  }
-
-  var hostVCType: HostVCType? {
-    return HostVCType(rawValue: host)
-  }
-
   var vc: UIViewController? {
-    return hostVCType?.getVC(with: mapping)
+    return type?.getVC(with: queryItems)
   }
 }
