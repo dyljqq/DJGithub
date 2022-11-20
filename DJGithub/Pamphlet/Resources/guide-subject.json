@@ -1,6 +1,6 @@
 [
     {
-        "name":"Swift 那些事",
+        "sectionName":"Swift 那些事",
         "id":2202101754,
         "issues":[
             {
@@ -11,7 +11,7 @@
         ]
     },
     {
-        "name":"规范",
+        "sectionName":"规范",
         "id":2111231351,
         "issues":[
             {
@@ -22,7 +22,7 @@
         ]
     },
     {
-        "name":"资料推荐",
+        "sectionName":"资料推荐",
         "id":2112071713,
         "issues":[
             {
@@ -33,7 +33,7 @@
         ]
     },
     {
-        "name":"三方库使用",
+        "sectionName":"三方库使用",
         "id":2112021254,
         "issues":[
             {
@@ -44,7 +44,7 @@
         ]
     },
     {
-        "name":"macOS",
+        "sectionName":"macOS",
         "id":2111231353,
         "issues":[
             {
@@ -75,7 +75,7 @@
         ]
     },
     {
-        "name":"性能和构建",
+        "sectionName":"性能和构建",
         "id":2206271556,
         "issues":[
             {

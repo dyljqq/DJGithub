@@ -126,6 +126,11 @@ extension PamphletViewController {
     case archive
     case resource
     case guideSyntax
+    case guideFeatures
+    case guideSubject
+    case swiftUI
+    case combine
+    case concurrency
 
     var title: String {
       switch self {
@@ -134,6 +139,11 @@ extension PamphletViewController {
       case .resource: return "资料整理"
       case .main: return "Pamphlet"
       case .guideSyntax: return "语法速查"
+      case .guideFeatures: return "特性"
+      case .guideSubject: return "专题"
+      case .swiftUI: return "SwiftUI"
+      case .combine: return "Combine"
+      case .concurrency: return "Concurrency"
       }
     }
 
@@ -142,6 +152,11 @@ extension PamphletViewController {
       case .main: return "PamphletData"
       case .resource: return "PamphletSectionContentResource"
       case .guideSyntax: return "guide-syntax"
+      case .guideFeatures: return "guide-features"
+      case .guideSubject: return "guide-subject"
+      case .swiftUI: return "lib-SwiftUI"
+      case .combine: return "lib-Combine"
+      case .concurrency: return "lib-Concurrency"
       default: return ""
       }
     }

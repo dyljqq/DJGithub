@@ -39,11 +39,13 @@
       },
       {
         "imageName": "p26",
-        "title": "特性"
+        "title": "特性",
+        "jumpUrl": "djgithub://pamphlet?type=guideFeatures"
       },
       {
         "imageName": "p27",
-        "title": "专题"
+        "title": "专题",
+        "jumpUrl": "djgithub://pamphlet?type=guideSubject"
       },
     ]
   },
@@ -52,15 +54,18 @@
     "items": [
       {
         "imageName": "p28",
-        "title": "SwiftUI"
+        "title": "SwiftUI",
+        "jumpUrl": "djgithub://pamphlet?type=swiftUI"
       },
       {
         "imageName": "p29",
-        "title": "Combine"
+        "title": "Combine",
+        "jumpUrl": "djgithub://pamphlet?type=combine"
       },
       {
         "imageName": "p30",
-        "title": "Concurrency"
+        "title": "Concurrency",
+        "jumpUrl": "djgithub://pamphlet?type=concurrency"
       },
     ]
   }
