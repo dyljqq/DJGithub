@@ -1,0 +1,63 @@
+[
+  {
+    "sectionName": "新动态",
+    "items": [
+      {
+        "imageName": "p21",
+        "title": "博客与资讯",
+      },
+      {
+        "imageName": "p22",
+        "title": "资料整理",
+        "jumpUrl": "djgithub://pamaphletMain?type=resource"
+      }
+    ]
+  },
+  {
+    "sectionName": "Github",
+    "items": [
+      {
+        "imageName": "p23",
+        "title": "探索库"
+      },
+      {
+        "imageName": "p24",
+        "title": "库存档"
+      },
+    ]
+  },
+  {
+    "sectionName": "Swift指南",
+    "items": [
+      {
+        "imageName": "p25",
+        "title": "语法速查"
+      },
+      {
+        "imageName": "p26",
+        "title": "特性"
+      },
+      {
+        "imageName": "p27",
+        "title": "专题"
+      },
+    ]
+  },
+  {
+    "sectionName": "库使用指南",
+    "items": [
+      {
+        "imageName": "p28",
+        "title": "SwiftUI"
+      },
+      {
+        "imageName": "p29",
+        "title": "Combine"
+      },
+      {
+        "imageName": "p30",
+        "title": "Concurrency"
+      },
+    ]
+  }
+]
