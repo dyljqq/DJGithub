@@ -143,21 +143,20 @@ class UserViewController: UIViewController {
       self.loadUserViewerInfo(with: userViewer)
     }
 
-    if let viewer = self.userViewer {
-      self.loadUserViewerInfo(with: viewer)
-    } else {
-      Task {
-        view.startLoading()
-        if let viewer = await UserManager.fetchUserInfo(by: self.name) {
-          self.userViewer = viewer
-          self.loadUserViewerInfo(with: viewer)
+    if self.userViewer == nil {
+      view.startLoading()
+    }
 
-          if ConfigManager.checkOwner(by: viewer.login) {
-            LocalUserManager.saveUser(viewer)
-          }
-        } else {
-          view.stopLoading()
+    Task {
+      if let viewer = await UserManager.fetchUserInfo(by: self.name) {
+        self.userViewer = viewer
+        self.loadUserViewerInfo(with: viewer)
+
+        if ConfigManager.checkOwner(by: viewer.login) {
+          LocalUserManager.saveUser(viewer)
         }
+      } else {
+        view.stopLoading()
       }
     }
 
