@@ -20,20 +20,17 @@ struct LocalDataViewModel {
     self.type = type
   }
 
-  func loadData() async -> [DJCodable] {
-    let task = Task { () -> [DJCodable] in
-      switch type {
-      case .developer:
-        var rs: [DJCodable] = await DeveloperGroupManager.shared.loadFromDatabase()
-        if rs.isEmpty {
-          rs = await DeveloperGroupManager.shared.loadLocalDeveloperGroups()
-        }
-        return rs
-      case .repo:
-        return await LocalRepoManager.loadRepos()
+  func loadData(with filename: String? = nil) async -> [DJCodable] {
+    switch type {
+    case .developer:
+      var rs: [DJCodable] = await DeveloperGroupManager.shared.loadFromDatabase()
+      if rs.isEmpty {
+        rs = await DeveloperGroupManager.shared.loadLocalDeveloperGroups()
       }
+      return rs
+    case .repo:
+      return await LocalRepoManager.loadRepos(with: filename)
     }
-    return await task.value
   }
 
 }

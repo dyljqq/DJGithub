@@ -1,0 +1,38 @@
+[
+  {
+    "sectionName": "新鲜事",
+    "items": [
+      {
+        "title": "周报"
+      },
+      {
+        "title": "播客"
+      }
+    ],
+  },
+  {
+    "sectionName": "Swift",
+    "items": [
+      {
+        "title": "Swift 官方"
+      },
+      {
+        "title": "Swift 技术"
+      },
+      {
+        "title": "SwiftUI"
+      }
+    ],
+  },
+  {
+    "sectionName": "美术",
+    "items": [
+      {
+        "title": "图片工具"
+      },
+      {
+        "title": "美术素材"
+      }
+    ]
+  }
+]

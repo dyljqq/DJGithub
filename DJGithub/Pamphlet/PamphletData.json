@@ -1,0 +1,72 @@
+[
+  {
+    "sectionName": "新动态",
+    "items": [
+      {
+        "imageName": "p21",
+        "title": "博客与资讯",
+        "jumpUrl": "djgithub://rssfeeds"
+      },
+      {
+        "imageName": "p22",
+        "title": "资料整理",
+        "jumpUrl": "djgithub://pamphlet?type=resource"
+      }
+    ]
+  },
+  {
+    "sectionName": "Github",
+    "items": [
+      {
+        "imageName": "p23",
+        "title": "探索库",
+        "jumpUrl": "djgithub://explore?filename=repos&title=探索库"
+      },
+      {
+        "imageName": "p24",
+        "title": "库存档",
+        "jumpUrl": "djgithub://archive?filename=archiveRepos&title=库存档"
+      },
+    ]
+  },
+  {
+    "sectionName": "Swift指南",
+    "items": [
+      {
+        "imageName": "p25",
+        "title": "语法速查",
+        "jumpUrl": "djgithub://pamphlet?type=guideSyntax"
+      },
+      {
+        "imageName": "p26",
+        "title": "特性",
+        "jumpUrl": "djgithub://pamphlet?type=guideFeatures"
+      },
+      {
+        "imageName": "p27",
+        "title": "专题",
+        "jumpUrl": "djgithub://pamphlet?type=guideSubject"
+      },
+    ]
+  },
+  {
+    "sectionName": "库使用指南",
+    "items": [
+      {
+        "imageName": "p28",
+        "title": "SwiftUI",
+        "jumpUrl": "djgithub://pamphlet?type=swiftUI"
+      },
+      {
+        "imageName": "p29",
+        "title": "Combine",
+        "jumpUrl": "djgithub://pamphlet?type=combine"
+      },
+      {
+        "imageName": "p30",
+        "title": "Concurrency",
+        "jumpUrl": "djgithub://pamphlet?type=concurrency"
+      },
+    ]
+  }
+]

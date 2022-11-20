@@ -22,7 +22,7 @@ func isEmpty(by str: String?) -> Bool {
 
 func loadBundleJSONFile<T: DJCodable>(_ filename: String) -> T {
   guard let file = Bundle.main.url(forResource: filename, withExtension: "json") else {
-      fatalError("Couldn't find \(filename) in main bundle.")
+    fatalError("Couldn't find \(filename) in main bundle.")
   }
   do {
     let decoder = JSONDecoder()
@@ -34,14 +34,14 @@ func loadBundleJSONFile<T: DJCodable>(_ filename: String) -> T {
 }
 
 func loadBundleData(_ filename: String) -> Data {
-    let data: Data
-    guard let file = Bundle.main.url(forResource: filename, withExtension: nil) else {
-        fatalError("Couldn't find \(filename) in main bundle.")
-    }
-    do {
-        data = try Data(contentsOf: file)
-        return data
-    } catch {
-        fatalError("Couldn't load \(filename) from main bundle:\n\(error)")
-    }
+  let data: Data
+  guard let file = Bundle.main.url(forResource: filename, withExtension: nil) else {
+    fatalError("Couldn't find \(filename) in main bundle.")
+  }
+  do {
+    data = try Data(contentsOf: file)
+    return data
+  } catch {
+    fatalError("Couldn't load \(filename) from main bundle:\n\(error)")
+  }
 }

@@ -31,6 +31,18 @@
 		73101D5A28E4A2AB00DB5423 /* rssfeed.json in Resources */ = {isa = PBXBuildFile; fileRef = 73101D5728E4A2AB00DB5423 /* rssfeed.json */; };
 		73101D5B28E4A2AB00DB5423 /* repos.json in Resources */ = {isa = PBXBuildFile; fileRef = 73101D5828E4A2AB00DB5423 /* repos.json */; };
 		73101D5F28E4A5E400DB5423 /* DevelopersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73101D5E28E4A5E400DB5423 /* DevelopersViewController.swift */; };
+		7311A520292A36E800B1A2A6 /* URLRouterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7311A51F292A36E800B1A2A6 /* URLRouterModel.swift */; };
+		7311A522292A3CA600B1A2A6 /* HostVCType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7311A521292A3CA600B1A2A6 /* HostVCType.swift */; };
+		7311A524292A433100B1A2A6 /* archiveRepos.json in Resources */ = {isa = PBXBuildFile; fileRef = 7311A523292A433100B1A2A6 /* archiveRepos.json */; };
+		7311A526292A68DA00B1A2A6 /* PamphletResourceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7311A525292A68DA00B1A2A6 /* PamphletResourceModel.swift */; };
+		7311A528292A69A600B1A2A6 /* PamphletResourceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7311A527292A69A600B1A2A6 /* PamphletResourceViewController.swift */; };
+		7311A52A292A6A2B00B1A2A6 /* PamphletResourceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7311A529292A6A2B00B1A2A6 /* PamphletResourceCell.swift */; };
+		7311A52C292A830A00B1A2A6 /* guide-syntax.json in Resources */ = {isa = PBXBuildFile; fileRef = 7311A52B292A830A00B1A2A6 /* guide-syntax.json */; };
+		7311A532292A832300B1A2A6 /* guide-subject.json in Resources */ = {isa = PBXBuildFile; fileRef = 7311A52D292A832300B1A2A6 /* guide-subject.json */; };
+		7311A533292A832300B1A2A6 /* lib-Combine.json in Resources */ = {isa = PBXBuildFile; fileRef = 7311A52E292A832300B1A2A6 /* lib-Combine.json */; };
+		7311A534292A832300B1A2A6 /* guide-features.json in Resources */ = {isa = PBXBuildFile; fileRef = 7311A52F292A832300B1A2A6 /* guide-features.json */; };
+		7311A535292A832300B1A2A6 /* lib-Concurrency.json in Resources */ = {isa = PBXBuildFile; fileRef = 7311A530292A832300B1A2A6 /* lib-Concurrency.json */; };
+		7311A536292A832300B1A2A6 /* lib-SwiftUI.json in Resources */ = {isa = PBXBuildFile; fileRef = 7311A531292A832300B1A2A6 /* lib-SwiftUI.json */; };
 		732016FF28F46DFB007B970F /* DateParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732016FE28F46DFB007B970F /* DateParser.swift */; };
 		7320170128F47B76007B970F /* RegularParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7320170028F47B76007B970F /* RegularParser.swift */; };
 		7320170328F48227007B970F /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7320170228F48227007B970F /* FeedViewController.swift */; };
@@ -70,6 +82,21 @@
 		7362FE852911816600D97E1A /* Default+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7362FE842911816600D97E1A /* Default+Ext.swift */; };
 		7362FEC729124F9000D97E1A /* RssFeedRead.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7362FEC629124F9000D97E1A /* RssFeedRead.swift */; };
 		7374D19728E0BC1D00E6BE47 /* Readme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7374D19628E0BC1D00E6BE47 /* Readme.swift */; };
+		737EF2732929FB960060C64F /* D-图片工具.json in Resources */ = {isa = PBXBuildFile; fileRef = 737EF26A2929FB960060C64F /* D-图片工具.json */; };
+		737EF2742929FB960060C64F /* D-美术素材.json in Resources */ = {isa = PBXBuildFile; fileRef = 737EF26B2929FB960060C64F /* D-美术素材.json */; };
+		737EF2752929FB960060C64F /* D-周报.json in Resources */ = {isa = PBXBuildFile; fileRef = 737EF26D2929FB960060C64F /* D-周报.json */; };
+		737EF2762929FB960060C64F /* D-播客.json in Resources */ = {isa = PBXBuildFile; fileRef = 737EF26E2929FB960060C64F /* D-播客.json */; };
+		737EF2772929FB960060C64F /* D-Swift 技术.json in Resources */ = {isa = PBXBuildFile; fileRef = 737EF2702929FB960060C64F /* D-Swift 技术.json */; };
+		737EF2782929FB960060C64F /* D-Swift 官方.json in Resources */ = {isa = PBXBuildFile; fileRef = 737EF2712929FB960060C64F /* D-Swift 官方.json */; };
+		737EF2792929FB960060C64F /* D-SwiftUI.json in Resources */ = {isa = PBXBuildFile; fileRef = 737EF2722929FB960060C64F /* D-SwiftUI.json */; };
+		737EF27F2929FC390060C64F /* PamphletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737EF27E2929FC390060C64F /* PamphletViewController.swift */; };
+		737EF2812929FE740060C64F /* PamphletSimpleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737EF2802929FE740060C64F /* PamphletSimpleModel.swift */; };
+		737EF285292A000F0060C64F /* PamphletSimpleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737EF284292A000F0060C64F /* PamphletSimpleCell.swift */; };
+		737EF288292A069C0060C64F /* PamphletData.json in Resources */ = {isa = PBXBuildFile; fileRef = 737EF287292A069C0060C64F /* PamphletData.json */; };
+		737EF28A292A0DEC0060C64F /* PamphletContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737EF289292A0DEC0060C64F /* PamphletContentViewController.swift */; };
+		737EF28E292A0EF80060C64F /* PamphletSectionContentResource.json in Resources */ = {isa = PBXBuildFile; fileRef = 737EF28D292A0EF80060C64F /* PamphletSectionContentResource.json */; };
+		737EF295292A11DF0060C64F /* Array+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737EF294292A11DF0060C64F /* Array+Ext.swift */; };
+		737EF298292A21080060C64F /* URLRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737EF297292A21080060C64F /* URLRouter.swift */; };
 		73936F2B291377F300BC2901 /* DJLeakSniffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F2A291377F300BC2901 /* DJLeakSniffer.swift */; };
 		73936F2D2913784500BC2901 /* NSNotificationName+Leak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F2C2913784500BC2901 /* NSNotificationName+Leak.swift */; };
 		73936F2F2913790F00BC2901 /* UIViewController+Leak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F2E2913790F00BC2901 /* UIViewController+Leak.swift */; };
@@ -237,6 +264,18 @@
 		73101D5728E4A2AB00DB5423 /* rssfeed.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = rssfeed.json; sourceTree = "<group>"; };
 		73101D5828E4A2AB00DB5423 /* repos.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = repos.json; sourceTree = "<group>"; };
 		73101D5E28E4A5E400DB5423 /* DevelopersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopersViewController.swift; sourceTree = "<group>"; };
+		7311A51F292A36E800B1A2A6 /* URLRouterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRouterModel.swift; sourceTree = "<group>"; };
+		7311A521292A3CA600B1A2A6 /* HostVCType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostVCType.swift; sourceTree = "<group>"; };
+		7311A523292A433100B1A2A6 /* archiveRepos.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = archiveRepos.json; sourceTree = "<group>"; };
+		7311A525292A68DA00B1A2A6 /* PamphletResourceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PamphletResourceModel.swift; sourceTree = "<group>"; };
+		7311A527292A69A600B1A2A6 /* PamphletResourceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PamphletResourceViewController.swift; sourceTree = "<group>"; };
+		7311A529292A6A2B00B1A2A6 /* PamphletResourceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PamphletResourceCell.swift; sourceTree = "<group>"; };
+		7311A52B292A830A00B1A2A6 /* guide-syntax.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "guide-syntax.json"; sourceTree = "<group>"; };
+		7311A52D292A832300B1A2A6 /* guide-subject.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "guide-subject.json"; sourceTree = "<group>"; };
+		7311A52E292A832300B1A2A6 /* lib-Combine.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "lib-Combine.json"; sourceTree = "<group>"; };
+		7311A52F292A832300B1A2A6 /* guide-features.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "guide-features.json"; sourceTree = "<group>"; };
+		7311A530292A832300B1A2A6 /* lib-Concurrency.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "lib-Concurrency.json"; sourceTree = "<group>"; };
+		7311A531292A832300B1A2A6 /* lib-SwiftUI.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "lib-SwiftUI.json"; sourceTree = "<group>"; };
 		732016FE28F46DFB007B970F /* DateParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateParser.swift; sourceTree = "<group>"; };
 		7320170028F47B76007B970F /* RegularParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularParser.swift; sourceTree = "<group>"; };
 		7320170228F48227007B970F /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
@@ -276,6 +315,21 @@
 		7362FE842911816600D97E1A /* Default+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Default+Ext.swift"; sourceTree = "<group>"; };
 		7362FEC629124F9000D97E1A /* RssFeedRead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssFeedRead.swift; sourceTree = "<group>"; };
 		7374D19628E0BC1D00E6BE47 /* Readme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Readme.swift; sourceTree = "<group>"; };
+		737EF26A2929FB960060C64F /* D-图片工具.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "D-图片工具.json"; sourceTree = "<group>"; };
+		737EF26B2929FB960060C64F /* D-美术素材.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "D-美术素材.json"; sourceTree = "<group>"; };
+		737EF26D2929FB960060C64F /* D-周报.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "D-周报.json"; sourceTree = "<group>"; };
+		737EF26E2929FB960060C64F /* D-播客.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "D-播客.json"; sourceTree = "<group>"; };
+		737EF2702929FB960060C64F /* D-Swift 技术.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "D-Swift 技术.json"; sourceTree = "<group>"; };
+		737EF2712929FB960060C64F /* D-Swift 官方.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "D-Swift 官方.json"; sourceTree = "<group>"; };
+		737EF2722929FB960060C64F /* D-SwiftUI.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "D-SwiftUI.json"; sourceTree = "<group>"; };
+		737EF27E2929FC390060C64F /* PamphletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PamphletViewController.swift; sourceTree = "<group>"; };
+		737EF2802929FE740060C64F /* PamphletSimpleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PamphletSimpleModel.swift; sourceTree = "<group>"; };
+		737EF284292A000F0060C64F /* PamphletSimpleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PamphletSimpleCell.swift; sourceTree = "<group>"; };
+		737EF287292A069C0060C64F /* PamphletData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PamphletData.json; sourceTree = "<group>"; };
+		737EF289292A0DEC0060C64F /* PamphletContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PamphletContentViewController.swift; sourceTree = "<group>"; };
+		737EF28D292A0EF80060C64F /* PamphletSectionContentResource.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PamphletSectionContentResource.json; sourceTree = "<group>"; };
+		737EF294292A11DF0060C64F /* Array+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Ext.swift"; sourceTree = "<group>"; };
+		737EF297292A21080060C64F /* URLRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRouter.swift; sourceTree = "<group>"; };
 		73936F2A291377F300BC2901 /* DJLeakSniffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJLeakSniffer.swift; sourceTree = "<group>"; };
 		73936F2C2913784500BC2901 /* NSNotificationName+Leak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotificationName+Leak.swift"; sourceTree = "<group>"; };
 		73936F2E2913790F00BC2901 /* UIViewController+Leak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Leak.swift"; sourceTree = "<group>"; };
@@ -510,6 +564,120 @@
 			path = DJMonitor;
 			sourceTree = "<group>";
 		};
+		737EF2662929FB620060C64F /* Pamphlet */ = {
+			isa = PBXGroup;
+			children = (
+				737EF296292A20F50060C64F /* Utils */,
+				737EF293292A11CE0060C64F /* Extension */,
+				737EF27C2929FBBF0060C64F /* Model */,
+				737EF27B2929FBB90060C64F /* View */,
+				737EF27A2929FBA50060C64F /* ViewController */,
+				737EF2672929FB700060C64F /* Resources */,
+				737EF287292A069C0060C64F /* PamphletData.json */,
+			);
+			path = Pamphlet;
+			sourceTree = "<group>";
+		};
+		737EF2672929FB700060C64F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7311A52F292A832300B1A2A6 /* guide-features.json */,
+				7311A52D292A832300B1A2A6 /* guide-subject.json */,
+				7311A52E292A832300B1A2A6 /* lib-Combine.json */,
+				7311A530292A832300B1A2A6 /* lib-Concurrency.json */,
+				7311A531292A832300B1A2A6 /* lib-SwiftUI.json */,
+				7311A52B292A830A00B1A2A6 /* guide-syntax.json */,
+				7311A523292A433100B1A2A6 /* archiveRepos.json */,
+				737EF2682929FB960060C64F /* Data */,
+				737EF28D292A0EF80060C64F /* PamphletSectionContentResource.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		737EF2682929FB960060C64F /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				737EF2692929FB960060C64F /* 美术 */,
+				737EF26C2929FB960060C64F /* 新鲜事 */,
+				737EF26F2929FB960060C64F /* Swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		737EF2692929FB960060C64F /* 美术 */ = {
+			isa = PBXGroup;
+			children = (
+				737EF26A2929FB960060C64F /* D-图片工具.json */,
+				737EF26B2929FB960060C64F /* D-美术素材.json */,
+			);
+			path = "美术";
+			sourceTree = "<group>";
+		};
+		737EF26C2929FB960060C64F /* 新鲜事 */ = {
+			isa = PBXGroup;
+			children = (
+				737EF26D2929FB960060C64F /* D-周报.json */,
+				737EF26E2929FB960060C64F /* D-播客.json */,
+			);
+			path = "新鲜事";
+			sourceTree = "<group>";
+		};
+		737EF26F2929FB960060C64F /* Swift */ = {
+			isa = PBXGroup;
+			children = (
+				737EF2702929FB960060C64F /* D-Swift 技术.json */,
+				737EF2712929FB960060C64F /* D-Swift 官方.json */,
+				737EF2722929FB960060C64F /* D-SwiftUI.json */,
+			);
+			path = Swift;
+			sourceTree = "<group>";
+		};
+		737EF27A2929FBA50060C64F /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				737EF27E2929FC390060C64F /* PamphletViewController.swift */,
+				737EF289292A0DEC0060C64F /* PamphletContentViewController.swift */,
+				7311A527292A69A600B1A2A6 /* PamphletResourceViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		737EF27B2929FBB90060C64F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				737EF284292A000F0060C64F /* PamphletSimpleCell.swift */,
+				7311A529292A6A2B00B1A2A6 /* PamphletResourceCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		737EF27C2929FBBF0060C64F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				737EF2802929FE740060C64F /* PamphletSimpleModel.swift */,
+				7311A525292A68DA00B1A2A6 /* PamphletResourceModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		737EF293292A11CE0060C64F /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				737EF294292A11DF0060C64F /* Array+Ext.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		737EF296292A20F50060C64F /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				737EF297292A21080060C64F /* URLRouter.swift */,
+				7311A51F292A36E800B1A2A6 /* URLRouterModel.swift */,
+				7311A521292A3CA600B1A2A6 /* HostVCType.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		73936F29291377DD00BC2901 /* DJLeak */ = {
 			isa = PBXGroup;
 			children = (
@@ -566,6 +734,7 @@
 		73AACAD328D308A60072B1DF /* DJGithub */ = {
 			isa = PBXGroup;
 			children = (
+				737EF2662929FB620060C64F /* Pamphlet */,
 				735D0E002903115D00E618B3 /* DJMonitor */,
 				73AACB1528D311C30072B1DF /* Github */,
 				73AACB0428D308E30072B1DF /* DJFoundation */,
@@ -1073,14 +1242,30 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7311A535292A832300B1A2A6 /* lib-Concurrency.json in Resources */,
 				73AACAE128D308A70072B1DF /* LaunchScreen.storyboard in Resources */,
+				737EF2772929FB960060C64F /* D-Swift 技术.json in Resources */,
+				737EF2762929FB960060C64F /* D-播客.json in Resources */,
+				7311A534292A832300B1A2A6 /* guide-features.json in Resources */,
 				7339201F28F693EA00DC76B0 /* config.json in Resources */,
+				7311A524292A433100B1A2A6 /* archiveRepos.json in Resources */,
+				737EF2732929FB960060C64F /* D-图片工具.json in Resources */,
+				7311A52C292A830A00B1A2A6 /* guide-syntax.json in Resources */,
 				73AACADE28D308A70072B1DF /* Assets.xcassets in Resources */,
 				73101D5A28E4A2AB00DB5423 /* rssfeed.json in Resources */,
+				7311A532292A832300B1A2A6 /* guide-subject.json in Resources */,
+				737EF2752929FB960060C64F /* D-周报.json in Resources */,
+				737EF2792929FB960060C64F /* D-SwiftUI.json in Resources */,
+				737EF2782929FB960060C64F /* D-Swift 官方.json in Resources */,
 				7339201728F587F100DC76B0 /* css.html in Resources */,
+				7311A533292A832300B1A2A6 /* lib-Combine.json in Resources */,
 				73101D5B28E4A2AB00DB5423 /* repos.json in Resources */,
+				737EF28E292A0EF80060C64F /* PamphletSectionContentResource.json in Resources */,
+				737EF2742929FB960060C64F /* D-美术素材.json in Resources */,
 				73DF6BF428EB0DCB0003BDB8 /* developers.json in Resources */,
+				737EF288292A069C0060C64F /* PamphletData.json in Resources */,
 				73AACADC28D308A60072B1DF /* Main.storyboard in Resources */,
+				7311A536292A832300B1A2A6 /* lib-SwiftUI.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1127,6 +1312,7 @@
 			files = (
 				73EE0CE2290968310010C54A /* PinnedItemsCell.swift in Sources */,
 				73101D4328E310D900DB5423 /* UserFollowingViewController.swift in Sources */,
+				737EF2812929FE740060C64F /* PamphletSimpleModel.swift in Sources */,
 				73B7906628E7F133002A9CDC /* SearchViewController.swift in Sources */,
 				73936F9C2919BFBA00BC2901 /* RssFeedLatestView.swift in Sources */,
 				73B7905828E541BE002A9CDC /* Bool+Ext.swift in Sources */,
@@ -1140,6 +1326,8 @@
 				73DF6C0028EC00FD0003BDB8 /* RepoContentCell.swift in Sources */,
 				73DF6C0428EC252E0003BDB8 /* String+File.swift in Sources */,
 				73AACB3428D357C80072B1DF /* UserViewController.swift in Sources */,
+				737EF285292A000F0060C64F /* PamphletSimpleCell.swift in Sources */,
+				7311A528292A69A600B1A2A6 /* PamphletResourceViewController.swift in Sources */,
 				7341DCC628DF2400009A3A3C /* TabBarController.swift in Sources */,
 				7320170128F47B76007B970F /* RegularParser.swift in Sources */,
 				73074C7E28ED5664001A90E7 /* IssueDetail.swift in Sources */,
@@ -1158,6 +1346,7 @@
 				732B21D328E228FD005893C0 /* NextPageModel.swift in Sources */,
 				73D0DE2B2907D2DD00F385E6 /* DJUserDefaults.swift in Sources */,
 				73936F9A2919BB7800BC2901 /* RssFeedLatestCell.swift in Sources */,
+				737EF295292A11DF0060C64F /* Array+Ext.swift in Sources */,
 				7341DCD428E0422F009A3A3C /* RepoCell.swift in Sources */,
 				7320170F28F5385B007B970F /* RssFeedSimpleCell.swift in Sources */,
 				73EE0CE0290962CE0010C54A /* PinnedRepoCell.swift in Sources */,
@@ -1176,6 +1365,7 @@
 				73AACB3A28D359550072B1DF /* UserHeaderView.swift in Sources */,
 				73DF6C0228EC1EE80003BDB8 /* RepoContentFileViewController.swift in Sources */,
 				73101D5F28E4A5E400DB5423 /* DevelopersViewController.swift in Sources */,
+				7311A522292A3CA600B1A2A6 /* HostVCType.swift in Sources */,
 				73DF6BFE28EBFEE30003BDB8 /* RepoContentsViewController.swift in Sources */,
 				735D0E072903115E00E618B3 /* DJCallStack.swift in Sources */,
 				73936FC7291E3F7F00BC2901 /* OrganizationViewController.swift in Sources */,
@@ -1200,10 +1390,12 @@
 				73074CC728EF4809001A90E7 /* LocalRepo.swift in Sources */,
 				73101D4128E30C5200DB5423 /* SimpleUserCell.swift in Sources */,
 				73B7904A28E52450002A9CDC /* LocalDevelopersViewController.swift in Sources */,
+				7311A52A292A6A2B00B1A2A6 /* PamphletResourceCell.swift in Sources */,
 				735D0E0B2903115E00E618B3 /* StackAddressInfo.swift in Sources */,
 				73936F2D2913784500BC2901 /* NSNotificationName+Leak.swift in Sources */,
 				73074CD528F166D8001A90E7 /* UserInfoEditViewController.swift in Sources */,
 				73074CCD28EF4AFE001A90E7 /* LocalDataManager.swift in Sources */,
+				7311A520292A36E800B1A2A6 /* URLRouterModel.swift in Sources */,
 				73AACB3C28D35C360072B1DF /* Utils.swift in Sources */,
 				73EE0CF2290AE2E90010C54A /* RepoBranchCommitFileCell.swift in Sources */,
 				73AACB4C28D45EA50072B1DF /* UserCell.swift in Sources */,
@@ -1248,6 +1440,7 @@
 				73E14E5328F34FF200A9811D /* Parser.swift in Sources */,
 				73C598C528D85EF100DA86A1 /* PopoverView.swift in Sources */,
 				73074C7C28ED5507001A90E7 /* RepoIssueDetailViewController.swift in Sources */,
+				7311A526292A68DA00B1A2A6 /* PamphletResourceModel.swift in Sources */,
 				73AACAD728D308A60072B1DF /* SceneDelegate.swift in Sources */,
 				73AACB5628D47FCB0072B1DF /* String+Ext.swift in Sources */,
 				7362FE7D291031D600D97E1A /* DJCrashManager.swift in Sources */,
@@ -1266,6 +1459,7 @@
 				73EE0CEC290A72560010C54A /* DJMaskView.swift in Sources */,
 				73936F3729137E7200BC2901 /* DJObjectProxy.swift in Sources */,
 				73936F2F2913790F00BC2901 /* UIViewController+Leak.swift in Sources */,
+				737EF28A292A0DEC0060C64F /* PamphletContentViewController.swift in Sources */,
 				73AACB5828D483CA0072B1DF /* UserContributionCell.swift in Sources */,
 				73AACB0C28D30B3D0072B1DF /* Error.swift in Sources */,
 				735D0E082903115E00E618B3 /* mach_stack_info.c in Sources */,
@@ -1285,6 +1479,7 @@
 				73074CD128F1559D001A90E7 /* UserInfoViewController.swift in Sources */,
 				73D0DE292907D21F00F385E6 /* LocalUserManager.swift in Sources */,
 				7320170928F535CB007B970F /* RssFeed.swift in Sources */,
+				737EF27F2929FC390060C64F /* PamphletViewController.swift in Sources */,
 				73AACB1828D312D30072B1DF /* GithubRouter.swift in Sources */,
 				73936F9829197E4300BC2901 /* DJUIThread.swift in Sources */,
 				73101D5028E4A10400DB5423 /* LocalDeveloperGroup.swift in Sources */,
@@ -1294,6 +1489,7 @@
 				73074CC428EEF54F001A90E7 /* HUD.swift in Sources */,
 				73EE0CF6290BA8F10010C54A /* RepoPullRequestViewController.swift in Sources */,
 				73B7905228E53353002A9CDC /* Config.swift in Sources */,
+				737EF298292A21080060C64F /* URLRouter.swift in Sources */,
 				7341DCCA28DF2B4B009A3A3C /* ImageCoder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
