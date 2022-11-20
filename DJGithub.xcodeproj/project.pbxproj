@@ -31,6 +31,8 @@
 		73101D5A28E4A2AB00DB5423 /* rssfeed.json in Resources */ = {isa = PBXBuildFile; fileRef = 73101D5728E4A2AB00DB5423 /* rssfeed.json */; };
 		73101D5B28E4A2AB00DB5423 /* repos.json in Resources */ = {isa = PBXBuildFile; fileRef = 73101D5828E4A2AB00DB5423 /* repos.json */; };
 		73101D5F28E4A5E400DB5423 /* DevelopersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73101D5E28E4A5E400DB5423 /* DevelopersViewController.swift */; };
+		7311A520292A36E800B1A2A6 /* URLRouterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7311A51F292A36E800B1A2A6 /* URLRouterModel.swift */; };
+		7311A522292A3CA600B1A2A6 /* HostVCType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7311A521292A3CA600B1A2A6 /* HostVCType.swift */; };
 		732016FF28F46DFB007B970F /* DateParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732016FE28F46DFB007B970F /* DateParser.swift */; };
 		7320170128F47B76007B970F /* RegularParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7320170028F47B76007B970F /* RegularParser.swift */; };
 		7320170328F48227007B970F /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7320170228F48227007B970F /* FeedViewController.swift */; };
@@ -252,6 +254,8 @@
 		73101D5728E4A2AB00DB5423 /* rssfeed.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = rssfeed.json; sourceTree = "<group>"; };
 		73101D5828E4A2AB00DB5423 /* repos.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = repos.json; sourceTree = "<group>"; };
 		73101D5E28E4A5E400DB5423 /* DevelopersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopersViewController.swift; sourceTree = "<group>"; };
+		7311A51F292A36E800B1A2A6 /* URLRouterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRouterModel.swift; sourceTree = "<group>"; };
+		7311A521292A3CA600B1A2A6 /* HostVCType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostVCType.swift; sourceTree = "<group>"; };
 		732016FE28F46DFB007B970F /* DateParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateParser.swift; sourceTree = "<group>"; };
 		7320170028F47B76007B970F /* RegularParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularParser.swift; sourceTree = "<group>"; };
 		7320170228F48227007B970F /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
@@ -638,6 +642,8 @@
 			isa = PBXGroup;
 			children = (
 				737EF297292A21080060C64F /* URLRouter.swift */,
+				7311A51F292A36E800B1A2A6 /* URLRouterModel.swift */,
+				7311A521292A3CA600B1A2A6 /* HostVCType.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1321,6 +1327,7 @@
 				73AACB3A28D359550072B1DF /* UserHeaderView.swift in Sources */,
 				73DF6C0228EC1EE80003BDB8 /* RepoContentFileViewController.swift in Sources */,
 				73101D5F28E4A5E400DB5423 /* DevelopersViewController.swift in Sources */,
+				7311A522292A3CA600B1A2A6 /* HostVCType.swift in Sources */,
 				73DF6BFE28EBFEE30003BDB8 /* RepoContentsViewController.swift in Sources */,
 				735D0E072903115E00E618B3 /* DJCallStack.swift in Sources */,
 				73936FC7291E3F7F00BC2901 /* OrganizationViewController.swift in Sources */,
@@ -1349,6 +1356,7 @@
 				73936F2D2913784500BC2901 /* NSNotificationName+Leak.swift in Sources */,
 				73074CD528F166D8001A90E7 /* UserInfoEditViewController.swift in Sources */,
 				73074CCD28EF4AFE001A90E7 /* LocalDataManager.swift in Sources */,
+				7311A520292A36E800B1A2A6 /* URLRouterModel.swift in Sources */,
 				73AACB3C28D35C360072B1DF /* Utils.swift in Sources */,
 				73EE0CF2290AE2E90010C54A /* RepoBranchCommitFileCell.swift in Sources */,
 				73AACB4C28D45EA50072B1DF /* UserCell.swift in Sources */,

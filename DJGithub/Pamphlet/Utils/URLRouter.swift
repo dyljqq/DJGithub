@@ -5,23 +5,31 @@
 //  Created by jiqinqiang on 2022/11/20.
 //
 
-import Foundation
+import UIKit
 
 private let baseScheme = "djgithub"
-private let urlMapping = [
-  "pamaphletMain": PamphletViewController.classForCoder()
-]
-
-struct URLRouterModel {
-  let scheme: String
-  let host: String
-  let path: String
-  let queryItems: [URLQueryItem]?
-}
 
 struct URLRouter {
   static func open(with urlString: String?) {
-    print(urlString?.urlRouterModel)
+    guard let model = urlString?.urlRouterModel else { return }
+    switch model.transition {
+    case .push: pushVC(model.vc)
+    case .present: break
+    }
+  }
+
+  static func pushVC(_ vc: UIViewController?) {
+    guard let vc, let navi = getCurrentNavigation() else { return }
+    navi.pushViewController(vc, animated: true)
+  }
+
+  static func getCurrentNavigation() -> UINavigationController? {
+    guard let window = UIApplication.shared.keyWindow else { return nil }
+    if let rootVC = window.rootViewController as? UITabBarController,
+       let navi = rootVC.selectedViewController as? UINavigationController {
+      return navi
+    }
+    return nil
   }
 }
 

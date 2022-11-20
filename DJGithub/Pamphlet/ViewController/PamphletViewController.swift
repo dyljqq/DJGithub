@@ -42,7 +42,7 @@ class PamphletViewController: UIViewController {
   }
 
   private func setUp() {
-    navigationItem.title = "Pamphlet"
+    navigationItem.title = type.title
 
     view.addSubview(tableView)
     tableView.snp.makeConstraints { make in
@@ -108,7 +108,7 @@ extension PamphletViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension PamphletViewController {
-  enum VCType {
+  enum VCType: String {
     case main
     case explore
     case archive

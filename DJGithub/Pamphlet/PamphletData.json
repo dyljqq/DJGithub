@@ -5,11 +5,12 @@
       {
         "imageName": "p21",
         "title": "博客与资讯",
+        "jumpUrl": "djgithub://rssfeeds"
       },
       {
         "imageName": "p22",
         "title": "资料整理",
-        "jumpUrl": "djgithub://pamaphletMain?type=resource"
+        "jumpUrl": "djgithub://pamphlet?type=resource"
       }
     ]
   },
