@@ -115,6 +115,8 @@
 		73936FC5291E3E4500BC2901 /* Organization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936FC4291E3E4500BC2901 /* Organization.swift */; };
 		73936FC7291E3F7F00BC2901 /* OrganizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936FC6291E3F7F00BC2901 /* OrganizationViewController.swift */; };
 		73936FC9291E484A00BC2901 /* UserContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936FC8291E484A00BC2901 /* UserContainerViewController.swift */; };
+		7396BDA9292BE11600B391CC /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7396BDA8292BE11600B391CC /* UserViewModel.swift */; };
+		7396BDAB292BE1AC00B391CC /* DJObserverable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7396BDAA292BE1AC00B391CC /* DJObserverable.swift */; };
 		73AACAD528D308A60072B1DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD428D308A60072B1DF /* AppDelegate.swift */; };
 		73AACAD728D308A60072B1DF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD628D308A60072B1DF /* SceneDelegate.swift */; };
 		73AACAD928D308A60072B1DF /* LoadingViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AACAD828D308A60072B1DF /* LoadingViewerViewController.swift */; };
@@ -348,6 +350,8 @@
 		73936FC4291E3E4500BC2901 /* Organization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Organization.swift; sourceTree = "<group>"; };
 		73936FC6291E3F7F00BC2901 /* OrganizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizationViewController.swift; sourceTree = "<group>"; };
 		73936FC8291E484A00BC2901 /* UserContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserContainerViewController.swift; sourceTree = "<group>"; };
+		7396BDA8292BE11600B391CC /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
+		7396BDAA292BE1AC00B391CC /* DJObserverable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJObserverable.swift; sourceTree = "<group>"; };
 		73AACAD128D308A60072B1DF /* DJGithub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DJGithub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73AACAD428D308A60072B1DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		73AACAD628D308A60072B1DF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -709,6 +713,14 @@
 			path = UIThread;
 			sourceTree = "<group>";
 		};
+		7396BDAC292BE21900B391CC /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7396BDA8292BE11600B391CC /* UserViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		73AACAC828D308A60072B1DF = {
 			isa = PBXGroup;
 			children = (
@@ -923,6 +935,7 @@
 				7339201428F56D2900DC76B0 /* RssFeedManager.swift */,
 				73D0DE2A2907D2DD00F385E6 /* DJUserDefaults.swift */,
 				73EE0CFF290C24AD0010C54A /* NotificationKeys.swift */,
+				7396BDAA292BE1AC00B391CC /* DJObserverable.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -942,6 +955,7 @@
 		73AACB3228D357A50072B1DF /* User */ = {
 			isa = PBXGroup;
 			children = (
+				7396BDAC292BE21900B391CC /* ViewModel */,
 				73AACB3528D357CE0072B1DF /* Views */,
 				73AACB3328D357C80072B1DF /* UserViewController.swift */,
 				73101D4228E310D900DB5423 /* UserFollowingViewController.swift */,
@@ -1365,12 +1379,14 @@
 				73AACB3A28D359550072B1DF /* UserHeaderView.swift in Sources */,
 				73DF6C0228EC1EE80003BDB8 /* RepoContentFileViewController.swift in Sources */,
 				73101D5F28E4A5E400DB5423 /* DevelopersViewController.swift in Sources */,
+				7396BDAB292BE1AC00B391CC /* DJObserverable.swift in Sources */,
 				7311A522292A3CA600B1A2A6 /* HostVCType.swift in Sources */,
 				73DF6BFE28EBFEE30003BDB8 /* RepoContentsViewController.swift in Sources */,
 				735D0E072903115E00E618B3 /* DJCallStack.swift in Sources */,
 				73936FC7291E3F7F00BC2901 /* OrganizationViewController.swift in Sources */,
 				73101D4B28E4889B00DB5423 /* UserStatusView.swift in Sources */,
 				734D676329084571006A0BFA /* Repository.swift in Sources */,
+				7396BDA9292BE11600B391CC /* UserViewModel.swift in Sources */,
 				73E14E5628F3DAC800A9811D /* DJJSONParser.swift in Sources */,
 				73DF6BF228EAE3060003BDB8 /* DJCodable.swift in Sources */,
 				7341DCD828E05D98009A3A3C /* RepoFooterView.swift in Sources */,

@@ -108,12 +108,21 @@ class UserViewController: UIViewController {
 
   let name: String
 
-  var userViewer: UserViewer?
+  private var userViewer: UserViewer?
+  private var userViewModel: UserViewModel
 
   fileprivate var dataSource: [CellType] = []
 
   init(name: String) {
     self.name = name
+    self.userViewModel = UserViewModel()
+    super.init(nibName: nil, bundle: nil)
+  }
+
+  init(with viewer: UserViewer) {
+    self.userViewer = viewer
+    self.userViewModel = UserViewModel()
+    self.name = viewer.login
     super.init(nibName: nil, bundle: nil)
   }
 
@@ -137,26 +146,19 @@ class UserViewController: UIViewController {
       make.edges.equalTo(view)
     }
 
-    if name.isEmpty || ConfigManager.checkOwner(by: name),
-       let userViewer = ConfigManager.viewer {
-      self.userViewer = userViewer
-      self.loadUserViewerInfo(with: userViewer)
+    self.userViewModel.userObserver.bind { [weak self] userViewer in
+      DispatchQueue.main.async {
+        self?.loadUserViewerInfo(with: userViewer)
+        self?.tableView.reloadData()
+      }
     }
 
-    if self.userViewer == nil {
-      view.startLoading()
-    }
-
-    Task {
-      if let viewer = await UserManager.fetchUserInfo(by: self.name) {
-        self.userViewer = viewer
-        self.loadUserViewerInfo(with: viewer)
-
-        if ConfigManager.checkOwner(by: viewer.login) {
-          LocalUserManager.saveUser(viewer)
-        }
-      } else {
-        view.stopLoading()
+    if let userViewer {
+      userViewModel.update(userViewer)
+    } else {
+      Task {
+        view.startLoading()
+        await userViewModel.fetchUser(with: name)
       }
     }
 
@@ -171,17 +173,18 @@ class UserViewController: UIViewController {
       strongSelf.naviVc?.navigationController?.pushToUserInfo()
     }
     userHeaderView.tapCounterClosure = { [weak self] index in
-      guard let strongSelf = self else { return }
+      guard let strongSelf = self, let userViewer = strongSelf.userViewModel.userViewer else { return }
       strongSelf.naviVc?.navigationController?.pushToUserInteract(
-        with: strongSelf.userViewer?.login ?? "",
-        title: strongSelf.userViewer?.name ?? "",
+        with: userViewer.login,
+        title: userViewer.name ?? "",
         selectedIndex: index
       )
     }
   }
 
-  private func loadUserViewerInfo(with userViewer: UserViewer) {
+  private func loadUserViewerInfo(with userViewer: UserViewer?) {
     view.stopLoading()
+    guard let userViewer else { return }
 
     self.followStatusView.isHidden = userViewer.isViewer
     self.followStatusView.active = userViewer.viewerIsFollowing
@@ -230,7 +233,7 @@ extension UserViewController: UITableViewDataSource {
       } else {
         cell.accessoryType = .none
       }
-      let contentModel = userType.getContent(by: userViewer)
+      let contentModel = userType.getContent(by: userViewModel.userViewer)
       cell.render(with: userType.iconImageName, content: contentModel.content, contentColor: contentModel.color)
       return cell
     case .pinnedItem(let pinnedItems):
@@ -259,12 +262,12 @@ extension UserViewController: UITableViewDelegate {
       let content = userType.getContent(by: self.userViewer)
       switch userType {
       case .email:
-        if let email = userViewer?.email, !email.isEmpty {
+        if let email = userViewModel.userViewer?.email, !email.isEmpty {
           UIPasteboard.general.string = content.content
           HUD.show(with: "已经复制到粘贴板")
         }
       case .link:
-        if let link = userViewer?.websiteUrl, !link.isEmpty {
+        if let link = userViewModel.userViewer?.websiteUrl, !link.isEmpty {
           self.naviVc?.navigationController?.pushToWebView(with: link)
         }
       default:
