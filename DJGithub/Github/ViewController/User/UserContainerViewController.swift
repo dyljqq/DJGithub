@@ -59,8 +59,12 @@ class UserContainerViewController: UIViewController {
     self.navigationItem.title = "User"
     self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.followStatusView)
 
-    let vc = UserViewController(name: name)
-    vc.userViewer = viewer
+    let vc: UserViewController
+    if let viewer = viewer {
+      vc = UserViewController(with: viewer)
+    } else {
+      vc = UserViewController(name: name)
+    }
     setUp(with: vc)
 
     if let viewer = viewer {
