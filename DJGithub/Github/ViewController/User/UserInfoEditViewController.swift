@@ -20,7 +20,7 @@ class UserInfoEditViewController: UIViewController {
     textField.textColor = .textColor
     textField.clearButtonMode = .always
     textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: 0))
-    textField.leftViewMode = UITextField.ViewMode.always
+    textField.leftViewMode = .always
     return textField
   }()
 
@@ -53,6 +53,26 @@ class UserInfoEditViewController: UIViewController {
     super.viewDidLoad()
 
     setUp()
+
+    commitView.commitClosure = { [weak self] in
+      guard let strongSelf = self else { return }
+      strongSelf.commitView.isLoading = true
+      let text: String?
+      if case UserInfoType.bio = strongSelf.type {
+        text = strongSelf.textView.text
+      } else {
+        text = strongSelf.textField.text
+      }
+      let key = strongSelf.type.rawValue
+      Task {
+        if await UserManager.editUserInfo(with: [key: text ?? ""]) != nil {
+          _ = strongSelf.navigationController?.popViewController(animated: true)
+        } else {
+          HUD.show(with: "Failed to update \(strongSelf.type.name)")
+        }
+        strongSelf.commitView.isLoading = false
+      }
+    }
   }
 
   private func setUp() {
@@ -90,26 +110,6 @@ class UserInfoEditViewController: UIViewController {
         make.leading.equalTo(40)
         make.centerX.equalToSuperview()
         make.height.equalTo(34)
-      }
-    }
-
-    commitView.commitClosure = { [weak self] in
-      guard let strongSelf = self else { return }
-      strongSelf.commitView.isLoading = true
-      let text: String?
-      if case UserInfoType.bio = strongSelf.type {
-        text = strongSelf.textView.text
-      } else {
-        text = strongSelf.textField.text
-      }
-      let key = strongSelf.type.rawValue
-      Task {
-        if let _ = await UserManager.editUserInfo(with: [key: text ?? ""]) {
-          _ = strongSelf.navigationController?.popViewController(animated: true)
-        } else {
-          HUD.show(with: "Failed to update \(strongSelf.type.name)")
-        }
-        strongSelf.commitView.isLoading = false
       }
     }
   }
