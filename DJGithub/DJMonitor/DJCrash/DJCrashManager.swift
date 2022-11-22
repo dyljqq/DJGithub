@@ -135,9 +135,55 @@ class DJCrashManager: NSObject {
   }
 
   func stackSymbolsStr() -> String? {
-    let symbols = Thread.callStackSymbols
-    if let data = try? JSONSerialization.data(withJSONObject: symbols) {
+    let callStackSymbols = Thread.callStackSymbols
+    let symbols = parse(with: callStackSymbols)
+    let data = symbols.isEmpty ? callStackSymbols : symbols
+    if let data = try? JSONSerialization.data(withJSONObject: data) {
       return String(data: data, encoding: .utf8)
+    }
+    return nil
+  }
+
+  private func parse(with symbols: [String]) -> [String] {
+    return symbols.compactMap { parse(with: $0) }
+  }
+
+  private func parse(with symbol: String) -> String? {
+    if let address = parseAddress(with: symbol),
+       let index = parseIndex(with: symbol) {
+      let addressInfo = StackAddressInfo(address: address)
+      return addressInfo.formattedDescription(index: index)
+    }
+    return nil
+  }
+
+  private func parseIndex(with symbol: String) -> Int? {
+    let regex = "^[0-9]+ "
+    if let str = parseSymbolRegex(symbol, regex: regex) {
+      return Int(str)
+    }
+    return nil
+  }
+
+  private func parseAddress(with symbol: String) -> UInt? {
+    let regex = "0x[0-9a-z]+ "
+    if let str = parseSymbolRegex(symbol, regex: regex) {
+      return UInt(str)
+    }
+    return nil
+  }
+
+  private func parseSymbolRegex(_ symbol: String, regex: String) -> String? {
+    do {
+      let re = try NSRegularExpression(pattern: regex, options: .caseInsensitive)
+      let matches = re.matches(in: symbol, range: NSRange(location: 0, length: symbol.count))
+      for match in matches {
+        let range = match.range
+        let r = (symbol as NSString).substring(with: NSRange(location: range.location, length: range.length))
+        return r
+      }
+    } catch {
+      print("parseSymbolStr error: \(error)")
     }
     return nil
   }
