@@ -15,6 +15,7 @@ class FeedsViewController: UIViewController, NextPageLoadable {
   var nextPageState: NextPageState = NextPageState()
 
   var feeds: Feeds?
+  var feedViewModel: FeedViewModel
 
   lazy var tableView: UITableView = {
     let tableView = UITableView()
@@ -25,6 +26,15 @@ class FeedsViewController: UIViewController, NextPageLoadable {
     tableView.register(FeedCell.classForCoder(), forCellReuseIdentifier: FeedCell.className)
     return tableView
   }()
+
+  init() {
+    feedViewModel = FeedViewModel()
+    super.init(nibName: nil, bundle: nil)
+  }
+
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -42,34 +52,48 @@ class FeedsViewController: UIViewController, NextPageLoadable {
     }
 
     view.startLoading()
-    nextPageState.update(start: 1, hasNext: true, isLoading: false)
+    feedViewModel.feedInfoObserver.bind { [weak self] feedInfo in
+      guard let strongSelf = self, let feedInfo else { return }
+      DispatchQueue.main.async {
+        strongSelf.dataSource = feedInfo.entry
+        strongSelf.reloadData()
+      }
+    }
+
+    if let feedInfo = feedViewModel.fetchLocalFeedInfo() {
+      feedViewModel.feedInfoObserver.value = feedInfo
+    }
 
     Task {
-      self.feeds = await FeedManager.getFeeds()
-      if self.feeds != nil {
-        tableView.addHeader { [weak self] in
-          guard let strongSelf = self else { return }
-          strongSelf.nextPageState.update(start: 1, hasNext: true, isLoading: false)
-          strongSelf.loadNext(start: strongSelf.nextPageState.start)
-        }
-        tableView.addFooter { [weak self] in
-          guard let strongSelf = self else { return }
-          strongSelf.loadNext(start: strongSelf.nextPageState.start + 1)
-        }
-        self.loadNext(start: nextPageState.start)
+      if let feedInfo = await feedViewModel.asyncFetchFeedInfo() {
+        feedViewModel.feedInfoObserver.value = feedInfo
       } else {
         view.stopLoading()
       }
+    }
+
+    tableView.addHeader { [weak self] in
+      guard let strongSelf = self else { return }
+      strongSelf.nextPageState.update(start: 1, hasNext: true, isLoading: false)
+      strongSelf.loadNext(start: strongSelf.nextPageState.start)
+    }
+    tableView.addFooter { [weak self] in
+      guard let strongSelf = self else { return }
+      strongSelf.loadNext(start: strongSelf.nextPageState.start + 1)
     }
   }
 
   func loadNext(start: Int) {
     self.loadNext(start: start) { [weak self] in
       guard let strongSelf = self else { return }
-      strongSelf.view.stopLoading()
-      strongSelf.tableView.dj_endRefresh()
-      strongSelf.tableView.reloadData()
+      strongSelf.reloadData()
     }
+  }
+
+  private func reloadData() {
+    view.stopLoading()
+    tableView.dj_endRefresh()
+    tableView.reloadData()
   }
 
   func performLoad(successHandler: @escaping ([DataType], Bool) -> Void, failureHandler: @escaping (String) -> Void) {
