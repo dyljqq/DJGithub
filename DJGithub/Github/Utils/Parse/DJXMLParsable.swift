@@ -63,10 +63,9 @@ class DJXMLParser<T: DJCodable>: NSObject, Parsable, XMLParserDelegate {
   var stack: [XMLNode] = []
 
   func parse(with data: Data?) async throws -> T? {
-    guard let data = data else { return nil }
     do {
       return try await withCheckedThrowingContinuation { [weak self] (continuation: CheckedContinuation<T?, Error>) in
-        guard let strongSelf = self else { return }
+        guard let data = data, let strongSelf = self else { return }
         strongSelf.continuation = continuation
         let parser = XMLParser(data: data)
         parser.delegate = strongSelf

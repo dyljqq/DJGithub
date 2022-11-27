@@ -49,7 +49,7 @@ protocol NextPageLoadable: AnyObject {
 extension NextPageLoadable {
 
   var firstPageIndex: Int {
-    return 0
+    return 1
   }
 
   func loadNext(start: Int, completionHandler: (() -> Void)? = nil) {

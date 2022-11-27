@@ -97,6 +97,8 @@
 		737EF28E292A0EF80060C64F /* PamphletSectionContentResource.json in Resources */ = {isa = PBXBuildFile; fileRef = 737EF28D292A0EF80060C64F /* PamphletSectionContentResource.json */; };
 		737EF295292A11DF0060C64F /* Array+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737EF294292A11DF0060C64F /* Array+Ext.swift */; };
 		737EF298292A21080060C64F /* URLRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737EF297292A21080060C64F /* URLRouter.swift */; };
+		73893E3A2933893300F848DF /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73893E392933893300F848DF /* FeedViewModel.swift */; };
+		73893E3C2933954800F848DF /* DJCrashListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73893E3B2933954800F848DF /* DJCrashListViewController.swift */; };
 		73936F2B291377F300BC2901 /* DJLeakSniffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F2A291377F300BC2901 /* DJLeakSniffer.swift */; };
 		73936F2D2913784500BC2901 /* NSNotificationName+Leak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F2C2913784500BC2901 /* NSNotificationName+Leak.swift */; };
 		73936F2F2913790F00BC2901 /* UIViewController+Leak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F2E2913790F00BC2901 /* UIViewController+Leak.swift */; };
@@ -332,6 +334,8 @@
 		737EF28D292A0EF80060C64F /* PamphletSectionContentResource.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PamphletSectionContentResource.json; sourceTree = "<group>"; };
 		737EF294292A11DF0060C64F /* Array+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Ext.swift"; sourceTree = "<group>"; };
 		737EF297292A21080060C64F /* URLRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRouter.swift; sourceTree = "<group>"; };
+		73893E392933893300F848DF /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
+		73893E3B2933954800F848DF /* DJCrashListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJCrashListViewController.swift; sourceTree = "<group>"; };
 		73936F2A291377F300BC2901 /* DJLeakSniffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJLeakSniffer.swift; sourceTree = "<group>"; };
 		73936F2C2913784500BC2901 /* NSNotificationName+Leak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotificationName+Leak.swift"; sourceTree = "<group>"; };
 		73936F2E2913790F00BC2901 /* UIViewController+Leak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Leak.swift"; sourceTree = "<group>"; };
@@ -680,6 +684,14 @@
 				7311A521292A3CA600B1A2A6 /* HostVCType.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		73893E382933892300F848DF /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				73893E392933893300F848DF /* FeedViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		73936F29291377DD00BC2901 /* DJLeak */ = {
@@ -1106,6 +1118,7 @@
 		73E14E5928F414F600A9811D /* Feed */ = {
 			isa = PBXGroup;
 			children = (
+				73893E382933892300F848DF /* ViewModel */,
 				73E14E5A28F414FC00A9811D /* Views */,
 				73E14E5C28F4151100A9811D /* FeedsViewController.swift */,
 				7320170228F48227007B970F /* FeedViewController.swift */,
@@ -1132,6 +1145,7 @@
 			children = (
 				7362FE7C291031D600D97E1A /* DJCrashManager.swift */,
 				7362FE802910BF2700D97E1A /* DJCrashLog.swift */,
+				73893E3B2933954800F848DF /* DJCrashListViewController.swift */,
 			);
 			path = DJCrash;
 			sourceTree = "<group>";
@@ -1330,6 +1344,7 @@
 				73B7906628E7F133002A9CDC /* SearchViewController.swift in Sources */,
 				73936F9C2919BFBA00BC2901 /* RssFeedLatestView.swift in Sources */,
 				73B7905828E541BE002A9CDC /* Bool+Ext.swift in Sources */,
+				73893E3A2933893300F848DF /* FeedViewModel.swift in Sources */,
 				73074C8028EDB955001A90E7 /* WebViewFooterView.swift in Sources */,
 				73074CBE28EEC4AF001A90E7 /* TitleAndDescViewController.swift in Sources */,
 				73C598C728D8617800DA86A1 /* UIApplication+Ext.swift in Sources */,
@@ -1456,6 +1471,7 @@
 				73E14E5328F34FF200A9811D /* Parser.swift in Sources */,
 				73C598C528D85EF100DA86A1 /* PopoverView.swift in Sources */,
 				73074C7C28ED5507001A90E7 /* RepoIssueDetailViewController.swift in Sources */,
+				73893E3C2933954800F848DF /* DJCrashListViewController.swift in Sources */,
 				7311A526292A68DA00B1A2A6 /* PamphletResourceModel.swift in Sources */,
 				73AACAD728D308A60072B1DF /* SceneDelegate.swift in Sources */,
 				73AACB5628D47FCB0072B1DF /* String+Ext.swift in Sources */,

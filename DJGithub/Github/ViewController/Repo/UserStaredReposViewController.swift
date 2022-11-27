@@ -17,13 +17,27 @@ enum UserRepoState {
   case unknown
 }
 
-class UserStaredReposViewController: UIViewController, NextPageLoadable {
-  typealias DataType = Repo
-  var firstPageIndex: Int {
-    return 1
-  }
+struct UserStaredReposModel {
 
-  var dataSource: [Repo] = []
+  let repo: Repo
+  let height: CGFloat
+
+  static func convert(from repo: Repo) async -> UserStaredReposModel? {
+    if let rect = await repo.desc.asyncBoundingRect(
+      with: CGSize(width: FrameGuide.screenWidth - 64, height: 0),
+      options: .usesLineFragmentOrigin,
+      attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)],
+      context: nil) {
+      return UserStaredReposModel(repo: repo, height: rect.height + 82)
+    }
+    return nil
+  }
+}
+
+class UserStaredReposViewController: UIViewController, NextPageLoadable {
+  typealias DataType = UserStaredReposModel
+
+  var dataSource: [UserStaredReposModel] = []
   var nextPageState: NextPageState = NextPageState()
   var userRepoState: UserRepoState
   var repo: Repo?
@@ -92,8 +106,9 @@ class UserStaredReposViewController: UIViewController, NextPageLoadable {
 
   func loadNext(start: Int) {
     loadNext(start: start) { [weak self] in
-      guard let strongSelf = self else {
-        return
+      guard let strongSelf = self else { return }
+      Task {
+
       }
       strongSelf.view.stopLoading()
       strongSelf.tableView.dj_endRefresh()
@@ -105,8 +120,10 @@ class UserStaredReposViewController: UIViewController, NextPageLoadable {
     switch userRepoState {
     case .star:
       if let repos = DJUserDefaults.getStaredRepos() {
-        dataSource = repos
-        tableView.reloadData()
+        Task {
+          dataSource = await repos.convert()
+          self.tableView.reloadData()
+        }
       }
     default:
       view.startLoading()
@@ -123,7 +140,7 @@ extension UserStaredReposViewController: UITableViewDataSource {
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: UserStaredRepoCell.className, for: indexPath) as! UserStaredRepoCell
-    var r = dataSource[indexPath.row]
+    var r = dataSource[indexPath.row].repo
     if case UserRepoState.fork = self.userRepoState,
        let repo = self.repo,
        r.language == nil {
@@ -131,16 +148,14 @@ extension UserStaredReposViewController: UITableViewDataSource {
     }
     cell.render(with: r)
     cell.avatarImageViewTappedClosure = { [weak self] userName in
-      guard let strongSelf = self else {
-        return
-      }
+      guard let strongSelf = self else { return }
       strongSelf.navigationController?.pushToUser(with: userName)
     }
     return cell
   }
 
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return UserStaredRepoCell.cellHeight(by: dataSource[indexPath.row])
+    return dataSource[indexPath.row].height
   }
 }
 
@@ -148,7 +163,7 @@ extension UserStaredReposViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
 
-    let repo = dataSource[indexPath.row]
+    let repo = dataSource[indexPath.row].repo
     if let userName = repo.owner?.login {
       self.navigationController?.pushToRepo(with: userName, repoName: repo.name)
     }
@@ -157,7 +172,7 @@ extension UserStaredReposViewController: UITableViewDelegate {
 
 extension UserStaredReposViewController {
 
-  func performLoad(successHandler: @escaping ([Repo], Bool) -> Void, failureHandler: @escaping (String) -> Void) {
+  func performLoad(successHandler: @escaping ([UserStaredReposModel], Bool) -> Void, failureHandler: @escaping (String) -> Void) {
     Task {
       let repos: [Repo]
       switch self.userRepoState {
@@ -182,8 +197,22 @@ extension UserStaredReposViewController {
       }
       let languages = repos.map { Language(id: 0, language: $0.language ?? "Unknown", hex: UIColor.randomHex) }
       await LanguageManager.save(languages)
-      successHandler(repos, repos.count > 0)
+
+      let rs = await repos.convert()
+      successHandler(rs, rs.count > 0)
     }
   }
 
+}
+
+fileprivate extension Array where Element == Repo {
+  func convert() async -> [UserStaredReposModel] {
+    var rs: [UserStaredReposModel] = []
+    for repo in self {
+      if let model = await UserStaredReposModel.convert(from: repo) {
+        rs.append(model)
+      }
+    }
+    return rs
+  }
 }

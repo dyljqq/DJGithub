@@ -15,6 +15,8 @@ struct DJUserDefaults {
     case staredRepos
     case viewerName
     case crash
+    case feeds
+    case feedInfo
   }
 
   static func allHistorySearchWords() -> [String] {
@@ -84,6 +86,34 @@ struct DJUserDefaults {
 
   static func getCrashInfo() -> [String: String] {
     return UserDefaults.standard.value(forKey: Keys.crash.rawValue) as? [String: String] ?? [:]
+  }
+
+  static func setFeeds(with feeds: Feeds?) {
+    guard let feeds = feeds, let dict = DJEncoder(model: feeds).encode() as? [String: Any] else { return }
+    UserDefaults.standard.set(dict, forKey: Keys.feeds.rawValue)
+  }
+
+  static func getFeeds() -> Feeds? {
+    guard let dict = UserDefaults.standard.value(forKey: Keys.feeds.rawValue) as? [String: Any] else { return nil }
+    return try? DJDecoder(dict: dict).decode()
+  }
+
+  static func setFeedInfo(with feedInfo: FeedInfo?) {
+    set(with: feedInfo, key: Keys.feedInfo)
+  }
+
+  static func getFeedInfo() -> FeedInfo? {
+    return get(with: Keys.feedInfo)
+  }
+
+  static func set<T: DJCodable>(with model: T?, key: Keys) {
+    guard let dict = DJEncoder(model: model).encode() as? [String: Any] else { return }
+    UserDefaults.standard.set(dict, forKey: key.rawValue)
+  }
+
+  static func get<T: DJCodable>(with key: Keys) -> T? {
+    guard let dict = UserDefaults.standard.value(forKey: key.rawValue) as? [String: Any] else { return nil }
+    return try? DJDecoder(dict: dict).decode()
   }
 
 }
