@@ -28,3 +28,38 @@ extension String {
     return arr.count == 2 ? (arr[0], arr[1]) : nil
   }
 }
+
+extension String {
+  func boundingRect(with size: CGSize,
+                    options: NSStringDrawingOptions = [],
+                    attributes: [NSAttributedString.Key: Any]? = nil,
+                    context: NSStringDrawingContext?,
+                    completionHandler: @escaping (CGRect) -> Void) {
+    DispatchQueue.global(qos: .utility).async {
+      let rect = (self as NSString).boundingRect(
+        with: size,
+        options: options,
+        attributes: attributes,
+        context: context)
+      DispatchQueue.main.async {
+        completionHandler(rect)
+      }
+    }
+  }
+
+  func asyncBoundingRect(with size: CGSize,
+                    options: NSStringDrawingOptions = [],
+                    attributes: [NSAttributedString.Key: Any]? = nil,
+                         context: NSStringDrawingContext?) async -> CGRect? {
+    try? await withCheckedThrowingContinuation { continuation in
+      self.boundingRect(
+        with: size,
+        options: options,
+        attributes: attributes,
+        context: context
+      ) { rect in
+        continuation.resume(returning: rect)
+      }
+    }
+  }
+}
