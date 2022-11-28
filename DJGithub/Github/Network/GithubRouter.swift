@@ -147,6 +147,8 @@ enum GithubRouter: Router {
       return params
     case .repoBranchMerge(_, _, _, let params):
       return params
+    case .userInfoEdit(let params):
+      return params
     default: return [:]
     }
   }

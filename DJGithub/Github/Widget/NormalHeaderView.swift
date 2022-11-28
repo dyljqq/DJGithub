@@ -77,8 +77,8 @@ class NormalHeaderView: UIView {
 
   lazy var nameLabel: UILabel = {
     let label = UILabel()
-    label.textColor = .blue
-    label.font = UIFont.systemFont(ofSize: 16)
+    label.textColor = .lightBlue
+    label.font = UIFont.boldSystemFont(ofSize: 16)
     return label
   }()
 
