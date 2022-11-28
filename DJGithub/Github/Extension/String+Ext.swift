@@ -48,8 +48,8 @@ extension String {
   }
 
   func asyncBoundingRect(with size: CGSize,
-                    options: NSStringDrawingOptions = [],
-                    attributes: [NSAttributedString.Key: Any]? = nil,
+                         options: NSStringDrawingOptions = [],
+                         attributes: [NSAttributedString.Key: Any]? = nil,
                          context: NSStringDrawingContext?) async -> CGRect? {
     try? await withCheckedThrowingContinuation { continuation in
       self.boundingRect(

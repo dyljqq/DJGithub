@@ -30,6 +30,7 @@ class UserInfoEditViewController: UIViewController {
     textView.textColor = .textColor
     textView.font = UIFont.systemFont(ofSize: 14)
     textView.backgroundColor = .white
+    textView.textContainerInset = UIEdgeInsets(top: 10, left: 12, bottom: 10, right: 12)
     return textView
   }()
 
@@ -65,7 +66,7 @@ class UserInfoEditViewController: UIViewController {
       }
       let key = strongSelf.type.rawValue
       Task {
-        if await UserManager.editUserInfo(with: [key: text ?? ""]) != nil {
+        if let user = await UserManager.editUserInfo(with: [key: text ?? ""]) {
           _ = strongSelf.navigationController?.popViewController(animated: true)
         } else {
           HUD.show(with: "Failed to update \(strongSelf.type.name)")
