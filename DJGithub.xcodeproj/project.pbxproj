@@ -99,6 +99,8 @@
 		737EF298292A21080060C64F /* URLRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737EF297292A21080060C64F /* URLRouter.swift */; };
 		73893E3A2933893300F848DF /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73893E392933893300F848DF /* FeedViewModel.swift */; };
 		73893E3C2933954800F848DF /* DJCrashListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73893E3B2933954800F848DF /* DJCrashListViewController.swift */; };
+		73893E932937A5C800F848DF /* AppStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73893E922937A5C800F848DF /* AppStyle.swift */; };
+		73893E952937A61700F848DF /* AppStyleUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73893E942937A61700F848DF /* AppStyleUtility.swift */; };
 		73936F2B291377F300BC2901 /* DJLeakSniffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F2A291377F300BC2901 /* DJLeakSniffer.swift */; };
 		73936F2D2913784500BC2901 /* NSNotificationName+Leak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F2C2913784500BC2901 /* NSNotificationName+Leak.swift */; };
 		73936F2F2913790F00BC2901 /* UIViewController+Leak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F2E2913790F00BC2901 /* UIViewController+Leak.swift */; };
@@ -336,6 +338,8 @@
 		737EF297292A21080060C64F /* URLRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRouter.swift; sourceTree = "<group>"; };
 		73893E392933893300F848DF /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		73893E3B2933954800F848DF /* DJCrashListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJCrashListViewController.swift; sourceTree = "<group>"; };
+		73893E922937A5C800F848DF /* AppStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStyle.swift; sourceTree = "<group>"; };
+		73893E942937A61700F848DF /* AppStyleUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStyleUtility.swift; sourceTree = "<group>"; };
 		73936F2A291377F300BC2901 /* DJLeakSniffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJLeakSniffer.swift; sourceTree = "<group>"; };
 		73936F2C2913784500BC2901 /* NSNotificationName+Leak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotificationName+Leak.swift"; sourceTree = "<group>"; };
 		73936F2E2913790F00BC2901 /* UIViewController+Leak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Leak.swift"; sourceTree = "<group>"; };
@@ -694,6 +698,15 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		73893E912937A5BB00F848DF /* AppStyle */ = {
+			isa = PBXGroup;
+			children = (
+				73893E922937A5C800F848DF /* AppStyle.swift */,
+				73893E942937A61700F848DF /* AppStyleUtility.swift */,
+			);
+			path = AppStyle;
+			sourceTree = "<group>";
+		};
 		73936F29291377DD00BC2901 /* DJLeak */ = {
 			isa = PBXGroup;
 			children = (
@@ -845,6 +858,7 @@
 		73AACB1528D311C30072B1DF /* Github */ = {
 			isa = PBXGroup;
 			children = (
+				73893E912937A5BB00F848DF /* AppStyle */,
 				73101D4C28E49E2E00DB5423 /* Resource */,
 				73101D4528E47ED400DB5423 /* Protocol */,
 				73AACB7528D5BBDA0072B1DF /* DataBase */,
@@ -1425,6 +1439,7 @@
 				735D0E0B2903115E00E618B3 /* StackAddressInfo.swift in Sources */,
 				73936F2D2913784500BC2901 /* NSNotificationName+Leak.swift in Sources */,
 				73074CD528F166D8001A90E7 /* UserInfoEditViewController.swift in Sources */,
+				73893E932937A5C800F848DF /* AppStyle.swift in Sources */,
 				73074CCD28EF4AFE001A90E7 /* LocalDataManager.swift in Sources */,
 				7311A520292A36E800B1A2A6 /* URLRouterModel.swift in Sources */,
 				73AACB3C28D35C360072B1DF /* Utils.swift in Sources */,
@@ -1455,6 +1470,7 @@
 				73B7905E28E6D8EB002A9CDC /* UserFollowingManager.swift in Sources */,
 				7320170D28F5378E007B970F /* RssFeedAtom.swift in Sources */,
 				73EE0CDC29092F960010C54A /* LanguageGradientView.swift in Sources */,
+				73893E952937A61700F848DF /* AppStyleUtility.swift in Sources */,
 				73EE0CF8290BAE7D0010C54A /* RepoPull.swift in Sources */,
 				73B7906D28E972A9002A9CDC /* SearchWordManager.swift in Sources */,
 				73074CCF28EF573D001A90E7 /* LocalRepoCell.swift in Sources */,
