@@ -39,6 +39,10 @@ class PamphletViewController: UIViewController {
 
     view.backgroundColor = .backgroundColor
     setUp()
+
+    DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+      AppStyleUtility.shared.open(with: .gray)
+    })
   }
 
   private func setUp() {
