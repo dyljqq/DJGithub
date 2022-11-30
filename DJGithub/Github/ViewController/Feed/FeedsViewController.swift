@@ -14,7 +14,6 @@ class FeedsViewController: UIViewController, NextPageLoadable {
   var dataSource: [DataType] = []
   var nextPageState: NextPageState = NextPageState()
 
-  var feeds: Feeds?
   var feedViewModel: FeedViewModel
 
   lazy var tableView: UITableView = {
@@ -97,7 +96,7 @@ class FeedsViewController: UIViewController, NextPageLoadable {
   }
 
   func performLoad(successHandler: @escaping ([DataType], Bool) -> Void, failureHandler: @escaping (String) -> Void) {
-    guard let feeds = self.feeds else {
+    guard let feeds = self.feedViewModel.feeds else {
       failureHandler("no valid url.")
       return
     }

@@ -8,8 +8,11 @@
 import Foundation
 
 struct FeedViewModel {
-  var feeds: DJObserverable<Feeds> = DJObserverable()
   var feedInfoObserver: DJObserverable<FeedInfo> = DJObserverable()
+
+  var feeds: Feeds? {
+    return DJUserDefaults.getFeeds()
+  }
 
   func fetchLocalFeedInfo() -> FeedInfo? {
     return DJUserDefaults.getFeedInfo()
@@ -53,7 +56,7 @@ struct FeedViewModel {
     }
   }
 
-  func updateLocalFeeds(_ feeds: Feeds?) {
+  private func updateLocalFeeds(_ feeds: Feeds?) {
     DJUserDefaults.setFeeds(with: feeds)
   }
 
