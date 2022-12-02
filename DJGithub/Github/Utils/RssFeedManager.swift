@@ -47,21 +47,16 @@ class RssFeedManager: NSObject {
     guard self.atoms.isEmpty else {
       return atoms
     }
+    let localAtoms: [RssFeedAtom] = loadBundleJSONFile("rssfeed")
     let atoms: [RssFeedAtom] = RssFeedAtom.select(with: " order by update_time desc")
-    if atoms.isEmpty {
-      await self.saveAtoms()
-    }
-    return RssFeedAtom.select(with: " order by update_time desc")
-  }
-
-  func saveAtoms() async {
-    let atoms: [RssFeedAtom] = loadBundleJSONFile("rssfeed")
-    for atom in atoms {
-      let storedAtoms = RssFeedAtom.select(with: " where feed_link='\(atom.feedLink)'") as [RssFeedAtom]
-      if storedAtoms.isEmpty {
+    var mapping: Set<String> = Set()
+    atoms.forEach { mapping.insert($0.feedLink) }
+    for atom in localAtoms {
+      if !mapping.contains(atom.feedLink) {
         try? atom.insert()
       }
     }
+    return RssFeedAtom.select(with: " order by update_time desc")
   }
 
   static func updateAtom(with title: String, description: String, feedLink: String) {
