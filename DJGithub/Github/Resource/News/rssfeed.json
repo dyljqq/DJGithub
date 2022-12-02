@@ -16,6 +16,14 @@
         "atomType": "myzb"
     },
     {
+      "title":"SwiftRocks",
+      "id":2201071628,
+      "des":"SwiftRocks is a blog about how Swift works and general iOS tips and tricks.",
+      "siteLink":"https://swiftrocks.com/",
+      "feedLink":"https://swiftrocks.com/rss.xml",
+      "atomType": "swiftrocks"
+    },
+    {
         "title":"Michael Tsai",
         "id":2201111053,
         "des":"一名 macOS 开发者的博客",
