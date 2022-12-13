@@ -84,7 +84,6 @@ class UserStatusView: UIView {
       backgroundColor = .backgroundColor
     default:
       font = nil
-      break
     }
 
     if let font = font {
