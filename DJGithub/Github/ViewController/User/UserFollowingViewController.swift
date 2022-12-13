@@ -13,7 +13,7 @@ enum UserFollowingType {
   case contributor(String)
   case following(String)
   case followers(String)
-  case search(String)
+  case search(SearchCondition)
   case unknown
 
   var title: String {
@@ -176,8 +176,9 @@ extension UserFollowingViewController {
         users = await UserManager.fetch(by: .subscribers(repoName, ["page": "\(nextPageState.start)"]))
       case .followers(let name):
         users = await UserManager.getUserFollowers(with: name, page: nextPageState.start)
-      case .search(let q):
-        if let r = await SearchManager.searchUsers(with: q, page: nextPageState.start) {
+      case .search(var condition):
+        condition.update(with: nextPageState.start)
+        if let r = await SearchManager.searchUsers(with: .users, condition: condition) {
           users = r.items
         } else {
           users = []

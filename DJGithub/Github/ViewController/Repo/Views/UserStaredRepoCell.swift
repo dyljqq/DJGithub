@@ -87,7 +87,7 @@ class UserStaredRepoCell: UITableViewCell {
 
   lazy var repoNameLabel: UILabel = {
     let label = UILabel()
-    label.textColor = .blue
+    label.textColor = .lightBlue
     label.font = UIFont.systemFont(ofSize: 14)
     return label
   }()

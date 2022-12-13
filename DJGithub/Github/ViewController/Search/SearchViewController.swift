@@ -10,8 +10,8 @@ import UIKit
 extension SearchType {
   var vc: UIViewController {
     switch self {
-    case .users: return UserFollowingViewController(with: .search(""))
-    case .repos: return UserStaredReposViewController(userRepoState: .search(""))
+    case .users: return UserFollowingViewController(with: .search(SearchCondition(query: "")))
+    case .repos: return UserStaredReposViewController(userRepoState: .search(SearchCondition(query: "")))
     }
   }
 }
@@ -23,7 +23,26 @@ class SearchViewController: UIViewController {
     case result
   }
 
+  struct Constants {
+    static let startIndex = 1
+  }
+
   let types: [SearchType]
+
+  var sortedParam: String = ""
+
+  var searchType: SearchType {
+    return types[currentPage]
+  }
+
+  var filterParams: [String] {
+    switch searchType {
+    case .users:
+      return ["followers", "repositories"]
+    case .repos:
+      return ["stars", "forks", "updated"]
+    }
+  }
 
   lazy var searchBar: UISearchBar = {
     let searchBar = UISearchBar()
@@ -38,6 +57,17 @@ class SearchViewController: UIViewController {
     segment.selectedSegmentIndex = 0
     segment.addTarget(self, action: #selector(segmentSelectAction), for: .valueChanged)
     return segment
+  }()
+
+  lazy var searchSortedImageView: UIImageView = {
+    let imageView = UIImageView()
+    imageView.image = UIImage(named: "search_sort")
+
+    let tap = UITapGestureRecognizer(target: self, action: #selector(filterAction))
+    imageView.isUserInteractionEnabled = true
+    imageView.addGestureRecognizer(tap)
+
+    return imageView
   }()
 
   lazy var scrollView: UIScrollView = {
@@ -116,6 +146,12 @@ class SearchViewController: UIViewController {
       width: 200,
       height: 30
     )
+    view.addSubview(searchSortedImageView)
+    searchSortedImageView.snp.makeConstraints { make in
+      make.centerY.equalTo(FrameGuide.navigationBarAndStatusBarHeight + 37)
+      make.trailing.equalToSuperview().offset(-12)
+      make.width.height.equalTo(18)
+    }
 
     view.addSubview(self.tableView)
     self.tableView.snp.makeConstraints { make in
@@ -174,6 +210,19 @@ class SearchViewController: UIViewController {
     self.scrollView.setContentOffset(CGPoint(x: CGFloat(self.currentPage) * FrameGuide.screenWidth, y: scrollView.contentOffset.y), animated: true)
   }
 
+  @objc func filterAction() {
+    let sheetVC = UIAlertController(title: "Sorted Condition", message: "", preferredStyle: .actionSheet)
+    for param in filterParams {
+      sheetVC.addAction(UIAlertAction(title: param, style: .default) { [weak self] _ in
+        guard let strongSelf = self else { return }
+        strongSelf.sortedParam = param
+        strongSelf.loadData(with: Constants.startIndex)
+      })
+    }
+    sheetVC.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+    self.present(sheetVC, animated: true)
+  }
+
   private func update(with type: SearchViewType) {
     switch type {
     case .history:
@@ -193,14 +242,15 @@ class SearchViewController: UIViewController {
     }
 
     for vc in vcs {
+      let condition = SearchCondition(query: searchWord, sort: sortedParam)
       if let vc = vc as? UserFollowingViewController {
-        vc.type = .search(searchWord)
-        vc.nextPageState.update(start: 1, hasNext: true, isLoading: false)
-        vc.loadData(start: 1)
+        vc.type = .search(condition)
+        vc.nextPageState.update(start: Constants.startIndex, hasNext: true, isLoading: false)
+        vc.loadData(start: Constants.startIndex)
       } else if let vc = vc as? UserStaredReposViewController {
-        vc.userRepoState = .search(searchWord)
-        vc.nextPageState.update(start: 1, hasNext: true, isLoading: false)
-        vc.loadNext(start: 1)
+        vc.userRepoState = .search(condition)
+        vc.nextPageState.update(start: Constants.startIndex, hasNext: true, isLoading: false)
+        vc.loadNext(start: Constants.startIndex)
       }
     }
   }

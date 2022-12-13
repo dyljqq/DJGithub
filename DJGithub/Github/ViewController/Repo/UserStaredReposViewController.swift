@@ -13,7 +13,7 @@ enum UserRepoState {
   case star(String)
   case repos(String)
   case subscription(String)
-  case search(String)
+  case search(SearchCondition)
   case unknown
 }
 
@@ -190,8 +190,9 @@ extension UserStaredReposViewController {
         repos = await RepoManager.fetchUserRepos(with: content, page: nextPageState.start)
       case .subscription(let userName):
         repos = await UserManager.getUserSubscription(with: userName, page: nextPageState.start)
-      case .search(let query):
-        repos = await SearchManager.searchRepos(with: query, page: nextPageState.start)?.items ?? []
+      case .search(var condition):
+        condition.update(with: nextPageState.start)
+        repos = await SearchManager.searchRepos(with: .repos, condition: condition)?.items ?? []
       default:
         repos = []
       }
