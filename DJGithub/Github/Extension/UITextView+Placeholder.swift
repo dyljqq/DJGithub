@@ -1,72 +1,119 @@
 //
 //  UITextView+Placeholder.swift
-//  DJGithub
+//  UITextViewPlaceholder
 //
-//  Created by jiqinqiang on 2022/10/6.
+//  Created by dyljqq dev on 2023/1/4.
 //
 
 import UIKit
 
-private var placeholderLabelKey: UInt8 = 0
+private var placeholderKey: UInt8 = 0
+private var placeholderViewKey: UInt8 = 0
 
-extension UITextView: UITextViewDelegate {
-
-  var placeholderLabel: UILabel? {
-    get {
-      return objc_getAssociatedObject(self, &placeholderLabelKey) as? UILabel
+extension UITextView {
+    public var placeholder: String? {
+        get {
+            return objc_getAssociatedObject(self, &placeholderKey) as? String
+        }
+        
+        set {
+            guard newValue != placeholder else { return }
+            objc_setAssociatedObject(self, &placeholderKey, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+            updatePlaceholderTextView()
+        }
     }
-    set {
-      objc_setAssociatedObject(self, &placeholderLabelKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+    
+    var placeholderTextView: UITextView {
+        get {
+            if let textView = objc_getAssociatedObject(self, &placeholderViewKey) as? UITextView {
+                return textView
+            }
+            return createPlaceholderTextView()
+        }
     }
-  }
-
-  var placeholder: String? {
-    get {
-      return self.placeholderLabel?.text
+    
+    override open func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        updatePlaceholderTextView()
     }
-    set {
-      if self.placeholderLabel == nil {
-        self.addPlaceholder(with: newValue)
-      }
-      if newValue == nil || newValue!.isEmpty {
-        self.placeholderLabel?.isHidden = true
-      } else {
-        self.placeholderLabel?.isHidden = false
-      }
-      self.placeholderLabel?.text = newValue
-      self.resizePlaceholderLabel()
+}
+
+private extension UITextView {
+    func createPlaceholderTextView() -> UITextView {
+        let textView = UITextView()
+        textView.backgroundColor = .clear
+        textView.textColor = Self.defaultPlaceholderColor()
+        textView.isUserInteractionEnabled = false
+        textView.isAccessibilityElement = false
+        
+        objc_setAssociatedObject(self, &placeholderViewKey, textView, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        
+        updatePlaceholderTextView()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updatePlaceholderTextView), name: UITextView.textDidChangeNotification, object: nil)
+        setupObservers()
+                
+        return textView
     }
-  }
-
-  public func textViewDidChange(_ textView: UITextView) {
-    placeholderLabel?.isHidden = !textView.text.isEmpty
-  }
-
-  private func resizePlaceholderLabel() {
-    let x = self.textContainer.lineFragmentPadding
-    let y = self.textContainerInset.top
-
-    if let placeholder = placeholder {
-      let rect = (placeholder as NSString).boundingRect(
-        with: CGSize(width: 0, height: 20),
-        options: .usesLineFragmentOrigin,
-        attributes: [NSAttributedString.Key.font: self.placeholderLabel?.font ?? UIFont.systemFont(ofSize: 14)],
-        context: nil)
-      placeholderLabel?.frame = CGRect(x: x, y: y, width: rect.width, height: 20)
+    
+    @objc func updatePlaceholderTextView() {
+        if self.text.isEmpty {
+            self.insertSubview(placeholderTextView, at: 0)
+            placeholderTextView.text = placeholder
+        } else {
+            placeholderTextView.removeFromSuperview()
+        }
+        
+        if placeholderTextView.attributedText.length == 0 {
+            placeholderTextView.textAlignment = textAlignment
+        }
+        
+        placeholderTextView.font = font
+        placeholderTextView.textContainer.exclusionPaths = textContainer.exclusionPaths
+        placeholderTextView.textContainerInset = textContainerInset
+        placeholderTextView.textContainer.lineFragmentPadding = textContainer.lineFragmentPadding
+        placeholderTextView.frame = bounds
     }
-  }
+    
+    class func defaultPlaceholderColor() -> UIColor {
+        if #available(iOS 13.0, *) {
+            let selector = NSSelectorFromString("placeholderTextColor")
+            if UIColor.responds(to: selector),
+               let v = UIColor.perform(selector),
+               let color = v.takeUnretainedValue() as? UIColor {
+                return color
+            }
+        }
+        return UITextField().defaultPlaceholderColor
+    }
+    
+    func setupObservers() {
+        for key in Self.observingKeys {
+            self.addObserver(self, forKeyPath: key, options: .new, context: nil)
+        }
+    }
+    
+    class var observingKeys: [String] {
+        return [
+            "attributedText",
+            "text",
+            "frame",
+            "bounds",
+            "textAlignment",
+            "font",
+            "textContainerInset",
+            "textContainer.lineFragmentPadding",
+            "textContainer.exclusionPaths"
+        ]
+    }
+}
 
-  private func addPlaceholder(with placeholder: String?) {
-    let label = UILabel()
-    label.textColor = .lightGray
-    label.text = placeholder
-    label.font = self.font
-    label.isHidden = !self.text.isEmpty
-    self.addSubview(label)
-    self.delegate = self
-    self.placeholderLabel = label
-
-    self.resizePlaceholderLabel()
-  }
-
+private extension UITextField {
+    var defaultPlaceholderColor: UIColor {
+        placeholder = " "
+        guard let attributes = self.attributedPlaceholder?.attributes(at: 0, effectiveRange: nil),
+              let color = attributes[NSAttributedString.Key.foregroundColor] as? UIColor else {
+            return UIColor(red: 0, green: 0, blue: 0.0980392, alpha: 0.22)
+        }
+        return color
+    }
 }
