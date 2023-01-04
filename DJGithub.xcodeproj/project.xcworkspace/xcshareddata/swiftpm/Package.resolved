@@ -1,6 +1,15 @@
 {
   "pins" : [
     {
+      "identity" : "djrefresh",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dyljqq/DJRefresh.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "d8372da5e62b0ff7618f79eb5eac78a5b2cf2353"
+      }
+    },
+    {
       "identity" : "kingfisher",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/onevcat/Kingfisher.git",
