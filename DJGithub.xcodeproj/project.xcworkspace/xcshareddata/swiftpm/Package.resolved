@@ -37,6 +37,15 @@
       }
     },
     {
+      "identity" : "swiftsoup",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/scinfu/SwiftSoup.git",
+      "state" : {
+        "revision" : "f707b8680cddb96dc1855632340a572ef37bbb98",
+        "version" : "2.5.3"
+      }
+    },
+    {
       "identity" : "swiftymarkdown",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SimonFairbairn/SwiftyMarkdown.git",
