@@ -10,8 +10,13 @@ import SwiftUI
 
 class GithubTrendingManager: NSObject {
     
-    @objc func addTrendingRepoView(with path: String) -> UIViewController {
-        return UIHostingController(rootView: GithubTrendingReposView(path: path))
+    @objc func addTrendingRepoView(with path: String, pushClosure: ((String, String) -> Void)? = nil) -> UIViewController {
+        return UIHostingController(
+            rootView: GithubTrendingReposView(
+                path: path,
+                pushClosure: pushClosure
+            )
+        )
     }
     
 }

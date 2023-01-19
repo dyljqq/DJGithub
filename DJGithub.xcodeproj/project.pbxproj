@@ -235,6 +235,7 @@
 		D90B812829795E0500CA4006 /* GithubTrendingRepoHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90B812729795E0500CA4006 /* GithubTrendingRepoHostingController.swift */; };
 		D90B812A29795F8400CA4006 /* GithubTrendingRepoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90B812929795F8400CA4006 /* GithubTrendingRepoViewController.swift */; };
 		D90B812C29795FC800CA4006 /* GithubTrendingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90B812B29795FC800CA4006 /* GithubTrendingManager.swift */; };
+		D90B812E297965D500CA4006 /* GithubTrendingReposRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90B812D297965D500CA4006 /* GithubTrendingReposRepresentation.swift */; };
 		D937FB872965C961005CD291 /* UITextView+Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D937FB862965C961005CD291 /* UITextView+Placeholder.swift */; };
 /* End PBXBuildFile section */
 
@@ -484,6 +485,7 @@
 		D90B812729795E0500CA4006 /* GithubTrendingRepoHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubTrendingRepoHostingController.swift; sourceTree = "<group>"; };
 		D90B812929795F8400CA4006 /* GithubTrendingRepoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubTrendingRepoViewController.swift; sourceTree = "<group>"; };
 		D90B812B29795FC800CA4006 /* GithubTrendingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubTrendingManager.swift; sourceTree = "<group>"; };
+		D90B812D297965D500CA4006 /* GithubTrendingReposRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubTrendingReposRepresentation.swift; sourceTree = "<group>"; };
 		D937FB862965C961005CD291 /* UITextView+Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Placeholder.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1205,6 +1207,7 @@
 				D90B812729795E0500CA4006 /* GithubTrendingRepoHostingController.swift */,
 				D90B812929795F8400CA4006 /* GithubTrendingRepoViewController.swift */,
 				D90B812B29795FC800CA4006 /* GithubTrendingManager.swift */,
+				D90B812D297965D500CA4006 /* GithubTrendingReposRepresentation.swift */,
 			);
 			path = GithubTrending;
 			sourceTree = "<group>";
@@ -1425,6 +1428,7 @@
 				73074C7E28ED5664001A90E7 /* IssueDetail.swift in Sources */,
 				73EE0D00290C24AD0010C54A /* NotificationKeys.swift in Sources */,
 				73DF6C0C28EC7A7A0003BDB8 /* RepoIssuesStateViewController.swift in Sources */,
+				D90B812E297965D500CA4006 /* GithubTrendingReposRepresentation.swift in Sources */,
 				73EE0CDE2909351A0010C54A /* PrimaryLanguageCell.swift in Sources */,
 				7339201528F56D2900DC76B0 /* RssFeedManager.swift in Sources */,
 				73EE0CFA290BB3F50010C54A /* RepoBranchCommitUserView.swift in Sources */,

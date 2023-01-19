@@ -20,6 +20,7 @@ enum HostVCType: String {
   case github
   case web
   case githubIssue
+  case trending
   case unknown
 
   func getVC(with params: [String: String] = [:]) -> UIViewController? {
@@ -55,6 +56,9 @@ enum HostVCType: String {
          let issueNumber = Int(params["issueNumber"] ?? "") {
         return configGithubIssueVC(with: userName, repoName: repoName, issueNumber: issueNumber)
       }
+    case .trending:
+        guard let type = params["type"] else { return nil }
+        return configGithubTrendingVC()
     case .unknown:
       return nil
     }
@@ -93,4 +97,8 @@ fileprivate extension HostVCType {
   func configGithubIssueVC(with userName: String, repoName: String, issueNumber: Int) -> RepoIssueDetailViewController {
     return RepoIssueDetailViewController(userName: userName, repoName: repoName, issueNum: issueNumber)
   }
+    
+    func configGithubTrendingVC() -> GithubTrendingRepoViewController {
+        return GithubTrendingRepoViewController()
+    }
 }

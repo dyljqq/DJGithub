@@ -26,7 +26,8 @@ struct GithubTrendingRepoView: View {
             .padding(.bottom, 4)
             Text(repo.desc)
                 .font(.system(size: 12))
-                .foregroundColor(Color.gray)
+                .foregroundColor(Color(uiColor: UIColor.textColor))
+                .padding(.bottom, 8)
             HStack {
                 HStack {
                     Circle()
@@ -34,6 +35,7 @@ struct GithubTrendingRepoView: View {
                         .frame(width: 14, height: 14)
                     Text(repo.languange)
                         .font(.system(size: 12))
+                        .foregroundColor(Color(uiColor: .textGrayColor))
                 }
                 Spacer()
                 HStack {
@@ -42,18 +44,20 @@ struct GithubTrendingRepoView: View {
                         .frame(width: 14, height: 14)
                     Text(repo.star)
                         .font(.system(size: 12))
+                        .foregroundColor(Color(uiColor: .textGrayColor))
                 }
                 Spacer()
                 HStack {
-                    Image(systemName: "arrow.triangle.branch")
+                    Image("git-branch")
                         .resizable()
                         .frame(width: 14, height: 14)
                     Text(repo.fork)
                         .font(.system(size: 12))
+                        .foregroundColor(Color(uiColor: .textGrayColor))
                 }
             }
         }
-        .padding()
+        .padding(EdgeInsets(top: 10, leading: 12, bottom: 10, trailing: 12))
     }
 }
 

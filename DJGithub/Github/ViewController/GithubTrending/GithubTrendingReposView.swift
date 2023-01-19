@@ -10,26 +10,37 @@ import SwiftUI
 struct GithubTrendingReposView: View {
     
     let path: String
+    let pushClosure:((String, String) -> Void)?
     
     private let baseUrlString = "https://github.com/trending"
     
     @State var repos: [GithubTrendingRepo] = []
     
-    init(path: String = "", repos: [GithubTrendingRepo] = []) {
+    init(path: String = "", repos: [GithubTrendingRepo] = [], pushClosure: ((String, String) -> Void)? = nil) {
         self.path = path
         self.repos = repos
+        self.pushClosure = pushClosure
     }
     
     var body: some View {
-        ScrollView {
-            LazyVStack(alignment: .leading) {
-                ForEach(repos, id: \.id) { repo in
-                    VStack {
-                        GithubTrendingRepoView(repo: repo)
-                        Rectangle()
-                            .fill(Color(with: 244, green: 244, blue: 244))
-                            .frame(height: 0.5)
-                            .padding(.leading, 12)
+        VStack {
+            if repos.isEmpty {
+                
+            } else {
+                ScrollView {
+                    LazyVStack(alignment: .leading) {
+                        ForEach(repos, id: \.id) { repo in
+                            VStack {
+                                GithubTrendingRepoView(repo: repo)
+                                Rectangle()
+                                    .fill(Color(with: 244, green: 244, blue: 244))
+                                    .frame(height: 0.5)
+                                    .padding(.leading, 12)
+                            }
+                            .onTapGesture {
+                                self.pushClosure?(repo.userName, repo.repoName)
+                            }
+                        }
                     }
                 }
             }

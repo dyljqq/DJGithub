@@ -131,6 +131,7 @@ extension PamphletViewController {
     case swiftUI
     case combine
     case concurrency
+    case githubTreding
 
     var title: String {
       switch self {
@@ -144,6 +145,7 @@ extension PamphletViewController {
       case .swiftUI: return "SwiftUI"
       case .combine: return "Combine"
       case .concurrency: return "Concurrency"
+      case .githubTreding: return "Trending"
       }
     }
 
