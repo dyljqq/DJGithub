@@ -236,6 +236,7 @@
 		D90B812A29795F8400CA4006 /* GithubTrendingRepoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90B812929795F8400CA4006 /* GithubTrendingRepoViewController.swift */; };
 		D90B812C29795FC800CA4006 /* GithubTrendingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90B812B29795FC800CA4006 /* GithubTrendingManager.swift */; };
 		D90B812E297965D500CA4006 /* GithubTrendingReposRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90B812D297965D500CA4006 /* GithubTrendingReposRepresentation.swift */; };
+		D90B813229797A5800CA4006 /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90B813129797A5800CA4006 /* LoaderView.swift */; };
 		D937FB872965C961005CD291 /* UITextView+Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D937FB862965C961005CD291 /* UITextView+Placeholder.swift */; };
 /* End PBXBuildFile section */
 
@@ -486,6 +487,7 @@
 		D90B812929795F8400CA4006 /* GithubTrendingRepoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubTrendingRepoViewController.swift; sourceTree = "<group>"; };
 		D90B812B29795FC800CA4006 /* GithubTrendingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubTrendingManager.swift; sourceTree = "<group>"; };
 		D90B812D297965D500CA4006 /* GithubTrendingReposRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubTrendingReposRepresentation.swift; sourceTree = "<group>"; };
+		D90B813129797A5800CA4006 /* LoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
 		D937FB862965C961005CD291 /* UITextView+Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Placeholder.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1208,6 +1210,7 @@
 				D90B812929795F8400CA4006 /* GithubTrendingRepoViewController.swift */,
 				D90B812B29795FC800CA4006 /* GithubTrendingManager.swift */,
 				D90B812D297965D500CA4006 /* GithubTrendingReposRepresentation.swift */,
+				D90B813129797A5800CA4006 /* LoaderView.swift */,
 			);
 			path = GithubTrending;
 			sourceTree = "<group>";
@@ -1581,6 +1584,7 @@
 				73101D3F28E3077C00DB5423 /* UserManager.swift in Sources */,
 				73AACB3E28D362430072B1DF /* Consts.swift in Sources */,
 				7362FE812910BF2700D97E1A /* DJCrashLog.swift in Sources */,
+				D90B813229797A5800CA4006 /* LoaderView.swift in Sources */,
 				7374D19728E0BC1D00E6BE47 /* Readme.swift in Sources */,
 				73DF6BEE28EADD160003BDB8 /* LocalDeveloperSectionHeaderView.swift in Sources */,
 				73074CD128F1559D001A90E7 /* UserInfoViewController.swift in Sources */,

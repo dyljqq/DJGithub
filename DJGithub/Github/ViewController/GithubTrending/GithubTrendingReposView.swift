@@ -25,7 +25,7 @@ struct GithubTrendingReposView: View {
     var body: some View {
         VStack {
             if repos.isEmpty {
-                
+                LoaderView(tintColor: .gray)
             } else {
                 ScrollView {
                     LazyVStack(alignment: .leading) {

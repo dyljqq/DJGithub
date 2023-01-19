@@ -14,7 +14,7 @@
       },
       {
         "imageName": "p19",
-        "title": "Trending",
+        "title": "Github Trending",
         "jumpUrl": "djgithub://trending?type=repo"
       },
     ]
