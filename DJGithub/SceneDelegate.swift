@@ -25,6 +25,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     window?.makeKeyAndVisible()
 
     setUp()
+      
+      Task {
+          await GithubTrendingParser(urlString: "https://github.com/trending/swift?since=daily").parse()
+      }
   }
 
   func setUp() {

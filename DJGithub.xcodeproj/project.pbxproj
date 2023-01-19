@@ -225,6 +225,18 @@
 		73EE0D00290C24AD0010C54A /* NotificationKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EE0CFF290C24AD0010C54A /* NotificationKeys.swift */; };
 		73FA3870290FBEE800FCEBC6 /* AppStartTimeMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FA386F290FBEE800FCEBC6 /* AppStartTimeMonitor.swift */; };
 		D906A20D29599C9C009F3956 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = D906A20C29599C9C009F3956 /* config.json */; };
+		D90B811529793B3400CA4006 /* GithubTrendingParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90B811429793B3400CA4006 /* GithubTrendingParser.swift */; };
+		D90B811729793BE700CA4006 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = D90B811629793BE600CA4006 /* SwiftSoup */; };
+		D90B811929793FB200CA4006 /* GithubTrendingRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90B811829793FB200CA4006 /* GithubTrendingRepo.swift */; };
+		D90B811C29794CD600CA4006 /* GithubTrendingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90B811B29794CD600CA4006 /* GithubTrendingView.swift */; };
+		D90B812029794D2F00CA4006 /* GithubTrendingRepoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90B811F29794D2F00CA4006 /* GithubTrendingRepoView.swift */; };
+		D90B81242979578400CA4006 /* GithubTrendingReposView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90B81232979578400CA4006 /* GithubTrendingReposView.swift */; };
+		D90B812629795A5F00CA4006 /* Color+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90B812529795A5F00CA4006 /* Color+Ext.swift */; };
+		D90B812829795E0500CA4006 /* GithubTrendingRepoHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90B812729795E0500CA4006 /* GithubTrendingRepoHostingController.swift */; };
+		D90B812A29795F8400CA4006 /* GithubTrendingRepoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90B812929795F8400CA4006 /* GithubTrendingRepoViewController.swift */; };
+		D90B812C29795FC800CA4006 /* GithubTrendingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90B812B29795FC800CA4006 /* GithubTrendingManager.swift */; };
+		D90B812E297965D500CA4006 /* GithubTrendingReposRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90B812D297965D500CA4006 /* GithubTrendingReposRepresentation.swift */; };
+		D90B813229797A5800CA4006 /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90B813129797A5800CA4006 /* LoaderView.swift */; };
 		D937FB872965C961005CD291 /* UITextView+Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D937FB862965C961005CD291 /* UITextView+Placeholder.swift */; };
 /* End PBXBuildFile section */
 
@@ -465,6 +477,17 @@
 		73EE0CFF290C24AD0010C54A /* NotificationKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationKeys.swift; sourceTree = "<group>"; };
 		73FA386F290FBEE800FCEBC6 /* AppStartTimeMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStartTimeMonitor.swift; sourceTree = "<group>"; };
 		D906A20C29599C9C009F3956 /* config.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
+		D90B811429793B3400CA4006 /* GithubTrendingParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubTrendingParser.swift; sourceTree = "<group>"; };
+		D90B811829793FB200CA4006 /* GithubTrendingRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubTrendingRepo.swift; sourceTree = "<group>"; };
+		D90B811B29794CD600CA4006 /* GithubTrendingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubTrendingView.swift; sourceTree = "<group>"; };
+		D90B811F29794D2F00CA4006 /* GithubTrendingRepoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubTrendingRepoView.swift; sourceTree = "<group>"; };
+		D90B81232979578400CA4006 /* GithubTrendingReposView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubTrendingReposView.swift; sourceTree = "<group>"; };
+		D90B812529795A5F00CA4006 /* Color+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Ext.swift"; sourceTree = "<group>"; };
+		D90B812729795E0500CA4006 /* GithubTrendingRepoHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubTrendingRepoHostingController.swift; sourceTree = "<group>"; };
+		D90B812929795F8400CA4006 /* GithubTrendingRepoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubTrendingRepoViewController.swift; sourceTree = "<group>"; };
+		D90B812B29795FC800CA4006 /* GithubTrendingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubTrendingManager.swift; sourceTree = "<group>"; };
+		D90B812D297965D500CA4006 /* GithubTrendingReposRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubTrendingReposRepresentation.swift; sourceTree = "<group>"; };
+		D90B813129797A5800CA4006 /* LoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
 		D937FB862965C961005CD291 /* UITextView+Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Placeholder.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -478,6 +501,7 @@
 				73D0DE252907B5F500F385E6 /* DJRefresh in Frameworks */,
 				73DE29CC28E0C08200B48009 /* MarkdownView in Frameworks */,
 				734D675F2908298A006A0BFA /* DJRefresh in Frameworks */,
+				D90B811729793BE700CA4006 /* SwiftSoup in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -946,6 +970,7 @@
 				7362FE842911816600D97E1A /* Default+Ext.swift */,
 				73936F9F291A4C8C00BC2901 /* UIViewController+Share.swift */,
 				D937FB862965C961005CD291 /* UITextView+Placeholder.swift */,
+				D90B812529795A5F00CA4006 /* Color+Ext.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -953,6 +978,7 @@
 		73AACB2E28D32E6C0072B1DF /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				D90B811329793B1B00CA4006 /* GithubTrending */,
 				73E14E5428F3DAB100A9811D /* Parse */,
 				73AACB4D28D45F1F0072B1DF /* Color.swift */,
 				73AACB6B28D5AF7D0072B1DF /* LanguageManager.swift */,
@@ -969,6 +995,7 @@
 		73AACB3128D357980072B1DF /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				D90B811A29794CB500CA4006 /* GithubTrending */,
 				73E14E5928F414F600A9811D /* Feed */,
 				73B7906328E7F10C002A9CDC /* Search */,
 				73101D5C28E4A5BF00DB5423 /* Developer */,
@@ -1164,6 +1191,30 @@
 			path = DJCrash;
 			sourceTree = "<group>";
 		};
+		D90B811329793B1B00CA4006 /* GithubTrending */ = {
+			isa = PBXGroup;
+			children = (
+				D90B811429793B3400CA4006 /* GithubTrendingParser.swift */,
+				D90B811829793FB200CA4006 /* GithubTrendingRepo.swift */,
+			);
+			path = GithubTrending;
+			sourceTree = "<group>";
+		};
+		D90B811A29794CB500CA4006 /* GithubTrending */ = {
+			isa = PBXGroup;
+			children = (
+				D90B811B29794CD600CA4006 /* GithubTrendingView.swift */,
+				D90B811F29794D2F00CA4006 /* GithubTrendingRepoView.swift */,
+				D90B81232979578400CA4006 /* GithubTrendingReposView.swift */,
+				D90B812729795E0500CA4006 /* GithubTrendingRepoHostingController.swift */,
+				D90B812929795F8400CA4006 /* GithubTrendingRepoViewController.swift */,
+				D90B812B29795FC800CA4006 /* GithubTrendingManager.swift */,
+				D90B812D297965D500CA4006 /* GithubTrendingReposRepresentation.swift */,
+				D90B813129797A5800CA4006 /* LoaderView.swift */,
+			);
+			path = GithubTrending;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1187,6 +1238,7 @@
 				73DE29CB28E0C08200B48009 /* MarkdownView */,
 				73D0DE242907B5F500F385E6 /* DJRefresh */,
 				734D675E2908298A006A0BFA /* DJRefresh */,
+				D90B811629793BE600CA4006 /* SwiftSoup */,
 			);
 			productName = DJGithub;
 			productReference = 73AACAD128D308A60072B1DF /* DJGithub.app */;
@@ -1267,6 +1319,7 @@
 				7374D19328E0B2F300E6BE47 /* XCRemoteSwiftPackageReference "SwiftyMarkdown" */,
 				73DE29CA28E0C08200B48009 /* XCRemoteSwiftPackageReference "MarkdownView" */,
 				734D675D2908298A006A0BFA /* XCRemoteSwiftPackageReference "DJRefresh" */,
+				D90B811229793AC800CA4006 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 			);
 			productRefGroup = 73AACAD228D308A60072B1DF /* Products */;
 			projectDirPath = "";
@@ -1373,9 +1426,12 @@
 				7311A528292A69A600B1A2A6 /* PamphletResourceViewController.swift in Sources */,
 				7341DCC628DF2400009A3A3C /* TabBarController.swift in Sources */,
 				7320170128F47B76007B970F /* RegularParser.swift in Sources */,
+				D90B812029794D2F00CA4006 /* GithubTrendingRepoView.swift in Sources */,
+				D90B812829795E0500CA4006 /* GithubTrendingRepoHostingController.swift in Sources */,
 				73074C7E28ED5664001A90E7 /* IssueDetail.swift in Sources */,
 				73EE0D00290C24AD0010C54A /* NotificationKeys.swift in Sources */,
 				73DF6C0C28EC7A7A0003BDB8 /* RepoIssuesStateViewController.swift in Sources */,
+				D90B812E297965D500CA4006 /* GithubTrendingReposRepresentation.swift in Sources */,
 				73EE0CDE2909351A0010C54A /* PrimaryLanguageCell.swift in Sources */,
 				7339201528F56D2900DC76B0 /* RssFeedManager.swift in Sources */,
 				73EE0CFA290BB3F50010C54A /* RepoBranchCommitUserView.swift in Sources */,
@@ -1385,6 +1441,7 @@
 				73AACB2928D321480072B1DF /* Result.swift in Sources */,
 				7320170628F53455007B970F /* RssFeedAtomViewController.swift in Sources */,
 				73DF6BFC28EBFD3E0003BDB8 /* RepoContent.swift in Sources */,
+				D90B812629795A5F00CA4006 /* Color+Ext.swift in Sources */,
 				735D0E0A2903115E00E618B3 /* DJThreadInfoModel.swift in Sources */,
 				732B21D328E228FD005893C0 /* NextPageModel.swift in Sources */,
 				73D0DE2B2907D2DD00F385E6 /* DJUserDefaults.swift in Sources */,
@@ -1421,9 +1478,11 @@
 				7341DCD828E05D98009A3A3C /* RepoFooterView.swift in Sources */,
 				73DE29CE28E0C35200B48009 /* WebViewController.swift in Sources */,
 				73B7905428E533C2002A9CDC /* ConfigManager.swift in Sources */,
+				D90B811929793FB200CA4006 /* GithubTrendingRepo.swift in Sources */,
 				73936FC9291E484A00BC2901 /* UserContainerViewController.swift in Sources */,
 				73B7905A28E56003002A9CDC /* RepoInteractViewController.swift in Sources */,
 				73B7906028E7E805002A9CDC /* SearchManager.swift in Sources */,
+				D90B811529793B3400CA4006 /* GithubTrendingParser.swift in Sources */,
 				73AACB0F28D30C470072B1DF /* APIClient.swift in Sources */,
 				73AACB8B28D708740072B1DF /* UIScrollView+Refresh.swift in Sources */,
 				73936F39291385C700BC2901 /* DJProperty.swift in Sources */,
@@ -1436,6 +1495,7 @@
 				73B7904A28E52450002A9CDC /* LocalDevelopersViewController.swift in Sources */,
 				7311A52A292A6A2B00B1A2A6 /* PamphletResourceCell.swift in Sources */,
 				735D0E0B2903115E00E618B3 /* StackAddressInfo.swift in Sources */,
+				D90B811C29794CD600CA4006 /* GithubTrendingView.swift in Sources */,
 				73936F2D2913784500BC2901 /* NSNotificationName+Leak.swift in Sources */,
 				73074CD528F166D8001A90E7 /* UserInfoEditViewController.swift in Sources */,
 				73893E932937A5C800F848DF /* AppStyle.swift in Sources */,
@@ -1465,6 +1525,7 @@
 				73EE0CFC290BB48E0010C54A /* RepoBranchCommitCell.swift in Sources */,
 				73B7904C28E5298D002A9CDC /* LocalDeveloperCell.swift in Sources */,
 				732016FF28F46DFB007B970F /* DateParser.swift in Sources */,
+				D90B812C29795FC800CA4006 /* GithubTrendingManager.swift in Sources */,
 				73101D4928E47FB100DB5423 /* StatusModel.swift in Sources */,
 				73B7905E28E6D8EB002A9CDC /* UserFollowingManager.swift in Sources */,
 				7320170D28F5378E007B970F /* RssFeedAtom.swift in Sources */,
@@ -1486,6 +1547,7 @@
 				73E14E5328F34FF200A9811D /* Parser.swift in Sources */,
 				73C598C528D85EF100DA86A1 /* PopoverView.swift in Sources */,
 				73074C7C28ED5507001A90E7 /* RepoIssueDetailViewController.swift in Sources */,
+				D90B812A29795F8400CA4006 /* GithubTrendingRepoViewController.swift in Sources */,
 				73893E3C2933954800F848DF /* DJCrashListViewController.swift in Sources */,
 				7311A526292A68DA00B1A2A6 /* PamphletResourceModel.swift in Sources */,
 				73AACAD728D308A60072B1DF /* SceneDelegate.swift in Sources */,
@@ -1522,6 +1584,7 @@
 				73101D3F28E3077C00DB5423 /* UserManager.swift in Sources */,
 				73AACB3E28D362430072B1DF /* Consts.swift in Sources */,
 				7362FE812910BF2700D97E1A /* DJCrashLog.swift in Sources */,
+				D90B813229797A5800CA4006 /* LoaderView.swift in Sources */,
 				7374D19728E0BC1D00E6BE47 /* Readme.swift in Sources */,
 				73DF6BEE28EADD160003BDB8 /* LocalDeveloperSectionHeaderView.swift in Sources */,
 				73074CD128F1559D001A90E7 /* UserInfoViewController.swift in Sources */,
@@ -1534,6 +1597,7 @@
 				735D0E092903115E00E618B3 /* DJStuckMonitor.swift in Sources */,
 				73DF6BEC28EACF340003BDB8 /* SearchWordHeaderView.swift in Sources */,
 				73936F2B291377F300BC2901 /* DJLeakSniffer.swift in Sources */,
+				D90B81242979578400CA4006 /* GithubTrendingReposView.swift in Sources */,
 				73074CC428EEF54F001A90E7 /* HUD.swift in Sources */,
 				73EE0CF6290BA8F10010C54A /* RepoPullRequestViewController.swift in Sources */,
 				73B7905228E53353002A9CDC /* Config.swift in Sources */,
@@ -1942,6 +2006,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		D90B811229793AC800CA4006 /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scinfu/SwiftSoup.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1968,6 +2040,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 73DE29CA28E0C08200B48009 /* XCRemoteSwiftPackageReference "MarkdownView" */;
 			productName = MarkdownView;
+		};
+		D90B811629793BE600CA4006 /* SwiftSoup */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D90B811229793AC800CA4006 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
+			productName = SwiftSoup;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -11,7 +11,12 @@
         "imageName": "p22",
         "title": "资料整理",
         "jumpUrl": "djgithub://pamphlet?type=resource"
-      }
+      },
+      {
+        "imageName": "p19",
+        "title": "Github Trending",
+        "jumpUrl": "djgithub://trending?type=repo"
+      },
     ]
   },
   {
