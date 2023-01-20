@@ -9,46 +9,37 @@ import SwiftUI
 
 struct GithubTrendingReposView: View {
     
-    let path: String
-    let pushClosure:((String, String) -> Void)?
-    
-    private let baseUrlString = "https://github.com/trending"
+    let urlString: String
+    let itemDidSelectedClosure:((Int) -> Void)?
     
     @State var repos: [GithubTrendingRepo] = []
     
-    init(path: String = "", repos: [GithubTrendingRepo] = [], pushClosure: ((String, String) -> Void)? = nil) {
-        self.path = path
+    init(with urlString: String, itemDidSelectedClosure: ((Int) -> Void)? = nil) {
+        self.urlString = urlString
+        self.itemDidSelectedClosure = itemDidSelectedClosure
+    }
+    
+    init(with repos: [GithubTrendingRepo], itemDidSelectedClosure: ((Int) -> Void)? = nil) {
+        self.urlString = ""
         self.repos = repos
-        self.pushClosure = pushClosure
+        self.itemDidSelectedClosure = itemDidSelectedClosure
     }
     
     var body: some View {
-        VStack {
-            if repos.isEmpty {
-                LoaderView(tintColor: .gray)
-            } else {
-                ScrollView {
-                    LazyVStack(alignment: .leading) {
-                        ForEach(repos, id: \.id) { repo in
-                            VStack {
-                                GithubTrendingRepoView(repo: repo)
-                                Rectangle()
-                                    .fill(Color(with: 244, green: 244, blue: 244))
-                                    .frame(height: 0.5)
-                                    .padding(.leading, 12)
-                            }
-                            .onTapGesture {
-                                self.pushClosure?(repo.userName, repo.repoName)
-                            }
-                        }
+        ScrollView {
+            LazyVStack(alignment: .leading) {
+                ForEach(0..<repos.count, id: \.self) { index in
+                    VStack {
+                        GithubTrendingRepoView(repo: repos[index])
+                        Rectangle()
+                            .fill(Color(with: 244, green: 244, blue: 244))
+                            .frame(height: 0.5)
+                            .padding(.leading, 12)
+                    }
+                    .onTapGesture {
+                        self.itemDidSelectedClosure?(index)
                     }
                 }
-            }
-        }
-        .onAppear {
-            Task {
-                let urlString = baseUrlString + path
-                self.repos = await GithubTrendingParser(urlString: urlString).parse()
             }
         }
     }
@@ -58,7 +49,7 @@ struct GithubTrendingRepos_Previews: PreviewProvider {
     
     static var previews: some View {
         GithubTrendingReposView(
-            repos: [
+            with: [
                 GithubTrendingRepo(userName: "dyljqq", repoName: "DJGithub", languange: "Swift", desc: "DJGithub", star: "14", fork: "2", footerDesc: "2 stars today"),
                 GithubTrendingRepo(userName: "dyljqq", repoName: "DJGithub", languange: "Swift", desc: "DJGithub", star: "14", fork: "2", footerDesc: "2 stars today"),
                 GithubTrendingRepo(userName: "dyljqq", repoName: "DJGithub", languange: "Swift", desc: "DJGithub", star: "14", fork: "2", footerDesc: "2 stars today"),

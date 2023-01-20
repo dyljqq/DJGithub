@@ -16,21 +16,25 @@ struct GithubTrendingParser {
         self.urlString = urlString
     }
     
-    func parse() async -> [GithubTrendingRepo] {
-        guard let html = await self.load() else { return [] }
+    func parse<T: Codable>(with type: TrendingType) async -> [T] {
+        guard let html = await load() else { return [] }
         do {
             let doc = try SwiftSoup.parse(html)
             guard let box = try parseBox(with: doc) else { return [] }
-            let elements = try parseArticles(with: box)
-            return try elements.map { try parseArticle(with: $0) }
+            let elements = try parseArticles(with: box, className: type.className)
+            
+            return elements.compactMap { element in
+                switch type {
+                case .repo: return try? parseRepoArticle(with: element) as? T
+                case .developer: return try? parseDeveloper(with: element) as? T
+                }
+            }
         } catch {
             print("Github Trending Parse Error: \(error)")
         }
         return []
     }
-}
-
-private extension GithubTrendingParser {
+    
     func load() async -> String? {
         guard let url = URL(string: urlString) else { return nil }
         do {
@@ -43,17 +47,35 @@ private extension GithubTrendingParser {
         }
         return nil
     }
+}
+
+extension GithubTrendingParser {
+    enum TrendingType {
+        case repo
+        case developer
+        
+        var className: String {
+            switch self {
+            case .repo: return "Box-row"
+            case .developer: return "Box-row d-flex"
+            }
+        }
+    }
+}
+
+private extension GithubTrendingParser {
     
     func parseBox(with doc: Document) throws -> Element? {
         let elements = try doc.getElementsByClass("Box")
         return try elements.filter { try $0.className() == "Box" }.first
     }
     
-    func parseArticles(with element: Element) throws -> Elements {
-        return try element.getElementsByTag("Article")
+    func parseArticles(with element: Element, className: String) throws -> [Element] {
+        let elements = try element.getElementsByTag("Article")
+        return try elements.filter { try $0.className() == className }
     }
     
-    func parseArticle(with element: Element) throws -> GithubTrendingRepo {
+    func parseRepoArticle(with element: Element) throws -> GithubTrendingRepo {
         let (userName, repoName) = try parseUserNameAndRepoName(with: element)
         let desc = try parseDesc(with: element)
         let footer = try parseFooter(with: element)
@@ -70,6 +92,21 @@ private extension GithubTrendingParser {
             star: starNum,
             fork: repoFork,
             footerDesc: footerDesc
+        )
+    }
+    
+    func parseDeveloper(with element: Element) throws -> GithubTrendingDeveloper {
+        let avatarImageUrl = try parseAvatarImageUrl(with: element)
+        let name = try parseDeveloperName(with: element)
+        let login = try parseDeveloperLoginName(with: element)
+        let repoName = try parseDeveloperHotRepoName(with: element)
+        let repoDesc = try parseDeveloperHotRepoDesc(with: element)
+        return GithubTrendingDeveloper(
+            avatarImageUrl: avatarImageUrl,
+            name: name,
+            login: login,
+            repoName: repoName,
+            repoDesc: repoDesc
         )
     }
     
@@ -111,5 +148,49 @@ private extension GithubTrendingParser {
     func parseFooterDesc(with element: Element) throws -> String {
         let ele = try element.getElementsByClass("d-inline-block float-sm-right").get(0)
         return try ele.text(trimAndNormaliseWhitespace: true)
+    }
+    
+    func parseAvatarImageUrl(with element: Element) throws -> String {
+        guard let div = try element.getElementsByClass("mx-3").first() else { return "" }
+        let src = try div.getElementsByTag("img").attr("src")
+        return src
+    }
+    
+    func parseDeveloperName(with element: Element) throws -> String {
+        let h1Tags = try element.getElementsByTag("h1")
+        for tag in h1Tags {
+            let className = try tag.className()
+            if className == "h3 lh-condensed" {
+                return try tag.text(trimAndNormaliseWhitespace: true)
+            }
+        }
+        return ""
+    }
+    
+    func parseDeveloperLoginName(with element: Element) throws -> String {
+        let h1Tags = try element.getElementsByTag("p")
+        for tag in h1Tags {
+            let className = try tag.className()
+            if className == "f4 text-normal mb-1" {
+                return try tag.text(trimAndNormaliseWhitespace: true)
+            }
+        }
+        return ""
+    }
+    
+    func parseDeveloperHotRepoName(with element: Element) throws -> String {
+        let h1Tags = try element.getElementsByTag("h1")
+        for tag in h1Tags {
+            let className = try tag.className()
+            if className == "h4 lh-condensed" {
+                return try tag.text(trimAndNormaliseWhitespace: true)
+            }
+        }
+        return ""
+    }
+    
+    func parseDeveloperHotRepoDesc(with element: Element) throws -> String {
+        let div = try element.getElementsByClass("f6 color-fg-muted mt-1").get(0)
+        return try div.text(trimAndNormaliseWhitespace: true)
     }
 }

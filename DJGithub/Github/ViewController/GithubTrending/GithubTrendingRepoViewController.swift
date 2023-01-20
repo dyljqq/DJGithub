@@ -18,18 +18,7 @@ class GithubTrendingRepoViewController: UIViewController {
     }
     
     private func setUp() {
-        navigationItem.title = "Repos Trending"
-        view.backgroundColor = .white
         
-        let vc = manager.addTrendingRepoView(with: "/swift?since=daily") { [weak self] userName, repoName in
-            guard let strongSelf = self else { return }
-            strongSelf.navigationController?.pushToRepo(with: userName, repoName: repoName)
-        }
-        view.addSubview(vc.view)
-        vc.view.backgroundColor = .white
-        vc.view.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
     }
 
 }
