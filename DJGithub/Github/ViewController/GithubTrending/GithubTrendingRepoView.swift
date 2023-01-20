@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GithubTrendingRepoView: View {
     
-    @State var repo: GithubTrendingRepo
+    let repo: GithubTrendingRepo
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -31,7 +31,7 @@ struct GithubTrendingRepoView: View {
             HStack {
                 HStack {
                     Circle()
-                        .fill(Color.red)
+                        .fill(Color(with: repo.languageColor))
                         .frame(width: 14, height: 14)
                     Text(repo.languange)
                         .font(.system(size: 12))
@@ -64,7 +64,16 @@ struct GithubTrendingRepoView: View {
 struct GithubTrendingRepoView_Previews: PreviewProvider {
     static var previews: some View {
         GithubTrendingRepoView(
-        repo: GithubTrendingRepo(userName: "dyljqq", repoName: "DJGithub", languange: "Swift", desc: "DJGithub", star: "14", fork: "2", footerDesc: "2 stars today")
+            repo: GithubTrendingRepo(
+                userName: "dyljqq",
+                repoName: "DJGithub",
+                languange: "Swift",
+                desc: "DJGithub",
+                star: "14",
+                fork: "2",
+                footerDesc: "2 stars today",
+                languageColor: "0x000000"
+            )
         )
     }
 }

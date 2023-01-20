@@ -17,4 +17,5 @@ struct GithubTrendingRepo: Codable {
     let star: String
     let fork: String
     let footerDesc: String
+    let languageColor: String
 }
