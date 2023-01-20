@@ -31,7 +31,7 @@ struct GithubTrendingRepoView: View {
             HStack {
                 HStack {
                     Circle()
-                        .fill(Color.red)
+                        .fill(Color(with: repo.languageColor))
                         .frame(width: 14, height: 14)
                     Text(repo.languange)
                         .font(.system(size: 12))
@@ -71,7 +71,8 @@ struct GithubTrendingRepoView_Previews: PreviewProvider {
                 desc: "DJGithub",
                 star: "14",
                 fork: "2",
-                footerDesc: "2 stars today"
+                footerDesc: "2 stars today",
+                languageColor: "0x000000"
             )
         )
     }

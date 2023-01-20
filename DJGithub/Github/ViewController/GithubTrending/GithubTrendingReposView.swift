@@ -50,10 +50,46 @@ struct GithubTrendingRepos_Previews: PreviewProvider {
     static var previews: some View {
         GithubTrendingReposView(
             with: [
-                GithubTrendingRepo(userName: "dyljqq", repoName: "DJGithub", languange: "Swift", desc: "DJGithub", star: "14", fork: "2", footerDesc: "2 stars today"),
-                GithubTrendingRepo(userName: "dyljqq", repoName: "DJGithub", languange: "Swift", desc: "DJGithub", star: "14", fork: "2", footerDesc: "2 stars today"),
-                GithubTrendingRepo(userName: "dyljqq", repoName: "DJGithub", languange: "Swift", desc: "DJGithub", star: "14", fork: "2", footerDesc: "2 stars today"),
-                GithubTrendingRepo(userName: "dyljqq", repoName: "DJGithub", languange: "Swift", desc: "DJGithub", star: "14", fork: "2", footerDesc: "2 stars today")
+                GithubTrendingRepo(
+                    userName: "dyljqq",
+                    repoName: "DJGithub",
+                    languange: "Swift",
+                    desc: "DJGithub",
+                    star: "14",
+                    fork: "2",
+                    footerDesc: "2 stars today",
+                    languageColor: "0x000000"
+                ),
+                GithubTrendingRepo(
+                    userName: "dyljqq",
+                    repoName: "DJGithub",
+                    languange: "Swift",
+                    desc: "DJGithub",
+                    star: "14",
+                    fork: "2",
+                    footerDesc: "2 stars today",
+                    languageColor: "0x000000"
+                ),
+                GithubTrendingRepo(
+                    userName: "dyljqq",
+                    repoName: "DJGithub",
+                    languange: "Swift",
+                    desc: "DJGithub",
+                    star: "14",
+                    fork: "2",
+                    footerDesc: "2 stars today",
+                    languageColor: "0x000000"
+                ),
+                GithubTrendingRepo(
+                    userName: "dyljqq",
+                    repoName: "DJGithub",
+                    languange: "Swift",
+                    desc: "DJGithub",
+                    star: "14",
+                    fork: "2",
+                    footerDesc: "2 stars today",
+                    languageColor: "0x000000"
+                )
             ]
         )
     }

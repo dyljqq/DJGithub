@@ -79,7 +79,7 @@ private extension GithubTrendingParser {
         let (userName, repoName) = try parseUserNameAndRepoName(with: element)
         let desc = try parseDesc(with: element)
         let footer = try parseFooter(with: element)
-        let languange = try parseRepoLanguage(with: footer)
+        let (languange, color) = try parseRepoLanguage(with: footer)
         let starNum = try parseRepoStar(with: footer)
         let repoFork = try parseRepoFork(with: footer)
         let footerDesc = try parseFooterDesc(with: footer)
@@ -91,7 +91,8 @@ private extension GithubTrendingParser {
             desc: desc,
             star: starNum,
             fork: repoFork,
-            footerDesc: footerDesc
+            footerDesc: footerDesc,
+            languageColor: color
         )
     }
     
@@ -129,10 +130,17 @@ private extension GithubTrendingParser {
         return div.get(0)
     }
     
-    func parseRepoLanguage(with element: Element) throws -> String {
-        let ele = try element.getElementsByClass("d-inline-block ml-0 mr-3").get(0)
-        let span = try ele.getElementsByAttributeValue("itemprop", "programmingLanguage")
-        return try span.text()
+    func parseRepoLanguage(with element: Element) throws -> (String, String) {
+        guard let ele = try element.getElementsByClass("d-inline-block ml-0 mr-3").first() else {
+            return ("", "")
+        }
+        let colorSpan = try ele.getElementsByClass("repo-language-color").get(0)
+        let languageSpan = try ele.getElementsByAttributeValue("itemprop", "programmingLanguage").get(0)
+        let language = try languageSpan.text()
+        guard let style = try colorSpan.attr("style").components(separatedBy: ":").last?.trimmingCharacters(in: .whitespacesAndNewlines) else {
+            return (language, "")
+        }
+        return (language, style)
     }
     
     func parseRepoStar(with element: Element) throws -> String {
