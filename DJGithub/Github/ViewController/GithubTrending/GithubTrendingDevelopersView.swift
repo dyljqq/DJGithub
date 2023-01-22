@@ -31,9 +31,7 @@ struct GithubTrendingDevelopersView: View {
                 ForEach(0..<developers.count, id: \.self) { index in
                     VStack(alignment: .leading) {
                         GithubTrendingDeveloperView(developer: developers[index])
-                        Rectangle()
-                            .fill(Color(with: 244, green: 244, blue: 244))
-                            .frame(height: 0.5)
+                        Divider()
                             .padding(.leading, 12)
                     }
                     .onTapGesture {
