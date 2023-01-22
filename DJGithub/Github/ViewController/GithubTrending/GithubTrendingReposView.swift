@@ -31,9 +31,7 @@ struct GithubTrendingReposView: View {
                 ForEach(0..<repos.count, id: \.self) { index in
                     VStack {
                         GithubTrendingRepoView(repo: repos[index])
-                        Rectangle()
-                            .fill(Color(with: 244, green: 244, blue: 244))
-                            .frame(height: 0.5)
+                        Divider()
                             .padding(.leading, 12)
                     }
                     .onTapGesture {
