@@ -51,7 +51,7 @@ class FeedCell: UITableViewCell {
 
   func render(with feed: Feed) {
     self.feed = feed
-    avatarImageView.setImage(with: feed.thumbnail?.url)
+      avatarImageView.setImage(with: feed.thumbnail?.url, placeHolder: .defaultPersonImage)
     titleTextView.text = feed.title
     dateLabel.text = feed.formatedDate
 

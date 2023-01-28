@@ -437,7 +437,6 @@
 		73C598C428D85EF100DA86A1 /* PopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverView.swift; sourceTree = "<group>"; };
 		73C598C628D8617800DA86A1 /* UIApplication+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Ext.swift"; sourceTree = "<group>"; };
 		73C598CC28D9E6A100DA86A1 /* URL+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Ext.swift"; sourceTree = "<group>"; };
-		73D0DE272907CE9700F385E6 /* DJRefresh */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DJRefresh; path = ../DJRefresh; sourceTree = "<group>"; };
 		73D0DE282907D21F00F385E6 /* LocalUserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalUserManager.swift; sourceTree = "<group>"; };
 		73D0DE2A2907D2DD00F385E6 /* DJUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJUserDefaults.swift; sourceTree = "<group>"; };
 		73DE29CD28E0C35200B48009 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
@@ -781,7 +780,6 @@
 		73AACAC828D308A60072B1DF = {
 			isa = PBXGroup;
 			children = (
-				73D0DE262907CE9700F385E6 /* Packages */,
 				73AACAD328D308A60072B1DF /* DJGithub */,
 				73AACAEA28D308A70072B1DF /* DJGithubTests */,
 				73AACAF428D308A70072B1DF /* DJGithubUITests */,
@@ -1142,14 +1140,6 @@
 			children = (
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		73D0DE262907CE9700F385E6 /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-				73D0DE272907CE9700F385E6 /* DJRefresh */,
-			);
-			name = Packages;
 			sourceTree = "<group>";
 		};
 		73E14E5428F3DAB100A9811D /* Parse */ = {
