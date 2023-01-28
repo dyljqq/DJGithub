@@ -25,6 +25,7 @@ func loadDatabase() -> SQLiteDatabase? {
 }
 
 class ConfigManager: NSObject {
+
   static let shared = ConfigManager()
   static var config: Config = Config()
 

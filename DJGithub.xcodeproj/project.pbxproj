@@ -242,6 +242,9 @@
 		D9883566297A3EB400AF7E4F /* GithubTrendingDevelopersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9883565297A3EB400AF7E4F /* GithubTrendingDevelopersView.swift */; };
 		D9883569297A59F000AF7E4F /* GithubTrendingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9883568297A59F000AF7E4F /* GithubTrendingType.swift */; };
 		D988356B297A5BFF00AF7E4F /* GithubTrendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D988356A297A5BFF00AF7E4F /* GithubTrendingViewController.swift */; };
+		D98835B12984C76D00AF7E4F /* AuthorizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98835B02984C76D00AF7E4F /* AuthorizationView.swift */; };
+		D98835B32984CE8300AF7E4F /* PersonalAccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98835B22984CE8300AF7E4F /* PersonalAccessView.swift */; };
+		D98835B52984D28800AF7E4F /* AuthorizationViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98835B42984D28800AF7E4F /* AuthorizationViewManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -437,7 +440,6 @@
 		73C598C428D85EF100DA86A1 /* PopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverView.swift; sourceTree = "<group>"; };
 		73C598C628D8617800DA86A1 /* UIApplication+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Ext.swift"; sourceTree = "<group>"; };
 		73C598CC28D9E6A100DA86A1 /* URL+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Ext.swift"; sourceTree = "<group>"; };
-		73D0DE272907CE9700F385E6 /* DJRefresh */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DJRefresh; path = ../DJRefresh; sourceTree = "<group>"; };
 		73D0DE282907D21F00F385E6 /* LocalUserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalUserManager.swift; sourceTree = "<group>"; };
 		73D0DE2A2907D2DD00F385E6 /* DJUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJUserDefaults.swift; sourceTree = "<group>"; };
 		73DE29CD28E0C35200B48009 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
@@ -497,6 +499,9 @@
 		D9883565297A3EB400AF7E4F /* GithubTrendingDevelopersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubTrendingDevelopersView.swift; sourceTree = "<group>"; };
 		D9883568297A59F000AF7E4F /* GithubTrendingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubTrendingType.swift; sourceTree = "<group>"; };
 		D988356A297A5BFF00AF7E4F /* GithubTrendingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubTrendingViewController.swift; sourceTree = "<group>"; };
+		D98835B02984C76D00AF7E4F /* AuthorizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationView.swift; sourceTree = "<group>"; };
+		D98835B22984CE8300AF7E4F /* PersonalAccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalAccessView.swift; sourceTree = "<group>"; };
+		D98835B42984D28800AF7E4F /* AuthorizationViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -781,7 +786,6 @@
 		73AACAC828D308A60072B1DF = {
 			isa = PBXGroup;
 			children = (
-				73D0DE262907CE9700F385E6 /* Packages */,
 				73AACAD328D308A60072B1DF /* DJGithub */,
 				73AACAEA28D308A70072B1DF /* DJGithubTests */,
 				73AACAF428D308A70072B1DF /* DJGithubUITests */,
@@ -1003,6 +1007,7 @@
 		73AACB3128D357980072B1DF /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				D98835AF2984C70F00AF7E4F /* Authorization */,
 				D90B811A29794CB500CA4006 /* GithubTrending */,
 				73E14E5928F414F600A9811D /* Feed */,
 				73B7906328E7F10C002A9CDC /* Search */,
@@ -1144,14 +1149,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		73D0DE262907CE9700F385E6 /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-				73D0DE272907CE9700F385E6 /* DJRefresh */,
-			);
-			name = Packages;
-			sourceTree = "<group>";
-		};
 		73E14E5428F3DAB100A9811D /* Parse */ = {
 			isa = PBXGroup;
 			children = (
@@ -1233,6 +1230,16 @@
 				D9883568297A59F000AF7E4F /* GithubTrendingType.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		D98835AF2984C70F00AF7E4F /* Authorization */ = {
+			isa = PBXGroup;
+			children = (
+				D98835B02984C76D00AF7E4F /* AuthorizationView.swift */,
+				D98835B22984CE8300AF7E4F /* PersonalAccessView.swift */,
+				D98835B42984D28800AF7E4F /* AuthorizationViewManager.swift */,
+			);
+			path = Authorization;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1430,6 +1437,7 @@
 				737EF2812929FE740060C64F /* PamphletSimpleModel.swift in Sources */,
 				73B7906628E7F133002A9CDC /* SearchViewController.swift in Sources */,
 				73936F9C2919BFBA00BC2901 /* RssFeedLatestView.swift in Sources */,
+				D98835B12984C76D00AF7E4F /* AuthorizationView.swift in Sources */,
 				73B7905828E541BE002A9CDC /* Bool+Ext.swift in Sources */,
 				73893E3A2933893300F848DF /* FeedViewModel.swift in Sources */,
 				73074C8028EDB955001A90E7 /* WebViewFooterView.swift in Sources */,
@@ -1538,6 +1546,7 @@
 				73936F932917BF8C00BC2901 /* UIView+Leak.swift in Sources */,
 				73AACB6028D4BE4F0072B1DF /* RepoManager.swift in Sources */,
 				73AACAD528D308A60072B1DF /* AppDelegate.swift in Sources */,
+				D98835B52984D28800AF7E4F /* AuthorizationViewManager.swift in Sources */,
 				73074CCB28EF4AD0001A90E7 /* LocalDataViewController.swift in Sources */,
 				73074CC928EF4992001A90E7 /* LocalRepoManager.swift in Sources */,
 				73AACB5428D47ECB0072B1DF /* UserContrbutionItemCell.swift in Sources */,
@@ -1600,6 +1609,7 @@
 				73EE0CEE290ABF7B0010C54A /* RepoBranchCommit.swift in Sources */,
 				7362FE8329117D2000D97E1A /* DefaultValue.swift in Sources */,
 				73AACB0A28D30B0C0072B1DF /* URLConvertible.swift in Sources */,
+				D98835B32984CE8300AF7E4F /* PersonalAccessView.swift in Sources */,
 				73AACB4A28D4463B0072B1DF /* UIView+Loading.swift in Sources */,
 				73AACB5E28D4BD3B0072B1DF /* UserStaredReposViewController.swift in Sources */,
 				73AACB5A28D4B8610072B1DF /* Repo.swift in Sources */,

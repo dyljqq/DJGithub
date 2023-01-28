@@ -204,7 +204,8 @@ class RepoIssueDetailViewController: UIViewController {
   func render(with issueDetail: IssueDetail) {
     self.issue = issueDetail
 
-    if case Issue.IssueState.open = issueDetail.state {
+    if case Issue.IssueState.open = issueDetail.state,
+       ConfigManager.shared.viewerName == issueDetail.user.login {
       self.navigationItem.rightBarButtonItems = [
         UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addAction)),
         UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editAction))
