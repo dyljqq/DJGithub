@@ -245,6 +245,9 @@
 		D98835B12984C76D00AF7E4F /* AuthorizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98835B02984C76D00AF7E4F /* AuthorizationView.swift */; };
 		D98835B32984CE8300AF7E4F /* PersonalAccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98835B22984CE8300AF7E4F /* PersonalAccessView.swift */; };
 		D98835B52984D28800AF7E4F /* AuthorizationViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98835B42984D28800AF7E4F /* AuthorizationViewManager.swift */; };
+		D98835E529865AEB00AF7E4F /* RssFeedsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98835E429865AEB00AF7E4F /* RssFeedsView.swift */; };
+		D98835E729865B0800AF7E4F /* RssFeedsItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98835E629865B0800AF7E4F /* RssFeedsItemView.swift */; };
+		D98835E929865F8C00AF7E4F /* RssFeedsViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98835E829865F8C00AF7E4F /* RssFeedsViewManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -502,6 +505,9 @@
 		D98835B02984C76D00AF7E4F /* AuthorizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationView.swift; sourceTree = "<group>"; };
 		D98835B22984CE8300AF7E4F /* PersonalAccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalAccessView.swift; sourceTree = "<group>"; };
 		D98835B42984D28800AF7E4F /* AuthorizationViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewManager.swift; sourceTree = "<group>"; };
+		D98835E429865AEB00AF7E4F /* RssFeedsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssFeedsView.swift; sourceTree = "<group>"; };
+		D98835E629865B0800AF7E4F /* RssFeedsItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssFeedsItemView.swift; sourceTree = "<group>"; };
+		D98835E829865F8C00AF7E4F /* RssFeedsViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssFeedsViewManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1171,6 +1177,8 @@
 				7320170528F53455007B970F /* RssFeedAtomViewController.swift */,
 				7339201028F53DAC00DC76B0 /* RssFeedsViewController.swift */,
 				7339201828F5883500DC76B0 /* RssFeedDetailViewController.swift */,
+				D98835E429865AEB00AF7E4F /* RssFeedsView.swift */,
+				D98835E829865F8C00AF7E4F /* RssFeedsViewManager.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -1182,6 +1190,7 @@
 				7320170E28F5385B007B970F /* RssFeedSimpleCell.swift */,
 				73936F992919BB7800BC2901 /* RssFeedLatestCell.swift */,
 				73936F9B2919BFBA00BC2901 /* RssFeedLatestView.swift */,
+				D98835E629865B0800AF7E4F /* RssFeedsItemView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1489,6 +1498,7 @@
 				73AACB4828D443350072B1DF /* LoadingView.swift in Sources */,
 				73AACB6A28D5ACBD0072B1DF /* UIColor+Ext.swift in Sources */,
 				732B21D628E22B9A005893C0 /* NextPageLoadable.swift in Sources */,
+				D98835E529865AEB00AF7E4F /* RssFeedsView.swift in Sources */,
 				73E14E4D28F3426900A9811D /* FeedManager.swift in Sources */,
 				73AACB3A28D359550072B1DF /* UserHeaderView.swift in Sources */,
 				73DF6C0228EC1EE80003BDB8 /* RepoContentFileViewController.swift in Sources */,
@@ -1504,7 +1514,9 @@
 				73E14E5628F3DAC800A9811D /* DJJSONParser.swift in Sources */,
 				73DF6BF228EAE3060003BDB8 /* DJCodable.swift in Sources */,
 				7341DCD828E05D98009A3A3C /* RepoFooterView.swift in Sources */,
+				D98835E929865F8C00AF7E4F /* RssFeedsViewManager.swift in Sources */,
 				73DE29CE28E0C35200B48009 /* WebViewController.swift in Sources */,
+				D98835E729865B0800AF7E4F /* RssFeedsItemView.swift in Sources */,
 				73B7905428E533C2002A9CDC /* ConfigManager.swift in Sources */,
 				D90B811929793FB200CA4006 /* GithubTrendingRepo.swift in Sources */,
 				73936FC9291E484A00BC2901 /* UserContainerViewController.swift in Sources */,

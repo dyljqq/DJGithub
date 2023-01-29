@@ -55,19 +55,19 @@ struct RssFeedLink: DJCodable {
 }
 
 struct RssFeed: DJCodable {
-  var id: Int
-  var title: String
-  var updated: String
-  var content: String
-  var link: String
+  var id: Int = 0
+  var title: String = ""
+  var updated: String = ""
+  var content: String = ""
+  var link: String = ""
 
-  var contentEncoded: String?
-  var description: String?
-  var pubDate: String?
-  var summary: String?
+  var contentEncoded: String? = nil
+  var description: String? = nil
+  var pubDate: String? = nil
+  var summary: String? = nil
 
-  var atomId: Int
-  var feedLink: String?
+  var atomId: Int = 0
+  var feedLink: String? = nil
 
   var unread: Bool {
     if let v = RssFeedManager.shared.feedReadMapping[self.id], v {
@@ -193,4 +193,12 @@ extension RssFeed {
       }
     }
   }
+}
+
+extension RssFeed {
+    init(with id: Int, title: String, content: String) {
+        self.id = id
+        self.title = title
+        self.content = content
+    }
 }
