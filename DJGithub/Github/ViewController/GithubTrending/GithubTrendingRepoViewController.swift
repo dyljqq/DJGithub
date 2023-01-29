@@ -8,17 +8,17 @@
 import UIKit
 
 class GithubTrendingRepoViewController: UIViewController {
-    
+
     private let manager = GithubTrendingManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setUp()
     }
-    
+
     private func setUp() {
-        
+
     }
 
 }

@@ -8,23 +8,23 @@
 import SwiftUI
 
 struct GithubTrendingReposView: View {
-    
+
     let urlString: String
-    let itemDidSelectedClosure:((Int) -> Void)?
-    
+    let itemDidSelectedClosure: ((Int) -> Void)?
+
     @State var repos: [GithubTrendingRepo] = []
-    
+
     init(with urlString: String, itemDidSelectedClosure: ((Int) -> Void)? = nil) {
         self.urlString = urlString
         self.itemDidSelectedClosure = itemDidSelectedClosure
     }
-    
+
     init(with repos: [GithubTrendingRepo], itemDidSelectedClosure: ((Int) -> Void)? = nil) {
         self.urlString = ""
         self.repos = repos
         self.itemDidSelectedClosure = itemDidSelectedClosure
     }
-    
+
     var body: some View {
         ScrollView {
             LazyVStack(alignment: .leading) {
@@ -44,7 +44,7 @@ struct GithubTrendingReposView: View {
 }
 
 struct GithubTrendingRepos_Previews: PreviewProvider {
-    
+
     static var previews: some View {
         GithubTrendingReposView(
             with: [

@@ -61,13 +61,13 @@ struct RssFeed: DJCodable {
   var content: String = ""
   var link: String = ""
 
-  var contentEncoded: String? = nil
-  var description: String? = nil
-  var pubDate: String? = nil
-  var summary: String? = nil
+  var contentEncoded: String?
+  var description: String?
+  var pubDate: String?
+  var summary: String?
 
   var atomId: Int = 0
-  var feedLink: String? = nil
+  var feedLink: String?
 
   var unread: Bool {
     if let v = RssFeedManager.shared.feedReadMapping[self.id], v {

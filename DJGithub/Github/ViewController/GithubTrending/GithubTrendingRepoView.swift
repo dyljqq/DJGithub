@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct GithubTrendingRepoView: View {
-    
+
     let repo: GithubTrendingRepo
-    
+
     var body: some View {
         VStack(alignment: .leading) {
-            HStack() {
+            HStack {
                 Image(systemName: "book.closed")
                 Text("\(repo.userName) /")
                     .font(.system(size: 14))

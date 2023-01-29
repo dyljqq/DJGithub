@@ -49,6 +49,9 @@
 		7320170928F535CB007B970F /* RssFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7320170828F535CB007B970F /* RssFeed.swift */; };
 		7320170D28F5378E007B970F /* RssFeedAtom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7320170C28F5378E007B970F /* RssFeedAtom.swift */; };
 		7320170F28F5385B007B970F /* RssFeedSimpleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7320170E28F5385B007B970F /* RssFeedSimpleCell.swift */; };
+		7321DD252986B1A6002B5E8E /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7321DD242986B1A6002B5E8E /* Home.swift */; };
+		7321DD272986B1B8002B5E8E /* RssFeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7321DD262986B1B8002B5E8E /* RssFeedItem.swift */; };
+		7321DD292986B5A0002B5E8E /* LatestRssFeedItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7321DD282986B5A0002B5E8E /* LatestRssFeedItems.swift */; };
 		732B21D028E1C09B005893C0 /* RepoStarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732B21CF28E1C09B005893C0 /* RepoStarView.swift */; };
 		732B21D328E228FD005893C0 /* NextPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732B21D228E228FD005893C0 /* NextPageModel.swift */; };
 		732B21D628E22B9A005893C0 /* NextPageLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732B21D528E22B9A005893C0 /* NextPageLoadable.swift */; };
@@ -310,6 +313,9 @@
 		7320170828F535CB007B970F /* RssFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssFeed.swift; sourceTree = "<group>"; };
 		7320170C28F5378E007B970F /* RssFeedAtom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssFeedAtom.swift; sourceTree = "<group>"; };
 		7320170E28F5385B007B970F /* RssFeedSimpleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssFeedSimpleCell.swift; sourceTree = "<group>"; };
+		7321DD242986B1A6002B5E8E /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		7321DD262986B1B8002B5E8E /* RssFeedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssFeedItem.swift; sourceTree = "<group>"; };
+		7321DD282986B5A0002B5E8E /* LatestRssFeedItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestRssFeedItems.swift; sourceTree = "<group>"; };
 		732B21CF28E1C09B005893C0 /* RepoStarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoStarView.swift; sourceTree = "<group>"; };
 		732B21D228E228FD005893C0 /* NextPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextPageModel.swift; sourceTree = "<group>"; };
 		732B21D528E22B9A005893C0 /* NextPageLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextPageLoadable.swift; sourceTree = "<group>"; };
@@ -598,6 +604,16 @@
 				7362FEC629124F9000D97E1A /* RssFeedRead.swift */,
 			);
 			path = RssFeed;
+			sourceTree = "<group>";
+		};
+		7321DD232986B188002B5E8E /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				7321DD242986B1A6002B5E8E /* Home.swift */,
+				7321DD262986B1B8002B5E8E /* RssFeedItem.swift */,
+				7321DD282986B5A0002B5E8E /* LatestRssFeedItems.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 		735D0E002903115D00E618B3 /* DJMonitor */ = {
@@ -1013,6 +1029,7 @@
 		73AACB3128D357980072B1DF /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				7321DD232986B188002B5E8E /* Home */,
 				D98835AF2984C70F00AF7E4F /* Authorization */,
 				D90B811A29794CB500CA4006 /* GithubTrending */,
 				73E14E5928F414F600A9811D /* Feed */,
@@ -1457,6 +1474,7 @@
 				73DF6C0A28EC6A9C0003BDB8 /* IssueCell.swift in Sources */,
 				73074CD328F155CB001A90E7 /* UserInfoCell.swift in Sources */,
 				73DF6C0028EC00FD0003BDB8 /* RepoContentCell.swift in Sources */,
+				7321DD292986B5A0002B5E8E /* LatestRssFeedItems.swift in Sources */,
 				73DF6C0428EC252E0003BDB8 /* String+File.swift in Sources */,
 				73AACB3428D357C80072B1DF /* UserViewController.swift in Sources */,
 				737EF285292A000F0060C64F /* PamphletSimpleCell.swift in Sources */,
@@ -1488,6 +1506,7 @@
 				73EE0CE0290962CE0010C54A /* PinnedRepoCell.swift in Sources */,
 				73AACB1328D30F350072B1DF /* DJParser.swift in Sources */,
 				73AACB7728D5BBE90072B1DF /* SQLTable.swift in Sources */,
+				7321DD252986B1A6002B5E8E /* Home.swift in Sources */,
 				73E14E5D28F4151100A9811D /* FeedsViewController.swift in Sources */,
 				73AACB7428D5BA2D0072B1DF /* Language.swift in Sources */,
 				73B7905C28E59104002A9CDC /* HeaderSegmentView.swift in Sources */,
@@ -1571,6 +1590,7 @@
 				D90B812C29795FC800CA4006 /* GithubTrendingManager.swift in Sources */,
 				73101D4928E47FB100DB5423 /* StatusModel.swift in Sources */,
 				73B7905E28E6D8EB002A9CDC /* UserFollowingManager.swift in Sources */,
+				7321DD272986B1B8002B5E8E /* RssFeedItem.swift in Sources */,
 				7320170D28F5378E007B970F /* RssFeedAtom.swift in Sources */,
 				73EE0CDC29092F960010C54A /* LanguageGradientView.swift in Sources */,
 				73893E952937A61700F848DF /* AppStyleUtility.swift in Sources */,
@@ -1826,7 +1846,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6DJYW749D6;
+				DEVELOPMENT_TEAM = U4Y29F8CZ3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DJGithub/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1860,7 +1880,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6DJYW749D6;
+				DEVELOPMENT_TEAM = U4Y29F8CZ3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DJGithub/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

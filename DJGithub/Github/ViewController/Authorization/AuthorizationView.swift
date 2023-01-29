@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct AuthorizationView: View {
-    
-    var completionHandler: ((Bool) -> ())? = nil
-    
+
+    var completionHandler: ((Bool) -> Void)?
+
     @State private var showingPopover = false
     @State private var showPersonalPopover = false
-    
+
     @ViewBuilder private var personalAccessView: some View {
         PersonalAccessView { isSuccess in
             if isSuccess {
@@ -24,7 +24,7 @@ struct AuthorizationView: View {
             }
         }
     }
-    
+
     var body: some View {
         VStack {
             HStack {

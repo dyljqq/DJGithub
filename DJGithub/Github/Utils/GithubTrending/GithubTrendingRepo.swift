@@ -9,7 +9,7 @@ import Foundation
 
 struct GithubTrendingRepo: Codable {
     var id = UUID()
-    
+
     let userName: String
     let repoName: String
     let languange: String

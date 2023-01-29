@@ -8,20 +8,20 @@
 import SwiftUI
 
 struct PersonalAccessView: View {
-    
+
     @State var accessToken: String = ""
     @State var showErrorMessage = false
     @State var isLoading = false
 
     @Environment(\.dismiss) var dismiss
 
-    var completionHandler: ((Bool) -> ())? = nil
-    
+    var completionHandler: ((Bool) -> Void)?
+
     var body: some View {
         VStack {
             HStack {
                 Spacer()
-                
+
                 Image(uiImage: UIImage(named: "close")!)
                     .resizable()
                     .frame(width: 20, height: 20)
@@ -31,11 +31,11 @@ struct PersonalAccessView: View {
             }
             .padding(.horizontal)
             .padding(.bottom, 20)
-            
+
             Text("Privacy Licence: We will not collect your github personal key, even more, wo dont have own server.")
                 .padding(.horizontal)
                 .foregroundColor(Color(uiColor: .textGrayColor))
-            
+
             VStack {
                 HStack {
                     TextField("Personal Access Token", text: $accessToken)
@@ -46,7 +46,7 @@ struct PersonalAccessView: View {
                     RoundedRectangle(cornerRadius: 8)
                         .stroke(.gray, lineWidth: 1)
                 )
-                
+
                 if showErrorMessage {
                     HStack {
                         Text("Invalid Personal Access Token!!!")
@@ -57,7 +57,7 @@ struct PersonalAccessView: View {
                 }
             }
             .padding()
-            
+
             Button(action: {
                 guard !isLoading else { return }
                 guard !accessToken.isEmpty else {
@@ -65,7 +65,7 @@ struct PersonalAccessView: View {
                     return
                 }
                 isLoading = true
-                
+
                 Task {
                     defer {
                         isLoading = false
@@ -81,13 +81,13 @@ struct PersonalAccessView: View {
                     completionHandler?(true)
                     dismiss()
                 }
-                
+
             }) {
                 HStack(spacing: 15) {
                     Text("Login")
                         .font(.system(size: 16))
                         .foregroundColor(.white)
-                    
+
                     if isLoading {
                         ProgressView()
                             .progressViewStyle(CircularProgressViewStyle(tint: .gray))
@@ -99,7 +99,7 @@ struct PersonalAccessView: View {
             .background(Color(with: 68, green: 73, blue: 82))
             .cornerRadius(6)
             .padding(EdgeInsets(top: 0, leading: 40, bottom: 40, trailing: 40))
-            
+
             Spacer()
         }
         .padding(.top, 20)

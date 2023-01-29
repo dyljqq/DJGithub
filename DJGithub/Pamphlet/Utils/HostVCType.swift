@@ -97,7 +97,7 @@ fileprivate extension HostVCType {
   func configGithubIssueVC(with userName: String, repoName: String, issueNumber: Int) -> RepoIssueDetailViewController {
     return RepoIssueDetailViewController(userName: userName, repoName: repoName, issueNum: issueNumber)
   }
-    
+
     func configGithubTrendingVC() -> GithubTrendingViewController {
         return GithubTrendingViewController()
     }

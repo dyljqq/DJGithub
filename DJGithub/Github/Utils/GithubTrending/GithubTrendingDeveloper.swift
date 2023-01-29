@@ -13,6 +13,6 @@ struct GithubTrendingDeveloper: Codable {
     let login: String
     let repoName: String
     let repoDesc: String
-    
+
     var id = UUID()
 }

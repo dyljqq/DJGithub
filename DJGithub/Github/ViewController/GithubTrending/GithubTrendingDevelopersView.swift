@@ -8,23 +8,23 @@
 import SwiftUI
 
 struct GithubTrendingDevelopersView: View {
-    
+
     @State var developers: [GithubTrendingDeveloper] = []
-    
+
     let urlString: String
-    let itemDidSelectedClosure: (Int) -> (Void)
-    
-    init(with urlString: String, itemDidSelectedClosure: @escaping (Int) -> (Void)) {
+    let itemDidSelectedClosure: (Int) -> Void
+
+    init(with urlString: String, itemDidSelectedClosure: @escaping (Int) -> Void) {
         self.urlString = urlString
         self.itemDidSelectedClosure = itemDidSelectedClosure
     }
-    
+
     init(with developers: [GithubTrendingDeveloper], itemDidSelectedClosure: @escaping (Int) -> Void) {
         self.urlString = ""
         self.developers = developers
         self.itemDidSelectedClosure = itemDidSelectedClosure
     }
-    
+
     var body: some View {
         ScrollView {
             LazyVStack {
@@ -69,8 +69,8 @@ struct GithubTrendingDevelopersView_Previews: PreviewProvider {
                     repoDesc: "A type-safe, Swift-language layer over SQLite3."
                 )
             ],
-            itemDidSelectedClosure: { developer in
-                
+            itemDidSelectedClosure: { _ in
+
             }
         )
     }

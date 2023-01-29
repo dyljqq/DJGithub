@@ -9,15 +9,15 @@ import Foundation
 import SwiftUI
 
 struct GithubTrendingReposRepresentation: UIViewControllerRepresentable {
-    
+
     let userName: String
     let repoName: String
-    
+
     func makeUIViewController(context: Context) -> some UIViewController {
         return RepoViewController(with: userName, repoName: repoName)
     }
-    
+
     func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
-        
+
     }
 }

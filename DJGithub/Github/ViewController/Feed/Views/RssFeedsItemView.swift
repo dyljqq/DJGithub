@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct RssFeedsItemView: View {
-    
+
     let title: String
     let desc: String
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 5) {
             Text(title)
