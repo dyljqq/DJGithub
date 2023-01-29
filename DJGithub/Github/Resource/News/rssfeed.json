@@ -16,6 +16,27 @@
         "atomType": "myzb"
     },
     {
+        "title":"Ray Wenderlich - iOS & Swift Tutorials RSS Feed",
+        "id":2301071620,
+        "des":">Kodeco | High quality programming tutorials: iOS, Android, Swift, Kotlin, Unity, and more",
+        "siteLink":"https://www.kodeco.com/ios/feed",
+        "feedLink":"https://www.kodeco.com/ios/feed",
+    },
+    {
+        "title":"AppCoda",
+        "id":2301071621,
+        "des":"Your iOS Programming Community",
+        "siteLink":"http://feeds.feedburner.com/appcoda",
+        "feedLink":"http://feeds.feedburner.com/appcoda",
+    },
+    {
+        "title":"Ole Begemann",
+        "id":2301071621,
+        "des":"Ole is an iOS and Mac developer from Berlin. He's written about software development on Apple platforms since 2009. Though he publishes only a few articles a year, all of them are worthwhile reading. You can subscribe to get notified once he updates a new one.",
+        "siteLink":"https://oleb.net/",
+        "feedLink":"https://oleb.net/blog/atom.xml",
+    },
+    {
       "title":"SwiftRocks",
       "id":2201071628,
       "des":"SwiftRocks is a blog about how Swift works and general iOS tips and tricks.",

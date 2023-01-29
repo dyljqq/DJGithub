@@ -125,6 +125,7 @@ struct DJUserDefaults {
         if let accessToken = UserDefaults.standard.value(forKey: Keys.accessToken.rawValue) as? String {
             return accessToken
         } else if let config = loadBundleJSONFile("config") as Config? {
+            setAccessToken(config.authorization)
             return config.authorization
         }
         return nil

@@ -6,6 +6,8 @@
 
 ### 配置
 
+##### 方式一
+
 在/DJGithub/Github/Resource/config.json文件中补充对应的配置信息.
 
 Personal access tokens的申请链接如下：
@@ -39,6 +41,10 @@ struct Config: DJCodable {
   }
 }
 ```
+
+##### 方式二
+
+新用户在第一次打开App的时候，会要求你输入`Personal Access Token`。
 
 
 
