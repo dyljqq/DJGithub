@@ -9,7 +9,9 @@ import SwiftUI
 
 struct LatestRssFeedItems: View {
 
-    let items: [RssFeedLatestCellModel]
+    var feedItemSelectedClosure: ((RssFeedLatestCellModel) -> Void)?
+    
+    @State var items: [RssFeedLatestCellModel] = []
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -20,7 +22,7 @@ struct LatestRssFeedItems: View {
                 .padding(.top, 10)
                 .padding(.leading, 16)
             ScrollView(.horizontal, showsIndicators: false) {
-                LazyHStack(spacing: 20) {
+                LazyHStack(spacing: 10) {
                     ForEach(0..<items.count, id: \.self) { index in
                         RssFeedItem(item: items[index])
                             .padding(.leading, 10)
@@ -30,6 +32,9 @@ struct LatestRssFeedItems: View {
                                 RoundedRectangle(cornerRadius: 10)
                                     .fill(.white)
                             }
+                            .onTapGesture {
+                                feedItemSelectedClosure?(items[index])
+                            }
                     }
                 }
                 .padding(.leading, 16)
@@ -38,6 +43,15 @@ struct LatestRssFeedItems: View {
         }
         .background(Color.backgroundColor)
         .frame(maxWidth: .infinity, maxHeight: 140)
+        .onAppear {
+            Task {
+                do {
+                    self.items = try await RssFeedManager.shared.asyncLoadLatestFeeds()
+                } catch {
+                    print("Error to load latest feeds.")
+                }
+            }
+        }
     }
 }
 

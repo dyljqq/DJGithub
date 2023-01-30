@@ -18,4 +18,17 @@ struct GithubTrendingRepo: Codable {
     let fork: String
     let footerDesc: String
     let languageColor: String
+    
+    #if DEBUG
+    static let sample: GithubTrendingRepo = GithubTrendingRepo(
+        userName: "dyljqq",
+        repoName: "DJGithub",
+        languange: "Swift",
+        desc: "DJGithub",
+        star: "14",
+        fork: "2",
+        footerDesc: "2 stars today",
+        languageColor: "0x000000"
+    )
+    #endif
 }

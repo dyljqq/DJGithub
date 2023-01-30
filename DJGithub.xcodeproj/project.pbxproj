@@ -251,6 +251,11 @@
 		D98835E529865AEB00AF7E4F /* RssFeedsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98835E429865AEB00AF7E4F /* RssFeedsView.swift */; };
 		D98835E729865B0800AF7E4F /* RssFeedsItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98835E629865B0800AF7E4F /* RssFeedsItemView.swift */; };
 		D98835E929865F8C00AF7E4F /* RssFeedsViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98835E829865F8C00AF7E4F /* RssFeedsViewManager.swift */; };
+		D98836A6298790E300AF7E4F /* ReposTrendingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98836A5298790E300AF7E4F /* ReposTrendingView.swift */; };
+		D98836A8298794AA00AF7E4F /* HomeHorizontalItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98836A7298794AA00AF7E4F /* HomeHorizontalItemsView.swift */; };
+		D98836AA2987966900AF7E4F /* DevelopersTrendingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98836A92987966900AF7E4F /* DevelopersTrendingView.swift */; };
+		D98836AC2987968300AF7E4F /* GithubTrendingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98836AB2987968300AF7E4F /* GithubTrendingItemView.swift */; };
+		D98836AE298799ED00AF7E4F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98836AD298799ED00AF7E4F /* HomeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -514,6 +519,11 @@
 		D98835E429865AEB00AF7E4F /* RssFeedsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssFeedsView.swift; sourceTree = "<group>"; };
 		D98835E629865B0800AF7E4F /* RssFeedsItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssFeedsItemView.swift; sourceTree = "<group>"; };
 		D98835E829865F8C00AF7E4F /* RssFeedsViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssFeedsViewManager.swift; sourceTree = "<group>"; };
+		D98836A5298790E300AF7E4F /* ReposTrendingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReposTrendingView.swift; sourceTree = "<group>"; };
+		D98836A7298794AA00AF7E4F /* HomeHorizontalItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHorizontalItemsView.swift; sourceTree = "<group>"; };
+		D98836A92987966900AF7E4F /* DevelopersTrendingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopersTrendingView.swift; sourceTree = "<group>"; };
+		D98836AB2987968300AF7E4F /* GithubTrendingItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubTrendingItemView.swift; sourceTree = "<group>"; };
+		D98836AD298799ED00AF7E4F /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -612,6 +622,11 @@
 				7321DD242986B1A6002B5E8E /* Home.swift */,
 				7321DD262986B1B8002B5E8E /* RssFeedItem.swift */,
 				7321DD282986B5A0002B5E8E /* LatestRssFeedItems.swift */,
+				D98836A5298790E300AF7E4F /* ReposTrendingView.swift */,
+				D98836A7298794AA00AF7E4F /* HomeHorizontalItemsView.swift */,
+				D98836A92987966900AF7E4F /* DevelopersTrendingView.swift */,
+				D98836AB2987968300AF7E4F /* GithubTrendingItemView.swift */,
+				D98836AD298799ED00AF7E4F /* HomeViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1490,6 +1505,7 @@
 				7339201528F56D2900DC76B0 /* RssFeedManager.swift in Sources */,
 				73EE0CFA290BB3F50010C54A /* RepoBranchCommitUserView.swift in Sources */,
 				73936F3529137C4A00BC2901 /* DispatchQueue+Leak.swift in Sources */,
+				D98836AA2987966900AF7E4F /* DevelopersTrendingView.swift in Sources */,
 				73EE0CF0290AC4B30010C54A /* RepoBranchCommitViewController.swift in Sources */,
 				73EE0CE6290A6E040010C54A /* RepoBranchListView.swift in Sources */,
 				73AACB2928D321480072B1DF /* Result.swift in Sources */,
@@ -1559,6 +1575,7 @@
 				73936F2D2913784500BC2901 /* NSNotificationName+Leak.swift in Sources */,
 				73074CD528F166D8001A90E7 /* UserInfoEditViewController.swift in Sources */,
 				D90B8134297A29BE00CA4006 /* GithubTrendingDeveloper.swift in Sources */,
+				D98836A6298790E300AF7E4F /* ReposTrendingView.swift in Sources */,
 				73893E932937A5C800F848DF /* AppStyle.swift in Sources */,
 				73074CCD28EF4AFE001A90E7 /* LocalDataManager.swift in Sources */,
 				7311A520292A36E800B1A2A6 /* URLRouterModel.swift in Sources */,
@@ -1625,6 +1642,7 @@
 				73EE0CFE290BB79A0010C54A /* RepoPullFile.swift in Sources */,
 				73936FC5291E3E4500BC2901 /* Organization.swift in Sources */,
 				7339201328F5458100DC76B0 /* DateHelper.swift in Sources */,
+				D98836A8298794AA00AF7E4F /* HomeHorizontalItemsView.swift in Sources */,
 				D937FB872965C961005CD291 /* UITextView+Placeholder.swift in Sources */,
 				7320170328F48227007B970F /* FeedViewController.swift in Sources */,
 				73DF6BF028EAE0A00003BDB8 /* DeveloperGroupManager.swift in Sources */,
@@ -1647,6 +1665,7 @@
 				73AACB5A28D4B8610072B1DF /* Repo.swift in Sources */,
 				732B21D028E1C09B005893C0 /* RepoStarView.swift in Sources */,
 				73EE0CEA290A6FB40010C54A /* RepoBranchCell.swift in Sources */,
+				D98836AC2987968300AF7E4F /* GithubTrendingItemView.swift in Sources */,
 				73101D3F28E3077C00DB5423 /* UserManager.swift in Sources */,
 				73AACB3E28D362430072B1DF /* Consts.swift in Sources */,
 				7362FE812910BF2700D97E1A /* DJCrashLog.swift in Sources */,
@@ -1657,6 +1676,7 @@
 				73D0DE292907D21F00F385E6 /* LocalUserManager.swift in Sources */,
 				7320170928F535CB007B970F /* RssFeed.swift in Sources */,
 				737EF27F2929FC390060C64F /* PamphletViewController.swift in Sources */,
+				D98836AE298799ED00AF7E4F /* HomeViewController.swift in Sources */,
 				73AACB1828D312D30072B1DF /* GithubRouter.swift in Sources */,
 				73936F9829197E4300BC2901 /* DJUIThread.swift in Sources */,
 				73101D5028E4A10400DB5423 /* LocalDeveloperGroup.swift in Sources */,

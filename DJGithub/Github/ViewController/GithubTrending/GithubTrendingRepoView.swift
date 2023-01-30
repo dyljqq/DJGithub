@@ -72,7 +72,7 @@ struct GithubTrendingRepoView_Previews: PreviewProvider {
                 star: "14",
                 fork: "2",
                 footerDesc: "2 stars today",
-                languageColor: "0x000000"
+                languageColor: "0x242424"
             )
         )
     }

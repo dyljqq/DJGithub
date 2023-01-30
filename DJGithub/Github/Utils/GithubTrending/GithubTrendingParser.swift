@@ -121,8 +121,7 @@ private extension GithubTrendingParser {
     }
 
     func parseDesc(with element: Element) throws -> String {
-        let p = try element.getElementsByClass("col-9 color-fg-muted my-1 pr-4").get(0)
-        return try p.text()
+        return try element.getElementsByClass("col-9 color-fg-muted my-1 pr-4").first?.text() ?? "No Provided Desc."
     }
 
     func parseFooter(with element: Element) throws -> Element {
@@ -149,8 +148,12 @@ private extension GithubTrendingParser {
     }
 
     func parseRepoFork(with element: Element) throws -> String {
-        let ele = try element.getElementsByClass("Link--muted d-inline-block mr-3").get(1)
-        return try ele.text(trimAndNormaliseWhitespace: true)
+        let eles = try element.getElementsByClass("Link--muted d-inline-block mr-3")
+        if eles.count > 1 {
+            return try element.getElementsByClass("Link--muted d-inline-block mr-3").get(1).text(trimAndNormaliseWhitespace: true)
+        } else {
+            return "0"
+        }
     }
 
     func parseFooterDesc(with element: Element) throws -> String {
