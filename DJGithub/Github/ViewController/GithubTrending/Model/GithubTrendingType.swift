@@ -13,7 +13,7 @@ enum GithubTrendingType {
 }
 
 extension GithubTrendingType {
-    
+
     var urlString: String {
         switch self {
         case .repo(let path): return "https://github.com/trending" + path

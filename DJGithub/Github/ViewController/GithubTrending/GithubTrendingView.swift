@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct GithubTrendingView: View {
-    
+
     let types: [GithubTrendingType]
     let repoSelectedClosure: (GithubTrendingRepo) -> Void
     let developerSelectedClosure: (GithubTrendingDeveloper) -> Void
-    
+
     @State var repos: [GithubTrendingRepo] = []
     @State var developers: [GithubTrendingDeveloper] = []
     @State var selectedIndex: Int = 0
-    
+
     init(types: [GithubTrendingType],
          selectedIndex: Int,
          repoSelectedClosure: @escaping (GithubTrendingRepo) -> Void,
@@ -27,7 +27,7 @@ struct GithubTrendingView: View {
         self.repoSelectedClosure = repoSelectedClosure
         self.developerSelectedClosure = developerSelectedClosure
     }
-    
+
     var body: some View {
         VStack(alignment: .leading) {
             Picker("", selection: $selectedIndex) {
@@ -41,10 +41,10 @@ struct GithubTrendingView: View {
             }
             .pickerStyle(.segmented)
             .padding(EdgeInsets(top: 12, leading: 30, bottom: 12, trailing: 30))
-            .onChange(of: selectedIndex) { index in
+            .onChange(of: selectedIndex) { _ in
                 loadData()
             }
-            
+
             let type = types[selectedIndex]
             if case GithubTrendingType.repo = type, !repos.isEmpty {
                 GithubTrendingReposView(with: repos) { index in
@@ -66,7 +66,7 @@ struct GithubTrendingView: View {
             loadData()
         }
     }
-    
+
     func loadData() {
         let type = types[selectedIndex]
         Task {

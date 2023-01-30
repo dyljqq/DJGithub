@@ -10,11 +10,11 @@ import Kingfisher
 import UIKit
 
 struct GithubTrendingDeveloperView: View {
-    
+
     let developer: GithubTrendingDeveloper
-    
+
     let placeholderImage = UIImage(named: "person")!
-    
+
     var body: some View {
         HStack(alignment: .top) {
             KFImage.url(URL(string: developer.avatarImageUrl))

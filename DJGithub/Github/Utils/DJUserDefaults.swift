@@ -116,11 +116,11 @@ struct DJUserDefaults {
     guard let dict = UserDefaults.standard.value(forKey: key.rawValue) as? [String: Any] else { return nil }
     return try? DJDecoder(dict: dict).decode()
   }
-    
+
     static func setAccessToken(_ accessToken: String) {
         UserDefaults.standard.set(accessToken, forKey: Keys.accessToken.rawValue)
     }
-    
+
     static func accessToken() -> String? {
         if let accessToken = UserDefaults.standard.value(forKey: Keys.accessToken.rawValue) as? String {
             return accessToken

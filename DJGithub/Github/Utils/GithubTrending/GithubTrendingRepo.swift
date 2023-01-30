@@ -8,8 +8,8 @@
 import Foundation
 
 struct GithubTrendingRepo: Codable {
-    var id = UUID()
-    
+    let id = UUID()
+
     let userName: String
     let repoName: String
     let languange: String
@@ -18,4 +18,24 @@ struct GithubTrendingRepo: Codable {
     let fork: String
     let footerDesc: String
     let languageColor: String
+    
+    enum CodingKeys: String, CodingKey {
+        case userName, repoName, languange, desc, star
+        case fork, footerDesc, languageColor
+    }
+}
+
+extension GithubTrendingRepo {
+#if DEBUG
+    static let sample: GithubTrendingRepo = GithubTrendingRepo(
+        userName: "dyljqq",
+        repoName: "DJGithub",
+        languange: "Swift",
+        desc: "DJGithub",
+        star: "14",
+        fork: "2",
+        footerDesc: "2 stars today",
+        languageColor: "0x000000"
+    )
+#endif
 }

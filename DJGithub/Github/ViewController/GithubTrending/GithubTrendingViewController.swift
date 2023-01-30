@@ -10,17 +10,17 @@ import UIKit
 class GithubTrendingViewController: UIViewController {
 
     private let manager = GithubTrendingManager()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setUp()
     }
-    
+
     private func setUp() {
         navigationItem.title = "Repos Trending"
         view.backgroundColor = .white
-        
+
         let path = "/swift?since=daily"
         let vc = manager.addTrendingView(
             with: [.repo(path), .developer(path)],

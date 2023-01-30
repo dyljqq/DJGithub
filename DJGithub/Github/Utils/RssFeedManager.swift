@@ -162,7 +162,13 @@ class RssFeedManager: NSObject {
       let feeds: [RssFeed] = RssFeed.select(with: " order by updated desc limit \(limit)")
       let models = feeds.compactMap { feed in
         if let atom = self.atomMapping[feed.atomId] {
-          return RssFeedLatestCellModel(title: feed.title, from: atom.title, feedId: feed.id)
+            let date = feed.updated.components(separatedBy: " ").first ?? feed.updated
+          return RssFeedLatestCellModel(
+            title: feed.title,
+            from: atom.title,
+            feedId: feed.id,
+            date: date
+          )
         }
         return nil
       }

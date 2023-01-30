@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct GithubTrendingRepoView: View {
-    
+
     let repo: GithubTrendingRepo
-    
+
     var body: some View {
         VStack(alignment: .leading) {
-            HStack() {
+            HStack {
                 Image(systemName: "book.closed")
                 Text("\(repo.userName) /")
                     .font(.system(size: 14))
@@ -72,7 +72,7 @@ struct GithubTrendingRepoView_Previews: PreviewProvider {
                 star: "14",
                 fork: "2",
                 footerDesc: "2 stars today",
-                languageColor: "0x000000"
+                languageColor: "0x242424"
             )
         )
     }

@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct RssFeedsView: View {
-    
+
     let atom: RssFeedAtom
     var itemDidSelectClosure: ((RssFeed) -> Void)?
-    
+
     @State var feeds: [RssFeed] = []
-    
+
     var body: some View {
         ScrollView {
             LazyVStack(spacing: 0) {
@@ -37,7 +37,7 @@ struct RssFeedsView: View {
             self.loadData()
         }
     }
-    
+
     private func loadData() {
         Task {
             self.feeds = await RssFeedManager.getFeeds(by: atom.id)
