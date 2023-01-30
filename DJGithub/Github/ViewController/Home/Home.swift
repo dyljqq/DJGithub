@@ -59,7 +59,7 @@ struct Home: View {
                 
                 if !pamphletModels.isEmpty {
                     ForEach(pamphletModels, id: \.sectionName) { section in
-                        Section(header: Text("Important tasks")
+                        Section(header: Text(section.sectionName)
                             .font(.headline)
                             .fontWeight(.bold)
                             .foregroundColor(.black)
