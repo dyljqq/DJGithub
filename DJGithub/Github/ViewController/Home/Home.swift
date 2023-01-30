@@ -12,12 +12,14 @@ struct Home: View {
     var feedItemSelectedClosure: ((RssFeedLatestCellModel) -> Void)?
     var repoSelectedClosure: ((GithubTrendingRepo) -> Void)?
     var developerSelectedClosure: ((GithubTrendingDeveloper) -> Void)?
+    var pamphletItemSelectedClosure: ((PamphletSectionModel.PamphletSimpleModel) -> Void)?
     
     @State var repos: [GithubTrendingRepo] = []
     @State var developers: [GithubTrendingDeveloper] = []
+    @State var pamphletModels: [PamphletSectionModel] = []
     
     var body: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             LazyVStack(alignment: .leading, spacing: 0) {
                 Section {
                     LatestRssFeedItems(feedItemSelectedClosure: feedItemSelectedClosure)
@@ -54,12 +56,47 @@ struct Home: View {
                         )
                     }
                 }
+                
+                if !pamphletModels.isEmpty {
+                    ForEach(pamphletModels, id: \.sectionName) { section in
+                        Section(header: Text("Important tasks")
+                            .font(.headline)
+                            .fontWeight(.bold)
+                            .foregroundColor(.black)
+                            .padding(.top, 10)
+                            .padding(.leading, 16)) {
+                            ForEach(0..<section.displayItems.count, id: \.self) { index in
+                                if let item = section.displayItems[index] as? PamphletSectionModel.PamphletSimpleModel {
+                                    VStack(alignment: .leading) {
+                                        HStack {
+                                            if let imageName = item.imageName {
+                                                Image(uiImage: UIImage(named: imageName)!)
+                                                    .resizable()
+                                                    .frame(width: 30, height: 30)
+                                            }
+                                            Text(item.title)
+                                                .font(.system(size: 14))
+                                                .foregroundColor(.textColor)
+                                        }
+                                        Divider()
+                                    }
+                                    .padding(.leading, 16)
+                                    .padding(.top, 10)
+                                    .onTapGesture {
+                                        pamphletItemSelectedClosure?(item)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
         .background(Color.backgroundColor)
         .onAppear {
             loadRepos()
             loadDevelopers()
+            loadPamphletModels()
         }
     }
     
@@ -68,7 +105,6 @@ struct Home: View {
             let type = GithubTrendingType.repo("/swift?since=daily")
             let repos: [GithubTrendingRepo] = await GithubTrendingParser(urlString: type.urlString).parse(with: .repo)
             self.repos = repos.count > 5 ? Array(repos[0..<5]) : repos
-            print("repos: \(repos.count)")
         }
     }
     
@@ -77,7 +113,12 @@ struct Home: View {
             let type = GithubTrendingType.developer("/swift?since=daily")
             let developers: [GithubTrendingDeveloper] = await GithubTrendingParser(urlString: type.urlString).parse(with: .developer)
             self.developers = developers.count > 5 ? Array(developers[..<5]) : developers
-            print("developers: \(developers.count)")
+        }
+    }
+    
+    private func loadPamphletModels() {
+        Task {
+            pamphletModels = loadBundleJSONFile("PamphletData")
         }
     }
 }

@@ -34,6 +34,12 @@ class HomeViewController: UIViewController {
         }
     }
     
+    var pamphletItemSelectedClosure: ((PamphletSectionModel.PamphletSimpleModel) -> Void) {
+        return { pamphlet in
+            URLRouter.open(with: pamphlet.jumpUrl)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUp()
@@ -45,13 +51,15 @@ class HomeViewController: UIViewController {
         let home = Home(
             feedItemSelectedClosure: feedItemSelectedClosure,
             repoSelectedClosure: repoSelectedClosure,
-            developerSelectedClosure: developerSelectedClosure
+            developerSelectedClosure: developerSelectedClosure,
+            pamphletItemSelectedClosure: pamphletItemSelectedClosure
         )
         let homeV = UIHostingController(rootView: home)
         view.addSubview(homeV.view)
         homeV.view.snp.makeConstraints { make in
             make.top.equalTo(FrameGuide.navigationBarAndStatusBarHeight)
-            make.leading.trailing.bottom.equalToSuperview()
+            make.bottom.equalTo(-FrameGuide.tabbarHeight)
+            make.leading.trailing.equalToSuperview()
         }
     }
 }
