@@ -256,6 +256,8 @@
 		D98836AA2987966900AF7E4F /* DevelopersTrendingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98836A92987966900AF7E4F /* DevelopersTrendingView.swift */; };
 		D98836AC2987968300AF7E4F /* GithubTrendingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98836AB2987968300AF7E4F /* GithubTrendingItemView.swift */; };
 		D98836AE298799ED00AF7E4F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98836AD298799ED00AF7E4F /* HomeViewController.swift */; };
+		D98836B22987AE0B00AF7E4F /* GithubTrendingItemsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98836B12987AE0B00AF7E4F /* GithubTrendingItemsManager.swift */; };
+		D98836B42987BD0E00AF7E4F /* JSONSerialization+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98836B32987BD0E00AF7E4F /* JSONSerialization+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -524,6 +526,8 @@
 		D98836A92987966900AF7E4F /* DevelopersTrendingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopersTrendingView.swift; sourceTree = "<group>"; };
 		D98836AB2987968300AF7E4F /* GithubTrendingItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubTrendingItemView.swift; sourceTree = "<group>"; };
 		D98836AD298799ED00AF7E4F /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		D98836B12987AE0B00AF7E4F /* GithubTrendingItemsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubTrendingItemsManager.swift; sourceTree = "<group>"; };
+		D98836B32987BD0E00AF7E4F /* JSONSerialization+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONSerialization+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1020,6 +1024,7 @@
 				73936F9F291A4C8C00BC2901 /* UIViewController+Share.swift */,
 				D937FB862965C961005CD291 /* UITextView+Placeholder.swift */,
 				D90B812529795A5F00CA4006 /* Color+Ext.swift */,
+				D98836B32987BD0E00AF7E4F /* JSONSerialization+Ext.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1243,6 +1248,7 @@
 				D90B811429793B3400CA4006 /* GithubTrendingParser.swift */,
 				D90B811829793FB200CA4006 /* GithubTrendingRepo.swift */,
 				D90B8133297A29BE00CA4006 /* GithubTrendingDeveloper.swift */,
+				D98836B12987AE0B00AF7E4F /* GithubTrendingItemsManager.swift */,
 			);
 			path = GithubTrending;
 			sourceTree = "<group>";
@@ -1547,6 +1553,7 @@
 				734D676329084571006A0BFA /* Repository.swift in Sources */,
 				7396BDA9292BE11600B391CC /* UserViewModel.swift in Sources */,
 				73E14E5628F3DAC800A9811D /* DJJSONParser.swift in Sources */,
+				D98836B22987AE0B00AF7E4F /* GithubTrendingItemsManager.swift in Sources */,
 				73DF6BF228EAE3060003BDB8 /* DJCodable.swift in Sources */,
 				7341DCD828E05D98009A3A3C /* RepoFooterView.swift in Sources */,
 				D98835E929865F8C00AF7E4F /* RssFeedsViewManager.swift in Sources */,
@@ -1668,6 +1675,7 @@
 				D98836AC2987968300AF7E4F /* GithubTrendingItemView.swift in Sources */,
 				73101D3F28E3077C00DB5423 /* UserManager.swift in Sources */,
 				73AACB3E28D362430072B1DF /* Consts.swift in Sources */,
+				D98836B42987BD0E00AF7E4F /* JSONSerialization+Ext.swift in Sources */,
 				7362FE812910BF2700D97E1A /* DJCrashLog.swift in Sources */,
 				D90B813229797A5800CA4006 /* LoaderView.swift in Sources */,
 				7374D19728E0BC1D00E6BE47 /* Readme.swift in Sources */,

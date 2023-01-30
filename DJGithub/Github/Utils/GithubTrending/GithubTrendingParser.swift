@@ -23,12 +23,21 @@ struct GithubTrendingParser {
             guard let box = try parseBox(with: doc) else { return [] }
             let elements = try parseArticles(with: box, className: type.className)
 
-            return elements.compactMap { element in
+            let items = elements.compactMap { element in
                 switch type {
                 case .repo: return try? parseRepoArticle(with: element) as? T
                 case .developer: return try? parseDeveloper(with: element) as? T
                 }
             }
+            
+            let trendingType: GithubTrendingItemsManager.TrendingType
+            switch type {
+            case .repo: trendingType = GithubTrendingItemsManager.TrendingType.repo
+            case .developer: trendingType = GithubTrendingItemsManager.TrendingType.developer
+            }
+            GithubTrendingItemsManager.shared.save(with: trendingType, items: items)
+
+            return items
         } catch {
             print("Github Trending Parse Error: \(error)")
         }
@@ -58,6 +67,17 @@ extension GithubTrendingParser {
             switch self {
             case .repo: return "Box-row"
             case .developer: return "Box-row d-flex"
+            }
+        }
+        
+        var dirName: String {
+            return "GithubTrending"
+        }
+        
+        var filename: String {
+            switch self {
+            case .repo: return "repo.json"
+            case .developer: return "developer.json"
             }
         }
     }
