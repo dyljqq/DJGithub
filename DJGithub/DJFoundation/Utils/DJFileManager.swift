@@ -10,14 +10,14 @@ import Foundation
 struct DJFileManager {
 
     static let `default` = DJFileManager()
-    
+
     @discardableResult
     func createDir(with dirName: String) -> URL? {
         guard let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return nil }
         let url = documentURL.appendingPathComponent(dirName, isDirectory: true)
-        
+
         guard !dirExists(at: url) else { return url }
-        
+
         do {
             try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true)
             return url
@@ -26,13 +26,13 @@ struct DJFileManager {
             return nil
         }
     }
-    
+
     func save(with data: Data, path: String) {
         guard let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
         let url = documentURL.appendingPathComponent(path)
         save(with: data, url: url)
     }
-    
+
     func save(with data: Data, url: URL) {
         do {
             try data.write(to: url)
@@ -40,13 +40,13 @@ struct DJFileManager {
             print("Error to save data: \n url: \(url) \n \(error)")
         }
     }
-    
+
     func dirExists(at path: URL) -> Bool {
         var isDirectory: ObjCBool = ObjCBool(false)
         let isExist = FileManager.default.fileExists(atPath: path.path, isDirectory: &isDirectory)
         return isExist
     }
-    
+
     func load<T: Codable>(with filename: String) -> T? {
         guard let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return nil }
         let filePath = url.appendingPathComponent(filename, isDirectory: false)

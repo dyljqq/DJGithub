@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct ReposTrendingView: View {
-    
+
     let items: [GithubTrendingRepo]
-    
+
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             LazyHStack {
@@ -36,7 +36,7 @@ struct ReposTrendingView_Previews: PreviewProvider {
             GithubTrendingRepo.sample,
             GithubTrendingRepo.sample,
             GithubTrendingRepo.sample,
-            GithubTrendingRepo.sample,
+            GithubTrendingRepo.sample
         ])
     }
 }

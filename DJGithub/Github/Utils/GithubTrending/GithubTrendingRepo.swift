@@ -18,7 +18,7 @@ struct GithubTrendingRepo: Codable {
     let fork: String
     let footerDesc: String
     let languageColor: String
-    
+
     enum CodingKeys: String, CodingKey {
         case userName, repoName, languange, desc, star
         case fork, footerDesc, languageColor

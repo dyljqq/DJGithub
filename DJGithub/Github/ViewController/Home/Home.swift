@@ -8,23 +8,23 @@
 import SwiftUI
 
 struct Home: View {
-    
+
     var feedItemSelectedClosure: ((RssFeedLatestCellModel) -> Void)?
     var repoSelectedClosure: ((GithubTrendingRepo) -> Void)?
     var developerSelectedClosure: ((GithubTrendingDeveloper) -> Void)?
     var pamphletItemSelectedClosure: ((PamphletSectionModel.PamphletSimpleModel) -> Void)?
-    
+
     @State var repos: [GithubTrendingRepo] = []
     @State var developers: [GithubTrendingDeveloper] = []
     @State var pamphletModels: [PamphletSectionModel] = []
-    
+
     var body: some View {
         ScrollView(showsIndicators: false) {
             LazyVStack(alignment: .leading, spacing: 0) {
                 Section {
                     LatestRssFeedItems(feedItemSelectedClosure: feedItemSelectedClosure)
                 }
-                
+
                 if !repos.isEmpty {
                     Section {
                         HomeHorizontalItemsView(
@@ -40,7 +40,7 @@ struct Home: View {
                         )
                     }
                 }
-                
+
                 if !developers.isEmpty {
                     Section {
                         HomeHorizontalItemsView(
@@ -56,7 +56,7 @@ struct Home: View {
                         )
                     }
                 }
-                
+
                 if !pamphletModels.isEmpty {
                     ForEach(pamphletModels, id: \.sectionName) { section in
                         Section(header: Text(section.sectionName)
@@ -99,31 +99,31 @@ struct Home: View {
             loadPamphletModels()
         }
     }
-    
+
     private func loadRepos() {
         Task {
             if let repos = GithubTrendingItemsManager.shared.load(with: .repo) as [GithubTrendingRepo]? {
                 self.repos = repos
             }
-            
+
             let type = GithubTrendingType.repo("/swift?since=daily")
             let repos: [GithubTrendingRepo] = await GithubTrendingParser(urlString: type.urlString).parse(with: .repo)
             self.repos = repos.count > 5 ? Array(repos[0..<5]) : repos
         }
     }
-    
+
     private func loadDevelopers() {
         Task {
             if let developers = GithubTrendingItemsManager.shared.load(with: .developer) as [GithubTrendingDeveloper]? {
                 self.developers = developers
             }
-            
+
             let type = GithubTrendingType.developer("/swift?since=daily")
             let developers: [GithubTrendingDeveloper] = await GithubTrendingParser(urlString: type.urlString).parse(with: .developer)
             self.developers = developers.count > 5 ? Array(developers[..<5]) : developers
         }
     }
-    
+
     private func loadPamphletModels() {
         Task {
             pamphletModels = loadBundleJSONFile("PamphletData")
