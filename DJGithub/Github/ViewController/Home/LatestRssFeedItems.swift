@@ -10,7 +10,7 @@ import SwiftUI
 struct LatestRssFeedItems: View {
 
     var feedItemSelectedClosure: ((RssFeedLatestCellModel) -> Void)?
-    
+
     @State var items: [RssFeedLatestCellModel] = []
 
     var body: some View {

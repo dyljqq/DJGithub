@@ -8,7 +8,7 @@
 import Foundation
 
 extension JSONSerialization {
-    
+
     @discardableResult
     static func loadJSON<T: Codable>(withFilename filename: String) throws -> T? {
         let fm = FileManager.default
@@ -21,9 +21,9 @@ extension JSONSerialization {
         }
         return nil
     }
-    
+
     @discardableResult
-    static func save(jsonObject: Any, toFilename filename: String) throws -> Bool{
+    static func save(jsonObject: Any, toFilename filename: String) throws -> Bool {
         let fm = FileManager.default
         let urls = fm.urls(for: .documentDirectory, in: .userDomainMask)
         if let url = urls.first {
@@ -33,7 +33,7 @@ extension JSONSerialization {
             try data.write(to: fileURL, options: [.atomicWrite])
             return true
         }
-        
+
         return false
     }
 }

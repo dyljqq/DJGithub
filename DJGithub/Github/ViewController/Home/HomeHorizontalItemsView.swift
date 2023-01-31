@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct HomeHorizontalItemsView<ChildView: View>: View {
-    
+
     let title: String
     let horizontalView: ChildView
-    
+
     var body: some View {
         VStack(alignment: .leading) {
             Text(title)

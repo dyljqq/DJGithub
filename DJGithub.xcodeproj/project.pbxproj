@@ -82,6 +82,10 @@
 		7362FE8329117D2000D97E1A /* DefaultValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7362FE8229117D2000D97E1A /* DefaultValue.swift */; };
 		7362FE852911816600D97E1A /* Default+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7362FE842911816600D97E1A /* Default+Ext.swift */; };
 		7362FEC729124F9000D97E1A /* RssFeedRead.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7362FEC629124F9000D97E1A /* RssFeedRead.swift */; };
+		7367476E2989682800FD0C72 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7367476D2989682800FD0C72 /* SettingView.swift */; };
+		736747702989683A00FD0C72 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7367476F2989683A00FD0C72 /* Setting.swift */; };
+		7367477229896C3100FD0C72 /* SettingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7367477129896C3100FD0C72 /* SettingType.swift */; };
+		73674774298972F900FD0C72 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73674773298972F900FD0C72 /* SettingViewController.swift */; };
 		7374D19728E0BC1D00E6BE47 /* Readme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7374D19628E0BC1D00E6BE47 /* Readme.swift */; };
 		737EF2732929FB960060C64F /* D-图片工具.json in Resources */ = {isa = PBXBuildFile; fileRef = 737EF26A2929FB960060C64F /* D-图片工具.json */; };
 		737EF2742929FB960060C64F /* D-美术素材.json in Resources */ = {isa = PBXBuildFile; fileRef = 737EF26B2929FB960060C64F /* D-美术素材.json */; };
@@ -353,6 +357,10 @@
 		7362FE8229117D2000D97E1A /* DefaultValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultValue.swift; sourceTree = "<group>"; };
 		7362FE842911816600D97E1A /* Default+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Default+Ext.swift"; sourceTree = "<group>"; };
 		7362FEC629124F9000D97E1A /* RssFeedRead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssFeedRead.swift; sourceTree = "<group>"; };
+		7367476D2989682800FD0C72 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		7367476F2989683A00FD0C72 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
+		7367477129896C3100FD0C72 /* SettingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingType.swift; sourceTree = "<group>"; };
+		73674773298972F900FD0C72 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		7374D19628E0BC1D00E6BE47 /* Readme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Readme.swift; sourceTree = "<group>"; };
 		737EF26A2929FB960060C64F /* D-图片工具.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "D-图片工具.json"; sourceTree = "<group>"; };
 		737EF26B2929FB960060C64F /* D-美术素材.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "D-美术素材.json"; sourceTree = "<group>"; };
@@ -820,6 +828,8 @@
 			isa = PBXGroup;
 			children = (
 				7396BDA8292BE11600B391CC /* UserViewModel.swift */,
+				7367476F2989683A00FD0C72 /* Setting.swift */,
+				7367477129896C3100FD0C72 /* SettingType.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1072,6 +1082,8 @@
 				73074CD428F166D8001A90E7 /* UserInfoEditViewController.swift */,
 				73936FC6291E3F7F00BC2901 /* OrganizationViewController.swift */,
 				73936FC8291E484A00BC2901 /* UserContainerViewController.swift */,
+				7367476D2989682800FD0C72 /* SettingView.swift */,
+				73674773298972F900FD0C72 /* SettingViewController.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -1496,6 +1508,7 @@
 				73074CD328F155CB001A90E7 /* UserInfoCell.swift in Sources */,
 				73DF6C0028EC00FD0003BDB8 /* RepoContentCell.swift in Sources */,
 				7321DD292986B5A0002B5E8E /* LatestRssFeedItems.swift in Sources */,
+				73674774298972F900FD0C72 /* SettingViewController.swift in Sources */,
 				73DF6C0428EC252E0003BDB8 /* String+File.swift in Sources */,
 				73AACB3428D357C80072B1DF /* UserViewController.swift in Sources */,
 				737EF285292A000F0060C64F /* PamphletSimpleCell.swift in Sources */,
@@ -1529,6 +1542,7 @@
 				73AACB1328D30F350072B1DF /* DJParser.swift in Sources */,
 				73AACB7728D5BBE90072B1DF /* SQLTable.swift in Sources */,
 				7321DD252986B1A6002B5E8E /* Home.swift in Sources */,
+				736747702989683A00FD0C72 /* Setting.swift in Sources */,
 				73E14E5D28F4151100A9811D /* FeedsViewController.swift in Sources */,
 				73AACB7428D5BA2D0072B1DF /* Language.swift in Sources */,
 				73B7905C28E59104002A9CDC /* HeaderSegmentView.swift in Sources */,
@@ -1582,6 +1596,7 @@
 				73936F2D2913784500BC2901 /* NSNotificationName+Leak.swift in Sources */,
 				73074CD528F166D8001A90E7 /* UserInfoEditViewController.swift in Sources */,
 				D90B8134297A29BE00CA4006 /* GithubTrendingDeveloper.swift in Sources */,
+				7367477229896C3100FD0C72 /* SettingType.swift in Sources */,
 				D98836A6298790E300AF7E4F /* ReposTrendingView.swift in Sources */,
 				73893E932937A5C800F848DF /* AppStyle.swift in Sources */,
 				73074CCD28EF4AFE001A90E7 /* LocalDataManager.swift in Sources */,
@@ -1674,6 +1689,7 @@
 				73EE0CEA290A6FB40010C54A /* RepoBranchCell.swift in Sources */,
 				D98836AC2987968300AF7E4F /* GithubTrendingItemView.swift in Sources */,
 				73101D3F28E3077C00DB5423 /* UserManager.swift in Sources */,
+				7367476E2989682800FD0C72 /* SettingView.swift in Sources */,
 				73AACB3E28D362430072B1DF /* Consts.swift in Sources */,
 				D98836B42987BD0E00AF7E4F /* JSONSerialization+Ext.swift in Sources */,
 				7362FE812910BF2700D97E1A /* DJCrashLog.swift in Sources */,

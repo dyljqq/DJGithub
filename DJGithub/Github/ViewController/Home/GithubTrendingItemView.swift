@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct GithubTrendingItemView<ChildView: View>: View {
-    
+
     let views: [ChildView]
-    
+
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             LazyHStack(spacing: 10) {

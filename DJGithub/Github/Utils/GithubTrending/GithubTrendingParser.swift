@@ -29,7 +29,7 @@ struct GithubTrendingParser {
                 case .developer: return try? parseDeveloper(with: element) as? T
                 }
             }
-            
+
             let trendingType: GithubTrendingItemsManager.TrendingType
             switch type {
             case .repo: trendingType = GithubTrendingItemsManager.TrendingType.repo
@@ -69,11 +69,11 @@ extension GithubTrendingParser {
             case .developer: return "Box-row d-flex"
             }
         }
-        
+
         var dirName: String {
             return "GithubTrending"
         }
-        
+
         var filename: String {
             switch self {
             case .repo: return "repo.json"
@@ -221,7 +221,7 @@ private extension GithubTrendingParser {
     }
 
     func parseDeveloperHotRepoDesc(with element: Element) throws -> String {
-        let div = try element.getElementsByClass("f6 color-fg-muted mt-1").get(0)
+        guard let div = try element.getElementsByClass("f6 color-fg-muted mt-1").first else { return "" }
         return try div.text(trimAndNormaliseWhitespace: true)
     }
 }

@@ -21,33 +21,33 @@ class HomeViewController: UIViewController {
             }
         }
     }
-    
+
     var repoSelectedClosure: (GithubTrendingRepo) -> Void {
         return { [weak self] repo in
             self?.navigationController?.pushToRepo(with: repo.userName, repoName: repo.repoName)
         }
     }
-    
+
     var developerSelectedClosure: (GithubTrendingDeveloper) -> Void {
         return { [weak self] developer in
             self?.navigationController?.pushToUser(with: developer.login)
         }
     }
-    
+
     var pamphletItemSelectedClosure: ((PamphletSectionModel.PamphletSimpleModel) -> Void) {
         return { pamphlet in
             URLRouter.open(with: pamphlet.jumpUrl)
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setUp()
     }
-    
+
     private func setUp() {
         navigationItem.title = "Home"
-        
+
         let home = Home(
             feedItemSelectedClosure: feedItemSelectedClosure,
             repoSelectedClosure: repoSelectedClosure,
