@@ -262,6 +262,7 @@
 		D98836AE298799ED00AF7E4F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98836AD298799ED00AF7E4F /* HomeViewController.swift */; };
 		D98836B22987AE0B00AF7E4F /* GithubTrendingItemsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98836B12987AE0B00AF7E4F /* GithubTrendingItemsManager.swift */; };
 		D98836B42987BD0E00AF7E4F /* JSONSerialization+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98836B32987BD0E00AF7E4F /* JSONSerialization+Ext.swift */; };
+		D9F9C29D298A851900631570 /* Bundle+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F9C29C298A851900631570 /* Bundle+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -536,6 +537,7 @@
 		D98836AD298799ED00AF7E4F /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		D98836B12987AE0B00AF7E4F /* GithubTrendingItemsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubTrendingItemsManager.swift; sourceTree = "<group>"; };
 		D98836B32987BD0E00AF7E4F /* JSONSerialization+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONSerialization+Ext.swift"; sourceTree = "<group>"; };
+		D9F9C29C298A851900631570 /* Bundle+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1035,6 +1037,7 @@
 				D937FB862965C961005CD291 /* UITextView+Placeholder.swift */,
 				D90B812529795A5F00CA4006 /* Color+Ext.swift */,
 				D98836B32987BD0E00AF7E4F /* JSONSerialization+Ext.swift */,
+				D9F9C29C298A851900631570 /* Bundle+Ext.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1522,6 +1525,7 @@
 				D90B812E297965D500CA4006 /* GithubTrendingReposRepresentation.swift in Sources */,
 				73EE0CDE2909351A0010C54A /* PrimaryLanguageCell.swift in Sources */,
 				7339201528F56D2900DC76B0 /* RssFeedManager.swift in Sources */,
+				D9F9C29D298A851900631570 /* Bundle+Ext.swift in Sources */,
 				73EE0CFA290BB3F50010C54A /* RepoBranchCommitUserView.swift in Sources */,
 				73936F3529137C4A00BC2901 /* DispatchQueue+Leak.swift in Sources */,
 				D98836AA2987966900AF7E4F /* DevelopersTrendingView.swift in Sources */,
