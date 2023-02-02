@@ -86,6 +86,7 @@
 		736747702989683A00FD0C72 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7367476F2989683A00FD0C72 /* Setting.swift */; };
 		7367477229896C3100FD0C72 /* SettingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7367477129896C3100FD0C72 /* SettingType.swift */; };
 		73674774298972F900FD0C72 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73674773298972F900FD0C72 /* SettingViewController.swift */; };
+		73674779298B3D7500FD0C72 /* ViewDidLoadModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73674778298B3D7500FD0C72 /* ViewDidLoadModifier.swift */; };
 		7374D19728E0BC1D00E6BE47 /* Readme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7374D19628E0BC1D00E6BE47 /* Readme.swift */; };
 		737EF2732929FB960060C64F /* D-图片工具.json in Resources */ = {isa = PBXBuildFile; fileRef = 737EF26A2929FB960060C64F /* D-图片工具.json */; };
 		737EF2742929FB960060C64F /* D-美术素材.json in Resources */ = {isa = PBXBuildFile; fileRef = 737EF26B2929FB960060C64F /* D-美术素材.json */; };
@@ -362,6 +363,7 @@
 		7367476F2989683A00FD0C72 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		7367477129896C3100FD0C72 /* SettingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingType.swift; sourceTree = "<group>"; };
 		73674773298972F900FD0C72 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		73674778298B3D7500FD0C72 /* ViewDidLoadModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDidLoadModifier.swift; sourceTree = "<group>"; };
 		7374D19628E0BC1D00E6BE47 /* Readme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Readme.swift; sourceTree = "<group>"; };
 		737EF26A2929FB960060C64F /* D-图片工具.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "D-图片工具.json"; sourceTree = "<group>"; };
 		737EF26B2929FB960060C64F /* D-美术素材.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "D-美术素材.json"; sourceTree = "<group>"; };
@@ -664,6 +666,22 @@
 			path = DJMonitor;
 			sourceTree = "<group>";
 		};
+		73674776298B3D5300FD0C72 /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				73674777298B3D5F00FD0C72 /* Modifier */,
+			);
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
+		73674777298B3D5F00FD0C72 /* Modifier */ = {
+			isa = PBXGroup;
+			children = (
+				73674778298B3D7500FD0C72 /* ViewDidLoadModifier.swift */,
+			);
+			path = Modifier;
+			sourceTree = "<group>";
+		};
 		737EF2662929FB620060C64F /* Pamphlet */ = {
 			isa = PBXGroup;
 			children = (
@@ -860,6 +878,7 @@
 		73AACAD328D308A60072B1DF /* DJGithub */ = {
 			isa = PBXGroup;
 			children = (
+				73674776298B3D5300FD0C72 /* SwiftUI */,
 				737EF2662929FB620060C64F /* Pamphlet */,
 				735D0E002903115D00E618B3 /* DJMonitor */,
 				73AACB1528D311C30072B1DF /* Github */,
@@ -1573,6 +1592,7 @@
 				73E14E5628F3DAC800A9811D /* DJJSONParser.swift in Sources */,
 				D98836B22987AE0B00AF7E4F /* GithubTrendingItemsManager.swift in Sources */,
 				73DF6BF228EAE3060003BDB8 /* DJCodable.swift in Sources */,
+				73674779298B3D7500FD0C72 /* ViewDidLoadModifier.swift in Sources */,
 				7341DCD828E05D98009A3A3C /* RepoFooterView.swift in Sources */,
 				D98835E929865F8C00AF7E4F /* RssFeedsViewManager.swift in Sources */,
 				73DE29CE28E0C35200B48009 /* WebViewController.swift in Sources */,
