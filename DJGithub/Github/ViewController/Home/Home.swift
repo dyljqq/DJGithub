@@ -93,7 +93,7 @@ struct Home: View {
             }
         }
         .background(Color.backgroundColor)
-        .onAppear {
+        .onViewDidLoad {
             loadRepos()
             loadDevelopers()
             loadPamphletModels()

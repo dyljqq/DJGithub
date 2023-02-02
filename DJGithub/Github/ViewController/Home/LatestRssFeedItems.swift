@@ -43,7 +43,7 @@ struct LatestRssFeedItems: View {
         }
         .background(Color.backgroundColor)
         .frame(maxWidth: .infinity, maxHeight: 140)
-        .onAppear {
+        .onViewDidLoad {
             Task {
                 do {
                     self.items = try await RssFeedManager.shared.asyncLoadLatestFeeds()

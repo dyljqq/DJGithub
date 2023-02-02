@@ -62,7 +62,7 @@ struct GithubTrendingView: View {
             }
             Spacer()
         }
-        .onAppear {
+        .onViewDidLoad {
             loadData()
         }
     }

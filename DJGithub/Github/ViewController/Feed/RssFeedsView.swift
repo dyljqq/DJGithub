@@ -33,7 +33,7 @@ struct RssFeedsView: View {
                 }
             }
         }
-        .onAppear {
+        .onViewDidLoad {
             self.loadData()
         }
     }
