@@ -10,7 +10,7 @@ import Foundation
 enum SettingType {
     case iCloud
     case email, weibo, github
-    case version(String)
+    case version(String), signUp
 }
 
 extension SettingType {
@@ -21,6 +21,7 @@ extension SettingType {
         case .github: return "东方宜玲"
         case .iCloud: return "iCloud"
         case .version(let version): return "App Version: \(version)"
+        case .signUp: return "SignUp"
         }
     }
 

@@ -10,7 +10,7 @@ import Kingfisher
 
 class UserHeaderView: NormalHeaderView {
   func render(with model: User) {
-    avatarImageView.setImage(with: model.avatarUrl)
+    avatarImageView.setImage(with: model.avatarUrl, placeHolder: .defaultPersonImage)
     self.arrowImageView.isHidden = !ConfigManager.checkOwner(by: model.login)
     nameLabel.text = model.name ?? model.login
     loginLabel.text = "(\(model.login))"
@@ -26,7 +26,7 @@ class UserHeaderView: NormalHeaderView {
   }
 
   func render(with userViewer: UserViewer) {
-    avatarImageView.setImage(with: userViewer.avatarUrl)
+    avatarImageView.setImage(with: userViewer.avatarUrl, placeHolder: .defaultPersonImage)
     self.arrowImageView.isHidden = userViewer.viewerCanFollow
     nameLabel.text = userViewer.name ?? userViewer.login
     loginLabel.text = "(\(userViewer.login))"

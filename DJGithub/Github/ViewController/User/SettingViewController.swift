@@ -36,6 +36,9 @@ class SettingViewController: UIViewController {
         case .email: URLRouter.open(with: "mailto: \(type.title)", jumpType: .outside)
         case .weibo: URLRouter.open(with: "sinaweibo://userinfo?uid=2579435503", jumpType: .outside)
         case .github: URLRouter.open(with: "djgithub://user?name=dyljqq")
+        case .signUp:
+            DJUserDefaults.clearViewerInfo()
+            UIApplication.shared.keyWindow?.rootViewController = LoadingViewerViewController()
         default: break
         }
     }
