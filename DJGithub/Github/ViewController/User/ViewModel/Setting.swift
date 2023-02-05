@@ -12,7 +12,7 @@ class Setting: ObservableObject {
     let dataSource: [SettingSection] = [
         SettingSection(name: "Abillity", items: [.iCloud]),
         SettingSection(name: "Social", items: [.github, .email, .weibo]),
-        SettingSection(name: "Other", items: [.version(Bundle.main.appVersion)])
+        SettingSection(name: "Other", items: [.version(Bundle.main.appVersion), .signUp])
     ]
 
 }
