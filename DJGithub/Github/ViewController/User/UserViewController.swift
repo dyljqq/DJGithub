@@ -144,22 +144,16 @@ class UserViewController: UIViewController {
         tableView.snp.makeConstraints { make in
             make.edges.equalTo(view)
         }
-
+        
         self.userViewModel.userObserver.bind { [weak self] userViewer in
             DispatchQueue.main.async {
+                self?.tableView.dj_endRefresh()
                 self?.loadUserViewerInfo(with: userViewer)
                 self?.tableView.reloadData()
             }
         }
-
-        if let userViewer {
-            userViewModel.update(userViewer)
-        } else {
-            Task {
-                view.startLoading()
-                await userViewModel.fetchUser(with: name)
-            }
-        }
+        
+        loadUserInfo()
 
         userHeaderView.renderHeightClosure = { [weak self] height in
             guard let strongSelf = self else { return }
@@ -178,6 +172,26 @@ class UserViewController: UIViewController {
                 title: userViewer.name ?? "",
                 selectedIndex: index
             )
+        }
+        
+        addRefreshHeader()
+    }
+    
+    private func addRefreshHeader() {
+        tableView.addHeader { [weak self] in
+            guard let strongSelf = self else { return }
+            strongSelf.loadUserInfo()
+        }
+    }
+    
+    private func loadUserInfo() {
+        if let userViewer {
+            userViewModel.update(userViewer)
+        } else {
+            Task {
+                view.startLoading()
+                await userViewModel.fetchUser(with: name)
+            }
         }
     }
 
