@@ -94,16 +94,23 @@ struct Home: View {
         }
         .background(Color.backgroundColor)
         .onViewDidLoad {
-            loadRepos()
-            loadDevelopers()
-            loadPamphletModels()
+            reloadData()
         }
+        .refreshable {
+            reloadData()
+        }
+    }
+    
+    private func reloadData() {
+        loadRepos()
+        loadDevelopers()
+        loadPamphletModels()
     }
 
     private func loadRepos() {
         Task {
             if let repos = GithubTrendingItemsManager.shared.load(with: .repo) as [GithubTrendingRepo]? {
-                self.repos = repos
+                self.repos = repos.count > 5 ? Array(repos[0..<5]) : repos
             }
 
             let type = GithubTrendingType.repo("/swift?since=daily")
@@ -115,7 +122,7 @@ struct Home: View {
     private func loadDevelopers() {
         Task {
             if let developers = GithubTrendingItemsManager.shared.load(with: .developer) as [GithubTrendingDeveloper]? {
-                self.developers = developers
+                self.developers = developers.count > 5 ? Array(developers[..<5]) : developers
             }
 
             let type = GithubTrendingType.developer("/swift?since=daily")
