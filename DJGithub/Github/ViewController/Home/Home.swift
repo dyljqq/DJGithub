@@ -32,6 +32,8 @@ struct Home: View {
                             horizontalView: GithubTrendingItemView(
                                 views: repos.map { repo in
                                     GithubTrendingRepoView(repo: repo)
+                                        .padding(.top, 10)
+                                        .padding(.bottom, 10)
                                         .onTapGesture {
                                             repoSelectedClosure?(repo)
                                         }
@@ -48,6 +50,8 @@ struct Home: View {
                             horizontalView: GithubTrendingItemView(
                                 views: developers.map { developer in
                                     GithubTrendingDeveloperView(developer: developer)
+                                        .padding(.top, 10)
+                                        .padding(.bottom, 10)
                                         .onTapGesture {
                                             developerSelectedClosure?(developer)
                                         }

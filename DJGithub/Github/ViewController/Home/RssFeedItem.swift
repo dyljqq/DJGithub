@@ -29,7 +29,6 @@ struct RssFeedItem: View {
                         .foregroundColor(.textGrayColor)
                 }
             }
-            Spacer()
         }
     }
 }

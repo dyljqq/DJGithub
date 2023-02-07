@@ -60,7 +60,6 @@ struct GithubTrendingDeveloperView: View {
             }
             Spacer()
         }
-        .padding()
     }
 }
 
