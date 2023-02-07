@@ -57,7 +57,6 @@ struct GithubTrendingRepoView: View {
                 }
             }
         }
-        .padding(EdgeInsets(top: 10, leading: 12, bottom: 10, trailing: 12))
     }
 }
 
