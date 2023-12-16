@@ -28,6 +28,12 @@ struct Repo: DJCodable {
   }
 }
 
+extension Repo {
+    var id: UUID {
+        return UUID()
+    }
+}
+
 struct RepoOwner: DJCodable {
   var avatarUrl: String
   var id: Int
@@ -44,4 +50,29 @@ struct License: DJCodable {
   var licenseKey: String {
     return self.spdxId ?? self.key
   }
+}
+
+extension Repo {
+    #if DEBUG
+    static let sample = Repo(
+        name: "DJGithub",
+        fullName: "dyljqq/DJGithub",
+        forksCount: 10,
+        stargazersCount: 15,
+        watchersCount: 3,
+        openIssuesCount: 200,
+        size: 10,
+        updatedAt: "2023-02-17",
+        language: "Swift",
+        owner: repoOwner
+    )
+    
+    static let repoOwner = RepoOwner(
+        avatarUrl: "https://avatars.githubusercontent.com/u/8120438?v=4",
+        id: 1,
+        login: "dyljqq",
+        type: "User"
+    )
+    
+    #endif
 }

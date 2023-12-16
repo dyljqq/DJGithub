@@ -26,4 +26,5 @@ extension Color {
     static let textColor = Color(uiColor: .textColor)
     static let textGrayColor = Color(uiColor: .textGrayColor)
     static let backgroundColor = Color(uiColor: .backgroundColor)
+    static let lightBlue = Color(uiColor: .lightBlue)
 }

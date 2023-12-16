@@ -71,8 +71,8 @@ struct PersonalAccessView: View {
                         isLoading = false
                     }
 
-                    accessToken = "token \(accessToken)"
-                    DJUserDefaults.setAccessToken(accessToken)
+                    let token = "token \(accessToken)"
+                    DJUserDefaults.setAccessToken(token)
                     guard let _ = await LocalUserManager.loadViewer() else {
                         isLoading = false
                         showErrorMessage = true
