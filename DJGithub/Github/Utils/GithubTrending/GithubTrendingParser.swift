@@ -132,7 +132,9 @@ private extension GithubTrendingParser {
     }
 
     func parseUserNameAndRepoName(with element: Element) throws -> (String, String) {
-        let h1 = try element.getElementsByTag("h1").get(0)
+        let tags = try element.getElementsByTag("h2")
+        guard !tags.isEmpty() else { return ("", "") }
+        let h1 = tags.get(0)
         let a = try h1.getElementsByTag("a").get(0)
         let text = try a.text()
         let arr = text.components(separatedBy: "/").map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
@@ -163,14 +165,16 @@ private extension GithubTrendingParser {
     }
 
     func parseRepoStar(with element: Element) throws -> String {
-        let ele = try element.getElementsByClass("Link--muted d-inline-block mr-3").get(0)
+        let elements = try element.getElementsByClass("Link Link--muted d-inline-block mr-3")
+        guard !elements.isEmpty() else { return "" }
+        let ele = elements.get(0)
         return try ele.text(trimAndNormaliseWhitespace: true)
     }
 
     func parseRepoFork(with element: Element) throws -> String {
-        let eles = try element.getElementsByClass("Link--muted d-inline-block mr-3")
+        let eles = try element.getElementsByClass("Link Link--muted d-inline-block mr-3")
         if eles.count > 1 {
-            return try element.getElementsByClass("Link--muted d-inline-block mr-3").get(1).text(trimAndNormaliseWhitespace: true)
+            return try element.getElementsByClass("Link Link--muted d-inline-block mr-3").get(1).text(trimAndNormaliseWhitespace: true)
         } else {
             return "0"
         }

@@ -114,24 +114,24 @@ struct Home: View {
     private func loadRepos() {
         Task {
             if let repos = GithubTrendingItemsManager.shared.load(with: .repo) as [GithubTrendingRepo]? {
-                self.repos = repos.count > 5 ? Array(repos[0..<5]) : repos
+                self.repos = repos
             }
 
             let type = GithubTrendingType.repo("/swift?since=daily")
             let repos: [GithubTrendingRepo] = await GithubTrendingParser(urlString: type.urlString).parse(with: .repo)
-            self.repos = repos.count > 5 ? Array(repos[0..<5]) : repos
+            self.repos = repos
         }
     }
 
     private func loadDevelopers() {
         Task {
             if let developers = GithubTrendingItemsManager.shared.load(with: .developer) as [GithubTrendingDeveloper]? {
-                self.developers = developers.count > 5 ? Array(developers[..<5]) : developers
+                self.developers = developers
             }
 
             let type = GithubTrendingType.developer("/swift?since=daily")
             let developers: [GithubTrendingDeveloper] = await GithubTrendingParser(urlString: type.urlString).parse(with: .developer)
-            self.developers = developers.count > 5 ? Array(developers[..<5]) : developers
+            self.developers = developers
         }
     }
 
