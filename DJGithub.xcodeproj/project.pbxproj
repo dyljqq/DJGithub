@@ -250,6 +250,7 @@
 		D919C9FD299F8E0700F2B0F3 /* Image+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D919C9FC299F8E0700F2B0F3 /* Image+Ext.swift */; };
 		D919CA01299F92F300F2B0F3 /* RepoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D919CA00299F92F300F2B0F3 /* RepoListView.swift */; };
 		D937FB872965C961005CD291 /* UITextView+Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D937FB862965C961005CD291 /* UITextView+Placeholder.swift */; };
+		D9433ABC2BF20791009773D9 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9433ABB2BF20791009773D9 /* HomeViewModel.swift */; };
 		D9883566297A3EB400AF7E4F /* GithubTrendingDevelopersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9883565297A3EB400AF7E4F /* GithubTrendingDevelopersView.swift */; };
 		D9883569297A59F000AF7E4F /* GithubTrendingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9883568297A59F000AF7E4F /* GithubTrendingType.swift */; };
 		D988356B297A5BFF00AF7E4F /* GithubTrendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D988356A297A5BFF00AF7E4F /* GithubTrendingViewController.swift */; };
@@ -529,6 +530,7 @@
 		D919C9FC299F8E0700F2B0F3 /* Image+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Ext.swift"; sourceTree = "<group>"; };
 		D919CA00299F92F300F2B0F3 /* RepoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoListView.swift; sourceTree = "<group>"; };
 		D937FB862965C961005CD291 /* UITextView+Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Placeholder.swift"; sourceTree = "<group>"; };
+		D9433ABB2BF20791009773D9 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		D9883565297A3EB400AF7E4F /* GithubTrendingDevelopersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubTrendingDevelopersView.swift; sourceTree = "<group>"; };
 		D9883568297A59F000AF7E4F /* GithubTrendingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubTrendingType.swift; sourceTree = "<group>"; };
 		D988356A297A5BFF00AF7E4F /* GithubTrendingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubTrendingViewController.swift; sourceTree = "<group>"; };
@@ -641,6 +643,8 @@
 		7321DD232986B188002B5E8E /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				D9433ABA2BF20784009773D9 /* ViewModel */,
+				D9433AB92BF2071A009773D9 /* Model */,
 				7321DD242986B1A6002B5E8E /* Home.swift */,
 				7321DD262986B1B8002B5E8E /* RssFeedItem.swift */,
 				7321DD282986B5A0002B5E8E /* LatestRssFeedItems.swift */,
@@ -1322,6 +1326,21 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		D9433AB92BF2071A009773D9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D9433ABA2BF20784009773D9 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				D9433ABB2BF20791009773D9 /* HomeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		D9883567297A59DD00AF7E4F /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1549,6 +1568,7 @@
 				7321DD292986B5A0002B5E8E /* LatestRssFeedItems.swift in Sources */,
 				73674774298972F900FD0C72 /* SettingViewController.swift in Sources */,
 				73DF6C0428EC252E0003BDB8 /* String+File.swift in Sources */,
+				D9433ABC2BF20791009773D9 /* HomeViewModel.swift in Sources */,
 				73AACB3428D357C80072B1DF /* UserViewController.swift in Sources */,
 				737EF285292A000F0060C64F /* PamphletSimpleCell.swift in Sources */,
 				7311A528292A69A600B1A2A6 /* PamphletResourceViewController.swift in Sources */,
@@ -1942,7 +1962,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1954,6 +1974,7 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1976,7 +1997,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1988,6 +2009,7 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -2003,7 +2025,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = U4Y29F8CZ3;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dyljqq.DJGithubTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2023,7 +2045,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = U4Y29F8CZ3;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dyljqq.DJGithubTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

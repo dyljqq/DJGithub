@@ -12,12 +12,14 @@ struct RssFeedItem: View {
     let item: RssFeedLatestCellModel
 
     var body: some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 10) {
+        HStack(alignment: .top) {
+            VStack(alignment: .leading) {
                 Text(item.title)
                     .font(.headline)
                     .foregroundColor(.textColor)
                     .lineLimit(2)
+                    .padding(.top, 10)
+                Spacer()
                 HStack {
                     Text(item.from)
                         .font(.subheadline)
@@ -28,6 +30,7 @@ struct RssFeedItem: View {
                         .font(.subheadline)
                         .foregroundColor(.textGrayColor)
                 }
+                .padding(5)
             }
         }
     }

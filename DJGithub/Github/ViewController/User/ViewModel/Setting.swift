@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Setting: ObservableObject {
+@Observable class Setting {
 
     let dataSource: [SettingSection] = [
         SettingSection(name: "Abillity", items: [.iCloud]),

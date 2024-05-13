@@ -14,9 +14,7 @@ struct Home: View {
     var developerSelectedClosure: ((GithubTrendingDeveloper) -> Void)?
     var pamphletItemSelectedClosure: ((PamphletSectionModel.PamphletSimpleModel) -> Void)?
 
-    @State var repos: [GithubTrendingRepo] = []
-    @State var developers: [GithubTrendingDeveloper] = []
-    @State var pamphletModels: [PamphletSectionModel] = []
+    @State var viewModel: HomeViewModel = HomeViewModel()
 
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -25,12 +23,12 @@ struct Home: View {
                     LatestRssFeedItems(feedItemSelectedClosure: feedItemSelectedClosure)
                 }
 
-                if !repos.isEmpty {
+                if !viewModel.repos.isEmpty {
                     Section {
                         HomeHorizontalItemsView(
                             title: "Github Repo Trending:",
                             horizontalView: GithubTrendingItemView(
-                                views: repos.map { repo in
+                                views: viewModel.repos.map { repo in
                                     GithubTrendingRepoView(repo: repo)
                                         .padding(.top, 10)
                                         .padding(.bottom, 10)
@@ -43,12 +41,12 @@ struct Home: View {
                     }
                 }
 
-                if !developers.isEmpty {
+                if !viewModel.developers.isEmpty {
                     Section {
                         HomeHorizontalItemsView(
                             title: "Github Developer Trending:",
                             horizontalView: GithubTrendingItemView(
-                                views: developers.map { developer in
+                                views: viewModel.developers.map { developer in
                                     GithubTrendingDeveloperView(developer: developer)
                                         .padding(.top, 10)
                                         .padding(.bottom, 10)
@@ -61,8 +59,8 @@ struct Home: View {
                     }
                 }
 
-                if !pamphletModels.isEmpty {
-                    ForEach(pamphletModels, id: \.sectionName) { section in
+                if !viewModel.pamphletModels.isEmpty {
+                    ForEach(viewModel.pamphletModels, id: \.sectionName) { section in
                         Section(header: Text(section.sectionName)
                             .font(.headline)
                             .fontWeight(.bold)
@@ -106,38 +104,19 @@ struct Home: View {
     }
     
     private func reloadData() {
-        loadRepos()
-        loadDevelopers()
-        loadPamphletModels()
-    }
-
-    private func loadRepos() {
         Task {
-            if let repos = GithubTrendingItemsManager.shared.load(with: .repo) as [GithubTrendingRepo]? {
-                self.repos = repos
+            await withTaskGroup(of: Void.self) { group in
+                group.addTask {
+                    await self.viewModel.loadRepos()
+                }
+                group.addTask {
+                    await self.viewModel.loadDevelopers()
+                }
+                group.addTask {
+                    await self.viewModel.loadPamphletModels()
+                }
+                
             }
-
-            let type = GithubTrendingType.repo("/swift?since=daily")
-            let repos: [GithubTrendingRepo] = await GithubTrendingParser(urlString: type.urlString).parse(with: .repo)
-            self.repos = repos
-        }
-    }
-
-    private func loadDevelopers() {
-        Task {
-            if let developers = GithubTrendingItemsManager.shared.load(with: .developer) as [GithubTrendingDeveloper]? {
-                self.developers = developers
-            }
-
-            let type = GithubTrendingType.developer("/swift?since=daily")
-            let developers: [GithubTrendingDeveloper] = await GithubTrendingParser(urlString: type.urlString).parse(with: .developer)
-            self.developers = developers
-        }
-    }
-
-    private func loadPamphletModels() {
-        Task {
-            pamphletModels = loadBundleJSONFile("PamphletData")
         }
     }
 }
