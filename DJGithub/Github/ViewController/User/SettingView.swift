@@ -43,7 +43,7 @@ struct SettingRow: View {
 
 struct SettingView: View {
 
-    @ObservedObject var setting = Setting()
+    @State var setting = Setting()
 
     var itemDidSelectedClosure: (SettingType) -> Void
 
