@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     window?.backgroundColor = .white
 
     if ConfigManager.isLoadedViewer {
-      window?.rootViewController = TabBarController()
+      window?.rootViewController = TabBarController(nibName: nil, bundle: nil)
     } else {
       window?.rootViewController = LoadingViewerViewController()
     }

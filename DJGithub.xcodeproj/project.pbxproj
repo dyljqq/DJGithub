@@ -581,13 +581,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		73101D4528E47ED400DB5423 /* Protocol */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Protocol;
-			sourceTree = "<group>";
-		};
 		73101D4C28E49E2E00DB5423 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
@@ -979,7 +972,6 @@
 			children = (
 				73893E912937A5BB00F848DF /* AppStyle */,
 				73101D4C28E49E2E00DB5423 /* Resource */,
-				73101D4528E47ED400DB5423 /* Protocol */,
 				73AACB7528D5BBDA0072B1DF /* DataBase */,
 				73AACB4628D443260072B1DF /* Widget */,
 				73AACB3128D357980072B1DF /* ViewController */,
