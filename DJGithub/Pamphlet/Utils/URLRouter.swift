@@ -13,7 +13,7 @@ enum URLJumpType {
     case `internal`, outside
 }
 
-struct URLRouter {
+@MainActor struct URLRouter {
     static func open(with urlString: String?, jumpType: URLJumpType = .internal) {
         switch jumpType {
         case .outside:

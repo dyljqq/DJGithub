@@ -10,7 +10,7 @@ import UIKit
 class DJFPSLabel: UILabel {
 
   var count = 0
-  var link: CADisplayLink?
+  private var link: CADisplayLink?
   var lastTime: TimeInterval = 0
 
   convenience init() {
@@ -66,6 +66,8 @@ class DJFPSLabel: UILabel {
   }
 
   deinit {
-    link?.invalidate()
+      DispatchQueue.main.async { [weak self] in
+          self?.link?.invalidate()
+      }
   }
 }

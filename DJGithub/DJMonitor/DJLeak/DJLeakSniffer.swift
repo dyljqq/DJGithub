@@ -9,7 +9,7 @@ import UIKit
 
 class DJLeakSniffer {
 
-  static let shared = DJLeakSniffer()
+    static let shared = DJLeakSniffer()
 
   private var timer: Timer?
 
