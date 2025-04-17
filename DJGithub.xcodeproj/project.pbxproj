@@ -267,6 +267,8 @@
 		D98836AE298799ED00AF7E4F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98836AD298799ED00AF7E4F /* HomeViewController.swift */; };
 		D98836B22987AE0B00AF7E4F /* GithubTrendingItemsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98836B12987AE0B00AF7E4F /* GithubTrendingItemsManager.swift */; };
 		D98836B42987BD0E00AF7E4F /* JSONSerialization+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98836B32987BD0E00AF7E4F /* JSONSerialization+Ext.swift */; };
+		D9CA5F2E2DA8F6B400C61ECD /* StaticURL in Frameworks */ = {isa = PBXBuildFile; productRef = D9CA5F2D2DA8F6B400C61ECD /* StaticURL */; };
+		D9CA5F302DA8F6B400C61ECD /* StaticURLClient in Frameworks */ = {isa = PBXBuildFile; productRef = D9CA5F2F2DA8F6B400C61ECD /* StaticURLClient */; };
 		D9F9C29D298A851900631570 /* Bundle+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F9C29C298A851900631570 /* Bundle+Ext.swift */; };
 /* End PBXBuildFile section */
 
@@ -556,9 +558,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				73AACB4128D37E840072B1DF /* Kingfisher in Frameworks */,
+				D9CA5F302DA8F6B400C61ECD /* StaticURLClient in Frameworks */,
 				73AACB3828D359260072B1DF /* SnapKit in Frameworks */,
 				73D0DE252907B5F500F385E6 /* DJRefresh in Frameworks */,
 				73DE29CC28E0C08200B48009 /* MarkdownView in Frameworks */,
+				D9CA5F2E2DA8F6B400C61ECD /* StaticURL in Frameworks */,
 				734D675F2908298A006A0BFA /* DJRefresh in Frameworks */,
 				D90B811729793BE700CA4006 /* SwiftSoup in Frameworks */,
 			);
@@ -1375,6 +1379,8 @@
 				73D0DE242907B5F500F385E6 /* DJRefresh */,
 				734D675E2908298A006A0BFA /* DJRefresh */,
 				D90B811629793BE600CA4006 /* SwiftSoup */,
+				D9CA5F2D2DA8F6B400C61ECD /* StaticURL */,
+				D9CA5F2F2DA8F6B400C61ECD /* StaticURLClient */,
 			);
 			productName = DJGithub;
 			productReference = 73AACAD128D308A60072B1DF /* DJGithub.app */;
@@ -1456,6 +1462,7 @@
 				73DE29CA28E0C08200B48009 /* XCRemoteSwiftPackageReference "MarkdownView" */,
 				734D675D2908298A006A0BFA /* XCRemoteSwiftPackageReference "DJRefresh" */,
 				D90B811229793AC800CA4006 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
+				D9CA5F2C2DA8F62D00C61ECD /* XCLocalSwiftPackageReference "../../../polaris/SPM/StaticURL" */,
 			);
 			productRefGroup = 73AACAD228D308A60072B1DF /* Products */;
 			projectDirPath = "";
@@ -2127,6 +2134,13 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		D9CA5F2C2DA8F62D00C61ECD /* XCLocalSwiftPackageReference "../../../polaris/SPM/StaticURL" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../../polaris/SPM/StaticURL;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		7341DCDB28E0792F009A3A3C /* XCRemoteSwiftPackageReference "SwiftyMarkdown" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -2215,6 +2229,14 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D90B811229793AC800CA4006 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
 			productName = SwiftSoup;
+		};
+		D9CA5F2D2DA8F6B400C61ECD /* StaticURL */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = StaticURL;
+		};
+		D9CA5F2F2DA8F6B400C61ECD /* StaticURLClient */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = StaticURLClient;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
