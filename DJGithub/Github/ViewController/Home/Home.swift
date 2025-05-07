@@ -107,13 +107,22 @@ struct Home: View {
         Task {
             await withTaskGroup(of: Void.self) { group in
                 group.addTask {
-                    await self.viewModel.loadRepos()
+                    let repos = await HomeViewModel.loadRepos()
+                    await MainActor.run {
+                        self.viewModel.repos = repos
+                    }
                 }
                 group.addTask {
-                    await self.viewModel.loadDevelopers()
+                    let developers = await HomeViewModel.loadDevelopers()
+                    await MainActor.run {
+                        self.viewModel.developers = developers
+                    }
                 }
                 group.addTask {
-                    await self.viewModel.loadPamphletModels()
+                    let pamphletModels = await HomeViewModel.loadPamphletModels()
+                    await MainActor.run {
+                        self.viewModel.pamphletModels = pamphletModels
+                    }
                 }
                 
             }

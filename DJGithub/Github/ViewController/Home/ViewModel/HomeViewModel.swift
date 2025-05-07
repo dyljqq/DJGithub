@@ -14,28 +14,28 @@ class HomeViewModel {
     var developers: [GithubTrendingDeveloper] = []
     var pamphletModels: [PamphletSectionModel] = []
     
-    func loadRepos() async {
+    static func loadRepos() async -> [GithubTrendingRepo] {
         if let repos = GithubTrendingItemsManager.shared.load(with: .repo) as [GithubTrendingRepo]? {
-            self.repos = repos
+            return repos
         }
 
         let type = GithubTrendingType.repo("/swift?since=daily")
         let repos: [GithubTrendingRepo] = await GithubTrendingParser(urlString: type.urlString).parse(with: .repo)
-        self.repos = repos
+        return repos
     }
 
-    func loadDevelopers() async {
+    static func loadDevelopers() async -> [GithubTrendingDeveloper] {
         if let developers = GithubTrendingItemsManager.shared.load(with: .developer) as [GithubTrendingDeveloper]? {
-            self.developers = developers
+            return developers
         }
 
         let type = GithubTrendingType.developer("/swift?since=daily")
         let developers: [GithubTrendingDeveloper] = await GithubTrendingParser(urlString: type.urlString).parse(with: .developer)
-        self.developers = developers
+        return developers
     }
 
-    func loadPamphletModels() async {
-        pamphletModels = loadBundleJSONFile("PamphletData")
+    static func loadPamphletModels() async -> [PamphletSectionModel] {
+        return loadBundleJSONFile("PamphletData")
     }
     
 }

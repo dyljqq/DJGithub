@@ -188,9 +188,10 @@ class UserViewController: UIViewController {
         if let userViewer {
             userViewModel.update(userViewer)
         } else {
+            self.view.startLoading()
             Task {
-                view.startLoading()
-                await userViewModel.fetchUser(with: name)
+                await self.userViewModel.fetchUser(with: self.name)
+                self.view.startLoading()
             }
         }
     }

@@ -34,16 +34,23 @@ struct RssFeedsView: View {
             }
         }
         .onViewDidLoad {
-            self.loadData()
+            Task {
+                await self.loadData()
+            }
         }
     }
 
-    private func loadData() {
-        Task {
-            self.feeds = await RssFeedManager.getFeeds(by: atom.id)
+    private func loadData() async {
+        let id = self.atom.id
+        Task.detached {
+            guard let atom = RssFeedAtom.get(by: id) else { return }
+            let feeds = await RssFeedManager.getFeeds(by: id)
             let isUpdated = await RssFeedManager.shared.loadFeeds(by: atom)
             if isUpdated {
-                self.feeds = await RssFeedManager.getFeeds(by: atom.id)
+                let feeds = await RssFeedManager.getFeeds(by: atom.id)
+                await MainActor.run {
+                    self.feeds = feeds
+                }
             }
         }
     }

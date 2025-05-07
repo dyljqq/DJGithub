@@ -39,11 +39,6 @@ class TabBarController: UITabBarController {
     setUp()
   }
 
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    DJMonitor.shared.addFPSMonitor()
-  }
-
   func setUp() {
     let userName = ConfigManager.shared.viewerName
     let staredVc = UserStaredReposViewController(userRepoState: .star(userName))

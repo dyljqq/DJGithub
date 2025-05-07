@@ -8,7 +8,7 @@
 import UIKit
 
 private let loadingTag = 8888
-private var loadingKey = 0
+@MainActor private var loadingKey = 0
 
 extension UIView {
 

@@ -33,6 +33,7 @@ struct NextPageState {
 
 }
 
+@MainActor
 protocol NextPageLoadable: AnyObject {
 
   associatedtype DataType
