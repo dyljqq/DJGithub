@@ -25,7 +25,11 @@ struct DJMaskContentConfig {
 
   func render(with branches: [RepoBranch], title: String) {
     if let view = view as? RepoBranchListView {
-      view.render(with: branches, title: title)
+        Task {
+            await MainActor.run {
+                view.render(with: branches, title: title)
+            }
+        }
     }
   }
 }

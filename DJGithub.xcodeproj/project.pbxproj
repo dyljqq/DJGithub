@@ -71,14 +71,6 @@
 		734D675F2908298A006A0BFA /* DJRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = 734D675E2908298A006A0BFA /* DJRefresh */; };
 		734D676129082D3E006A0BFA /* UserViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734D676029082D3E006A0BFA /* UserViewer.swift */; };
 		734D676329084571006A0BFA /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734D676229084571006A0BFA /* Repository.swift */; };
-		735D0E072903115E00E618B3 /* DJCallStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D0E012903115D00E618B3 /* DJCallStack.swift */; };
-		735D0E082903115E00E618B3 /* mach_stack_info.c in Sources */ = {isa = PBXBuildFile; fileRef = 735D0E022903115D00E618B3 /* mach_stack_info.c */; };
-		735D0E092903115E00E618B3 /* DJStuckMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D0E032903115D00E618B3 /* DJStuckMonitor.swift */; };
-		735D0E0A2903115E00E618B3 /* DJThreadInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D0E042903115D00E618B3 /* DJThreadInfoModel.swift */; };
-		735D0E0B2903115E00E618B3 /* StackAddressInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D0E062903115D00E618B3 /* StackAddressInfo.swift */; };
-		7362FE7D291031D600D97E1A /* DJCrashManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7362FE7C291031D600D97E1A /* DJCrashManager.swift */; };
-		7362FE7F2910371700D97E1A /* DJMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7362FE7E2910371700D97E1A /* DJMonitor.swift */; };
-		7362FE812910BF2700D97E1A /* DJCrashLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7362FE802910BF2700D97E1A /* DJCrashLog.swift */; };
 		7362FE8329117D2000D97E1A /* DefaultValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7362FE8229117D2000D97E1A /* DefaultValue.swift */; };
 		7362FE852911816600D97E1A /* Default+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7362FE842911816600D97E1A /* Default+Ext.swift */; };
 		7362FEC729124F9000D97E1A /* RssFeedRead.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7362FEC629124F9000D97E1A /* RssFeedRead.swift */; };
@@ -104,20 +96,9 @@
 		737EF295292A11DF0060C64F /* Array+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737EF294292A11DF0060C64F /* Array+Ext.swift */; };
 		737EF298292A21080060C64F /* URLRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737EF297292A21080060C64F /* URLRouter.swift */; };
 		73893E3A2933893300F848DF /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73893E392933893300F848DF /* FeedViewModel.swift */; };
-		73893E3C2933954800F848DF /* DJCrashListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73893E3B2933954800F848DF /* DJCrashListViewController.swift */; };
 		73893E932937A5C800F848DF /* AppStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73893E922937A5C800F848DF /* AppStyle.swift */; };
 		73893E952937A61700F848DF /* AppStyleUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73893E942937A61700F848DF /* AppStyleUtility.swift */; };
-		73936F2B291377F300BC2901 /* DJLeakSniffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F2A291377F300BC2901 /* DJLeakSniffer.swift */; };
-		73936F2D2913784500BC2901 /* NSNotificationName+Leak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F2C2913784500BC2901 /* NSNotificationName+Leak.swift */; };
-		73936F2F2913790F00BC2901 /* UIViewController+Leak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F2E2913790F00BC2901 /* UIViewController+Leak.swift */; };
-		73936F33291379DA00BC2901 /* NSObject+Leak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F32291379DA00BC2901 /* NSObject+Leak.swift */; };
-		73936F3529137C4A00BC2901 /* DispatchQueue+Leak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F3429137C4A00BC2901 /* DispatchQueue+Leak.swift */; };
-		73936F3729137E7200BC2901 /* DJObjectProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F3629137E7200BC2901 /* DJObjectProxy.swift */; };
-		73936F39291385C700BC2901 /* DJProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F38291385C700BC2901 /* DJProperty.swift */; };
-		73936F8B2914030400BC2901 /* DJFPSLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F8A2914030400BC2901 /* DJFPSLabel.swift */; };
 		73936F8D2914BABF00BC2901 /* SqlCountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F8C2914BABF00BC2901 /* SqlCountModel.swift */; };
-		73936F932917BF8C00BC2901 /* UIView+Leak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F922917BF8C00BC2901 /* UIView+Leak.swift */; };
-		73936F9829197E4300BC2901 /* DJUIThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F9729197E4300BC2901 /* DJUIThread.swift */; };
 		73936F9A2919BB7800BC2901 /* RssFeedLatestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F992919BB7800BC2901 /* RssFeedLatestCell.swift */; };
 		73936F9C2919BFBA00BC2901 /* RssFeedLatestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F9B2919BFBA00BC2901 /* RssFeedLatestView.swift */; };
 		73936FA0291A4C8C00BC2901 /* UIViewController+Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73936F9F291A4C8C00BC2901 /* UIViewController+Share.swift */; };
@@ -231,7 +212,6 @@
 		73EE0CFC290BB48E0010C54A /* RepoBranchCommitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EE0CFB290BB48E0010C54A /* RepoBranchCommitCell.swift */; };
 		73EE0CFE290BB79A0010C54A /* RepoPullFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EE0CFD290BB79A0010C54A /* RepoPullFile.swift */; };
 		73EE0D00290C24AD0010C54A /* NotificationKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EE0CFF290C24AD0010C54A /* NotificationKeys.swift */; };
-		73FA3870290FBEE800FCEBC6 /* AppStartTimeMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FA386F290FBEE800FCEBC6 /* AppStartTimeMonitor.swift */; };
 		D906A20D29599C9C009F3956 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = D906A20C29599C9C009F3956 /* config.json */; };
 		D90B811529793B3400CA4006 /* GithubTrendingParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90B811429793B3400CA4006 /* GithubTrendingParser.swift */; };
 		D90B811729793BE700CA4006 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = D90B811629793BE600CA4006 /* SwiftSoup */; };
@@ -251,6 +231,8 @@
 		D919CA01299F92F300F2B0F3 /* RepoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D919CA00299F92F300F2B0F3 /* RepoListView.swift */; };
 		D937FB872965C961005CD291 /* UITextView+Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D937FB862965C961005CD291 /* UITextView+Placeholder.swift */; };
 		D9433ABC2BF20791009773D9 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9433ABB2BF20791009773D9 /* HomeViewModel.swift */; };
+		D986E32C2DB2317D00350FE5 /* UnChecked.swift in Sources */ = {isa = PBXBuildFile; fileRef = D986E32B2DB2317D00350FE5 /* UnChecked.swift */; };
+		D986E32E2DB2563200350FE5 /* Base.swift in Sources */ = {isa = PBXBuildFile; fileRef = D986E32D2DB2563000350FE5 /* Base.swift */; };
 		D9883566297A3EB400AF7E4F /* GithubTrendingDevelopersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9883565297A3EB400AF7E4F /* GithubTrendingDevelopersView.swift */; };
 		D9883569297A59F000AF7E4F /* GithubTrendingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9883568297A59F000AF7E4F /* GithubTrendingType.swift */; };
 		D988356B297A5BFF00AF7E4F /* GithubTrendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D988356A297A5BFF00AF7E4F /* GithubTrendingViewController.swift */; };
@@ -259,7 +241,6 @@
 		D98835B52984D28800AF7E4F /* AuthorizationViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98835B42984D28800AF7E4F /* AuthorizationViewManager.swift */; };
 		D98835E529865AEB00AF7E4F /* RssFeedsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98835E429865AEB00AF7E4F /* RssFeedsView.swift */; };
 		D98835E729865B0800AF7E4F /* RssFeedsItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98835E629865B0800AF7E4F /* RssFeedsItemView.swift */; };
-		D98835E929865F8C00AF7E4F /* RssFeedsViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98835E829865F8C00AF7E4F /* RssFeedsViewManager.swift */; };
 		D98836A6298790E300AF7E4F /* ReposTrendingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98836A5298790E300AF7E4F /* ReposTrendingView.swift */; };
 		D98836A8298794AA00AF7E4F /* HomeHorizontalItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98836A7298794AA00AF7E4F /* HomeHorizontalItemsView.swift */; };
 		D98836AA2987966900AF7E4F /* DevelopersTrendingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98836A92987966900AF7E4F /* DevelopersTrendingView.swift */; };
@@ -267,6 +248,8 @@
 		D98836AE298799ED00AF7E4F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98836AD298799ED00AF7E4F /* HomeViewController.swift */; };
 		D98836B22987AE0B00AF7E4F /* GithubTrendingItemsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98836B12987AE0B00AF7E4F /* GithubTrendingItemsManager.swift */; };
 		D98836B42987BD0E00AF7E4F /* JSONSerialization+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98836B32987BD0E00AF7E4F /* JSONSerialization+Ext.swift */; };
+		D9CA5F2E2DA8F6B400C61ECD /* StaticURL in Frameworks */ = {isa = PBXBuildFile; productRef = D9CA5F2D2DA8F6B400C61ECD /* StaticURL */; };
+		D9CA5F302DA8F6B400C61ECD /* StaticURLClient in Frameworks */ = {isa = PBXBuildFile; productRef = D9CA5F2F2DA8F6B400C61ECD /* StaticURLClient */; };
 		D9F9C29D298A851900631570 /* Bundle+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F9C29C298A851900631570 /* Bundle+Ext.swift */; };
 /* End PBXBuildFile section */
 
@@ -351,15 +334,6 @@
 		7341DCD728E05D98009A3A3C /* RepoFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoFooterView.swift; sourceTree = "<group>"; };
 		734D676029082D3E006A0BFA /* UserViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewer.swift; sourceTree = "<group>"; };
 		734D676229084571006A0BFA /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
-		735D0E012903115D00E618B3 /* DJCallStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DJCallStack.swift; sourceTree = "<group>"; };
-		735D0E022903115D00E618B3 /* mach_stack_info.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mach_stack_info.c; sourceTree = "<group>"; };
-		735D0E032903115D00E618B3 /* DJStuckMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DJStuckMonitor.swift; sourceTree = "<group>"; };
-		735D0E042903115D00E618B3 /* DJThreadInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DJThreadInfoModel.swift; sourceTree = "<group>"; };
-		735D0E052903115D00E618B3 /* mach_stack_info.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mach_stack_info.h; sourceTree = "<group>"; };
-		735D0E062903115D00E618B3 /* StackAddressInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackAddressInfo.swift; sourceTree = "<group>"; };
-		7362FE7C291031D600D97E1A /* DJCrashManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJCrashManager.swift; sourceTree = "<group>"; };
-		7362FE7E2910371700D97E1A /* DJMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJMonitor.swift; sourceTree = "<group>"; };
-		7362FE802910BF2700D97E1A /* DJCrashLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJCrashLog.swift; sourceTree = "<group>"; };
 		7362FE8229117D2000D97E1A /* DefaultValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultValue.swift; sourceTree = "<group>"; };
 		7362FE842911816600D97E1A /* Default+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Default+Ext.swift"; sourceTree = "<group>"; };
 		7362FEC629124F9000D97E1A /* RssFeedRead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssFeedRead.swift; sourceTree = "<group>"; };
@@ -385,20 +359,9 @@
 		737EF294292A11DF0060C64F /* Array+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Ext.swift"; sourceTree = "<group>"; };
 		737EF297292A21080060C64F /* URLRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRouter.swift; sourceTree = "<group>"; };
 		73893E392933893300F848DF /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
-		73893E3B2933954800F848DF /* DJCrashListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJCrashListViewController.swift; sourceTree = "<group>"; };
 		73893E922937A5C800F848DF /* AppStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStyle.swift; sourceTree = "<group>"; };
 		73893E942937A61700F848DF /* AppStyleUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStyleUtility.swift; sourceTree = "<group>"; };
-		73936F2A291377F300BC2901 /* DJLeakSniffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJLeakSniffer.swift; sourceTree = "<group>"; };
-		73936F2C2913784500BC2901 /* NSNotificationName+Leak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotificationName+Leak.swift"; sourceTree = "<group>"; };
-		73936F2E2913790F00BC2901 /* UIViewController+Leak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Leak.swift"; sourceTree = "<group>"; };
-		73936F32291379DA00BC2901 /* NSObject+Leak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Leak.swift"; sourceTree = "<group>"; };
-		73936F3429137C4A00BC2901 /* DispatchQueue+Leak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Leak.swift"; sourceTree = "<group>"; };
-		73936F3629137E7200BC2901 /* DJObjectProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJObjectProxy.swift; sourceTree = "<group>"; };
-		73936F38291385C700BC2901 /* DJProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJProperty.swift; sourceTree = "<group>"; };
-		73936F8A2914030400BC2901 /* DJFPSLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJFPSLabel.swift; sourceTree = "<group>"; };
 		73936F8C2914BABF00BC2901 /* SqlCountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SqlCountModel.swift; sourceTree = "<group>"; };
-		73936F922917BF8C00BC2901 /* UIView+Leak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Leak.swift"; sourceTree = "<group>"; };
-		73936F9729197E4300BC2901 /* DJUIThread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJUIThread.swift; sourceTree = "<group>"; };
 		73936F992919BB7800BC2901 /* RssFeedLatestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssFeedLatestCell.swift; sourceTree = "<group>"; };
 		73936F9B2919BFBA00BC2901 /* RssFeedLatestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssFeedLatestView.swift; sourceTree = "<group>"; };
 		73936F9F291A4C8C00BC2901 /* UIViewController+Share.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Share.swift"; sourceTree = "<group>"; };
@@ -512,7 +475,6 @@
 		73EE0CFB290BB48E0010C54A /* RepoBranchCommitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoBranchCommitCell.swift; sourceTree = "<group>"; };
 		73EE0CFD290BB79A0010C54A /* RepoPullFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoPullFile.swift; sourceTree = "<group>"; };
 		73EE0CFF290C24AD0010C54A /* NotificationKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationKeys.swift; sourceTree = "<group>"; };
-		73FA386F290FBEE800FCEBC6 /* AppStartTimeMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStartTimeMonitor.swift; sourceTree = "<group>"; };
 		D906A20C29599C9C009F3956 /* config.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
 		D90B811429793B3400CA4006 /* GithubTrendingParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubTrendingParser.swift; sourceTree = "<group>"; };
 		D90B811829793FB200CA4006 /* GithubTrendingRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubTrendingRepo.swift; sourceTree = "<group>"; };
@@ -531,6 +493,8 @@
 		D919CA00299F92F300F2B0F3 /* RepoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoListView.swift; sourceTree = "<group>"; };
 		D937FB862965C961005CD291 /* UITextView+Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Placeholder.swift"; sourceTree = "<group>"; };
 		D9433ABB2BF20791009773D9 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		D986E32B2DB2317D00350FE5 /* UnChecked.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnChecked.swift; sourceTree = "<group>"; };
+		D986E32D2DB2563000350FE5 /* Base.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Base.swift; sourceTree = "<group>"; };
 		D9883565297A3EB400AF7E4F /* GithubTrendingDevelopersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubTrendingDevelopersView.swift; sourceTree = "<group>"; };
 		D9883568297A59F000AF7E4F /* GithubTrendingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubTrendingType.swift; sourceTree = "<group>"; };
 		D988356A297A5BFF00AF7E4F /* GithubTrendingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubTrendingViewController.swift; sourceTree = "<group>"; };
@@ -539,7 +503,6 @@
 		D98835B42984D28800AF7E4F /* AuthorizationViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewManager.swift; sourceTree = "<group>"; };
 		D98835E429865AEB00AF7E4F /* RssFeedsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssFeedsView.swift; sourceTree = "<group>"; };
 		D98835E629865B0800AF7E4F /* RssFeedsItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssFeedsItemView.swift; sourceTree = "<group>"; };
-		D98835E829865F8C00AF7E4F /* RssFeedsViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssFeedsViewManager.swift; sourceTree = "<group>"; };
 		D98836A5298790E300AF7E4F /* ReposTrendingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReposTrendingView.swift; sourceTree = "<group>"; };
 		D98836A7298794AA00AF7E4F /* HomeHorizontalItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHorizontalItemsView.swift; sourceTree = "<group>"; };
 		D98836A92987966900AF7E4F /* DevelopersTrendingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopersTrendingView.swift; sourceTree = "<group>"; };
@@ -556,9 +519,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				73AACB4128D37E840072B1DF /* Kingfisher in Frameworks */,
+				D9CA5F302DA8F6B400C61ECD /* StaticURLClient in Frameworks */,
 				73AACB3828D359260072B1DF /* SnapKit in Frameworks */,
 				73D0DE252907B5F500F385E6 /* DJRefresh in Frameworks */,
 				73DE29CC28E0C08200B48009 /* MarkdownView in Frameworks */,
+				D9CA5F2E2DA8F6B400C61ECD /* StaticURL in Frameworks */,
 				734D675F2908298A006A0BFA /* DJRefresh in Frameworks */,
 				D90B811729793BE700CA4006 /* SwiftSoup in Frameworks */,
 			);
@@ -581,13 +546,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		73101D4528E47ED400DB5423 /* Protocol */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Protocol;
-			sourceTree = "<group>";
-		};
 		73101D4C28E49E2E00DB5423 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
@@ -655,25 +613,6 @@
 				D98836AD298799ED00AF7E4F /* HomeViewController.swift */,
 			);
 			path = Home;
-			sourceTree = "<group>";
-		};
-		735D0E002903115D00E618B3 /* DJMonitor */ = {
-			isa = PBXGroup;
-			children = (
-				73936F9629197E3000BC2901 /* UIThread */,
-				73936F89291402E500BC2901 /* DJFPS */,
-				73936F29291377DD00BC2901 /* DJLeak */,
-				73FA3871291031A800FCEBC6 /* DJCrash */,
-				735D0E052903115D00E618B3 /* mach_stack_info.h */,
-				735D0E022903115D00E618B3 /* mach_stack_info.c */,
-				735D0E012903115D00E618B3 /* DJCallStack.swift */,
-				735D0E032903115D00E618B3 /* DJStuckMonitor.swift */,
-				735D0E042903115D00E618B3 /* DJThreadInfoModel.swift */,
-				735D0E062903115D00E618B3 /* StackAddressInfo.swift */,
-				73FA386F290FBEE800FCEBC6 /* AppStartTimeMonitor.swift */,
-				7362FE7E2910371700D97E1A /* DJMonitor.swift */,
-			);
-			path = DJMonitor;
 			sourceTree = "<group>";
 		};
 		73674776298B3D5300FD0C72 /* SwiftUI */ = {
@@ -824,37 +763,6 @@
 			path = AppStyle;
 			sourceTree = "<group>";
 		};
-		73936F29291377DD00BC2901 /* DJLeak */ = {
-			isa = PBXGroup;
-			children = (
-				73936F2A291377F300BC2901 /* DJLeakSniffer.swift */,
-				73936F2C2913784500BC2901 /* NSNotificationName+Leak.swift */,
-				73936F2E2913790F00BC2901 /* UIViewController+Leak.swift */,
-				73936F32291379DA00BC2901 /* NSObject+Leak.swift */,
-				73936F3429137C4A00BC2901 /* DispatchQueue+Leak.swift */,
-				73936F3629137E7200BC2901 /* DJObjectProxy.swift */,
-				73936F38291385C700BC2901 /* DJProperty.swift */,
-				73936F922917BF8C00BC2901 /* UIView+Leak.swift */,
-			);
-			path = DJLeak;
-			sourceTree = "<group>";
-		};
-		73936F89291402E500BC2901 /* DJFPS */ = {
-			isa = PBXGroup;
-			children = (
-				73936F8A2914030400BC2901 /* DJFPSLabel.swift */,
-			);
-			path = DJFPS;
-			sourceTree = "<group>";
-		};
-		73936F9629197E3000BC2901 /* UIThread */ = {
-			isa = PBXGroup;
-			children = (
-				73936F9729197E4300BC2901 /* DJUIThread.swift */,
-			);
-			path = UIThread;
-			sourceTree = "<group>";
-		};
 		7396BDAC292BE21900B391CC /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -891,7 +799,6 @@
 			children = (
 				73674776298B3D5300FD0C72 /* SwiftUI */,
 				737EF2662929FB620060C64F /* Pamphlet */,
-				735D0E002903115D00E618B3 /* DJMonitor */,
 				73AACB1528D311C30072B1DF /* Github */,
 				73AACB0428D308E30072B1DF /* DJFoundation */,
 				73AACAD428D308A60072B1DF /* AppDelegate.swift */,
@@ -979,7 +886,6 @@
 			children = (
 				73893E912937A5BB00F848DF /* AppStyle */,
 				73101D4C28E49E2E00DB5423 /* Resource */,
-				73101D4528E47ED400DB5423 /* Protocol */,
 				73AACB7528D5BBDA0072B1DF /* DataBase */,
 				73AACB4628D443260072B1DF /* Widget */,
 				73AACB3128D357980072B1DF /* ViewController */,
@@ -1049,6 +955,7 @@
 		73AACB2728D3213D0072B1DF /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				D986E32D2DB2563000350FE5 /* Base.swift */,
 				73AACB2828D321480072B1DF /* Result.swift */,
 				73AACB4228D42C1B0072B1DF /* UINavigation+Router.swift */,
 				73AACB4928D4463B0072B1DF /* UIView+Loading.swift */,
@@ -1085,6 +992,7 @@
 				73D0DE2A2907D2DD00F385E6 /* DJUserDefaults.swift */,
 				73EE0CFF290C24AD0010C54A /* NotificationKeys.swift */,
 				7396BDAA292BE1AC00B391CC /* DJObserverable.swift */,
+				D986E32B2DB2317D00350FE5 /* UnChecked.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1262,7 +1170,6 @@
 				7339201028F53DAC00DC76B0 /* RssFeedsViewController.swift */,
 				7339201828F5883500DC76B0 /* RssFeedDetailViewController.swift */,
 				D98835E429865AEB00AF7E4F /* RssFeedsView.swift */,
-				D98835E829865F8C00AF7E4F /* RssFeedsViewManager.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -1277,16 +1184,6 @@
 				D98835E629865B0800AF7E4F /* RssFeedsItemView.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		73FA3871291031A800FCEBC6 /* DJCrash */ = {
-			isa = PBXGroup;
-			children = (
-				7362FE7C291031D600D97E1A /* DJCrashManager.swift */,
-				7362FE802910BF2700D97E1A /* DJCrashLog.swift */,
-				73893E3B2933954800F848DF /* DJCrashListViewController.swift */,
-			);
-			path = DJCrash;
 			sourceTree = "<group>";
 		};
 		D90B811329793B1B00CA4006 /* GithubTrending */ = {
@@ -1383,6 +1280,8 @@
 				73D0DE242907B5F500F385E6 /* DJRefresh */,
 				734D675E2908298A006A0BFA /* DJRefresh */,
 				D90B811629793BE600CA4006 /* SwiftSoup */,
+				D9CA5F2D2DA8F6B400C61ECD /* StaticURL */,
+				D9CA5F2F2DA8F6B400C61ECD /* StaticURLClient */,
 			);
 			productName = DJGithub;
 			productReference = 73AACAD128D308A60072B1DF /* DJGithub.app */;
@@ -1464,6 +1363,7 @@
 				73DE29CA28E0C08200B48009 /* XCRemoteSwiftPackageReference "MarkdownView" */,
 				734D675D2908298A006A0BFA /* XCRemoteSwiftPackageReference "DJRefresh" */,
 				D90B811229793AC800CA4006 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
+				D9CA5F2C2DA8F62D00C61ECD /* XCLocalSwiftPackageReference "../../../polaris/SPM/StaticURL" */,
 			);
 			productRefGroup = 73AACAD228D308A60072B1DF /* Products */;
 			projectDirPath = "";
@@ -1556,12 +1456,12 @@
 				73936F9C2919BFBA00BC2901 /* RssFeedLatestView.swift in Sources */,
 				D98835B12984C76D00AF7E4F /* AuthorizationView.swift in Sources */,
 				73B7905828E541BE002A9CDC /* Bool+Ext.swift in Sources */,
+				D986E32E2DB2563200350FE5 /* Base.swift in Sources */,
 				73893E3A2933893300F848DF /* FeedViewModel.swift in Sources */,
 				73074C8028EDB955001A90E7 /* WebViewFooterView.swift in Sources */,
 				73074CBE28EEC4AF001A90E7 /* TitleAndDescViewController.swift in Sources */,
 				73C598C728D8617800DA86A1 /* UIApplication+Ext.swift in Sources */,
 				73AACB0828D30A3C0072B1DF /* Router.swift in Sources */,
-				7362FE7F2910371700D97E1A /* DJMonitor.swift in Sources */,
 				73DF6C0A28EC6A9C0003BDB8 /* IssueCell.swift in Sources */,
 				73074CD328F155CB001A90E7 /* UserInfoCell.swift in Sources */,
 				73DF6C0028EC00FD0003BDB8 /* RepoContentCell.swift in Sources */,
@@ -1583,7 +1483,6 @@
 				7339201528F56D2900DC76B0 /* RssFeedManager.swift in Sources */,
 				D9F9C29D298A851900631570 /* Bundle+Ext.swift in Sources */,
 				73EE0CFA290BB3F50010C54A /* RepoBranchCommitUserView.swift in Sources */,
-				73936F3529137C4A00BC2901 /* DispatchQueue+Leak.swift in Sources */,
 				D98836AA2987966900AF7E4F /* DevelopersTrendingView.swift in Sources */,
 				73EE0CF0290AC4B30010C54A /* RepoBranchCommitViewController.swift in Sources */,
 				73EE0CE6290A6E040010C54A /* RepoBranchListView.swift in Sources */,
@@ -1591,7 +1490,6 @@
 				7320170628F53455007B970F /* RssFeedAtomViewController.swift in Sources */,
 				73DF6BFC28EBFD3E0003BDB8 /* RepoContent.swift in Sources */,
 				D90B812629795A5F00CA4006 /* Color+Ext.swift in Sources */,
-				735D0E0A2903115E00E618B3 /* DJThreadInfoModel.swift in Sources */,
 				732B21D328E228FD005893C0 /* NextPageModel.swift in Sources */,
 				73D0DE2B2907D2DD00F385E6 /* DJUserDefaults.swift in Sources */,
 				73936F9A2919BB7800BC2901 /* RssFeedLatestCell.swift in Sources */,
@@ -1621,7 +1519,6 @@
 				7396BDAB292BE1AC00B391CC /* DJObserverable.swift in Sources */,
 				7311A522292A3CA600B1A2A6 /* HostVCType.swift in Sources */,
 				73DF6BFE28EBFEE30003BDB8 /* RepoContentsViewController.swift in Sources */,
-				735D0E072903115E00E618B3 /* DJCallStack.swift in Sources */,
 				73936FC7291E3F7F00BC2901 /* OrganizationViewController.swift in Sources */,
 				73101D4B28E4889B00DB5423 /* UserStatusView.swift in Sources */,
 				734D676329084571006A0BFA /* Repository.swift in Sources */,
@@ -1632,7 +1529,7 @@
 				73DF6BF228EAE3060003BDB8 /* DJCodable.swift in Sources */,
 				73674779298B3D7500FD0C72 /* ViewDidLoadModifier.swift in Sources */,
 				7341DCD828E05D98009A3A3C /* RepoFooterView.swift in Sources */,
-				D98835E929865F8C00AF7E4F /* RssFeedsViewManager.swift in Sources */,
+				D986E32C2DB2317D00350FE5 /* UnChecked.swift in Sources */,
 				73DE29CE28E0C35200B48009 /* WebViewController.swift in Sources */,
 				D98835E729865B0800AF7E4F /* RssFeedsItemView.swift in Sources */,
 				73B7905428E533C2002A9CDC /* ConfigManager.swift in Sources */,
@@ -1643,19 +1540,14 @@
 				D90B811529793B3400CA4006 /* GithubTrendingParser.swift in Sources */,
 				73AACB0F28D30C470072B1DF /* APIClient.swift in Sources */,
 				73AACB8B28D708740072B1DF /* UIScrollView+Refresh.swift in Sources */,
-				73936F39291385C700BC2901 /* DJProperty.swift in Sources */,
 				73E14E5828F3DAE200A9811D /* DJXMLParsable.swift in Sources */,
-				73936F33291379DA00BC2901 /* NSObject+Leak.swift in Sources */,
-				73936F8B2914030400BC2901 /* DJFPSLabel.swift in Sources */,
 				D9883569297A59F000AF7E4F /* GithubTrendingType.swift in Sources */,
 				73936FC1291D422800BC2901 /* AvatarImageView.swift in Sources */,
 				73074CC728EF4809001A90E7 /* LocalRepo.swift in Sources */,
 				73101D4128E30C5200DB5423 /* SimpleUserCell.swift in Sources */,
 				73B7904A28E52450002A9CDC /* LocalDevelopersViewController.swift in Sources */,
 				7311A52A292A6A2B00B1A2A6 /* PamphletResourceCell.swift in Sources */,
-				735D0E0B2903115E00E618B3 /* StackAddressInfo.swift in Sources */,
 				D90B811C29794CD600CA4006 /* GithubTrendingView.swift in Sources */,
-				73936F2D2913784500BC2901 /* NSNotificationName+Leak.swift in Sources */,
 				73074CD528F166D8001A90E7 /* UserInfoEditViewController.swift in Sources */,
 				D90B8134297A29BE00CA4006 /* GithubTrendingDeveloper.swift in Sources */,
 				7367477229896C3100FD0C72 /* SettingType.swift in Sources */,
@@ -1675,7 +1567,6 @@
 				73EE0CE8290A6EC90010C54A /* RepoBranch.swift in Sources */,
 				73AACB6428D4E5000072B1DF /* Int+Ext.swift in Sources */,
 				73AACB2428D31A440072B1DF /* User.swift in Sources */,
-				73936F932917BF8C00BC2901 /* UIView+Leak.swift in Sources */,
 				73AACB6028D4BE4F0072B1DF /* RepoManager.swift in Sources */,
 				73AACAD528D308A60072B1DF /* AppDelegate.swift in Sources */,
 				D98835B52984D28800AF7E4F /* AuthorizationViewManager.swift in Sources */,
@@ -1714,14 +1605,11 @@
 				73C598C528D85EF100DA86A1 /* PopoverView.swift in Sources */,
 				73074C7C28ED5507001A90E7 /* RepoIssueDetailViewController.swift in Sources */,
 				D90B812A29795F8400CA4006 /* GithubTrendingRepoViewController.swift in Sources */,
-				73893E3C2933954800F848DF /* DJCrashListViewController.swift in Sources */,
 				7311A526292A68DA00B1A2A6 /* PamphletResourceModel.swift in Sources */,
 				73AACAD728D308A60072B1DF /* SceneDelegate.swift in Sources */,
 				73AACB5628D47FCB0072B1DF /* String+Ext.swift in Sources */,
-				7362FE7D291031D600D97E1A /* DJCrashManager.swift in Sources */,
 				73C598CD28D9E6A100DA86A1 /* URL+Ext.swift in Sources */,
 				7341DCD028E03B17009A3A3C /* RepoHeaderView.swift in Sources */,
-				73FA3870290FBEE800FCEBC6 /* AppStartTimeMonitor.swift in Sources */,
 				7362FEC729124F9000D97E1A /* RssFeedRead.swift in Sources */,
 				7339201928F5883500DC76B0 /* RssFeedDetailViewController.swift in Sources */,
 				73EE0CFE290BB79A0010C54A /* RepoPullFile.swift in Sources */,
@@ -1734,12 +1622,9 @@
 				73DF6C0828EC69840003BDB8 /* Issue.swift in Sources */,
 				73B7904828E51A3A002A9CDC /* UIImage+Ext.swift in Sources */,
 				73EE0CEC290A72560010C54A /* DJMaskView.swift in Sources */,
-				73936F3729137E7200BC2901 /* DJObjectProxy.swift in Sources */,
-				73936F2F2913790F00BC2901 /* UIViewController+Leak.swift in Sources */,
 				737EF28A292A0DEC0060C64F /* PamphletContentViewController.swift in Sources */,
 				73AACB5828D483CA0072B1DF /* UserContributionCell.swift in Sources */,
 				73AACB0C28D30B3D0072B1DF /* Error.swift in Sources */,
-				735D0E082903115E00E618B3 /* mach_stack_info.c in Sources */,
 				D90B8136297A38A800CA4006 /* GithubTrendingDeveloperView.swift in Sources */,
 				73EE0CEE290ABF7B0010C54A /* RepoBranchCommit.swift in Sources */,
 				7362FE8329117D2000D97E1A /* DefaultValue.swift in Sources */,
@@ -1755,7 +1640,6 @@
 				7367476E2989682800FD0C72 /* SettingView.swift in Sources */,
 				73AACB3E28D362430072B1DF /* Consts.swift in Sources */,
 				D98836B42987BD0E00AF7E4F /* JSONSerialization+Ext.swift in Sources */,
-				7362FE812910BF2700D97E1A /* DJCrashLog.swift in Sources */,
 				D90B813229797A5800CA4006 /* LoaderView.swift in Sources */,
 				7374D19728E0BC1D00E6BE47 /* Readme.swift in Sources */,
 				73DF6BEE28EADD160003BDB8 /* LocalDeveloperSectionHeaderView.swift in Sources */,
@@ -1765,11 +1649,8 @@
 				737EF27F2929FC390060C64F /* PamphletViewController.swift in Sources */,
 				D98836AE298799ED00AF7E4F /* HomeViewController.swift in Sources */,
 				73AACB1828D312D30072B1DF /* GithubRouter.swift in Sources */,
-				73936F9829197E4300BC2901 /* DJUIThread.swift in Sources */,
 				73101D5028E4A10400DB5423 /* LocalDeveloperGroup.swift in Sources */,
-				735D0E092903115E00E618B3 /* DJStuckMonitor.swift in Sources */,
 				73DF6BEC28EACF340003BDB8 /* SearchWordHeaderView.swift in Sources */,
-				73936F2B291377F300BC2901 /* DJLeakSniffer.swift in Sources */,
 				D90B81242979578400CA4006 /* GithubTrendingReposView.swift in Sources */,
 				73074CC428EEF54F001A90E7 /* HUD.swift in Sources */,
 				73EE0CF6290BA8F10010C54A /* RepoPullRequestViewController.swift in Sources */,
@@ -1976,7 +1857,8 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -2011,7 +1893,8 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -2133,6 +2016,13 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		D9CA5F2C2DA8F62D00C61ECD /* XCLocalSwiftPackageReference "../../../polaris/SPM/StaticURL" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../../polaris/SPM/StaticURL;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		7341DCDB28E0792F009A3A3C /* XCRemoteSwiftPackageReference "SwiftyMarkdown" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -2221,6 +2111,14 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D90B811229793AC800CA4006 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
 			productName = SwiftSoup;
+		};
+		D9CA5F2D2DA8F6B400C61ECD /* StaticURL */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = StaticURL;
+		};
+		D9CA5F2F2DA8F6B400C61ECD /* StaticURLClient */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = StaticURLClient;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

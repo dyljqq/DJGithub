@@ -6,12 +6,11 @@
 //
 
 import UIKit
+import SwiftUI
 
 class RssFeedsViewController: UIViewController {
 
     let rssFeedAtom: RssFeedAtom
-
-    let manager: RssFeedsViewManager = RssFeedsViewManager()
 
     init(with rssFeedAtom: RssFeedAtom) {
         self.rssFeedAtom = rssFeedAtom
@@ -32,7 +31,7 @@ class RssFeedsViewController: UIViewController {
         view.backgroundColor = .backgroundColor
         navigationItem.title = rssFeedAtom.title
 
-        let vc = manager.addRssFeedsView(with: rssFeedAtom) { [weak self] feed in
+        let rssFeedsView = RssFeedsView(atom: rssFeedAtom) { [weak self] feed in
             guard let strongSelf = self else { return }
             strongSelf.navigationController?.pushToRssFeedDetial(with: feed)
 
@@ -44,6 +43,7 @@ class RssFeedsViewController: UIViewController {
             }
         }
 
+        let vc = UIHostingController(rootView: rssFeedsView)
         view.addSubview(vc.view)
         vc.view.snp.makeConstraints { make in
             make.edges.equalToSuperview()

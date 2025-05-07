@@ -45,9 +45,11 @@ struct AuthorizationView: View {
             .padding()
             Spacer()
             VStack(spacing: 15) {
-                Image(uiImage: UIImage(named: "AppIcon")!)
-                    .resizable()
-                    .frame(width: 100, height: 100)
+                if let image = UIImage(named: "AppIcon") {
+                    Image(uiImage: image)
+                        .resizable()
+                        .frame(width: 100, height: 100)
+                }
                 Text("DJGithub For Github")
                     .font(.system(size: 16))
                     .foregroundColor(Color(uiColor: UIColor.textColor))

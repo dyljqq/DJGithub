@@ -10,6 +10,7 @@ import SwiftUI
 
 class GithubTrendingManager: NSObject {
 
+    @MainActor
     func addTrendingView(with types: [GithubTrendingType],
                          selectedIndex: Int = 0,
                          repoSelectedClosure: @escaping (GithubTrendingRepo) -> Void,

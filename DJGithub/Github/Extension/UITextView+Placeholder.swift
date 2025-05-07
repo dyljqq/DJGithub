@@ -7,8 +7,8 @@
 
 import UIKit
 
-private var placeholderKey: UInt8 = 0
-private var placeholderViewKey: UInt8 = 0
+@MainActor private var placeholderKey: UInt8 = 0
+@MainActor private var placeholderViewKey: UInt8 = 0
 
 extension UITextView {
     public var placeholder: String? {
@@ -33,7 +33,9 @@ extension UITextView {
     }
 
     override open func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
-        updatePlaceholderTextView()
+        DispatchQueue.main.async {
+            self.updatePlaceholderTextView()
+        }
     }
 }
 

@@ -66,20 +66,21 @@ struct PersonalAccessView: View {
                 }
                 isLoading = true
 
-                Task {
-                    defer {
-                        isLoading = false
-                    }
+                let token = "token \(accessToken)"
+                DJUserDefaults.setAccessToken(token)
 
-                    let token = "token \(accessToken)"
-                    DJUserDefaults.setAccessToken(token)
+                Task.detached {
                     guard let _ = await LocalUserManager.loadViewer() else {
-                        isLoading = false
-                        showErrorMessage = true
+                        await MainActor.run {
+                            self.showErrorMessage = true
+                        }
                         return
                     }
-                    completionHandler?(true)
-                    dismiss()
+                    await MainActor.run {
+                        self.isLoading = false
+                        completionHandler?(true)
+                        dismiss()
+                    }
                 }
 
             }) {

@@ -8,19 +8,20 @@
 import Foundation
 
 class DJObserverable<T> {
-  var value: T? {
-    didSet {
-      listener?(value)
+
+    var value: T? {
+        didSet {
+            listener?(value)
+        }
     }
-  }
-
-  private var listener: ((T?) -> Void)?
-
-  init(value: T? = nil) {
-    self.value = value
-  }
-
-  func bind(_ listener: @escaping (T?) -> Void) {
-    self.listener = listener
-  }
+    
+    private var listener: ((T?) -> Void)?
+    
+    init(value: T? = nil) {
+        self.value = value
+    }
+    
+    func bind(_ listener: @escaping (T?) -> Void) {
+        self.listener = listener
+    }
 }

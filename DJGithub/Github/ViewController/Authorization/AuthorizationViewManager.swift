@@ -10,6 +10,7 @@ import SwiftUI
 
 class AuthorizationViewManager: NSObject {
 
+    @MainActor
     func addAuthorizationView(_ completionHandler: ((Bool) -> Void)? = nil) -> UIViewController {
         let authorizationView = AuthorizationView(completionHandler: completionHandler)
         return UIHostingController(rootView: authorizationView)

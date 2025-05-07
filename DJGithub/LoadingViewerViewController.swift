@@ -33,7 +33,7 @@ class LoadingViewerViewController: UIViewController {
             HUD.show(with: "Error to load viewer info.")
             return
         }
-        UIApplication.shared.keyWindow?.rootViewController = TabBarController()
+        UIApplication.shared.keyWindow?.rootViewController = TabBarController(nibName: nil, bundle: nil)
 
         Task {
             await withThrowingTaskGroup(of: Void.self) { group in

@@ -24,7 +24,7 @@ enum HostVCType: String {
     case user
     case unknown
 
-    func getVC(with params: [String: String] = [:]) -> UIViewController? {
+    @MainActor func getVC(with params: [String: String] = [:]) -> UIViewController? {
         switch self {
         case .pamphlet:
             if let type = params["type"] {
@@ -58,7 +58,7 @@ enum HostVCType: String {
                 return configGithubIssueVC(with: userName, repoName: repoName, issueNumber: issueNumber)
             }
         case .trending:
-            guard let type = params["type"] else { return nil }
+            guard params["type"] != nil else { return nil }
             return configGithubTrendingVC()
         case .user:
             guard let name = params["name"] else { return nil }
@@ -71,7 +71,7 @@ enum HostVCType: String {
     }
 }
 
-fileprivate extension HostVCType {
+@MainActor fileprivate extension HostVCType {
     func configPamphletVC(with typeName: String) -> PamphletViewController? {
         guard let type = PamphletViewController.VCType(rawValue: typeName) else { return nil }
         return PamphletViewController(type: type)

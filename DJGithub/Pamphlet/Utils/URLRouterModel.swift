@@ -15,8 +15,10 @@ struct URLRouterModel {
   let queryItems: [String: String]
 
   var transition: VCTransition = .push
+}
 
-  var vc: UIViewController? {
-    return type?.getVC(with: queryItems)
-  }
+extension URLRouterModel {
+    @MainActor var vc: UIViewController? {
+      return type?.getVC(with: queryItems)
+    }
 }

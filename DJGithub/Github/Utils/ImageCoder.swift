@@ -9,7 +9,7 @@ import UIKit
 
 class ImageDecoder {
 
-    static func decode(data: Data, to pointSize: CGSize, scale: CGFloat, completionHandler: @escaping (UIImage?) -> Void) {
+    static func decode(data: Data, to pointSize: CGSize, scale: CGFloat, completionHandler: @Sendable @escaping (UIImage?) -> Void) {
         DispatchQueue.global().async {
             let image = downsampledImage(data: data, to: pointSize, scale: scale)
             DispatchQueue.main.async {
